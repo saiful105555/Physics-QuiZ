@@ -3,24 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>১০ম শ্রেণী টিউটোরিয়াল প্রস্তুতি - পদার্থবিজ্ঞান</title>
+    <title>৮ম শ্রেণী টিউটোরিয়াল প্রস্তুতি - বিজ্ঞান</title>
     <style>
         :root {
-            --primary-color: #0d6efd;
-            --bg-color: #f4f6f9;
+            --primary: #4e54c8;
+            --secondary: #8f94fb;
+            --bg: #f4f7f6;
+            --text: #2d3748;
             --card-bg: #ffffff;
-            --text-color: #212529;
-            --correct-color: #198754;
-            --wrong-color: #dc3545;
-            --whatsapp-color: #25D366;
+            --correct: #28a745;
+            --wrong: #dc3545;
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: 'Kalpurush', 'SolaimanLipi', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
         }
 
         body {
-            font-family: 'SolaimanLipi', 'Kalpurush', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            margin: 0;
+            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+            min-height: 100vh;
+            color: var(--text);
             padding: 15px;
         }
 
@@ -28,146 +33,106 @@
             max-width: 800px;
             margin: 0 auto;
             background: var(--card-bg);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
             padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
             position: relative;
         }
 
-        header {
+        .header {
             text-align: center;
-            border-bottom: 2px solid #e9ecef;
+            border-bottom: 3px solid #8ec5fc;
             padding-bottom: 15px;
-            margin-bottom: 25px;
-        }
-
-        header h1 {
-            color: var(--primary-color);
-            font-size: 24px;
-            margin-bottom: 5px;
-        }
-
-        header h2 {
-            font-size: 18px;
-            color: #495057;
-            margin-top: 0;
-        }
-
-        .meta-info {
-            background-color: #e7f1ff;
-            padding: 8px 15px;
-            border-radius: 8px;
-            font-size: 15px;
-            font-weight: bold;
-            color: #084298;
-            display: inline-block;
-            margin-top: 5px;
-        }
-
-        /* Timer Sticky Box */
-        #timer-box {
-            position: sticky;
-            top: 10px;
-            z-index: 1000;
-            background: #fff3cd;
-            border: 2px solid #ffecb5;
-            color: #664d03;
-            padding: 10px 20px;
-            border-radius: 30px;
-            font-size: 18px;
-            font-weight: bold;
-            text-align: center;
             margin-bottom: 20px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            color: #2b3a67;
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .header h2 {
+            color: #4e54c8;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .info-bar {
+            background: #eef2f5;
+            padding: 10px 15px;
+            border-radius: 8px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            font-weight: bold;
+            color: #444;
         }
 
-        #timer {
-            color: #dc3545;
-            font-size: 20px;
+        .timer-box {
+            background: #ff4757;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 16px;
+            display: inline-block;
         }
 
         .question-card {
-            background: #fff;
+            background: #fafafa;
             border: 1px solid #e0e0e0;
+            border-left: 5px solid var(--primary);
             border-radius: 8px;
-            padding: 15px 20px;
-            margin-bottom: 20px;
-            transition: all 0.2s ease;
+            padding: 15px;
+            margin-bottom: 18px;
+            transition: all 0.3s ease;
         }
 
-        .question-title {
-            font-size: 16px;
-            font-weight: 600;
+        .question-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .q-title {
+            font-size: 17px;
+            font-weight: bold;
             margin-bottom: 12px;
+            color: #1e293b;
         }
 
-        .options {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 10px;
+        .options-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
         }
 
-        @media (min-width: 576px) {
-            .options {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        .option-label {
+        .option-btn {
             display: flex;
             align-items: center;
-            padding: 10px 12px;
-            border: 1px solid #ced4da;
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            padding: 10px 14px;
             border-radius: 6px;
             cursor: pointer;
-            transition: background 0.2s, border-color 0.2s;
+            transition: background 0.2s;
             font-size: 15px;
         }
 
-        .option-label:hover {
-            background-color: #f8f9fa;
+        .option-btn:hover {
+            background: #e2e8f0;
         }
 
-        .option-label input {
-            margin-right: 10px;
-            accent-color: var(--primary-color);
-        }
-
-        /* Result styling */
-        .question-card.correct {
-            border: 2px solid var(--correct-color);
-            background-color: #f0fff4;
-        }
-
-        .question-card.wrong {
-            border: 2px solid var(--wrong-color);
-            background-color: #fff5f5;
-        }
-
-        .option-label.selected-correct {
-            background-color: #d1e7dd;
-            border-color: var(--correct-color);
-            font-weight: bold;
-        }
-
-        .option-label.selected-wrong {
-            background-color: #f8d7da;
-            border-color: var(--wrong-color);
-        }
-
-        .option-label.show-correct {
-            background-color: #d1e7dd;
-            border-color: var(--correct-color);
-            font-weight: bold;
+        .option-btn input[type="radio"] {
+            margin-right: 12px;
+            transform: scale(1.2);
+            cursor: pointer;
         }
 
         .btn-submit {
             display: block;
             width: 100%;
-            background-color: var(--primary-color);
+            background: linear-gradient(135deg, #4e54c8, #8f94fb);
             color: white;
             border: none;
             padding: 14px;
@@ -175,456 +140,379 @@
             font-weight: bold;
             border-radius: 8px;
             cursor: pointer;
+            box-shadow: 0 4px 15px rgba(78, 84, 200, 0.4);
             margin-top: 20px;
-            transition: background 0.3s;
         }
 
         .btn-submit:hover {
-            background-color: #0b5ed7;
+            opacity: 0.95;
         }
 
-        .btn-whatsapp {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            background-color: var(--whatsapp-color);
-            color: white;
-            text-decoration: none;
-            padding: 12px 20px;
-            font-size: 16px;
-            font-weight: bold;
-            border-radius: 8px;
-            margin-top: 15px;
-            transition: background 0.3s;
-        }
-
-        .btn-whatsapp:hover {
-            background-color: #1eb855;
-        }
-
-        #result-box {
+        .result-box {
             display: none;
-            background: #e7f1ff;
-            border: 2px solid var(--primary-color);
-            border-radius: 10px;
-            padding: 20px;
             text-align: center;
+            background: #f0fdf4;
+            border: 2px solid #22c55e;
+            padding: 20px;
+            border-radius: 12px;
             margin-bottom: 25px;
         }
 
-        #result-box h3 {
-            margin-top: 0;
-            color: #084298;
+        .result-box h2 {
+            color: #15803d;
+            margin-bottom: 10px;
+        }
+
+        .result-score {
             font-size: 22px;
-        }
-
-        .score-summary {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin: 15px 0;
-            flex-wrap: wrap;
-        }
-
-        .score-card {
-            background: #ffffff;
-            border: 1px solid #b6d4fe;
-            border-radius: 8px;
-            padding: 10px 20px;
-            min-width: 130px;
-        }
-
-        .score-card .title {
-            font-size: 13px;
-            color: #6c757d;
-            margin-bottom: 2px;
-        }
-
-        .score-card .val {
-            font-size: 20px;
             font-weight: bold;
-            color: #084298;
+            color: #047857;
         }
 
-        .warning-text {
+        .correct-ans {
+            background: #d1fae5 !important;
+            border-color: #10b981 !important;
+            font-weight: bold;
+            color: #065f46;
+        }
+
+        .wrong-ans {
+            background: #fee2e2 !important;
+            border-color: #ef4444 !important;
+            color: #991b1b;
+        }
+
+        .already-submitted {
+            text-align: center;
+            padding: 40px 20px;
+            background: #fff;
+            border-radius: 12px;
+        }
+
+        .already-submitted h2 {
             color: #dc3545;
-            font-size: 14px;
-            margin-top: 10px;
+            margin-bottom: 10px;
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <header>
-        <h1>১০ম শ্রেণী টিউটোরিয়াল প্রস্তুতি</h1>
-        <h2>বিষয়: পদার্থবিজ্ঞান (১ম অধ্যায়)</h2>
-        <div class="meta-info">সার্বিক তত্ত্বাবধানে: ইঞ্জিঃ সাইফুল ইসলাম</div>
-    </header>
-
-    <div id="timer-box">
-        <span>⏱️ অবশিষ্ট সময়:</span>
-        <span id="timer">৩০:০০</span>
+<div class="container" id="quizContainer">
+    <div class="header">
+        <h1>৮ম শ্রেণী টিউটোরিয়াল প্রস্তুতি</h1>
+        <h2>বিষয়: বিজ্ঞান (একাদশ অধ্যায়: আলো)</h2>
+        <p><strong>সার্বিক তত্ত্বাবধানে:</strong> সাইফুল ইসলাম | <strong>মোবাইল:</strong> ০১৬২২১৮৬৮১২</p>
     </div>
 
-    <div id="result-box">
-        <h3>পরীক্ষার ফলাফল</h3>
-        <div class="score-summary">
-            <div class="score-card">
-                <div class="title">অর্জিত মার্কস</div>
-                <div class="val" id="score-marks">-</div>
-            </div>
-            <div class="score-card">
-                <div class="title">সাফল্যের হার (শতকরা)</div>
-                <div class="val" id="score-percent">-</div>
-            </div>
-        </div>
-        <p class="warning-text">⚠️ আপনি এই পরীক্ষাটি ইতোমধ্যে প্রদান করেছেন। নতুন করে দেওয়া সম্ভব নয়।</p>
-        <a id="whatsapp-share" href="#" target="_blank" class="btn-whatsapp">
-            <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
-                <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.57 6.57 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.17-.478 1.338-.94.166-.462.166-.856.116-.94-.05-.083-.183-.133-.38-.232z"/>
-            </svg>
-            WhatsApp-এ রেজাল্ট শেয়ার করুন
-        </a>
+    <div class="info-bar">
+        <span>মোট প্রশ্ন: ৩০ টি</span>
+        <span>পূর্ণমান: ৩০</span>
+        <div class="timer-box" id="timer">সময় বাকি: ৩০:০০</div>
     </div>
 
-    <form id="quizForm">
-        <div id="questions-container"></div>
-        <button type="button" id="submit-btn" class="btn-submit" onclick="submitQuiz()">উত্তর সাবমিট করুন</button>
+    <div class="result-box" id="resultBox">
+        <h2>পরীক্ষা সমাপ্ত হয়েছে!</h2>
+        <div class="result-score" id="scoreText"></div>
+        <p style="margin-top:8px; color:#555;">নিচে আপনার সঠিক ও ভুল উত্তরগুলো মার্ক করে দেওয়া হলো।</p>
+    </div>
+
+    <form id="quizForm" style="margin-top: 20px;">
+        <div id="questions"></div>
+        <button type="button" class="btn-submit" id="submitBtn" onclick="submitExam()">পরীক্ষা জমা দিন (Submit)</button>
     </form>
 </div>
 
 <script>
-// ১. পরীক্ষার সময় নির্ধারণ (৩০ মিনিট)
-const quizTimeMinutes = 30; 
-let timeInSeconds = quizTimeMinutes * 60;
-let timerInterval;
-
-const quizData = [
+const questionsData = [
     {
-        q: "১. আধুনিক পদার্থবিজ্ঞানের জনক বলা হয় কাকে?",
-        options: ["(ক) আলবার্ট আইনস্টাইন", "(খ) আইজ্যাক নিউটন", "(গ) গ্যালিলিও গ্যালিলি", "(ঘ) আল-হাইসাম"],
-        ans: 2
+        id: 1,
+        question: "১. আলো যখন এক স্বচ্ছ মাধ্যম থেকে অন্য স্বচ্ছ মাধ্যমে তির্যকভাবে প্রবেশ করে, তখন কী পরিবর্তন হয়?",
+        options: ["(ক) আলোর দিক ও বেগ", "(খ) আলোর তীব্রতা", "(গ) আলোর কণা", "(ঘ) আলোর ভর"],
+        correct: 0
     },
     {
-        q: "২. পদার্থবিজ্ঞানের প্রধান লক্ষ্য কী?",
-        options: ["(ক) প্রকৃতির রহস্য উদঘাটন করা", "(খ) নতুন প্রযুক্তি তৈরি করা", "(গ) রাসায়নিক বিক্রিয়া পর্যবেক্ষণ", "(ঘ) গাণিতিক হিসাব সহজ করা"],
-        ans: 0
+        id: 2,
+        question: "২. আলোর প্রতিসরণের প্রধান কারণ কী?",
+        options: ["(ক) আলোর প্রতিফলন হওয়া", "(খ) ভিন্ন ভিন্ন মাধ্যমে আলোর বেগ ভিন্ন হওয়া", "(গ) মাধ্যমের ঘনত্ব সবসময় সমান থাকা", "(ঘ) মাধ্যমে আলো শোষিত হওয়া"],
+        correct: 1
     },
     {
-        q: "৩. 'Big Bang' তত্ত্বের সাথে নিচের কার নাম বিশেষভাবে জড়িত?",
-        options: ["(ক) আর্নেস্ট রাদারফোর্ড", "(খ) স্টিফেন হকিং", "(গ) ম্যাক্স প্ল্যাঙ্ক", "(ঘ) নিলস বোর"],
-        ans: 1
+        id: 3,
+        question: "৩. হালকা মাধ্যম থেকে ঘন মাধ্যমে আলো প্রবেশ করলে প্রতিসরিত রশ্মি অভিলম্বের দিকে—",
+        options: ["(ক) দূরে সরে যায়", "(খ) কাছে সরে আসে", "(গ) সোজা চলে যায়", "(ঘ) বিপরীত দিকে যায়"],
+        correct: 1
     },
     {
-        q: "৪. নিচের কোনটি মৌলিক রাশি?",
-        options: ["(ক) কাজ", "(খ) বল", "(গ) তাপমাত্রা", "(ঘ) বেগ"],
-        ans: 2
+        id: 4,
+        question: "৪. ঘন মাধ্যম থেকে হালকা মাধ্যমে আলো প্রবেশ করলে কোনটি ঘটে?",
+        options: ["(ক) আপতন কোণ > প্রতিসরণ কোণ", "(খ) আপতন কোণ = প্রতিসরণ কোণ", "(গ) প্রতিসরণ কোণ = ০°", "(ঘ) আপতন কোণ < প্রতিসরণ কোণ"],
+        correct: 3
     },
     {
-        q: "৫. এস.আই (SI) পদ্ধতিতে মৌলিক রাশি কয়টি?",
-        options: ["(ক) ৩টি", "(খ) ৫টি", "(গ) ৭টি", "(ঘ) ৯টি"],
-        ans: 2
+        id: 5,
+        question: "৫. হালকা মাধ্যম থেকে ঘন মাধ্যমে আলো প্রবেশ করলে আপতন কোণ ও প্রতিসরণ কোণের সম্পর্ক কী?",
+        options: ["(ক) আপতন কোণ > প্রতিসরণ কোণ", "(খ) আপতন কোণ < প্রতিসরণ কোণ", "(গ) আপতন কোণ = প্রতিসরণ কোণ", "(ঘ) কোনো সম্পর্ক নেই"],
+        correct: 0
     },
     {
-        q: "৬. দ্বীপন তীব্রতার (Luminous Intensity) এস.আই একক কোনটি?",
-        options: ["(ক) অ্যাম্পিয়ার", "(খ) ক্যান্ডেলা", "(গ) মোল", "(ঘ) কেলভিন"],
-        ans: 1
+        id: 6,
+        question: "৬. আলো যখন এক মাধ্যম থেকে অন্য মাধ্যমে লম্বভাবে আপতিত হয়, তখন প্রতিসরণ কোণের মান কত?",
+        options: ["(ক) ৯০°", "(খ) ৪৫°", "(গ) ০°", "(ঘ) ১৮০°"],
+        correct: 2
     },
     {
-        q: "৭. ১ গিগামিটার (1 GM) = কত মিটার?",
-        options: ["(ক) 10⁶ m", "(খ) 10⁹ m", "(গ) 10¹² m", "(ঘ) 10¹⁵ m"],
-        ans: 1
+        id: 7,
+        question: "৭. আলো লম্বভাবে আপতিত হলে প্রতিসরিত রশ্মির—",
+        options: ["(ক) দিক পরিবর্তন হয়", "(খ) কোনো দিক পরিবর্তন হয় না", "(গ) পেছনে ফিরে আসে", "(ঘ) বেঁকে যায়"],
+        correct: 1
     },
     {
-        q: "৮. 10⁻⁶ উপসর্গকে কোনটি দ্বারা প্রকাশ করা হয়?",
-        options: ["(ক) মিলি (m)", "(খ) মাইক্রো (μ)", "(গ) ন্যানো (n)", "(ঘ) পিকো (p)"],
-        ans: 1
+        id: 8,
+        question: "৮. পানিতে ডোবানো সোজা লাঠিকে বাঁকা দেখানোর কারণ কী?",
+        options: ["(ক) আলোর প্রতিফলন", "(খ) আলোর শোষন", "(গ) আলোর বিচ্ছুরণ", "(ঘ) আলোর প্রতিসরণ"],
+        correct: 3
     },
     {
-        q: "৯. বল-এর মাত্রা (Dimension) কোনটি?",
-        options: ["(ক) [MLT⁻¹]", "(খ) [MLT⁻²]", "(গ) [ML²T⁻²]", "(ঘ) [ML⁻¹T⁻²]"],
-        ans: 1
+        id: 9,
+        question: "৯. পানিতে একটি মুদ্রা রাখলে এটিকে কিছুটা উপরে উঠে এসেছে বলে মনে হয় কেন?",
+        options: ["(ক) আলোর প্রতিসরণের জন্য", "(খ) আলোর প্রতিফলনের জন্য", "(গ) আলোর বেগের জন্য", "(ঘ) পানির ঘনত্বের জন্য"],
+        correct: 0
     },
     {
-        q: "১০. [ML²T⁻²] মাত্রাটি কোন রাশির?",
-        options: ["(ক) ত্বরণ", "(খ) কাজ", "(গ) ক্ষমতা", "(ঘ) ভরবেগ"],
-        ans: 1
+        id: 10,
+        question: "১০. কাঁচের গ্লাসে পানি নিয়ে তা দিয়ে লেখা দেখলে লেখাগুলো কেমন মনে হয়?",
+        options: ["(ক) ছোট", "(খ) কিছুটা উপরে ও মোটা", "(গ) অদৃশ্য", "(ঘ) সরু"],
+        correct: 1
     },
     {
-        q: "১১. স্লাইড ক্যালিপার্স দিয়ে কোনটির মান সরাসরি পরিমাপ করা যায় না?",
-        options: ["(ক) দণ্ডের দৈর্ঘ্য", "(খ) চোঙের উচ্চতা", "(গ) ফাঁপা নলের ভেতরের ব্যাস", "(ঘ) ভর"],
-        ans: 3
+        id: 11,
+        question: "১১. সংকট কোণ বা ক্রান্তি কোণ কখন সৃষ্টি হয়?",
+        options: ["(ক) আলো হালকা থেকে ঘন মাধ্যমে গেলে", "(খ) দুটি মাধ্যমের ঘনত্ব সমান হলে", "(গ) আলো ঘন থেকে হালকা মাধ্যমে গেলে", "(ঘ) সোজা মাধ্যমে আলো চললে"],
+        correct: 2
     },
     {
-        q: "১২. স্লাইড ক্যালিপার্সের প্রধান স্কেলের 19 ঘর ভার্নিয়ার স্কেলের 20 ঘরের সমান হলে ভার্নিয়ার ধ্রুবক (VC) কত?",
-        options: ["(ক) 0.1 mm", "(খ) 0.05 mm", "(গ) 0.01 mm", "(ঘ) 0.005 mm"],
-        ans: 1
+        id: 12,
+        question: "১২. সংকট কোণের ক্ষেত্রে প্রতিসরণ কোণের মান কত হয়?",
+        options: ["(ক) ৪৫°", "(খ) ৬০°", "(গ) ৯০°", "(ঘ) ১৮০°"],
+        correct: 2
     },
     {
-        q: "১৩. মাইক্রোমিটারের সাহায্যে নিখুঁতভাবে পরিমাপ করা যায়—",
-        options: ["(ক) তারের ব্যাসার্ধ", "(খ) ঘরের দৈর্ঘ্য", "(গ) তরলের আয়তন", "(ঘ) বস্তুর ভর"],
-        ans: 0
+        id: 13,
+        question: "১৩. আলো ঘন মাধ্যম থেকে হালকা মাধ্যমে যাওয়ার সময় আপতন কোণ সংকট কোণের সমান হলে প্রতিসরিত রশ্মি কীভাবে যায়?",
+        options: ["(ক) বিভেদ তল ঘেঁষে", "(খ) অভিলম্বের দিকে", "(গ) পূর্বের মাধ্যমে ফিরে আসে", "(ঘ) সোজা চলে যায়"],
+        correct: 0
     },
     {
-        q: "১৪. স্ক্রুগজের পিচ (1 mm) এবং বৃত্তাকার স্কেলের ভাগ সংখ্যা 100 হলে লঘিষ্ঠ গণন (LC) কত?",
-        options: ["(ক) 0.01 cm", "(খ) 0.01 mm", "(গ) 0.001 mm", "(ঘ) 0.1 mm"],
-        ans: 1
+        id: 14,
+        question: "১৪. আপতন কোণ সংকট কোণের চেয়ে বড় হলে আলো কী হয়?",
+        options: ["(ক) দ্বিতীয় মাধ্যমে প্রতিসরিত হয়", "(খ) প্রথম মাধ্যমে প্রতিফলিত হয়ে ফিরে আসে", "(গ) শোষিত হয়ে যায়", "(ঘ) দিক পরিবর্তন করে না"],
+        correct: 1
     },
     {
-        q: "১৫. স্ক্রুগজে মিটার স্কেলের চেয়েও সূক্ষ্ম মাপ নেওয়ার কারণ কোনটি?",
-        options: ["(ক) রৈখিক স্কেলের উপস্থিতি", "(খ) ভার্নিয়ার স্কেল থাকা", "(গ) বৃত্তাকার স্কেলের ঘূর্ণন", "(ঘ) সঠিক স্কেলিং না থাকা"],
-        ans: 2
+        id: 15,
+        question: "১৫. সংকট কোণের চেয়ে বড় কোণে আপতিত আলো সম্পূর্ণ ঘন মাধ্যমে প্রতিফলিত হওয়াকে কী বলে?",
+        options: ["(ক) সাধারণ প্রতিফলন", "(খ) প্রতিসরণ", "(গ) পূর্ণ অভ্যন্তরীণ প্রতিফলন", "(ঘ) বিচ্ছুরণ"],
+        correct: 2
     },
     {
-        q: "১৬. পরিমাপের ত্রুটি মূলত কত প্রকার?",
-        options: ["(ক) ২ প্রকার", "(খ) ৩ প্রকার", "(গ) ৪ প্রকার", "(ঘ) ৫ প্রকার"],
-        ans: 1
+        id: 16,
+        question: "১৬. পূর্ণ অভ্যন্তরীণ প্রতিফলনের প্রথম শর্ত কোনটি?",
+        options: ["(ক) আলোক রশ্মিকে হালকা থেকে ঘন মাধ্যমে যেতে হবে", "(খ) আলোক রশ্মিকে ঘন থেকে হালকা মাধ্যমে যেতে হবে", "(গ) আপতন কোণ সংকট কোণের চেয়ে ছোট হতে হবে", "(ঘ) মাধ্যম দুটির ঘনত্ব সমান হতে হবে"],
+        correct: 1
     },
     {
-        q: "১৭. পপকর্ন বা চালের দানা গণনার ক্ষেত্রে কোন ত্রুটি ঘটার সম্ভাবনা বেশি?",
-        options: ["(ক) ব্যক্তিগত ত্রুটি", "(খ) যান্ত্রিক ত্রুটি", "(গ) দৈব ত্রুটি", "(ঘ) স্থির ত্রুটি"],
-        ans: 2
+        id: 17,
+        question: "১৭. পূর্ণ অভ্যন্তরীণ প্রতিফলনের ক্ষেত্রে আপতন কোণের মান সংকট কোণের চেয়ে—",
+        options: ["(ক) ছোট হতে হয়", "(খ) সমান হতে হয়", "(গ) শূন্য হতে হয়", "(ঘ) বড় হতে হয়"],
+        correct: 3
     },
     {
-        q: "১৮. পরিমাপে আপেক্ষিক ত্রুটি (Relative Error) বের করার সূত্র কোনটি?",
-        options: ["(ক) চূড়ান্ত ত্রুটি / পরিমাপকৃত মান", "(খ) পরিমাপকৃত মান / চূড়ান্ত ত্রুটি", "(গ) চূড়ান্ত ত্রুটি × পরিমাপকৃত মান", "(ঘ) পরিমাপকৃত মান - চূড়ান্ত ত্রুটি"],
-        ans: 0
+        id: 18,
+        question: "১৮. মরুভূমিতে মরীচিকা সৃষ্টির কারণ কোনটি?",
+        options: ["(ক) আলোর সাধারণ প্রতিফলন", "(খ) আলোর প্রতিসরণ", "(গ) পূর্ণ অভ্যন্তরীণ প্রতিফলন", "(ঘ) আলোর শোষণ"],
+        correct: 2
     },
     {
-        q: "১৯. কোনো একটি পরিমাপে চূড়ান্ত ত্রুটি 0.5 cm এবং পরিমাপকৃত মান 10 cm হলে, শতকরা আপেক্ষিক ত্রুটি কত?",
-        options: ["(ক) 2%", "(খ) 5%", "(গ) 10%", "(ঘ) 0.5%"],
-        ans: 1
+        id: 19,
+        question: "১৯. গরমের দিনে পিচঢালা রাস্তার দিকে তাকালে দূর থেকে পানি জমে আছে বলে মনে হওয়ার কারণ কী?",
+        options: ["(ক) আলোর প্রতিফলন", "(খ) মরীচিকা (পূর্ণ অভ্যন্তরীণ প্রতিফলন)", "(গ) রাস্তার কালোরং", "(ঘ) আলোর বিচ্ছুরণ"],
+        correct: 1
     },
     {
-        q: "২০. স্লাইড ক্যালিপার্সের ভার্নিয়ার স্কেলের জিরো দাগ যদি মূল স্কেলের জিরো দাগের ডানে থাকে, তবে সেটি কী ধরনের ত্রুটি?",
-        options: ["(ক) ধনাত্মক যান্ত্রিক ত্রুটি", "(খ) ঋণাত্মক যান্ত্রিক ত্রুটি", "(গ) দৈব ত্রুটি", "(ঘ) ব্যক্তিগত ত্রুটি"],
-        ans: 0
+        id: 20,
+        question: "২০. অপটিক্যাল ফাইবারে আলোর কোন ঘটনাটিকে কাজে লাগানো হয়?",
+        options: ["(ক) প্রতিসরণ", "(খ) সাধারণ প্রতিফলন", "(গ) বিচ্ছুরণ", "(ঘ) পূর্ণ অভ্যন্তরীণ প্রতিফলন"],
+        correct: 3
     },
     {
-        q: "২১. নিচের কোনটি লব্ধ রাশি (Derived Quantity)?",
-        options: ["(ক) সময়", "(খ) ভর", "(গ) আয়তন", "(ঘ) তাপমাত্রা"],
-        ans: 2
+        id: 21,
+        question: "২১. অত্যন্ত সূক্ষ্ম ও নমনীয় কাঁচতন্তু দিয়ে তৈরি নলের নাম কী?",
+        options: ["(ক) পেরিস্কোপ", "(খ) অপটিক্যাল ফাইবার", "(গ) টেলিস্কোপ", "(ঘ) থার্মোমিটার"],
+        correct: 1
     },
     {
-        q: "২২. কোয়ান্টাম তত্ত্বের প্রতিষ্ঠাতাদের একজন কে?",
-        options: ["(ক) আর্কিমিডিস", "(খ) ম্যাক্স প্ল্যাঙ্ক", "(গ) গ্যালেলিনো", "(ঘ) কেপলার"],
-        ans: 1
+        id: 22,
+        question: "২২. অপটিক্যাল ফাইবারে সংকেত কী হিসেবে পাঠানো হয়?",
+        options: ["(ক) শব্দ সংকেত", "(খ) আলোক সংকেত", "(গ) বিদ্যুৎ সংকেত", "(ঘ) তাপ সংকেত"],
+        correct: 1
     },
     {
-        q: "২৩. একটি বস্তুর দৈর্ঘ্য মেপে পাওয়া গেল 8 cm। যদি পরিমাপের সর্বোচ্চ সূক্ষ্মতা 0.1 cm হয়, তবে শতকরা ত্রুটি কত?",
-        options: ["(ক) 1.25%", "(খ) 2.5%", "(গ) 0.125%", "(ঘ) 5%"],
-        ans: 0
+        id: 23,
+        question: "২৩. মানবদেহের ভেতরের কোনো অঙ্গ (যেমন পাকস্থলী) দেখার জন্য চিকিৎসকরা কোন যন্ত্র ব্যবহার করেন?",
+        options: ["(ক) মাইক্রোস্কোপ", "(খ) এনডোস্কোপ", "(গ) পেরিস্কোপ", "(ঘ) স্টাথোস্কোপ"],
+        correct: 1
     },
     {
-        q: "২৪. থার্মোমিটার দিয়ে তাপমাত্রা মাপা হলে পরিমাপ করা হচ্ছে একটি—",
-        options: ["(ক) মৌলিক রাশি", "(খ) লব্ধ রাশি", "(গ) ভেক্টর রাশি", "(ঘ) মাত্রাহীন রাশি"],
-        ans: 0
+        id: 24,
+        question: "২৪. এনডোস্কোপ যন্ত্রে কোনটি ব্যবহার করা হয়?",
+        options: ["(ক) একটিমাত্র সমতল কাঁচ", "(খ) আলোক নল বা অপটিক্যাল ফাইবার", "(গ) উত্তল লেন্স", "(ঘ) প্রিজম"],
+        correct: 1
     },
     {
-        q: "২৫. ১ ফেমটোমিটার (1 fm) = কত মিটার?",
-        options: ["(ক) 10⁻¹² m", "(খ) 10⁻¹⁵ m", "(গ) 10⁻¹⁸ m", "(ঘ) 10⁻⁹ m"],
-        ans: 1
+        id: 25,
+        question: "২৫. পানিতে আলো প্রবেশ করলে প্রতিসরিত রশ্মির গতিবেগ—",
+        options: ["(ক) বৃদ্ধি পায়", "(খ) হ্রাস পায়", "(গ) একই থাকে", "(ঘ) শূন্য হয়ে যায়"],
+        correct: 1
     },
     {
-        q: "২৬. আলোর বেগ c-এর মাত্রা কোনটি?",
-        options: ["(ক) [LT⁻¹]", "(খ) [LT⁻²]", "(গ) [MLT⁻¹]", "(ঘ) [L²T⁻¹]"],
-        ans: 0
+        id: 26,
+        question: "২৬. কাঁচ ও বায়ুর মধ্যে কোনটি ঘন মাধ্যম?",
+        options: ["(ক) বায়ু", "(খ) কাঁচ", "(গ) দুটিই সমান", "(ঘ) কোনটিই নয়"],
+        correct: 1
     },
     {
-        q: "২৭. কাজের একক জুল (J) কে মৌলিক এককে প্রকাশ করলে কোনটি হবে?",
-        options: ["(ক) kg·m·s⁻²", "(খ) kg·m²·s⁻²", "(গ) kg·m²·s⁻¹", "(ঘ) kg·m⁻¹·s⁻²"],
-        ans: 1
+        id: 27,
+        question: "২৭. আলোক রশ্মি যখন ঘন মাধ্যম থেকে হালকা মাধ্যমে যায়, তখন প্রতিসরণ কোণ আপতন কোণের চেয়ে—",
+        options: ["(ক) ছোট হয়", "(খ) বড় হয়", "(গ) সমান হয়", "(ঘ) অর্ধেক হয়"],
+        correct: 1
     },
     {
-        q: "২৮. পিচ পরিমাপ করা হয় কোন যন্ত্র দিয়ে?",
-        options: ["(ক) স্কেল", "(খ) স্ক্রুগজ", "(গ) থার্মোমিটার", "(ঘ) থামোমিটার"],
-        ans: 1
+        id: 28,
+        question: "২৮. অভিলম্বের সাথে আপতিত রশ্মি যে কোণ উৎপন্ন করে তাকে কী বলে?",
+        options: ["(ক) প্রতিসরণ কোণ", "(খ) আপতন কোণ", "(গ) সংকট কোণ", "(ঘ) প্রতিফলন কোণ"],
+        correct: 1
     },
     {
-        q: "২৯. আপেক্ষিক ত্রুটি যত কম হবে, পরিমাপটি—",
-        options: ["(ক) তত কম নিখুঁত হবে", "(খ) তত বেশি নিখুঁত হবে", "(গ) অপরিবর্তিত থাকবে", "(ঘ) ত্রুটিপূর্ণ থাকবে"],
-        ans: 1
+        id: 29,
+        question: "২৯. অভিলম্বের সাথে প্রতিসরিত রশ্মি যে কোণ উৎপন্ন করে তাকে কী বলে?",
+        options: ["(ক) আপতন কোণ", "(খ) সংকট কোণ", "(গ) প্রতিসরণ কোণ", "(ঘ) পূর্ণ কোণ"],
+        correct: 2
     },
     {
-        q: "৩০. এক মোল (1 mol) পদার্থে কয়টি অনু বা পরমাণু থাকে?",
-        options: ["(ক) 6.023 × 10²³", "(খ) 6.023 × 10²²", "(গ) 3.00 × 10⁸", "(ঘ) 1.6 × 10⁻¹⁹"],
-        ans: 0
+        id: 30,
+        question: "৩০. মরীচিকার ক্ষেত্রে পথিকের কাছে মাটির কাছের বাতাসকে কেমন মনে হয়?",
+        options: ["(ক) ঘন মাধ্যম", "(খ) হালকা মাধ্যম", "(গ) শক্ত মাধ্যম", "(ঘ) কোনো মাধ্যম নয়"],
+        correct: 1
     }
 ];
 
+let totalSeconds = 30 * 60;
+let timerInterval;
+
+window.onload = function() {
+    if (localStorage.getItem("examSubmitted_class8_light")) {
+        showAlreadySubmitted();
+    } else {
+        renderQuestions();
+        startTimer();
+    }
+};
+
+function renderQuestions() {
+    const container = document.getElementById("questions");
+    let html = "";
+
+    questionsData.forEach((q, index) => {
+        html += `
+            <div class="question-card" id="qcard-${index}">
+                <div class="q-title">${q.question}</div>
+                <div class="options-group">
+                    ${q.options.map((opt, optIdx) => `
+                        <label class="option-btn" id="opt-label-${index}-${optIdx}">
+                            <input type="radio" name="q${index}" value="${optIdx}">
+                            ${opt}
+                        </label>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+    });
+
+    container.innerHTML = html;
+}
+
 function startTimer() {
     timerInterval = setInterval(() => {
-        let minutes = Math.floor(timeInSeconds / 60);
-        let seconds = timeInSeconds % 60;
+        totalSeconds--;
+        let minutes = Math.floor(totalSeconds / 60);
+        let seconds = totalSeconds % 60;
 
-        let displayMinutes = minutes < 10 ? '০' + convertToBengaliNumeral(minutes) : convertToBengaliNumeral(minutes);
-        let displaySeconds = seconds < 10 ? '০' + convertToBengaliNumeral(seconds) : convertToBengaliNumeral(seconds);
+        let displayM = minutes < 10 ? "০" + convertToBangla(minutes) : convertToBangla(minutes);
+        let displayS = seconds < 10 ? "০" + convertToBangla(seconds) : convertToBangla(seconds);
 
-        document.getElementById('timer').innerText = `${displayMinutes}:${displaySeconds}`;
+        document.getElementById("timer").innerText = `সময় বাকি: ${displayM}:${displayS}`;
 
-        if (timeInSeconds <= 0) {
+        if (totalSeconds <= 0) {
             clearInterval(timerInterval);
-            alert("⏰ সময় শেষ! আপনার উত্তর স্বয়ংক্রিয়ভাবে সাবমিট হচ্ছে।");
-            submitQuiz(true); // Auto submit
+            alert("সময় শেষ! আপনার উত্তর স্বয়ংক্রিয়ভাবে জমা হচ্ছে।");
+            submitExam();
         }
-        timeInSeconds--;
     }, 1000);
 }
 
-function convertToBengaliNumeral(num) {
-    const bnNums = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+function convertToBangla(num) {
+    const bnNums = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
     return num.toString().split('').map(n => bnNums[n] || n).join('');
 }
 
-function renderQuiz() {
-    const container = document.getElementById('questions-container');
-    container.innerHTML = '';
-
-    quizData.forEach((q, index) => {
-        const card = document.createElement('div');
-        card.className = 'question-card';
-        card.id = `q-card-${index}`;
-
-        let optionsHTML = '';
-        q.options.forEach((opt, optIndex) => {
-            optionsHTML += `
-                <label class="option-label" id="label-${index}-${optIndex}">
-                    <input type="radio" name="q${index}" value="${optIndex}">
-                    ${opt}
-                </label>
-            `;
-        });
-
-        card.innerHTML = `
-            <div class="question-title">${q.q}</div>
-            <div class="options">${optionsHTML}</div>
-        `;
-        container.appendChild(card);
-    });
-}
-
-function submitQuiz(isAuto = false) {
+function submitExam() {
     clearInterval(timerInterval);
-    document.getElementById('timer-box').style.display = 'none';
+    localStorage.setItem("examSubmitted_class8_light", "true");
 
     let score = 0;
-    let userAnswers = {};
 
-    quizData.forEach((q, index) => {
-        const card = document.getElementById(`q-card-${index}`);
+    questionsData.forEach((q, index) => {
         const selected = document.querySelector(`input[name="q${index}"]:checked`);
-        
-        card.classList.remove('correct', 'wrong');
-        q.options.forEach((_, optIndex) => {
-            const label = document.getElementById(`label-${index}-${optIndex}`);
-            label.classList.remove('selected-correct', 'selected-wrong', 'show-correct');
-            
-            // সাবমিট করার পর সব ইনপুট ডিসেবল করা
-            const input = label.querySelector('input');
-            if (input) input.disabled = true;
-        });
+        const userAns = selected ? parseInt(selected.value) : -1;
 
-        if (selected) {
-            const userAns = parseInt(selected.value);
-            userAnswers[index] = userAns;
-            if (userAns === q.ans) {
-                score++;
-                card.classList.add('correct');
-                document.getElementById(`label-${index}-${userAns}`).classList.add('selected-correct');
-            } else {
-                card.classList.add('wrong');
-                document.getElementById(`label-${index}-${userAns}`).classList.add('selected-wrong');
-                document.getElementById(`label-${index}-${q.ans}`).classList.add('show-correct');
+        const radios = document.getElementsByName(`q${index}`);
+        radios.forEach(r => r.disabled = true);
+
+        const correctLabel = document.getElementById(`opt-label-${index}-${q.correct}`);
+        if (correctLabel) {
+            correctLabel.classList.add("correct-ans");
+        }
+
+        if (userAns === q.correct) {
+            score++;
+        } else if (userAns !== -1) {
+            const wrongLabel = document.getElementById(`opt-label-${index}-${userAns}`);
+            if (wrongLabel) {
+                wrongLabel.classList.add("wrong-ans");
             }
-        } else {
-            card.classList.add('wrong');
-            document.getElementById(`label-${index}-${q.ans}`).classList.add('show-correct');
         }
     });
 
-    const totalQuestions = quizData.length;
-    const percentage = convertToBengaliNumeral(((score / totalQuestions) * 100).toFixed(1));
-    const scoreBn = convertToBengaliNumeral(score);
-    const totalQuestionsBn = convertToBengaliNumeral(totalQuestions);
+    document.getElementById("submitBtn").style.display = "none";
 
-    // LocalStorage-এ ডাটা সেভ করা হচ্ছে (যাতে ২য় বার পরীক্ষা দেওয়া না যায়)
-    const resultData = {
-        submitted: true,
-        score: score,
-        scoreBn: scoreBn,
-        percentage: percentage,
-        userAnswers: userAnswers
-    };
-    localStorage.setItem('ssc_physics_ch1_quiz', JSON.stringify(resultData));
-
-    showResultUI(scoreBn, totalQuestionsBn, percentage);
-}
-
-function showResultUI(scoreBn, totalQuestionsBn, percentage) {
-    const resultBox = document.getElementById('result-box');
-    const submitBtn = document.getElementById('submit-btn');
-
-    document.getElementById('score-marks').innerText = `${scoreBn} / ${totalQuestionsBn}`;
-    document.getElementById('score-percent').innerText = `${percentage}%`;
-
-    const shareMessage = `*১০ম শ্রেণী টিউটোরিয়াল প্রস্তুতি (পদার্থবিজ্ঞান)*\n` +
-                         `সার্বিক তত্ত্বাবধানে: ইঞ্জিঃ সাইফুল ইসলাম\n\n` +
-                         `🎯 *আমার অর্জিত মার্কস:* ${scoreBn}/${totalQuestionsBn}\n` +
-                         `📊 *সাফল্যের হার:* ${percentage}%\n\n` +
-                         `আপনিও আপনার প্রস্তুতি যাচাই করুন!`;
-    
-    const whatsappBtn = document.getElementById('whatsapp-share');
-    whatsappBtn.href = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareMessage)}`;
-
-    resultBox.style.display = 'block';
-    submitBtn.style.display = 'none';
+    const resultBox = document.getElementById("resultBox");
+    const scoreText = document.getElementById("scoreText");
+    scoreText.innerText = `আপনার প্রাপ্ত নম্বর: ${convertToBangla(score)} / ${convertToBangla(questionsData.length)}`;
+    resultBox.style.display = "block";
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// পূর্বের অ্যাটেম্পট চেক করার ফাংশন
-function checkPreviousAttempt() {
-    const savedResult = localStorage.getItem('ssc_physics_ch1_quiz');
-    if (savedResult) {
-        const data = JSON.parse(savedResult);
-        document.getElementById('timer-box').style.display = 'none';
-        
-        quizData.forEach((q, index) => {
-            const card = document.getElementById(`q-card-${index}`);
-            const userAns = data.userAnswers ? data.userAnswers[index] : undefined;
-
-            if (userAns !== undefined) {
-                if (userAns === q.ans) {
-                    card.classList.add('correct');
-                    document.getElementById(`label-${index}-${userAns}`).classList.add('selected-correct');
-                } else {
-                    card.classList.add('wrong');
-                    document.getElementById(`label-${index}-${userAns}`).classList.add('selected-wrong');
-                    document.getElementById(`label-${index}-${q.ans}`).classList.add('show-correct');
-                }
-            } else {
-                card.classList.add('wrong');
-                document.getElementById(`label-${index}-${q.ans}`).classList.add('show-correct');
-            }
-
-            q.options.forEach((_, optIndex) => {
-                const input = document.getElementById(`label-${index}-${optIndex}`).querySelector('input');
-                if (input) input.disabled = true;
-            });
-        });
-
-        const totalQuestionsBn = convertToBengaliNumeral(quizData.length);
-        showResultUI(data.scoreBn || convertToBengaliNumeral(data.score), totalQuestionsBn, data.percentage);
-    } else {
-        startTimer();
-    }
+function showAlreadySubmitted() {
+    const container = document.getElementById("quizContainer");
+    container.innerHTML = `
+        <div class="already-submitted">
+            <h2>আপনি ইতিমধ্যে এই পরীক্ষাটি দিয়েছেন!</h2>
+            <p style="font-size: 16px; color: #666;">একবার উত্তর জমা দেওয়ার পর পুনরায় পরীক্ষা দেওয়া গ্রহণযোগ্য নয়।</p>
+            <p style="margin-top: 15px; font-weight: bold; color: #4e54c8;">সার্বিক তত্ত্বাবধানে: সাইফুল ইসলাম (০১৬২২১৮৬৮১২)</p>
+        </div>
+    `;
 }
-
-// কুইজ শুরু
-renderQuiz();
-checkPreviousAttempt();
 </script>
 
 </body>
