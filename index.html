@@ -3,510 +3,173 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>৯ম শ্রেণী টিউটোরিয়াল প্রস্তুতি - পদার্থবিজ্ঞান (আলোর প্রতিফলন)</title>
+    <title>পরীক্ষার নোটিশ</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap');
-
         * {
-            box-sizing: border-box;
-            font-family: 'Hind Siliguri', sans-serif;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+            font-family: 'SolaimanLipi', 'Kalpurush', 'Hind Siliguri', sans-serif;
         }
 
         body {
-            background: linear-gradient(135deg, #1f1c2c, #928dab);
             min-height: 100vh;
-            color: #333;
-            padding: 20px 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(-45deg, #0f172a, #1e1b4b, #311042, #020617);
+            background-size: 400% 400%;
+            animation: gradientBG 12s ease infinite;
+            padding: 20px;
+            overflow-x: hidden;
         }
 
-        .container {
+        /* ব্যাকগ্রাউন্ড গ্রেডিয়েন্ট অ্যানিমেশন */
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* প্রধান কার্ডে গ্লাসমোরফিজম ও শাইনিং বর্ডার */
+        .notice-card {
+            position: relative;
             max-width: 800px;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 25px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-        }
-
-        .header {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            border-radius: 24px;
+            padding: 50px 40px;
             text-align: center;
-            border-bottom: 3px solid #6c5ce7;
-            padding-bottom: 15px;
-            margin-bottom: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6),
+                        0 0 30px rgba(168, 85, 247, 0.2);
+            animation: floatCard 4s ease-in-out infinite alternate;
         }
 
-        .header h1 {
-            color: #2d3436;
-            font-size: 24px;
-            margin-bottom: 8px;
+        @keyframes floatCard {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-10px); }
         }
 
-        .header h2 {
-            color: #6c5ce7;
-            font-size: 18px;
-            margin-bottom: 10px;
-        }
-
-        .header .teacher-info {
-            background: #e17055;
-            color: white;
-            padding: 6px 15px;
-            border-radius: 50px;
+        /* অ্যানিমেটেড হেডার ট্যাগ */
+        .badge {
             display: inline-block;
-            font-size: 15px;
-            font-weight: 600;
-        }
-
-        .instructions {
-            background: #fff3bf;
-            border-left: 5px solid #fcc419;
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            animation: pulse 2s infinite, glowBorder 3s infinite alternate;
+            padding: 8px 24px;
+            background: linear-gradient(90deg, #ff416c, #ff4b2b);
+            color: #fff;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 50px;
+            letter-spacing: 1px;
+            box-shadow: 0 0 20px rgba(255, 65, 108, 0.6);
+            margin-bottom: 25px;
+            animation: pulse 1.8s infinite;
         }
 
         @keyframes pulse {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(252, 196, 25, 0.5); }
-            50% { transform: scale(1.01); box-shadow: 0 0 15px 5px rgba(252, 196, 25, 0.3); }
-            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(252, 196, 25, 0); }
+            0% { transform: scale(1); box-shadow: 0 0 15px rgba(255, 65, 108, 0.6); }
+            50% { transform: scale(1.05); box-shadow: 0 0 30px rgba(255, 65, 108, 0.9); }
+            100% { transform: scale(1); box-shadow: 0 0 15px rgba(255, 65, 108, 0.6); }
         }
 
-        @keyframes glowBorder {
-            0% { border-left-color: #fcc419; }
-            50% { border-left-color: #ff6b6b; }
-            100% { border-left-color: #6c5ce7; }
+        /* বিষয় শিরোনাম */
+        .subject-title {
+            font-size: 42px;
+            font-weight: 800;
+            background: linear-gradient(90deg, #38ef7d, #11998e, #00d2ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(56, 239, 125, 0.3);
         }
 
-        .instructions h3 {
-            color: #d9480f;
-            margin-bottom: 8px;
-            font-size: 16px;
-        }
-
-        .instructions ul {
-            list-style-type: square;
-            margin-left: 20px;
-            color: #495057;
-            font-size: 14px;
+        /* মূল বার্তা */
+        .message {
+            font-size: 26px;
             line-height: 1.6;
+            color: #f1f5f9;
+            margin-bottom: 35px;
+            font-weight: 500;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
 
-        .timer-bar {
-            position: sticky;
-            top: 10px;
-            z-index: 100;
-            background: #2d3436;
-            color: #00cec9;
-            padding: 12px 20px;
-            border-radius: 50px;
-            text-align: center;
-            font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 25px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .student-info-form {
-            background: #f8f9fa;
-            padding: 18px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            border: 1px solid #e9ecef;
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-
-        .input-group {
-            flex: 1;
-            min-width: 200px;
-        }
-
-        .input-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: 600;
-            color: #2d3436;
-        }
-
-        .input-group input {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ced4da;
-            border-radius: 6px;
-            font-size: 15px;
-            outline: none;
-            transition: border-color 0.2s;
-        }
-
-        .input-group input:focus {
-            border-color: #6c5ce7;
-        }
-
-        .question-card {
-            background: #ffffff;
-            border: 1px solid #e9ecef;
-            border-radius: 12px;
-            padding: 18px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            transition: transform 0.2s;
-        }
-
-        .question-card:hover {
-            transform: translateY(-2px);
-        }
-
-        .question-title {
+        .highlight {
+            color: #facc15;
             font-weight: 700;
-            font-size: 16px;
-            color: #2d3436;
-            margin-bottom: 12px;
+            text-shadow: 0 0 10px rgba(250, 204, 21, 0.5);
         }
 
-        .options-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
+        /* ডিভাইডার লাইন */
+        .divider {
+            height: 2px;
+            width: 60%;
+            margin: 0 auto 30px auto;
+            background: linear-gradient(90deg, transparent, #a855f7, transparent);
         }
 
-        @media (max-width: 600px) {
-            .options-grid {
-                grid-template-columns: 1fr;
-            }
+        /* শিক্ষকের তথ্য */
+        .footer-info {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 20px 35px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .option-btn {
-            background: #f1f3f5;
-            border: 2px solid #dee2e6;
-            padding: 10px 14px;
-            border-radius: 8px;
-            cursor: pointer;
-            text-align: left;
-            font-size: 15px;
-            transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-        }
-
-        .option-btn:hover {
-            background: #e9ecef;
-            border-color: #adb5bd;
-        }
-
-        .option-btn input {
-            margin-right: 10px;
-            accent-color: #6c5ce7;
-            transform: scale(1.2);
-        }
-
-        .submit-btn {
-            width: 100%;
-            background: linear-gradient(45deg, #00b894, #00cec9);
-            color: white;
-            border: none;
-            padding: 15px;
-            border-radius: 12px;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0, 184, 148, 0.4);
-            transition: all 0.3s ease;
-        }
-
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0, 184, 148, 0.6);
-        }
-
-        /* Result Styles */
-        .result-box {
-            display: none;
-            background: #f8f9fa;
-            border-radius: 12px;
-            padding: 20px;
-            text-align: center;
-            margin-bottom: 25px;
-            border: 2px solid #6c5ce7;
-        }
-
-        .score-display {
+        .teacher-name {
             font-size: 28px;
             font-weight: bold;
-            color: #6c5ce7;
-            margin: 10px 0;
+            background: linear-gradient(90deg, #ff7e5f, #feb47b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 5px;
         }
 
-        .wa-btn {
-            background: #25D366;
-            color: white;
-            text-decoration: none;
-            padding: 12px 25px;
-            border-radius: 50px;
-            display: inline-block;
-            font-weight: bold;
-            margin-top: 15px;
-            box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);
+        .teacher-designation {
+            font-size: 20px;
+            color: #cbd5e1;
+            margin-bottom: 4px;
         }
 
-        /* Correct / Wrong highlight styles */
-        .correct-opt {
-            background: #d4edda !important;
-            border-color: #28a745 !important;
-            color: #155724;
-            font-weight: bold;
+        .institution {
+            font-size: 22px;
+            color: #38bdf8;
+            font-weight: 600;
         }
 
-        .wrong-opt {
-            background: #f8d7da !important;
-            border-color: #dc3545 !important;
-            color: #721c24;
-        }
-
-        .locked-msg {
-            display: none;
-            background: #e74c3c;
-            color: white;
-            padding: 15px;
-            border-radius: 10px;
-            text-align: center;
-            font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 20px;
+        /* মোবাইল স্ক্রিনের জন্য রেসপনসিভ স্টাইল */
+        @media (max-width: 600px) {
+            .notice-card { padding: 35px 20px; }
+            .subject-title { font-size: 30px; }
+            .message { font-size: 20px; }
+            .teacher-name { font-size: 22px; }
+            .teacher-designation { font-size: 16px; }
+            .institution { font-size: 18px; }
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="header">
-        <h1>৯ম শ্রেণী টিউটোরিয়াল প্রস্তুতি</h1>
-        <h2>বিষয়: পদার্থবিজ্ঞান (আলোর প্রতিফলন)</h2>
-        <div class="teacher-info">সার্বিক তত্ত্বাবধানে : সাইফুল ইসলাম | মোবাইল: 01622186812</div>
-    </div>
+    <div class="notice-card">
+        <div class="badge">📌 জরুরি নোটিশ</div>
+        
+        <h1 class="subject-title">পদার্থবিজ্ঞান MCQ পরীক্ষা</h1>
+        
+        <p class="message">
+            তোমাদের পদার্থবিজ্ঞান MCQ পরীক্ষাটির <span class="highlight">সময়সীমা শেষ</span>। 
+            পরবর্তী পরীক্ষা অনুষ্ঠিত হলে ক্লাসে জানিয়ে দেয়া হবে।
+        </p>
 
-    <div class="instructions">
-        <h3>📌 পরীক্ষা দেওয়ার নির্দেশনা:</h3>
-        <ul>
-            <li>১। পরীক্ষাটি মাত্র একবারই দিতে পারবে। সাবমিট করার পর স্বয়ংক্রিয়ভাবে পেইজ টা লক হয়ে যাবে।</li>
-            <li>২। <strong>Whatsapp এ রেজাল্ট শেয়ার করুন</strong> এই বাটনে ক্লিক করে 01622186812 নাম্বারে তোমার রেজাল্ট শেয়ার করবে।</li>
-            <li>৩। সময় সীমানা: ৩০ মিনিট। সময় শেষ হলে স্বয়ংক্রিয়ভাবে সাবমিট হয়ে যাবে।</li>
-        </ul>
-    </div>
+        <div class="divider"></div>
 
-    <div class="timer-bar">
-        <span>⏱️ সময় বাকি:</span>
-        <span id="timer">30:00</span>
-    </div>
-
-    <div id="lockedMessage" class="locked-msg">
-        ❌ আপনি ইতিমধ্যে পরীক্ষাটি জমা দিয়েছেন! পুনরায় দেওয়া সম্ভব নয়।
-    </div>
-
-    <div id="resultBox" class="result-box">
-        <h2>🎉 পরীক্ষার ফলাফল</h2>
-        <div class="score-display" id="scoreText">০ / ৩০</div>
-        <p id="studentDetails"></p>
-        <a id="waShareLink" href="#" target="_blank" class="wa-btn">📱 WhatsApp-এ রেজাল্ট শেয়ার করুন</a>
-    </div>
-
-    <form id="quizForm">
-        <div class="student-info-form">
-            <div class="input-group">
-                <label for="studentName">শিক্ষার্থীর নাম:</label>
-                <input type="text" id="studentName" placeholder="তোমার পূর্ণ নাম লিখো" required>
-            </div>
-            <div class="input-group">
-                <label for="studentRoll">রোল নম্বর:</label>
-                <input type="text" id="studentRoll" placeholder="তোমার রোল নম্বর লিখো" required>
-            </div>
+        <div class="footer-info">
+            <div class="teacher-name">সাইফুল ইসলাম</div>
+            <div class="teacher-designation">সহকারী শিক্ষক</div>
+            <div class="institution">ইবনে তাইমিয়া স্কুল অ্যান্ড কলেজ</div>
         </div>
-
-        <div id="questionsContainer"></div>
-
-        <button type="button" class="submit-btn" onclick="submitQuiz()">উত্তরপত্র জমা দিন (Submit)</button>
-    </form>
-</div>
-
-<script>
-    const questionsData = [
-        { q: "১. রিমোট কন্ট্রোল থেকে কোন ধরনের আলো বের হয়?", options: ["আল্ট্রা ভায়োলেট", "মাইক্রোওয়েভ", "এক্স-রে", "ইনফ্রারেড"], ans: 3 },
-        { q: "২. সবচেয়ে ছোট তরঙ্গ দৈর্ঘ্যের আলো কোনটি?", options: ["গামা রে", "এক্স-রে", "ইনফ্রারেড", "রেডিও ওয়েভ"], ans: 0 },
-        { q: "৩. কোন সংবেদনশীল আইসি ব্যবহার করার জন্য মোবাইল ক্যামেরা দিয়ে ইনফ্রারেড আলো দেখা যায়?", options: ["পিসিবি", "সিসিডি", "সিসিডিআই", "সিডিডি"], ans: 1 },
-        { q: "৪. তেজস্ক্রিয় নিউক্লিয়াস থেকে কোন আলো বের হয়?", options: ["এক্স-রে", "ইনফ্রারেড", "আল্ট্রাভায়োলেট", "গামা-রে"], ans: 3 },
-        { q: "৫. এক্স-রে এর তরঙ্গদৈর্ঘ্য কত মিটার?", options: ["10⁻¹⁴", "10⁻⁸", "10⁻¹⁰", "10⁸"], ans: 2 },
-        { q: "৬. এক টুকরো সাধারণ কাচে প্রতিফলন হয়—", options: ["2% - 3%", "3% - 4%", "4% - 5%", "5% - 6%"], ans: 2 },
-        { q: "৭. প্রধান অক্ষ ফোকাস তলের সাথে কত কোণ উৎপন্ন করে?", options: ["0°", "45°", "90°", "180°"], ans: 2 },
-        { q: "৮. দর্পণে কোনটি ঘটে?", options: ["প্রতিসরণ", "প্রতিফলন", "ব্যতিচার", "সমবর্তন"], ans: 1 },
-        { q: "৯. কাগজে আলোর কোন ধরনের প্রতিফলন হয়?", options: ["নিয়মিত", "ব্যপ্ত", "উত্তরি", "কোনোটিই নয়"], ans: 1 },
-        { q: "১০. সাদা তল সব রঙের আলোই—", options: ["প্রতিফলিত হয়", "প্রতিসরিত হয়", "প্রতিফলন ঘটে", "সাদা হয়"], ans: 0 },
-        { q: "১১. আলোর প্রতিফলনের সূত্র কয়টি?", options: ["১টি", "২টি", "৩টি", "৪টি"], ans: 1 },
-        { q: "১২. একটি সমতল দর্পণের 10 সে.মি. সামনে লক্ষ্যবস্তু স্থাপন করলে প্রতিবিম্বটি লক্ষ্যবস্তু থেকে কত সে.মি. দূরে গঠিত হবে?", options: ["0", "5", "10", "20"], ans: 3 },
-        { q: "১৩. লাল আলোতে লাল গোলাপ ফুল কোন বর্ণে দেখায়?", options: ["লাল", "গোলাপী", "সবুজ", "নীল"], ans: 0 },
-        { q: "১৪. নিচের কোনটির সাথে অবতল দর্পণের অসংলগ্নতা আছে?", options: ["ভিউ মিরর", "দাঁত পরীক্ষার", "টর্চ লাইট", "টেলিস্কোপ"], ans: 0 },
-        { q: "১৫. নিখুঁত ও নিরাপদ গাড়ি চালানোর জন্য কোনটি সর্বাপেক্ষা প্রয়োজনীয়?", options: ["গাড়ির কাচ পরিষ্কার করা", "জ্বালনি হিসেবে পেট্রোল ব্যবহার করা", "দর্পণগুলো ঠিকমতো উপযোজন করা", "সবসময় বাতি জ্বালিয়ে রাখা"], ans: 2 },
-        { q: "১৬. টেলিস্কোপে অবতল দর্পণ ব্যবহার করা হয় কেন?", options: ["স্পষ্ট প্রতিবিম্ব তৈরি করা", "প্রতিবিম্ব বিবর্ধিত করা", "প্রতিবিম্ব খর্বিত করা", "প্রতিবিম্ব সোজা করা"], ans: 0 },
-        { q: "১৭. গাড়ির রিয়ারভিউ মিরর হিসেবে কোন ধরনের দর্পণ ব্যবহৃত হয়?", options: ["অবতল", "উত্তল", "সমতল", "অভিসারী"], ans: 1 },
-        { q: "১৮. নিচের কোন ক্ষেত্রে উত্তল দর্পণ ব্যবহার করা হয়?", options: ["ওভারহেড প্রজেক্টরে", "প্রতিফলক টেলিস্কোপে", "কান ও গলা পরীক্ষায়", "স্ট্রিটের সার্চলাইটে"], ans: 3 },
-        { q: "১৯. একটি সরল পেরিস্কোপে আলোক রশ্মির দিকের পরিবর্তন ঘটে কত?", options: ["0°", "45°", "90°", "180°"], ans: 3 },
-        { q: "২০. রাস্তার বাঁকে দেখার জন্য সমতল দর্পণ কত ডিগ্রি কোণে স্থাপন করতে হয়?", options: ["30°", "45°", "90°", "180°"], ans: 1 },
-        { q: "২১. দন্ত চিকিৎসকগণ কোন আলোকময় যন্ত্র ব্যবহার করেন?", options: ["অবতল দর্পণ", "উত্তল দর্পণ", "উত্তল লেন্স", "অবতল লেন্স"], ans: 0 },
-        { q: "২২. বড় বড় টেলিস্কোপে কোনটি ব্যবহার করা হয়?", options: ["উত্তল আয়না", "অবতল আয়না", "সমতল আয়না", "উত্তল লেন্স"], ans: 1 },
-        { q: "২৩. দাঁতের চিকিৎসায় ব্যবহৃত দর্পণে কিরূপ প্রতিবিম্ব গঠিত হয়?", options: ["বাস্তব ও বিবর্ধিত", "অবাস্তব ও বিবর্ধিত", "বাস্তব ও খর্বিত", "অবাস্তব ও খর্বিত"], ans: 1 },
-        { q: "২৪. সরল পেরিস্কোপে ব্যবহৃত দুটি সমতল দর্পণের মধ্যবর্তী কোণ কত?", options: ["90°", "270°", "360°", "180°"], ans: 3 },
-        { q: "২৫. গাড়িতে দর্পণ ব্যবহার করা হয় কয়টি?", options: ["একটি", "দুটি", "তিনটি", "চারটি"], ans: 2 },
-        { q: "২৬. কোন স্টিমারের সার্চ লাইটে প্রতিফলক হিসেবে কোন দর্পণ ব্যবহার করা হয়?", options: ["সমতল দর্পণ", "উত্তল দর্পণ", "অবতল দর্পণ", "গোলীয় দর্পণ"], ans: 2 },
-        { q: "২৭. ভিড়ের মধ্যে খেলা দেখার জন্য ব্যবহৃত যন্ত্রে কোন দর্পণ ব্যবহার করা হয়?", options: ["উত্তল দর্পণ", "অবতল দর্পণ", "সমতল দর্পণ", "উত্তলাবতল দর্পণ"], ans: 2 },
-        { q: "২৮. টর্চ লাইটে নিচের কোনটি ব্যবহার করা হয়?", options: ["সমতল দর্পণ", "অবতলাউত্তল দর্পণ", "উত্তল দর্পণ", "অবতল দর্পণ"], ans: 3 },
-        { q: "২৯. দর্পণের মেরু ও প্রধান ফোকাসের মধ্যবর্তী দূরত্বকে কী বলে?", options: ["বক্রতার ব্যাসার্ধ", "ফোকাস দূরত্ব", "প্রধান অক্ষ", "গৌণ অক্ষ"], ans: 1 },
-        { q: "৩০. বক্রতার ব্যাসার্ধ ফোকাস দূরত্বের কত গুণ?", options: ["অর্ধেক", "সমান", "দ্বিগুণ", "চারগুণ"], ans: 2 }
-    ];
-
-    const optionLabels = ["ক", "খ", "গ", "ঘ"];
-    let timerInterval;
-    let timeLeft = 30 * 60; // 30 minutes in seconds
-
-    // Render Questions
-    function renderQuestions() {
-        const container = document.getElementById("questionsContainer");
-        questionsData.forEach((qObj, index) => {
-            const card = document.createElement("div");
-            card.className = "question-card";
-            card.id = `q-card-${index}`;
-
-            let html = `<div class="question-title">${qObj.q}</div><div class="options-grid">`;
-            
-            qObj.options.forEach((optText, optIdx) => {
-                html += `
-                    <label class="option-btn" id="opt-label-${index}-${optIdx}">
-                        <input type="radio" name="q${index}" value="${optIdx}">
-                        ${optionLabels[optIdx]}) ${optText}
-                    </label>
-                `;
-            });
-
-            html += `</div>`;
-            card.innerHTML = html;
-            container.appendChild(card);
-        });
-    }
-
-    // Timer Logic
-    function startTimer() {
-        timerInterval = setInterval(() => {
-            if (timeLeft <= 0) {
-                clearInterval(timerInterval);
-                submitQuiz(true);
-            } else {
-                timeLeft--;
-                let min = Math.floor(timeLeft / 60);
-                let sec = timeLeft % 60;
-                document.getElementById("timer").innerText = 
-                    `${min < 10 ? '0' + min : min}:${sec < 10 ? '0' + sec : sec}`;
-            }
-        }, 1000);
-    }
-
-    // Check if already submitted
-    function checkPreviousSubmission() {
-        if (localStorage.getItem("physics_quiz_submitted") === "true") {
-            document.getElementById("quizForm").style.display = "none";
-            document.getElementById("lockedMessage").style.display = "block";
-            let savedScore = localStorage.getItem("physics_quiz_score");
-            let savedName = localStorage.getItem("physics_quiz_name");
-            let savedRoll = localStorage.getItem("physics_quiz_roll");
-            if (savedScore) {
-                showResult(savedScore, savedName, savedRoll);
-            }
-            return true;
-        }
-        return false;
-    }
-
-    // Submit Quiz
-    function submitQuiz(isTimeOut = false) {
-        const nameInput = document.getElementById("studentName");
-        const rollInput = document.getElementById("studentRoll");
-
-        if (!isTimeOut) {
-            if (!nameInput.value.trim()) {
-                alert("অনুগ্রহ করে তোমার নাম প্রদান করো!");
-                nameInput.focus();
-                return;
-            }
-            if (!rollInput.value.trim()) {
-                alert("অনুগ্রহ করে তোমার রোল নম্বর প্রদান করো!");
-                rollInput.focus();
-                return;
-            }
-        }
-
-        clearInterval(timerInterval);
-        let score = 0;
-
-        questionsData.forEach((qObj, index) => {
-            const selectedOpt = document.querySelector(`input[name="q${index}"]:checked`);
-            const correctOptIdx = qObj.ans;
-
-            // Highlight Correct Answer
-            const correctLabel = document.getElementById(`opt-label-${index}-${correctOptIdx}`);
-            if (correctLabel) correctLabel.classList.add("correct-opt");
-
-            if (selectedOpt) {
-                const userAns = parseInt(selectedOpt.value);
-                if (userAns === correctOptIdx) {
-                    score++;
-                } else {
-                    // Highlight Wrong Selected Answer
-                    const wrongLabel = document.getElementById(`opt-label-${index}-${userAns}`);
-                    if (wrongLabel) wrongLabel.classList.add("wrong-opt");
-                }
-            }
-        });
-
-        // Lock Inputs
-        const inputs = document.querySelectorAll("input");
-        inputs.forEach(input => input.disabled = true);
-        document.querySelector(".submit-btn").style.display = "none";
-
-        const studentName = nameInput.value.trim() || "শিক্ষার্থী";
-        const studentRoll = rollInput.value.trim() || "N/A";
-
-        // Save State
-        localStorage.setItem("physics_quiz_submitted", "true");
-        localStorage.setItem("physics_quiz_score", score);
-        localStorage.setItem("physics_quiz_name", studentName);
-        localStorage.setItem("physics_quiz_roll", studentRoll);
-
-        showResult(score, studentName, studentRoll);
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    function showResult(score, name, roll) {
-        const resultBox = document.getElementById("resultBox");
-        resultBox.style.display = "block";
-        document.getElementById("scoreText").innerText = `${score} / ৩০`;
-        document.getElementById("studentDetails").innerText = `শিক্ষার্থীর নাম: ${name} | রোল: ${roll}`;
-
-        // WhatsApp Share Link
-        const message = encodeURIComponent(`আসসালামু আলাইকুম স্যার,\nআমি ${name} (রোল: ${roll})।\n৯ম শ্রেণী টিউটোরিয়াল প্রস্তুতি (পদার্থবিজ্ঞান - আলোর প্রতিফলন) পরীক্ষায় আমার নম্বর: ${score}/৩০।`);
-        const waUrl = `https://wa.me/8801622186812?text=${message}`;
-        document.getElementById("waShareLink").href = waUrl;
-    }
-
-    window.onload = function() {
-        renderQuestions();
-        if (!checkPreviousSubmission()) {
-            startTimer();
-        }
-    };
-</script>
+    </div>
 
 </body>
 </html>
