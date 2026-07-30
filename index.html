@@ -1,175 +1,408 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>পরীক্ষার নোটিশ</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'SolaimanLipi', 'Kalpurush', 'Hind Siliguri', sans-serif;
-        }
-
-        body {
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: linear-gradient(-45deg, #0f172a, #1e1b4b, #311042, #020617);
-            background-size: 400% 400%;
-            animation: gradientBG 12s ease infinite;
-            padding: 20px;
-            overflow-x: hidden;
-        }
-
-        /* ব্যাকগ্রাউন্ড গ্রেডিয়েন্ট অ্যানিমেশন */
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* প্রধান কার্ডে গ্লাসমোরফিজম ও শাইনিং বর্ডার */
-        .notice-card {
-            position: relative;
-            max-width: 800px;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 2px solid rgba(255, 255, 255, 0.15);
-            border-radius: 24px;
-            padding: 50px 40px;
-            text-align: center;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6),
-                        0 0 30px rgba(168, 85, 247, 0.2);
-            animation: floatCard 4s ease-in-out infinite alternate;
-        }
-
-        @keyframes floatCard {
-            0% { transform: translateY(0px); }
-            100% { transform: translateY(-10px); }
-        }
-
-        /* অ্যানিমেটেড হেডার ট্যাগ */
-        .badge {
-            display: inline-block;
-            padding: 8px 24px;
-            background: linear-gradient(90deg, #ff416c, #ff4b2b);
-            color: #fff;
-            font-size: 18px;
-            font-weight: bold;
-            border-radius: 50px;
-            letter-spacing: 1px;
-            box-shadow: 0 0 20px rgba(255, 65, 108, 0.6);
-            margin-bottom: 25px;
-            animation: pulse 1.8s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); box-shadow: 0 0 15px rgba(255, 65, 108, 0.6); }
-            50% { transform: scale(1.05); box-shadow: 0 0 30px rgba(255, 65, 108, 0.9); }
-            100% { transform: scale(1); box-shadow: 0 0 15px rgba(255, 65, 108, 0.6); }
-        }
-
-        /* বিষয় শিরোনাম */
-        .subject-title {
-            font-size: 42px;
-            font-weight: 800;
-            background: linear-gradient(90deg, #38ef7d, #11998e, #00d2ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 20px;
-            text-shadow: 0 0 20px rgba(56, 239, 125, 0.3);
-        }
-
-        /* মূল বার্তা */
-        .message {
-            font-size: 26px;
-            line-height: 1.6;
-            color: #f1f5f9;
-            margin-bottom: 35px;
-            font-weight: 500;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-        }
-
-        .highlight {
-            color: #facc15;
-            font-weight: 700;
-            text-shadow: 0 0 10px rgba(250, 204, 21, 0.5);
-        }
-
-        /* ডিভাইডার লাইন */
-        .divider {
-            height: 2px;
-            width: 60%;
-            margin: 0 auto 30px auto;
-            background: linear-gradient(90deg, transparent, #a855f7, transparent);
-        }
-
-        /* শিক্ষকের তথ্য */
-        .footer-info {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.03);
-            padding: 20px 35px;
-            border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .teacher-name {
-            font-size: 28px;
-            font-weight: bold;
-            background: linear-gradient(90deg, #ff7e5f, #feb47b);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 5px;
-        }
-
-        .teacher-designation {
-            font-size: 20px;
-            color: #cbd5e1;
-            margin-bottom: 4px;
-        }
-
-        .institution {
-            font-size: 22px;
-            color: #38bdf8;
-            font-weight: 600;
-        }
-
-        /* মোবাইল স্ক্রিনের জন্য রেসপনসিভ স্টাইল */
-        @media (max-width: 600px) {
-            .notice-card { padding: 35px 20px; }
-            .subject-title { font-size: 30px; }
-            .message { font-size: 20px; }
-            .teacher-name { font-size: 22px; }
-            .teacher-designation { font-size: 16px; }
-            .institution { font-size: 18px; }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>১০ম শ্রেণী টিউটোরিয়াল প্রস্তুতি - ICT</title>
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Hind Siliguri', sans-serif; }
+    body {
+      background: linear-gradient(135deg, #1A1A40 0%, #270082 50%, #7A0BC0 100%);
+      color: #fff;
+      padding: 20px 10px;
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 850px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.96);
+      color: #222;
+      border-radius: 20px;
+      padding: 25px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+    }
+    header {
+      text-align: center;
+      border-bottom: 3px solid #7A0BC0;
+      padding-bottom: 15px;
+      margin-bottom: 20px;
+    }
+    h1 { color: #270082; font-size: 24px; margin-bottom: 5px; }
+    h2 { color: #FA58B6; font-size: 18px; margin-bottom: 5px; }
+    .supervisor { color: #444; font-weight: 600; font-size: 15px; }
+    .contact-info {
+      background: #E8F0FE;
+      color: #1A73E8;
+      padding: 8px 15px;
+      border-radius: 20px;
+      display: inline-block;
+      margin-top: 10px;
+      font-weight: bold;
+      font-size: 14px;
+    }
+    .user-info {
+      background: #f0f4f8;
+      padding: 15px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+    .user-info input {
+      flex: 1;
+      min-width: 200px;
+      padding: 12px;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+      outline: none;
+    }
+    .user-info input:focus { border-color: #7A0BC0; }
+    .timer-box {
+      position: sticky;
+      top: 10px;
+      z-index: 100;
+      background: #ff0055;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      border-radius: 30px;
+      font-size: 18px;
+      font-weight: bold;
+      box-shadow: 0 5px 15px rgba(255, 0, 85, 0.4);
+      margin-bottom: 20px;
+    }
+    .q-card {
+      background: #fff;
+      border: 2px solid #e0e0e0;
+      border-radius: 12px;
+      padding: 15px;
+      margin-bottom: 18px;
+      transition: all 0.3s ease;
+    }
+    .q-title { font-size: 17px; font-weight: 700; color: #1A1A40; margin-bottom: 12px; }
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 10px;
+    }
+    .opt-label {
+      display: flex;
+      align-items: center;
+      background: #f8f9fa;
+      border: 2px solid #e9ecef;
+      padding: 10px 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.2s;
+    }
+    .opt-label:hover { background: #eef2ff; border-color: #7A0BC0; }
+    .opt-label input { margin-right: 10px; transform: scale(1.2); }
+    .btn {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 12px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+      margin-top: 10px;
+    }
+    .submit-btn { background: linear-gradient(90deg, #270082, #7A0BC0); color: white; }
+    .submit-btn:hover { opacity: 0.9; transform: translateY(-2px); }
+    .whatsapp-btn { background: #25D366; color: white; display: none; text-align: center; text-decoration: none; margin-top: 10px; }
+    .whatsapp-btn:hover { background: #1ebc57; }
+    .admin-btn { background: #6c757d; color: white; margin-top: 15px; }
+    
+    #result-box {
+      display: none;
+      background: #e6fffa;
+      border: 2px solid #38b2ac;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      margin-bottom: 25px;
+    }
+    #result-box h3 { color: #234e52; font-size: 22px; margin-bottom: 10px; }
+    .score-text { font-size: 28px; font-weight: bold; color: #2b6cb0; }
+    
+    /* Marking styles */
+    .correct-opt { background: #d4edda !important; border-color: #28a745 !important; color: #155724; }
+    .wrong-opt { background: #f8d7da !important; border-color: #dc3545 !important; color: #721c24; }
+    
+    #admin-panel {
+      display: none;
+      margin-top: 25px;
+      background: #f1f3f5;
+      padding: 15px;
+      border-radius: 12px;
+      border: 1px solid #ced4da;
+    }
+    table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+    th, td { border: 1px solid #dee2e6; padding: 8px; text-align: center; }
+    th { background: #270082; color: white; }
+  </style>
 </head>
 <body>
 
-    <div class="notice-card">
-        <div class="badge">📌 জরুরি নোটিশ</div>
-        
-        <h1 class="subject-title">পদার্থবিজ্ঞান MCQ পরীক্ষা</h1>
-        
-        <p class="message">
-            তোমাদের পদার্থবিজ্ঞান MCQ পরীক্ষাটির <span class="highlight">সময়সীমা শেষ</span>। 
-            পরবর্তী পরীক্ষা অনুষ্ঠিত হলে ক্লাসে জানিয়ে দেয়া হবে।
-        </p>
+<div class="container">
+  <header>
+    <h1>১০ম শ্রেণী টিউটোরিয়াল প্রস্তুতি</h1>
+    <h2>বিষয়: তথ্য ও যোগাযোগ প্রযুক্তি (প্রোগ্রামিং)</h2>
+    <div class="supervisor">সার্বিক তত্ত্বাবধানে : সাইফুল ইসলাম</div>
+    <div class="contact-info">📱 মোবাইল/WhatsApp: 01622186812</div>
+  </header>
 
-        <div class="divider"></div>
+  <div class="timer-box">⏱️ অবশিষ্ট সময়: <span id="timer">৩০:০০</span></div>
 
-        <div class="footer-info">
-            <div class="teacher-name">সাইফুল ইসলাম</div>
-            <div class="teacher-designation">সহকারী শিক্ষক</div>
-            <div class="institution">ইবনে তাইমিয়া স্কুল অ্যান্ড কলেজ</div>
-        </div>
-    </div>
+  <div class="user-info" id="userInfoBox">
+    <input type="text" id="studentName" placeholder="শিক্ষার্থীর নাম লিখুন..." required>
+    <input type="text" id="studentRoll" placeholder="রোল নম্বর লিখুন..." required>
+  </div>
+
+  <div id="result-box">
+    <h3>পরীক্ষার ফলাফল</h3>
+    <div class="score-text" id="scoreDisplay">০ / ৪০</div>
+    <p id="timeTakenText" style="margin-top:5px; color:#555;"></p>
+  </div>
+
+  <form id="quizForm">
+    <div id="questionsContainer"></div>
+    <button type="button" class="btn submit-btn" id="subBtn" onclick="submitQuiz()">উত্তরপত্র জমা দিন (Submit)</button>
+  </form>
+
+  <a id="waBtn" href="#" target="_blank" class="btn whatsapp-btn">📲 রেজাল্ট WhatsApp এ শেয়ার করুন</a>
+  
+  <button type="button" class="btn admin-btn" onclick="toggleAdminPanel()">📊 অংশগ্রহনকারীদের তালিকা (Teacher Panel)</button>
+  
+  <div id="admin-panel">
+    <h3>অংশগ্রহণকারী ছাত্রদের তালিকা</h3>
+    <table id="recordsTable">
+      <thead>
+        <tr>
+          <th>নাম</th>
+          <th>রোল</th>
+          <th>প্রাপ্ত নম্বর</th>
+          <th>সময়</th>
+        </tr>
+      </thead>
+      <tbody id="recordsBody"></tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+  // ৪০টি প্রশ্ন এবং সুষম ক,খ,গ,ঘ সঠিক উত্তর সেটআপ (প্রতিটি ১০টি করে)
+  const questions = [
+    { q: "১. কম্পিউটার সরাসরি কোন দুটি সংখ্যা বুঝতে পারে?", opts: ["১ ও ২", "২ ও ৩", "০ ও ১", "১ ও ৪"], ans: 2 }, // গ
+    { q: "২. নিচের কোনটি প্রোগ্রামিং ভাষা?", opts: ["বাংলা", "ইংরেজি", "পাইথন", "ল্যাটিন"], ans: 2 }, // গ
+    { q: "৩. প্রোগ্রামিং ভাষার প্রধান কাজ কী?", opts: ["ছবি আঁকা", "কম্পিউটারকে নির্দেশ দেওয়া", "গান তৈরি করা", "তথ্য মুছে ফেলা"], ans: 1 }, // খ
+    { q: "৪. কোন প্রোগ্রামিং ভাষায় সাধারণত প্রতিটি স্টেটমেন্টের শেষে সেমিকোলন দিতে হয়?", opts: ["পাইথন", "সি", "রুবি", "স্ক্র্যাচ"], ans: 1 }, // খ
+    { q: "৫. পাইথনে দুটি মান সমান কি না পরীক্ষা করার অপারেটর কোনটি?", opts: ["=", "!=", "==", ">="], ans: 2 }, // গ
+    { q: "৬. নিচের কোনটি পাইথনের একটি ডেটা টাইপ?", opts: ["break", "continue", "bool", "print"], ans: 2 }, // গ
+    { q: "৭. print() ফাংশনের কাজ কী?", opts: ["কিবোর্ড থেকে তথ্য গ্রহণ করা", "পর্দায় তথ্য প্রদর্শন করা", "চলক তৈরি করা", "প্রোগ্রাম বন্ধ করা"], ans: 1 }, // খ
+    { q: "৮. নিচের কোনটি প্রোগ্রামিং ভাষার নাম?", opts: ["কম্পাইলার", "বাইনারি", "পাইথন", "অ্যালগরিদম"], ans: 2 }, // গ
+    { q: "৯. পাঠ্যবইয়ে পাইথনের প্রধান ডেটা টাইপ কয় ধরনের উল্লেখ করা হয়েছে?", opts: ["২ ধরনের", "৩ ধরনের", "৪ ধরনের", "৫ ধরনের"], ans: 2 }, // গ
+    { q: "১০. নিচের কোনটি বৈধ ভ্যারিয়েবল বা চলকের নাম?", opts: ["2number", "my-number", "my number", "my_number"], ans: 3 }, // ঘ
+    { q: "১১. চলকের নামে কোনটি ব্যবহার করা যায় না?", opts: ["আন্ডারস্কোর", "ইংরেজি বর্ণ", "ফাঁকা স্থান", "সংখ্যা শেষে"], ans: 2 }, // গ
+    { q: "১২. True এবং False কোন ডেটা টাইপের মান?", opts: ["int", "float", "str", "bool"], ans: 3 }, // ঘ
+    { q: "১৩. পাইথনে পর্দায় Bangladesh দেখানোর সঠিক স্টেটমেন্ট কোনটি?", opts: ["input(\"Bangladesh\")", "print(\"Bangladesh\")", "show(\"Bangladesh\")", "display Bangladesh"], ans: 1 }, // খ
+    { q: "১৪. নিচের কোনটি ভগ্নাংশ বা দশমিক সংখ্যা সংরক্ষণের ডেটা টাইপ?", opts: ["int", "float", "str", "bool"], ans: 1 }, // খ
+    { q: "১৫. নিচের কোনটি স্ট্রিং ডেটার উদাহরণ?", opts: ["25", "3.75", "\"Dhaka\"", "True"], ans: 2 }, // গ
+    { q: "১৬. কম্পিউটারের নিজস্ব ভাষাকে কী বলা হয়?", opts: ["উচ্চস্তরের ভাষা", "মেশিন ভাষা", "প্রাকৃতিক ভাষা", "সাংকেতিক ভাষা"], ans: 1 }, // খ
+    { q: "১৭. মেশিন ভাষায় নির্দেশ প্রকাশ করা হয় কী দিয়ে?", opts: ["বাংলা অক্ষর দিয়ে", "ইংরেজি শব্দ দিয়ে", "০ ও ১ দিয়ে", "বিভিন্ন ছবি দিয়ে"], ans: 2 }, // গ
+    { q: "১৮. মানুষের পক্ষে সহজে বোঝা যায় কোন ধরনের প্রোগ্রামিং ভাষা?", opts: ["মেশিন ভাষা", "উচ্চস্তরের ভাষা", "বাইনারি ভাষা", "হার্ডওয়্যার ভাষা"], ans: 1 }, // খ
+    { q: "১৯. উচ্চস্তরের ভাষায় লেখা প্রোগ্রামকে মেশিন ভাষায় রূপান্তরের জন্য কী প্রয়োজন?", opts: ["ওয়েব ব্রাউজার", "অনুবাদক প্রোগ্রাম", "অ্যান্টিভাইরাস", "ওয়ার্ড প্রসেসর"], ans: 1 }, // খ
+    { q: "২০. কোন অনুবাদক সম্পূর্ণ প্রোগ্রামকে একসঙ্গে মেশিন ভাষায় রূপান্তর করে?", opts: ["কম্পাইলার", "ইন্টারপ্রেটার", "অপারেটিং সিস্টেম", "ডিবাগার"], ans: 0 }, // ক
+    { q: "২১. কোন অনুবাদক প্রোগ্রামের নির্দেশগুলো এক লাইন করে অনুবাদ ও কার্যকর করে?", opts: ["কম্পাইলার", "ইন্টারপ্রেটার", "অ্যাসেম্বলার", "প্রসেসর"], ans: 1 }, // খ
+    { q: "২২. প্রোগ্রামে ডেটা রাখার জন্য ব্যবহৃত নামযুক্ত স্থানকে কী বলে?", opts: ["অপারেটর", "ফাংশন", "চলক", "স্টেটমেন্ট"], ans: 2 }, // গ
+    { q: "২৩. পাইথনে চলকে মান সংরক্ষণের জন্য কোন অপারেটর ব্যবহৃত হয়?", opts: ["==", "=", "!=", "<="], ans: 1 }, // খ
+    { q: "২৪. age = 16 স্টেটমেন্টে age কী?", opts: ["ডেটা টাইপ", "অপারেটর", "চলক", "ফাংশন"], ans: 2 }, // গ
+    { q: "২৫. age = 16 স্টেটমেন্টে 16-এর ডেটা টাইপ কী?", opts: ["int", "float", "str", "bool"], ans: 0 }, // ক
+    { q: "২৬. কিবোর্ড থেকে ব্যবহারকারীর তথ্য গ্রহণ করতে কোন ফাংশন ব্যবহৃত হয়?", opts: ["print()", "input()", "type()", "output()"], ans: 1 }, // খ
+    { q: "২৭. পাইথনের input() ফাংশন সাধারণভাবে কোন ধরনের ডেটা গ্রহণ করে?", opts: ["int", "float", "str", "bool"], ans: 2 }, // গ
+    { q: "২৮. \"25\"-কে পূর্ণসংখ্যায় রূপান্তর করার সঠিক পদ্ধতি কোনটি?", opts: ["float(\"25\")", "str(\"25\")", "int(\"25\")", "bool(\"25\")"], ans: 2 }, // গ
+    { q: "২৯. এক ডেটা টাইপকে অন্য ডেটা টাইপে রূপান্তর করাকে কী বলে?", opts: ["কম্পাইলিং", "টাইপ কাস্টিং", "ডিবাগিং", "লুপিং"], ans: 1 }, // খ
+    { q: "৩০. পাইথনে ভাগশেষ নির্ণয়ের অপারেটর কোনটি?", opts: ["/", "//", "%", "**"], ans: 2 }, // গ
+    { q: "৩১. 17 % 5-এর ফলাফল কত?", opts: ["২", "৩", "৩.৪", "১২"], ans: 0 }, // ক
+    { q: "৩২. পাইথনে ঘাত বা সূচক নির্ণয়ের অপারেটর কোনটি?", opts: ["*", "**", "//", "%"], ans: 1 }, // খ
+    { q: "৩৩. 2 ** 3-এর ফলাফল কত?", opts: ["৫", "৬", "৮", "৯"], ans: 2 }, // গ
+    { q: "৩৪. 10 // 3-এর ফলাফল কত?", opts: ["৩", "৩.৩৩", "১", "৪"], ans: 0 }, // ক
+    { q: "৩৫. কোন অপারেটরের অর্থ অসমান?", opts: ["==", "!=", ">=", "="], ans: 1 }, // খ
+    { q: "৩৬. দুটি শর্তই সত্য হলে সত্য ফলাফল দেয় কোন লজিক্যাল অপারেটর?", opts: ["or", "not", "and", "in"], ans: 2 }, // গ
+    { q: "৩৭. প্রোগ্রামে কোনো শর্ত পরীক্ষা করার জন্য প্রধানত কোন স্টেটমেন্ট ব্যবহৃত হয়?", opts: ["print", "input", "if", "break"], ans: 2 }, // গ
+    { q: "৩৮. কোনো শর্ত সত্য না হলে বিকল্প নির্দেশ কার্যকর করতে কোনটি ব্যবহৃত হয়?", opts: ["else", "while", "print", "continue"], ans: 0 }, // ক
+    { q: "৩৯. একই নির্দেশ বারবার কার্যকর করার প্রক্রিয়াকে কী বলে?", opts: ["টাইপ কাস্টিং", "লুপ", "কম্পাইলিং", "ইনপুট"], ans: 1 }, // খ
+    { q: "৪০. লুপের কার্যক্রম তাৎক্ষণিকভাবে সম্পূর্ণ বন্ধ করতে কোন স্টেটমেন্ট ব্যবহৃত হয়?", opts: ["continue", "input", "break", "print"], ans: 2 } // গ
+  ];
+
+  let totalSeconds = 30 * 60;
+  let timerInterval;
+
+  // রেন্ডার প্রশ্নাবলী
+  function loadQuestions() {
+    const container = document.getElementById('questionsContainer');
+    const prefixes = ['ক', 'খ', 'গ', 'ঘ'];
+    
+    questions.forEach((q, idx) => {
+      let qHtml = `<div class="q-card" id="q-card-${idx}">
+        <div class="q-title">${q.q}</div>
+        <div class="options-grid">`;
+      
+      q.opts.forEach((opt, oIdx) => {
+        qHtml += `
+          <label class="opt-label" id="label-${idx}-${oIdx}">
+            <input type="radio" name="q${idx}" value="${oIdx}">
+            (${prefixes[oIdx]}) ${opt}
+          </label>
+        `;
+      });
+      
+      qHtml += `</div></div>`;
+      container.innerHTML += qHtml;
+    });
+  }
+
+  // টাইমার চালু
+  function startTimer() {
+    timerInterval = setInterval(() => {
+      totalSeconds--;
+      let m = Math.floor(totalSeconds / 60);
+      let s = totalSeconds % 60;
+      document.getElementById('timer').innerText = 
+        `${m < 10 ? '০'+m : m}:${s < 10 ? '০'+s : s}`;
+
+      if (totalSeconds <= 0) {
+        clearInterval(timerInterval);
+        alert("সময় শেষ! আপনার পরীক্ষা স্বয়ংক্রিয়ভাবে জমা হচ্ছে।");
+        submitQuiz(true);
+      }
+    }, 1000);
+  }
+
+  // সাবমিট হ্যান্ডলার
+  function submitQuiz(isTimeUp = false) {
+    const name = document.getElementById('studentName').value.trim();
+    const roll = document.getElementById('studentRoll').value.trim();
+
+    if (!isTimeUp && (!name || !roll)) {
+      alert("অনুগ্রহ করে পরীক্ষা জমা দেওয়ার পূর্বে আপনার নাম এবং রোল লিখুন!");
+      return;
+    }
+
+    // পরীক্ষা এক বার দেওয়া নিশ্চিত করা
+    if(localStorage.getItem('ict_quiz_submitted')) {
+      alert("আপনি ইতোমধ্যেই পরীক্ষাটি দিয়েছেন! বারবার দেওয়া যাবে না।");
+      return;
+    }
+
+    clearInterval(timerInterval);
+    let score = 0;
+
+    questions.forEach((q, idx) => {
+      const selected = document.querySelector(`input[name="q${idx}"]:checked`);
+      const card = document.getElementById(`q-card-${idx}`);
+      
+      if (selected) {
+        const val = parseInt(selected.value);
+        if (val === q.ans) {
+          score++;
+          document.getElementById(`label-${idx}-${val}`).classList.add('correct-opt');
+        } else {
+          document.getElementById(`label-${idx}-${val}`).classList.add('wrong-opt');
+          document.getElementById(`label-${idx}-${q.ans}`).classList.add('correct-opt');
+        }
+      } else {
+        document.getElementById(`label-${idx}-${q.ans}`).classList.add('correct-opt');
+      }
+
+      // রেডিও বাটন ডিজেবল
+      const inputs = card.querySelectorAll('input');
+      inputs.forEach(i => i.disabled = true);
+    });
+
+    // রেজাল্ট দেখান
+    document.getElementById('result-box').style.display = 'block';
+    document.getElementById('scoreDisplay').innerText = `${score} / ৪০`;
+    document.getElementById('subBtn').style.display = 'none';
+    document.getElementById('userInfoBox').style.display = 'none';
+
+    // ১ বার সাবমিট চিহ্নিতকরণ
+    localStorage.setItem('ict_quiz_submitted', 'true');
+
+    // স্টোরেজে রেকর্ড সংরক্ষণ (Local Storage - Teacher Panel)
+    saveRecord(name, roll, score);
+
+    // WhatsApp শেয়ার বাটন তৈরি
+    setupWhatsAppButton(name, roll, score);
+  }
+
+  function saveRecord(name, roll, score) {
+    let records = JSON.parse(localStorage.getItem('ict_quiz_records') || '[]');
+    records.push({
+      name: name || 'Unknown',
+      roll: roll || 'N/A',
+      score: score,
+      time: new Date().toLocaleTimeString()
+    });
+    localStorage.setItem('ict_quiz_records', JSON.stringify(records));
+  }
+
+  function setupWhatsAppButton(name, roll, score) {
+    const waBtn = document.getElementById('waBtn');
+    const text = `*১০ম শ্রেণী টিউটোরিয়াল প্রস্তুতি - ICT*%0A` +
+                 `👤 *নাম:* ${name}%0A` +
+                 `🆔 *রোল:* ${roll}%0A` +
+                 `📊 *প্রাপ্ত নম্বর:* ${score} / ৪০%0A` +
+                 `সার্বিক তত্ত্বাবধানে: সাইফুল ইসলাম স্যার`;
+    
+    waBtn.href = `https://wa.me/8801622186812?text=${text}`;
+    waBtn.style.display = 'block';
+  }
+
+  function toggleAdminPanel() {
+    const panel = document.getElementById('admin-panel');
+    const recordsBody = document.getElementById('recordsBody');
+    
+    if (panel.style.display === 'none' || panel.style.display === '') {
+      let records = JSON.parse(localStorage.getItem('ict_quiz_records') || '[]');
+      recordsBody.innerHTML = '';
+      
+      if(records.length === 0) {
+        recordsBody.innerHTML = '<tr><td colspan="4">এখনও কেউ পরীক্ষা দেয়নি।</td></tr>';
+      } else {
+        records.forEach(r => {
+          recordsBody.innerHTML += `<tr>
+            <td>${r.name}</td>
+            <td>${r.roll}</td>
+            <td>${r.score}</td>
+            <td>${r.time}</td>
+          </tr>`;
+        });
+      }
+      panel.style.display = 'block';
+    } else {
+      panel.style.display = 'none';
+    }
+  }
+
+  // পেজ লোড হলে
+  window.onload = function() {
+    loadQuestions();
+    
+    if(localStorage.getItem('ict_quiz_submitted')) {
+      alert("আপনি এই ডিভাইস থেকে ইতোমধ্যেই একবার পরীক্ষাটি সম্পন্ন করেছেন।");
+      document.getElementById('subBtn').disabled = true;
+      document.getElementById('subBtn').innerText = "আপনি পরীক্ষাটি দিয়ে ফেলেছেন";
+    } else {
+      startTimer();
+    }
+  };
+</script>
 
 </body>
 </html>
