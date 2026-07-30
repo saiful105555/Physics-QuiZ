@@ -41,6 +41,40 @@
       font-weight: bold;
       font-size: 14px;
     }
+
+    /* Animated Notice Section */
+    .notice-box {
+      background: linear-gradient(90deg, #fff3cd, #ffe8a1, #fff3cd);
+      background-size: 200% 200%;
+      animation: gradientShift 3s ease infinite, pulseBorder 2s infinite alternate;
+      border: 2px solid #ffc107;
+      border-radius: 12px;
+      padding: 12px 18px;
+      margin-bottom: 20px;
+      color: #856404;
+      font-weight: 600;
+      font-size: 15px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(255, 193, 7, 0.2);
+    }
+    .notice-box p {
+      margin: 4px 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    @keyframes pulseBorder {
+      0% { border-color: #ffc107; box-shadow: 0 0 8px rgba(255, 193, 7, 0.4); }
+      100% { border-color: #ff9800; box-shadow: 0 0 16px rgba(255, 152, 0, 0.7); }
+    }
+
     .user-info {
       background: #f0f4f8;
       padding: 15px;
@@ -114,10 +148,7 @@
     }
     .submit-btn { background: linear-gradient(90deg, #270082, #7A0BC0); color: white; }
     .submit-btn:hover { opacity: 0.9; transform: translateY(-2px); }
-    .whatsapp-btn { background: #25D366; color: white; display: none; text-align: center; text-decoration: none; margin-top: 10px; }
-    .whatsapp-btn:hover { background: #1ebc57; }
-    .admin-btn { background: #6c757d; color: white; margin-top: 15px; }
-    
+
     #result-box {
       display: none;
       background: #e6fffa;
@@ -129,22 +160,10 @@
     }
     #result-box h3 { color: #234e52; font-size: 22px; margin-bottom: 10px; }
     .score-text { font-size: 28px; font-weight: bold; color: #2b6cb0; }
-    
+
     /* Marking styles */
     .correct-opt { background: #d4edda !important; border-color: #28a745 !important; color: #155724; }
     .wrong-opt { background: #f8d7da !important; border-color: #dc3545 !important; color: #721c24; }
-    
-    #admin-panel {
-      display: none;
-      margin-top: 25px;
-      background: #f1f3f5;
-      padding: 15px;
-      border-radius: 12px;
-      border: 1px solid #ced4da;
-    }
-    table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-    th, td { border: 1px solid #dee2e6; padding: 8px; text-align: center; }
-    th { background: #270082; color: white; }
   </style>
 </head>
 <body>
@@ -157,6 +176,13 @@
     <div class="contact-info">📱 মোবাইল/WhatsApp: 01622186812</div>
   </header>
 
+  <!-- Animated Notice Box -->
+  <div class="notice-box">
+    <p>⚠️ <strong>বিশেষ নির্দেশনাবলী:</strong></p>
+    <p>📌 পরীক্ষাটি মাত্র একবারই দিতে পারবে।</p>
+    <p>📩 তোমার রেজাল্ট স্বয়ংক্রিয়ভাবে ডেভেলপার (সাইফুল ইসলাম) এর কাছে জমা হবে।</p>
+  </div>
+
   <div class="timer-box">⏱️ অবশিষ্ট সময়: <span id="timer">৩০:০০</span></div>
 
   <div class="user-info" id="userInfoBox">
@@ -167,92 +193,81 @@
   <div id="result-box">
     <h3>পরীক্ষার ফলাফল</h3>
     <div class="score-text" id="scoreDisplay">০ / ৪০</div>
-    <p id="timeTakenText" style="margin-top:5px; color:#555;"></p>
+    <p id="statusText" style="margin-top:8px; color:#234e52; font-weight:600;">আপনার ফলাফল সফলভাবে সাইফুল স্যার (ডেভেলপার) এর কাছে জমা দেওয়া হয়েছে।</p>
   </div>
 
-  <form id="quizForm">
-    <div id="questionsContainer"></div>
-    <button type="button" class="btn submit-btn" id="subBtn" onclick="submitQuiz()">উত্তরপত্র জমা দিন (Submit)</button>
+  <!-- FormSubmit Form (Saiful.cou10@gmail.com) -->
+  <form id="formsubmitForm" action="https://formsubmit.co/Saiful.cou10@gmail.com" method="POST" style="display:none;">
+    <input type="hidden" name="_subject" value="১০ম শ্রেণী ICT পরীক্ষা - নতুন ফলাফল">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="শিক্ষার্থীর নাম" id="fsName">
+    <input type="hidden" name="রোল নম্বর" id="fsRoll">
+    <input type="hidden" name="প্রাপ্ত নম্বর" id="fsScore">
   </form>
 
-  <a id="waBtn" href="#" target="_blank" class="btn whatsapp-btn">📲 রেজাল্ট WhatsApp এ শেয়ার করুন</a>
-  
-  <button type="button" class="btn admin-btn" onclick="toggleAdminPanel()">📊 অংশগ্রহনকারীদের তালিকা (Teacher Panel)</button>
-  
-  <div id="admin-panel">
-    <h3>অংশগ্রহণকারী ছাত্রদের তালিকা</h3>
-    <table id="recordsTable">
-      <thead>
-        <tr>
-          <th>নাম</th>
-          <th>রোল</th>
-          <th>প্রাপ্ত নম্বর</th>
-          <th>সময়</th>
-        </tr>
-      </thead>
-      <tbody id="recordsBody"></tbody>
-    </table>
+  <div id="quizForm">
+    <div id="questionsContainer"></div>
+    <button type="button" class="btn submit-btn" id="subBtn" onclick="submitQuiz()">উত্তরপত্র জমা দিন (Submit)</button>
   </div>
 </div>
 
 <script>
-  // ৪০টি প্রশ্ন এবং সুষম ক,খ,গ,ঘ সঠিক উত্তর সেটআপ (প্রতিটি ১০টি করে)
+  // ৪০টি প্রশ্ন
   const questions = [
-    { q: "১. কম্পিউটার সরাসরি কোন দুটি সংখ্যা বুঝতে পারে?", opts: ["১ ও ২", "২ ও ৩", "০ ও ১", "১ ও ৪"], ans: 2 }, // গ
-    { q: "২. নিচের কোনটি প্রোগ্রামিং ভাষা?", opts: ["বাংলা", "ইংরেজি", "পাইথন", "ল্যাটিন"], ans: 2 }, // গ
-    { q: "৩. প্রোগ্রামিং ভাষার প্রধান কাজ কী?", opts: ["ছবি আঁকা", "কম্পিউটারকে নির্দেশ দেওয়া", "গান তৈরি করা", "তথ্য মুছে ফেলা"], ans: 1 }, // খ
-    { q: "৪. কোন প্রোগ্রামিং ভাষায় সাধারণত প্রতিটি স্টেটমেন্টের শেষে সেমিকোলন দিতে হয়?", opts: ["পাইথন", "সি", "রুবি", "স্ক্র্যাচ"], ans: 1 }, // খ
-    { q: "৫. পাইথনে দুটি মান সমান কি না পরীক্ষা করার অপারেটর কোনটি?", opts: ["=", "!=", "==", ">="], ans: 2 }, // গ
-    { q: "৬. নিচের কোনটি পাইথনের একটি ডেটা টাইপ?", opts: ["break", "continue", "bool", "print"], ans: 2 }, // গ
-    { q: "৭. print() ফাংশনের কাজ কী?", opts: ["কিবোর্ড থেকে তথ্য গ্রহণ করা", "পর্দায় তথ্য প্রদর্শন করা", "চলক তৈরি করা", "প্রোগ্রাম বন্ধ করা"], ans: 1 }, // খ
-    { q: "৮. নিচের কোনটি প্রোগ্রামিং ভাষার নাম?", opts: ["কম্পাইলার", "বাইনারি", "পাইথন", "অ্যালগরিদম"], ans: 2 }, // গ
-    { q: "৯. পাঠ্যবইয়ে পাইথনের প্রধান ডেটা টাইপ কয় ধরনের উল্লেখ করা হয়েছে?", opts: ["২ ধরনের", "৩ ধরনের", "৪ ধরনের", "৫ ধরনের"], ans: 2 }, // গ
-    { q: "১০. নিচের কোনটি বৈধ ভ্যারিয়েবল বা চলকের নাম?", opts: ["2number", "my-number", "my number", "my_number"], ans: 3 }, // ঘ
-    { q: "১১. চলকের নামে কোনটি ব্যবহার করা যায় না?", opts: ["আন্ডারস্কোর", "ইংরেজি বর্ণ", "ফাঁকা স্থান", "সংখ্যা শেষে"], ans: 2 }, // গ
-    { q: "১২. True এবং False কোন ডেটা টাইপের মান?", opts: ["int", "float", "str", "bool"], ans: 3 }, // ঘ
-    { q: "১৩. পাইথনে পর্দায় Bangladesh দেখানোর সঠিক স্টেটমেন্ট কোনটি?", opts: ["input(\"Bangladesh\")", "print(\"Bangladesh\")", "show(\"Bangladesh\")", "display Bangladesh"], ans: 1 }, // খ
-    { q: "১৪. নিচের কোনটি ভগ্নাংশ বা দশমিক সংখ্যা সংরক্ষণের ডেটা টাইপ?", opts: ["int", "float", "str", "bool"], ans: 1 }, // খ
-    { q: "১৫. নিচের কোনটি স্ট্রিং ডেটার উদাহরণ?", opts: ["25", "3.75", "\"Dhaka\"", "True"], ans: 2 }, // গ
-    { q: "১৬. কম্পিউটারের নিজস্ব ভাষাকে কী বলা হয়?", opts: ["উচ্চস্তরের ভাষা", "মেশিন ভাষা", "প্রাকৃতিক ভাষা", "সাংকেতিক ভাষা"], ans: 1 }, // খ
-    { q: "১৭. মেশিন ভাষায় নির্দেশ প্রকাশ করা হয় কী দিয়ে?", opts: ["বাংলা অক্ষর দিয়ে", "ইংরেজি শব্দ দিয়ে", "০ ও ১ দিয়ে", "বিভিন্ন ছবি দিয়ে"], ans: 2 }, // গ
-    { q: "১৮. মানুষের পক্ষে সহজে বোঝা যায় কোন ধরনের প্রোগ্রামিং ভাষা?", opts: ["মেশিন ভাষা", "উচ্চস্তরের ভাষা", "বাইনারি ভাষা", "হার্ডওয়্যার ভাষা"], ans: 1 }, // খ
-    { q: "১৯. উচ্চস্তরের ভাষায় লেখা প্রোগ্রামকে মেশিন ভাষায় রূপান্তরের জন্য কী প্রয়োজন?", opts: ["ওয়েব ব্রাউজার", "অনুবাদক প্রোগ্রাম", "অ্যান্টিভাইরাস", "ওয়ার্ড প্রসেসর"], ans: 1 }, // খ
-    { q: "২০. কোন অনুবাদক সম্পূর্ণ প্রোগ্রামকে একসঙ্গে মেশিন ভাষায় রূপান্তর করে?", opts: ["কম্পাইলার", "ইন্টারপ্রেটার", "অপারেটিং সিস্টেম", "ডিবাগার"], ans: 0 }, // ক
-    { q: "২১. কোন অনুবাদক প্রোগ্রামের নির্দেশগুলো এক লাইন করে অনুবাদ ও কার্যকর করে?", opts: ["কম্পাইলার", "ইন্টারপ্রেটার", "অ্যাসেম্বলার", "প্রসেসর"], ans: 1 }, // খ
-    { q: "২২. প্রোগ্রামে ডেটা রাখার জন্য ব্যবহৃত নামযুক্ত স্থানকে কী বলে?", opts: ["অপারেটর", "ফাংশন", "চলক", "স্টেটমেন্ট"], ans: 2 }, // গ
-    { q: "২৩. পাইথনে চলকে মান সংরক্ষণের জন্য কোন অপারেটর ব্যবহৃত হয়?", opts: ["==", "=", "!=", "<="], ans: 1 }, // খ
-    { q: "২৪. age = 16 স্টেটমেন্টে age কী?", opts: ["ডেটা টাইপ", "অপারেটর", "চলক", "ফাংশন"], ans: 2 }, // গ
-    { q: "২৫. age = 16 স্টেটমেন্টে 16-এর ডেটা টাইপ কী?", opts: ["int", "float", "str", "bool"], ans: 0 }, // ক
-    { q: "২৬. কিবোর্ড থেকে ব্যবহারকারীর তথ্য গ্রহণ করতে কোন ফাংশন ব্যবহৃত হয়?", opts: ["print()", "input()", "type()", "output()"], ans: 1 }, // খ
-    { q: "২৭. পাইথনের input() ফাংশন সাধারণভাবে কোন ধরনের ডেটা গ্রহণ করে?", opts: ["int", "float", "str", "bool"], ans: 2 }, // গ
-    { q: "২৮. \"25\"-কে পূর্ণসংখ্যায় রূপান্তর করার সঠিক পদ্ধতি কোনটি?", opts: ["float(\"25\")", "str(\"25\")", "int(\"25\")", "bool(\"25\")"], ans: 2 }, // গ
-    { q: "২৯. এক ডেটা টাইপকে অন্য ডেটা টাইপে রূপান্তর করাকে কী বলে?", opts: ["কম্পাইলিং", "টাইপ কাস্টিং", "ডিবাগিং", "লুপিং"], ans: 1 }, // খ
-    { q: "৩০. পাইথনে ভাগশেষ নির্ণয়ের অপারেটর কোনটি?", opts: ["/", "//", "%", "**"], ans: 2 }, // গ
-    { q: "৩১. 17 % 5-এর ফলাফল কত?", opts: ["২", "৩", "৩.৪", "১২"], ans: 0 }, // ক
-    { q: "৩২. পাইথনে ঘাত বা সূচক নির্ণয়ের অপারেটর কোনটি?", opts: ["*", "**", "//", "%"], ans: 1 }, // খ
-    { q: "৩৩. 2 ** 3-এর ফলাফল কত?", opts: ["৫", "৬", "৮", "৯"], ans: 2 }, // গ
-    { q: "৩৪. 10 // 3-এর ফলাফল কত?", opts: ["৩", "৩.৩৩", "১", "৪"], ans: 0 }, // ক
-    { q: "৩৫. কোন অপারেটরের অর্থ অসমান?", opts: ["==", "!=", ">=", "="], ans: 1 }, // খ
-    { q: "৩৬. দুটি শর্তই সত্য হলে সত্য ফলাফল দেয় কোন লজিক্যাল অপারেটর?", opts: ["or", "not", "and", "in"], ans: 2 }, // গ
-    { q: "৩৭. প্রোগ্রামে কোনো শর্ত পরীক্ষা করার জন্য প্রধানত কোন স্টেটমেন্ট ব্যবহৃত হয়?", opts: ["print", "input", "if", "break"], ans: 2 }, // গ
-    { q: "৩৮. কোনো শর্ত সত্য না হলে বিকল্প নির্দেশ কার্যকর করতে কোনটি ব্যবহৃত হয়?", opts: ["else", "while", "print", "continue"], ans: 0 }, // ক
-    { q: "৩৯. একই নির্দেশ বারবার কার্যকর করার প্রক্রিয়াকে কী বলে?", opts: ["টাইপ কাস্টিং", "লুপ", "কম্পাইলিং", "ইনপুট"], ans: 1 }, // খ
-    { q: "৪০. লুপের কার্যক্রম তাৎক্ষণিকভাবে সম্পূর্ণ বন্ধ করতে কোন স্টেটমেন্ট ব্যবহৃত হয়?", opts: ["continue", "input", "break", "print"], ans: 2 } // গ
+    { q: "১. কম্পিউটার সরাসরি কোন দুটি সংখ্যা বুঝতে পারে?", opts: ["১ ও ২", "২ ও ৩", "০ ও ১", "১ ও ৪"], ans: 2 },
+    { q: "২. নিচের কোনটি প্রোগ্রামিং ভাষা?", opts: ["বাংলা", "ইংরেজি", "পাইথন", "ল্যাটিন"], ans: 2 },
+    { q: "৩. প্রোগ্রামিং ভাষার প্রধান কাজ কী?", opts: ["ছবি আঁকা", "কম্পিউটারকে নির্দেশ দেওয়া", "গান তৈরি করা", "তথ্য মুছে ফেলা"], ans: 1 },
+    { q: "৪. কোন প্রোগ্রামিং ভাষায় সাধারণত প্রতিটি স্টেটমেন্টের শেষে সেমিকোলন দিতে হয়?", opts: ["পাইথন", "সি", "রুবি", "স্ক্র্যাচ"], ans: 1 },
+    { q: "৫. পাইথনে দুটি মান সমান কি না পরীক্ষা করার অপারেটর কোনটি?", opts: ["=", "!=", "==", ">="], ans: 2 },
+    { q: "৬. নিচের কোনটি পাইথনের একটি ডেটা টাইপ?", opts: ["break", "continue", "bool", "print"], ans: 2 },
+    { q: "৭. print() ফাংশনের কাজ কী?", opts: ["কিবোর্ড থেকে তথ্য গ্রহণ করা", "পর্দায় তথ্য প্রদর্শন করা", "চলক তৈরি করা", "প্রোগ্রাম বন্ধ করা"], ans: 1 },
+    { q: "৮. নিচের কোনটি প্রোগ্রামিং ভাষার নাম?", opts: ["কম্পাইলার", "বাইনারি", "পাইথন", "অ্যালগরিদম"], ans: 2 },
+    { q: "৯. পাঠ্যবইয়ে পাইথনের প্রধান ডেটা টাইপ কয় ধরনের উল্লেখ করা হয়েছে?", opts: ["২ ধরনের", "৩ ধরনের", "৪ ধরনের", "৫ ধরনের"], ans: 2 },
+    { q: "১০. নিচের কোনটি বৈধ ভ্যারিয়েবল বা চলকের নাম?", opts: ["2number", "my-number", "my number", "my_number"], ans: 3 },
+    { q: "১১. চলকের নামে কোনটি ব্যবহার করা যায় না?", opts: ["আন্ডারস্কোর", "ইংরেজি বর্ণ", "ফাঁকা স্থান", "সংখ্যা শেষে"], ans: 2 },
+    { q: "১২. True এবং False কোন ডেটা টাইপের মান?", opts: ["int", "float", "str", "bool"], ans: 3 },
+    { q: "১৩. পাইথনে পর্দায় Bangladesh দেখানোর সঠিক স্টেটমেন্ট কোনটি?", opts: ["input(\"Bangladesh\")", "print(\"Bangladesh\")", "show(\"Bangladesh\")", "display Bangladesh"], ans: 1 },
+    { q: "১৪. নিচের কোনটি ভগ্নাংশ বা দশমিক সংখ্যা সংরক্ষণের ডেটা টাইপ?", opts: ["int", "float", "str", "bool"], ans: 1 },
+    { q: "১৫. নিচের কোনটি স্ট্রিং ডেটার উদাহরণ?", opts: ["25", "3.75", "\"Dhaka\"", "True"], ans: 2 },
+    { q: "১৬. কম্পিউটারের নিজস্ব ভাষাকে কী বলা হয়?", opts: ["উচ্চস্তরের ভাষা", "মেশিন ভাষা", "প্রাকৃতিক ভাষা", "সাংকেতিক ভাষা"], ans: 1 },
+    { q: "১৭. মেশিন ভাষায় নির্দেশ প্রকাশ করা হয় কী দিয়ে?", opts: ["বাংলা অক্ষর দিয়ে", "ইংরেজি শব্দ দিয়ে", "০ ও ১ দিয়ে", "বিভিন্ন ছবি দিয়ে"], ans: 2 },
+    { q: "১৮. মানুষের পক্ষে সহজে বোঝা যায় কোন ধরনের প্রোগ্রামিং ভাষা?", opts: ["মেশিন ভাষা", "উচ্চস্তরের ভাষা", "বাইনারি ভাষা", "হার্ডওয়্যার ভাষা"], ans: 1 },
+    { q: "১৯. উচ্চস্তরের ভাষায় লেখা প্রোগ্রামকে মেশিন ভাষায় রূপান্তরের জন্য কী প্রয়োজন?", opts: ["ওয়েব ব্রাউজার", "অনুবাদক প্রোগ্রাম", "অ্যান্টিভাইরাস", "ওয়ার্ড প্রসেসর"], ans: 1 },
+    { q: "২০. কোন অনুবাদক সম্পূর্ণ প্রোগ্রামকে একসঙ্গে মেশিন ভাষায় রূপান্তর করে?", opts: ["কম্পাইলার", "ইন্টারপ্রেটার", "অপারেটিং সিস্টেম", "ডিবাগার"], ans: 0 },
+    { q: "২১. কোন অনুবাদক প্রোগ্রামের নির্দেশগুলো এক লাইন করে অনুবাদ ও কার্যকর করে?", opts: ["কম্পাইলার", "ইন্টারপ্রেটার", "অ্যাসেম্বলার", "প্রসেসর"], ans: 1 },
+    { q: "২২. প্রোগ্রামে ডেটা রাখার জন্য ব্যবহৃত নামযুক্ত স্থানকে কী বলে?", opts: ["অপারেটর", "ফাংশন", "চলক", "স্টেটমেন্ট"], ans: 2 },
+    { q: "২৩. পাইথনে চলকে মান সংরক্ষণের জন্য কোন অপারেটর ব্যবহৃত হয়?", opts: ["==", "=", "!=", "<="], ans: 1 },
+    { q: "২৪. age = 16 স্টেটমেন্টে age কী?", opts: ["ডেটা টাইপ", "অপারেটর", "চলক", "ফাংশন"], ans: 2 },
+    { q: "২৫. age = 16 স্টেটমেন্টে 16-এর ডেটা টাইপ কী?", opts: ["int", "float", "str", "bool"], ans: 0 },
+    { q: "২৬. কিবোর্ড থেকে ব্যবহারকারীর তথ্য গ্রহণ করতে কোন ফাংশন ব্যবহৃত হয়?", opts: ["print()", "input()", "type()", "output()"], ans: 1 },
+    { q: "২৭. পাইথনের input() ফাংশন সাধারণভাবে কোন ধরনের ডেটা গ্রহণ করে?", opts: ["int", "float", "str", "bool"], ans: 2 },
+    { q: "২৮. \"25\"-কে পূর্ণসংখ্যায় রূপান্তর করার সঠিক পদ্ধতি কোনটি?", opts: ["float(\"25\")", "str(\"25\")", "int(\"25\")", "bool(\"25\")"], ans: 2 },
+    { q: "২৯. এক ডেটা টাইপকে অন্য ডেটা টাইপে রূপান্তর করাকে কী বলে?", opts: ["কম্পাইলিং", "টাইপ কাস্টিং", "ডিবাগিং", "লুপিং"], ans: 1 },
+    { q: "৩০. পাইথনে ভাগশেষ নির্ণয়ের অপারেটর কোনটি?", opts: ["/", "//", "%", "**"], ans: 2 },
+    { q: "৩১. 17 % 5-এর ফলাফল কত?", opts: ["২", "৩", "৩.৪", "১২"], ans: 0 },
+    { q: "৩২. পাইথনে ঘাত বা সূচক নির্ণয়ের অপারেটর কোনটি?", opts: ["*", "**", "//", "%"], ans: 1 },
+    { q: "৩৩. 2 ** 3-এর ফলাফল কত?", opts: ["৫", "৬", "৮", "৯"], ans: 2 },
+    { q: "৩৪. 10 // 3-এর ফলাফল কত?", opts: ["৩", "৩.৩৩", "১", "৪"], ans: 0 },
+    { q: "৩৫. কোন অপারেটরের অর্থ অসমান?", opts: ["==", "!=", ">=", "="], ans: 1 },
+    { q: "৩৬. দুটি শর্তই সত্য হলে সত্য ফলাফল দেয় কোন লজিক্যাল অপারেটর?", opts: ["or", "not", "and", "in"], ans: 2 },
+    { q: "৩৭. প্রোগ্রামে কোনো শর্ত পরীক্ষা করার জন্য প্রধানত কোন স্টেটমেন্ট ব্যবহৃত হয়?", opts: ["print", "input", "if", "break"], ans: 2 },
+    { q: "৩৮. কোনো শর্ত সত্য না হলে বিকল্প নির্দেশ কার্যকর করতে কোনটি ব্যবহৃত হয়?", opts: ["else", "while", "print", "continue"], ans: 0 },
+    { q: "৩৯. একই নির্দেশ বারবার কার্যকর করার প্রক্রিয়াকে কী বলে?", opts: ["টাইপ কাস্টিং", "লুপ", "কম্পাইলিং", "ইনপুট"], ans: 1 },
+    { q: "৪০. লুপের কার্যক্রম তাৎক্ষণিকভাবে সম্পূর্ণ বন্ধ করতে কোন স্টেটমেন্ট ব্যবহৃত হয়?", opts: ["continue", "input", "break", "print"], ans: 2 }
   ];
 
   let totalSeconds = 30 * 60;
   let timerInterval;
 
-  // রেন্ডার প্রশ্নাবলী
   function loadQuestions() {
     const container = document.getElementById('questionsContainer');
     const prefixes = ['ক', 'খ', 'গ', 'ঘ'];
-    
+
     questions.forEach((q, idx) => {
       let qHtml = `<div class="q-card" id="q-card-${idx}">
         <div class="q-title">${q.q}</div>
         <div class="options-grid">`;
-      
+
       q.opts.forEach((opt, oIdx) => {
         qHtml += `
           <label class="opt-label" id="label-${idx}-${oIdx}">
@@ -261,13 +276,12 @@
           </label>
         `;
       });
-      
+
       qHtml += `</div></div>`;
       container.innerHTML += qHtml;
     });
   }
 
-  // টাইমার চালু
   function startTimer() {
     timerInterval = setInterval(() => {
       totalSeconds--;
@@ -284,19 +298,18 @@
     }, 1000);
   }
 
-  // সাবমিট হ্যান্ডলার
   function submitQuiz(isTimeUp = false) {
+    // পরীক্ষা ইতোমধ্যেই দেওয়া হয়েছে কি না পরীক্ষা করা
+    if(localStorage.getItem('ict_quiz_submitted')) {
+      alert("আপনি ইতোমধ্যেই পরীক্ষাটি দিয়েছেন! একজন শিক্ষার্থী মাত্র একবারই পরীক্ষা দিতে পারবে।");
+      return;
+    }
+
     const name = document.getElementById('studentName').value.trim();
     const roll = document.getElementById('studentRoll').value.trim();
 
     if (!isTimeUp && (!name || !roll)) {
       alert("অনুগ্রহ করে পরীক্ষা জমা দেওয়ার পূর্বে আপনার নাম এবং রোল লিখুন!");
-      return;
-    }
-
-    // পরীক্ষা এক বার দেওয়া নিশ্চিত করা
-    if(localStorage.getItem('ict_quiz_submitted')) {
-      alert("আপনি ইতোমধ্যেই পরীক্ষাটি দিয়েছেন! বারবার দেওয়া যাবে না।");
       return;
     }
 
@@ -306,7 +319,7 @@
     questions.forEach((q, idx) => {
       const selected = document.querySelector(`input[name="q${idx}"]:checked`);
       const card = document.getElementById(`q-card-${idx}`);
-      
+
       if (selected) {
         const val = parseInt(selected.value);
         if (val === q.ans) {
@@ -320,84 +333,55 @@
         document.getElementById(`label-${idx}-${q.ans}`).classList.add('correct-opt');
       }
 
-      // রেডিও বাটন ডিজেবল
       const inputs = card.querySelectorAll('input');
       inputs.forEach(i => i.disabled = true);
     });
 
-    // রেজাল্ট দেখান
+    // ১ বার সাবমিটের তথ্য সেভ করা
+    localStorage.setItem('ict_quiz_submitted', 'true');
+
+    // ফলাফল দেখানো
     document.getElementById('result-box').style.display = 'block';
     document.getElementById('scoreDisplay').innerText = `${score} / ৪০`;
     document.getElementById('subBtn').style.display = 'none';
     document.getElementById('userInfoBox').style.display = 'none';
 
-    // ১ বার সাবমিট চিহ্নিতকরণ
-    localStorage.setItem('ict_quiz_submitted', 'true');
-
-    // স্টোরেজে রেকর্ড সংরক্ষণ (Local Storage - Teacher Panel)
-    saveRecord(name, roll, score);
-
-    // WhatsApp শেয়ার বাটন তৈরি
-    setupWhatsAppButton(name, roll, score);
+    // FormSubmit-এর মাধ্যমে ইমেইলে নাম, রোল ও নম্বর পাঠানো
+    sendDataToFormSubmit(name, roll, score);
   }
 
-  function saveRecord(name, roll, score) {
-    let records = JSON.parse(localStorage.getItem('ict_quiz_records') || '[]');
-    records.push({
-      name: name || 'Unknown',
-      roll: roll || 'N/A',
-      score: score,
-      time: new Date().toLocaleTimeString()
-    });
-    localStorage.setItem('ict_quiz_records', JSON.stringify(records));
-  }
+  function sendDataToFormSubmit(name, roll, score) {
+    document.getElementById('fsName').value = name || 'অজানা';
+    document.getElementById('fsRoll').value = roll || 'N/A';
+    document.getElementById('fsScore').value = `${score} / 40`;
 
-  function setupWhatsAppButton(name, roll, score) {
-    const waBtn = document.getElementById('waBtn');
-    const text = `*১০ম শ্রেণী টিউটোরিয়াল প্রস্তুতি - ICT*%0A` +
-                 `👤 *নাম:* ${name}%0A` +
-                 `🆔 *রোল:* ${roll}%0A` +
-                 `📊 *প্রাপ্ত নম্বর:* ${score} / ৪০%0A` +
-                 `সার্বিক তত্ত্বাবধানে: সাইফুল ইসলাম স্যার`;
-    
-    waBtn.href = `https://wa.me/8801622186812?text=${text}`;
-    waBtn.style.display = 'block';
-  }
+    const form = document.getElementById('formsubmitForm');
+    const formData = new FormData(form);
 
-  function toggleAdminPanel() {
-    const panel = document.getElementById('admin-panel');
-    const recordsBody = document.getElementById('recordsBody');
-    
-    if (panel.style.display === 'none' || panel.style.display === '') {
-      let records = JSON.parse(localStorage.getItem('ict_quiz_records') || '[]');
-      recordsBody.innerHTML = '';
-      
-      if(records.length === 0) {
-        recordsBody.innerHTML = '<tr><td colspan="4">এখনও কেউ পরীক্ষা দেয়নি।</td></tr>';
-      } else {
-        records.forEach(r => {
-          recordsBody.innerHTML += `<tr>
-            <td>${r.name}</td>
-            <td>${r.roll}</td>
-            <td>${r.score}</td>
-            <td>${r.time}</td>
-          </tr>`;
-        });
+    fetch(form.action, {
+      method: 'POST',
+      body: formData,
+      headers: {
+        'Accept': 'application/json'
       }
-      panel.style.display = 'block';
-    } else {
-      panel.style.display = 'none';
-    }
+    }).then(response => {
+      if (response.ok) {
+        console.log('তথ্য সফলভাবে Saiful.cou10@gmail.com ইমেইলে জমা হয়েছে!');
+      }
+    }).catch(error => {
+      console.error('তথ্য পাঠাতে সমস্যা হয়েছে:', error);
+    });
   }
 
-  // পেজ লোড হলে
   window.onload = function() {
     loadQuestions();
-    
+
+    // শিক্ষার্থী পূর্বে পরীক্ষা দিয়ে থাকলে সাবমিট বাটন ডিজেবল ও অ্যালার্ট দেখানো
     if(localStorage.getItem('ict_quiz_submitted')) {
-      alert("আপনি এই ডিভাইস থেকে ইতোমধ্যেই একবার পরীক্ষাটি সম্পন্ন করেছেন।");
+      alert("আপনি ইতোমধ্যেই পরীক্ষাটি দিয়েছেন! একজন শিক্ষার্থী মাত্র একবারই পরীক্ষা দিতে পারবে।");
       document.getElementById('subBtn').disabled = true;
-      document.getElementById('subBtn').innerText = "আপনি পরীক্ষাটি দিয়ে ফেলেছেন";
+      document.getElementById('subBtn').innerText = "আপনি ইতোমধ্যেই পরীক্ষাটি সম্পন্ন করেছেন";
+      document.getElementById('subBtn').style.background = "#6c757d";
     } else {
       startTimer();
     }
