@@ -3,390 +3,232 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>১০ম শ্রেণী টিউটোরিয়াল প্রস্তুতি - ICT</title>
-  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
+  <title>পরীক্ষার নোটিশ - ইবনে তাইমিয়া স্কুল এন্ড কলেজ</title>
+
+  <!-- Google Fonts & Font Awesome Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Hind Siliguri', sans-serif; }
+    * {
+      box-sizing: border-box;
+      font-family: 'Hind Siliguri', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
-      background: linear-gradient(135deg, #1A1A40 0%, #270082 50%, #7A0BC0 100%);
-      color: #fff;
-      padding: 20px 10px;
       min-height: 100vh;
-    }
-    .container {
-      max-width: 850px;
-      margin: 0 auto;
-      background: rgba(255, 255, 255, 0.96);
-      color: #222;
-      border-radius: 20px;
-      padding: 25px;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.4);
-    }
-    header {
-      text-align: center;
-      border-bottom: 3px solid #7A0BC0;
-      padding-bottom: 15px;
-      margin-bottom: 20px;
-    }
-    h1 { color: #270082; font-size: 24px; margin-bottom: 5px; }
-    h2 { color: #FA58B6; font-size: 18px; margin-bottom: 5px; }
-    .supervisor { color: #444; font-weight: 600; font-size: 15px; }
-    .contact-info {
-      background: #E8F0FE;
-      color: #1A73E8;
-      padding: 8px 15px;
-      border-radius: 20px;
-      display: inline-block;
-      margin-top: 10px;
-      font-weight: bold;
-      font-size: 14px;
-    }
-
-    /* Animated Notice Section */
-    .notice-box {
-      background: linear-gradient(90deg, #fff3cd, #ffe8a1, #fff3cd);
-      background-size: 200% 200%;
-      animation: gradientShift 3s ease infinite, pulseBorder 2s infinite alternate;
-      border: 2px solid #ffc107;
-      border-radius: 12px;
-      padding: 12px 18px;
-      margin-bottom: 20px;
-      color: #856404;
-      font-weight: 600;
-      font-size: 15px;
-      text-align: center;
-      box-shadow: 0 4px 12px rgba(255, 193, 7, 0.2);
-    }
-    .notice-box p {
-      margin: 4px 0;
       display: flex;
-      align-items: center;
       justify-content: center;
-      gap: 8px;
+      align-items: center;
+      background: linear-gradient(-45deg, #0f172a, #1e1b4b, #31103f, #1e293b);
+      background-size: 400% 400%;
+      animation: gradientBG 12s ease infinite;
+      padding: 20px;
     }
 
-    @keyframes gradientShift {
+    /* Live Animated Background */
+    @keyframes gradientBG {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
-    @keyframes pulseBorder {
-      0% { border-color: #ffc107; box-shadow: 0 0 8px rgba(255, 193, 7, 0.4); }
-      100% { border-color: #ff9800; box-shadow: 0 0 16px rgba(255, 152, 0, 0.7); }
+
+    /* Main Card Container */
+    .notice-card {
+      max-width: 850px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 24px;
+      padding: 45px 35px;
+      text-align: center;
+      color: #ffffff;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5),
+                  0 0 30px rgba(168, 85, 247, 0.25);
+      animation: zoomIn 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
     }
 
-    .user-info {
-      background: #f0f4f8;
-      padding: 15px;
-      border-radius: 12px;
-      margin-bottom: 20px;
+    /* Pulse Alert Icon */
+    .icon-box {
+      width: 90px;
+      height: 90px;
+      margin: 0 auto 25px auto;
+      background: linear-gradient(135deg, #f43f5e, #e11d48);
+      border-radius: 50%;
       display: flex;
-      gap: 15px;
-      flex-wrap: wrap;
-    }
-    .user-info input {
-      flex: 1;
-      min-width: 200px;
-      padding: 12px;
-      border: 2px solid #ccc;
-      border-radius: 8px;
-      font-size: 16px;
-      outline: none;
-    }
-    .user-info input:focus { border-color: #7A0BC0; }
-    .timer-box {
-      position: sticky;
-      top: 10px;
-      z-index: 100;
-      background: #ff0055;
+      justify-content: center;
+      align-items: center;
+      font-size: 40px;
       color: white;
-      text-align: center;
-      padding: 10px;
+      box-shadow: 0 0 0 0 rgba(244, 63, 94, 0.7);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(244, 63, 94, 0.7);
+      }
+      70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 20px rgba(244, 63, 94, 0);
+      }
+      100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(244, 63, 94, 0);
+      }
+    }
+
+    /* Main Notice Title/Headline */
+    .notice-card h1 {
+      font-size: 32px;
+      font-weight: 700;
+      color: #fbbf24;
+      margin-bottom: 20px;
+      text-shadow: 0 2px 10px rgba(251, 191, 36, 0.3);
+      line-height: 1.4;
+    }
+
+    /* Notice Description Body */
+    .notice-body {
+      font-size: 22px;
+      line-height: 1.7;
+      color: #f1f5f9;
+      background: rgba(0, 0, 0, 0.25);
+      padding: 25px;
+      border-radius: 16px;
+      border-left: 5px solid #38bdf8;
+      margin-bottom: 30px;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    }
+
+    .highlight-text {
+      color: #38bdf8;
+      font-weight: 600;
+    }
+
+    /* Teacher Signature Block */
+    .signature-section {
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+      padding-top: 25px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .teacher-name {
+      font-size: 26px;
+      font-weight: 700;
+      background: linear-gradient(90deg, #38bdf8, #818cf8, #c084fc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .teacher-title {
+      font-size: 18px;
+      color: #cbd5e1;
+      font-weight: 500;
+    }
+
+    .institution {
+      font-size: 20px;
+      color: #f43f5e;
+      font-weight: 700;
+      margin-top: 2px;
+    }
+
+    /* Mobile Button */
+    .mobile-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 15px;
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: white;
+      text-decoration: none;
+      padding: 10px 24px;
       border-radius: 30px;
       font-size: 18px;
-      font-weight: bold;
-      box-shadow: 0 5px 15px rgba(255, 0, 85, 0.4);
-      margin-bottom: 20px;
-    }
-    .q-card {
-      background: #fff;
-      border: 2px solid #e0e0e0;
-      border-radius: 12px;
-      padding: 15px;
-      margin-bottom: 18px;
+      font-weight: 600;
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
       transition: all 0.3s ease;
     }
-    .q-title { font-size: 17px; font-weight: 700; color: #1A1A40; margin-bottom: 12px; }
-    .options-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 10px;
-    }
-    .opt-label {
-      display: flex;
-      align-items: center;
-      background: #f8f9fa;
-      border: 2px solid #e9ecef;
-      padding: 10px 14px;
-      border-radius: 10px;
-      cursor: pointer;
-      font-weight: 600;
-      transition: 0.2s;
-    }
-    .opt-label:hover { background: #eef2ff; border-color: #7A0BC0; }
-    .opt-label input { margin-right: 10px; transform: scale(1.2); }
-    .btn {
-      width: 100%;
-      padding: 15px;
-      border: none;
-      border-radius: 12px;
-      font-size: 18px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: 0.3s;
-      margin-top: 10px;
-    }
-    .submit-btn { background: linear-gradient(90deg, #270082, #7A0BC0); color: white; }
-    .submit-btn:hover { opacity: 0.9; transform: translateY(-2px); }
 
-    #result-box {
-      display: none;
-      background: #e6fffa;
-      border: 2px solid #38b2ac;
-      border-radius: 12px;
-      padding: 20px;
-      text-align: center;
-      margin-bottom: 25px;
+    .mobile-link:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 8px 25px rgba(16, 185, 129, 0.5);
+      background: linear-gradient(135deg, #059669, #047857);
     }
-    #result-box h3 { color: #234e52; font-size: 22px; margin-bottom: 10px; }
-    .score-text { font-size: 28px; font-weight: bold; color: #2b6cb0; }
 
-    /* Marking styles */
-    .correct-opt { background: #d4edda !important; border-color: #28a745 !important; color: #155724; }
-    .wrong-opt { background: #f8d7da !important; border-color: #dc3545 !important; color: #721c24; }
+    /* Entry Animations */
+    @keyframes zoomIn {
+      from {
+        opacity: 0;
+        transform: scale(0.85);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    /* Responsive for Small Screens */
+    @media (max-width: 600px) {
+      .notice-card {
+        padding: 30px 20px;
+      }
+      .notice-card h1 {
+        font-size: 24px;
+      }
+      .notice-body {
+        font-size: 18px;
+        padding: 18px;
+      }
+      .teacher-name {
+        font-size: 22px;
+      }
+      .teacher-title, .institution {
+        font-size: 16px;
+      }
+    }
   </style>
 </head>
 <body>
 
-<div class="container">
-  <header>
-    <h1>১০ম শ্রেণী টিউটোরিয়াল প্রস্তুতি</h1>
-    <h2>বিষয়: তথ্য ও যোগাযোগ প্রযুক্তি (প্রোগ্রামিং)</h2>
-    <div class="supervisor">সার্বিক তত্ত্বাবধানে : সাইফুল ইসলাম</div>
-    <div class="contact-info">📱 মোবাইল/WhatsApp: 01622186812</div>
-  </header>
+  <div class="notice-card">
+    <!-- Icon -->
+    <div class="icon-box">
+      <i class="fa-solid fa-clock-rotate-left"></i>
+    </div>
 
-  <!-- Animated Notice Box -->
-  <div class="notice-box">
-    <p>⚠️ <strong>বিশেষ নির্দেশনাবলী:</strong></p>
-    <p>📌 পরীক্ষাটি মাত্র একবারই দিতে পারবে।</p>
-    <p>📩 তোমার রেজাল্ট স্বয়ংক্রিয়ভাবে ডেভেলপার (সাইফুল ইসলাম) এর কাছে জমা হবে।</p>
+    <!-- Main Title -->
+    <h1>জরুরী নোটিশ : পরীক্ষা সমাপ্ত</h1>
+
+    <!-- Notice Content -->
+    <div class="notice-body">
+      তথ্য ও যোগাযোগ প্রযুক্তি বিষয়ের <span class="highlight-text">প্রোগ্রামিং অধ্যায়ের</span> MCQ পরীক্ষাটির নির্ধারিত সময়সীমা শেষ হওয়ায়, পেইজটি সরিয়ে নেয়া হয়েছে।<br><br>
+      পরবর্তীতে পরীক্ষা অনুষ্ঠিত হলে ক্লাসে তোমাদের জানিয়ে দেয়া হবে—<strong style="color: #4ade80;">ধন্যবাদ।</strong>
+    </div>
+
+    <!-- Teacher Info -->
+    <div class="signature-section">
+      <div class="teacher-name">সাইফুল ইসলাম</div>
+      <div class="teacher-title">সহকারী শিক্ষক (জবা শিফট)</div>
+      <div class="institution">ইবনে তাইমিয়া স্কুল এন্ড কলেজ</div>
+      
+      <!-- Mobile Call Action -->
+      <a href="tel:01622186812" class="mobile-link">
+        <i class="fa-solid fa-phone"></i> ০১৬২২১৮৬৮১২
+      </a>
+    </div>
   </div>
-
-  <div class="timer-box">⏱️ অবশিষ্ট সময়: <span id="timer">৩০:০০</span></div>
-
-  <div class="user-info" id="userInfoBox">
-    <input type="text" id="studentName" placeholder="শিক্ষার্থীর নাম লিখুন..." required>
-    <input type="text" id="studentRoll" placeholder="রোল নম্বর লিখুন..." required>
-  </div>
-
-  <div id="result-box">
-    <h3>পরীক্ষার ফলাফল</h3>
-    <div class="score-text" id="scoreDisplay">০ / ৪০</div>
-    <p id="statusText" style="margin-top:8px; color:#234e52; font-weight:600;">আপনার ফলাফল সফলভাবে সাইফুল স্যার (ডেভেলপার) এর কাছে জমা দেওয়া হয়েছে।</p>
-  </div>
-
-  <!-- FormSubmit Form (Saiful.cou10@gmail.com) -->
-  <form id="formsubmitForm" action="https://formsubmit.co/Saiful.cou10@gmail.com" method="POST" style="display:none;">
-    <input type="hidden" name="_subject" value="১০ম শ্রেণী ICT পরীক্ষা - নতুন ফলাফল">
-    <input type="hidden" name="_captcha" value="false">
-    <input type="hidden" name="শিক্ষার্থীর নাম" id="fsName">
-    <input type="hidden" name="রোল নম্বর" id="fsRoll">
-    <input type="hidden" name="প্রাপ্ত নম্বর" id="fsScore">
-  </form>
-
-  <div id="quizForm">
-    <div id="questionsContainer"></div>
-    <button type="button" class="btn submit-btn" id="subBtn" onclick="submitQuiz()">উত্তরপত্র জমা দিন (Submit)</button>
-  </div>
-</div>
-
-<script>
-  // ৪০টি প্রশ্ন
-  const questions = [
-    { q: "১. কম্পিউটার সরাসরি কোন দুটি সংখ্যা বুঝতে পারে?", opts: ["১ ও ২", "২ ও ৩", "০ ও ১", "১ ও ৪"], ans: 2 },
-    { q: "২. নিচের কোনটি প্রোগ্রামিং ভাষা?", opts: ["বাংলা", "ইংরেজি", "পাইথন", "ল্যাটিন"], ans: 2 },
-    { q: "৩. প্রোগ্রামিং ভাষার প্রধান কাজ কী?", opts: ["ছবি আঁকা", "কম্পিউটারকে নির্দেশ দেওয়া", "গান তৈরি করা", "তথ্য মুছে ফেলা"], ans: 1 },
-    { q: "৪. কোন প্রোগ্রামিং ভাষায় সাধারণত প্রতিটি স্টেটমেন্টের শেষে সেমিকোলন দিতে হয়?", opts: ["পাইথন", "সি", "রুবি", "স্ক্র্যাচ"], ans: 1 },
-    { q: "৫. পাইথনে দুটি মান সমান কি না পরীক্ষা করার অপারেটর কোনটি?", opts: ["=", "!=", "==", ">="], ans: 2 },
-    { q: "৬. নিচের কোনটি পাইথনের একটি ডেটা টাইপ?", opts: ["break", "continue", "bool", "print"], ans: 2 },
-    { q: "৭. print() ফাংশনের কাজ কী?", opts: ["কিবোর্ড থেকে তথ্য গ্রহণ করা", "পর্দায় তথ্য প্রদর্শন করা", "চলক তৈরি করা", "প্রোগ্রাম বন্ধ করা"], ans: 1 },
-    { q: "৮. নিচের কোনটি প্রোগ্রামিং ভাষার নাম?", opts: ["কম্পাইলার", "বাইনারি", "পাইথন", "অ্যালগরিদম"], ans: 2 },
-    { q: "৯. পাঠ্যবইয়ে পাইথনের প্রধান ডেটা টাইপ কয় ধরনের উল্লেখ করা হয়েছে?", opts: ["২ ধরনের", "৩ ধরনের", "৪ ধরনের", "৫ ধরনের"], ans: 2 },
-    { q: "১০. নিচের কোনটি বৈধ ভ্যারিয়েবল বা চলকের নাম?", opts: ["2number", "my-number", "my number", "my_number"], ans: 3 },
-    { q: "১১. চলকের নামে কোনটি ব্যবহার করা যায় না?", opts: ["আন্ডারস্কোর", "ইংরেজি বর্ণ", "ফাঁকা স্থান", "সংখ্যা শেষে"], ans: 2 },
-    { q: "১২. True এবং False কোন ডেটা টাইপের মান?", opts: ["int", "float", "str", "bool"], ans: 3 },
-    { q: "১৩. পাইথনে পর্দায় Bangladesh দেখানোর সঠিক স্টেটমেন্ট কোনটি?", opts: ["input(\"Bangladesh\")", "print(\"Bangladesh\")", "show(\"Bangladesh\")", "display Bangladesh"], ans: 1 },
-    { q: "১৪. নিচের কোনটি ভগ্নাংশ বা দশমিক সংখ্যা সংরক্ষণের ডেটা টাইপ?", opts: ["int", "float", "str", "bool"], ans: 1 },
-    { q: "১৫. নিচের কোনটি স্ট্রিং ডেটার উদাহরণ?", opts: ["25", "3.75", "\"Dhaka\"", "True"], ans: 2 },
-    { q: "১৬. কম্পিউটারের নিজস্ব ভাষাকে কী বলা হয়?", opts: ["উচ্চস্তরের ভাষা", "মেশিন ভাষা", "প্রাকৃতিক ভাষা", "সাংকেতিক ভাষা"], ans: 1 },
-    { q: "১৭. মেশিন ভাষায় নির্দেশ প্রকাশ করা হয় কী দিয়ে?", opts: ["বাংলা অক্ষর দিয়ে", "ইংরেজি শব্দ দিয়ে", "০ ও ১ দিয়ে", "বিভিন্ন ছবি দিয়ে"], ans: 2 },
-    { q: "১৮. মানুষের পক্ষে সহজে বোঝা যায় কোন ধরনের প্রোগ্রামিং ভাষা?", opts: ["মেশিন ভাষা", "উচ্চস্তরের ভাষা", "বাইনারি ভাষা", "হার্ডওয়্যার ভাষা"], ans: 1 },
-    { q: "১৯. উচ্চস্তরের ভাষায় লেখা প্রোগ্রামকে মেশিন ভাষায় রূপান্তরের জন্য কী প্রয়োজন?", opts: ["ওয়েব ব্রাউজার", "অনুবাদক প্রোগ্রাম", "অ্যান্টিভাইরাস", "ওয়ার্ড প্রসেসর"], ans: 1 },
-    { q: "২০. কোন অনুবাদক সম্পূর্ণ প্রোগ্রামকে একসঙ্গে মেশিন ভাষায় রূপান্তর করে?", opts: ["কম্পাইলার", "ইন্টারপ্রেটার", "অপারেটিং সিস্টেম", "ডিবাগার"], ans: 0 },
-    { q: "২১. কোন অনুবাদক প্রোগ্রামের নির্দেশগুলো এক লাইন করে অনুবাদ ও কার্যকর করে?", opts: ["কম্পাইলার", "ইন্টারপ্রেটার", "অ্যাসেম্বলার", "প্রসেসর"], ans: 1 },
-    { q: "২২. প্রোগ্রামে ডেটা রাখার জন্য ব্যবহৃত নামযুক্ত স্থানকে কী বলে?", opts: ["অপারেটর", "ফাংশন", "চলক", "স্টেটমেন্ট"], ans: 2 },
-    { q: "২৩. পাইথনে চলকে মান সংরক্ষণের জন্য কোন অপারেটর ব্যবহৃত হয়?", opts: ["==", "=", "!=", "<="], ans: 1 },
-    { q: "২৪. age = 16 স্টেটমেন্টে age কী?", opts: ["ডেটা টাইপ", "অপারেটর", "চলক", "ফাংশন"], ans: 2 },
-    { q: "২৫. age = 16 স্টেটমেন্টে 16-এর ডেটা টাইপ কী?", opts: ["int", "float", "str", "bool"], ans: 0 },
-    { q: "২৬. কিবোর্ড থেকে ব্যবহারকারীর তথ্য গ্রহণ করতে কোন ফাংশন ব্যবহৃত হয়?", opts: ["print()", "input()", "type()", "output()"], ans: 1 },
-    { q: "২৭. পাইথনের input() ফাংশন সাধারণভাবে কোন ধরনের ডেটা গ্রহণ করে?", opts: ["int", "float", "str", "bool"], ans: 2 },
-    { q: "২৮. \"25\"-কে পূর্ণসংখ্যায় রূপান্তর করার সঠিক পদ্ধতি কোনটি?", opts: ["float(\"25\")", "str(\"25\")", "int(\"25\")", "bool(\"25\")"], ans: 2 },
-    { q: "২৯. এক ডেটা টাইপকে অন্য ডেটা টাইপে রূপান্তর করাকে কী বলে?", opts: ["কম্পাইলিং", "টাইপ কাস্টিং", "ডিবাগিং", "লুপিং"], ans: 1 },
-    { q: "৩০. পাইথনে ভাগশেষ নির্ণয়ের অপারেটর কোনটি?", opts: ["/", "//", "%", "**"], ans: 2 },
-    { q: "৩১. 17 % 5-এর ফলাফল কত?", opts: ["২", "৩", "৩.৪", "১২"], ans: 0 },
-    { q: "৩২. পাইথনে ঘাত বা সূচক নির্ণয়ের অপারেটর কোনটি?", opts: ["*", "**", "//", "%"], ans: 1 },
-    { q: "৩৩. 2 ** 3-এর ফলাফল কত?", opts: ["৫", "৬", "৮", "৯"], ans: 2 },
-    { q: "৩৪. 10 // 3-এর ফলাফল কত?", opts: ["৩", "৩.৩৩", "১", "৪"], ans: 0 },
-    { q: "৩৫. কোন অপারেটরের অর্থ অসমান?", opts: ["==", "!=", ">=", "="], ans: 1 },
-    { q: "৩৬. দুটি শর্তই সত্য হলে সত্য ফলাফল দেয় কোন লজিক্যাল অপারেটর?", opts: ["or", "not", "and", "in"], ans: 2 },
-    { q: "৩৭. প্রোগ্রামে কোনো শর্ত পরীক্ষা করার জন্য প্রধানত কোন স্টেটমেন্ট ব্যবহৃত হয়?", opts: ["print", "input", "if", "break"], ans: 2 },
-    { q: "৩৮. কোনো শর্ত সত্য না হলে বিকল্প নির্দেশ কার্যকর করতে কোনটি ব্যবহৃত হয়?", opts: ["else", "while", "print", "continue"], ans: 0 },
-    { q: "৩৯. একই নির্দেশ বারবার কার্যকর করার প্রক্রিয়াকে কী বলে?", opts: ["টাইপ কাস্টিং", "লুপ", "কম্পাইলিং", "ইনপুট"], ans: 1 },
-    { q: "৪০. লুপের কার্যক্রম তাৎক্ষণিকভাবে সম্পূর্ণ বন্ধ করতে কোন স্টেটমেন্ট ব্যবহৃত হয়?", opts: ["continue", "input", "break", "print"], ans: 2 }
-  ];
-
-  let totalSeconds = 30 * 60;
-  let timerInterval;
-
-  function loadQuestions() {
-    const container = document.getElementById('questionsContainer');
-    const prefixes = ['ক', 'খ', 'গ', 'ঘ'];
-
-    questions.forEach((q, idx) => {
-      let qHtml = `<div class="q-card" id="q-card-${idx}">
-        <div class="q-title">${q.q}</div>
-        <div class="options-grid">`;
-
-      q.opts.forEach((opt, oIdx) => {
-        qHtml += `
-          <label class="opt-label" id="label-${idx}-${oIdx}">
-            <input type="radio" name="q${idx}" value="${oIdx}">
-            (${prefixes[oIdx]}) ${opt}
-          </label>
-        `;
-      });
-
-      qHtml += `</div></div>`;
-      container.innerHTML += qHtml;
-    });
-  }
-
-  function startTimer() {
-    timerInterval = setInterval(() => {
-      totalSeconds--;
-      let m = Math.floor(totalSeconds / 60);
-      let s = totalSeconds % 60;
-      document.getElementById('timer').innerText = 
-        `${m < 10 ? '০'+m : m}:${s < 10 ? '০'+s : s}`;
-
-      if (totalSeconds <= 0) {
-        clearInterval(timerInterval);
-        alert("সময় শেষ! আপনার পরীক্ষা স্বয়ংক্রিয়ভাবে জমা হচ্ছে।");
-        submitQuiz(true);
-      }
-    }, 1000);
-  }
-
-  function submitQuiz(isTimeUp = false) {
-    // পরীক্ষা ইতোমধ্যেই দেওয়া হয়েছে কি না পরীক্ষা করা
-    if(localStorage.getItem('ict_quiz_submitted')) {
-      alert("আপনি ইতোমধ্যেই পরীক্ষাটি দিয়েছেন! একজন শিক্ষার্থী মাত্র একবারই পরীক্ষা দিতে পারবে।");
-      return;
-    }
-
-    const name = document.getElementById('studentName').value.trim();
-    const roll = document.getElementById('studentRoll').value.trim();
-
-    if (!isTimeUp && (!name || !roll)) {
-      alert("অনুগ্রহ করে পরীক্ষা জমা দেওয়ার পূর্বে আপনার নাম এবং রোল লিখুন!");
-      return;
-    }
-
-    clearInterval(timerInterval);
-    let score = 0;
-
-    questions.forEach((q, idx) => {
-      const selected = document.querySelector(`input[name="q${idx}"]:checked`);
-      const card = document.getElementById(`q-card-${idx}`);
-
-      if (selected) {
-        const val = parseInt(selected.value);
-        if (val === q.ans) {
-          score++;
-          document.getElementById(`label-${idx}-${val}`).classList.add('correct-opt');
-        } else {
-          document.getElementById(`label-${idx}-${val}`).classList.add('wrong-opt');
-          document.getElementById(`label-${idx}-${q.ans}`).classList.add('correct-opt');
-        }
-      } else {
-        document.getElementById(`label-${idx}-${q.ans}`).classList.add('correct-opt');
-      }
-
-      const inputs = card.querySelectorAll('input');
-      inputs.forEach(i => i.disabled = true);
-    });
-
-    // ১ বার সাবমিটের তথ্য সেভ করা
-    localStorage.setItem('ict_quiz_submitted', 'true');
-
-    // ফলাফল দেখানো
-    document.getElementById('result-box').style.display = 'block';
-    document.getElementById('scoreDisplay').innerText = `${score} / ৪০`;
-    document.getElementById('subBtn').style.display = 'none';
-    document.getElementById('userInfoBox').style.display = 'none';
-
-    // FormSubmit-এর মাধ্যমে ইমেইলে নাম, রোল ও নম্বর পাঠানো
-    sendDataToFormSubmit(name, roll, score);
-  }
-
-  function sendDataToFormSubmit(name, roll, score) {
-    document.getElementById('fsName').value = name || 'অজানা';
-    document.getElementById('fsRoll').value = roll || 'N/A';
-    document.getElementById('fsScore').value = `${score} / 40`;
-
-    const form = document.getElementById('formsubmitForm');
-    const formData = new FormData(form);
-
-    fetch(form.action, {
-      method: 'POST',
-      body: formData,
-      headers: {
-        'Accept': 'application/json'
-      }
-    }).then(response => {
-      if (response.ok) {
-        console.log('তথ্য সফলভাবে Saiful.cou10@gmail.com ইমেইলে জমা হয়েছে!');
-      }
-    }).catch(error => {
-      console.error('তথ্য পাঠাতে সমস্যা হয়েছে:', error);
-    });
-  }
-
-  window.onload = function() {
-    loadQuestions();
-
-    // শিক্ষার্থী পূর্বে পরীক্ষা দিয়ে থাকলে সাবমিট বাটন ডিজেবল ও অ্যালার্ট দেখানো
-    if(localStorage.getItem('ict_quiz_submitted')) {
-      alert("আপনি ইতোমধ্যেই পরীক্ষাটি দিয়েছেন! একজন শিক্ষার্থী মাত্র একবারই পরীক্ষা দিতে পারবে।");
-      document.getElementById('subBtn').disabled = true;
-      document.getElementById('subBtn').innerText = "আপনি ইতোমধ্যেই পরীক্ষাটি সম্পন্ন করেছেন";
-      document.getElementById('subBtn').style.background = "#6c757d";
-    } else {
-      startTimer();
-    }
-  };
-</script>
 
 </body>
 </html>
