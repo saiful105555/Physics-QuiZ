@@ -14,7 +14,7 @@
        ১. ইনপুট সেকশন (Screen View) CSS
        ======================================================= */
     * { box-sizing: border-box; font-family: 'Hind Siliguri', 'Poppins', sans-serif; }
-    
+
     body { 
       background: #f1f5f9; 
       margin: 0; padding: 20px; 
@@ -32,29 +32,35 @@
       background: linear-gradient(135deg, #4f46e5, #9333ea);
       padding: 20px; border-radius: 10px; color: white; margin-bottom: 20px;
     }
-    
+
     .logo-box {
       width: 70px; height: 70px; background: white; border-radius: 50%;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
       color: #4f46e5; border: 3px solid #facc15; font-weight: bold;
     }
-    
+
     .global-info { display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 20px; background: #f8fafc; padding: 15px; border-radius: 8px; border: 1px solid #cbd5e1; }
     .global-info label { font-weight: 600; font-size: 14px; margin-right: 5px;}
     .global-info input { padding: 8px; border: 1px solid #94a3b8; border-radius: 4px; width: 120px; }
 
+    .warning-box {
+      background: #fee2e2; color: #b91c1c; padding: 15px; border-left: 5px solid #ef4444; 
+      margin-bottom: 20px; font-size: 16px; font-weight: 700; border-radius: 6px;
+      display: flex; align-items: center; gap: 10px;
+    }
+
     .table-responsive { width: 100%; overflow-x: auto; max-height: 600px; border: 1px solid #cbd5e1; margin-bottom: 20px; border-radius: 8px;}
-    
+
     .input-table { width: 100%; border-collapse: collapse; min-width: 3500px; font-size: 13px; }
     .input-table th, .input-table td { border: 1px solid #cbd5e1; padding: 5px; text-align: center; vertical-align: middle; }
     .input-table th { background: #1e293b; color: white; position: sticky; top: 0; z-index: 10; font-size: 12px;}
     .input-table td input { width: 45px; padding: 5px; text-align: center; border: 1px solid #94a3b8; border-radius: 4px; font-weight: 600; background: #faf5ff;}
     .input-table td input:focus { border-color: #4f46e5; outline: none; background: #fff;}
     .input-table td input[type="text"] { width: 140px; text-align: left; }
-    
+
     .subj-group { border-right: 3px solid #3b82f6 !important; }
     .btn-group { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;}
-    
+
     button {
       padding: 12px 20px; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; color: white; display: flex; align-items: center; gap: 8px; font-size: 15px; transition: 0.3s;
     }
@@ -69,7 +75,7 @@
     @page { size: A4 portrait; margin: 10mm; }
 
     #printArea { display: none; }
-    
+
     @media print {
       body * { visibility: hidden; }
       body { background: white; margin: 0; padding: 0; }
@@ -85,7 +91,7 @@
         font-family: 'Times New Roman', serif;
         color: #000;
       }
-      
+
       .marksheet-page:last-child {
         page-break-after: auto;
       }
@@ -94,7 +100,7 @@
       .header-left { width: 220px; }
       .badge-red { background: #be1e2d; color: white; font-weight: bold; font-size: 18px; padding: 5px; text-align: center; border: 1px solid #000; }
       .badge-yellow { background: #fff200; color: #000; font-weight: bold; font-size: 16px; padding: 3px; text-align: center; border: 1px solid #000; margin-top: -1px;}
-      
+
       .header-center { flex-grow: 1; text-align: center; display: flex; align-items: center; justify-content: center; gap: 15px;}
       .school-logo { width: 85px; height: 85px; object-fit: contain; }
       .school-text h1 { color: #1c3c78; font-size: 34px; margin: 0; font-weight: bold; }
@@ -106,10 +112,10 @@
 
       .result-table { width: 100%; border-collapse: collapse; text-align: center; font-size: 14px; margin-bottom: 15px; border: 2px solid #000;}
       .result-table th, .result-table td { border: 1px solid #000; padding: 3px 2px; }
-      
+
       .text-green { color: #006633 !important; font-weight: bold; }
       .bg-blue-light { background-color: #d9e2f3 !important; font-weight: bold; }
-      
+
       .gpa-col { background-color: #f4b6c2 !important; writing-mode: vertical-rl; transform: rotate(180deg); font-size: 20px; font-weight: bold; padding: 10px 5px !important; color: #000;}
       .merit-col { background-color: #fce5cd !important; writing-mode: vertical-rl; transform: rotate(180deg); font-size: 16px; font-weight: bold; padding: 10px 5px !important; color: #cc0000;}
 
@@ -130,16 +136,18 @@
       <p style="margin:0; font-size: 14px; opacity: 0.9;">Annual Exam Smart Result Generator - Class 9 & 10 Model</p>
     </div>
   </div>
+  
+  <!-- লাল কালারের সতর্কতা মেসেজ -->
+  <div class="warning-box">
+    <i class="fa-solid fa-triangle-exclamation"></i> 
+    সতর্কতা: এই মার্কশীট শুধু ক্লাস নাইন এবং ১০ম শ্রেণীর প্রাক-নির্বাচনী পরিক্ষা পর্যন্ত ব্যাবহার করা যাবে। কোনো ভাবেই নির্বাচনী(টেস্ট) পরিক্ষায় ব্যাবহার করা যাবেনা।
+  </div>
 
   <div class="global-info">
     <div><label>Class:</label><input type="text" id="gClass" value="Nine" oninput="saveDataToCache()"></div>
     <div><label>Section:</label><input type="text" id="gSec" value="B" oninput="saveDataToCache()"></div>
     <div><label>Shift:</label><input type="text" id="gShift" value="Joba" oninput="saveDataToCache()"></div>
     <div><label>Exam Year:</label><input type="text" id="gYear" value="2026" oninput="saveDataToCache()"></div>
-  </div>
-
-  <div style="background: #fff3cd; padding: 10px; border-left: 4px solid #ffc107; margin-bottom: 15px; font-size: 14px;">
-    <b>নির্দেশনা:</b> এখন ইনপুট টেবিলেও প্র্যাকটিক্যাল ঘর যুক্ত করা হয়েছে। আপনার টাইপ করা সব ডেটা অটোমেটিক ব্রাউজারে সেভ হয়ে থাকবে।
   </div>
 
   <div class="table-responsive">
@@ -161,7 +169,6 @@
   <div class="btn-group">
     <button class="btn-add" onclick="addRow()"><i class="fa-solid fa-plus"></i> ১ জন যোগ করুন</button>
     <button class="btn-add" onclick="addMultiple(5)"><i class="fa-solid fa-users"></i> ৫ জন যোগ করুন</button>
-    <!-- Cash Memory Reset Button -->
     <button class="btn-clear" onclick="clearCacheData()"><i class="fa-solid fa-trash-can"></i> ক্যাশ মেমোরি রিসেট</button>
   </div>
 
@@ -195,7 +202,7 @@
 
   window.onload = () => {
     buildInputTableHeaders();
-    loadDataFromCache(); // Load Data Automatically 
+    loadDataFromCache(); 
   };
 
   function buildInputTableHeaders() {
@@ -207,27 +214,26 @@
       <th rowspan="2" class="subj-group" style="width: 80px;">Att.</th>
     `;
     let tr2 = '';
-    
+
     subjects.forEach(sub => {
-      let cols = 4; // ET, Tu, Tot, Gr (Always there)
+      let cols = 4;
       if(sub.hasMCQ) cols++;
       if(sub.hasPrac) cols++;
-      
+
       tr1 += `<th colspan="${cols}" class="subj-group">${sub.name}</th>`;
-      
+
       if(sub.hasMCQ) tr2 += `<th>MCQ</th>`;
       tr2 += `<th>ET</th>`;
       if(sub.hasPrac) tr2 += `<th>Prac</th>`;
       tr2 += `<th>Tu</th><th>Tot</th><th class="subj-group">Gr</th>`;
     });
-    
+
     tr1 += `<th rowspan="2" style="width: 65px;">Action</th>`;
 
     document.getElementById('th-row-1').innerHTML = tr1;
     document.getElementById('th-row-2').innerHTML = tr2;
   }
 
-  // Row Generation & Rendering Function
   function addRow(data = null) {
     const tbody = document.getElementById('tableBody');
     const tr = document.createElement('tr');
@@ -241,15 +247,14 @@
       <td class="subj-group"><input type="number" class="i-att" value="${data ? data.att : '180'}" oninput="saveDataToCache()"></td>
     `;
 
-    // Dynamic input generation including MCQ, Prac, Tot & Grade
     subjects.forEach(sub => {
       let m = data && data.marks && data.marks[sub.id] ? data.marks[sub.id] : {mcq:'', et:'', pr:'', tu:''};
-      
+
       if(sub.hasMCQ) html += `<td><input type="number" class="${sub.id}-mcq" value="${m.mcq}" oninput="liveCalc(this)"></td>`;
       html += `<td><input type="number" class="${sub.id}-et" value="${m.et}" oninput="liveCalc(this)"></td>`;
       if(sub.hasPrac) html += `<td><input type="number" class="${sub.id}-pr" value="${m.pr}" oninput="liveCalc(this)"></td>`;
       html += `<td><input type="number" class="${sub.id}-tu" value="${m.tu}" oninput="liveCalc(this)"></td>`;
-      
+
       html += `<td><span class="${sub.id}-tot" style="font-weight:bold; color:#1e3a8a;">0</span></td>`;
       html += `<td class="subj-group"><span class="${sub.id}-gr" style="font-weight:bold; color:#b91c1c;">-</span></td>`;
     });
@@ -259,7 +264,7 @@
     tbody.appendChild(tr);
 
     if (data) {
-        liveCalc(tr.querySelector('.i-roll')); // Calculate grades on initial load
+        liveCalc(tr.querySelector('.i-roll')); 
     }
   }
 
@@ -268,9 +273,6 @@
     saveDataToCache();
   }
 
-  // =========================================================
-  // Local Storage Functions (Data Auto Saving)
-  // =========================================================
   function saveDataToCache() {
     const globalData = {
       cls: document.getElementById('gClass').value,
@@ -290,7 +292,7 @@
         att: row.querySelector('.i-att').value,
         marks: {}
       };
-      
+
       subjects.forEach(sub => {
         s.marks[sub.id] = {
           mcq: sub.hasMCQ ? (row.querySelector(`.${sub.id}-mcq`).value || '') : '',
@@ -330,9 +332,6 @@
     }
   }
 
-  // =========================================================
-  // Calculation Functions
-  // =========================================================
   function liveCalc(elem) {
     const row = elem.closest('tr');
     const s = extractStudentData(row);
@@ -343,8 +342,7 @@
       if(totSpan) totSpan.innerText = s.results[sub.id].gTotal;
       if(grSpan) grSpan.innerText = s.results[sub.id].lg;
     });
-    
-    // Save to Cache after every typing calculation
+
     saveDataToCache();
   }
 
@@ -368,6 +366,7 @@
     };
 
     let totalGP = 0;
+    let grandTotalMarks = 0; // গ্র্যান্ড টোটাল যোগ করার জন্য ভ্যারিয়েবল
     let isFail = false;
 
     subjects.forEach(sub => {
@@ -378,7 +377,7 @@
 
       let rawTotal = mcq + et + pr;
       let tot70 = Math.round(rawTotal * 0.70); 
-      
+
       if(sub.id === 'e1' || sub.id === 'e2') {
          tot70 = Math.round(et * 0.70);
       }
@@ -395,19 +394,25 @@
       let grade = getGrade(percent);
 
       s.results[sub.id] = { mcq, et, pr, tot70, tu: finalTu, gTotal, lg: grade.lg, gp: grade.gp };
+      
+      grandTotalMarks += gTotal; // প্রতিটি বিষয়ের টোটাল মার্কস যোগ করা হচ্ছে
     });
+
+    s.grandTotalMarks = grandTotalMarks; // স্টুডেন্ট অবজেক্টে গ্র্যান্ড টোটাল সেভ করা হলো
 
     s.banglaTotal = s.results.b1.gTotal + s.results.b2.gTotal;
     s.banglaGrade = getGrade((s.banglaTotal / 200) * 100);
-    
+
     s.englishTotal = s.results.e1.gTotal + s.results.e2.gTotal;
     s.englishGrade = getGrade((s.englishTotal / 200) * 100);
 
+    // Higher Math কেও সাধারণ/মেইন বিষয় হিসেবে ধরা হলো (৪র্থ বিষয় হিসেবে বাদ দেওয়া হয়নি)
     const coreGPs = [
       s.banglaGrade.gp, s.englishGrade.gp, s.results.math.gp, s.results.rel.gp, 
-      s.results.bgs.gp, s.results.phy.gp, s.results.chem.gp, s.results.bio.gp, s.results.ict.gp
+      s.results.bgs.gp, s.results.phy.gp, s.results.chem.gp, s.results.bio.gp, 
+      s.results.ict.gp, s.results.hm.gp 
     ];
-    
+
     coreGPs.forEach(gp => {
       if(gp === 0) isFail = true;
       totalGP += gp;
@@ -435,7 +440,7 @@
 
     rows.forEach(row => {
       const s = extractStudentData(row);
-      
+
       const renderTR = (sub, title) => `
         <tr>
           <td class="text-green" style="text-align:left; padding-left:5px;">${title}</td>
@@ -515,8 +520,8 @@
                 <td>${s.results.b1.mcq || ''}</td><td>${s.results.b1.et || ''}</td><td></td>
                 <td>${s.results.b1.tot70}</td><td>${s.results.b1.tu}</td><td><b>${s.results.b1.gTotal}</b></td>
                 <td rowspan="2"></td><td rowspan="2"></td>
-                <td rowspan="19" class="gpa-col">${s.finalGPA}</td>
-                <td rowspan="19" class="merit-col"></td>
+                <td rowspan="18" class="gpa-col">${s.finalGPA}</td>
+                <td rowspan="18" class="merit-col"></td>
               </tr>
               <tr>
                 <td class="text-green" style="text-align:left; padding-left:5px;">Bangla-II</td>
@@ -568,8 +573,11 @@
                 <td><b>${s.results.moral.gTotal}</b></td><td>${s.results.moral.lg}</td><td>${s.results.moral.gp.toFixed(2)}</td>
               </tr>
               
+              <!-- Grand Total Row -->
               <tr style="background:#e5e7eb;">
-                <td colspan="11" style="text-align:left; font-weight:bold; padding-left:10px; color:#b91c1c;">GRAND TOTAL</td>
+                <td colspan="8" style="text-align:right; font-weight:bold; padding-right:10px; color:#b91c1c;">GRAND TOTAL</td>
+                <td style="font-weight:bold; font-size:16px; color:#b91c1c;">${s.grandTotalMarks}</td>
+                <td colspan="2"></td>
               </tr>
             </tbody>
           </table>
@@ -625,7 +633,7 @@
     rows.forEach(row => {
       const s = extractStudentData(row);
       let subTds = '';
-      
+
       subjects.forEach(sub => {
           let lgColor = s.results[sub.id].lg === 'F' ? 'color:#ef4444;' : 'color:#1e293b;';
           subTds += `<td>${s.results[sub.id].gTotal}</td><td style="border-right:2px solid #334155; font-weight:bold; ${lgColor}">${s.results[sub.id].lg}</td>`;
@@ -644,6 +652,7 @@
         <tr>
           <td>${s.roll}</td><td style="text-align:left; padding-left:5px;">${s.name}</td>
           ${subTds}
+          <td style="font-weight:bold; font-size:14px; background:#d1fae5; color:#065f46;">${s.grandTotalMarks}</td>
           <td style="background:#fce5cd; font-weight:bold; font-size:14px; color:#b91c1c;">${s.finalGPA}</td>
         </tr>
       `;
@@ -675,6 +684,7 @@
               <th rowspan="2" style="width:30px;">Roll</th>
               <th rowspan="2" style="width:120px;">Name</th>
               ${ths}
+              <th rowspan="2" style="background:#059669;">Total<br>Marks</th>
               <th rowspan="2" style="background:#ea580c;">GPA</th>
             </tr>
             <tr>
