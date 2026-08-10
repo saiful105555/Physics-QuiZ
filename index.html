@@ -59,6 +59,7 @@
       padding: 12px 20px; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; color: white; display: flex; align-items: center; gap: 8px; font-size: 15px; transition: 0.3s;
     }
     .btn-add { background: #3b82f6; } .btn-add:hover { background: #2563eb; }
+    .btn-clear { background: #ef4444; margin-left: auto; } .btn-clear:hover { background: #dc2626; }
     .btn-print { background: #d97706; flex: 1; justify-content: center; font-size: 16px;} .btn-print:hover { background: #b45309; }
     .btn-smart { background: #4f46e5; flex: 1; justify-content: center; font-size: 16px;} .btn-smart:hover { background: #4338ca; }
 
@@ -85,7 +86,6 @@
         color: #000;
       }
       
-      /* শেষের মার্কশিটের পর যেন কোনো খালি পেজ না আসে */
       .marksheet-page:last-child {
         page-break-after: auto;
       }
@@ -132,14 +132,14 @@
   </div>
 
   <div class="global-info">
-    <div><label>Class:</label><input type="text" id="gClass" value="Nine"></div>
-    <div><label>Section:</label><input type="text" id="gSec" value="B"></div>
-    <div><label>Shift:</label><input type="text" id="gShift" value="Joba"></div>
-    <div><label>Exam Year:</label><input type="text" id="gYear" value="2026"></div>
+    <div><label>Class:</label><input type="text" id="gClass" value="Nine" oninput="saveDataToCache()"></div>
+    <div><label>Section:</label><input type="text" id="gSec" value="B" oninput="saveDataToCache()"></div>
+    <div><label>Shift:</label><input type="text" id="gShift" value="Joba" oninput="saveDataToCache()"></div>
+    <div><label>Exam Year:</label><input type="text" id="gYear" value="2026" oninput="saveDataToCache()"></div>
   </div>
 
   <div style="background: #fff3cd; padding: 10px; border-left: 4px solid #ffc107; margin-bottom: 15px; font-size: 14px;">
-    <b>নির্দেশনা:</b> এখন ইনপুট টেবিলেও প্র্যাকটিক্যাল ঘর যুক্ত করা হয়েছে এবং মার্কস বসালেই Total ও Grade সরাসরি ক্যালকুলেট হবে।
+    <b>নির্দেশনা:</b> এখন ইনপুট টেবিলেও প্র্যাকটিক্যাল ঘর যুক্ত করা হয়েছে। আপনার টাইপ করা সব ডেটা অটোমেটিক ব্রাউজারে সেভ হয়ে থাকবে।
   </div>
 
   <div class="table-responsive">
@@ -161,6 +161,8 @@
   <div class="btn-group">
     <button class="btn-add" onclick="addRow()"><i class="fa-solid fa-plus"></i> ১ জন যোগ করুন</button>
     <button class="btn-add" onclick="addMultiple(5)"><i class="fa-solid fa-users"></i> ৫ জন যোগ করুন</button>
+    <!-- Cash Memory Reset Button -->
+    <button class="btn-clear" onclick="clearCacheData()"><i class="fa-solid fa-trash-can"></i> ক্যাশ মেমোরি রিসেট</button>
   </div>
 
   <div class="btn-group">
@@ -193,7 +195,7 @@
 
   window.onload = () => {
     buildInputTableHeaders();
-    addMultiple(3); 
+    loadDataFromCache(); // Load Data Automatically 
   };
 
   function buildInputTableHeaders() {
@@ -225,41 +227,112 @@
     document.getElementById('th-row-2').innerHTML = tr2;
   }
 
-  function addRow() {
+  // Row Generation & Rendering Function
+  function addRow(data = null) {
     const tbody = document.getElementById('tableBody');
     const tr = document.createElement('tr');
     const rowCount = tbody.rows.length + 1;
 
     let html = `
-      <td><input type="number" class="i-roll" value="${rowCount}"></td>
-      <td><input type="text" class="i-name" placeholder="Student Name"></td>
-      <td><input type="text" class="i-fname" placeholder="Father Name"></td>
-      <td><input type="text" class="i-mname" placeholder="Mother Name"></td>
-      <td class="subj-group"><input type="number" class="i-att" value="180"></td>
+      <td><input type="number" class="i-roll" value="${data ? data.roll : rowCount}" oninput="saveDataToCache()"></td>
+      <td><input type="text" class="i-name" placeholder="Student Name" value="${data ? data.name : ''}" oninput="saveDataToCache()"></td>
+      <td><input type="text" class="i-fname" placeholder="Father Name" value="${data ? data.fname : ''}" oninput="saveDataToCache()"></td>
+      <td><input type="text" class="i-mname" placeholder="Mother Name" value="${data ? data.mname : ''}" oninput="saveDataToCache()"></td>
+      <td class="subj-group"><input type="number" class="i-att" value="${data ? data.att : '180'}" oninput="saveDataToCache()"></td>
     `;
 
     // Dynamic input generation including MCQ, Prac, Tot & Grade
     subjects.forEach(sub => {
-      if(sub.hasMCQ) html += `<td><input type="number" class="${sub.id}-mcq" oninput="liveCalc(this)"></td>`;
-      html += `<td><input type="number" class="${sub.id}-et" oninput="liveCalc(this)"></td>`;
-      if(sub.hasPrac) html += `<td><input type="number" class="${sub.id}-pr" oninput="liveCalc(this)"></td>`;
-      html += `<td><input type="number" class="${sub.id}-tu" oninput="liveCalc(this)"></td>`;
+      let m = data && data.marks && data.marks[sub.id] ? data.marks[sub.id] : {mcq:'', et:'', pr:'', tu:''};
       
-      // Auto Calculation Display in Input Table
+      if(sub.hasMCQ) html += `<td><input type="number" class="${sub.id}-mcq" value="${m.mcq}" oninput="liveCalc(this)"></td>`;
+      html += `<td><input type="number" class="${sub.id}-et" value="${m.et}" oninput="liveCalc(this)"></td>`;
+      if(sub.hasPrac) html += `<td><input type="number" class="${sub.id}-pr" value="${m.pr}" oninput="liveCalc(this)"></td>`;
+      html += `<td><input type="number" class="${sub.id}-tu" value="${m.tu}" oninput="liveCalc(this)"></td>`;
+      
       html += `<td><span class="${sub.id}-tot" style="font-weight:bold; color:#1e3a8a;">0</span></td>`;
       html += `<td class="subj-group"><span class="${sub.id}-gr" style="font-weight:bold; color:#b91c1c;">-</span></td>`;
     });
 
-    html += `<td><button onclick="this.closest('tr').remove()" style="background:#ef4444; padding:5px; border-radius:4px;"><i class="fa-solid fa-trash"></i></button></td>`;
+    html += `<td><button onclick="this.closest('tr').remove(); saveDataToCache();" style="background:#ef4444; padding:5px; border-radius:4px;"><i class="fa-solid fa-trash"></i></button></td>`;
     tr.innerHTML = html;
     tbody.appendChild(tr);
+
+    if (data) {
+        liveCalc(tr.querySelector('.i-roll')); // Calculate grades on initial load
+    }
   }
 
   function addMultiple(num) {
     for(let i=0; i<num; i++) addRow();
+    saveDataToCache();
   }
 
-  // Live calculation for Input Table (Tot & Gr updating instantly)
+  // =========================================================
+  // Local Storage Functions (Data Auto Saving)
+  // =========================================================
+  function saveDataToCache() {
+    const globalData = {
+      cls: document.getElementById('gClass').value,
+      sec: document.getElementById('gSec').value,
+      shift: document.getElementById('gShift').value,
+      year: document.getElementById('gYear').value
+    };
+    localStorage.setItem('itsc_global_annual_v1', JSON.stringify(globalData));
+
+    const students = [];
+    document.querySelectorAll('#tableBody tr').forEach(row => {
+      let s = {
+        roll: row.querySelector('.i-roll').value,
+        name: row.querySelector('.i-name').value,
+        fname: row.querySelector('.i-fname').value,
+        mname: row.querySelector('.i-mname').value,
+        att: row.querySelector('.i-att').value,
+        marks: {}
+      };
+      
+      subjects.forEach(sub => {
+        s.marks[sub.id] = {
+          mcq: sub.hasMCQ ? (row.querySelector(`.${sub.id}-mcq`).value || '') : '',
+          et: row.querySelector(`.${sub.id}-et`).value || '',
+          pr: sub.hasPrac ? (row.querySelector(`.${sub.id}-pr`).value || '') : '',
+          tu: row.querySelector(`.${sub.id}-tu`).value || ''
+        };
+      });
+      students.push(s);
+    });
+    localStorage.setItem('itsc_students_annual_v1', JSON.stringify(students));
+  }
+
+  function loadDataFromCache() {
+    const gData = JSON.parse(localStorage.getItem('itsc_global_annual_v1'));
+    if (gData) {
+      document.getElementById('gClass').value = gData.cls || '';
+      document.getElementById('gSec').value = gData.sec || '';
+      document.getElementById('gShift').value = gData.shift || '';
+      document.getElementById('gYear').value = gData.year || '2026';
+    }
+
+    const sData = JSON.parse(localStorage.getItem('itsc_students_annual_v1'));
+    if (sData && sData.length > 0) {
+      sData.forEach(s => addRow(s));
+    } else {
+      addMultiple(3);
+    }
+  }
+
+  function clearCacheData() {
+    if(confirm('আপনি কি নিশ্চিত যে ক্যাশ মেমোরি থেকে সব ডেটা মুছে ফেলতে চান?')) {
+      localStorage.removeItem('itsc_global_annual_v1');
+      localStorage.removeItem('itsc_students_annual_v1');
+      document.getElementById('tableBody').innerHTML = '';
+      addMultiple(3);
+    }
+  }
+
+  // =========================================================
+  // Calculation Functions
+  // =========================================================
   function liveCalc(elem) {
     const row = elem.closest('tr');
     const s = extractStudentData(row);
@@ -270,6 +343,9 @@
       if(totSpan) totSpan.innerText = s.results[sub.id].gTotal;
       if(grSpan) grSpan.innerText = s.results[sub.id].lg;
     });
+    
+    // Save to Cache after every typing calculation
+    saveDataToCache();
   }
 
   function getGrade(percentage) {
@@ -278,7 +354,6 @@
     if (percentage >= 60) return { lg: 'A-', gp: 3.50 };
     if (percentage >= 50) return { lg: 'B',  gp: 3.00 };
     if (percentage >= 40) return { lg: 'C',  gp: 2.00 };
-    // ৪০% এর কম পেলেই সরাসরি ফেল (F)
     return { lg: 'F', gp: 0.00 };
   }
 
@@ -308,7 +383,6 @@
          tot70 = Math.round(et * 0.70);
       }
 
-      // ICT সাবজেক্টের ক্ষেত্রে Tuto এর ৫০% যোগ হবে
       let finalTu = tu;
       if (sub.id === 'ict') {
          finalTu = Math.round(tu * 0.50);
@@ -346,7 +420,7 @@
   }
 
   // =========================================================
-  // Print Marksheet Generator (Matches 1000019432.jpg)
+  // Print Marksheet Generator
   // =========================================================
   function printMarksheets() {
     const rows = document.querySelectorAll('#tableBody tr');
@@ -534,7 +608,6 @@
     let ths = '';
     let subThsRow2 = '';
 
-    // Smart View Header Setup (Adding Bangla 1+2 & English 1+2 combined columns)
     subjects.forEach(sub => {
         ths += `<th colspan="2" style="border-right:2px solid #fff; font-size:10px; padding: 2px 4px;">${sub.name}</th>`;
         subThsRow2 += `<th>Tot</th><th style="border-right:2px solid #fff;">Gr</th>`;
@@ -549,7 +622,6 @@
         }
     });
 
-    // Smart View Body Setup
     rows.forEach(row => {
       const s = extractStudentData(row);
       let subTds = '';
@@ -558,12 +630,10 @@
           let lgColor = s.results[sub.id].lg === 'F' ? 'color:#ef4444;' : 'color:#1e293b;';
           subTds += `<td>${s.results[sub.id].gTotal}</td><td style="border-right:2px solid #334155; font-weight:bold; ${lgColor}">${s.results[sub.id].lg}</td>`;
 
-          // Injecting Bangla Combined Cell after Bangla 2
           if (sub.id === 'b2') {
               let bLgColor = s.banglaGrade.lg === 'F' ? 'color:#ef4444;' : 'color:#1e293b;';
               subTds += `<td style="background:#e0e7ff; font-weight:bold;">${s.banglaTotal}</td><td style="background:#e0e7ff; border-right:2px solid #334155; font-weight:bold; ${bLgColor}">${s.banglaGrade.lg}</td>`;
           }
-          // Injecting English Combined Cell after English 2
           if (sub.id === 'e2') {
               let eLgColor = s.englishGrade.lg === 'F' ? 'color:#ef4444;' : 'color:#1e293b;';
               subTds += `<td style="background:#e0e7ff; font-weight:bold;">${s.englishTotal}</td><td style="background:#e0e7ff; border-right:2px solid #334155; font-weight:bold; ${eLgColor}">${s.englishGrade.lg}</td>`;
