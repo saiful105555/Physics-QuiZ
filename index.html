@@ -78,11 +78,16 @@
       * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
 
       .marksheet-page {
-        width: 100%; height: 100vh;
+        width: 100%;
         page-break-after: always; page-break-inside: avoid;
         box-sizing: border-box; padding: 10px 20px;
         font-family: 'Times New Roman', serif;
         color: #000;
+      }
+      
+      /* শেষের মার্কশিটের পর যেন কোনো খালি পেজ না আসে */
+      .marksheet-page:last-child {
+        page-break-after: auto;
       }
 
       .ms-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 15px; border-bottom: 2px solid #000; padding-bottom: 10px;}
