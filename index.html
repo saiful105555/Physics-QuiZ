@@ -278,7 +278,7 @@
     if (percentage >= 60) return { lg: 'A-', gp: 3.50 };
     if (percentage >= 50) return { lg: 'B',  gp: 3.00 };
     if (percentage >= 40) return { lg: 'C',  gp: 2.00 };
-    if (percentage >= 33) return { lg: 'D',  gp: 1.00 };
+    // ৪০% এর কম পেলেই সরাসরি ফেল (F)
     return { lg: 'F', gp: 0.00 };
   }
 
@@ -525,27 +525,52 @@
     const gSec = document.getElementById('gSec').value;
 
     let trs = '';
+    let ths = '';
+    let subThsRow2 = '';
+
+    // Smart View Header Setup (Adding Bangla 1+2 & English 1+2 combined columns)
+    subjects.forEach(sub => {
+        ths += `<th colspan="2" style="border-right:2px solid #fff; font-size:10px; padding: 2px 4px;">${sub.name}</th>`;
+        subThsRow2 += `<th>Tot</th><th style="border-right:2px solid #fff;">Gr</th>`;
+
+        if (sub.id === 'b2') {
+            ths += `<th colspan="2" style="background: #3b82f6; border-right:2px solid #fff; font-size:10px; padding: 2px 4px;">Bangla (1+2)</th>`;
+            subThsRow2 += `<th>Tot</th><th style="border-right:2px solid #fff;">Gr</th>`;
+        }
+        if (sub.id === 'e2') {
+            ths += `<th colspan="2" style="background: #3b82f6; border-right:2px solid #fff; font-size:10px; padding: 2px 4px;">English (1+2)</th>`;
+            subThsRow2 += `<th>Tot</th><th style="border-right:2px solid #fff;">Gr</th>`;
+        }
+    });
+
+    // Smart View Body Setup
     rows.forEach(row => {
       const s = extractStudentData(row);
       let subTds = '';
       
       subjects.forEach(sub => {
-          subTds += `<td>${s.results[sub.id].gTotal}</td><td style="border-right:2px solid #334155; font-weight:bold;">${s.results[sub.id].lg}</td>`;
+          let lgColor = s.results[sub.id].lg === 'F' ? 'color:#ef4444;' : 'color:#1e293b;';
+          subTds += `<td>${s.results[sub.id].gTotal}</td><td style="border-right:2px solid #334155; font-weight:bold; ${lgColor}">${s.results[sub.id].lg}</td>`;
+
+          // Injecting Bangla Combined Cell after Bangla 2
+          if (sub.id === 'b2') {
+              let bLgColor = s.banglaGrade.lg === 'F' ? 'color:#ef4444;' : 'color:#1e293b;';
+              subTds += `<td style="background:#e0e7ff; font-weight:bold;">${s.banglaTotal}</td><td style="background:#e0e7ff; border-right:2px solid #334155; font-weight:bold; ${bLgColor}">${s.banglaGrade.lg}</td>`;
+          }
+          // Injecting English Combined Cell after English 2
+          if (sub.id === 'e2') {
+              let eLgColor = s.englishGrade.lg === 'F' ? 'color:#ef4444;' : 'color:#1e293b;';
+              subTds += `<td style="background:#e0e7ff; font-weight:bold;">${s.englishTotal}</td><td style="background:#e0e7ff; border-right:2px solid #334155; font-weight:bold; ${eLgColor}">${s.englishGrade.lg}</td>`;
+          }
       });
 
       trs += `
         <tr>
           <td>${s.roll}</td><td style="text-align:left; padding-left:5px;">${s.name}</td>
           ${subTds}
-          <td style="background:#fce5cd; font-weight:bold; font-size:16px; color:#b91c1c;">${s.finalGPA}</td>
+          <td style="background:#fce5cd; font-weight:bold; font-size:14px; color:#b91c1c;">${s.finalGPA}</td>
         </tr>
       `;
-    });
-
-    let ths = '';
-    // এখানে সাবজেক্টের পুরো নাম শো করবে, কোনো নাম কাটা পড়বে না
-    subjects.forEach(sub => { 
-        ths += `<th colspan="2" style="border-right:2px solid #fff; font-size:10px; padding: 2px 4px;">${sub.name}</th>`; 
     });
 
     const win = window.open('', '_blank');
@@ -577,7 +602,7 @@
               <th rowspan="2" style="background:#ea580c;">GPA</th>
             </tr>
             <tr>
-              ${'<th>Tot</th><th style="border-right:2px solid #fff;">Gr</th>'.repeat(subjects.length)}
+              ${subThsRow2}
             </tr>
           </thead>
           <tbody>${trs}</tbody>
