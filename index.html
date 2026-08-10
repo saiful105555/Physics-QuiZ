@@ -308,13 +308,19 @@
          tot70 = Math.round(et * 0.70);
       }
 
-      let gTotal = tot70 + tu;
+      // ICT সাবজেক্টের ক্ষেত্রে Tuto এর ৫০% যোগ হবে
+      let finalTu = tu;
+      if (sub.id === 'ict') {
+         finalTu = Math.round(tu * 0.50);
+      }
+
+      let gTotal = tot70 + finalTu;
       if (gTotal > sub.max) gTotal = sub.max;
 
       let percent = (gTotal / sub.max) * 100;
       let grade = getGrade(percent);
 
-      s.results[sub.id] = { mcq, et, pr, tot70, tu, gTotal, lg: grade.lg, gp: grade.gp };
+      s.results[sub.id] = { mcq, et, pr, tot70, tu: finalTu, gTotal, lg: grade.lg, gp: grade.gp };
     });
 
     s.banglaTotal = s.results.b1.gTotal + s.results.b2.gTotal;
