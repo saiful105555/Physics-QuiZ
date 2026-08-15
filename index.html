@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Grammar Exam</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f3f4f6;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            text-align: center;
+            color: #2c3e50;
+        }
+        .section-title {
+            background-color: #e2e8f0;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 30px;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        .question-block {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            background-color: #fafafa;
+        }
+        .question-text {
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        .options label {
+            display: block;
+            margin-bottom: 8px;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+        .options label:hover {
+            background-color: #e2e8f0;
+        }
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+        .btn-submit {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            font-size: 1.2em;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: background 0.3s;
+        }
+        .btn-submit:hover {
+            background-color: #2980b9;
+        }
+        .btn-whatsapp {
+            display: inline-block;
+            background-color: #25D366;
+            color: #fff;
+            padding: 12px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        .btn-whatsapp:hover {
+            background-color: #128C7E;
+        }
+        #result-section, #already-taken {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+        .score-display {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #27ae60;
+            margin-bottom: 10px;
+        }
+        .student-info {
+            margin-bottom: 30px;
+        }
+        .student-info input {
+            width: 100%;
+            padding: 10px;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>English Grammar Exam</h1>
+    
+    <div id="already-taken">
+        <h2>আপনি ইতোমধ্যে পরীক্ষা দিয়েছেন!</h2>
+        <p>এই পরীক্ষাটি শুধুমাত্র একবার দেওয়া যাবে।</p>
+        <div class="score-display" id="previous-score"></div>
+    </div>
+
+    <div id="result-section">
+        <h2>আপনার রেজাল্ট</h2>
+        <div class="score-display" id="current-score"></div>
+        <p>নিচের বাটনে ক্লিক করে রেজাল্ট WhatsApp এ শেয়ার করুন:</p>
+        <a href="#" id="wa-share-btn" class="btn-whatsapp" target="_blank">Share on WhatsApp</a>
+    </div>
+
+    <form id="quizForm">
+        <div class="student-info">
+            <label for="studentName"><strong>আপনার নাম লিখুন (বাধ্যতামূলক):</strong></label>
+            <input type="text" id="studentName" required placeholder="Enter your full name">
+        </div>
+
+        <div class="section-title">পর্ব ১: Transformation of Degree (প্রশ্ন ১-১৫)</div>
+
+        <!-- Questions 1 to 15 (Degrees) -->
+        <script>
+            const questions = [
+                {q: '1. "He is the best boy in the class." - Choose the correct Positive degree:', opts: ['No other boy in the class is as good as he.', 'Very few boys in the class are as good as he.', 'He is better than any other boy in the class.', 'No other boy in the class is so best as he.']},
+                {q: '2. "No other metal is as heavy as lead." - Choose the correct Comparative degree:', opts: ['Lead is heavier than most other metals.', 'Lead is heavier than any other metal.', 'Lead is the heaviest metal.', 'Very few metals are heavier than lead.']},
+                {q: '3. "Dhaka is larger than most other cities in Bangladesh." - Choose the correct Superlative degree:', opts: ['Dhaka is the largest city in Bangladesh.', 'Dhaka is one of the largest cities in Bangladesh.', 'No other city in Bangladesh is as large as Dhaka.', 'Very few cities in Bangladesh are largest as Dhaka.']},
+                {q: '4. "Iron is the most useful metal." - Choose the correct Comparative degree:', opts: ['Iron is more useful than any other metal.', 'Iron is more useful than most other metals.', 'No other metal is as useful as iron.', 'Iron is useful than all metals.']},
+                {q: '5. "Very few animals are as ferocious as the tiger." - Choose the correct Superlative degree:', opts: ['The tiger is the most ferocious animal.', 'The tiger is one of the most ferocious animals.', 'The tiger is more ferocious than most other animals.', 'No other animal is the most ferocious.']},
+                {q: '6. "She is wiser than her sister." - Choose the correct Positive degree:', opts: ['Her sister is not as wise as she.', 'No other sister is as wise as she.', 'Her sister is wise than her.', 'She is as wise as her sister.']},
+                {q: '7. "He is as tall as his brother." - Choose the correct Comparative degree:', opts: ['His brother is not taller than he.', 'His brother is taller than he.', 'He is taller than his brother.', 'No other brother is taller than he.']},
+                {q: '8. "This is the easiest way to solve the problem." - Choose the correct Positive degree:', opts: ['No other way to solve the problem is as easy as this.', 'Very few ways to solve the problem are as easy as this.', 'This is easier than any other way to solve the problem.', 'No other problem is as easy as this way.']},
+                {q: '9. "The pen is mightier than the sword." - Choose the correct Positive degree:', opts: ['The sword is not as mighty as the pen.', 'No other sword is as mighty as the pen.', 'The sword is mighty as the pen.', 'Very few swords are as mighty as the pen.']},
+                {q: '10. "Prevention is better than cure." - Choose the correct Positive degree:', opts: ['Cure is not as good as prevention.', 'No other cure is as good as prevention.', 'Prevention is as good as cure.', 'Cure is worse than prevention.']},
+                {q: '11. "Shakespeare is the greatest of all English dramatists." - Choose the correct Comparative degree:', opts: ['Shakespeare is greater than all other English dramatists.', 'Shakespeare is greater than most other English dramatists.', 'No other English dramatist is as great as Shakespeare.', 'Shakespeare is great than any other English dramatist.']},
+                {q: '12. "No other problem in Bangladesh is as great as illiteracy." - Choose the correct Superlative degree:', opts: ['Illiteracy is one of the greatest problems in Bangladesh.', 'Illiteracy is the greatest problem in Bangladesh.', 'Illiteracy is greater than any other problem in Bangladesh.', 'Illiteracy is the most great problem in Bangladesh.']},
+                {q: '13. "Mango is sweeter than apple." - Choose the correct Positive degree:', opts: ['Apple is not as sweet as mango.', 'No other apple is as sweet as mango.', 'Very few apples are as sweet as mango.', 'Apple is as sweet as mango.']},
+                {q: '14. "Very few insects are as busy as a bee." - Choose the correct Comparative degree:', opts: ['A bee is busier than any other insect.', 'A bee is busier than most other insects.', 'A bee is the busiest insect.', 'Most other insects are busier than a bee.']},
+                {q: '15. "He is one of the most brilliant students in the class." - Choose the correct Positive degree:', opts: ['No other student in the class is as brilliant as he.', 'Very few students in the class are as brilliant as he.', 'He is more brilliant than most other students in the class.', 'Some students in the class are as brilliant as him.']}
+            ];
+
+            const verbsQuestions = [
+                {q: '16. He (read) a book now.', opts: ['reads', 'is reading', 'read', 'has read']},
+                {q: '17. At present, the government (try) to control inflation.', opts: ['tries', 'tried', 'is trying', 'has tried']},
+                {q: '18. He speaks as if he (know) everything.', opts: ['knows', 'knew', 'has known', 'is knowing']},
+                {q: '19. Fifty miles (be) a long distance.', opts: ['are', 'is', 'were', 'have been']},
+                {q: '20. Every mother (love) her child.', opts: ['love', 'is loving', 'loves', 'loved']},
+                {q: '21. Neither of the boys (be) guilty.', opts: ['are', 'is', 'were', 'have']},
+                {q: '22. Is there anything that (make) you happy?', opts: ['makes', 'make', 'making', 'are making']},
+                {q: '23. Everything (look) beautiful in spring.', opts: ['look', 'is looking', 'looks', 'looked']},
+                {q: '24. If it rains, I (not go) out.', opts: ['do not go', 'will not go', 'did not go', 'would not go']},
+                {q: '25. If I had a lot of money, I (help) the poor.', opts: ['will help', 'help', 'helped', 'would help']},
+                {q: '26. The patient had died before the doctor (come).', opts: ['comes', 'came', 'had come', 'will come']},
+                {q: '27. The train left after we (reach) the station.', opts: ['reached', 'reach', 'had reached', 'have reached']},
+                {q: '28. It is high time we (change) our eating habits.', opts: ['change', 'changed', 'will change', 'are changing']},
+                {q: '29. I fancy I (turn) a trifle pale.', opts: ['turn', 'turned', 'turning', 'have turned']},
+                {q: '30. I wish I (be) a king.', opts: ['am', 'is', 'was', 'were']}
+            ];
+
+            const values = ['a', 'b', 'c', 'd'];
+            let htmlContent = '';
+
+            // Generate Degree Questions
+            questions.forEach((item, index) => {
+                let qNum = index + 1;
+                htmlContent += `<div class="question-block"><div class="question-text">${item.q}</div><div class="options">`;
+                item.opts.forEach((opt, i) => {
+                    htmlContent += `<label><input type="radio" name="q${qNum}" value="${values[i]}" required> ${values[i]}) ${opt}</label>`;
+                });
+                htmlContent += `</div></div>`;
+            });
+            document.write(htmlContent);
+
+            document.write('<div class="section-title">পর্ব ২: Right Form of Verbs (প্রশ্ন ১৬-৩০)</div>');
+            htmlContent = '';
+            
+            // Generate Verbs Questions
+            verbsQuestions.forEach((item, index) => {
+                let qNum = index + 16;
+                htmlContent += `<div class="question-block"><div class="question-text">${item.q}</div><div class="options">`;
+                item.opts.forEach((opt, i) => {
+                    htmlContent += `<label><input type="radio" name="q${qNum}" value="${values[i]}" required> ${values[i]}) ${opt}</label>`;
+                });
+                htmlContent += `</div></div>`;
+            });
+            document.write(htmlContent);
+        </script>
+
+        <button type="submit" class="btn-submit">Submit Exam</button>
+    </form>
+</div>
+
+<script>
+    // Correct Answer Key
+    const answers = {
+        q1: 'a', q2: 'b', q3: 'b', q4: 'a', q5: 'b', 
+        q6: 'a', q7: 'a', q8: 'a', q9: 'a', q10: 'a', 
+        q11: 'a', q12: 'b', q13: 'a', q14: 'b', q15: 'b',
+        q16: 'b', q17: 'c', q18: 'b', q19: 'b', q20: 'c', 
+        q21: 'b', q22: 'a', q23: 'c', q24: 'b', q25: 'd', 
+        q26: 'b', q27: 'c', q28: 'b', q29: 'b', q30: 'd'
+    };
+
+    // Check if exam is already taken
+    window.onload = function() {
+        if(localStorage.getItem("grammarExamTaken") === "true") {
+            document.getElementById("quizForm").style.display = "none";
+            document.getElementById("already-taken").style.display = "block";
+            document.getElementById("previous-score").innerText = localStorage.getItem("grammarExamScore") + " / 30";
+        }
+    };
+
+    document.getElementById("quizForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        let score = 0;
+        let studentName = document.getElementById("studentName").value.trim();
+
+        if(!studentName) {
+            alert("Please enter your name first!");
+            return;
+        }
+
+        // Calculate score
+        for(let i = 1; i <= 30; i++) {
+            let selected = document.querySelector(`input[name="q${i}"]:checked`);
+            if(selected && selected.value === answers[`q${i}`]) {
+                score++;
+            }
+        }
+
+        // Save data to block re-takes
+        localStorage.setItem("grammarExamTaken", "true");
+        localStorage.setItem("grammarExamScore", score);
+
+        // Hide form and show result
+        document.getElementById("quizForm").style.display = "none";
+        document.getElementById("result-section").style.display = "block";
+        document.getElementById("current-score").innerText = score + " / 30";
+
+        // Generate WhatsApp Share Link (Country code 88 added for Bangladesh)
+        let waNumber = "8801622186812";
+        let message = `Hello Sir, \nআমি ${studentName}। আমি English Grammar Exam টি সম্পন্ন করেছি। \nআমার প্রাপ্ত নম্বর: ${score}/30`;
+        let waUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`;
+        
+        document.getElementById("wa-share-btn").href = waUrl;
+    });
+</script>
+
+</body>
+</html>
