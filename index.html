@@ -380,6 +380,15 @@
       <label for="globalExamYear">পরীক্ষার সাল:</label>
       <input type="text" id="globalExamYear" value="2026" oninput="saveDataToCache()">
     </div>
+    <!-- নতুন যোগ করা ইনপুট ফিল্ড -->
+    <div>
+      <label for="globalWorkingDays">মোট কর্মদিবস (Working Days):</label>
+      <input type="text" id="globalWorkingDays" value="" placeholder="যেমন: ২১০" oninput="saveDataToCache()">
+    </div>
+    <div>
+      <label for="globalHighestAtt">সর্বোচ্চ উপস্থিতি (Highest Att.):</label>
+      <input type="text" id="globalHighestAtt" value="" placeholder="যেমন: ২০৫" oninput="saveDataToCache()">
+    </div>
   </div>
 
   <div class="section-card">
@@ -490,7 +499,9 @@
       cls: document.getElementById('globalClass').value,
       sec: document.getElementById('globalSection').value,
       shift: document.getElementById('globalShift').value,
-      year: document.getElementById('globalExamYear').value
+      year: document.getElementById('globalExamYear').value,
+      workingDays: document.getElementById('globalWorkingDays').value, // NEW
+      highestAtt: document.getElementById('globalHighestAtt').value    // NEW
     };
 
     const rows = document.querySelectorAll('#mainTableBody tr');
@@ -513,21 +524,23 @@
       studentsData.push(student);
     });
 
-    localStorage.setItem('itsc_global_info_v4', JSON.stringify(globalData));
-    localStorage.setItem('itsc_students_data_v4', JSON.stringify(studentsData));
+    localStorage.setItem('itsc_global_info_v5', JSON.stringify(globalData));
+    localStorage.setItem('itsc_students_data_v5', JSON.stringify(studentsData));
   }
 
   function loadDataFromCache() {
-    const savedGlobal = localStorage.getItem('itsc_global_info_v4');
+    const savedGlobal = localStorage.getItem('itsc_global_info_v5');
     if (savedGlobal) {
       const gData = JSON.parse(savedGlobal);
       document.getElementById('globalClass').value = gData.cls || '';
       document.getElementById('globalSection').value = gData.sec || '';
       document.getElementById('globalShift').value = gData.shift || '';
       document.getElementById('globalExamYear').value = gData.year || '2026';
+      document.getElementById('globalWorkingDays').value = gData.workingDays || ''; // NEW
+      document.getElementById('globalHighestAtt').value = gData.highestAtt || '';   // NEW
     }
 
-    const savedStudents = localStorage.getItem('itsc_students_data_v4');
+    const savedStudents = localStorage.getItem('itsc_students_data_v5');
     if (savedStudents) {
       const sData = JSON.parse(savedStudents);
       if (sData.length > 0) {
@@ -540,8 +553,8 @@
 
   function clearCacheData() {
     if(confirm('ক্যাশ মেমোরি থেকে সব ডেটা মুছে ফেলতে চান?')) {
-      localStorage.removeItem('itsc_global_info_v4');
-      localStorage.removeItem('itsc_students_data_v4');
+      localStorage.removeItem('itsc_global_info_v5');
+      localStorage.removeItem('itsc_students_data_v5');
       document.getElementById('mainTableBody').innerHTML = '';
       addMultipleRows(3);
     }
@@ -636,6 +649,10 @@
     const shift = document.getElementById('globalShift').value || '';
     const examYear = document.getElementById('globalExamYear').value || '';
     const att = row.querySelector('.in-att').value || '';
+
+    // নতুন ইনপুট থেকে ডাটা গ্রহণ
+    const totalWorkingDays = document.getElementById('globalWorkingDays').value || '';
+    const highestAttendance = document.getElementById('globalHighestAtt').value || '';
 
     let results = {};
     subjectsConfig.forEach(sub => {
@@ -815,9 +832,10 @@
                   </tr>
                   <tr>
                       <td class="pr-bg-yellow">Annual</td>
-                      <td></td>
+                      <!-- নতুন ইনপুটের ডাটা এখানে শো করবে -->
+                      <td>${totalWorkingDays}</td> 
                       <td>${att}</td>
-                      <td></td>
+                      <td>${highestAttendance}</td>
                   </tr>
               </table>
               <div class="pr-signatures">
