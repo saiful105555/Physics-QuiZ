@@ -3,376 +3,196 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>জীববিজ্ঞান বহুনির্বাচনি অভীক্ষা</title>
+    <title>টেকনিক্যাল সাপোর্ট পোর্টাল - ইবনে তাইমিয়া স্কুল এন্ড কলেজ</title>
     <style>
-        :root {
-            --primary-color: #2563eb;
-            --bg-color: #f8fafc;
-            --card-bg: #ffffff;
-            --text-main: #1e293b;
-            --text-muted: #64748b;
-            --correct-bg: #dcfce7;
-            --correct-border: #22c55e;
-            --wrong-bg: #fee2e2;
-            --wrong-border: #ef4444;
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Noto Serif Bengali', 'Kalpurush', sans-serif;
         }
+
         body {
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            line-height: 1.6;
-            margin: 0;
-            padding: 20px;
-        }
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
-            padding: 20px;
-            background: var(--card-bg);
-            border-radius: 12px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        }
-        .header h1 {
-            margin: 0;
-            color: var(--primary-color);
-        }
-        .set-title {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--primary-color);
-            margin-top: 40px;
-            margin-bottom: 20px;
-            border-bottom: 2px solid var(--primary-color);
-            padding-bottom: 10px;
-        }
-        .question-card {
-            background: var(--card-bg);
-            padding: 24px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            border: 1px solid #e2e8f0;
-        }
-        .question-text {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 16px;
-        }
-        .options-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 12px;
-        }
-        .option-label {
+            background-color: #f4f7f6;
+            color: #333;
             display: flex;
-            align-items: center;
-            padding: 12px 16px;
-            border: 1px solid #cbd5e1;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.2s;
-            background: #f8fafc;
+            flex-direction: column;
+            min-height: 100vh;
         }
-        .option-label:hover {
-            background: #f1f5f9;
-            border-color: #94a3b8;
-        }
-        .option-label input[type="radio"] {
-            margin-right: 12px;
-            transform: scale(1.2);
-        }
-        .submit-btn {
-            display: block;
-            width: 100%;
-            padding: 16px;
-            background-color: var(--primary-color);
+
+        /* Header Styles & Animations */
+        header {
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
             color: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .logo-container img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid #fff;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+            animation: float 3s ease-in-out infinite;
+            margin-bottom: 15px;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .institute-name {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 5px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .eiin {
+            font-size: 16px;
+            color: #d1d8e0;
+            margin-bottom: 15px;
+            animation: fadeInDown 1.2s ease-out;
+        }
+
+        .portal-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: #f1c40f;
+            margin-bottom: 10px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .subtitle {
+            font-size: 18px;
+            color: #ecf0f1;
+            animation: fadeInUp 1.2s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Main Content & Buttons */
+        main {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .shift-btn {
+            background: white;
+            color: #2c3e50;
             border: none;
-            border-radius: 8px;
-            font-size: 1.25rem;
-            font-weight: bold;
+            padding: 20px 30px;
+            font-size: 20px;
+            font-weight: 600;
+            border-radius: 15px;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
             cursor: pointer;
-            margin-top: 40px;
-            transition: background-color 0.2s;
-            box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);
-        }
-        .submit-btn:hover {
-            background-color: #1d4ed8;
-        }
-        .correct-answer {
-            background-color: var(--correct-bg) !important;
-            border-color: var(--correct-border) !important;
-            color: #166534;
-            font-weight: bold;
-        }
-        .wrong-answer {
-            background-color: var(--wrong-bg) !important;
-            border-color: var(--wrong-border) !important;
-            color: #991b1b;
-        }
-        /* Modal Styles */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 999;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
             align-items: center;
             justify-content: center;
         }
-        .modal-content {
-            background: white;
-            padding: 40px;
-            border-radius: 16px;
-            text-align: center;
-            max-width: 400px;
-            width: 90%;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+
+        .shift-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(44, 83, 100, 0.1), transparent);
+            transition: all 0.5s ease;
         }
-        .modal-content h2 {
-            margin-top: 0;
-            color: var(--primary-color);
-        }
-        .score-display {
-            font-size: 3rem;
-            font-weight: bold;
-            color: var(--text-main);
-            margin: 20px 0;
-        }
-        .close-btn {
-            padding: 10px 24px;
-            background: var(--text-main);
+
+        .shift-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px rgba(0,0,0,0.15);
+            background: #2c5364;
             color: white;
-            border: none;
-            border-radius: 6px;
-            font-size: 1rem;
-            cursor: pointer;
+        }
+
+        .shift-btn:hover::before {
+            left: 100%;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            text-align: center;
+            padding: 20px;
+            font-size: 15px;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 600px) {
+            .institute-name { font-size: 22px; }
+            .portal-title { font-size: 18px; }
+            .subtitle { font-size: 16px; }
+            .logo-container img { width: 80px; height: 80px; }
+            .shift-btn { font-size: 18px; padding: 15px 20px; }
+            .button-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="header">
-        <h1>জীববিজ্ঞান বহুনির্বাচনি অভীক্ষা</h1>
-        <p>সঠিক উত্তরটি নির্বাচন করে শেষে 'Submit Exam' বাটনে ক্লিক করুন।</p>
-    </div>
+    <header>
+        <div class="logo-container">
+            <!-- Google Drive image direct view link -->
+            <img src="https://drive.google.com/uc?export=view&id=1ZmxR46CCr7Ge5UntTMM_TbTeMJfdiqTD" alt="Institute Logo">
+        </div>
+        <h1 class="institute-name">ইবনে তাইমিয়া স্কুল এন্ড কলেজ</h1>
+        <p class="eiin">EIIN-105751</p>
+        
+        <h2 class="portal-title">টেকনিক্যাল সাপোর্ট পোর্টাল</h2>
+        <p class="subtitle">এসএসসি নির্বাচনি পরিক্ষা-২০২৬ ডিউটি রোস্টার</p>
+    </header>
 
-    <form id="examForm">
-        <div id="quizContainer"></div>
-        <button type="button" class="submit-btn" onclick="submitExam()">Submit Exam</button>
-    </form>
-</div>
+    <main>
+        <div class="button-grid">
+            <button class="shift-btn" onclick="alert('জবা শিফটের রুটিন লোড হচ্ছে...')">১। জবা শিফট</button>
+            <button class="shift-btn" onclick="alert('শাপলা শিফটের রুটিন লোড হচ্ছে...')">২। শাপলা শিফট</button>
+            <button class="shift-btn" onclick="alert('বেলি শিফটের রুটিন লোড হচ্ছে...')">৩। বেলি শিফট</button>
+            <button class="shift-btn" onclick="alert('বকুল শিফটের রুটিন লোড হচ্ছে...')">৪। বকুল শিফট</button>
+        </div>
+    </main>
 
-<!-- Result Modal -->
-<div class="modal-overlay" id="resultModal">
-    <div class="modal-content">
-        <h2>পরীক্ষা সম্পন্ন!</h2>
-        <p>আপনার প্রাপ্ত নম্বর:</p>
-        <div class="score-display"><span id="scoreValue">0</span> / <span id="totalQuestions">0</span></div>
-        <p style="margin-bottom: 24px; color: var(--text-muted);">সঠিক উত্তরগুলো সবুজ এবং ভুল উত্তরগুলো লাল রঙে চিহ্নিত করা হয়েছে।</p>
-        <button class="close-btn" onclick="closeModal()">উত্তরমালা দেখুন</button>
-    </div>
-</div>
-
-<script>
-    const examData = [
-        {
-            set: "সেট–১: কোষ বিভাজন",
-            questions: [
-                { q: "১. অ্যাস্টার-রে বিস্তৃত হয় কোন ধাপে?", options: ["ক) প্রোফেজ", "খ) মেটাফেজ", "গ) প্রো-মেটাফেজ", "ঘ) অ্যানাফেজ"], ans: 2 },
-                { q: "২. কোন ধাপে বায়ুপ্রবাহ অনুসরণীয় হয়?", options: ["ক) মেটাফেজ", "খ) অ্যানাফেজ", "গ) টেলোফেজ", "ঘ) প্রোফেজ"], ans: 1 },
-                { q: "৩. মিয়োসিস কোষ বিভাজনে—<br>i. ক্রোমোজোম সংখ্যার পরিবর্তন ঘটে<br>ii. হ্যাপ্লয়েড সংখ্যক গ্যামেট তৈরি হয়<br>iii. জীবের দৈহিক বৃদ্ধি ঘটে<br>নিচের কোনটি সঠিক?", options: ["ক) i ও ii", "খ) i ও iii", "গ) ii ও iii", "ঘ) i, ii ও iii"], ans: 0 },
-                { q: "৪. সাইটোকাইনেসিসের পূর্বে কোনটি ঘটে?", options: ["ক) প্রোফেজ", "খ) মেটাফেজ", "গ) টেলোফেজ", "ঘ) ইন্টারফেজ"], ans: 2 },
-                { q: "৫. কোন ধাপে নিউক্লিয়াস আকারে বড়ো হয়?", options: ["ক) প্রোফেজ", "খ) মেটাফেজ", "গ) অ্যানাফেজ", "ঘ) টেলোফেজ"], ans: 0 },
-                { q: "৬. নিচের কোনটিতে মিয়োসিস ঘটে?", options: ["ক) ভ্রূণ-মুকুল", "খ) বর্ধনশীল পাতা", "গ) মূলের অগ্রভাগ", "ঘ) উদ্ভিদের পরাগধানী"], ans: 3 },
-                { q: "৭. জিনের আদান-প্রদান ঘটে কোন বিভাজনের মাধ্যমে?", options: ["ক) মাইটোসিস", "খ) মিয়োসিস", "গ) অ্যামাইটোসিস", "ঘ) দ্বি-বিভাজন"], ans: 1 },
-                { q: "১০. নিয়ন্ত্রণহীন কোষ বিভাজনের ফল কোনটি?", options: ["ক) অর্বুদ", "খ) আলসার", "গ) নিউমোনিয়া", "ঘ) যক্ষ্মা"], ans: 0 },
-                { q: "১১. জননকোষের সংখ্যা বৃদ্ধি পায় কোন বিভাজনের কারণে?", options: ["ক) মিয়োসিস", "খ) মাইটোসিস", "গ) অ্যামাইটোসিস", "ঘ) ক্যারিওকাইনেসিস"], ans: 1 },
-                { q: "১২. কোনটিতে মিয়োসিস কোষ বিভাজন ঘটে?", options: ["ক) ডিম্বাণুতে", "খ) শস্য কোষে", "গ) পরাগধানীতে", "ঘ) জেনারেটিভ কোষে"], ans: 2 },
-                { q: "১৩. অনিয়ন্ত্রিত মাইটোসিস বিভাজনের ফলে—<br>i. জরায়ুমুখে টিউমার সৃষ্টি হয়<br>ii. ক্যান্সার কোষ সৃষ্টি হয়<br>iii. উদ্ভিদদেহে অর্বুদ সৃষ্টি হয়<br>নিচের কোনটি সঠিক?", options: ["ক) i ও ii", "খ) i ও iii", "গ) ii ও iii", "ঘ) i, ii ও iii"], ans: 3 },
-                { q: "১৪. নিচের কোন ভাইরাস ক্যান্সার কোষ সৃষ্টিতে সহায়তা করে?", options: ["ক) HIV", "খ) প্যাপিলোমা", "গ) র‍্যাবিস", "ঘ) রুবিওলা"], ans: 1 },
-                { q: "১৫. অ্যানাফেজ ধাপের L আকৃতির ক্রোমোজোমকে কী বলে?", options: ["ক) মেটাসেন্ট্রিক", "খ) সাবমেটাসেন্ট্রিক", "গ) অ্যাক্রোসেন্ট্রিক", "ঘ) টেলোসেন্ট্রিক"], ans: 1 },
-                { q: "১৬. কোষ বিভাজনের কোন পর্যায়ে ক্রোমোজোমের সেন্ট্রোমিয়ারগুলো দুভাগে বিভক্ত হয়?", options: ["ক) প্রোফেজ", "খ) মেটাফেজ", "গ) টেলোফেজ", "ঘ) অ্যানাফেজ"], ans: 3 },
-                { q: "১৭. অ্যাক্রোসেন্ট্রিক ক্রোমোজোমের আকৃতি কোনটি?", options: ["ক) V", "খ) J", "গ) L", "ঘ) I"], ans: 1 },
-                { q: "১৮. প্রো-মেটাফেজ দশায়—<br>i. দুই মেরুবিশিষ্ট স্পিন্ডল যন্ত্র সৃষ্টি হয়<br>ii. ক্রোমোজোমগুলোতে পানি যোজন শুরু হয়<br>iii. নিউক্লিওলাসের বিলুপ্তি ঘটতে থাকে<br>নিচের কোনটি সঠিক?", options: ["ক) i ও ii", "খ) i ও iii", "গ) ii ও iii", "ঘ) i, ii ও iii"], ans: 1 },
-                { q: "২১. সাইটোকাইনেসিসের পরে কোনটি ঘটে?", options: ["ক) প্রোফেজ", "খ) ইন্টারফেজ", "গ) মেটাফেজ", "ঘ) টেলোফেজ"], ans: 1 },
-                { q: "২২. স্পিন্ডল যন্ত্র সৃষ্টি হয় কোন ধাপে?", options: ["ক) প্রোফেজ", "খ) প্রো-মেটাফেজ", "গ) মেটাফেজ", "ঘ) টেলোফেজ"], ans: 1 },
-                { q: "২৩. মাইটোসিসের কোন ধাপে সেন্ট্রোমিয়ারের বিভাজন শুরু হয়?", options: ["ক) প্রোফেজ", "খ) প্রো-মেটাফেজ", "গ) মেটাফেজ", "ঘ) অ্যানাফেজ"], ans: 3 },
-                { q: "২৪. মাইটোসিস বিভাজনের ফলে—<br>i. ক্রোমোজোমের সংখ্যা একই থাকে<br>ii. নিউক্লিয়াস দুইবার বিভাজিত হয়<br>iii. ক্ষতস্থানে নতুন কোষ সৃষ্টি হয়<br>নিচের কোনটি সঠিক?", options: ["ক) i ও ii", "খ) ii ও iii", "গ) i ও iii", "ঘ) i, ii ও iii"], ans: 2 },
-                { q: "২৫. অনিয়ন্ত্রিত কোষ বিভাজনের ফল কোনটি?", options: ["ক) এইডস", "খ) গয়টার", "গ) রক্তশূন্যতা", "ঘ) ক্যান্সার"], ans: 3 }
-            ]
-        },
-        {
-            set: "সেট–২: জীবজগতের শ্রেণিবিন্যাস",
-            questions: [
-                { q: "১. প্রকৃতি বিজ্ঞানের প্রাচীনতম শাখা কোনটি?", options: ["ক) জীববিজ্ঞান", "খ) কৃষিবিজ্ঞান", "গ) বনবিজ্ঞান", "ঘ) সমুদ্রবিজ্ঞান"], ans: 0 },
-                { q: "২. ক্যান্সার নির্ণায়ক বিদ্যা কোন শাখার অন্তর্ভুক্ত?", options: ["ক) ফার্মেসি", "খ) জীবপ্রযুক্তি", "গ) বায়োইনফরমেটিক্স", "ঘ) অণুজীববিজ্ঞান"], ans: 1 },
-                { q: "৩. কোনটি ভৌত বিজ্ঞানের অন্তর্ভুক্ত?", options: ["ক) Morphology", "খ) Entomology", "গ) Palaeontology", "ঘ) Biochemistry"], ans: 3 },
-                { q: "৬. শারীরবিদ্যার আলোচ্য বিষয় কোনটি?", options: ["ক) জীবের বিবর্তন", "খ) সালোকসংশ্লেষণ", "গ) উদ্ভিদের বিকাশ", "ঘ) টিস্যুর বিন্যাস"], ans: 1 },
-                { q: "৭. ভ্রূণবিদ্যায় আলোচনার বিষয় হলো—<br>i. পৃথিবীতে প্রাণের বিকাশ<br>ii. জনন কোষের উৎপত্তি<br>iii. ভ্রূণের পরিস্ফুটন<br>নিচের কোনটি সঠিক?", options: ["ক) i ও ii", "খ) i ও iii", "গ) ii ও iii", "ঘ) i, ii ও iii"], ans: 2 },
-                { q: "৮. ফলিত জীববিজ্ঞানের শাখা কোনটি?", options: ["ক) হিস্টোলজি", "খ) ভ্রূণবিদ্যা", "গ) বাস্তুবিদ্যা", "ঘ) কীটতত্ত্ব"], ans: 3 },
-                { q: "৯. ব্যাকটেরিয়ার রাজ্য কোনটি?", options: ["ক) মনেরা", "খ) প্রোটিস্টা", "গ) ফানজাই", "ঘ) প্লানটি"], ans: 0 },
-                { q: "১০. ডায়াটম কোন রাজ্যের জীব?", options: ["ক) মনেরা", "খ) প্রোটিস্টা", "গ) ফানজাই", "ঘ) প্লানটি"], ans: 1 },
-                { q: "১১. কনজুগেশনের মাধ্যমে কোন জীবে যৌন জনন ঘটে?", options: ["ক) শৈবাল", "খ) পেনিসিলিয়াম", "গ) ইস্ট", "ঘ) ব্যাকটেরিয়া"], ans: 3 },
-                { q: "১২. প্রোটিস্টা রাজ্যের জীবের ক্ষেত্রে প্রজননের পদ্ধতি হলো—<br>i. কনজুগেশন<br>ii. মাইটোসিস<br>iii. মিয়োসিস<br>নিচের কোনটি সঠিক?", options: ["ক) i ও ii", "খ) i ও iii", "গ) ii ও iii", "ঘ) i, ii ও iii"], ans: 3 },
-                { q: "১৩. নীলাভ সবুজ শৈবাল কোন রাজ্যের অন্তর্ভুক্ত?", options: ["ক) মনেরা", "খ) প্রোটিস্টা", "গ) ফানজাই", "ঘ) অ্যানিমেলিয়া"], ans: 0 },
-                { q: "১৪. উদ্ভিদের ক্ষেত্রে দ্বিপদ নামকরণ পদ্ধতি কোনটি?", options: ["ক) ICZN", "খ) IMVN", "গ) IMCB", "ঘ) ICBN"], ans: 3 },
-                { q: "১৫. কোন রাজ্যটি সম্পূর্ণ উদ্ভিদবিশিষ্ট?", options: ["ক) প্লানটি", "খ) ফানজাই", "গ) মনেরা", "ঘ) প্রোটিস্টা"], ans: 0 },
-                { q: "১৮. কোন প্রাণী বুদ্ধিবৃত্তিকভাবে উন্নত?", options: ["ক) গরিলা", "খ) মানুষ", "গ) শিম্পাঞ্জি", "ঘ) বানর"], ans: 1 },
-                { q: "১৯. জীবজগতকে ছয়টি রাজ্যে ভাগ করেন কে?", options: ["ক) ক্যারোলাস লিনিয়াস", "খ) আর. এইচ. হুইটেকার", "গ) মারগুলিস", "ঘ) টমাস ক্যাভালিয়ার-স্মিথ"], ans: 3 },
-                { q: "২০. মনেরার বৈশিষ্ট্য হলো—<br>i. এরা এককোষী, ফিলামেন্টাস<br>ii. এদের নিউক্লিওলাস ও নিউক্লিয়ার পর্দা আছে<br>iii. এরা প্রধানত শোষণ পদ্ধতিতে খাদ্যগ্রহণ করে<br>নিচের কোনটি সঠিক?", options: ["ক) i ও ii", "খ) i ও iii", "গ) ii ও iii", "ঘ) i, ii ও iii"], ans: 1 },
-                { q: "২১. কোন রাজ্যের জীবের দেহে জটিল টিস্যুতন্ত্র থাকে?", options: ["ক) প্রোটিস্টা", "খ) ফানজাই", "গ) মনেরা", "ঘ) অ্যানিমেলিয়া"], ans: 3 },
-                { q: "২২. কোনটি ফলিত জীববিজ্ঞানের শাখা?<br>i. বংশগতিবিদ্যা<br>ii. জিন প্রযুক্তি<br>iii. বাস্তুবিদ্যা<br>নিচের কোনটি সঠিক?", options: ["ক) i", "খ) ii", "গ) i ও ii", "ঘ) i, ii ও iii"], ans: 1 },
-                { q: "২৩. মাশরুমের কোষপ্রাচীর কী দ্বারা গঠিত?", options: ["ক) লিপিড", "খ) লিগনিন", "গ) পেকটিন", "ঘ) কাইটিন"], ans: 3 },
-                { q: "২৪. Plasmid বহনকারী জীবাণুটি কোন রাজ্যের অন্তর্ভুক্ত?", options: ["ক) মনেরা", "খ) প্রোটিস্টা", "গ) ফানজাই", "ঘ) প্লানটি"], ans: 0 },
-                { q: "২৫. নিচের কোনটি ফলিত জীববিজ্ঞানের অন্তর্ভুক্ত?", options: ["ক) বংশগতিবিদ্যা", "খ) বিবর্তনবিদ্যা", "গ) সামুদ্রিক জীববিজ্ঞান", "ঘ) জীবভূগোল"], ans: 2 }
-            ]
-        },
-        {
-            set: "সেট–৩: মিয়োসিস",
-            questions: [
-                { q: "৬৬. প্যাপিলোমা ভাইরাসের কোন দুইটি জিন ক্যান্সার তৈরির জন্য দায়ী?", options: ["ক) E₄ ও E₅", "খ) E₅ ও E₆", "গ) E₆ ও E₇", "ঘ) E₇ ও E₈"], ans: 2 },
-                { q: "৬৭. কোলনের একটি অংশের কোষগুলোর অস্বাভাবিক বৃদ্ধির জন্য কোন ভাইরাস দায়ী?", options: ["ক) এইচআইভি", "খ) রোটা", "গ) হেপাটাইটিস বি", "ঘ) প্যাপিলোমা"], ans: 3 },
-                { q: "৬৯. ক্যান্সার কোষ সৃষ্টিতে সহায়তা করে—<br>i. রোগজীবাণু<br>ii. রাসায়নিক পদার্থ<br>iii. তেজস্ক্রিয়তা<br>নিচের কোনটি সঠিক?", options: ["ক) i ও ii", "খ) i ও iii", "গ) ii ও iii", "ঘ) i, ii ও iii"], ans: 3 },
-                { q: "৭০. অনিয়ন্ত্রিত মাইটোসিস বিভাজনের ফলে—<br>i. জরায়ুমুখে টিউমার সৃষ্টি হয়<br>ii. ক্যান্সার কোষ সৃষ্টি হয়<br>iii. উদ্ভিদদেহে অর্বুদ সৃষ্টি হয়<br>নিচের কোনটি সঠিক?", options: ["ক) i ও ii", "খ) i ও iii", "গ) ii ও iii", "ঘ) i, ii ও iii"], ans: 3 },
-                { q: "৭১. মিয়োসিস বিভাজনে নিউক্লিয়াস কয়বার বিভাজিত হয়?", options: ["ক) পাঁচ", "খ) চার", "গ) তিন", "ঘ) দুই"], ans: 3 },
-                { q: "৭২. মিয়োসিস কোষ বিভাজনের মাধ্যমে কোনটি ঘটে?", options: ["ক) জীবের ক্ষতস্থান পূরণ হয়", "খ) প্রজাতিতে বৈচিত্র্যের সৃষ্টি হয়", "গ) টিউমার ও ক্যান্সার হতে পারে", "ঘ) অপত্য কোষে ক্রোমোজোম সংখ্যা সমান থাকে"], ans: 1 },
-                { q: "৭৩. মানবদেহে মিয়োসিস কোষ বিভাজনে প্রতিটি অপত্য কোষে কতটি ক্রোমোজোম থাকে?", options: ["ক) ২১টি", "খ) ২২টি", "গ) ২৩টি", "ঘ) ২৪টি"], ans: 2 },
-                { q: "৭৪. কোন কোষ বিভাজন প্রক্রিয়ায় DNA-এর পরিমাণ অর্ধেক হয়ে যায়?", options: ["ক) মিয়োসিস", "খ) মাইটোসিস", "গ) অ্যামাইটোসিস", "ঘ) মাইটোকাইনেসিস"], ans: 0 },
-                { q: "৭৫. হ্যাপ্লয়েড উদ্ভিদের কোথায় মিয়োসিস ঘটে?", options: ["ক) জাইগোটে", "খ) দেহকোষে", "গ) জননকোষে", "ঘ) মুকুলে"], ans: 0 },
-                { q: "৭৬. মিয়োসিসের গুরুত্ব কী?", options: ["ক) উদ্ভিদের বৃদ্ধি", "খ) ক্রোমোজোমের সংখ্যা ঠিক রাখা", "গ) জীবের ক্ষতস্থান পূরণ", "ঘ) জননকোষ সৃষ্টি"], ans: 1 },
-                { q: "৭৭. নিচের কোনটিতে মিয়োসিস ঘটে?", options: ["ক) ভ্রূণ-মুকুল", "খ) বর্ধনশীল পাতা", "গ) মূলের অগ্রভাগ", "ঘ) উদ্ভিদের পরাগধানী"], ans: 3 },
-                { q: "৭৮. নিচের কোন উদ্ভিদের জাইগোটে মিয়োসিস ঘটে?", options: ["ক) মাশরুম", "খ) নীটাম", "গ) জোয়ালোবা", "ঘ) ফার্ন"], ans: 3 },
-                { q: "৭৯. মিয়োসিস ঘটে সপুষ্পক উদ্ভিদের কোন অংশে?", options: ["ক) কাণ্ডে", "খ) ভ্রূণমূলে", "গ) মূলকোষে", "ঘ) পরাগধানীতে"], ans: 3 },
-                { q: "৮০. মিয়োসিস কোথায় ঘটে? অথবা, কোনটিতে মিয়োসিস কোষ বিভাজন ঘটে?", options: ["ক) ডিম্বাণুতে", "খ) দেহকোষে", "গ) পরাগধানীতে", "ঘ) জেনারেটিভ কোষে"], ans: 2 },
-                { q: "৮১. মিয়োসিস কোষ বিভাজনের দ্বিতীয় বিভাজনটি কোনটির অনুরূপ?", options: ["ক) মাইটোসিস", "খ) মাইটোসিস–১", "গ) মিয়োসিস–১", "ঘ) মিয়োসিস–২"], ans: 0 },
-                { q: "৮২. “ক্রোমোজোম সংখ্যা বেড়ে গিয়ে নতুন প্রজাতি উদ্ভব”— কোনটির বাঞ্ছনীয় ঘটনা?", options: ["ক) শৈবাল", "খ) আলু", "গ) মাশরুম", "ঘ) অ্যামিবা"], ans: 1 }
-            ]
-        },
-        {
-            set: "সেট–৪: ফানজাই, প্রোটিস্টা ও প্লানটি",
-            questions: [
-                { q: "৭৬. নিচের কোনটি ক্রোমাটিন বস্তুতে DNA, RNA ও প্রোটিন থাকে?", options: ["ক) মনেরা", "খ) প্রোটিস্টা", "গ) ফানজাই", "ঘ) প্লানটি"], ans: 1 },
-                { q: "৭৭. কনজুগেশনের মাধ্যমে কোন জীবে যৌন জনন ঘটে?", options: ["ক) শৈবাল", "খ) পেনিসিলিয়াম", "গ) ইস্ট", "ঘ) ব্যাকটেরিয়া"], ans: 3 },
-                { q: "৭৮. কোনটি প্রোটিস্টার উদাহরণ?", options: ["ক) ব্যাকটেরিয়া", "খ) প্যারামেসিয়াম", "গ) মাশরুম", "ঘ) পেনিসিলিয়াম"], ans: 1 },
-                { q: "৭۹. Paramecium কোন রাজ্যের জীব?", options: ["ক) মনেরা", "খ) প্রোটিস্টা", "গ) ফানজাই", "ঘ) প্লানটি"], ans: 1 },
-                { q: "৮০. ডায়াটম কোন রাজ্যের জীব?", options: ["ক) মনেরা", "খ) প্রোটিস্টা", "গ) ফানজাই", "ঘ) প্লানটি"], ans: 1 },
-                { q: "৮১. নিচের কোনটিতে সালোকসংশ্লেষণ হয়?", options: ["ক) অ্যামিবা", "খ) হাইড্রা", "গ) ইস্ট", "ঘ) ডায়াটম"], ans: 3 },
-                { q: "৮২. ফানজাই-এর ক্ষেত্রে প্রযোজ্য—", options: ["ক) এরা প্রধানত মৃতজীবী", "খ) কোষপ্রাচীর সেলুলোজ নির্মিত", "গ) নিজ ক্ষমতায় নড়াচড়া করতে পারে", "ঘ) এদের জননাঙ্গ বহুকোষী"], ans: 0 },
-                { q: "৮৩. কোন জীবটি শোষণ পদ্ধতিতে খাদ্য গ্রহণ করে?", options: ["ক) মস", "খ) মাশরুম", "গ) কাঁঠাল গাছ", "ঘ) সবুজ শৈবাল"], ans: 1 },
-                { q: "৮৪. কোনটি Penicillium-এর কোষপ্রাচীর তৈরি করে?", options: ["ক) প্রোটিন", "খ) লিপিড", "গ) সুবেরিন", "ঘ) কাইটিন"], ans: 3 },
-                { q: "৮৫. নিচের কোনটিতে স্পোর দিয়ে বংশবৃদ্ধি হয়?", options: ["ক) প্যারামেসিয়াম", "খ) ডায়াটম", "গ) পেনিসিলিয়াম", "ঘ) নীলাভ সবুজ শৈবাল"], ans: 2 },
-                { q: "৮৬. মৃতজীবী বা পরজীবীদের স্থান দেওয়া হয়েছে কোন রাজ্যে?", options: ["ক) মনেরা", "খ) প্রোটিস্টা", "গ) ফানজাই", "ঘ) অ্যানিমেলিয়া"], ans: 2 },
-                { q: "৮৭. নিচের কোনটির দেহ মাইসেলিয়াম দ্বারা গঠিত?", options: ["ক) ব্যাকটেরিয়া", "খ) প্যারামেসিয়াম", "গ) মাশরুম", "ঘ) ডায়াটম"], ans: 2 },
-                { q: "৮৮. কোনটি Penicillium-এর কোষপ্রাচীর তৈরি করে? (পুনরাবৃত্তি)", options: ["ক) প্রোটিন", "খ) লিপিড", "গ) সুবেরিন", "ঘ) কাইটিন"], ans: 3 },
-                { q: "৮৯. কোনটির কোষপ্রাচীর কাইটিন দিয়ে গঠিত?", options: ["ক) ইস্ট", "খ) ডায়াটম", "গ) ব্যাকটেরিয়া", "ঘ) প্যারামেসিয়াম"], ans: 0 },
-                { q: "৯০. ছত্রাকের কোষপ্রাচীর কোনটি দ্বারা গঠিত?", options: ["ক) লিগনিন", "খ) কাইটিন", "গ) পেকটিন", "ঘ) সুবেরিন"], ans: 1 },
-                { q: "৯১. মাশরুমের কোষপ্রাচীর কী দ্বারা গঠিত?", options: ["ক) লিপিড", "খ) লিগনিন", "গ) পেকটিন", "ঘ) কাইটিন"], ans: 3 },
-                { q: "৯২. ইস্ট-এর খাদ্য গ্রহণ পদ্ধতি নিচের কোনটি?", options: ["ক) ব্যাপন", "খ) শোষণ", "গ) সালোকসংশ্লেষণ", "ঘ) কেমোসিন্থেসিস"], ans: 1 },
-                { q: "৯৩. কোনটির হ্যাপ্লয়েড স্পোর দিয়ে বংশবৃদ্ধি ঘটে?", options: ["ক) ডায়াটম", "খ) প্যারামেসিয়াম", "গ) নীলাভ সবুজ শৈবাল", "ঘ) মাশরুম"], ans: 3 },
-                { q: "৯৪. ফানজাই রাজ্যের জীব কোনটি?", options: ["ক) মাশরুম", "খ) অ্যামিবা", "গ) প্যারামেসিয়াম", "ঘ) নীলাভ সবুজ শৈবাল"], ans: 0 },
-                { q: "৯৫. হ্যাপ্লয়েড রেণু উৎপন্ন হয় কোনটিতে?", options: ["ক) প্যারামেসিয়াম", "খ) অ্যামিবা", "গ) মাশরুম", "ঘ) ডায়াটম"], ans: 2 },
-                { q: "৯৬. নিচের কোনটি স্বভোজী?", options: ["ক) এগারিকাস", "খ) আমগাছ", "গ) স্বর্ণলতা", "ঘ) TMV"], ans: 1 }
-            ]
-        }
-    ];
-
-    let totalQuestionsCount = 0;
-    const container = document.getElementById('quizContainer');
-
-    // Render HTML Questions dynamically
-    examData.forEach((section, setIndex) => {
-        const setTitle = document.createElement('div');
-        setTitle.className = 'set-title';
-        setTitle.textContent = section.set;
-        container.appendChild(setTitle);
-
-        section.questions.forEach((qData, qIndex) => {
-            totalQuestionsCount++;
-            const globalQIndex = `${setIndex}_${qIndex}`;
-            
-            const card = document.createElement('div');
-            card.className = 'question-card';
-            
-            const qText = document.createElement('div');
-            qText.className = 'question-text';
-            qText.innerHTML = qData.q;
-            card.appendChild(qText);
-
-            const optionsGrid = document.createElement('div');
-            optionsGrid.className = 'options-grid';
-
-            qData.options.forEach((optText, optIndex) => {
-                const label = document.createElement('label');
-                label.className = 'option-label';
-                label.id = `label_${globalQIndex}_${optIndex}`;
-                
-                const radio = document.createElement('input');
-                radio.type = 'radio';
-                radio.name = `q_${globalQIndex}`;
-                radio.value = optIndex;
-                
-                label.appendChild(radio);
-                label.appendChild(document.createTextNode(optText));
-                optionsGrid.appendChild(label);
-            });
-            
-            card.appendChild(optionsGrid);
-            container.appendChild(card);
-        });
-    });
-
-    document.getElementById('totalQuestions').textContent = totalQuestionsCount;
-
-    function submitExam() {
-        let score = 0;
-
-        examData.forEach((section, setIndex) => {
-            section.questions.forEach((qData, qIndex) => {
-                const globalQIndex = `${setIndex}_${qIndex}`;
-                const radios = document.getElementsByName(`q_${globalQIndex}`);
-                let answered = false;
-
-                radios.forEach(radio => {
-                    const val = parseInt(radio.value);
-                    const label = document.getElementById(`label_${globalQIndex}_${val}`);
-                    
-                    // Reset styling
-                    label.classList.remove('correct-answer', 'wrong-answer');
-                    radio.disabled = true; // Lock the answer
-
-                    if (radio.checked) {
-                        answered = true;
-                        if (val === qData.ans) {
-                            score++;
-                            label.classList.add('correct-answer');
-                        } else {
-                            label.classList.add('wrong-answer');
-                        }
-                    }
-                });
-
-                // Always highlight the correct answer
-                const correctLabel = document.getElementById(`label_${globalQIndex}_${qData.ans}`);
-                if (correctLabel) correctLabel.classList.add('correct-answer');
-            });
-        });
-
-        // Show Modal with Score
-        document.getElementById('scoreValue').textContent = score;
-        document.getElementById('resultModal').style.display = 'flex';
-    }
-
-    function closeModal() {
-        document.getElementById('resultModal').style.display = 'none';
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-</script>
+    <footer>
+        সার্বিক তত্বাবধানে: জবা শিফট, ইবনে তাইমিয়া স্কুল এন্ড কলেজ।
+    </footer>
 
 </body>
 </html>
