@@ -153,7 +153,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(0, 0, 0, 0.7);
             display: none;
             justify-content: center;
             align-items: center;
@@ -162,10 +162,10 @@
 
         .modal-content {
             background: white;
-            padding: 30px;
+            padding: 30px 20px;
             border-radius: 20px;
             text-align: center;
-            max-width: 400px;
+            max-width: 450px;
             width: 90%;
             position: relative;
             animation: scaleIn 0.3s ease-out;
@@ -179,7 +179,7 @@
 
         .close-btn {
             position: absolute;
-            top: 15px;
+            top: 10px;
             right: 20px;
             font-size: 28px;
             cursor: pointer;
@@ -193,35 +193,67 @@
         }
 
         .modal-text {
-            font-size: 18px;
+            font-size: 16px;
             margin-bottom: 20px;
             margin-top: 10px;
-            color: #2c3e50;
+            color: #34495e;
             font-weight: 600;
             line-height: 1.5;
         }
         
         .shift-name-display {
-            font-size: 20px;
+            font-size: 22px;
             color: #e67e22;
             font-weight: 700;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
             display: block;
         }
 
+        /* Media Container for Preview & QR */
+        .modal-media {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 25px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .media-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .media-title {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .roster-preview {
+            width: 120px;
+            height: 160px;
+            object-fit: cover;
+            object-position: top;
+            border: 2px solid #bdc3c7;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
         .qr-code {
-            width: 180px;
-            height: 180px;
-            margin-bottom: 20px;
-            border: 5px solid #ecf0f1;
-            border-radius: 10px;
+            width: 140px;
+            height: 140px;
+            border: 4px solid #ecf0f1;
+            border-radius: 8px;
         }
 
         .download-btn {
             background: #27ae60;
             color: white;
             text-decoration: none;
-            padding: 12px 30px;
+            padding: 12px 35px;
             font-size: 18px;
             font-weight: bold;
             border-radius: 8px;
@@ -244,17 +276,27 @@
             font-size: 15px;
             border-top-left-radius: 20px;
             border-top-right-radius: 20px;
+            line-height: 1.6;
+        }
+        
+        .footer-highlight {
+            display: inline-block;
+            margin-top: 8px;
+            font-size: 17px;
+            font-weight: 700;
+            color: #f1c40f; /* পোর্টাল টাইটেলের মতো সোনালী রঙ */
+            letter-spacing: 0.5px;
         }
 
         /* Mobile Responsiveness */
         @media (max-width: 600px) {
             .institute-name { font-size: 22px; }
             .portal-title { font-size: 18px; }
-            .subtitle { font-size: 16px; }
             .logo-container img { width: 80px; height: 80px; }
             .shift-btn { font-size: 18px; padding: 15px 20px; }
             .button-grid { grid-template-columns: 1fr; }
-            .modal-text { font-size: 16px; }
+            .modal-media { gap: 15px; }
+            .footer-highlight { font-size: 15px; }
         }
     </style>
 </head>
@@ -273,7 +315,6 @@
 
     <main>
         <div class="button-grid">
-            <!-- বাটনগুলোতে onclick এর মাধ্যমে ফাইলের ID পাঠানো হচ্ছে -->
             <button class="shift-btn" onclick="openModal('জবা শিফট', '15TNLDoXNdDjmZ-5iML4-4jtlSW-ATEr8')">১। জবা শিফট</button>
             <button class="shift-btn" onclick="openModal('শাপলা শিফট', '1pAUbN2XPrfMqpWNZOGKKC5msdc-4y0XM')">২। শাপলা শিফট</button>
             <button class="shift-btn" onclick="openModal('বেলি শিফট', '1Bl-_CmU4gjs7-prGw9am3KNPN_RsdX1S')">৩। বেলি শিফট</button>
@@ -288,39 +329,53 @@
             <span class="shift-name-display" id="shiftNameDisplay"></span>
             <p class="modal-text">রোস্টারটি ডাউনলোড করতে QR Code স্ক্যান করুন অথবা ডাউনলোড বাটনে ক্লিক করুন।</p>
             
-            <!-- QR Code Image (src will be updated by JS) -->
-            <img src="" id="qrCodeImg" alt="QR Code" class="qr-code">
-            <br>
+            <div class="modal-media">
+                <!-- Roster Preview -->
+                <div class="media-box">
+                    <span class="media-title">রোস্টারের প্রিভিউ</span>
+                    <img src="" id="rosterPreviewImg" class="roster-preview" alt="Roster Preview">
+                </div>
+                
+                <!-- QR Code -->
+                <div class="media-box">
+                    <span class="media-title">QR Code স্ক্যান করুন</span>
+                    <img src="" id="qrCodeImg" class="qr-code" alt="QR Code">
+                </div>
+            </div>
             
-            <!-- Download Button (href will be updated by JS) -->
-            <a href="#" id="downloadBtn" class="download-btn" target="_blank">ডাউনলোড</a>
+            <!-- Download Button -->
+            <a href="#" id="downloadBtn" class="download-btn" target="_blank">ডাউনলোড করুন</a>
         </div>
     </div>
 
     <footer>
-        সার্বিক তত্বাবধানে: জবা শিফট, ইবনে তাইমিয়া স্কুল এন্ড কলেজ।
+        সার্বিক তত্বাবধানে: জবা শিফট, ইবনে তাইমিয়া স্কুল এন্ড কলেজ।<br>
+        <span class="footer-highlight">পৃষ্ঠপোষকতায়: ইসরাফিল আলম, ইনচার্জ (জবা শিফট)</span>
     </footer>
 
     <!-- JavaScript for Dynamic Modal -->
     <script>
         function openModal(shiftName, driveFileId) {
-            // পপ-আপের উপাদানগুলো সিলেক্ট করা
             const modal = document.getElementById('qrModal');
             const shiftDisplay = document.getElementById('shiftNameDisplay');
+            const previewImg = document.getElementById('rosterPreviewImg');
             const qrImg = document.getElementById('qrCodeImg');
             const downloadBtn = document.getElementById('downloadBtn');
 
-            // শিফটের নাম সেট করা
+            // Set Shift Name
             shiftDisplay.innerText = shiftName + ' রোস্টার';
 
-            // ডাইনামিক QR Code জেনারেট করা
+            // Set Dynamic Roster Preview (Using Drive Thumbnail API)
+            previewImg.src = `https://drive.google.com/thumbnail?id=${driveFileId}&sz=w400`;
+
+            // Set Dynamic QR Code
             const driveLink = `https://drive.google.com/file/d/${driveFileId}/view?usp=drivesdk`;
             qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(driveLink)}`;
 
-            // ডাইরেক্ট ডাউনলোড লিংক সেট করা
+            // Set Direct Download Link
             downloadBtn.href = `https://drive.google.com/uc?export=download&id=${driveFileId}`;
 
-            // পপ-আপ ওপেন করা
+            // Open Modal
             modal.style.display = 'flex';
         }
 
@@ -328,7 +383,7 @@
             document.getElementById('qrModal').style.display = 'none';
         }
 
-        // পপ-আপের বাইরের অংশে ক্লিক করলে বন্ধ হওয়ার জন্য
+        // Close when clicking outside the modal
         window.onclick = function(event) {
             let modal = document.getElementById('qrModal');
             if (event.target == modal) {
