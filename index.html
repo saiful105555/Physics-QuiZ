@@ -7,6 +7,18 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;600;700&display=swap');
 
+        :root {
+            --primary-bg: #f4f7f6;
+            --text-dark: #1e293b;
+            --border-color: #cbd5e1;
+            --table-header-bg: #1e293b; /* Corporate Dark Slate */
+            --table-header-text: #f8fafc;
+            --row-even: #f8fafc;
+            --row-odd: #ffffff;
+            --row-hover: #e2e8f0;
+            --tick-color: #10b981; /* Professional Green */
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -15,106 +27,83 @@
         }
 
         body {
-            background-color: #f4f7f6;
-            color: #333;
+            background-color: var(--primary-bg);
+            color: var(--text-dark);
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+            padding: 15px;
+            overflow-x: hidden;
         }
 
-        /* Header Styles & Animations */
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 5px;}
+        ::-webkit-scrollbar-thumb { background: #64748b; border-radius: 5px; }
+        ::-webkit-scrollbar-thumb:hover { background: #475569; }
+
+        /* Portal Header */
         header {
             background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
             color: white;
-            padding: 40px 20px;
+            padding: 20px;
             text-align: center;
-            border-bottom-left-radius: 30px;
-            border-bottom-right-radius: 30px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
         }
 
         .logo-container img {
-            width: 100px;
-            height: 100px;
+            width: 90px;
+            height: 90px;
             object-fit: cover;
             border-radius: 50%;
             border: 4px solid #fff;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
-            animation: float 3s ease-in-out infinite;
-            margin-bottom: 15px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+            margin-bottom: 5px;
             background: white;
         }
 
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
-        }
-
         .institute-name {
-            font-size: 28px;
+            font-size: 26px;
             font-weight: 700;
             margin-bottom: 5px;
-            animation: fadeInDown 1s ease-out;
-        }
-
-        .eiin {
-            font-size: 16px;
-            color: #d1d8e0;
-            margin-bottom: 15px;
-            animation: fadeInDown 1.2s ease-out;
+            letter-spacing: 0.5px;
         }
 
         .portal-title {
-            font-size: 22px;
-            font-weight: 600;
-            color: #f1c40f;
-            margin-bottom: 10px;
-            animation: fadeInUp 1s ease-out;
-        }
-
-        .subtitle {
             font-size: 18px;
-            color: #ecf0f1;
-            animation: fadeInUp 1.2s ease-out;
+            font-weight: 700;
+            color: #f1c40f;
+            margin-bottom: 5px;
         }
 
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Main Content & Buttons */
+        /* Main Buttons */
         main {
             flex-grow: 1;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 40px 20px;
+            padding: 30px 20px;
         }
 
         .button-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 20px;
             width: 100%;
-            max-width: 800px;
+            max-width: 900px;
         }
 
         .shift-btn {
-            background: white;
-            color: #2c3e50;
-            border: none;
+            background: linear-gradient(145deg, #ffffff, #f1f5f9);
+            color: #1e293b;
+            border: 1px solid #e2e8f0;
             padding: 20px 30px;
             font-size: 20px;
-            font-weight: 600;
-            border-radius: 15px;
-            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+            font-weight: 700;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
             cursor: pointer;
             transition: all 0.3s ease;
             position: relative;
@@ -124,92 +113,73 @@
             justify-content: center;
         }
 
-        .shift-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(44, 83, 100, 0.1), transparent);
-            transition: all 0.5s ease;
-        }
-
         .shift-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 25px rgba(0,0,0,0.15);
-            background: #2c5364;
-            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            color: #0f2027;
+            border-color: #cbd5e1;
         }
 
-        .shift-btn:hover::before {
-            left: 100%;
-        }
-
-        /* Modal Styles */
+        /* =========================================
+           MODAL OVERLAY (COMMON)
+           ========================================= */
         .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(8px);
             display: none;
             justify-content: center;
             align-items: center;
             z-index: 1000;
-        }
-
-        .modal-content {
-            background: white;
-            padding: 30px 20px;
-            border-radius: 20px;
-            text-align: center;
-            max-width: 450px;
-            width: 90%;
-            position: relative;
-            animation: scaleIn 0.3s ease-out;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-        }
-
-        @keyframes scaleIn {
-            from { transform: scale(0.8); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
+            padding: 15px;
         }
 
         .close-btn {
             position: absolute;
             top: 10px;
             right: 20px;
-            font-size: 28px;
+            font-size: 35px;
             cursor: pointer;
-            color: #e74c3c;
+            color: #ef4444;
             font-weight: bold;
             transition: color 0.3s ease;
+            z-index: 100;
         }
 
-        .close-btn:hover {
-            color: #c0392b;
+        .close-btn:hover { color: #b91c1c; }
+
+        @keyframes popIn {
+            from { transform: scale(0.95); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
         }
 
-        .modal-text {
-            font-size: 16px;
-            margin-bottom: 20px;
-            margin-top: 10px;
-            color: #34495e;
-            font-weight: 600;
-            line-height: 1.5;
+        /* =========================================
+           SMALL MODAL (Demo shifts)
+           ========================================= */
+        .small-modal-content {
+            background: white;
+            padding: 30px 20px;
+            border-radius: 15px;
+            text-align: center;
+            max-width: 450px;
+            width: 90%;
+            position: relative;
+            animation: popIn 0.3s ease-out forwards;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
         }
-        
-        .shift-name-display {
+
+        .small-shift-name {
             font-size: 22px;
-            color: #e67e22;
+            color: #d97706;
             font-weight: 700;
             margin-bottom: 5px;
             display: block;
         }
 
-        /* Media Container for Preview & QR */
         .modal-media {
             display: flex;
             justify-content: center;
@@ -227,7 +197,7 @@
 
         .media-title {
             font-size: 14px;
-            color: #7f8c8d;
+            color: #64748b;
             margin-bottom: 8px;
             font-weight: 600;
         }
@@ -237,66 +207,321 @@
             height: 160px;
             object-fit: cover;
             object-position: top;
-            border: 2px solid #bdc3c7;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
         }
 
-        .qr-code {
+        .small-qr-code {
             width: 140px;
             height: 140px;
-            border: 4px solid #ecf0f1;
+            border: 2px solid #e2e8f0;
             border-radius: 8px;
+            padding: 4px;
+        }
+
+        /* =========================================
+           LARGE MODAL (PROFESSIONAL ROSTER VIEW)
+           ========================================= */
+        .large-modal-content {
+            background: #f8fafc; /* Professional light slate background */
+            border-radius: 16px;
+            padding: 20px;
+            width: 100%;
+            height: 96vh; 
+            max-width: 1500px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            animation: popIn 0.3s ease-out forwards;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            border: 1px solid #e2e8f0;
+        }
+
+        .modal-header-container {
+            text-align: center;
+            margin-bottom: 10px;
+            flex-shrink: 0;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+        }
+
+        .large-shift-name {
+            font-size: 26px;
+            font-weight: 800;
+            color: #0f172a; /* Solid dark color */
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .time-info {
+            font-size: 14px;
+            font-weight: 600;
+            color: #b91c1c;
+            margin-top: 5px;
+            display: block;
+        }
+
+        /* PROFESSIONAL TABLE CONTAINER */
+        .pro-roster-container {
+            flex-grow: 1;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 10px;
+            overflow-y: auto; 
+            overflow-x: auto;
+            border: 1px solid #cbd5e1;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            margin-top: 10px;
+        }
+
+        .pro-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            font-size: 15px;
+            min-width: 1100px;
+        }
+
+        /* Table Headers */
+        .pro-table th {
+            background: var(--table-header-bg);
+            color: var(--table-header-text);
+            padding: 12px 8px;
+            font-weight: 700;
+            text-align: center;
+            border-bottom: 2px solid #0f172a;
+            border-right: 1px solid #334155;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            white-space: nowrap;
+            letter-spacing: 0.5px;
+        }
+
+        /* Table Data Cells */
+        .pro-table td {
+            padding: 10px 8px;
+            text-align: center;
+            color: #334155;
+            font-weight: 600;
+            border-bottom: 1px solid #e2e8f0;
+            border-right: 1px solid #e2e8f0;
+            transition: background-color 0.2s;
+        }
+
+        /* Zebra Striping */
+        .pro-table tbody tr:nth-child(odd) td { background: var(--row-odd); }
+        .pro-table tbody tr:nth-child(even) td { background: var(--row-even); }
+
+        /* Row Hover Effect - Subtle & Professional */
+        .pro-table tbody tr:hover td {
+            background: var(--row-hover);
+            color: #0f172a;
+        }
+
+        /* Sticky Columns */
+        .pro-table td.sticky-col-1, .pro-table th.sticky-col-1 {
+            position: sticky; left: 0; z-index: 5;
+        }
+        .pro-table td.sticky-col-2, .pro-table th.sticky-col-2 {
+            position: sticky; left: 50px; z-index: 5;
+            text-align: left !important; padding-left: 15px;
+        }
+        
+        /* Sticky Header Intersections */
+        .pro-table th.sticky-col-1, .pro-table th.sticky-col-2 {
+            background: var(--table-header-bg); z-index: 11;
+        }
+
+        /* Sticky Column Backgrounds to match Zebra Striping */
+        .pro-table tbody tr:nth-child(odd) td.sticky-col-1, 
+        .pro-table tbody tr:nth-child(odd) td.sticky-col-2 {
+            background: var(--row-odd);
+        }
+        .pro-table tbody tr:nth-child(even) td.sticky-col-1, 
+        .pro-table tbody tr:nth-child(even) td.sticky-col-2 {
+            background: var(--row-even);
+        }
+
+        /* Hover on Sticky Columns */
+        .pro-table tbody tr:hover td.sticky-col-1, 
+        .pro-table tbody tr:hover td.sticky-col-2 {
+            background: var(--row-hover);
+        }
+
+        /* Clear, Professional Tick Mark */
+        .tick {
+            color: var(--tick-color);
+            font-size: 20px;
+            font-weight: 900;
+        }
+
+        /* Table Footer / Totals */
+        tfoot th {
+            background: #0f172a;
+            color: #ffffff;
+            padding: 12px 8px;
+            font-size: 16px;
+            position: sticky;
+            bottom: 0;
+            z-index: 10;
+            border-right: 1px solid #334155;
+            border-top: 2px solid #cbd5e1;
+        }
+        
+        tfoot th.sticky-col-2 { background: #0f172a; z-index: 13; }
+
+        .grand-total { color: #fbbf24 !important; font-size: 18px !important; }
+
+        /* Modal Footer Action Area */
+        .large-modal-actions {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            background: #ffffff;
+            padding: 12px 20px;
+            border-radius: 10px;
+            border: 1px solid #cbd5e1;
+            margin-top: 15px;
+            flex-shrink: 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        .qr-section { display: flex; align-items: center; gap: 8px; }
+
+        .large-qr-code { width: 55px; height: 55px; border: 1px solid #cbd5e1; border-radius: 4px; padding: 2px; }
+
+        /* Download & Print Buttons - Corporate Style */
+        .btn-corporate {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 20px;
+            font-size: 15px;
+            font-weight: 700;
+            border-radius: 6px;
+            transition: all 0.2s;
+            cursor: pointer;
+            text-decoration: none;
+            border: none;
         }
 
         .download-btn {
-            background: #27ae60;
+            background: #2563eb;
             color: white;
-            text-decoration: none;
-            padding: 12px 35px;
-            font-size: 18px;
-            font-weight: bold;
-            border-radius: 8px;
-            display: inline-block;
-            transition: background 0.3s ease;
-            box-shadow: 0 4px 10px rgba(39, 174, 96, 0.3);
+            box-shadow: 0 2px 4px rgba(37, 99, 235, 0.3);
         }
+        .download-btn:hover { background: #1d4ed8; transform: translateY(-1px); }
 
-        .download-btn:hover {
-            background: #219150;
-            transform: translateY(-2px);
+        .print-btn {
+            position: absolute;
+            bottom: 15px;
+            left: 20px;
+            background: #475569;
+            color: white;
+            box-shadow: 0 2px 4px rgba(71, 85, 105, 0.3);
+            z-index: 100;
+        }
+        .print-btn:hover { background: #334155; transform: translateY(-1px); }
+
+        /* Signatures Area (Visible only on Print) */
+        .signature-area {
+            display: none; 
+            justify-content: space-between;
+            margin-top: 30px;
+            padding: 0 20px;
+        }
+        .sign-box {
+            text-align: center;
+            font-size: 16px;
+            font-weight: 700;
+            color: #0f172a;
+            border-top: 2px solid #0f172a;
+            padding-top: 5px;
+            width: 150px;
         }
 
         /* Footer */
         footer {
-            background-color: #2c3e50;
-            color: #ecf0f1;
+            background-color: #1e293b;
+            color: #f8fafc;
             text-align: center;
             padding: 20px;
-            font-size: 15px;
+            font-size: 14px;
             border-top-left-radius: 20px;
             border-top-right-radius: 20px;
-            line-height: 1.6;
+            margin-top: auto;
         }
         
         .footer-highlight {
             display: inline-block;
             margin-top: 8px;
-            font-size: 17px;
+            font-size: 15px;
             font-weight: 700;
-            color: #f1c40f; /* পোর্টাল টাইটেলের মতো সোনালী রঙ */
-            letter-spacing: 0.5px;
+            color: #facc15; 
         }
 
-        /* Mobile Responsiveness */
+        /* Mobile Adjustments */
         @media (max-width: 600px) {
             .institute-name { font-size: 22px; }
             .portal-title { font-size: 18px; }
-            .logo-container img { width: 80px; height: 80px; }
-            .shift-btn { font-size: 18px; padding: 15px 20px; }
-            .button-grid { grid-template-columns: 1fr; }
-            .modal-media { gap: 15px; }
-            .footer-highlight { font-size: 15px; }
+            .pro-table td.sticky-col-2, .pro-table th.sticky-col-2 { left: 45px; }
+            .print-btn { display: none; } 
+        }
+
+        /* =========================================
+           PRINT VIEW STYLES (A4 LANDSCAPE)
+           ========================================= */
+        @media print {
+            @page { size: A4 landscape; margin: 8mm; }
+            
+            body {
+                background: white;
+                padding: 0;
+                overflow: visible;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            header, main, footer, .large-modal-actions, .close-btn, .print-btn, .small-modal-content { display: none !important; }
+
+            .modal-overlay {
+                position: static;
+                background: white;
+                display: block !important;
+                padding: 0;
+            }
+
+            .large-modal-content {
+                box-shadow: none; border-radius: 0; padding: 0; height: auto; border: none; max-width: 100%; background: #fff;
+            }
+
+            .modal-header-container { margin-bottom: 5px; padding-bottom: 2px; border-bottom: 1.5px solid #000; }
+            .large-shift-name { font-size: 14pt; color: #000; background: transparent; padding: 0; -webkit-text-fill-color: #000;}
+            .time-info { font-size: 11pt; color: #000; display: block; margin-top: 2px;}
+
+            .pro-roster-container {
+                overflow: visible; max-height: none; box-shadow: none; padding: 0; background: transparent; border: none; margin-top: 5px;
+            }
+
+            .pro-table { width: 100%; border: 2px solid #000; page-break-inside: avoid; min-width: auto; border-spacing: 0; }
+
+            .pro-table th, .pro-table td {
+                border: 1px solid #000; padding: 3px; font-size: 10.5pt; position: static !important; box-shadow: none !important; color: #000 !important; background: #fff !important;
+            }
+
+            .pro-table th { font-size: 9.5pt; background: #d1d8e0 !important; }
+            .pro-table tbody tr { transition: none; transform: none; page-break-inside: avoid; background: #fff !important;}
+            .tick { color: #000 !important; text-shadow: none !important; font-size: 12pt; }
+            
+            tfoot th { background: #bdc3c7 !important; color: #000 !important; font-size: 11pt; border: 1px solid #000; }
+            .grand-total { background-color: #95a5a6 !important; color: #000 !important; }
+
+            .signature-area { display: flex; margin-top: 25px; padding: 0 10px; }
+            .sign-box { border-top: 1px solid #000; font-size: 11pt; padding-top: 3px; color:#000;}
         }
     </style>
 </head>
@@ -308,44 +533,79 @@
         </div>
         <h1 class="institute-name">ইবনে তাইমিয়া স্কুল এন্ড কলেজ</h1>
         <p class="eiin">EIIN-105751</p>
-        
+
         <h2 class="portal-title">টেকনিক্যাল সাপোর্ট পোর্টাল</h2>
-        <p class="subtitle">এসএসসি নির্বাচনি পরিক্ষা-২০২৬ ডিউটি রোস্টার</p>
+        <p class="subtitle" style="color: #cbd5e1; font-size:16px;">এসএসসি নির্বাচনি পরিক্ষা-২০২৬ ডিউটি রোস্টার</p>
     </header>
 
     <main>
         <div class="button-grid">
-            <button class="shift-btn" onclick="openModal('জবা শিফট', '15TNLDoXNdDjmZ-5iML4-4jtlSW-ATEr8')">১। জবা শিফট</button>
-            <button class="shift-btn" onclick="openModal('শাপলা শিফট', '1pAUbN2XPrfMqpWNZOGKKC5msdc-4y0XM')">২। শাপলা শিফট</button>
-            <button class="shift-btn" onclick="openModal('বেলি শিফট', '1Bl-_CmU4gjs7-prGw9am3KNPN_RsdX1S')">৩। বেলি শিফট</button>
-            <button class="shift-btn" onclick="openModal('বকুল শিফট', '1jERcRKF7GnxSxXGvEVovCowL7VAV_9z1')">৪। বকুল শিফট</button>
+            <button class="shift-btn" onclick="openSmallModal('জবা শিফট', '15TNLDoXNdDjmZ-5iML4-4jtlSW-ATEr8')">১। জবা শিফট</button>
+            <button class="shift-btn" onclick="openSmallModal('শাপলা শিফট', '1pAUbN2XPrfMqpWNZOGKKC5msdc-4y0XM')">২। শাপলা শিফট</button>
+            <button class="shift-btn" onclick="openSmallModal('বেলি শিফট', '1Bl-_CmU4gjs7-prGw9am3KNPN_RsdX1S')">৩। বেলি শিফট</button>
+            <button class="shift-btn" onclick="openLargeModal('বকুল শিফট', '1jERcRKF7GnxSxXGvEVovCowL7VAV_9z1')">৪। বকুল শিফট</button>
         </div>
     </main>
 
-    <!-- Modal HTML Structure -->
-    <div class="modal-overlay" id="qrModal">
-        <div class="modal-content">
+    <!-- Overlay Wrapper for Modals -->
+    <div class="modal-overlay" id="modalOverlay">
+        
+        <!-- SMALL MODAL (Joba, Shapla, Beli) -->
+        <div class="small-modal-content" id="smallModal" style="display: none;">
             <span class="close-btn" onclick="closeModal()">&times;</span>
-            <span class="shift-name-display" id="shiftNameDisplay"></span>
-            <p class="modal-text">রোস্টারটি ডাউনলোড করতে QR Code স্ক্যান করুন অথবা ডাউনলোড বাটনে ক্লিক করুন।</p>
-            
+            <span class="small-shift-name" id="smallShiftDisplay"></span>
+            <p class="small-modal-text">রোস্টারটি ডাউনলোড করতে QR Code স্ক্যান করুন অথবা ডাউনলোড বাটনে ক্লিক করুন।</p>
+
             <div class="modal-media">
-                <!-- Roster Preview -->
                 <div class="media-box">
                     <span class="media-title">রোস্টারের প্রিভিউ</span>
-                    <img src="" id="rosterPreviewImg" class="roster-preview" alt="Roster Preview">
+                    <img src="" id="smallRosterPreview" class="roster-preview" alt="Roster Preview">
                 </div>
-                
-                <!-- QR Code -->
                 <div class="media-box">
                     <span class="media-title">QR Code স্ক্যান করুন</span>
-                    <img src="" id="qrCodeImg" class="qr-code" alt="QR Code">
+                    <img src="" id="smallQrCode" class="small-qr-code" alt="QR Code">
                 </div>
             </div>
-            
-            <!-- Download Button -->
-            <a href="#" id="downloadBtn" class="download-btn" target="_blank">ডাউনলোড করুন</a>
+
+            <a href="#" id="smallDownloadBtn" class="btn-corporate download-btn" target="_blank">ডাউনলোড করুন</a>
         </div>
+
+        <!-- LARGE MODAL (Bokul Shift Professional Table) -->
+        <div class="large-modal-content" id="largeModal" style="display: none;">
+            <button class="btn-corporate print-btn" onclick="window.print()">🖨️ প্রিন্ট করুন</button>
+            <span class="close-btn" onclick="closeModal()" title="বন্ধ করুন">&times;</span>
+            
+            <div class="modal-header-container">
+                <span class="large-shift-name" id="largeShiftDisplay"></span><br>
+                <span class="time-info">পরীক্ষার সময়: দুপুর ২.০০টা - ৫.০০টা। (অবশ্যই ২০ মিনিট পূর্বে উপস্থিত হতে হবে)</span>
+            </div>
+            
+            <!-- Professional Data Table -->
+            <div class="pro-roster-container" id="rosterContainer">
+                <!-- Data injected via Javascript -->
+            </div>
+            
+            <div class="large-modal-actions">
+                <div class="qr-section">
+                    <img src="" id="largeQrCode" class="large-qr-code" alt="QR Code">
+                </div>
+                
+                <a href="#" id="largeDownloadBtn" class="btn-corporate download-btn large-download-btn" target="_blank">
+                    <svg style="width:18px;height:18px;margin-right:8px" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z" />
+                    </svg>
+                    রোস্টার ডাউনলোড
+                </a>
+            </div>
+
+            <!-- Signatures (Visible only on Print) -->
+            <div class="signature-area">
+                <div class="sign-box">অধ্যক্ষ</div>
+                <div class="sign-box">পরীক্ষা নিয়ন্ত্রক</div>
+                <div class="sign-box">প্রস্তুতকারী</div>
+            </div>
+        </div>
+
     </div>
 
     <footer>
@@ -353,42 +613,135 @@
         <span class="footer-highlight">পৃষ্ঠপোষকতায়: ইসরাফিল আলম, ইনচার্জ (জবা শিফট)</span>
     </footer>
 
-    <!-- JavaScript for Dynamic Modal -->
+    <!-- JavaScript Control Logic -->
     <script>
-        function openModal(shiftName, driveFileId) {
-            const modal = document.getElementById('qrModal');
-            const shiftDisplay = document.getElementById('shiftNameDisplay');
-            const previewImg = document.getElementById('rosterPreviewImg');
-            const qrImg = document.getElementById('qrCodeImg');
-            const downloadBtn = document.getElementById('downloadBtn');
+        const overlay = document.getElementById('modalOverlay');
+        const smallModal = document.getElementById('smallModal');
+        const largeModal = document.getElementById('largeModal');
 
-            // Set Shift Name
-            shiftDisplay.innerText = shiftName + ' রোস্টার';
-
-            // Set Dynamic Roster Preview (Using Drive Thumbnail API)
-            previewImg.src = `https://drive.google.com/thumbnail?id=${driveFileId}&sz=w400`;
-
-            // Set Dynamic QR Code
-            const driveLink = `https://drive.google.com/file/d/${driveFileId}/view?usp=drivesdk`;
-            qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(driveLink)}`;
-
-            // Set Direct Download Link
-            downloadBtn.href = `https://drive.google.com/uc?export=download&id=${driveFileId}`;
-
-            // Open Modal
-            modal.style.display = 'flex';
-        }
-
+        // General close function
         function closeModal() {
-            document.getElementById('qrModal').style.display = 'none';
+            overlay.style.display = 'none';
+            document.body.style.overflow = 'auto'; 
+        }
+        window.onclick = function(event) {
+            if (event.target == overlay) closeModal();
         }
 
-        // Close when clicking outside the modal
-        window.onclick = function(event) {
-            let modal = document.getElementById('qrModal');
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
+        // ----------------------------------------------------
+        // Open Small Modal (For Joba, Shapla, Beli)
+        // ----------------------------------------------------
+        function openSmallModal(shiftName, driveFileId) {
+            smallModal.style.display = 'block';
+            largeModal.style.display = 'none';
+
+            document.getElementById('smallShiftDisplay').innerText = shiftName + ' রোস্টার';
+            document.getElementById('smallRosterPreview').src = `https://drive.google.com/thumbnail?id=${driveFileId}&sz=w400`;
+            
+            const driveLink = `https://drive.google.com/file/d/${driveFileId}/view?usp=drivesdk`;
+            document.getElementById('smallQrCode').src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(driveLink)}`;
+            document.getElementById('smallDownloadBtn').href = `https://drive.google.com/uc?export=download&id=${driveFileId}`;
+
+            overlay.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        // ----------------------------------------------------
+        // Open Large Modal (Professional Bokul Table)
+        // ----------------------------------------------------
+        function openLargeModal(shiftName, driveFileId) {
+            smallModal.style.display = 'none';
+            largeModal.style.display = 'flex';
+
+            document.getElementById('largeShiftDisplay').innerText = shiftName + ' রোস্টার';
+            
+            const driveLink = `https://drive.google.com/file/d/${driveFileId}/view?usp=drivesdk`;
+            document.getElementById('largeQrCode').src = `https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=${encodeURIComponent(driveLink)}&color=1e293b`;
+            document.getElementById('largeDownloadBtn').href = `https://drive.google.com/uc?export=download&id=${driveFileId}`;
+
+            generateBokulTable();
+
+            overlay.style.display = 'flex';
+            document.body.style.overflow = 'hidden'; 
+        }
+
+        function generateBokulTable() {
+            let html = '<table class="pro-table">';
+            html += `<thead>
+                        <tr>
+                            <th width="4%" class="sticky-col-1">ক্রমিক<br>নং</th>
+                            <th width="20%" class="sticky-col-2">শিক্ষকের নাম</th>
+                            <th>১১/১০/২৬<br>রবি</th>
+                            <th>১২/১০/২৬<br>সোম</th>
+                            <th>১৩/১০/২৬<br>মঙ্গল</th>
+                            <th>১৫/১০/২৬<br>বৃহঃ</th>
+                            <th>২৬/১০/২৬<br>সোম</th>
+                            <th>২৭/১০/২৬<br>মঙ্গল</th>
+                            <th>২৮/১০/২৬<br>বুধ</th>
+                            <th>২৯/১০/২৬<br>বৃহঃ</th>
+                            <th>০১/১১/২৬<br>রবি</th>
+                            <th>০২/১১/২৬<br>সোম</th>
+                            <th>০৪/১১/২৬<br>বুধ</th>
+                            <th>০৫/১১/২৬<br>বৃহঃ</th>
+                            <th width="6%">মোট<br>ডিউটি</th>
+                        </tr>
+                    </thead><tbody id="rosterBody">`;
+
+            const teachers = [
+                { name: "মোঃ মিজানুর রহমান-৩", total: 5 }, { name: "মোঃ মিজানুর রহমান-৪", total: 5 },
+                { name: "মোঃ আবুল হোসন ফারুক", total: 5 }, { name: "মোঃ সাইফুল ইসলাম-১", total: 5 },
+                { name: "মোঃ দুলাল হোসন চৌধুরী", total: 5 }, { name: "মোঃ নিজাম উদ্দীন মজুমদার", total: 6 },
+                { name: "মোহাম্মদ আব্দুর রহমান", total: 5 }, { name: "মোস্তফা কামাল", total: 6 },
+                { name: "মো: জহিরুল ইসলাম", total: 5 }, { name: "ফরহাদ আল ফয়সাল", total: 6 },
+                { name: "সিরাজুস সালেহীন", total: 5 }, { name: "মোহাম্মদ মহসিন-২", total: 5 },
+                { name: "সাইফুল ইসলাম মিয়াজী", total: 5 }, { name: "মাও. মহিউদ্দিন", total: 6 },
+                { name: "মোঃ স্বপন মজুমদার", total: 6 }, { name: "মোঃ সিফাতুল মোস্তফা", total: 5 },
+                { name: "কাউছার আহমেদ", total: 6 }, { name: "মোঃ ইউছুফ আলী", total: 6 },
+                { name: "মোহাম্মদ হোসাইন", total: 6 }, { name: "বিল্লাল হোসন", total: 6 },
+                { name: "এমরান হোসাইন", total: 5 }, { name: "আবু মু. সজিব", total: 6 },
+                { name: "মাসুদ আলম", total: 6 }, { name: "বায়েজিদুল ইসলাম মিজু.", total: 6 },
+                { name: "কাউছার হামিদ জীবন", total: 6 }
+            ];
+
+            // Exact matrix mapping provided
+            const dutyMatrix = [
+                [2, 6, 9, 10, 12], [1, 3, 6, 7, 9], [2, 4, 5, 7, 12], [1, 6, 7, 9, 10], [2, 6, 7, 10, 12],
+                [1, 3, 6, 8, 9, 11], [1, 3, 4, 8, 12], [2, 3, 5, 6, 8, 9], [4, 5, 9, 10, 12], [2, 3, 5, 8, 10, 11],
+                [1, 2, 4, 7, 12], [1, 4, 5, 9, 11], [2, 3, 7, 8, 10], [3, 5, 7, 8, 10, 11], [1, 2, 4, 5, 8, 9],
+                [1, 2, 5, 6, 11], [3, 4, 6, 8, 10, 11], [3, 5, 6, 8, 9, 11], [1, 3, 6, 7, 9, 11], [3, 4, 6, 7, 10, 11],
+                [3, 5, 7, 8, 11], [1, 4, 5, 7, 9, 10], [2, 4, 6, 8, 10, 11], [1, 2, 4, 7, 8, 10], [1, 2, 4, 5, 9, 11]
+            ];
+
+            teachers.forEach((teacher, index) => {
+                html += `<tr>
+                    <td class="sticky-col-1"><b>${index + 1}</b></td>
+                    <td class="sticky-col-2 teacher-name">${teacher.name}</td>`;
+                
+                let validTickCount = 0;
+                for (let day = 1; day <= 12; day++) {
+                    if (dutyMatrix[index].includes(day)) {
+                        html += `<td><span class="tick">✓</span></td>`;
+                        validTickCount++;
+                    } else {
+                        html += `<td></td>`;
+                    }
+                }
+                
+                // Color formatting for total based on validation
+                const totalColor = validTickCount === teacher.total ? '#d97706' : '#ef4444';
+                html += `<td><b style="color: ${totalColor}; font-size: 16px;">${validTickCount}</b></td></tr>`;
+            });
+
+            html += `</tbody><tfoot>
+                        <tr>
+                            <th colspan="2" class="sticky-col-2" style="text-align: right; padding-right: 15px;">প্রতিদিনের মোট ডিউটি :</th>
+                            <th>১২</th><th>১২</th><th>১২</th><th>১২</th><th>১২</th><th>১২</th>
+                            <th>১২</th><th>১২</th><th>১২</th><th>১২</th><th>১২</th><th>৬</th>
+                            <th class="grand-total">১৩৮</th>
+                        </tr>
+                    </tfoot></table>`;
+
+            document.getElementById('rosterContainer').innerHTML = html;
         }
     </script>
 </body>
