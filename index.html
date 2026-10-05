@@ -3,745 +3,822 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>টেকনিক্যাল সাপোর্ট পোর্টাল - ইবনে তাইমিয়া স্কুল এন্ড কলেজ</title>
+    <title>সাইফুল'স সাইন্স কেয়ার | বায়োলজি-মডেল টেস্ট</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;600;700&display=swap');
 
         :root {
-            --primary-bg: #f4f7f6;
-            --text-dark: #1e293b;
-            --border-color: #cbd5e1;
-            --table-header-bg: #1e293b; /* Corporate Dark Slate */
-            --table-header-text: #f8fafc;
-            --row-even: #f8fafc;
-            --row-odd: #ffffff;
-            --row-hover: #e2e8f0;
-            --tick-color: #10b981; /* Professional Green */
+            --primary: #10b981;
+            --primary-dark: #059669;
+            --primary-light: #ecfdf5;
+            --secondary: #3b82f6;
+            --background: #f3f4f6;
+            --card-bg: #ffffff;
+            --text-main: #1f2937;
+            --text-muted: #6b7280;
+            --correct: #22c55e;
+            --incorrect: #ef4444;
+            --warning: #f59e0b;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Noto Serif Bengali', 'Kalpurush', sans-serif;
+            font-family: 'Noto Sans Bengali', sans-serif;
         }
 
         body {
-            background-color: var(--primary-bg);
-            color: var(--text-dark);
+            background-color: var(--background);
+            background-image: radial-gradient(circle at 10% 20%, rgb(236, 253, 245) 0%, rgb(243, 244, 246) 90%);
+            color: var(--text-main);
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            min-height: 100vh;
-            padding: 15px;
+            align-items: center;
             overflow-x: hidden;
         }
 
-        /* Scrollbar */
-        ::-webkit-scrollbar { width: 8px; height: 8px; }
-        ::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 5px;}
-        ::-webkit-scrollbar-thumb { background: #64748b; border-radius: 5px; }
-        ::-webkit-scrollbar-thumb:hover { background: #475569; }
-
-        /* Portal Header */
-        header {
-            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-            color: white;
-            padding: 20px;
-            text-align: center;
-            border-bottom-left-radius: 40px;
-            border-bottom-right-radius: 40px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-        }
-
-        .logo-container img {
-            width: 90px;
-            height: 90px;
-            object-fit: cover;
-            border-radius: 50%;
-            border: 4px solid #fff;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
-            margin-bottom: 5px;
-            background: white;
-        }
-
-        .institute-name {
-            font-size: 26px;
-            font-weight: 700;
-            margin-bottom: 5px;
-            letter-spacing: 0.5px;
-        }
-
-        .portal-title {
-            font-size: 18px;
-            font-weight: 700;
-            color: #f1c40f;
-            margin-bottom: 5px;
-        }
-
-        /* Main Buttons */
-        main {
-            flex-grow: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 30px 20px;
-        }
-
-        .button-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 20px;
+        /* Header Styles */
+        .header {
             width: 100%;
-            max-width: 900px;
-        }
-
-        .shift-btn {
-            background: linear-gradient(145deg, #ffffff, #f1f5f9);
-            color: #1e293b;
-            border: 1px solid #e2e8f0;
-            padding: 20px 30px;
-            font-size: 20px;
-            font-weight: 700;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            cursor: pointer;
-            transition: all 0.3s ease;
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
             position: relative;
             overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
-        .shift-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            color: #0f2027;
-            border-color: #cbd5e1;
-        }
-
-        /* =========================================
-           MODAL OVERLAY (COMMON)
-           ========================================= */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(15, 23, 42, 0.85);
-            backdrop-filter: blur(8px);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            padding: 15px;
-        }
-
-        .close-btn {
+        .header::before {
+            content: '';
             position: absolute;
-            top: 10px;
-            right: 20px;
-            font-size: 35px;
-            cursor: pointer;
-            color: #ef4444;
-            font-weight: bold;
-            transition: color 0.3s ease;
-            z-index: 100;
+            top: -50px; left: -50px;
+            width: 150px; height: 150px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
         }
 
-        .close-btn:hover { color: #b91c1c; }
-
-        @keyframes popIn {
-            from { transform: scale(0.95); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: -50px; right: -50px;
+            width: 200px; height: 200px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
         }
 
-        /* =========================================
-           SMALL MODAL (Demo shifts)
-           ========================================= */
-        .small-modal-content {
+        .header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            position: relative;
+            z-index: 1;
+        }
+
+        .header h2 {
+            font-size: 1.2rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .instruction {
+            background: rgba(255, 255, 255, 0.2);
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(5px);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Stats & Progress */
+        .sticky-stats {
+            position: sticky;
+            top: 0;
+            width: 100%;
             background: white;
-            padding: 30px 20px;
-            border-radius: 15px;
-            text-align: center;
-            max-width: 450px;
-            width: 90%;
-            position: relative;
-            animation: popIn 0.3s ease-out forwards;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-        }
-
-        .small-shift-name {
-            font-size: 22px;
-            color: #d97706;
-            font-weight: 700;
-            margin-bottom: 5px;
-            display: block;
-        }
-
-        .modal-media {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 25px;
-            margin-bottom: 25px;
-            flex-wrap: wrap;
-        }
-
-        .media-box {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .media-title {
-            font-size: 14px;
-            color: #64748b;
-            margin-bottom: 8px;
-            font-weight: 600;
-        }
-
-        .roster-preview {
-            width: 120px;
-            height: 160px;
-            object-fit: cover;
-            object-position: top;
-            border: 1px solid #cbd5e1;
-            border-radius: 6px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-        }
-
-        .small-qr-code {
-            width: 140px;
-            height: 140px;
-            border: 2px solid #e2e8f0;
-            border-radius: 8px;
-            padding: 4px;
-        }
-
-        /* =========================================
-           LARGE MODAL (PROFESSIONAL ROSTER VIEW)
-           ========================================= */
-        .large-modal-content {
-            background: #f8fafc; /* Professional light slate background */
-            border-radius: 16px;
-            padding: 20px;
-            width: 100%;
-            height: 96vh; 
-            max-width: 1500px;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            animation: popIn 0.3s ease-out forwards;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-            border: 1px solid #e2e8f0;
-        }
-
-        .modal-header-container {
-            text-align: center;
-            margin-bottom: 10px;
-            flex-shrink: 0;
-            border-bottom: 2px solid #e2e8f0;
-            padding-bottom: 10px;
-        }
-
-        .large-shift-name {
-            font-size: 26px;
-            font-weight: 800;
-            color: #0f172a; /* Solid dark color */
-            display: inline-block;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .time-info {
-            font-size: 14px;
-            font-weight: 600;
-            color: #b91c1c;
-            margin-top: 5px;
-            display: block;
-        }
-
-        /* PROFESSIONAL TABLE CONTAINER */
-        .pro-roster-container {
-            flex-grow: 1;
-            width: 100%;
-            background: #ffffff;
-            border-radius: 10px;
-            overflow-y: auto; 
-            overflow-x: auto;
-            border: 1px solid #cbd5e1;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            margin-top: 10px;
-        }
-
-        .pro-table {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
-            font-size: 15px;
-            min-width: 1100px;
-        }
-
-        /* Table Headers */
-        .pro-table th {
-            background: var(--table-header-bg);
-            color: var(--table-header-text);
-            padding: 12px 8px;
-            font-weight: 700;
-            text-align: center;
-            border-bottom: 2px solid #0f172a;
-            border-right: 1px solid #334155;
-            position: sticky;
-            top: 0;
-            z-index: 10;
-            white-space: nowrap;
-            letter-spacing: 0.5px;
-        }
-
-        /* Table Data Cells */
-        .pro-table td {
-            padding: 10px 8px;
-            text-align: center;
-            color: #334155;
-            font-weight: 600;
-            border-bottom: 1px solid #e2e8f0;
-            border-right: 1px solid #e2e8f0;
-            transition: background-color 0.2s;
-        }
-
-        /* Zebra Striping */
-        .pro-table tbody tr:nth-child(odd) td { background: var(--row-odd); }
-        .pro-table tbody tr:nth-child(even) td { background: var(--row-even); }
-
-        /* Row Hover Effect - Subtle & Professional */
-        .pro-table tbody tr:hover td {
-            background: var(--row-hover);
-            color: #0f172a;
-        }
-
-        /* Sticky Columns */
-        .pro-table td.sticky-col-1, .pro-table th.sticky-col-1 {
-            position: sticky; left: 0; z-index: 5;
-        }
-        .pro-table td.sticky-col-2, .pro-table th.sticky-col-2 {
-            position: sticky; left: 50px; z-index: 5;
-            text-align: left !important; padding-left: 15px;
-        }
-        
-        /* Sticky Header Intersections */
-        .pro-table th.sticky-col-1, .pro-table th.sticky-col-2 {
-            background: var(--table-header-bg); z-index: 11;
-        }
-
-        /* Sticky Column Backgrounds to match Zebra Striping */
-        .pro-table tbody tr:nth-child(odd) td.sticky-col-1, 
-        .pro-table tbody tr:nth-child(odd) td.sticky-col-2 {
-            background: var(--row-odd);
-        }
-        .pro-table tbody tr:nth-child(even) td.sticky-col-1, 
-        .pro-table tbody tr:nth-child(even) td.sticky-col-2 {
-            background: var(--row-even);
-        }
-
-        /* Hover on Sticky Columns */
-        .pro-table tbody tr:hover td.sticky-col-1, 
-        .pro-table tbody tr:hover td.sticky-col-2 {
-            background: var(--row-hover);
-        }
-
-        /* Clear, Professional Tick Mark */
-        .tick {
-            color: var(--tick-color);
-            font-size: 20px;
-            font-weight: 900;
-        }
-
-        /* Table Footer / Totals */
-        tfoot th {
-            background: #0f172a;
-            color: #ffffff;
-            padding: 12px 8px;
-            font-size: 16px;
-            position: sticky;
-            bottom: 0;
-            z-index: 10;
-            border-right: 1px solid #334155;
-            border-top: 2px solid #cbd5e1;
-        }
-        
-        tfoot th.sticky-col-2 { background: #0f172a; z-index: 13; }
-
-        .grand-total { color: #fbbf24 !important; font-size: 18px !important; }
-
-        /* Modal Footer Action Area */
-        .large-modal-actions {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
-            background: #ffffff;
-            padding: 12px 20px;
-            border-radius: 10px;
-            border: 1px solid #cbd5e1;
-            margin-top: 15px;
-            flex-shrink: 0;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-        }
-
-        .qr-section { display: flex; align-items: center; gap: 8px; }
-
-        .large-qr-code { width: 55px; height: 55px; border: 1px solid #cbd5e1; border-radius: 4px; padding: 2px; }
-
-        /* Download & Print Buttons - Corporate Style */
-        .btn-corporate {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 10px 20px;
-            font-size: 15px;
-            font-weight: 700;
-            border-radius: 6px;
-            transition: all 0.2s;
-            cursor: pointer;
-            text-decoration: none;
-            border: none;
-        }
-
-        .download-btn {
-            background: #2563eb;
-            color: white;
-            box-shadow: 0 2px 4px rgba(37, 99, 235, 0.3);
-        }
-        .download-btn:hover { background: #1d4ed8; transform: translateY(-1px); }
-
-        .print-btn {
-            position: absolute;
-            bottom: 15px;
-            left: 20px;
-            background: #475569;
-            color: white;
-            box-shadow: 0 2px 4px rgba(71, 85, 105, 0.3);
+            padding: 1rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
             z-index: 100;
+            display: flex;
+            justify-content: center;
         }
-        .print-btn:hover { background: #334155; transform: translateY(-1px); }
 
-        /* Signatures Area (Visible only on Print) */
-        .signature-area {
-            display: none; 
+        .stats-container {
+            width: 100%;
+            max-width: 800px;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .stats-row {
+            display: flex;
             justify-content: space-between;
-            margin-top: 30px;
-            padding: 0 20px;
+            font-size: 0.95rem;
+            font-weight: 600;
         }
-        .sign-box {
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .stat-badge {
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            color: white;
+            font-size: 0.85rem;
+        }
+        .badge-total { background: var(--secondary); }
+        .badge-answered { background: var(--primary); }
+        .badge-unanswered { background: var(--warning); }
+
+        .progress-bar-bg {
+            width: 100%;
+            height: 8px;
+            background: var(--background);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: var(--primary);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        /* Main Container */
+        .main-container {
+            width: 100%;
+            max-width: 800px;
+            padding: 2rem 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        /* Question Cards */
+        .question-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02), 0 1px 3px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 4px solid var(--primary);
+        }
+
+        .question-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.05);
+        }
+
+        .question-header {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .question-number {
+            background: var(--primary-light);
+            color: var(--primary-dark);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+            font-size: 1.1rem;
+        }
+
+        .question-text {
+            font-size: 1.15rem;
+            line-height: 1.5;
+            color: var(--text-main);
+            margin-top: 0.3rem;
+        }
+
+        /* Options */
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.8rem;
+            padding-left: 3rem;
+        }
+
+        .option-btn {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            text-align: left;
+            background: #f9fafb;
+            border: 2px solid transparent;
+            padding: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            color: var(--text-main);
+            transition: all 0.2s ease;
+        }
+
+        .option-btn:hover {
+            background: var(--primary-light);
+            border-color: #a7f3d0;
+        }
+
+        .option-btn.selected {
+            background: var(--primary-light);
+            border-color: var(--primary);
+            font-weight: 600;
+        }
+
+        .option-prefix {
+            font-weight: bold;
+            margin-right: 1rem;
+            color: var(--text-muted);
+        }
+
+        .option-btn.selected .option-prefix {
+            color: var(--primary-dark);
+        }
+
+        /* Submit Button */
+        .submit-container {
             text-align: center;
-            font-size: 16px;
-            font-weight: 700;
-            color: #0f172a;
-            border-top: 2px solid #0f172a;
-            padding-top: 5px;
+            margin-top: 2rem;
+            padding-bottom: 4rem;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            padding: 1rem 3rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.6);
+        }
+
+        /* Locked Screen */
+        .locked-screen {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-height: 60vh;
+            padding: 2rem;
+        }
+
+        .locked-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: var(--text-muted);
+        }
+
+        .locked-screen h2 {
+            color: var(--text-main);
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        /* Result Screen */
+        .result-screen {
+            display: none;
+            width: 100%;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .result-summary {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            border-top: 6px solid var(--primary);
+        }
+
+        .result-summary h2 {
+            font-size: 2rem;
+            color: var(--primary-dark);
+            margin-bottom: 1.5rem;
+        }
+
+        .score-circle {
             width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 8px solid var(--primary);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem auto;
+            background: var(--primary-light);
         }
 
-        /* Footer */
-        footer {
-            background-color: #1e293b;
-            color: #f8fafc;
-            text-align: center;
-            padding: 20px;
-            font-size: 14px;
-            border-top-left-radius: 20px;
-            border-top-right-radius: 20px;
-            margin-top: auto;
-        }
-        
-        .footer-highlight {
-            display: inline-block;
-            margin-top: 8px;
-            font-size: 15px;
-            font-weight: 700;
-            color: #facc15; 
+        .score-circle span {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-dark);
         }
 
-        /* Mobile Adjustments */
+        .score-circle small {
+            font-size: 1rem;
+            color: var(--text-muted);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .stat-box {
+            padding: 1rem;
+            border-radius: 10px;
+            background: var(--background);
+        }
+
+        .stat-box h3 { font-size: 1.5rem; margin-bottom: 0.3rem; }
+        .stat-box p { font-size: 0.9rem; color: var(--text-muted); }
+        .stat-box.c-correct h3 { color: var(--correct); }
+        .stat-box.c-incorrect h3 { color: var(--incorrect); }
+        .stat-box.c-unanswered h3 { color: var(--warning); }
+
+        /* Review Styles */
+        .review-card {
+            border-left: none;
+        }
+
+        .review-option {
+            position: relative;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            border-radius: 8px;
+            border: 2px solid transparent;
+            background: #f9fafb;
+            display: flex;
+            align-items: center;
+        }
+
+        .review-option.correct-ans {
+            background: #dcfce7;
+            border-color: var(--correct);
+            font-weight: 600;
+        }
+
+        .review-option.wrong-ans {
+            background: #fee2e2;
+            border-color: var(--incorrect);
+        }
+
+        .review-badge {
+            margin-left: auto;
+            font-size: 0.85rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            color: white;
+        }
+
+        .bg-green { background: var(--correct); }
+        .bg-red { background: var(--incorrect); }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive Design */
         @media (max-width: 600px) {
-            .institute-name { font-size: 22px; }
-            .portal-title { font-size: 18px; }
-            .pro-table td.sticky-col-2, .pro-table th.sticky-col-2 { left: 45px; }
-            .print-btn { display: none; } 
-        }
-
-        /* =========================================
-           PRINT VIEW STYLES (A4 LANDSCAPE)
-           ========================================= */
-        @media print {
-            @page { size: A4 landscape; margin: 8mm; }
-            
-            body {
-                background: white;
-                padding: 0;
-                overflow: visible;
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-            }
-
-            header, main, footer, .large-modal-actions, .close-btn, .print-btn, .small-modal-content { display: none !important; }
-
-            .modal-overlay {
-                position: static;
-                background: white;
-                display: block !important;
-                padding: 0;
-            }
-
-            .large-modal-content {
-                box-shadow: none; border-radius: 0; padding: 0; height: auto; border: none; max-width: 100%; background: #fff;
-            }
-
-            .modal-header-container { margin-bottom: 5px; padding-bottom: 2px; border-bottom: 1.5px solid #000; }
-            .large-shift-name { font-size: 14pt; color: #000; background: transparent; padding: 0; -webkit-text-fill-color: #000;}
-            .time-info { font-size: 11pt; color: #000; display: block; margin-top: 2px;}
-
-            .pro-roster-container {
-                overflow: visible; max-height: none; box-shadow: none; padding: 0; background: transparent; border: none; margin-top: 5px;
-            }
-
-            .pro-table { width: 100%; border: 2px solid #000; page-break-inside: avoid; min-width: auto; border-spacing: 0; }
-
-            .pro-table th, .pro-table td {
-                border: 1px solid #000; padding: 3px; font-size: 10.5pt; position: static !important; box-shadow: none !important; color: #000 !important; background: #fff !important;
-            }
-
-            .pro-table th { font-size: 9.5pt; background: #d1d8e0 !important; }
-            .pro-table tbody tr { transition: none; transform: none; page-break-inside: avoid; background: #fff !important;}
-            .tick { color: #000 !important; text-shadow: none !important; font-size: 12pt; }
-            
-            tfoot th { background: #bdc3c7 !important; color: #000 !important; font-size: 11pt; border: 1px solid #000; }
-            .grand-total { background-color: #95a5a6 !important; color: #000 !important; }
-
-            .signature-area { display: flex; margin-top: 25px; padding: 0 10px; }
-            .sign-box { border-top: 1px solid #000; font-size: 11pt; padding-top: 3px; color:#000;}
+            .options-grid { padding-left: 0; }
+            .question-header { flex-direction: column; gap: 0.5rem; }
+            .stats-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 1.8rem; }
+            .main-container { padding: 1rem; }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="logo-container">
-            <img src="https://drive.google.com/thumbnail?id=1ZmxR46CCr7Ge5UntTMM_TbTeMJfdiqTD&sz=w500" alt="Institute Logo">
-        </div>
-        <h1 class="institute-name">ইবনে তাইমিয়া স্কুল এন্ড কলেজ</h1>
-        <p class="eiin">EIIN-105751</p>
-
-        <h2 class="portal-title">টেকনিক্যাল সাপোর্ট পোর্টাল</h2>
-        <p class="subtitle" style="color: #cbd5e1; font-size:16px;">এসএসসি নির্বাচনি পরিক্ষা-২০২৬ ডিউটি রোস্টার</p>
-    </header>
-
-    <main>
-        <div class="button-grid">
-            <button class="shift-btn" onclick="openSmallModal('জবা শিফট', '15TNLDoXNdDjmZ-5iML4-4jtlSW-ATEr8')">১। জবা শিফট</button>
-            <button class="shift-btn" onclick="openSmallModal('শাপলা শিফট', '1pAUbN2XPrfMqpWNZOGKKC5msdc-4y0XM')">২। শাপলা শিফট</button>
-            <button class="shift-btn" onclick="openSmallModal('বেলি শিফট', '1Bl-_CmU4gjs7-prGw9am3KNPN_RsdX1S')">৩। বেলি শিফট</button>
-            <button class="shift-btn" onclick="openLargeModal('বকুল শিফট', '1jERcRKF7GnxSxXGvEVovCowL7VAV_9z1')">৪। বকুল শিফট</button>
-        </div>
-    </main>
-
-    <!-- Overlay Wrapper for Modals -->
-    <div class="modal-overlay" id="modalOverlay">
-        
-        <!-- SMALL MODAL (Joba, Shapla, Beli) -->
-        <div class="small-modal-content" id="smallModal" style="display: none;">
-            <span class="close-btn" onclick="closeModal()">&times;</span>
-            <span class="small-shift-name" id="smallShiftDisplay"></span>
-            <p class="small-modal-text">রোস্টারটি ডাউনলোড করতে QR Code স্ক্যান করুন অথবা ডাউনলোড বাটনে ক্লিক করুন।</p>
-
-            <div class="modal-media">
-                <div class="media-box">
-                    <span class="media-title">রোস্টারের প্রিভিউ</span>
-                    <img src="" id="smallRosterPreview" class="roster-preview" alt="Roster Preview">
-                </div>
-                <div class="media-box">
-                    <span class="media-title">QR Code স্ক্যান করুন</span>
-                    <img src="" id="smallQrCode" class="small-qr-code" alt="QR Code">
-                </div>
-            </div>
-
-            <a href="#" id="smallDownloadBtn" class="btn-corporate download-btn" target="_blank">ডাউনলোড করুন</a>
-        </div>
-
-        <!-- LARGE MODAL (Bokul Shift Professional Table) -->
-        <div class="large-modal-content" id="largeModal" style="display: none;">
-            <button class="btn-corporate print-btn" onclick="window.print()">🖨️ প্রিন্ট করুন</button>
-            <span class="close-btn" onclick="closeModal()" title="বন্ধ করুন">&times;</span>
-            
-            <div class="modal-header-container">
-                <span class="large-shift-name" id="largeShiftDisplay"></span><br>
-                <span class="time-info">পরীক্ষার সময়: দুপুর ২.০০টা - ৫.০০টা। (অবশ্যই ২০ মিনিট পূর্বে উপস্থিত হতে হবে)</span>
-            </div>
-            
-            <!-- Professional Data Table -->
-            <div class="pro-roster-container" id="rosterContainer">
-                <!-- Data injected via Javascript -->
-            </div>
-            
-            <div class="large-modal-actions">
-                <div class="qr-section">
-                    <img src="" id="largeQrCode" class="large-qr-code" alt="QR Code">
-                </div>
-                
-                <a href="#" id="largeDownloadBtn" class="btn-corporate download-btn large-download-btn" target="_blank">
-                    <svg style="width:18px;height:18px;margin-right:8px" viewBox="0 0 24 24">
-                        <path fill="currentColor" d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z" />
-                    </svg>
-                    রোস্টার ডাউনলোড
-                </a>
-            </div>
-
-            <!-- Signatures (Visible only on Print) -->
-            <div class="signature-area">
-                <div class="sign-box">অধ্যক্ষ</div>
-                <div class="sign-box">পরীক্ষা নিয়ন্ত্রক</div>
-                <div class="sign-box">প্রস্তুতকারী</div>
-            </div>
-        </div>
-
+    <div class="header">
+        <h1>সাইফুল'স সাইন্স কেয়ার</h1>
+        <h2>বায়োলজি-মডেল টেস্ট</h2>
+        <div class="instruction">বি:দ্র: পরীক্ষাটি এক বারই দেওয়া যাবে।</div>
     </div>
 
-    <footer>
-        সার্বিক তত্বাবধানে: জবা শিফট, ইবনে তাইমিয়া স্কুল এন্ড কলেজ।<br>
-        <span class="footer-highlight">পৃষ্ঠপোষকতায়: ইসরাফিল আলম, ইনচার্জ (জবা শিফট)</span>
-    </footer>
+    <!-- Stats Bar for active exam -->
+    <div class="sticky-stats" id="statsBar">
+        <div class="stats-container">
+            <div class="stats-row">
+                <div class="stat-item">
+                    <span>মোট প্রশ্ন:</span>
+                    <span class="stat-badge badge-total" id="totalQ">0</span>
+                </div>
+                <div class="stat-item">
+                    <span>উত্তর দেওয়া:</span>
+                    <span class="stat-badge badge-answered" id="answeredQ">0</span>
+                </div>
+                <div class="stat-item">
+                    <span>বাকি:</span>
+                    <span class="stat-badge badge-unanswered" id="unansweredQ">0</span>
+                </div>
+            </div>
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="progressBar"></div>
+            </div>
+        </div>
+    </div>
 
-    <!-- JavaScript Control Logic -->
+    <!-- Active Exam Container -->
+    <div class="main-container" id="examContainer">
+        <div id="questionsWrapper"></div>
+        
+        <div class="submit-container">
+            <button class="submit-btn" onclick="submitExam()">পরীক্ষা জমা দিন (Submit)</button>
+        </div>
+    </div>
+
+    <!-- Locked Screen Container -->
+    <div class="locked-screen" id="lockedScreen">
+        <div class="locked-icon">🔒</div>
+        <h2>পরীক্ষাটি ইতোমধ্যে সম্পন্ন হয়েছে!</h2>
+        <p style="color: #6b7280; font-size: 1.1rem; max-width: 400px;">
+            এই পরীক্ষাটি শুধুমাত্র একবার দেওয়ার সুযোগ ছিল। আপনি ইতোমধ্যে পরীক্ষাটি জমা দিয়েছেন।
+        </p>
+    </div>
+
+    <!-- Result Screen Container -->
+    <div class="main-container result-screen" id="resultContainer">
+        <div class="result-summary">
+            <h2>🎉 পরীক্ষা সম্পন্ন!</h2>
+            <div class="score-circle">
+                <span id="finalScoreText">0/0</span>
+                <small id="percentageText">0%</small>
+            </div>
+            <p id="performanceMessage" style="font-size: 1.2rem; font-weight: bold; color: var(--text-main);"></p>
+            
+            <div class="stats-grid">
+                <div class="stat-box c-correct">
+                    <h3 id="rCorrect">0</h3>
+                    <p>সঠিক উত্তর</p>
+                </div>
+                <div class="stat-box c-incorrect">
+                    <h3 id="rIncorrect">0</h3>
+                    <p>ভুল উত্তর</p>
+                </div>
+                <div class="stat-box c-unanswered">
+                    <h3 id="rUnanswered">0</h3>
+                    <p>উত্তরহীন</p>
+                </div>
+            </div>
+        </div>
+
+        <h3 style="text-align: center; margin: 2rem 0 1rem 0; color: var(--text-muted);">প্রশ্নের বিস্তারিত রিভিউ</h3>
+        <div id="reviewWrapper"></div>
+    </div>
+
     <script>
-        const overlay = document.getElementById('modalOverlay');
-        const smallModal = document.getElementById('smallModal');
-        const largeModal = document.getElementById('largeModal');
+        // Database of Questions extracted exactly from OCR
+        const db = [
+            // Image 1
+            { q: "দুর্বা ঘাসের শর্করা তৈরির প্রধান স্থান কোনটি?", opts: ["মূল", "মেসোফিল টিস্যু", "ফুল", "জাইলেম টিস্যু"], ans: 1 },
+            { q: "মূল দ্বারা উত্তোলিত পানির সর্বশেষ গন্তব্য কোনটি?", opts: ["এপিডার্মিস", "সীভনল", "এন্ডোডার্মিস", "মেসোফিল টিস্যু"], ans: 3 },
+            { q: "4 অণু FADH2 থেকে কয় অণু ATP উৎপন্ন হয়?", opts: ["4", "8", "18", "38"], ans: 1 },
+            { q: "ATP এর পূর্ণরূপ কোনটি?", opts: ["অ্যাডিনোসিন মনোফসফেট", "অ্যাডিনোসিন ডাইফসফেট", "অ্যাডিনোসিন ট্রাইফসফেট", "অ্যাডিনোসিন পেপটাফসফেট"], ans: 2 },
+            { q: "কোন উদ্ভিদের প্রথম স্থায়ী পদার্থ-৪ কার্বনবিশিষ্ট অক্সালো এসিটিক এসিড?", opts: ["আখ", "আম", "জাম", "কাঁঠাল"], ans: 0 },
+            { q: "C4 উদ্ভিদ কোনটি?", opts: ["আম", "আখ", "লিচু", "কলা"], ans: 1 },
+            { q: "সালোকসংশ্লেষণ স্বাভাবিক গতিতে ঘটার জন্য আদর্শ তাপমাত্রা কত?", opts: ["22°— 35°C", "27°— 40°C", "32°— 45°C", "37°— 50°C"], ans: 0 },
+            { q: "কোন তাপমাত্রায় সালোকসংশ্লেষণ প্রক্রিয়া বন্ধ হয়ে যায়?", opts: ["১৭° সে.", "২৫° সে.", "৩০° সে.", "0° সে."], ans: 3 },
+            { q: "ক্লোরোফিলের প্রধান উপকরণের নাম—", opts: ["Al + Mg", "N + Mg", "Ca + Mg", "Ca + K"], ans: 1 },
+            { q: "নিচের কোন তরঙ্গদৈর্ঘ্যের আলোতে সালোকসংশ্লেষণ ভালো হয়?", opts: ["360nm", "420nm", "560nm", "860nm"], ans: 1 },
+            { q: "শ্বসন প্রক্রিয়া দিবারাত্রিতে কত ঘণ্টা চলে?", opts: ["১২ ঘণ্টা", "১৬ ঘণ্টা", "১৮ ঘণ্টা", "২৪ ঘণ্টা"], ans: 3 },
+            { q: "ইস্টের অবাত শ্বসনে কোনটি তৈরি হয়?", opts: ["ইথাইল অ্যালকোহল ও অক্সিজেন", "ল্যাকটিক এসিড ও কার্বন ডাইঅক্সাইড", "পাইরুভিক এসিড ও পানি", "ইথাইল অ্যালকোহল ও কার্বন ডাইঅক্সাইড"], ans: 3 },
+            { q: "কোনটি C3 উদ্ভিদ?", opts: ["আখ", "ভুট্টা", "পাট", "মুথা ঘাস"], ans: 2 },
+            { q: "অবাত শ্বসনের ধাপ কয়টি?", opts: ["৪টি", "৬টি", "২টি", "৩টি"], ans: 2 },
+            { q: "সালোকসংশ্লেষণ প্রক্রিয়ায় উপজাত হিসেবে নির্গত হয় কোনটি?", opts: ["পানি", "শর্করা", "অক্সিজেন", "কার্বন ডাই-অক্সাইড"], ans: 2 },
+            { q: "এক অণু NADH2 থেকে কত অণু ATP এর সমান শক্তি উৎপন্ন হয়?", opts: ["১", "২", "৩", "৪"], ans: 2 },
+            { q: "গ্লাইকোলাইসিসের জন্য প্রযোজ্য—<br>i. অক্সিজেন আবশ্যক<br>ii. দুই অণু পাইরুভিক এসিড উৎপন্ন হয়<br>iii. সাইটোপ্লাজমে এ ঘটে<br>নিচের কোনটি সঠিক?", opts: ["i ও ii", "i ও iii", "ii ও iii", "i, ii ও iii"], ans: 2 },
+            { q: "শ্বসনের উত্তম তাপমাত্রা কত?", opts: ["১৮°C - ২৯°C", "১৯°C - ২৪°C", "২০°C - ৪৫°C", "২২°C - ৩৫°C"], ans: 2 },
+            { q: "অবাত শ্বসন সাধারণত দেখা যায়—<br>i. ইস্টে ii. শৈবালে iii. ব্যাকটেরিয়ায়<br>নিচের কোনটি সঠিক?", opts: ["i ও ii", "ii ও iii", "i ও iii", "i, ii ও iii"], ans: 2 },
+            { q: "সালোকসংশ্লেষণের উপজাত দ্রব্য—<br>i. O2 ii. CO2 iii. H2O<br>নিচের কোনটি সঠিক?", opts: ["i ও ii", "ii ও iii", "i ও iii", "i, ii ও iii"], ans: 2 },
+            { q: "নিচের সমীকরণের উপর ভিত্তি করে পরবর্তী দুটি প্রশ্নের উত্তর দাও:<br>গ্লুকোজ + X → CO2 + Y + শক্তি<br>'X' কি নির্দেশ করে?", opts: ["CO2", "O2", "H2O", "ATP"], ans: 1 },
+            { q: "উপরিবুক্ত সমীকরণে নিচের কোনটিকে বাহ্যিক প্রভাবক হিসেবে গণ্য করা যাবে?", opts: ["তাপমাত্রা", "খাদ্য উপাদান", "এনজাইম", "কোষের বয়স"], ans: 0 },
+            { q: "নিচের অনুচ্ছেদটি পড় এবং পরবর্তী ২টি প্রশ্নের উত্তর দাও:<br>C6H12O6 + [A] →(বিভিন্ন এনজাইম)→ 6CO2 + 6H2O + শক্তি<br>উদ্দীপকের প্রক্রিয়ায় A এর অনুপস্থিতিতে কত অণু ATP তৈরি হবে?", opts: ["২", "৮", "২০", "৩৮"], ans: 0 },
+            { q: "উদ্দীপকের প্রক্রিয়ার শেষ ধাপের ক্ষেত্রে সঠিক তথ্য হলো—<br>i. মাইটোকন্ড্রিয়াতে ঘটে<br>ii. পানি উৎপন্ন হয়<br>iii. ৩৪ অণু ATP তৈরি হয়<br>নিচের কোনটি সঠিক?", opts: ["i ও ii", "ii ও iii", "i ও iii", "i, ii ও iii"], ans: 3 },
+            // Image 2
+            { q: "কোনটি মূল ও কাণ্ডের বৃদ্ধির জন্য ক্লোরিন প্রয়োজন?", opts: ["টমেটো", "সূর্যমুখী", "সুগারবিট", "আলু"], ans: 2 },
+            { q: "ক্লোরোফিলের প্রধান উপাদান কোনটি?", opts: ["Zn", "Fe", "Na", "Mg"], ans: 3 },
+            { q: "ক্লোরোফিলের প্রধান উপাদান হচ্ছে—", opts: ["Ca ও Fe", "Na ও Mg", "Fe ও N", "Mg ও N"], ans: 3 },
+            { q: "ক্লোরোপ্লাস্ট গঠন ও সংরক্ষণের জন্য কোনটি প্রয়োজন?", opts: ["দস্তা", "লোহা", "ম্যাঙ্গানিজ", "তামা"], ans: 2 },
+            { q: "কোনটির অভাবে উদ্ভিদের পাতা বেগুনি রং ধারণ করে?", opts: ["ফসফরাস", "নাইট্রোজেন", "পটাশিয়াম", "ম্যাগনেসিয়াম"], ans: 0 },
+            { q: "উদ্ভিদের পাতার সবুজ রং হালকা হয়ে যায় কোনটির অভাবে?", opts: ["ক্যালসিয়াম", "ফসফরাস", "পটাশিয়াম", "ম্যাগনেসিয়াম"], ans: 3 },
+            { q: "কোনটির অভাবে ডাইব্যাক রোগ হয়?", opts: ["Ca", "K", "Fe", "S"], ans: 3 },
+            { q: "ডাইব্যাক রোগ সৃষ্টি হয় কোনটির অভাবে?", opts: ["বোরন", "সালফার", "ফসফরাস", "লৌহ"], ans: 1 },
+            { q: "আমিষে শতকরা কত ভাগ নাইট্রোজেন থাকে?", opts: ["২০", "১৬", "১৭", "১৯"], ans: 1 },
+            { q: "আমাদের খাদ্য তালিকায় কমপক্ষে কত ভাগ প্রাণিজ আমিষ থাকা দরকার?", opts: ["২০", "২৫", "১৫", "১০"], ans: 0 },
+            { q: "নিচের কোন খাদ্যের শ্বেতসার সহজে হজম হয়?", opts: ["ভাত ও সিদ্ধ আলু", "গম ও ডাল", "আলু ও আটা", "ভাত ও আটা"], ans: 0 },
+            { q: "দ্বি-শর্করার উৎস কোনটি?", opts: ["চিনি, আলু", "চিনি ও দুধ", "দুধ ও মধু", "আটা ও চিনি"], ans: 1 },
+            { q: "কোন খাদ্যে বহু অণুবিশিষ্ট গ্লুকোজ রয়েছে?", opts: ["মধু", "দুধ", "চিনি", "আলু"], ans: 3 },
+            { q: "একজন সুস্থ পূর্ণবয়স্ক ব্যক্তির দিনে কত গ্রাম চর্বির প্রয়োজন?", opts: ["৩০-৪০", "৪০-৫০", "৫০-৬০", "৬০-৭০"], ans: 2 },
+            { q: "চর্বিতে দ্রবণীয় ভিটামিন নিচের কোনটিতে পাওয়া যায়?", opts: ["মলা মাছ", "কাঁচামরিচ", "কলিজা", "বাঁধাকপি"], ans: 2 },
+            { q: "কোনটির মধ্যে উপাদান হিসেবে লৌহ (Fe) থাকে না?", opts: ["লাল শাক", "ডিমের কুসুম", "কচু শাক", "কলিজা"], ans: 2 },
+            { q: "একজন পূর্ণবয়স্ক মানুষের দৈনিক ওজনের শতকরা কত ভাগ পানি গ্রহণ করা প্রয়োজন?", opts: ["২০—৩০", "৩০—৪০", "৪৫—৬০", "৫৫—৭০"], ans: 2 },
+            { q: "খাদ্য পিরামিডের নিচের স্তরের খাদ্য উপাদান কোনটি?", opts: ["ভিটামিন", "শর্করা", "স্নেহ", "আমিষ"], ans: 1 },
+            { q: "সুষম খাদ্যে শর্করা, আমিষ ও চর্বির অনুপাত কত হবে?", opts: ["৪ : ১ : ১", "১ : ৪ : ১", "৪ : ১ : ২", "১ : ১ : ৪"], ans: 0 },
+            { q: "নিচের কোনটিতে সবচেয়ে বেশি পরিমাণ আমিষ রয়েছে?", opts: ["গরু ও খাসির মাংসে", "মসুর ডাল ও মুরগীর মাংসে", "ইলিশ ও চিংড়ী মাছে", "ডিম ও ছোলাতে"], ans: 1 },
+            { q: "আয়োডিনের অভাবে কোন গ্রন্থি ফুলে যায়?", opts: ["অ্যাড্রিনাল", "থাইমাস", "থাইরয়েড", "প্যারাথাইরয়েড"], ans: 2 },
+            { q: "ইলিশ মাছ নিচের কোন রোগটি প্রতিরোধ করে?", opts: ["ডায়াবেটিস", "গয়টার", "এপিলেপসি", "আমাশয়"], ans: 0 },
+            { q: "রিকেটস রোগ হয় কোন ভিটামিনের অভাবে?", opts: ["এ", "বি", "সি", "ডি"], ans: 3 },
+            { q: "কোন ভিটামিনের অভাবে রক্তশূন্যতা দেখা দেয়?", opts: ["ভিটামিন ‘এ’", "ভিটামিন ‘বি১২’", "ভিটামিন ‘সি’", "ভিটামিন ‘ডি’"], ans: 1 },
+            { q: "১৫ কিলোক্যালরি = কত জুল?", opts: ["৬৩০০০", "৬২,৯০০", "৬২,৮০০", "৬৩,৭০০"], ans: 2 },
+            { q: "ডাবলু প্রতিদিন ৪০ গ্রাম চাউলের ভাত, ৫০ গ্রাম মাংস ও ২০ গ্রাম মাখন খেলে সে কত কিলোক্যালরি শক্তি গ্রহণ করে?", opts: ["৫০০", "৫৫৫", "৫৭৩", "৫৮০"], ans: 1 },
+            { q: "১০০ গ্রাম পরিমাণের নিচের খাদ্য থেকে ক্যালরি বেশি পাওয়া যাবে কোনটি থেকে?", opts: ["ভাত", "চিনি", "মাছ", "চর্বি"], ans: 3 },
+            { q: "নির্ভর পরিশ্রমী, প্রতিদিন প্রচুর খেলাধুলা করে। তার বিএমআর মান ১৭৮৭.৫ কিলোক্যালরি হলে, তার দৈনিক ক্যালরি চাহিদা কত?", opts: ["৩০৮৩.৪ কিলোক্যালরি", "২৭৭০.৬ কিলোক্যালরি", "২৪৫৭.৮ কিলোক্যালরি", "২১৪৫.০ কিলোক্যালরি"], ans: 0 },
+            { q: "রিয়াদ সাহেবের বয়স ৭০ কেজি, উচ্চতা ১০০ সেমি, এবং বয়স ৪০ বছর। তিনি পরিশ্রম করেন না। তাহলে তার দৈনিক ক্যালরি চাহিদা কত হবে?", opts: ["১৬৮২.২", "১৬৩৮.৪", "১৬৮২", "১৬৪২"], ans: 1 },
+            { q: "রহিমের উচ্চতা ১.১৫ মিটার এবং ওজন ৪০ কেজি। রহিমের বিএমআই কত?", opts: ["২১.৫", "২৫.৬", "২৪.৬", "২৩.৬"], ans: 0 },
+            { q: "রাবেয়ার উচ্চতা ১২৬ সে.মি. এবং দৈহিক ওজন ৪৮ কেজি। তার বি.এম.আই. মান কত?", opts: ["১৯.০৭", "২৩.৮৩", "৩১.২৪", "৩৭.১৮"], ans: 2 },
+            { q: "বিএমআই এর মানদণ্ডে সুস্বাস্থ্যের আদর্শ মান কোনটি?", opts: ["১৬.৫-১৮.৪", "১৮.৫-২৪.৯", "২৫-২৯.৯", "৩০-৩৪.৯"], ans: 1 },
+            { q: "কোনো ব্যক্তির BMI যদি ২৭.৭৮ হয়। তিনি বি.এম.আই এর কোন অবস্থানে থাকবেন?", opts: ["সুস্বাস্থ্যের আদর্শ মান", "শরীরের অতিরিক্ত ওজন", "মোটা হওয়ার ১ম স্তর", "মোটা হওয়ার ২য় স্তর"], ans: 1 },
+            { q: "১.৫০ মিটার উচ্চতাবিশিষ্ট ৫০ কেজি ওজনের একজন ব্যক্তির BMI কত?", opts: ["২২.২২", "২৪.২০", "২৬.২২", "২৮.২০"], ans: 0 },
+            { q: "হাসানের ওজন ৪৫.২ কেজি এবং এবং উচ্চতা ১২০ সে.মি. হাসানের বি এম আই কত?", opts: ["৩৪", "৩৩", "৩৬", "৪০"], ans: 0 },
+            { q: "মানুষের স্থায়ী দাঁত কয় ধরনের?", opts: ["৪", "৩", "২", "১"], ans: 0 },
+            { q: "মানুষের ছেদন দাঁত মোট কয়টি?", opts: ["২", "৪", "৬", "৮"], ans: 1 },
+            { q: "পাকস্থলীর বৈশিষ্ট্য—", opts: ["প্রাচীর পুরু ও পেশীবহুল", "আকৃতি গোলাকার, পেশীবহুল", "খাদ্য পরিপাকে সহায়তা করে না", "প্রাচীরে কোনো গ্রন্থি থাকে না"], ans: 0 },
+            { q: "কোনটি মানব দেহের সবচেয়ে বড় গ্রন্থি?", opts: ["অগ্ন্যাশয়", "লালাগ্রন্থি", "যকৃৎ", "গ্যাস্ট্রিক গ্রন্থি"], ans: 2 },
+            { q: "পিত্ত রসের বর্ণ কোনটি?", opts: ["লাল", "বাদামী", "গোলাপী", "গাঢ় সবুজ"], ans: 3 },
+            { q: "পিত্তথলি কোন নালির মাধ্যমে ডিওডেনামে প্রবেশ করে?", opts: ["পিত্তনালি", "যকৃৎ-অগ্ন্যাশয় নালি", "অন্ত্রিক নালি", "অগ্ন্যাশয় নালি"], ans: 1 },
+            { q: "ইউরিক এসিড কোথায় তৈরি হয়?", opts: ["যকৃতে", "দেহকোষে", "রেনাল ধমনিতে", "বৃক্কে"], ans: 0 },
+            { q: "মানবদেহের মিশ্রগ্রন্থি নিঃসরণ করে কোনটি?", opts: ["TSH", "থাইরক্সিন", "টায়ালিন", "অ্যামাইলেজ"], ans: 3 },
+            { q: "অগ্ন্যাশয় রসে কোন এনজাইমগুলো থাকে?", opts: ["লাইপেজ, ল্যাকটেজ, সুক্রেজ", "অ্যামাইলেজ, লাইপেজ, টায়ালিন", "ট্রিপসিন, অ্যামাইলেজ, লাইপেজ", "ল্যাকটেজ, ট্রিপসিন, লাইপেজ"], ans: 2 },
+            { q: "গ্লুকাগন নিঃসরণে কোন গ্রন্থি কাজ করে?", opts: ["অগ্ন্যাশয়", "গ্যাস্ট্রিক", "অন্ত্রিক", "যকৃৎ"], ans: 0 },
+            { q: "কোন এনজাইম শ্বেতসার পরিপাকে অংশ নেয়?", opts: ["টায়ালিন", "পেপসিন", "লাইপেজ", "ট্রিপসিন"], ans: 0 },
+            { q: "লালা রসের এনজাইমের নাম কী?", opts: ["পেপসিন", "মিউসিন", "টায়ালিন", "ট্রিপসিন"], ans: 2 },
+            { q: "নিষ্ক্রিয় পেপসিনোজেনকে সক্রিয় পেপসিনে পরিণত করে কোনটি?", opts: ["হাইড্রোক্লোরিক এসিড", "কার্বোক্সিপেপটাইডেজ", "অ্যামাইলেজ", "লাইপেজ"], ans: 0 },
+            { q: "কোথায় 'কাইম' তৈরি হয়?", opts: ["যকৃতে", "ক্ষুদ্রান্ত্রে", "পাকস্থলিতে", "বৃহদন্ত্রে"], ans: 2 },
+            { q: "Fatty liver এর ক্ষেত্রে লিপিডের পরিমাণ বেড়ে যায় কত শতাংশ?", opts: ["১০ - ২০", "২০ - ৩০", "৩০ - ৪০", "৪০ - ৫০"], ans: 0 },
+            { q: "আমাশয় রোগের জীবাণু কোনটি?", opts: ["Shigella", "Streptococcus", "Pneumococcus", "Mycobacterium"], ans: 0 },
+            { q: "প্যাপটিক আলসার মারাত্মক হলে কোনটি ঘটে?", opts: ["পাতলা পায়খানা", "মাথা ব্যথা", "বমি", "রক্তবমি"], ans: 3 },
+            { q: "শিলা প্রায়ই কোষ্ঠকাঠিন্যে ভোগে। ডাক্তারের কাছে চিকিৎসার জন্য গেলে ডাক্তার তাকে বিশেষ কিছু খাবার খেতে পরামর্শ দেন। নিচের কোন খাবারটি খেতে বলবেন?", opts: ["কলিজা", "পনির", "মাছ", "ফল"], ans: 3 },
+            { q: "শস্য স্যালাইন তৈরি করতে কোনটির গুঁড়া ব্যবহার করা হয়?", opts: ["গম", "যব", "ভুট্টা", "চাল"], ans: 3 },
+            // Image 3
+            { q: "কোন ধরনের রোগীর ক্ষেত্রে কোনো লক্ষণ ছাড়াই হার্ট অ্যাটাক হতে পারে?", opts: ["লিউকেমিয়া", "ডায়াবেটিস", "থ্যালাসেমিয়া", "এইডস"], ans: 1 },
+            { q: "প্রস্বেদনের বাহ্যিক প্রভাবক কোনটি?", opts: ["পাতার আয়তন", "পত্রের সংখ্যা", "আপেক্ষিক আর্দ্রতা", "খনিজ পদার্থ"], ans: 2 },
+            { q: "ক্যালেজ জমা হয় নিচের কোনটিতে?", opts: ["ভেসেল", "সিভপ্লেট", "সঙ্গীকোষ", "ট্রাকিড"], ans: 1 },
+            { q: "কোন রক্ত কণিকা হেপারিন নিঃসৃত করে?", opts: ["লিম্ফোসাইট", "নিউট্রোফিল", "মনোসাইট", "বেসোফিল"], ans: 3 },
+            { q: "উদ্ভিদের প্রস্তুতকৃত খাদ্য কোন কোষের মাধ্যমে বিভিন্ন অঙ্গে পরিবাহিত হয়?", opts: ["ট্রাকিড", "সীবনল", "ভেসেল", "সঙ্গীকোষ"], ans: 1 },
+            { q: "উদ্ভিদের মোট প্রস্বেদনের শতকরা কত ভাগ পত্ররন্ধ্রের মাধ্যমে হয়ে থাকে?", opts: ["৮০-৯০%", "৮৫-৯০%", "৯০-৯৫%", "৯৫-১০০%"], ans: 2 },
+            { q: "অ্যালবুমিন একটি—", opts: ["হরমোন", "ভিটামিন", "আমিষ", "অ্যান্টিবডি"], ans: 2 },
+            { q: "রক্তের মাধ্যমে দেহকোষে নিম্নের কোনটি প্রবেশ করে?", opts: ["H", "O2", "CO2", "He"], ans: 1 },
+            { q: "কোন বিজ্ঞানী মানুষের রক্তের শ্রেণিবিন্যাস করেন?", opts: ["লুই পাস্তুর", "কার্ল এরিকি", "লিনিয়াস", "কার্ল ল্যান্ড স্টেইনার"], ans: 3 },
+            { q: "রক্তের গ্রুপ জানা না থাকলে সাধারণত কোন গ্রুপ নিরাপদ?", opts: ["A এবং Rh+", "B এবং Rh-", "O এবং Rh-", "O এবং Rh+"], ans: 2 },
+            { q: "প্রস্বেদনের হার বৃদ্ধির সাথে কোনটি সম্পর্কিত?", opts: ["বায়ুচাপ বৃদ্ধি", "নিম্ন তাপমাত্রা", "পাতার সংখ্যা বৃদ্ধি", "পত্রফলকের আয়তন ছোট"], ans: 2 },
+            { q: "নিচের কোনটি হাইড্রোফিলিক পদার্থ নয়?", opts: ["সেলুলোজ", "স্টার্চ", "জিলাটিন", "পাথর"], ans: 3 },
+            { q: "মানুষের রক্তে LDL এর শতকরা পরিমাণ কত?", opts: ["৭০%", "৮০%", "৯০%", "১০০%"], ans: 0 },
+            { q: "কোন অণুজীবের সংক্রমণে বাতজ্বর হয়?", opts: ["Bacillus", "Pseudomonas", "Streptococcus", "Staphylococcus"], ans: 2 },
+            { q: "রক্তকোষের ক্যান্সারকে কি বলা হয়?", opts: ["লিউকেমিয়া", "অ্যানজিনা", "সিফিলিস", "নিউমোনিয়া"], ans: 0 },
+            { q: "কোন মৌলের উপস্থিতির জন্য রক্তের রং লাল হয়?", opts: ["ক্যালসিয়াম", "ম্যাগনেসিয়াম", "পটাশিয়াম", "আয়রন"], ans: 3 },
+            { q: "হৃদপিণ্ডের প্রাচীরকে বলা হয়—", opts: ["এপিকার্ডিয়াম", "মায়োকার্ডিয়াম", "এন্ডোকার্ডিয়াম", "পেরিকার্ডিয়াম"], ans: 1 },
+            { q: "'O' রক্ত গ্রুপে কোন এন্টিবডি উপস্থিত?", opts: ["a", "b", "A, B", "a, b"], ans: 3 },
+            { q: "বাতজ্বরে শরীরে যে অঙ্গগুলো আক্রান্ত হয়—<br>i. হৃৎপিণ্ড<br>ii. যকৃৎ<br>iii. অস্থিসন্ধি<br>নিচের কোনটি সঠিক?", opts: ["i ও ii", "i ও iii", "ii ও iii", "i, ii ও iii"], ans: 1 },
+            { q: "অভিস্রবণে খনিজ লবণ শোষিত হয়—<br>i. অভিস্রবণ প্রক্রিয়ায়<br>ii. বিপাকীয় শক্তি খরচের মাধ্যমে<br>iii. আয়ন হিসেবে<br>নিচের কোনটি সঠিক?", opts: ["i ও ii", "i ও iii", "ii ও iii", "i, ii ও iii"], ans: 2 },
+            { q: "শরিফের রক্তগ্রুপ AB+, রিফাতের AB- এবং রায়হানের O-। শরিফ-<br>i. রিফাতকে রক্ত দিতে পারবে<br>ii. শরিফের থেকে রক্ত নিতে পারবে<br>iii. রায়হানের রক্ত নিতে পারবে<br>নিচের কোনটি সঠিক?", opts: ["i ও ii", "i ও iii", "ii ও iii", "i, ii ও iii"], ans: 2 },
+            { q: "নিচের তথ্যের ভিত্তিতে পরবর্তী প্রশ্নের উত্তর দাও: সবুর সাহেবের রক্তের গ্রুপ এমন— তিনি সবার থেকে রক্ত গ্রহণ করতে পারেন।<br>সবুর সাহেবের রক্তের গ্রুপ কোনটি?", opts: ["AB", "A", "B", "O"], ans: 0 },
+            { q: "উক্ত রক্তের বৈশিষ্ট্য হলো—<br>i. লোহিত রক্ত কণিকায় পরিমাণ কম<br>ii. অ্যান্টিজেন আছে<br>iii. অ্যান্টিবডি নেই<br>নিচের কোনটি সঠিক?", opts: ["i ও ii", "i ও iii", "ii ও iii", "i, ii ও iii"], ans: 2 },
+            // Image 4 (Left Column)
+            { q: "কোন প্রবাহী অর্ধভেদ্য ঝিল্লির মধ্য দিয়ে প্রবাহিত হয়?", opts: ["দ্রাবক", "দ্রাব", "দ্রবণ", "কলয়েড"], ans: 0 },
+            { q: "কোন গ্রুপধারী রক্তে কোনো অ্যান্টিজেন থাকে না?", opts: ["A", "B", "O", "AB"], ans: 2 },
+            { q: "কোন গ্রুপের রক্তে A, B কোনো অ্যান্টিবডি থাকে না?", opts: ["A", "B", "O", "AB"], ans: 3 },
+            { q: "লিউকেমিয়া রোগটি কেন হয়?", opts: ["শ্বেত রক্তকণিকা বেড়ে যায়", "লোহিত রক্তকণিকা কমে যায়", "অণুচক্রিকা কমে যায়", "রক্তে শ্বেত রক্তকণিকা কমে যায়"], ans: 0 },
+            { q: "রক্তে রক্তরসের পরিমাণ কত?", opts: ["৪৫%", "৫৫%", "৬৫%", "৭৫%"], ans: 1 },
+            { q: "কোনটিকে 'প্রয়োজনীয় অমঙ্গল' বলা হয়?", opts: ["ইমবাইবিশন", "ব্যাপন", "অভিস্রবণ", "প্রস্বেদন"], ans: 3 },
+            { q: "অণুচক্রিকার গড় আয়ু কতদিন?", opts: ["২-১০ দিন", "৫-১০ দিন", "৭-১০ দিন", "৮-১০ দিন"], ans: 1 },
+            { q: "জীবাণু ভক্ষণ করে নিচের কোন কণিকা?", opts: ["নিউট্রোফিল", "ইওসিনোফিল", "বেসোফিল", "থ্রম্বোসাইট"], ans: 0 },
+            { q: "B রক্তের গ্রুপে কোন অ্যান্টিবডি থাকে?", opts: ["b", "a", "নেই", "a, b"], ans: 1 },
+            { q: "কোনটির ভিতর দিয়ে অক্সিজেনযুক্ত রক্ত বাম অলিন্দে প্রবেশ করে?", opts: ["মহাধমনি", "উর্ধ্ব মহাশিরা", "ফুসফুসীয় ধমনি", "ফুসফুসীয় শিরা"], ans: 3 },
+            { q: "অক্সিজেনসমৃদ্ধ রক্ত হৃৎপিণ্ডের কোনটি অতিক্রম করে?", opts: ["ট্রাইকাসপিড ভালভ", "পালমোনারি কপাটিকা", "পালমোনারি ধমনি", "বাইকাসপিড ভালভ"], ans: 3 },
+            { q: "কোনো উদ্ভিদের মোট প্রস্বেদনের কত ভাগ পত্ররন্ধ্রের মাধ্যমে সংঘটিত হয়?", opts: ["৮০-৯০%", "৯০-৯৫%", "৯০-৯২%", "৯৫-৯৯%"], ans: 1 },
+            { q: "নিচের কোনটি হাইড্রোফিলিক পদার্থ নয়?", opts: ["সেলুলোজ", "কিউটিন", "স্টার্চ", "জিলাটিন"], ans: 1 },
+            { q: "সুপ্ত বীজ তলা বাতাসে ছড়িয়ে পড়া কোন ধরনের প্রক্রিয়া?", opts: ["ভৌত", "জৈব রাসায়নিক", "রাসায়নিক", "শ্বসন"], ans: 0 },
+            { q: "কোন প্রক্রিয়ায় উদ্ভিদে খনিজ পদার্থ মূলের কোষে স্থানান্তরিত হয়?", opts: ["ইমবাইবিশন", "অভিস্রবণ", "ব্যাপন", "শ্বসন"], ans: 1 },
+            // Image 4 (Right Column)
+            { q: "মানবদেহে রক্তের সমতা রক্ষা করা কোনটির কাজ?", opts: ["হরমোন", "পানি", "খনিজ লবণ", "ভিটামিন"], ans: 2 },
+            { q: "কোন রক্ত গ্রুপকে সর্বজনীন গ্রহীতা বলা হয়?", opts: ["A", "B", "AB", "O"], ans: 2 },
+            { q: "'ফ্লুইড অব লাইফ' বলা হয় নিচের কোনটিকে?", opts: ["পানি", "রক্তরস", "রক্তকণিকা", "খনিজ"], ans: 1 },
+            { q: "প্রোটোপ্লাজমের শতকরা কত ভাগ পানি?", opts: ["৬০%", "৭০%", "৮০%", "৯০%"], ans: 3 },
+            { q: "শুকনো কাঠ পানি শোষণ করে স্ফীত হওয়ার সাথে সম্পর্কিত কোনটি?", opts: ["প্রস্বেদন", "ব্যাপন", "অভিস্রবণ", "ইমবাইবিশন"], ans: 3 },
+            { q: "কাঠ দীর্ঘদিন পানির সংস্পর্শে থাকলে ফুলে ওঠে কারণ—", opts: ["ইমবাইবিশন", "ব্যাপন", "অভিস্রবণ", "প্রস্বেদন"], ans: 0 },
+            { q: "উদ্ভিদের পানি পরিশোধনে সবচেয়ে গুরুত্বপূর্ণ ভূমিকা পালন করে কোনটি?", opts: ["অভিস্রবণ ও শ্বসন", "শ্বসন ও প্রস্বেদন", "অভিস্রবণ ও প্রস্বেদন", "ব্যাপন ও শ্বসন"], ans: 2 },
+            { q: "ক্যাপিলারি অ্যাকশন কীসের মাধ্যমে ঘটে?", opts: ["ভেসেল", "ট্রাকিড", "সীবনল", "ফ্লোয়েম ফাইবার"], ans: 1 },
+            { q: "ফ্লোয়েম টিস্যুর সিভপ্লেটের ছিদ্রগুলো শীতের কোনটি জমে গেলে ছোট হয়ে যায়?", opts: ["সুক্রোজ", "এনজাইম", "কার্বন ডাইঅক্সাইড", "ক্যালোজ"], ans: 3 },
+            { q: "পত্ররন্ধ্রের সাথে যুক্ত কোষ কোনটি?", opts: ["লেন্টিসেল", "গার্ডকোষ", "স্পঞ্জি প্যারেনকাইমা", "প্যালিসেড প্যারেনকাইমা"], ans: 1 },
+            { q: "উদ্ভিদের গৌণ বৃদ্ধি হলে কাণ্ডের বাকল ফেটে কী সৃষ্টি হয়?", opts: ["কিউটিকল", "লেন্টিসেল", "স্টোমাটা", "কর্ক"], ans: 1 },
+            { q: "প্রস্বেদনের বাহ্যিক প্রভাবক কোনগুলো?", opts: ["তাপমাত্রা, আলো", "আলো, পত্ররন্ধ্র", "পত্ররন্ধ্র, পাতার সংখ্যা", "তাপমাত্রা, পাতার সংখ্যা"], ans: 0 },
+            { q: "কোন বিজ্ঞানী প্রস্বেদনকে 'প্রয়োজনীয় ক্ষতি' নাম দেন?", opts: ["কার্টিস", "ম্যাক্স", "লিনিয়াস", "রবার্ট হুক"], ans: 0 },
+            { q: "প্রস্বেদনকে প্রয়োজনীয় ক্ষতি (Necessary evil) নামে অভিহিত করেছেন কোন বিজ্ঞানী?", opts: ["লিনিয়াস", "কার্টিস", "বোরী", "গ্রেগর জোহান মেন্ডেল"], ans: 1 },
+            { q: "রক্তরসের রং কেমন হয়?", opts: ["লাল", "ঈষৎ হলুদাভ", "হলুদ", "ঈষৎ নীলাভ"], ans: 1 }
+        ];
 
-        // General close function
-        function closeModal() {
-            overlay.style.display = 'none';
-            document.body.style.overflow = 'auto'; 
-        }
-        window.onclick = function(event) {
-            if (event.target == overlay) closeModal();
-        }
+        // State Array based on length of questions
+        const userAnswers = new Array(db.length).fill(null);
+        const prefixArray = ["ক", "খ", "গ", "ঘ"];
+        const EXAM_LOCAL_KEY = "saifuls_biology_exam_completed";
 
-        // ----------------------------------------------------
-        // Open Small Modal (For Joba, Shapla, Beli)
-        // ----------------------------------------------------
-        function openSmallModal(shiftName, driveFileId) {
-            smallModal.style.display = 'block';
-            largeModal.style.display = 'none';
+        window.onload = function() {
+            if (localStorage.getItem(EXAM_LOCAL_KEY)) {
+                document.getElementById('statsBar').style.display = 'none';
+                document.getElementById('examContainer').style.display = 'none';
+                document.getElementById('lockedScreen').style.display = 'flex';
+            } else {
+                initExam();
+            }
+        };
 
-            document.getElementById('smallShiftDisplay').innerText = shiftName + ' রোস্টার';
-            document.getElementById('smallRosterPreview').src = `https://drive.google.com/thumbnail?id=${driveFileId}&sz=w400`;
-            
-            const driveLink = `https://drive.google.com/file/d/${driveFileId}/view?usp=drivesdk`;
-            document.getElementById('smallQrCode').src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(driveLink)}`;
-            document.getElementById('smallDownloadBtn').href = `https://drive.google.com/uc?export=download&id=${driveFileId}`;
+        function initExam() {
+            const wrapper = document.getElementById('questionsWrapper');
+            document.getElementById('totalQ').innerText = db.length;
+            document.getElementById('unansweredQ').innerText = db.length;
 
-            overlay.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-        }
-
-        // ----------------------------------------------------
-        // Open Large Modal (Professional Bokul Table)
-        // ----------------------------------------------------
-        function openLargeModal(shiftName, driveFileId) {
-            smallModal.style.display = 'none';
-            largeModal.style.display = 'flex';
-
-            document.getElementById('largeShiftDisplay').innerText = shiftName + ' রোস্টার';
-            
-            const driveLink = `https://drive.google.com/file/d/${driveFileId}/view?usp=drivesdk`;
-            document.getElementById('largeQrCode').src = `https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=${encodeURIComponent(driveLink)}&color=1e293b`;
-            document.getElementById('largeDownloadBtn').href = `https://drive.google.com/uc?export=download&id=${driveFileId}`;
-
-            generateBokulTable();
-
-            overlay.style.display = 'flex';
-            document.body.style.overflow = 'hidden'; 
-        }
-
-        function generateBokulTable() {
-            let html = '<table class="pro-table">';
-            html += `<thead>
-                        <tr>
-                            <th width="4%" class="sticky-col-1">ক্রমিক<br>নং</th>
-                            <th width="20%" class="sticky-col-2">শিক্ষকের নাম</th>
-                            <th>১১/১০/২৬<br>রবি</th>
-                            <th>১২/১০/২৬<br>সোম</th>
-                            <th>১৩/১০/২৬<br>মঙ্গল</th>
-                            <th>১৫/১০/২৬<br>বৃহঃ</th>
-                            <th>২৬/১০/২৬<br>সোম</th>
-                            <th>২৭/১০/২৬<br>মঙ্গল</th>
-                            <th>২৮/১০/২৬<br>বুধ</th>
-                            <th>২৯/১০/২৬<br>বৃহঃ</th>
-                            <th>০১/১১/২৬<br>রবি</th>
-                            <th>০২/১১/২৬<br>সোম</th>
-                            <th>০৪/১১/২৬<br>বুধ</th>
-                            <th>০৫/১১/২৬<br>বৃহঃ</th>
-                            <th width="6%">মোট<br>ডিউটি</th>
-                        </tr>
-                    </thead><tbody id="rosterBody">`;
-
-            const teachers = [
-                { name: "মোঃ মিজানুর রহমান-৩", total: 5 }, { name: "মোঃ মিজানুর রহমান-৪", total: 5 },
-                { name: "মোঃ আবুল হোসন ফারুক", total: 5 }, { name: "মোঃ সাইফুল ইসলাম-১", total: 5 },
-                { name: "মোঃ দুলাল হোসন চৌধুরী", total: 5 }, { name: "মোঃ নিজাম উদ্দীন মজুমদার", total: 6 },
-                { name: "মোহাম্মদ আব্দুর রহমান", total: 5 }, { name: "মোস্তফা কামাল", total: 6 },
-                { name: "মো: জহিরুল ইসলাম", total: 5 }, { name: "ফরহাদ আল ফয়সাল", total: 6 },
-                { name: "সিরাজুস সালেহীন", total: 5 }, { name: "মোহাম্মদ মহসিন-২", total: 5 },
-                { name: "সাইফুল ইসলাম মিয়াজী", total: 5 }, { name: "মাও. মহিউদ্দিন", total: 6 },
-                { name: "মোঃ স্বপন মজুমদার", total: 6 }, { name: "মোঃ সিফাতুল মোস্তফা", total: 5 },
-                { name: "কাউছার আহমেদ", total: 6 }, { name: "মোঃ ইউছুফ আলী", total: 6 },
-                { name: "মোহাম্মদ হোসাইন", total: 6 }, { name: "বিল্লাল হোসন", total: 6 },
-                { name: "এমরান হোসাইন", total: 5 }, { name: "আবু মু. সজিব", total: 6 },
-                { name: "মাসুদ আলম", total: 6 }, { name: "বায়েজিদুল ইসলাম মিজু.", total: 6 },
-                { name: "কাউছার হামিদ জীবন", total: 6 }
-            ];
-
-            // Exact matrix mapping provided
-            const dutyMatrix = [
-                [2, 6, 9, 10, 12], [1, 3, 6, 7, 9], [2, 4, 5, 7, 12], [1, 6, 7, 9, 10], [2, 6, 7, 10, 12],
-                [1, 3, 6, 8, 9, 11], [1, 3, 4, 8, 12], [2, 3, 5, 6, 8, 9], [4, 5, 9, 10, 12], [2, 3, 5, 8, 10, 11],
-                [1, 2, 4, 7, 12], [1, 4, 5, 9, 11], [2, 3, 7, 8, 10], [3, 5, 7, 8, 10, 11], [1, 2, 4, 5, 8, 9],
-                [1, 2, 5, 6, 11], [3, 4, 6, 8, 10, 11], [3, 5, 6, 8, 9, 11], [1, 3, 6, 7, 9, 11], [3, 4, 6, 7, 10, 11],
-                [3, 5, 7, 8, 11], [1, 4, 5, 7, 9, 10], [2, 4, 6, 8, 10, 11], [1, 2, 4, 7, 8, 10], [1, 2, 4, 5, 9, 11]
-            ];
-
-            teachers.forEach((teacher, index) => {
-                html += `<tr>
-                    <td class="sticky-col-1"><b>${index + 1}</b></td>
-                    <td class="sticky-col-2 teacher-name">${teacher.name}</td>`;
+            db.forEach((item, index) => {
+                const card = document.createElement('div');
+                card.className = 'question-card';
+                card.id = `q-card-${index}`;
                 
-                let validTickCount = 0;
-                for (let day = 1; day <= 12; day++) {
-                    if (dutyMatrix[index].includes(day)) {
-                        html += `<td><span class="tick">✓</span></td>`;
-                        validTickCount++;
-                    } else {
-                        html += `<td></td>`;
-                    }
+                const header = document.createElement('div');
+                header.className = 'question-header';
+                header.innerHTML = `
+                    <div class="question-number">${index + 1}</div>
+                    <div class="question-text">${item.q}</div>
+                `;
+                card.appendChild(header);
+
+                const optsGrid = document.createElement('div');
+                optsGrid.className = 'options-grid';
+
+                item.opts.forEach((optText, optIndex) => {
+                    const btn = document.createElement('button');
+                    btn.className = 'option-btn';
+                    btn.id = `btn-${index}-${optIndex}`;
+                    btn.innerHTML = `<span class="option-prefix">${prefixArray[optIndex]}.</span> ${optText}`;
+                    btn.onclick = () => selectOption(index, optIndex);
+                    optsGrid.appendChild(btn);
+                });
+
+                card.appendChild(optsGrid);
+                wrapper.appendChild(card);
+            });
+        }
+
+        function selectOption(qIndex, optIndex) {
+            userAnswers[qIndex] = optIndex;
+            
+            // Remove selected class from all options in this question
+            for (let i = 0; i < 4; i++) {
+                document.getElementById(`btn-${qIndex}-${i}`).classList.remove('selected');
+            }
+            // Add selected class to chosen one
+            document.getElementById(`btn-${qIndex}-${optIndex}`).classList.add('selected');
+
+            updateStats();
+        }
+
+        function updateStats() {
+            let answered = userAnswers.filter(a => a !== null).length;
+            let total = db.length;
+            let unanswered = total - answered;
+            
+            document.getElementById('answeredQ').innerText = answered;
+            document.getElementById('unansweredQ').innerText = unanswered;
+            
+            let percent = (answered / total) * 100;
+            document.getElementById('progressBar').style.width = percent + '%';
+        }
+
+        function submitExam() {
+            let answered = userAnswers.filter(a => a !== null).length;
+            let total = db.length;
+
+            if (answered < total) {
+                let confirmSubmit = confirm(`আপনি ${total - answered} টি প্রশ্নের উত্তর দেননি। আপনি কি নিশ্চিত যে আপনি পরীক্ষা জমা দিতে চান?`);
+                if (!confirmSubmit) return;
+            }
+
+            // Permanently lock exam
+            localStorage.setItem(EXAM_LOCAL_KEY, "true");
+
+            // Calculate Result
+            let correct = 0;
+            let incorrect = 0;
+            let unanswered = 0;
+
+            userAnswers.forEach((ans, index) => {
+                if (ans === null) {
+                    unanswered++;
+                } else if (ans === db[index].ans) {
+                    correct++;
+                } else {
+                    incorrect++;
                 }
-                
-                // Color formatting for total based on validation
-                const totalColor = validTickCount === teacher.total ? '#d97706' : '#ef4444';
-                html += `<td><b style="color: ${totalColor}; font-size: 16px;">${validTickCount}</b></td></tr>`;
             });
 
-            html += `</tbody><tfoot>
-                        <tr>
-                            <th colspan="2" class="sticky-col-2" style="text-align: right; padding-right: 15px;">প্রতিদিনের মোট ডিউটি :</th>
-                            <th>১২</th><th>১২</th><th>১২</th><th>১২</th><th>১২</th><th>১২</th>
-                            <th>১২</th><th>১২</th><th>১২</th><th>১২</th><th>১২</th><th>৬</th>
-                            <th class="grand-total">১৩৮</th>
-                        </tr>
-                    </tfoot></table>`;
+            let percentage = ((correct / total) * 100).toFixed(2);
 
-            document.getElementById('rosterContainer').innerHTML = html;
+            // Hide Exam, Show Result
+            document.getElementById('statsBar').style.display = 'none';
+            document.getElementById('examContainer').style.display = 'none';
+            document.getElementById('resultContainer').style.display = 'block';
+
+            // Populate Result Summary
+            document.getElementById('finalScoreText').innerText = `${correct}/${total}`;
+            document.getElementById('percentageText').innerText = `${percentage}%`;
+            document.getElementById('rCorrect').innerText = correct;
+            document.getElementById('rIncorrect').innerText = incorrect;
+            document.getElementById('rUnanswered').innerText = unanswered;
+
+            let msg = document.getElementById('performanceMessage');
+            if (percentage >= 80) { msg.innerText = "অসাধারণ পারফরম্যান্স! 🌟"; msg.style.color = "var(--correct)"; }
+            else if (percentage >= 60) { msg.innerText = "খুব ভালো চেষ্টা! 👍"; msg.style.color = "var(--primary-dark)"; }
+            else { msg.innerText = "আরও অনুশীলন প্রয়োজন। 📖"; msg.style.color = "var(--warning)"; }
+
+            // Generate Review
+            generateReview();
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        function generateReview() {
+            const wrapper = document.getElementById('reviewWrapper');
+            
+            db.forEach((item, index) => {
+                const uAns = userAnswers[index];
+                const cAns = item.ans;
+
+                const card = document.createElement('div');
+                card.className = 'question-card review-card';
+                
+                const header = document.createElement('div');
+                header.className = 'question-header';
+                header.innerHTML = `
+                    <div class="question-number">${index + 1}</div>
+                    <div class="question-text">${item.q}</div>
+                `;
+                card.appendChild(header);
+
+                const optsContainer = document.createElement('div');
+                optsContainer.className = 'options-grid';
+
+                item.opts.forEach((optText, optIndex) => {
+                    const optDiv = document.createElement('div');
+                    optDiv.className = 'review-option';
+                    
+                    let badgeHTML = '';
+                    
+                    if (optIndex === cAns) {
+                        optDiv.classList.add('correct-ans');
+                        badgeHTML = '<span class="review-badge bg-green">সঠিক উত্তর ✓</span>';
+                    }
+                    
+                    if (optIndex === uAns && uAns !== cAns) {
+                        optDiv.classList.add('wrong-ans');
+                        badgeHTML = '<span class="review-badge bg-red">আপনার ভুল উত্তর ✗</span>';
+                    }
+
+                    if (uAns === null && optIndex === cAns) {
+                        badgeHTML = '<span class="review-badge bg-green">সঠিক উত্তর (উত্তর দেওয়া হয়নি)</span>';
+                    }
+
+                    optDiv.innerHTML = `
+                        <span class="option-prefix">${prefixArray[optIndex]}.</span> 
+                        <span>${optText}</span>
+                        ${badgeHTML}
+                    `;
+                    optsContainer.appendChild(optDiv);
+                });
+
+                card.appendChild(optsContainer);
+                wrapper.appendChild(card);
+            });
         }
     </script>
 </body>
