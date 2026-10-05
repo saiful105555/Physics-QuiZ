@@ -3,419 +3,359 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>সাইফুল'স সাইন্স কেয়ার | বায়োলজি-মডেল টেস্ট</title>
+    <title>সাইফুল'স সাইন্স কেয়ার - বায়োলজি-মডেল টেস্ট</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap');
 
         :root {
-            --primary: #10b981;
-            --primary-dark: #059669;
-            --primary-light: #ecfdf5;
-            --secondary: #3b82f6;
-            --background: #f3f4f6;
+            --primary-color: #0f766e;
+            --secondary-color: #047857;
+            --bg-color: #f0fdf4;
             --card-bg: #ffffff;
-            --text-main: #1f2937;
-            --text-muted: #6b7280;
-            --correct: #22c55e;
-            --incorrect: #ef4444;
-            --warning: #f59e0b;
+            --text-color: #1f2937;
+            --option-bg: #f8fafc;
+            --option-hover: #d1fae5;
+            --option-selected: #a7f3d0;
+            --correct-color: #16a34a;
+            --correct-bg: #dcfce7;
+            --incorrect-color: #dc2626;
+            --incorrect-bg: #fee2e2;
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --border-radius: 16px;
         }
 
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: 'Noto Sans Bengali', sans-serif;
+            font-family: 'Hind Siliguri', sans-serif;
         }
 
         body {
-            background-color: var(--background);
-            background-image: radial-gradient(circle at 10% 20%, rgb(236, 253, 245) 0%, rgb(243, 244, 246) 90%);
-            color: var(--text-main);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            overflow-x: hidden;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
         }
 
-        /* Header Styles */
         .header {
-            width: 100%;
-            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
-            padding: 2rem 1rem;
+            padding: 2.5rem 1rem;
             text-align: center;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow);
             position: relative;
             overflow: hidden;
+            border-bottom: 5px solid #34d399;
         }
 
-        .header::before {
-            content: '';
+        .header::before, .header::after {
+            content: '🧬';
             position: absolute;
-            top: -50px; left: -50px;
-            width: 150px; height: 150px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 50%;
+            font-size: 120px;
+            opacity: 0.08;
+            transform: rotate(30deg);
         }
-
-        .header::after {
-            content: '';
-            position: absolute;
-            bottom: -50px; right: -50px;
-            width: 200px; height: 200px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 50%;
-        }
+        .header::before { top: -20px; left: -20px; }
+        .header::after { bottom: -20px; right: -20px; content: '🌿'; transform: rotate(-15deg); }
 
         .header h1 {
             font-size: 2.2rem;
+            font-weight: 700;
             margin-bottom: 0.5rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
             position: relative;
             z-index: 1;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
         }
 
         .header h2 {
-            font-size: 1.2rem;
-            font-weight: 400;
-            margin-bottom: 1rem;
-            opacity: 0.9;
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: #d1fae5;
             position: relative;
             z-index: 1;
         }
 
         .instruction {
-            background: rgba(255, 255, 255, 0.2);
-            display: inline-block;
-            padding: 0.5rem 1.5rem;
-            border-radius: 50px;
-            font-size: 0.9rem;
-            backdrop-filter: blur(5px);
-            position: relative;
-            z-index: 1;
-        }
-
-        /* Stats & Progress */
-        .sticky-stats {
-            position: sticky;
-            top: 0;
-            width: 100%;
-            background: white;
-            padding: 1rem;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            z-index: 100;
-            display: flex;
-            justify-content: center;
-        }
-
-        .stats-container {
-            width: 100%;
-            max-width: 800px;
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-        .stats-row {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.95rem;
-            font-weight: 600;
-        }
-
-        .stat-item {
+            background-color: #fef08a;
+            color: #854d0e;
+            padding: 0.75rem;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1rem;
+            border-bottom: 1px solid #fde047;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            justify-content: center;
+            gap: 8px;
         }
 
-        .stat-badge {
-            padding: 0.2rem 0.6rem;
-            border-radius: 12px;
-            color: white;
-            font-size: 0.85rem;
+        .container {
+            max-width: 850px;
+            margin: 2rem auto;
+            padding: 0 1rem;
         }
-        .badge-total { background: var(--secondary); }
-        .badge-answered { background: var(--primary); }
-        .badge-unanswered { background: var(--warning); }
 
-        .progress-bar-bg {
+        .status-bar {
+            background: var(--card-bg);
+            padding: 1.2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            border-top: 4px solid var(--primary-color);
+        }
+
+        .status-item {
+            font-size: 1rem;
+            font-weight: 600;
+            background: #f1f5f9;
+            padding: 8px 16px;
+            border-radius: 8px;
+            color: var(--primary-color);
+        }
+
+        .progress-container {
             width: 100%;
-            height: 8px;
-            background: var(--background);
-            border-radius: 4px;
+            height: 10px;
+            background: #e2e8f0;
+            border-radius: 5px;
+            margin-top: 5px;
             overflow: hidden;
         }
 
-        .progress-bar-fill {
+        .progress-bar {
             height: 100%;
-            background: var(--primary);
+            background: linear-gradient(90deg, #34d399, var(--primary-color));
             width: 0%;
-            transition: width 0.3s ease;
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* Main Container */
-        .main-container {
-            width: 100%;
-            max-width: 800px;
-            padding: 2rem 1rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        /* Question Cards */
         .question-card {
             background: var(--card-bg);
-            border-radius: 12px;
-            padding: 1.5rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.02), 0 1px 3px rgba(0,0,0,0.05);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border-left: 4px solid var(--primary);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 1.5rem;
+            display: none;
+            animation: slideIn 0.4s ease-out forwards;
+            border: 1px solid #e2e8f0;
         }
 
-        .question-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 15px rgba(0,0,0,0.05);
-        }
-
-        .question-header {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1.2rem;
-        }
-
-        .question-number {
-            background: var(--primary-light);
-            color: var(--primary-dark);
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            flex-shrink: 0;
-            font-size: 1.1rem;
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
         }
 
         .question-text {
-            font-size: 1.15rem;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #0f172a;
             line-height: 1.5;
-            color: var(--text-main);
-            margin-top: 0.3rem;
         }
 
-        /* Options */
         .options-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 0.8rem;
-            padding-left: 3rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
         }
 
-        .option-btn {
+        .option {
+            background: var(--option-bg);
+            border: 2px solid #e2e8f0;
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #334155;
             display: flex;
             align-items: center;
-            width: 100%;
-            text-align: left;
-            background: #f9fafb;
-            border: 2px solid transparent;
-            padding: 1rem;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1rem;
-            color: var(--text-main);
-            transition: all 0.2s ease;
         }
 
-        .option-btn:hover {
-            background: var(--primary-light);
-            border-color: #a7f3d0;
+        .option:hover:not(.disabled) {
+            background: var(--option-hover);
+            border-color: #34d399;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
         }
 
-        .option-btn.selected {
-            background: var(--primary-light);
-            border-color: var(--primary);
-            font-weight: 600;
+        .option.selected {
+            background: var(--option-selected);
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            font-weight: 700;
         }
 
-        .option-prefix {
-            font-weight: bold;
-            margin-right: 1rem;
-            color: var(--text-muted);
+        .option.disabled {
+            cursor: default;
         }
 
-        .option-btn.selected .option-prefix {
-            color: var(--primary-dark);
+        .option.correct-review {
+            background: var(--correct-bg);
+            border-color: var(--correct-color);
+            color: #166534;
+            font-weight: 700;
         }
 
-        /* Submit Button */
-        .submit-container {
-            text-align: center;
+        .option.incorrect-review {
+            background: var(--incorrect-bg);
+            border-color: var(--incorrect-color);
+            color: #991b1b;
+            font-weight: 700;
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
             margin-top: 2rem;
-            padding-bottom: 4rem;
+            gap: 15px;
         }
 
-        .submit-btn {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: white;
+        button {
+            padding: 0.8rem 2rem;
             border: none;
-            padding: 1rem 3rem;
-            font-size: 1.2rem;
-            font-weight: bold;
-            border-radius: 50px;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 700;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .submit-btn:hover {
-            transform: translateY(-2px) scale(1.02);
-            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.6);
-        }
-
-        /* Locked Screen */
-        .locked-screen {
-            display: none;
-            flex-direction: column;
+            transition: all 0.3s ease;
+            display: flex;
             align-items: center;
             justify-content: center;
-            text-align: center;
-            min-height: 60vh;
-            padding: 2rem;
         }
 
-        .locked-icon {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            color: var(--text-muted);
+        .btn-prev {
+            background: #cbd5e1;
+            color: #334155;
+        }
+        
+        .btn-prev:hover {
+            background: #94a3b8;
+            color: white;
         }
 
-        .locked-screen h2 {
-            color: var(--text-main);
-            margin-bottom: 1rem;
-            font-size: 1.8rem;
+        .btn-next, .btn-submit {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            box-shadow: 0 4px 15px rgba(15, 118, 110, 0.3);
+            flex-grow: 1;
+            max-width: 250px;
+        }
+
+        .btn-next:hover, .btn-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(15, 118, 110, 0.4);
+        }
+
+        .btn-hidden {
+            display: none !important;
         }
 
         /* Result Screen */
         .result-screen {
-            display: none;
-            width: 100%;
-            animation: fadeIn 0.5s ease;
-        }
-
-        .result-summary {
-            background: white;
-            border-radius: 15px;
-            padding: 2rem;
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 3rem 2rem;
             text-align: center;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            margin-bottom: 2rem;
-            border-top: 6px solid var(--primary);
+            box-shadow: var(--shadow);
+            display: none;
+            border-top: 5px solid var(--primary-color);
         }
 
-        .result-summary h2 {
-            font-size: 2rem;
-            color: var(--primary-dark);
+        .result-title {
+            font-size: 2.5rem;
+            color: var(--primary-color);
             margin-bottom: 1.5rem;
+            font-weight: 700;
         }
 
-        .score-circle {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            border: 8px solid var(--primary);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1.5rem auto;
-            background: var(--primary-light);
-        }
-
-        .score-circle span {
-            font-size: 2rem;
-            font-weight: bold;
-            color: var(--primary-dark);
-        }
-
-        .score-circle small {
-            font-size: 1rem;
-            color: var(--text-muted);
-        }
-
-        .stats-grid {
+        .result-stats {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-            margin-top: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
         }
 
         .stat-box {
-            padding: 1rem;
-            border-radius: 10px;
-            background: var(--background);
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            transition: transform 0.3s;
+        }
+        
+        .stat-box:hover {
+            transform: translateY(-5px);
         }
 
-        .stat-box h3 { font-size: 1.5rem; margin-bottom: 0.3rem; }
-        .stat-box p { font-size: 0.9rem; color: var(--text-muted); }
-        .stat-box.c-correct h3 { color: var(--correct); }
-        .stat-box.c-incorrect h3 { color: var(--incorrect); }
-        .stat-box.c-unanswered h3 { color: var(--warning); }
-
-        /* Review Styles */
-        .review-card {
-            border-left: none;
-        }
-
-        .review-option {
-            position: relative;
-            padding: 1rem;
+        .stat-box h3 {
+            font-size: 2.2rem;
             margin-bottom: 0.5rem;
-            border-radius: 8px;
-            border: 2px solid transparent;
-            background: #f9fafb;
-            display: flex;
-            align-items: center;
+            font-weight: 700;
         }
-
-        .review-option.correct-ans {
-            background: #dcfce7;
-            border-color: var(--correct);
+        
+        .stat-box p {
+            font-size: 1rem;
+            color: #475569;
             font-weight: 600;
         }
 
-        .review-option.wrong-ans {
-            background: #fee2e2;
-            border-color: var(--incorrect);
+        .score-display {
+            background: #ecfdf5;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+            border: 2px dashed #34d399;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
         }
 
-        .review-badge {
-            margin-left: auto;
-            font-size: 0.85rem;
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            color: white;
+        .review-section {
+            margin-top: 3rem;
+            text-align: left;
+            display: none;
         }
 
-        .bg-green { background: var(--correct); }
-        .bg-red { background: var(--incorrect); }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .review-title {
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 1rem;
+            text-align: center;
+            font-size: 1.8rem;
         }
 
-        /* Responsive Design */
+        .locked-message {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 4rem 2rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+            display: none;
+            border-top: 5px solid #ef4444;
+        }
+
+        .locked-icon {
+            font-size: 5rem;
+            margin-bottom: 1.5rem;
+        }
+
         @media (max-width: 600px) {
-            .options-grid { padding-left: 0; }
-            .question-header { flex-direction: column; gap: 0.5rem; }
-            .stats-grid { grid-template-columns: 1fr; }
             .header h1 { font-size: 1.8rem; }
-            .main-container { padding: 1rem; }
+            .header h2 { font-size: 1.1rem; }
+            .question-text { font-size: 1.15rem; }
+            .option { padding: 0.8rem 1rem; font-size: 1rem; }
+            .stat-box h3 { font-size: 1.8rem; }
+            .nav-buttons { flex-direction: column-reverse; }
+            .btn-next, .btn-submit, .btn-prev { max-width: 100%; width: 100%; }
         }
     </style>
 </head>
@@ -424,402 +364,403 @@
     <div class="header">
         <h1>সাইফুল'স সাইন্স কেয়ার</h1>
         <h2>বায়োলজি-মডেল টেস্ট</h2>
-        <div class="instruction">বি:দ্র: পরীক্ষাটি এক বারই দেওয়া যাবে।</div>
+    </div>
+    
+    <div class="instruction">
+        <span>⚠️</span> বি:দ্র: পরীক্ষাটি এক বারই দেওয়া যাবে।
     </div>
 
-    <!-- Stats Bar for active exam -->
-    <div class="sticky-stats" id="statsBar">
-        <div class="stats-container">
-            <div class="stats-row">
-                <div class="stat-item">
-                    <span>মোট প্রশ্ন:</span>
-                    <span class="stat-badge badge-total" id="totalQ">0</span>
-                </div>
-                <div class="stat-item">
-                    <span>উত্তর দেওয়া:</span>
-                    <span class="stat-badge badge-answered" id="answeredQ">0</span>
-                </div>
-                <div class="stat-item">
-                    <span>বাকি:</span>
-                    <span class="stat-badge badge-unanswered" id="unansweredQ">0</span>
-                </div>
-            </div>
-            <div class="progress-bar-bg">
-                <div class="progress-bar-fill" id="progressBar"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Active Exam Container -->
-    <div class="main-container" id="examContainer">
-        <div id="questionsWrapper"></div>
+    <div class="container">
         
-        <div class="submit-container">
-            <button class="submit-btn" onclick="submitExam()">পরীক্ষা জমা দিন (Submit)</button>
+        <div id="lockedScreen" class="locked-message">
+            <div class="locked-icon">🔒</div>
+            <h2 style="color: #1f2937; font-size: 2rem; margin-bottom: 10px;">পরীক্ষাটি ইতোমধ্যে সম্পন্ন হয়েছে!</h2>
+            <p style="color: #64748b; font-size: 1.1rem; margin-bottom: 2rem;">আপনি আগেই এই পরীক্ষায় অংশগ্রহণ করেছেন। সুরক্ষার স্বার্থে পুনরায় পরীক্ষা দেওয়ার সুযোগ নেই।</p>
+            <button class="btn-submit" style="margin: 0 auto;" onclick="showReviewFromLock()">আপনার ফলাফল দেখুন</button>
         </div>
-    </div>
 
-    <!-- Locked Screen Container -->
-    <div class="locked-screen" id="lockedScreen">
-        <div class="locked-icon">🔒</div>
-        <h2>পরীক্ষাটি ইতোমধ্যে সম্পন্ন হয়েছে!</h2>
-        <p style="color: #6b7280; font-size: 1.1rem; max-width: 400px;">
-            এই পরীক্ষাটি শুধুমাত্র একবার দেওয়ার সুযোগ ছিল। আপনি ইতোমধ্যে পরীক্ষাটি জমা দিয়েছেন।
-        </p>
-    </div>
-
-    <!-- Result Screen Container -->
-    <div class="main-container result-screen" id="resultContainer">
-        <div class="result-summary">
-            <h2>🎉 পরীক্ষা সম্পন্ন!</h2>
-            <div class="score-circle">
-                <span id="finalScoreText">0/0</span>
-                <small id="percentageText">0%</small>
+        <div id="examInterface">
+            <div class="status-bar">
+                <div class="status-item">প্রশ্ন: <span id="currentQNum">1</span> / <span id="totalQNum">0</span></div>
+                <div class="status-item">উত্তর দেওয়া হয়েছে: <span id="answeredCount">0</span></div>
+                <div class="progress-container">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
             </div>
-            <p id="performanceMessage" style="font-size: 1.2rem; font-weight: bold; color: var(--text-main);"></p>
-            
-            <div class="stats-grid">
-                <div class="stat-box c-correct">
-                    <h3 id="rCorrect">0</h3>
+
+            <div id="questionContainer">
+                <!-- Questions will be injected here -->
+            </div>
+
+            <div class="nav-buttons">
+                <button class="btn-prev" id="btnPrev" onclick="prevQuestion()">পূর্ববর্তী</button>
+                <button class="btn-next" id="btnNext" onclick="nextQuestion()">পরবর্তী</button>
+                <button class="btn-submit btn-hidden" id="btnSubmit" onclick="submitExam()">পরীক্ষা জমা দিন</button>
+            </div>
+        </div>
+
+        <div id="resultScreen" class="result-screen">
+            <div class="result-title">🎉 পরীক্ষা সম্পন্ন!</div>
+            <div class="result-stats">
+                <div class="stat-box">
+                    <h3 id="resTotal" style="color: #3b82f6;">0</h3>
+                    <p>মোট প্রশ্ন</p>
+                </div>
+                <div class="stat-box">
+                    <h3 id="resCorrect" style="color: #16a34a;">0</h3>
                     <p>সঠিক উত্তর</p>
                 </div>
-                <div class="stat-box c-incorrect">
-                    <h3 id="rIncorrect">0</h3>
+                <div class="stat-box">
+                    <h3 id="resIncorrect" style="color: #dc2626;">0</h3>
                     <p>ভুল উত্তর</p>
                 </div>
-                <div class="stat-box c-unanswered">
-                    <h3 id="rUnanswered">0</h3>
+                <div class="stat-box">
+                    <h3 id="resUnanswered" style="color: #d97706;">0</h3>
                     <p>উত্তরহীন</p>
                 </div>
             </div>
+            
+            <div class="score-display">
+                স্কোর: <span id="resScore">0</span> | 
+                শতকরা: <span id="resPercent">0%</span>
+            </div>
+            
+            <div class="review-section" id="reviewSection">
+                <h2 class="review-title">উত্তরপত্র পর্যালোচনা</h2>
+                <div id="reviewContainer"></div>
+            </div>
         </div>
 
-        <h3 style="text-align: center; margin: 2rem 0 1rem 0; color: var(--text-muted);">প্রশ্নের বিস্তারিত রিভিউ</h3>
-        <div id="reviewWrapper"></div>
     </div>
 
     <script>
-        // Database of Questions extracted exactly from OCR
-        const db = [
-            // Image 1
-            { q: "দুর্বা ঘাসের শর্করা তৈরির প্রধান স্থান কোনটি?", opts: ["মূল", "মেসোফিল টিস্যু", "ফুল", "জাইলেম টিস্যু"], ans: 1 },
-            { q: "মূল দ্বারা উত্তোলিত পানির সর্বশেষ গন্তব্য কোনটি?", opts: ["এপিডার্মিস", "সীভনল", "এন্ডোডার্মিস", "মেসোফিল টিস্যু"], ans: 3 },
-            { q: "4 অণু FADH2 থেকে কয় অণু ATP উৎপন্ন হয়?", opts: ["4", "8", "18", "38"], ans: 1 },
-            { q: "ATP এর পূর্ণরূপ কোনটি?", opts: ["অ্যাডিনোসিন মনোফসফেট", "অ্যাডিনোসিন ডাইফসফেট", "অ্যাডিনোসিন ট্রাইফসফেট", "অ্যাডিনোসিন পেপটাফসফেট"], ans: 2 },
-            { q: "কোন উদ্ভিদের প্রথম স্থায়ী পদার্থ-৪ কার্বনবিশিষ্ট অক্সালো এসিটিক এসিড?", opts: ["আখ", "আম", "জাম", "কাঁঠাল"], ans: 0 },
-            { q: "C4 উদ্ভিদ কোনটি?", opts: ["আম", "আখ", "লিচু", "কলা"], ans: 1 },
-            { q: "সালোকসংশ্লেষণ স্বাভাবিক গতিতে ঘটার জন্য আদর্শ তাপমাত্রা কত?", opts: ["22°— 35°C", "27°— 40°C", "32°— 45°C", "37°— 50°C"], ans: 0 },
-            { q: "কোন তাপমাত্রায় সালোকসংশ্লেষণ প্রক্রিয়া বন্ধ হয়ে যায়?", opts: ["১৭° সে.", "২৫° সে.", "৩০° সে.", "0° সে."], ans: 3 },
-            { q: "ক্লোরোফিলের প্রধান উপকরণের নাম—", opts: ["Al + Mg", "N + Mg", "Ca + Mg", "Ca + K"], ans: 1 },
-            { q: "নিচের কোন তরঙ্গদৈর্ঘ্যের আলোতে সালোকসংশ্লেষণ ভালো হয়?", opts: ["360nm", "420nm", "560nm", "860nm"], ans: 1 },
-            { q: "শ্বসন প্রক্রিয়া দিবারাত্রিতে কত ঘণ্টা চলে?", opts: ["১২ ঘণ্টা", "১৬ ঘণ্টা", "১৮ ঘণ্টা", "২৪ ঘণ্টা"], ans: 3 },
-            { q: "ইস্টের অবাত শ্বসনে কোনটি তৈরি হয়?", opts: ["ইথাইল অ্যালকোহল ও অক্সিজেন", "ল্যাকটিক এসিড ও কার্বন ডাইঅক্সাইড", "পাইরুভিক এসিড ও পানি", "ইথাইল অ্যালকোহল ও কার্বন ডাইঅক্সাইড"], ans: 3 },
-            { q: "কোনটি C3 উদ্ভিদ?", opts: ["আখ", "ভুট্টা", "পাট", "মুথা ঘাস"], ans: 2 },
-            { q: "অবাত শ্বসনের ধাপ কয়টি?", opts: ["৪টি", "৬টি", "২টি", "৩টি"], ans: 2 },
-            { q: "সালোকসংশ্লেষণ প্রক্রিয়ায় উপজাত হিসেবে নির্গত হয় কোনটি?", opts: ["পানি", "শর্করা", "অক্সিজেন", "কার্বন ডাই-অক্সাইড"], ans: 2 },
-            { q: "এক অণু NADH2 থেকে কত অণু ATP এর সমান শক্তি উৎপন্ন হয়?", opts: ["১", "২", "৩", "৪"], ans: 2 },
-            { q: "গ্লাইকোলাইসিসের জন্য প্রযোজ্য—<br>i. অক্সিজেন আবশ্যক<br>ii. দুই অণু পাইরুভিক এসিড উৎপন্ন হয়<br>iii. সাইটোপ্লাজমে এ ঘটে<br>নিচের কোনটি সঠিক?", opts: ["i ও ii", "i ও iii", "ii ও iii", "i, ii ও iii"], ans: 2 },
-            { q: "শ্বসনের উত্তম তাপমাত্রা কত?", opts: ["১৮°C - ২৯°C", "১৯°C - ২৪°C", "২০°C - ৪৫°C", "২২°C - ৩৫°C"], ans: 2 },
-            { q: "অবাত শ্বসন সাধারণত দেখা যায়—<br>i. ইস্টে ii. শৈবালে iii. ব্যাকটেরিয়ায়<br>নিচের কোনটি সঠিক?", opts: ["i ও ii", "ii ও iii", "i ও iii", "i, ii ও iii"], ans: 2 },
-            { q: "সালোকসংশ্লেষণের উপজাত দ্রব্য—<br>i. O2 ii. CO2 iii. H2O<br>নিচের কোনটি সঠিক?", opts: ["i ও ii", "ii ও iii", "i ও iii", "i, ii ও iii"], ans: 2 },
-            { q: "নিচের সমীকরণের উপর ভিত্তি করে পরবর্তী দুটি প্রশ্নের উত্তর দাও:<br>গ্লুকোজ + X → CO2 + Y + শক্তি<br>'X' কি নির্দেশ করে?", opts: ["CO2", "O2", "H2O", "ATP"], ans: 1 },
-            { q: "উপরিবুক্ত সমীকরণে নিচের কোনটিকে বাহ্যিক প্রভাবক হিসেবে গণ্য করা যাবে?", opts: ["তাপমাত্রা", "খাদ্য উপাদান", "এনজাইম", "কোষের বয়স"], ans: 0 },
-            { q: "নিচের অনুচ্ছেদটি পড় এবং পরবর্তী ২টি প্রশ্নের উত্তর দাও:<br>C6H12O6 + [A] →(বিভিন্ন এনজাইম)→ 6CO2 + 6H2O + শক্তি<br>উদ্দীপকের প্রক্রিয়ায় A এর অনুপস্থিতিতে কত অণু ATP তৈরি হবে?", opts: ["২", "৮", "২০", "৩৮"], ans: 0 },
-            { q: "উদ্দীপকের প্রক্রিয়ার শেষ ধাপের ক্ষেত্রে সঠিক তথ্য হলো—<br>i. মাইটোকন্ড্রিয়াতে ঘটে<br>ii. পানি উৎপন্ন হয়<br>iii. ৩৪ অণু ATP তৈরি হয়<br>নিচের কোনটি সঠিক?", opts: ["i ও ii", "ii ও iii", "i ও iii", "i, ii ও iii"], ans: 3 },
-            // Image 2
-            { q: "কোনটি মূল ও কাণ্ডের বৃদ্ধির জন্য ক্লোরিন প্রয়োজন?", opts: ["টমেটো", "সূর্যমুখী", "সুগারবিট", "আলু"], ans: 2 },
-            { q: "ক্লোরোফিলের প্রধান উপাদান কোনটি?", opts: ["Zn", "Fe", "Na", "Mg"], ans: 3 },
-            { q: "ক্লোরোফিলের প্রধান উপাদান হচ্ছে—", opts: ["Ca ও Fe", "Na ও Mg", "Fe ও N", "Mg ও N"], ans: 3 },
-            { q: "ক্লোরোপ্লাস্ট গঠন ও সংরক্ষণের জন্য কোনটি প্রয়োজন?", opts: ["দস্তা", "লোহা", "ম্যাঙ্গানিজ", "তামা"], ans: 2 },
-            { q: "কোনটির অভাবে উদ্ভিদের পাতা বেগুনি রং ধারণ করে?", opts: ["ফসফরাস", "নাইট্রোজেন", "পটাশিয়াম", "ম্যাগনেসিয়াম"], ans: 0 },
-            { q: "উদ্ভিদের পাতার সবুজ রং হালকা হয়ে যায় কোনটির অভাবে?", opts: ["ক্যালসিয়াম", "ফসফরাস", "পটাশিয়াম", "ম্যাগনেসিয়াম"], ans: 3 },
-            { q: "কোনটির অভাবে ডাইব্যাক রোগ হয়?", opts: ["Ca", "K", "Fe", "S"], ans: 3 },
-            { q: "ডাইব্যাক রোগ সৃষ্টি হয় কোনটির অভাবে?", opts: ["বোরন", "সালফার", "ফসফরাস", "লৌহ"], ans: 1 },
-            { q: "আমিষে শতকরা কত ভাগ নাইট্রোজেন থাকে?", opts: ["২০", "১৬", "১৭", "১৯"], ans: 1 },
-            { q: "আমাদের খাদ্য তালিকায় কমপক্ষে কত ভাগ প্রাণিজ আমিষ থাকা দরকার?", opts: ["২০", "২৫", "১৫", "১০"], ans: 0 },
-            { q: "নিচের কোন খাদ্যের শ্বেতসার সহজে হজম হয়?", opts: ["ভাত ও সিদ্ধ আলু", "গম ও ডাল", "আলু ও আটা", "ভাত ও আটা"], ans: 0 },
-            { q: "দ্বি-শর্করার উৎস কোনটি?", opts: ["চিনি, আলু", "চিনি ও দুধ", "দুধ ও মধু", "আটা ও চিনি"], ans: 1 },
-            { q: "কোন খাদ্যে বহু অণুবিশিষ্ট গ্লুকোজ রয়েছে?", opts: ["মধু", "দুধ", "চিনি", "আলু"], ans: 3 },
-            { q: "একজন সুস্থ পূর্ণবয়স্ক ব্যক্তির দিনে কত গ্রাম চর্বির প্রয়োজন?", opts: ["৩০-৪০", "৪০-৫০", "৫০-৬০", "৬০-৭০"], ans: 2 },
-            { q: "চর্বিতে দ্রবণীয় ভিটামিন নিচের কোনটিতে পাওয়া যায়?", opts: ["মলা মাছ", "কাঁচামরিচ", "কলিজা", "বাঁধাকপি"], ans: 2 },
-            { q: "কোনটির মধ্যে উপাদান হিসেবে লৌহ (Fe) থাকে না?", opts: ["লাল শাক", "ডিমের কুসুম", "কচু শাক", "কলিজা"], ans: 2 },
-            { q: "একজন পূর্ণবয়স্ক মানুষের দৈনিক ওজনের শতকরা কত ভাগ পানি গ্রহণ করা প্রয়োজন?", opts: ["২০—৩০", "৩০—৪০", "৪৫—৬০", "৫৫—৭০"], ans: 2 },
-            { q: "খাদ্য পিরামিডের নিচের স্তরের খাদ্য উপাদান কোনটি?", opts: ["ভিটামিন", "শর্করা", "স্নেহ", "আমিষ"], ans: 1 },
-            { q: "সুষম খাদ্যে শর্করা, আমিষ ও চর্বির অনুপাত কত হবে?", opts: ["৪ : ১ : ১", "১ : ৪ : ১", "৪ : ১ : ২", "১ : ১ : ৪"], ans: 0 },
-            { q: "নিচের কোনটিতে সবচেয়ে বেশি পরিমাণ আমিষ রয়েছে?", opts: ["গরু ও খাসির মাংসে", "মসুর ডাল ও মুরগীর মাংসে", "ইলিশ ও চিংড়ী মাছে", "ডিম ও ছোলাতে"], ans: 1 },
-            { q: "আয়োডিনের অভাবে কোন গ্রন্থি ফুলে যায়?", opts: ["অ্যাড্রিনাল", "থাইমাস", "থাইরয়েড", "প্যারাথাইরয়েড"], ans: 2 },
-            { q: "ইলিশ মাছ নিচের কোন রোগটি প্রতিরোধ করে?", opts: ["ডায়াবেটিস", "গয়টার", "এপিলেপসি", "আমাশয়"], ans: 0 },
-            { q: "রিকেটস রোগ হয় কোন ভিটামিনের অভাবে?", opts: ["এ", "বি", "সি", "ডি"], ans: 3 },
-            { q: "কোন ভিটামিনের অভাবে রক্তশূন্যতা দেখা দেয়?", opts: ["ভিটামিন ‘এ’", "ভিটামিন ‘বি১২’", "ভিটামিন ‘সি’", "ভিটামিন ‘ডি’"], ans: 1 },
-            { q: "১৫ কিলোক্যালরি = কত জুল?", opts: ["৬৩০০০", "৬২,৯০০", "৬২,৮০০", "৬৩,৭০০"], ans: 2 },
-            { q: "ডাবলু প্রতিদিন ৪০ গ্রাম চাউলের ভাত, ৫০ গ্রাম মাংস ও ২০ গ্রাম মাখন খেলে সে কত কিলোক্যালরি শক্তি গ্রহণ করে?", opts: ["৫০০", "৫৫৫", "৫৭৩", "৫৮০"], ans: 1 },
-            { q: "১০০ গ্রাম পরিমাণের নিচের খাদ্য থেকে ক্যালরি বেশি পাওয়া যাবে কোনটি থেকে?", opts: ["ভাত", "চিনি", "মাছ", "চর্বি"], ans: 3 },
-            { q: "নির্ভর পরিশ্রমী, প্রতিদিন প্রচুর খেলাধুলা করে। তার বিএমআর মান ১৭৮৭.৫ কিলোক্যালরি হলে, তার দৈনিক ক্যালরি চাহিদা কত?", opts: ["৩০৮৩.৪ কিলোক্যালরি", "২৭৭০.৬ কিলোক্যালরি", "২৪৫৭.৮ কিলোক্যালরি", "২১৪৫.০ কিলোক্যালরি"], ans: 0 },
-            { q: "রিয়াদ সাহেবের বয়স ৭০ কেজি, উচ্চতা ১০০ সেমি, এবং বয়স ৪০ বছর। তিনি পরিশ্রম করেন না। তাহলে তার দৈনিক ক্যালরি চাহিদা কত হবে?", opts: ["১৬৮২.২", "১৬৩৮.৪", "১৬৮২", "১৬৪২"], ans: 1 },
-            { q: "রহিমের উচ্চতা ১.১৫ মিটার এবং ওজন ৪০ কেজি। রহিমের বিএমআই কত?", opts: ["২১.৫", "২৫.৬", "২৪.৬", "২৩.৬"], ans: 0 },
-            { q: "রাবেয়ার উচ্চতা ১২৬ সে.মি. এবং দৈহিক ওজন ৪৮ কেজি। তার বি.এম.আই. মান কত?", opts: ["১৯.০৭", "২৩.৮৩", "৩১.২৪", "৩৭.১৮"], ans: 2 },
-            { q: "বিএমআই এর মানদণ্ডে সুস্বাস্থ্যের আদর্শ মান কোনটি?", opts: ["১৬.৫-১৮.৪", "১৮.৫-২৪.৯", "২৫-২৯.৯", "৩০-৩৪.৯"], ans: 1 },
-            { q: "কোনো ব্যক্তির BMI যদি ২৭.৭৮ হয়। তিনি বি.এম.আই এর কোন অবস্থানে থাকবেন?", opts: ["সুস্বাস্থ্যের আদর্শ মান", "শরীরের অতিরিক্ত ওজন", "মোটা হওয়ার ১ম স্তর", "মোটা হওয়ার ২য় স্তর"], ans: 1 },
-            { q: "১.৫০ মিটার উচ্চতাবিশিষ্ট ৫০ কেজি ওজনের একজন ব্যক্তির BMI কত?", opts: ["২২.২২", "২৪.২০", "২৬.২২", "২৮.২০"], ans: 0 },
-            { q: "হাসানের ওজন ৪৫.২ কেজি এবং এবং উচ্চতা ১২০ সে.মি. হাসানের বি এম আই কত?", opts: ["৩৪", "৩৩", "৩৬", "৪০"], ans: 0 },
-            { q: "মানুষের স্থায়ী দাঁত কয় ধরনের?", opts: ["৪", "৩", "২", "১"], ans: 0 },
-            { q: "মানুষের ছেদন দাঁত মোট কয়টি?", opts: ["২", "৪", "৬", "৮"], ans: 1 },
-            { q: "পাকস্থলীর বৈশিষ্ট্য—", opts: ["প্রাচীর পুরু ও পেশীবহুল", "আকৃতি গোলাকার, পেশীবহুল", "খাদ্য পরিপাকে সহায়তা করে না", "প্রাচীরে কোনো গ্রন্থি থাকে না"], ans: 0 },
-            { q: "কোনটি মানব দেহের সবচেয়ে বড় গ্রন্থি?", opts: ["অগ্ন্যাশয়", "লালাগ্রন্থি", "যকৃৎ", "গ্যাস্ট্রিক গ্রন্থি"], ans: 2 },
-            { q: "পিত্ত রসের বর্ণ কোনটি?", opts: ["লাল", "বাদামী", "গোলাপী", "গাঢ় সবুজ"], ans: 3 },
-            { q: "পিত্তথলি কোন নালির মাধ্যমে ডিওডেনামে প্রবেশ করে?", opts: ["পিত্তনালি", "যকৃৎ-অগ্ন্যাশয় নালি", "অন্ত্রিক নালি", "অগ্ন্যাশয় নালি"], ans: 1 },
-            { q: "ইউরিক এসিড কোথায় তৈরি হয়?", opts: ["যকৃতে", "দেহকোষে", "রেনাল ধমনিতে", "বৃক্কে"], ans: 0 },
-            { q: "মানবদেহের মিশ্রগ্রন্থি নিঃসরণ করে কোনটি?", opts: ["TSH", "থাইরক্সিন", "টায়ালিন", "অ্যামাইলেজ"], ans: 3 },
-            { q: "অগ্ন্যাশয় রসে কোন এনজাইমগুলো থাকে?", opts: ["লাইপেজ, ল্যাকটেজ, সুক্রেজ", "অ্যামাইলেজ, লাইপেজ, টায়ালিন", "ট্রিপসিন, অ্যামাইলেজ, লাইপেজ", "ল্যাকটেজ, ট্রিপসিন, লাইপেজ"], ans: 2 },
-            { q: "গ্লুকাগন নিঃসরণে কোন গ্রন্থি কাজ করে?", opts: ["অগ্ন্যাশয়", "গ্যাস্ট্রিক", "অন্ত্রিক", "যকৃৎ"], ans: 0 },
-            { q: "কোন এনজাইম শ্বেতসার পরিপাকে অংশ নেয়?", opts: ["টায়ালিন", "পেপসিন", "লাইপেজ", "ট্রিপসিন"], ans: 0 },
-            { q: "লালা রসের এনজাইমের নাম কী?", opts: ["পেপসিন", "মিউসিন", "টায়ালিন", "ট্রিপসিন"], ans: 2 },
-            { q: "নিষ্ক্রিয় পেপসিনোজেনকে সক্রিয় পেপসিনে পরিণত করে কোনটি?", opts: ["হাইড্রোক্লোরিক এসিড", "কার্বোক্সিপেপটাইডেজ", "অ্যামাইলেজ", "লাইপেজ"], ans: 0 },
-            { q: "কোথায় 'কাইম' তৈরি হয়?", opts: ["যকৃতে", "ক্ষুদ্রান্ত্রে", "পাকস্থলিতে", "বৃহদন্ত্রে"], ans: 2 },
-            { q: "Fatty liver এর ক্ষেত্রে লিপিডের পরিমাণ বেড়ে যায় কত শতাংশ?", opts: ["১০ - ২০", "২০ - ৩০", "৩০ - ৪০", "৪০ - ৫০"], ans: 0 },
-            { q: "আমাশয় রোগের জীবাণু কোনটি?", opts: ["Shigella", "Streptococcus", "Pneumococcus", "Mycobacterium"], ans: 0 },
-            { q: "প্যাপটিক আলসার মারাত্মক হলে কোনটি ঘটে?", opts: ["পাতলা পায়খানা", "মাথা ব্যথা", "বমি", "রক্তবমি"], ans: 3 },
-            { q: "শিলা প্রায়ই কোষ্ঠকাঠিন্যে ভোগে। ডাক্তারের কাছে চিকিৎসার জন্য গেলে ডাক্তার তাকে বিশেষ কিছু খাবার খেতে পরামর্শ দেন। নিচের কোন খাবারটি খেতে বলবেন?", opts: ["কলিজা", "পনির", "মাছ", "ফল"], ans: 3 },
-            { q: "শস্য স্যালাইন তৈরি করতে কোনটির গুঁড়া ব্যবহার করা হয়?", opts: ["গম", "যব", "ভুট্টা", "চাল"], ans: 3 },
-            // Image 3
-            { q: "কোন ধরনের রোগীর ক্ষেত্রে কোনো লক্ষণ ছাড়াই হার্ট অ্যাটাক হতে পারে?", opts: ["লিউকেমিয়া", "ডায়াবেটিস", "থ্যালাসেমিয়া", "এইডস"], ans: 1 },
-            { q: "প্রস্বেদনের বাহ্যিক প্রভাবক কোনটি?", opts: ["পাতার আয়তন", "পত্রের সংখ্যা", "আপেক্ষিক আর্দ্রতা", "খনিজ পদার্থ"], ans: 2 },
-            { q: "ক্যালেজ জমা হয় নিচের কোনটিতে?", opts: ["ভেসেল", "সিভপ্লেট", "সঙ্গীকোষ", "ট্রাকিড"], ans: 1 },
-            { q: "কোন রক্ত কণিকা হেপারিন নিঃসৃত করে?", opts: ["লিম্ফোসাইট", "নিউট্রোফিল", "মনোসাইট", "বেসোফিল"], ans: 3 },
-            { q: "উদ্ভিদের প্রস্তুতকৃত খাদ্য কোন কোষের মাধ্যমে বিভিন্ন অঙ্গে পরিবাহিত হয়?", opts: ["ট্রাকিড", "সীবনল", "ভেসেল", "সঙ্গীকোষ"], ans: 1 },
-            { q: "উদ্ভিদের মোট প্রস্বেদনের শতকরা কত ভাগ পত্ররন্ধ্রের মাধ্যমে হয়ে থাকে?", opts: ["৮০-৯০%", "৮৫-৯০%", "৯০-৯৫%", "৯৫-১০০%"], ans: 2 },
-            { q: "অ্যালবুমিন একটি—", opts: ["হরমোন", "ভিটামিন", "আমিষ", "অ্যান্টিবডি"], ans: 2 },
-            { q: "রক্তের মাধ্যমে দেহকোষে নিম্নের কোনটি প্রবেশ করে?", opts: ["H", "O2", "CO2", "He"], ans: 1 },
-            { q: "কোন বিজ্ঞানী মানুষের রক্তের শ্রেণিবিন্যাস করেন?", opts: ["লুই পাস্তুর", "কার্ল এরিকি", "লিনিয়াস", "কার্ল ল্যান্ড স্টেইনার"], ans: 3 },
-            { q: "রক্তের গ্রুপ জানা না থাকলে সাধারণত কোন গ্রুপ নিরাপদ?", opts: ["A এবং Rh+", "B এবং Rh-", "O এবং Rh-", "O এবং Rh+"], ans: 2 },
-            { q: "প্রস্বেদনের হার বৃদ্ধির সাথে কোনটি সম্পর্কিত?", opts: ["বায়ুচাপ বৃদ্ধি", "নিম্ন তাপমাত্রা", "পাতার সংখ্যা বৃদ্ধি", "পত্রফলকের আয়তন ছোট"], ans: 2 },
-            { q: "নিচের কোনটি হাইড্রোফিলিক পদার্থ নয়?", opts: ["সেলুলোজ", "স্টার্চ", "জিলাটিন", "পাথর"], ans: 3 },
-            { q: "মানুষের রক্তে LDL এর শতকরা পরিমাণ কত?", opts: ["৭০%", "৮০%", "৯০%", "১০০%"], ans: 0 },
-            { q: "কোন অণুজীবের সংক্রমণে বাতজ্বর হয়?", opts: ["Bacillus", "Pseudomonas", "Streptococcus", "Staphylococcus"], ans: 2 },
-            { q: "রক্তকোষের ক্যান্সারকে কি বলা হয়?", opts: ["লিউকেমিয়া", "অ্যানজিনা", "সিফিলিস", "নিউমোনিয়া"], ans: 0 },
-            { q: "কোন মৌলের উপস্থিতির জন্য রক্তের রং লাল হয়?", opts: ["ক্যালসিয়াম", "ম্যাগনেসিয়াম", "পটাশিয়াম", "আয়রন"], ans: 3 },
-            { q: "হৃদপিণ্ডের প্রাচীরকে বলা হয়—", opts: ["এপিকার্ডিয়াম", "মায়োকার্ডিয়াম", "এন্ডোকার্ডিয়াম", "পেরিকার্ডিয়াম"], ans: 1 },
-            { q: "'O' রক্ত গ্রুপে কোন এন্টিবডি উপস্থিত?", opts: ["a", "b", "A, B", "a, b"], ans: 3 },
-            { q: "বাতজ্বরে শরীরে যে অঙ্গগুলো আক্রান্ত হয়—<br>i. হৃৎপিণ্ড<br>ii. যকৃৎ<br>iii. অস্থিসন্ধি<br>নিচের কোনটি সঠিক?", opts: ["i ও ii", "i ও iii", "ii ও iii", "i, ii ও iii"], ans: 1 },
-            { q: "অভিস্রবণে খনিজ লবণ শোষিত হয়—<br>i. অভিস্রবণ প্রক্রিয়ায়<br>ii. বিপাকীয় শক্তি খরচের মাধ্যমে<br>iii. আয়ন হিসেবে<br>নিচের কোনটি সঠিক?", opts: ["i ও ii", "i ও iii", "ii ও iii", "i, ii ও iii"], ans: 2 },
-            { q: "শরিফের রক্তগ্রুপ AB+, রিফাতের AB- এবং রায়হানের O-। শরিফ-<br>i. রিফাতকে রক্ত দিতে পারবে<br>ii. শরিফের থেকে রক্ত নিতে পারবে<br>iii. রায়হানের রক্ত নিতে পারবে<br>নিচের কোনটি সঠিক?", opts: ["i ও ii", "i ও iii", "ii ও iii", "i, ii ও iii"], ans: 2 },
-            { q: "নিচের তথ্যের ভিত্তিতে পরবর্তী প্রশ্নের উত্তর দাও: সবুর সাহেবের রক্তের গ্রুপ এমন— তিনি সবার থেকে রক্ত গ্রহণ করতে পারেন।<br>সবুর সাহেবের রক্তের গ্রুপ কোনটি?", opts: ["AB", "A", "B", "O"], ans: 0 },
-            { q: "উক্ত রক্তের বৈশিষ্ট্য হলো—<br>i. লোহিত রক্ত কণিকায় পরিমাণ কম<br>ii. অ্যান্টিজেন আছে<br>iii. অ্যান্টিবডি নেই<br>নিচের কোনটি সঠিক?", opts: ["i ও ii", "i ও iii", "ii ও iii", "i, ii ও iii"], ans: 2 },
-            // Image 4 (Left Column)
-            { q: "কোন প্রবাহী অর্ধভেদ্য ঝিল্লির মধ্য দিয়ে প্রবাহিত হয়?", opts: ["দ্রাবক", "দ্রাব", "দ্রবণ", "কলয়েড"], ans: 0 },
-            { q: "কোন গ্রুপধারী রক্তে কোনো অ্যান্টিজেন থাকে না?", opts: ["A", "B", "O", "AB"], ans: 2 },
-            { q: "কোন গ্রুপের রক্তে A, B কোনো অ্যান্টিবডি থাকে না?", opts: ["A", "B", "O", "AB"], ans: 3 },
-            { q: "লিউকেমিয়া রোগটি কেন হয়?", opts: ["শ্বেত রক্তকণিকা বেড়ে যায়", "লোহিত রক্তকণিকা কমে যায়", "অণুচক্রিকা কমে যায়", "রক্তে শ্বেত রক্তকণিকা কমে যায়"], ans: 0 },
-            { q: "রক্তে রক্তরসের পরিমাণ কত?", opts: ["৪৫%", "৫৫%", "৬৫%", "৭৫%"], ans: 1 },
-            { q: "কোনটিকে 'প্রয়োজনীয় অমঙ্গল' বলা হয়?", opts: ["ইমবাইবিশন", "ব্যাপন", "অভিস্রবণ", "প্রস্বেদন"], ans: 3 },
-            { q: "অণুচক্রিকার গড় আয়ু কতদিন?", opts: ["২-১০ দিন", "৫-১০ দিন", "৭-১০ দিন", "৮-১০ দিন"], ans: 1 },
-            { q: "জীবাণু ভক্ষণ করে নিচের কোন কণিকা?", opts: ["নিউট্রোফিল", "ইওসিনোফিল", "বেসোফিল", "থ্রম্বোসাইট"], ans: 0 },
-            { q: "B রক্তের গ্রুপে কোন অ্যান্টিবডি থাকে?", opts: ["b", "a", "নেই", "a, b"], ans: 1 },
-            { q: "কোনটির ভিতর দিয়ে অক্সিজেনযুক্ত রক্ত বাম অলিন্দে প্রবেশ করে?", opts: ["মহাধমনি", "উর্ধ্ব মহাশিরা", "ফুসফুসীয় ধমনি", "ফুসফুসীয় শিরা"], ans: 3 },
-            { q: "অক্সিজেনসমৃদ্ধ রক্ত হৃৎপিণ্ডের কোনটি অতিক্রম করে?", opts: ["ট্রাইকাসপিড ভালভ", "পালমোনারি কপাটিকা", "পালমোনারি ধমনি", "বাইকাসপিড ভালভ"], ans: 3 },
-            { q: "কোনো উদ্ভিদের মোট প্রস্বেদনের কত ভাগ পত্ররন্ধ্রের মাধ্যমে সংঘটিত হয়?", opts: ["৮০-৯০%", "৯০-৯৫%", "৯০-৯২%", "৯৫-৯৯%"], ans: 1 },
-            { q: "নিচের কোনটি হাইড্রোফিলিক পদার্থ নয়?", opts: ["সেলুলোজ", "কিউটিন", "স্টার্চ", "জিলাটিন"], ans: 1 },
-            { q: "সুপ্ত বীজ তলা বাতাসে ছড়িয়ে পড়া কোন ধরনের প্রক্রিয়া?", opts: ["ভৌত", "জৈব রাসায়নিক", "রাসায়নিক", "শ্বসন"], ans: 0 },
-            { q: "কোন প্রক্রিয়ায় উদ্ভিদে খনিজ পদার্থ মূলের কোষে স্থানান্তরিত হয়?", opts: ["ইমবাইবিশন", "অভিস্রবণ", "ব্যাপন", "শ্বসন"], ans: 1 },
-            // Image 4 (Right Column)
-            { q: "মানবদেহে রক্তের সমতা রক্ষা করা কোনটির কাজ?", opts: ["হরমোন", "পানি", "খনিজ লবণ", "ভিটামিন"], ans: 2 },
-            { q: "কোন রক্ত গ্রুপকে সর্বজনীন গ্রহীতা বলা হয়?", opts: ["A", "B", "AB", "O"], ans: 2 },
-            { q: "'ফ্লুইড অব লাইফ' বলা হয় নিচের কোনটিকে?", opts: ["পানি", "রক্তরস", "রক্তকণিকা", "খনিজ"], ans: 1 },
-            { q: "প্রোটোপ্লাজমের শতকরা কত ভাগ পানি?", opts: ["৬০%", "৭০%", "৮০%", "৯০%"], ans: 3 },
-            { q: "শুকনো কাঠ পানি শোষণ করে স্ফীত হওয়ার সাথে সম্পর্কিত কোনটি?", opts: ["প্রস্বেদন", "ব্যাপন", "অভিস্রবণ", "ইমবাইবিশন"], ans: 3 },
-            { q: "কাঠ দীর্ঘদিন পানির সংস্পর্শে থাকলে ফুলে ওঠে কারণ—", opts: ["ইমবাইবিশন", "ব্যাপন", "অভিস্রবণ", "প্রস্বেদন"], ans: 0 },
-            { q: "উদ্ভিদের পানি পরিশোধনে সবচেয়ে গুরুত্বপূর্ণ ভূমিকা পালন করে কোনটি?", opts: ["অভিস্রবণ ও শ্বসন", "শ্বসন ও প্রস্বেদন", "অভিস্রবণ ও প্রস্বেদন", "ব্যাপন ও শ্বসন"], ans: 2 },
-            { q: "ক্যাপিলারি অ্যাকশন কীসের মাধ্যমে ঘটে?", opts: ["ভেসেল", "ট্রাকিড", "সীবনল", "ফ্লোয়েম ফাইবার"], ans: 1 },
-            { q: "ফ্লোয়েম টিস্যুর সিভপ্লেটের ছিদ্রগুলো শীতের কোনটি জমে গেলে ছোট হয়ে যায়?", opts: ["সুক্রোজ", "এনজাইম", "কার্বন ডাইঅক্সাইড", "ক্যালোজ"], ans: 3 },
-            { q: "পত্ররন্ধ্রের সাথে যুক্ত কোষ কোনটি?", opts: ["লেন্টিসেল", "গার্ডকোষ", "স্পঞ্জি প্যারেনকাইমা", "প্যালিসেড প্যারেনকাইমা"], ans: 1 },
-            { q: "উদ্ভিদের গৌণ বৃদ্ধি হলে কাণ্ডের বাকল ফেটে কী সৃষ্টি হয়?", opts: ["কিউটিকল", "লেন্টিসেল", "স্টোমাটা", "কর্ক"], ans: 1 },
-            { q: "প্রস্বেদনের বাহ্যিক প্রভাবক কোনগুলো?", opts: ["তাপমাত্রা, আলো", "আলো, পত্ররন্ধ্র", "পত্ররন্ধ্র, পাতার সংখ্যা", "তাপমাত্রা, পাতার সংখ্যা"], ans: 0 },
-            { q: "কোন বিজ্ঞানী প্রস্বেদনকে 'প্রয়োজনীয় ক্ষতি' নাম দেন?", opts: ["কার্টিস", "ম্যাক্স", "লিনিয়াস", "রবার্ট হুক"], ans: 0 },
-            { q: "প্রস্বেদনকে প্রয়োজনীয় ক্ষতি (Necessary evil) নামে অভিহিত করেছেন কোন বিজ্ঞানী?", opts: ["লিনিয়াস", "কার্টিস", "বোরী", "গ্রেগর জোহান মেন্ডেল"], ans: 1 },
-            { q: "রক্তরসের রং কেমন হয়?", opts: ["লাল", "ঈষৎ হলুদাভ", "হলুদ", "ঈষৎ নীলাভ"], ans: 1 }
+        // Full extraction of 119 MCQs from all 4 uploaded images (Figure-based omitted)
+        const questionsData = [
+            // --- Image 1 (Page 159) ---
+            { q: "নিচের কোনটি শ্বসনতন্ত্রের অংশ?", o: ["(ক) ইলিয়াম", "(খ) ইউরেটার", "(গ) ট্রাকিয়া", "(ঘ) গলবিল"], a: 2 },
+            { q: "ফুসফুসের আবরণটিকে কী বলে?", o: ["(ক) ডায়াফ্রাম", "(খ) প্লুরা", "(গ) পেরিকার্ডিয়াম", "(ঘ) পেরিটোনিয়াম"], a: 1 },
+            { q: "ফুসফুস থেকে অক্সিজেন রক্তে প্রবেশ করে কোন প্রক্রিয়ায়?", o: ["(ক) অভিস্রবণ", "(খ) ব্যাপন", "(গ) ইনবাইবিশন", "(ঘ) প্রস্বেদন"], a: 1 },
+            { q: "রোগ প্রতিরোধ ব্যবস্থার অতিরিক্ত প্রতিক্রিয়ার ফলে কোন রোগটি হয়?", o: ["(ক) নিউমোনিয়া", "(খ) ব্রংকাইটিস", "(গ) হাঁপানি", "(ঘ) যক্ষ্মা"], a: 2 },
+            { q: "ব্যক্তি বিশেষে চিংড়ি খেলে কোন রোগটি হতে পারে?", o: ["(ক) অ্যাজমা", "(খ) ব্রংকাইটিস", "(গ) নিউমোনিয়া", "(ঘ) যক্ষ্মা"], a: 0 },
+            { q: "শ্বাসনালির ভিতরে আবৃত প্রদাহকে কী বলে?", o: ["(ক) অ্যাজমা", "(খ) ব্রংকাইটিস", "(গ) নিউমোনিয়া", "(ঘ) যক্ষ্মা"], a: 1 },
+            { q: "শ্বাসকষ্ট, কাশি ও বুকের মধ্যে ঘড় ঘড় আওয়াজ হওয়া লক্ষণবিশিষ্ট রোগ সৃষ্টিকারী জীবাণু কোনটি?", o: ["(ক) Plasmodium", "(খ) Mycobacterium", "(গ) Helicobacter", "(ঘ) Pneumococcus"], a: 3 },
+            { q: "উদ্ভিদ ও প্রাণী উভয়ই—", o: ["(ক) সর্বক্ষণ অক্সিজেন গ্রহণ করে", "(খ) কার্বন ডাইঅক্সাইড গ্রহণ করে", "(গ) শ্বসনতন্ত্রের মাধ্যমে গ্যাসীয় বিনিময় ঘটায়", "(ঘ) হেটারোট্রপিক"], a: 0 },
+            { q: "বড় গাছের নিচে রাত্রিবেলা ঘুমালে কোনটি ঘটে?", o: ["(ক) ব্রংকাইটিস", "(খ) নিউমোনিয়া", "(গ) শ্বাসকষ্ট", "(ঘ) যক্ষ্মা"], a: 2 },
+            { q: "উদ্ভিদের গ্যাসীয় পদার্থ বিনিময়ে সাহায্য করে কোনটি?", o: ["(ক) পত্ররন্ধ্র ও মূলরোম", "(খ) লেন্টিসেল ও মূলরোম", "(গ) পত্ররন্ধ্র ও লেন্টিসেল", "(ঘ) কিউটিকল ও লেন্টিসেল"], a: 2 },
+            { q: "শক্তি উৎপাদনে ব্যবহৃত হয় কোনটি?", o: ["(ক) পানি", "(খ) কার্বন ডাইঅক্সাইড", "(গ) অক্সিজেন", "(ঘ) কার্বন মনোক্সাইড"], a: 2 },
+            { q: "মানবদেহে কত সময় পর্যন্ত O₂ সরবরাহ বন্ধ থাকলে মৃত্যু অনিবার্য?", o: ["(ক) ৩-৪ মিনিটের বেশি", "(খ) ৪-৫ মিনিটের বেশি", "(গ) ৫-৬ মিনিটের বেশি", "(ঘ) ৬-৭ মিনিটের বেশি"], a: 1 },
+            { q: "মানুষের শ্বসনতন্ত্রের অঙ্গ কোনগুলো?", o: ["(ক) ইলিয়াম, গলবিল, বুক", "(খ) গলবিল, অন্ননালি, ইউরেটার", "(গ) গলবিল, ল্যারিংস, ব্রংকাস", "(ঘ) ইলিয়াম, ল্যারিংস, ব্রংকাস"], a: 2 },
+            { q: "বায়ু প্রবাহের ক্ষেত্রে কোন পর্যায়ক্রমটি সঠিক?", o: ["(ক) নাসারন্ধ্র->নাসাপথ->ট্রাকিয়া->গলবিল->অ্যালভিওলাস", "(খ) অ্যালভিওলাস->ব্রংকাস->ট্রাকিয়া->ষড়যন্ত্র->গলবিল->নাসাগহ্বর", "(গ) নাসাগহ্বর->গলবিল->ষড়যন্ত্র->ট্রাকিয়া->ব্রংকাস->অ্যালভিওলাস", "(ঘ) নাসাগহ্বর->ষড়যন্ত্র->গলবিল->ট্রাকিয়া->ব্রংকাস->অ্যালভিওলাস"], a: 2 },
+            { q: "ব্রংকাস কোন তন্ত্রের অংশ?", o: ["(ক) রেচন", "(খ) স্নায়ু", "(গ) জনন", "(ঘ) শ্বসন"], a: 3 },
+            { q: "গলবিলের অংশ কোনটি?", o: ["(ক) ভোকাল কর্ড", "(খ) উপজিহ্বা", "(গ) পাতলা পর্দা", "(ঘ) আলজিহ্বা"], a: 3 },
+            { q: "Larynx-এর অবস্থান কোথায়?", o: ["(ক) নাসাপথে", "(খ) গলবিলের নিচে", "(গ) গলবিলের উপরে", "(ঘ) শ্বাসনালীর সামনে"], a: 1 },
+            { q: "Epiglottis কোথায় অবস্থিত?", o: ["(ক) Bronchus", "(খ) Pharynx", "(গ) Trachea", "(ঘ) Larynx"], a: 3 },
+            { q: "ষড়যন্ত্রের উপরে জিহ্বা আকৃতির ঢাকনাটির নাম কী?", o: ["(ক) আলজিহ্বা", "(খ) উপজিহ্বা", "(গ) ভোকাল কর্ড", "(ঘ) মধ্যচ্ছদা"], a: 1 },
+            { q: "ফুসফুস যে পর্দা দ্বারা আবৃত তার নাম কী?", o: ["(ক) পেরিটোনিয়াম", "(খ) প্লুরা", "(গ) পেরিকার্ডিয়াম", "(ঘ) ক্যাপসিউল"], a: 1 },
+            { q: "ডান ও বাম ফুসফুস বিভক্ত যথাক্রমে-", o: ["(ক) দুই ও তিন খণ্ডে", "(খ) তিন ও দুই খণ্ডে", "(গ) তিন ও চার খণ্ডে", "(ঘ) চার ও তিন খণ্ডে"], a: 1 },
+            { q: "নিচের কোনটি দ্বারা ফুসফুস আবৃত থাকে?", o: ["(ক) মেনিনজেস", "(খ) প্লুরা", "(গ) পেরিকার্ডিয়াম", "(ঘ) পেরিটোনিয়াম"], a: 1 },
+            { q: "ফুসফুসের বায়ু থলিগুলোকে কী বলে?", o: ["(ক) ব্রংকাস", "(খ) ব্রংকিওল", "(গ) অ্যালভিওলাস", "(ঘ) ট্রাকিয়া"], a: 2 },
+            { q: "ফুসফুসের প্রতিটি বায়ুথলি কী দ্বারা পরিবেষ্টিত থাকে?", o: ["(ক) অসংখ্য শিরা", "(খ) কৈশিক জালিকা", "(গ) ঐচ্ছিক পেশি", "(ঘ) অসংখ্য ধমনী"], a: 1 },
+            { q: "CO₂ কী রূপে রক্তে সঞ্চালিত হয়?", o: ["(ক) কার্বনিক এসিড রূপে", "(খ) বাইকার্বনেট রূপে", "(গ) কার্বন ডাই অক্সাইড রূপে", "(ঘ) কার্বন ও অক্সিজেন রূপে"], a: 1 },
+            { q: "রক্তে CO₂ প্রধানত কীরূপে সঞ্চালিত হয়?", o: ["(ক) বাইকার্বনেট রূপে", "(খ) কার্বামিনো যৌগ রূপে", "(গ) কার্বনিক এসিড রূপে", "(ঘ) কার্বন ও অক্সিজেন রূপে"], a: 0 },
+            { q: "ফুলের রেণুর কারণে কোন রোগটি হতে পারে?", o: ["(ক) নিউমোনিয়া", "(খ) অ্যাজমা", "(গ) ব্রংকাইটিস", "(ঘ) যক্ষ্মা"], a: 1 },
+            { q: "কোন রোগটি ঋতু পরিবর্তনের সময় বেড়ে যায়?", o: ["(ক) যক্ষ্মা", "(খ) নিউমোনিয়া", "(গ) ব্রংকাইটিস", "(ঘ) অ্যাজমা"], a: 3 },
+            { q: "কোনটি শ্বসনতন্ত্রের রোগ?", o: ["(ক) ব্রংকাইটিস", "(খ) নিউমোনিয়া", "(গ) অ্যাজমা", "(ঘ) যক্ষ্মা"], a: 0 },
+            { q: "কোনটির সংক্রমণে ব্রংকাইটিস হয়?", o: ["(ক) ছত্রাক", "(খ) ভাইরাস", "(গ) ব্যাকটেরিয়া", "(ঘ) প্রোটোজোয়া"], a: 1 },
+            { q: "কোনটি নিউমোনিয়ার জন্য দায়ী?", o: ["(ক) ভাইরাস", "(খ) ছত্রাক", "(গ) ব্যাকটেরিয়া", "(ঘ) প্রোটোজোয়া"], a: 2 },
+            { q: "নিউমোকক্কাস নিচের কোনটির অন্তর্ভুক্ত?", o: ["(ক) ব্যাকটেরিয়া", "(খ) প্রোটোজোয়া", "(গ) ভাইরাস", "(ঘ) ছত্রাক"], a: 0 },
+            { q: "নিউমোকক্কাস ব্যাকটেরিয়া আক্রমণে কোন রোগটি হয়?", o: ["(ক) যক্ষ্মা", "(খ) নিউমোনিয়া", "(গ) হাঁপানি", "(ঘ) ব্রংকাইটিস"], a: 1 },
+            { q: "Pneumococcus এর আক্রমণের সাথে কোন লক্ষণটি জড়িত?", o: ["(ক) জন্ডিস দেখা দিবে", "(খ) ওজন কমতে থাকে", "(গ) পেটের পীড়া দেখা দেয়", "(ঘ) ফুসফুসে শ্লেষ্মা জমে"], a: 3 },
+            { q: "যক্ষ্মার জীবাণুর বৈজ্ঞানিক নাম কী?", o: ["(ক) Mycobacterium tuberculosis", "(খ) Entamoeba histolytica", "(গ) Vibrio cholerae", "(ঘ) Plasmodium vivax"], a: 0 },
+            { q: "Mycobacterium tuberculosis কোন রোগের জীবাণু?", o: ["(ক) ব্রংকাইটিস", "(খ) নিউমোনিয়া", "(গ) অ্যাজমা", "(ঘ) যক্ষ্মা"], a: 3 },
+            { q: "ব্রংকাইটিসের লক্ষণ— i. হঠাৎ শ্বাসকষ্ট হওয়া ii. কাশির সাথে অনেক সময় কফ বের হওয়া iii. শ্বাসকষ্ট হওয়া", o: ["(ক) i ও ii", "(খ) i ও iii", "(গ) ii ও iii", "(ঘ) i, ii ও iii"], a: 2 },
+
+            // --- Image 2 ---
+            { q: "ব্যক্তি বিশেষে চিংড়ি খেলে কোন রোগটি হতে পারে?", o: ["(ক) অ্যাজমা", "(খ) ব্রংকাইটিস", "(গ) নিউমোনিয়া", "(ঘ) যক্ষ্মা"], a: 0 },
+            { q: "শ্বাসনালির ভিতরে আবৃত প্রদাহকে কী বলে?", o: ["(ক) অ্যাজমা", "(খ) ব্রংকাইটিস", "(গ) নিউমোনিয়া", "(ঘ) যক্ষ্মা"], a: 1 },
+            { q: "কোনটি নিউমোনিয়ার জন্য দায়ী?", o: ["(ক) ভাইরাস", "(খ) ছত্রাক", "(গ) ব্যাকটেরিয়া", "(ঘ) প্রোটোজোয়া"], a: 2 },
+            { q: "উদ্ভিদ ও প্রাণী উভয়ই—", o: ["(ক) সর্বক্ষণ অক্সিজেন গ্রহণ করে", "(খ) কার্বন ডাইঅক্সাইড গ্রহণ করে", "(গ) শ্বসনতন্ত্রের মাধ্যমে গ্যাসীয় বিনিময় ঘটায়", "(ঘ) হেটারোট্রপিক"], a: 0 },
+            { q: "উদ্ভিদে সালোকসংশ্লেষণের হার কখন বেশি হয়?", o: ["(ক) ভোরবেলায়", "(খ) দিনের বেলায়", "(গ) রাতের বেলায়", "(ঘ) গোধূলী বেলায়"], a: 1 },
+            { q: "বড় গাছের নিচে রাত্রিবেলা ঘুমালে কোনটি ঘটে?", o: ["(ক) ব্রংকাইটিস", "(খ) নিউমোনিয়া", "(গ) শ্বাসকষ্ট", "(ঘ) যক্ষ্মা"], a: 2 },
+            { q: "শক্তি উৎপাদনে ব্যবহৃত হয় কোনটি?", o: ["(ক) পানি", "(খ) কার্বন ডাইঅক্সাইড", "(গ) অক্সিজেন", "(ঘ) কার্বন মনোক্সাইড"], a: 2 },
+            { q: "উদ্ভিদের গ্যাসীয় বিনিময়ে সাহায্য করে— i. স্টোমাটা ii. লেন্টিসেল iii. মূলরোম", o: ["(ক) i ও ii", "(খ) i ও iii", "(গ) ii ও iii", "(ঘ) i, ii ও iii"], a: 3 },
+            { q: "মানুষের শ্বসনতন্ত্রের অঙ্গ কোনগুলো?", o: ["(ক) ইলিয়াম, গলবিল, বুক", "(খ) গলবিল, অন্ননালি, ইউরেটার", "(গ) গলবিল, ল্যারিংস, ব্রংকাস", "(ঘ) ইলিয়াম, ল্যারিংস, ব্রংকাস"], a: 2 },
+            { q: "শ্বাসকষ্ট, কাশি ও বুকের মধ্যে ঘড় ঘড় আওয়াজ হওয়া লক্ষণবিশিষ্ট রোগ সৃষ্টিকারী জীবাণু কোনটি?", o: ["(ক) Plasmodium", "(খ) Mycobacterium", "(গ) Helicobacter", "(ঘ) Pneumococcus"], a: 3 },
+            { q: "Larynx-এর অবস্থান কোথায়?", o: ["(ক) নাসাপথে", "(খ) গলবিলের নিচে", "(গ) গলবিলের উপরে", "(ঘ) শ্বাসনালীর সামনে"], a: 1 },
+            { q: "নিচের কোনটির সংক্রমণে যক্ষ্মা হয়?", o: ["(ক) ভাইরাস", "(খ) ব্যাকটেরিয়া", "(গ) ছত্রাক", "(ঘ) প্রোটোজোয়া"], a: 1 },
+            { q: "নিচের কোনটি শ্বসন ও খাদ্যগ্রহণ উভয়ের সাথে সম্পর্কিত?", o: ["(ক) এপিগ্লটিস", "(খ) প্যাপিল", "(গ) মেনিনজেস", "(ঘ) মিসল দানা"], a: 0 },
+            { q: "\"যক্ষারোগ\" সৃষ্টিকারী জীবাণুর নাম কী?", o: ["(ক) Streptococcus pneumonia", "(খ) Mycobacterium tuberculosis", "(গ) Vibrio cholerae", "(ঘ) Amoeba proteus"], a: 1 },
+            { q: "ফুসফুসের ক্যান্সার প্রতিরোধ করণীয়— i. ধূমপান ও মদ্যপান পরিহার ii. চর্বি জাতীয় খাদ্য বেশি খাওয়া iii. নিয়মিত ব্যায়াম", o: ["(ক) i ও ii", "(খ) i ও iii", "(গ) ii ও iii", "(ঘ) i, ii ও iii"], a: 1 },
+            { q: "বায়ুথলি থেকে অক্সিজেন কোন প্রক্রিয়ায় রক্তে প্রবেশ করে?", o: ["(ক) শ্বসন", "(খ) ব্যাপন", "(গ) অভিস্রবণ", "(ঘ) ইনবাইবিশন"], a: 1 },
+            { q: "CO₂ কী রূপে রক্তে সঞ্চালিত হয়?", o: ["(ক) কার্বনিক এসিড রূপে", "(খ) বাইকার্বনেট রূপে", "(গ) কার্বন ডাই অক্সাইড রূপে", "(ঘ) কার্বন ও অক্সিজেন রূপে"], a: 1 },
+            { q: "কোনটির সংক্রমণে ব্রংকাইটিস হয়?", o: ["(ক) ছত্রাক", "(খ) ভাইরাস", "(গ) ব্যাকটেরিয়া", "(ঘ) প্রোটোজোয়া"], a: 1 },
+            { q: "নিউমোকক্কাস ব্যাকটেরিয়া আক্রমণে কোন রোগটি হয়?", o: ["(ক) যক্ষ্মা", "(খ) নিউমোনিয়া", "(গ) হাঁপানি", "(ঘ) ব্রংকাইটিস"], a: 1 },
+            { q: "ফুসফুসের আবরণটিকে বলা হয়—", o: ["(ক) ডায়াফ্রাম", "(খ) প্লুরা", "(গ) পেরিকার্ডিয়াম", "(ঘ) পেরিকন্ড্রিয়াম"], a: 1 },
+            { q: "ফুসফুস থেকে দেহের কোষ পর্যন্ত O₂ পরিবাহিত হয়— i. অক্সিহিমোগ্লোবিন রূপে ii. রক্তরসে দ্রবীভূত হয়ে iii. বাইকার্বনেটরূপে", o: ["(ক) i ও ii", "(খ) i ও iii", "(গ) ii ও iii", "(ঘ) i, ii ও iii"], a: 0 },
+            { q: "অক্সিজেন— i. ব্যাপন প্রক্রিয়ায় রক্তে প্রবেশ করে ii. অক্সিহিমোগ্লোবিন তৈরি করে iii. রক্তরসে দ্রবীভূত হয় না", o: ["(ক) i ও ii", "(খ) i ও iii", "(গ) ii ও iii", "(ঘ) i, ii ও iii"], a: 0 },
+            { q: "বাম ফুসফুস কয় খণ্ডে বিভক্ত?", o: ["(ক) ২", "(খ) ৩", "(গ) ৪", "(ঘ) ৫"], a: 0 },
+
+            // --- Image 3 ---
+            { q: "'স্নায়ু'-তে কোন অস্থিসন্ধি বিদ্যমান?", o: ["(ক) কবজা সন্ধি", "(খ) বল ও কোটর সন্ধি", "(গ) নিশ্চল অস্থি সন্ধি", "(ঘ) ঈষৎ সচল অস্থি সন্ধি"], a: 2 },
+            { q: "অস্টিওপোরোসিস সাধারণত কাদের হয়?", o: ["(ক) বয়স্ক পুরুষ ও মহিলাদের", "(খ) বাচ্চাদের", "(গ) তরুণ ছেলেদের", "(ঘ) তরুণ মেয়েদের"], a: 0 },
+            { q: "নিচের কোন অঙ্গটি বেশ শক্ত?", o: ["(ক) লিগামেন্ট", "(খ) টেনডন", "(গ) ফাইব্রোব্লাস্ট", "(ঘ) তরুণাস্থি"], a: 1 },
+            { q: "টেনডন এর বৈশিষ্ট্য কোনটি?", o: ["(ক) শ্বেত ও পীততন্তু বিদ্যমান", "(খ) এদের স্থিতিস্থাপকতা বেশি", "(গ) ইলাস্টিন নামক আমিষ বিদ্যমান", "(ঘ) এদের স্থিতিস্থাপকতা নেই"], a: 3 },
+            { q: "অস্টিওপোরোসিস কিসের অভাবজনিত রোগ?", o: ["(ক) নাইট্রোজেন", "(খ) ক্যালসিয়াম", "(গ) জিংক", "(ঘ) সালফার"], a: 1 },
+            { q: "টেনডনের টিস্যু হচ্ছে— i. সাদা বর্ণের ও উজ্জ্বল ii. অশাখ ও তরঙ্গিত iii. তন্তুময় ও গুচ্ছাকার", o: ["(ক) i ও ii", "(খ) i ও iii", "(গ) ii ও iii", "(ঘ) i, ii ও iii"], a: 3 },
+            { q: "অস্থিকোষকে কী বলা হয়?", o: ["(ক) কন্ড্রিওব্লাস্ট", "(খ) ফাইব্রোব্লাস্ট", "(গ) অস্টিওব্লাস্ট", "(ঘ) কোলাজেনাম"], a: 2 },
+            { q: "হাড়ে (অস্থি) শতকরা কতভাগ পানি থাকে?", o: ["(ক) ২০-৩০", "(খ) ৩০-৪০", "(গ) ৪০-৫০", "(ঘ) ৫০-৬০"], a: 2 },
+            { q: "অস্থির ভিতর শতকরা কত ভাগ অজৈব যৌগ থাকে?", o: ["(ক) ৭০", "(খ) ৬০", "(গ) ৫০", "(ঘ) ৪০"], a: 1 },
+            { q: "তরুণাস্থি টিস্যু কী ধরনের?", o: ["(ক) আবরণী", "(খ) যোজক", "(গ) পেশি", "(ঘ) স্নায়ু"], a: 1 },
+            { q: "কন্ড্রিনের মাঝে দৃশ্যমান গহ্বরের নাম কী?", o: ["(ক) সাইনোভিয়াল", "(খ) কন্ড্রিয়াম", "(গ) ল্যাকিউনি", "(ঘ) কন্ড্রিওসাইট"], a: 2 },
+            { q: "ল্যাকিউনি কোথায় পাওয়া যায়?", o: ["(ক) অস্থি", "(খ) তরুণাস্থি", "(গ) রক্ত", "(ঘ) লসিকা"], a: 1 },
+            { q: "কোনটি জানুর অস্থি?", o: ["(ক) প্যাটেল", "(খ) পিউবিস", "(গ) স্যাক্রাম", "(ঘ) স্ক্যাপুলা"], a: 0 },
+            { q: "উরুসন্ধি কোন ধরনের সন্ধি?", o: ["(ক) ঈষৎ সচল অস্থি সন্ধি", "(খ) নিশ্চল অস্থি সন্ধি", "(গ) বল ও কোটর সন্ধি", "(ঘ) কবজা সন্ধি"], a: 2 },
+            { q: "সারকোলেমা হচ্ছে— i. পেশির আবরণী ii. পেশি ও টেনডনের সংযোগস্থলে শেষ হয় iii. অস্থির আবরণী", o: ["(ক) i ও ii", "(খ) i ও iii", "(গ) ii ও iii", "(ঘ) i, ii ও iii"], a: 0 },
+            { q: "জীববিজ্ঞান শিক্ষক অস্থিসন্ধি পড়াতে গিয়ে শ্রেণিকক্ষের দরজার কবজা ও কাঠামোর সাথে তুলনা করে দেখান। তুলনীয় অংশের সাথে মিল সম্পন্ন কোনটি?", o: ["(ক) পেশি—টেনডন—অস্থি", "(খ) অস্থি—তরুণাস্থি—অস্থি", "(গ) পেশি—লিগামেন্ট—তরুণাস্থি", "(ঘ) অস্থি—লিগামেন্ট—অস্থি"], a: 3 },
+            { q: "কনুই বাঁকা করলে কোন পেশি সংকুচিত হয়?", o: ["(ক) বাইসেপস", "(খ) ট্রাইসেপস", "(গ) রেডিয়াস", "(ঘ) আলনা"], a: 0 },
+            { q: "অস্থিসন্ধিতে প্রদাহ প্রতিকারের উপায় কোনটি?", o: ["(ক) ক্যালসিয়াম সমৃদ্ধ খাদ্য গ্রহণ", "(খ) সবুজ শাকসবজি গ্রহণ", "(গ) বীজ জাতীয় খাদ্য পরিহার", "(ঘ) দুগ্ধজাত খাবার গ্রহণ"], a: 2 },
+            { q: "অস্টিওপোরোসিস সাধারণত কাদের হয়?", o: ["(ক) বয়স্ক পুরুষ ও মহিলাদের", "(খ) বাচ্চাদের", "(গ) তরুণ ছেলেদের", "(ঘ) তরুণ মেয়েদের"], a: 0 },
+            { q: "৫০ বছরের বেশি বয়স্ক পুরুষ ও মহিলাদের দৈনিক কত মিলিগ্রাম ক্যালসিয়াম গ্রহণ করা প্রয়োজন?", o: ["(ক) ১০০০ mg", "(খ) ১২০০ mg", "(গ) ২১০০ mg", "(ঘ) ২২০০ mg"], a: 1 },
+            { q: "ফাহিমের বয়স ৭ বছর। ইদানিং তার অস্থি সন্ধিতে বেশ ব্যথা হচ্ছে। ফাহিমের কোন রোগটি হতে পারে?", o: ["(ক) Rheumatiod Arthritis", "(খ) Osteoporosis", "(গ) Rheumatic fever", "(ঘ) Pneumonia"], a: 2 },
+            { q: "হাতের কনুই-এর অস্থিসন্ধি হলো— i. পূর্ণ সচল অস্থিসন্ধি ii. বল ও কোটর সন্ধি iii. কেবল একদিকে নাড়ানো যায়", o: ["(ক) i ও ii", "(খ) i ও iii", "(গ) ii ও iii", "(ঘ) i, ii ও iii"], a: 1 },
+            { q: "লিগামেন্টের টিস্যু হচ্ছে— i. হাড়ের সাথে পেশী যুক্ত থাকে ii. হাড়ের সাথে হাড় সংযুক্ত করে iii. পীত বর্ণের", o: ["(ক) i ও ii", "(খ) ii ও iii", "(গ) i ও iii", "(ঘ) i, ii ও iii"], a: 1 },
+
+            // --- Image 4 ---
+            { q: "প্যাটেলার অবস্থান—", o: ["(ক) জানুতে", "(খ) স্কন্ধে", "(গ) শ্রোণিতে", "(ঘ) হাতের কব্জিতে"], a: 0 },
+            { q: "অস্থির অস্থিকোষে শতকরা কত ভাগ অজৈব পদার্থ থাকে?", o: ["(ক) ৪০", "(খ) ৫০", "(গ) ৭০", "(ঘ) ৯০"], a: 0 },
+            { q: "কোনটি সঠিক?", o: ["(ক) তরুণাস্থি অস্থিত ন্যায় কঠিন নয়", "(খ) মাইটোকন্ড্রিয়া জীবকোষে জৈব রাসায়নিক বিক্রিয়া নিয়ন্ত্রণ করে", "(গ) ত্বকের ভিতরের অংশে রঞ্জক কণা থাকে", "(ঘ) চোখের লেন্স মাইয়োপিয়া দশায় উত্তল হয়"], a: 0 },
+            { q: "কব্জা সন্ধি কোথায় থাকে?", o: ["(ক) স্কন্ধাস্থিতে", "(খ) মেরুদণ্ডে", "(গ) হাতের আঙুলে", "(ঘ) করোটিকায়"], a: 2 },
+            { q: "উরুসন্ধি কোন ধরনের সন্ধি?", o: ["(ক) ঈষৎ সচল অস্থি সন্ধি", "(খ) নিশ্চল অস্থি সন্ধি", "(গ) বল ও কোটর সন্ধি", "(ঘ) কবজা সন্ধি"], a: 2 },
+            { q: "আমরা হাতকে ভাঁজ করতে পারি কারণ—", o: ["(ক) বাইসেপস পেশি সংকুচিত হয়", "(খ) বাইসেপস পেশি প্রসারিত হয়", "(গ) ট্রাইসেপস পেশি সংকুচিত হয়", "(ঘ) ট্রাইসেপস পেশি প্রসারিত হয়"], a: 0 },
+            { q: "জীববিজ্ঞান শিক্ষক অস্থিসন্ধি পড়াতে গিয়ে শ্রেণিকক্ষের দরজার পাল্লা, কবজা ও কাঠামোর সাথে তুলনা করে দেখান। তুলনীয় অংশের সাথে মিল সম্পন্ন কোনটি?", o: ["(ক) পেশি—টেনডন—অস্থি", "(খ) অস্থি—তরুণাস্থি—অস্থি", "(গ) পেশি—লিগামেন্ট—তরুণাস্থি", "(ঘ) অস্থি—লিগামেন্ট—অস্থি"], a: 3 },
+            { q: "অস্টিওপোরোসিস রোগের লক্ষণ হলো—", o: ["(ক) অস্থিসন্ধিতে ব্যথা হয়", "(খ) অস্থিসন্ধিগুলো শক্ত হয়ে যায়", "(গ) অস্থিসন্ধি নাড়াতে কষ্ট হয়", "(ঘ) পেশির শক্তি কমতে থাকে"], a: 3 },
+            { q: "অস্টিওপোরোসিস কিসের অভাবজনিত রোগ?", o: ["(ক) নাইট্রোজেন", "(খ) ক্যালসিয়াম", "(গ) জিংক", "(ঘ) সালফার"], a: 1 },
+            { q: "কোনটি পেক্টোরাল গার্ডল এর অস্থি?", o: ["(ক) স্ক্যাপুলা", "(খ) পিউবিস", "(গ) স্যাক্রাম", "(ঘ) স্টার্নাম"], a: 0 },
+            { q: "অস্থিমজ্জা থেকে কোনটি তৈরি হয়?", o: ["(ক) শ্বেত রক্তকণিকা ও লসিকা", "(খ) অণুচক্রিকা ও রক্তরস", "(গ) লোহিত রক্তকণিকা ও শ্বেত রক্তকণিকা", "(ঘ) রক্তরস ও লসিকা"], a: 2 },
+            { q: "অস্থিকোষকে কী বলা হয়?", o: ["(ক) কন্ড্রিওব্লাস্ট", "(খ) ফাইব্রোব্লাস্ট", "(গ) অস্টিওব্লাস্ট", "(ঘ) কোলাজেনাম"], a: 2 },
+            { q: "হাড়ে (অস্থি) শতকরা কতভাগ পানি থাকে?", o: ["(ক) ২০-৩০", "(খ) ৩০-৪০", "(গ) ৪০-৫০", "(ঘ) ৫০-৬০"], a: 2 },
+            { q: "অস্থির ভিতর শতকরা কত ভাগ অজৈব যৌগ থাকে?", o: ["(ক) ৭০", "(খ) ৬০", "(গ) ৫০", "(ঘ) ৪০"], a: 1 },
+            { q: "অস্থির ভিতর শতকরা কতভাগ জৈব যৌগ থাকে?", o: ["(ক) ৩০", "(খ) ৪০", "(গ) ৫০", "(ঘ) ৬০"], a: 1 },
+            { q: "কোনটি গঠনে ক্যালসিয়াম গুরুত্বপূর্ণ ভূমিকা পালন করে?", o: ["(ক) অস্থি", "(খ) পেশী", "(গ) লিগামেন্ট", "(ঘ) টেনডন"], a: 0 },
+            { q: "তরুণাস্থি কোন তন্তুময় যোজক কলা দ্বারা পরিবেষ্টিত?", o: ["(ক) পেরিটোনিয়াম", "(খ) পেরিসিলিয়াম", "(গ) পেরিকার্ডিয়াম", "(ঘ) পেরিকন্ড্রিয়াম"], a: 3 },
+            { q: "তরুণাস্থি অস্থির ন্যায় শক্ত নয় কেন?", o: ["(ক) নরম ও স্থিতিস্থাপক", "(খ) নরম বলে", "(গ) নরম ও স্থিতিস্থাপক নয়", "(ঘ) যোজক কলা বলে"], a: 0 },
+            { q: "কানের পিনার মাতৃকায় রয়েছে কোনটি?", o: ["(ক) অস্টিওব্লাস্ট", "(খ) কন্ড্রিন", "(গ) পেরিটোস্টিনাম", "(ঘ) টেনডন"], a: 1 },
+            { q: "তরুণাস্থি বেষ্টনকারী আবরণটির নাম কী?", o: ["(ক) অস্টিওব্লাস্ট", "(খ) পেরিকন্ড্রিয়াম", "(গ) কন্ড্রিওব্লাস্ট", "(ঘ) কন্ড্রিওসাইট"], a: 1 },
+            { q: "নিচের কোনটি নিশ্চল অস্থিসন্ধি?", o: ["(ক) করোটিকা", "(খ) মেরুদণ্ড", "(গ) বল ও কোটর", "(ঘ) কাঁধ ও উরু"], a: 0 },
+            { q: "কোনটি ঈষৎ সচল অস্থি সন্ধি?", o: ["(ক) মেরুদণ্ডের অস্থি সন্ধি", "(খ) করোটিকা", "(গ) কবজা সন্ধি", "(ঘ) বল ও কোটর সন্ধি"], a: 0 },
+            { q: "কোথায় বল ও কোটর (সকেট) সন্ধি বা কঙ্কাল পেশি পাওয়া যায়?", o: ["(ক) জানুতে", "(খ) কাঁধে", "(গ) আঙুলে", "(ঘ) কনুইতে"], a: 1 },
+            { q: "'স্নায়ু'-তে কোন অস্থিসন্ধি বিদ্যমান?", o: ["(ক) কবজা সন্ধি", "(খ) বল ও কোটর সন্ধি", "(গ) নিশ্চল অস্থি সন্ধি", "(ঘ) ঈষৎ সচল অস্থি সন্ধি"], a: 2 },
+            { q: "কোনটি জানুর অস্থি?", o: ["(ক) প্যাটেল", "(খ) পিউবিস", "(গ) স্যাক্রাম", "(ঘ) স্ক্যাপুলা"], a: 0 },
+            { q: "নিচের কোন অংশটি বেশ শক্ত?", o: ["(ক) লিগামেন্ট", "(খ) টেনডন", "(গ) ফাইব্রোব্লাস্ট", "(ঘ) তরুণাস্থি"], a: 1 },
+            { q: "টেনডন এর বৈশিষ্ট্য কোনটি?", o: ["(ক) শ্বেত ও পীততন্তু বিদ্যমান", "(খ) এদের স্থিতিস্থাপকতা বেশি", "(গ) ইলাস্টিন নামক আমিষ বিদ্যমান", "(ঘ) এদের স্থিতিস্থাপকতা নেই"], a: 3 },
+            { q: "অস্থি সন্ধির তন্তুগুলো কী দিয়ে গঠিত?", o: ["(ক) লিপিড", "(খ) কার্বোহাইড্রেট", "(গ) ভিটামিন", "(ঘ) প্রোটিন"], a: 3 },
+            { q: "কোনটিতে শ্বেততন্তু ও পীততন্তু রয়েছে?", o: ["(ক) অস্থি", "(খ) লিগামেন্ট", "(গ) টেনডন", "(ঘ) স্নায়ু"], a: 1 },
+            { q: "লিগামেন্ট কী দিয়ে গঠিত?", o: ["(ক) শ্বেততন্তু ও টেনডন", "(খ) পীততন্তু ও শ্বেততন্তু", "(গ) টেনডন ও পীততন্তু", "(ঘ) ফাইব্রোব্লাস্ট ও টেনডন"], a: 1 },
+            { q: "নিচের কোনটি পেশী বন্ধনী?", o: ["(ক) টেনডন", "(খ) লিগামেন্ট", "(গ) কঙ্কাল", "(ঘ) তরুণাস্থি"], a: 0 },
+            { q: "টেনডন কোনটির মাধ্যমে অস্থিকে আটকে রাখে?", o: ["(ক) ঐচ্ছিক পেশি", "(খ) তরুণাস্থি", "(গ) অনৈচ্ছিক পেশি", "(ঘ) হৃদপেশি"], a: 0 },
+            { q: "লিগামেন্ট তন্তুগুলো কী দ্বারা গঠিত?", o: ["(ক) স্নেহ", "(খ) আমিষ", "(গ) শর্করা", "(ঘ) খনিজ লবণ"], a: 1 },
+            { q: "কোনটির অভাবে অস্টিওপোরোসিস হয়?", o: ["(ক) ক্যালসিয়াম", "(খ) আয়োডিন", "(গ) লৌহ", "(ঘ) ভিটামিন"], a: 0 },
+            { q: "অস্টিওপোরোসিস কিসের অভাবজনিত রোগ?", o: ["(ক) নাইট্রোজেন", "(খ) ক্যালসিয়াম", "(গ) জিংক", "(ঘ) সালফার"], a: 1 },
+            { q: "অস্টিওপোরোসিস সাধারণত কাদের হয়?", o: ["(ক) বয়স্ক পুরুষ ও মহিলাদের", "(খ) বাচ্চাদের", "(গ) তরুণ ছেলেদের", "(ঘ) তরুণ মেয়েদের"], a: 0 },
+            { q: "৫০ বছরের বেশি বয়স্ক পুরুষ ও মহিলাদের দৈনিক কত মিলিগ্রাম ক্যালসিয়াম গ্রহণ করা প্রয়োজন?", o: ["(ক) ১০০০ mg", "(খ) ১২০০ mg", "(গ) ২১০০ mg", "(ঘ) ২২০০ mg"], a: 1 },
+            { q: "রিউমাটয়েড আর্থ্রাইটিস প্রতিকারের জন্য কোনটি করতে হবে?", o: ["(ক) কমলার রস খাওয়া", "(খ) মাছ-মাংস খাওয়া", "(গ) দুগ্ধজাত দ্রব্য বর্জন", "(ঘ) ডাক্তারের পরামর্শ অনুযায়ী ঔষধ সেবন"], a: 3 },
+            { q: "আর্থ্রাইটিস প্রতিরোধ করে কোনটি?", o: ["(ক) সবজি", "(খ) ডাল", "(গ) লেবুর রস", "(ঘ) ডিম"], a: 0 },
+            { q: "অস্থিসন্ধিতে প্রদাহ প্রতিকারের উপায় কোনটি?", o: ["(ক) ক্যালসিয়াম সমৃদ্ধ খাদ্য গ্রহণ", "(খ) সবুজ শাকসবজি গ্রহণ", "(গ) বীজ জাতীয় খাদ্য পরিহার", "(ঘ) দুগ্ধজাত খাবার গ্রহণ"], a: 2 },
+            { q: "তরুণাস্থির— i. মাতৃকা কন্ড্রিন দ্বারা গঠিত ii. কোষকে অস্টিওব্লাস্ট বলে iii. আবরণীকে পেরিকন্ড্রিয়াম বলে", o: ["(ক) i ও ii", "(খ) i ও iii", "(গ) ii ও iii", "(ঘ) i, ii ও iii"], a: 1 },
+            { q: "হাতের কনুই-এর অস্থিসন্ধি হলো— i. পূর্ণ সচল অস্থিসন্ধি ii. বল ও কোটর সন্ধি iii. কেবল একদিকে নাড়ানো যায়", o: ["(ক) i ও ii", "(খ) i ও iii", "(গ) ii ও iii", "(ঘ) i, ii ও iii"], a: 1 }
         ];
 
-        // State Array based on length of questions
-        const userAnswers = new Array(db.length).fill(null);
-        const prefixArray = ["ক", "খ", "গ", "ঘ"];
-        const EXAM_LOCAL_KEY = "saifuls_biology_exam_completed";
+        let currentQuestionIndex = 0;
+        let userAnswers = new Array(questionsData.length).fill(null);
+        let examCompleted = false;
 
-        window.onload = function() {
-            if (localStorage.getItem(EXAM_LOCAL_KEY)) {
-                document.getElementById('statsBar').style.display = 'none';
-                document.getElementById('examContainer').style.display = 'none';
-                document.getElementById('lockedScreen').style.display = 'flex';
-            } else {
-                initExam();
-            }
-        };
+        const EXAM_KEY = "saifuls_bio_exam_final_119";
+        const ANSWERS_KEY = "saifuls_bio_ans_final_119";
 
         function initExam() {
-            const wrapper = document.getElementById('questionsWrapper');
-            document.getElementById('totalQ').innerText = db.length;
-            document.getElementById('unansweredQ').innerText = db.length;
+            if (localStorage.getItem(EXAM_KEY) === "true") {
+                document.getElementById('examInterface').style.display = 'none';
+                document.getElementById('lockedScreen').style.display = 'block';
+                return;
+            }
+            
+            document.getElementById('totalQNum').innerText = questionsData.length;
+            renderAllQuestions();
+            showQuestion(0);
+        }
 
-            db.forEach((item, index) => {
-                const card = document.createElement('div');
-                card.className = 'question-card';
-                card.id = `q-card-${index}`;
+        function renderAllQuestions() {
+            const container = document.getElementById('questionContainer');
+            questionsData.forEach((data, index) => {
+                const qDiv = document.createElement('div');
+                qDiv.className = 'question-card';
+                qDiv.id = `q-${index}`;
                 
-                const header = document.createElement('div');
-                header.className = 'question-header';
-                header.innerHTML = `
-                    <div class="question-number">${index + 1}</div>
-                    <div class="question-text">${item.q}</div>
-                `;
-                card.appendChild(header);
-
-                const optsGrid = document.createElement('div');
-                optsGrid.className = 'options-grid';
-
-                item.opts.forEach((optText, optIndex) => {
-                    const btn = document.createElement('button');
-                    btn.className = 'option-btn';
-                    btn.id = `btn-${index}-${optIndex}`;
-                    btn.innerHTML = `<span class="option-prefix">${prefixArray[optIndex]}.</span> ${optText}`;
-                    btn.onclick = () => selectOption(index, optIndex);
-                    optsGrid.appendChild(btn);
+                let optionsHtml = '';
+                data.o.forEach((opt, optIndex) => {
+                    optionsHtml += `<div class="option" id="opt-${index}-${optIndex}" onclick="selectOption(${index}, ${optIndex})">${opt}</div>`;
                 });
 
-                card.appendChild(optsGrid);
-                wrapper.appendChild(card);
+                qDiv.innerHTML = `
+                    <div class="question-text">${index + 1}. ${data.q}</div>
+                    <div class="options-grid">
+                        ${optionsHtml}
+                    </div>
+                `;
+                container.appendChild(qDiv);
             });
         }
 
-        function selectOption(qIndex, optIndex) {
-            userAnswers[qIndex] = optIndex;
+        function showQuestion(index) {
+            document.querySelectorAll('.question-card').forEach(card => {
+                card.style.display = 'none';
+            });
+            const currentCard = document.getElementById(`q-${index}`);
+            currentCard.style.display = 'block';
             
-            // Remove selected class from all options in this question
-            for (let i = 0; i < 4; i++) {
-                document.getElementById(`btn-${qIndex}-${i}`).classList.remove('selected');
-            }
-            // Add selected class to chosen one
-            document.getElementById(`btn-${qIndex}-${optIndex}`).classList.add('selected');
+            // Retrigger animation
+            currentCard.style.animation = 'none';
+            currentCard.offsetHeight; 
+            currentCard.style.animation = 'slideIn 0.4s ease-out forwards';
+            
+            document.getElementById('currentQNum').innerText = index + 1;
+            updateProgressBar();
 
-            updateStats();
+            const btnPrev = document.getElementById('btnPrev');
+            const btnNext = document.getElementById('btnNext');
+            const btnSubmit = document.getElementById('btnSubmit');
+
+            if (index === 0) {
+                btnPrev.classList.add('btn-hidden');
+            } else {
+                btnPrev.classList.remove('btn-hidden');
+            }
+            
+            if (index === questionsData.length - 1) {
+                btnNext.classList.add('btn-hidden');
+                btnSubmit.classList.remove('btn-hidden');
+            } else {
+                btnNext.classList.remove('btn-hidden');
+                btnSubmit.classList.add('btn-hidden');
+            }
         }
 
-        function updateStats() {
+        function selectOption(qIndex, optIndex) {
+            if (examCompleted) return;
+            
+            userAnswers[qIndex] = optIndex;
+            
+            // UI Update
+            for (let i = 0; i < 4; i++) {
+                const optEl = document.getElementById(`opt-${qIndex}-${i}`);
+                if (optEl) optEl.classList.remove('selected');
+            }
+            document.getElementById(`opt-${qIndex}-${optIndex}`).classList.add('selected');
+            
             let answered = userAnswers.filter(a => a !== null).length;
-            let total = db.length;
-            let unanswered = total - answered;
-            
-            document.getElementById('answeredQ').innerText = answered;
-            document.getElementById('unansweredQ').innerText = unanswered;
-            
-            let percent = (answered / total) * 100;
-            document.getElementById('progressBar').style.width = percent + '%';
+            document.getElementById('answeredCount').innerText = answered;
+        }
+
+        function prevQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                showQuestion(currentQuestionIndex);
+            }
+        }
+
+        function nextQuestion() {
+            if (currentQuestionIndex < questionsData.length - 1) {
+                currentQuestionIndex++;
+                showQuestion(currentQuestionIndex);
+            }
+        }
+
+        function updateProgressBar() {
+            const progress = ((currentQuestionIndex + 1) / questionsData.length) * 100;
+            document.getElementById('progressBar').style.width = `${progress}%`;
         }
 
         function submitExam() {
-            let answered = userAnswers.filter(a => a !== null).length;
-            let total = db.length;
+            const unanswered = userAnswers.filter(a => a === null).length;
+            let msg = unanswered > 0 
+                ? `আপনি ${unanswered} টি প্রশ্নের উত্তর দেননি। আপনি কি নিশ্চিত যে আপনি পরীক্ষা জমা দিতে চান? জমা দেওয়ার পর আর পরিবর্তন করা যাবে না।`
+                : "আপনি কি নিশ্চিত যে আপনি পরীক্ষা জমা দিতে চান? জমা দেওয়ার পর আর পরিবর্তন করা যাবে না।";
+                
+            if (!confirm(msg)) return;
+            
+            examCompleted = true;
+            localStorage.setItem(EXAM_KEY, "true");
+            localStorage.setItem(ANSWERS_KEY, JSON.stringify(userAnswers));
+            
+            document.getElementById('examInterface').style.display = 'none';
+            calculateAndShowResult();
+            window.scrollTo(0, 0);
+        }
 
-            if (answered < total) {
-                let confirmSubmit = confirm(`আপনি ${total - answered} টি প্রশ্নের উত্তর দেননি। আপনি কি নিশ্চিত যে আপনি পরীক্ষা জমা দিতে চান?`);
-                if (!confirmSubmit) return;
-            }
+        function showReviewFromLock() {
+            let savedAnswers = JSON.parse(localStorage.getItem(ANSWERS_KEY));
+            if(savedAnswers) userAnswers = savedAnswers;
+            
+            document.getElementById('lockedScreen').style.display = 'none';
+            calculateAndShowResult();
+        }
 
-            // Permanently lock exam
-            localStorage.setItem(EXAM_LOCAL_KEY, "true");
-
-            // Calculate Result
+        function calculateAndShowResult() {
+            document.getElementById('resultScreen').style.display = 'block';
+            
             let correct = 0;
             let incorrect = 0;
             let unanswered = 0;
 
-            userAnswers.forEach((ans, index) => {
-                if (ans === null) {
+            const reviewContainer = document.getElementById('reviewContainer');
+            reviewContainer.innerHTML = '';
+            document.getElementById('reviewSection').style.display = 'block';
+
+            questionsData.forEach((data, index) => {
+                let userAns = userAnswers[index];
+                
+                if (userAns === null) {
                     unanswered++;
-                } else if (ans === db[index].ans) {
+                } else if (userAns === data.a) {
                     correct++;
                 } else {
                     incorrect++;
                 }
-            });
 
-            let percentage = ((correct / total) * 100).toFixed(2);
-
-            // Hide Exam, Show Result
-            document.getElementById('statsBar').style.display = 'none';
-            document.getElementById('examContainer').style.display = 'none';
-            document.getElementById('resultContainer').style.display = 'block';
-
-            // Populate Result Summary
-            document.getElementById('finalScoreText').innerText = `${correct}/${total}`;
-            document.getElementById('percentageText').innerText = `${percentage}%`;
-            document.getElementById('rCorrect').innerText = correct;
-            document.getElementById('rIncorrect').innerText = incorrect;
-            document.getElementById('rUnanswered').innerText = unanswered;
-
-            let msg = document.getElementById('performanceMessage');
-            if (percentage >= 80) { msg.innerText = "অসাধারণ পারফরম্যান্স! 🌟"; msg.style.color = "var(--correct)"; }
-            else if (percentage >= 60) { msg.innerText = "খুব ভালো চেষ্টা! 👍"; msg.style.color = "var(--primary-dark)"; }
-            else { msg.innerText = "আরও অনুশীলন প্রয়োজন। 📖"; msg.style.color = "var(--warning)"; }
-
-            // Generate Review
-            generateReview();
-            
-            // Scroll to top
-            window.scrollTo(0, 0);
-        }
-
-        function generateReview() {
-            const wrapper = document.getElementById('reviewWrapper');
-            
-            db.forEach((item, index) => {
-                const uAns = userAnswers[index];
-                const cAns = item.ans;
-
-                const card = document.createElement('div');
-                card.className = 'question-card review-card';
+                // Render Review
+                const rDiv = document.createElement('div');
+                rDiv.className = 'question-card';
+                rDiv.style.display = 'block';
+                rDiv.style.animation = 'none';
                 
-                const header = document.createElement('div');
-                header.className = 'question-header';
-                header.innerHTML = `
-                    <div class="question-number">${index + 1}</div>
-                    <div class="question-text">${item.q}</div>
-                `;
-                card.appendChild(header);
-
-                const optsContainer = document.createElement('div');
-                optsContainer.className = 'options-grid';
-
-                item.opts.forEach((optText, optIndex) => {
-                    const optDiv = document.createElement('div');
-                    optDiv.className = 'review-option';
+                let optsHtml = '';
+                data.o.forEach((opt, optIndex) => {
+                    let className = 'option disabled';
+                    if (optIndex === data.a) className += ' correct-review';
+                    else if (optIndex === userAns && userAns !== data.a) className += ' incorrect-review';
                     
-                    let badgeHTML = '';
-                    
-                    if (optIndex === cAns) {
-                        optDiv.classList.add('correct-ans');
-                        badgeHTML = '<span class="review-badge bg-green">সঠিক উত্তর ✓</span>';
-                    }
-                    
-                    if (optIndex === uAns && uAns !== cAns) {
-                        optDiv.classList.add('wrong-ans');
-                        badgeHTML = '<span class="review-badge bg-red">আপনার ভুল উত্তর ✗</span>';
-                    }
-
-                    if (uAns === null && optIndex === cAns) {
-                        badgeHTML = '<span class="review-badge bg-green">সঠিক উত্তর (উত্তর দেওয়া হয়নি)</span>';
-                    }
-
-                    optDiv.innerHTML = `
-                        <span class="option-prefix">${prefixArray[optIndex]}.</span> 
-                        <span>${optText}</span>
-                        ${badgeHTML}
-                    `;
-                    optsContainer.appendChild(optDiv);
+                    optsHtml += `<div class="${className}">${opt}</div>`;
                 });
 
-                card.appendChild(optsContainer);
-                wrapper.appendChild(card);
+                rDiv.innerHTML = `
+                    <div class="question-text">${index + 1}. ${data.q}</div>
+                    <div class="options-grid">${optsHtml}</div>
+                `;
+                reviewContainer.appendChild(rDiv);
             });
+
+            document.getElementById('resTotal').innerText = questionsData.length;
+            document.getElementById('resCorrect').innerText = correct;
+            document.getElementById('resIncorrect').innerText = incorrect;
+            document.getElementById('resUnanswered').innerText = unanswered;
+            
+            document.getElementById('resScore').innerText = `${correct}/${questionsData.length}`;
+            let percent = ((correct / questionsData.length) * 100).toFixed(2);
+            document.getElementById('resPercent').innerText = `${percent}%`;
         }
+
+        // Initialize Exam
+        window.onload = initExam;
     </script>
 </body>
 </html>
