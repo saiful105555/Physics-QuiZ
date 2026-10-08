@@ -3,764 +3,699 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>সাইফুল'স সাইন্স কেয়ার - বায়োলজি-মডেল টেস্ট</title>
+    <title>সাইফুল'স সাইন্স কেয়ার - মেগা MCQ প্র্যাকটিস</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap');
-
         :root {
-            --primary-color: #0f766e;
-            --secondary-color: #047857;
-            --bg-color: #f0fdf4;
+            --primary-color: #1e3a8a;
+            --secondary-color: #3b82f6;
+            --bg-color: #f3f4f6;
             --card-bg: #ffffff;
-            --text-color: #1f2937;
-            --option-bg: #f8fafc;
-            --option-hover: #d1fae5;
-            --option-selected: #a7f3d0;
-            --correct-color: #16a34a;
-            --correct-bg: #dcfce7;
-            --incorrect-color: #dc2626;
-            --incorrect-bg: #fee2e2;
-            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            --border-radius: 16px;
+            --text-main: #1f2937;
+            --text-muted: #6b7280;
+            --success-color: #10b981;
+            --error-color: #ef4444;
+            --border-radius: 12px;
+            --transition: all 0.3s ease;
         }
 
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Hind Siliguri', sans-serif;
+            box-sizing: border-box;
+            font-family: 'Noto Sans Bengali', sans-serif;
         }
 
         body {
             background-color: var(--bg-color);
-            color: var(--text-color);
+            color: var(--text-main);
             line-height: 1.6;
         }
 
-        .header {
+        header {
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
-            padding: 2.5rem 1rem;
             text-align: center;
-            box-shadow: var(--shadow);
-            position: relative;
-            overflow: hidden;
-            border-bottom: 5px solid #34d399;
+            padding: 2.5rem 1rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            margin-bottom: 2rem;
         }
 
-        .header::before, .header::after {
-            content: '🧬';
-            position: absolute;
-            font-size: 120px;
-            opacity: 0.08;
-            transform: rotate(30deg);
-        }
-        .header::before { top: -20px; left: -20px; }
-        .header::after { bottom: -20px; right: -20px; content: '🌿'; transform: rotate(-15deg); }
-
-        .header h1 {
-            font-size: 2.2rem;
+        header h1 {
+            font-size: 2.5rem;
             font-weight: 700;
             margin-bottom: 0.5rem;
-            position: relative;
-            z-index: 1;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
         }
 
-        .header h2 {
-            font-size: 1.3rem;
-            font-weight: 500;
-            color: #d1fae5;
-            position: relative;
-            z-index: 1;
-        }
-
-        .instruction {
-            background-color: #fef08a;
-            color: #854d0e;
-            padding: 0.75rem;
-            text-align: center;
-            font-weight: 700;
-            font-size: 1rem;
-            border-bottom: 1px solid #fde047;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
         }
 
         .container {
             max-width: 850px;
-            margin: 2rem auto;
-            padding: 0 1rem;
-        }
-
-        .status-bar {
-            background: var(--card-bg);
-            padding: 1.2rem;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            margin-bottom: 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
-            border-top: 4px solid var(--primary-color);
-        }
-
-        .status-item {
-            font-size: 1rem;
-            font-weight: 600;
-            background: #f1f5f9;
-            padding: 8px 16px;
-            border-radius: 8px;
-            color: var(--primary-color);
+            margin: 0 auto;
+            padding: 0 1rem 4rem 1rem;
         }
 
         .progress-container {
-            width: 100%;
-            height: 10px;
-            background: #e2e8f0;
-            border-radius: 5px;
-            margin-top: 5px;
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+            position: sticky;
+            top: 15px;
+            z-index: 100;
+            border: 1px solid #e5e7eb;
+        }
+
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+        }
+
+        .progress-bar-bg {
+            background: #e5e7eb;
+            height: 12px;
+            border-radius: 6px;
             overflow: hidden;
         }
 
-        .progress-bar {
+        .progress-bar-fill {
+            background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
             height: 100%;
-            background: linear-gradient(90deg, #34d399, var(--primary-color));
             width: 0%;
             transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .question-card {
             background: var(--card-bg);
+            padding: 2.5rem 2rem;
             border-radius: var(--border-radius);
-            padding: 2rem;
-            box-shadow: var(--shadow);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
             margin-bottom: 1.5rem;
-            display: none;
-            animation: slideIn 0.4s ease-out forwards;
-            border: 1px solid #e2e8f0;
+            transition: var(--transition);
+            border: 1px solid #f3f4f6;
         }
 
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(20px); }
-            to { opacity: 1; transform: translateX(0); }
+        .question-card:hover {
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+            transform: translateY(-3px);
+            border-color: #e5e7eb;
         }
 
-        .question-text {
+        .q-number {
+            display: inline-block;
+            background: #eff6ff;
+            color: var(--primary-color);
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .q-text {
             font-size: 1.3rem;
             font-weight: 600;
-            margin-bottom: 1.5rem;
-            color: #0f172a;
+            margin-bottom: 1.8rem;
+            color: var(--text-main);
             line-height: 1.5;
         }
 
         .options-grid {
-            display: flex;
-            flex-direction: column;
+            display: grid;
+            grid-template-columns: 1fr;
             gap: 1rem;
         }
 
-        .option {
-            background: var(--option-bg);
-            border: 2px solid #e2e8f0;
-            padding: 1rem 1.5rem;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-size: 1.1rem;
-            font-weight: 500;
-            color: #334155;
+        .option-label {
             display: flex;
             align-items: center;
-        }
-
-        .option:hover:not(.disabled) {
-            background: var(--option-hover);
-            border-color: #34d399;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
-        }
-
-        .option.selected {
-            background: var(--option-selected);
-            border-color: var(--primary-color);
-            color: var(--primary-color);
-            font-weight: 700;
-        }
-
-        .option.disabled {
-            cursor: default;
-        }
-
-        .option.correct-review {
-            background: var(--correct-bg);
-            border-color: var(--correct-color);
-            color: #166534;
-            font-weight: 700;
-        }
-
-        .option.incorrect-review {
-            background: var(--incorrect-bg);
-            border-color: var(--incorrect-color);
-            color: #991b1b;
-            font-weight: 700;
-        }
-
-        .nav-buttons {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 2rem;
-            gap: 15px;
-        }
-
-        button {
-            padding: 0.8rem 2rem;
-            border: none;
+            padding: 1.2rem;
+            border: 2px solid #e5e7eb;
             border-radius: 10px;
-            font-size: 1.1rem;
-            font-weight: 700;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: var(--transition);
+            background: #fafafa;
+            font-size: 1.1rem;
+        }
+
+        .option-label:hover {
+            border-color: var(--secondary-color);
+            background: #eff6ff;
+        }
+
+        .option-input {
+            display: none;
+        }
+
+        .option-input:checked + .option-label {
+            border-color: var(--primary-color);
+            background: #e0e7ff;
+            font-weight: 600;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .option-prefix {
+            font-weight: bold;
+            margin-right: 15px;
+            color: var(--primary-color);
+            background: #dbeafe;
+            width: 35px;
+            height: 35px;
             display: flex;
             align-items: center;
             justify-content: center;
+            border-radius: 50%;
+            flex-shrink: 0;
         }
 
-        .btn-prev {
-            background: #cbd5e1;
-            color: #334155;
-        }
-        
-        .btn-prev:hover {
-            background: #94a3b8;
+        .option-input:checked + .option-label .option-prefix {
+            background: var(--primary-color);
             color: white;
         }
 
-        .btn-next, .btn-submit {
+        .btn {
+            display: inline-block;
+            padding: 1.2rem 2.5rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+            width: 100%;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .btn-primary {
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
-            box-shadow: 0 4px 15px rgba(15, 118, 110, 0.3);
-            flex-grow: 1;
-            max-width: 250px;
+            box-shadow: 0 10px 20px rgba(30, 58, 138, 0.2);
         }
 
-        .btn-next:hover, .btn-submit:hover {
+        .btn-primary:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(15, 118, 110, 0.4);
+            box-shadow: 0 15px 25px rgba(30, 58, 138, 0.3);
         }
 
-        .btn-hidden {
-            display: none !important;
+        .btn-secondary {
+            background: #e5e7eb;
+            color: #374151;
+        }
+        
+        .btn-secondary:hover {
+            background: #d1d5db;
         }
 
-        /* Result Screen */
-        .result-screen {
-            background: var(--card-bg);
-            border-radius: var(--border-radius);
-            padding: 3rem 2rem;
-            text-align: center;
-            box-shadow: var(--shadow);
+        .btn-success {
+            background: linear-gradient(135deg, var(--success-color), #059669);
+            color: white;
+            box-shadow: 0 10px 20px rgba(16, 185, 129, 0.2);
+        }
+
+        .btn-success:hover {
+            transform: translateY(-3px);
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(17, 24, 39, 0.7);
             display: none;
-            border-top: 5px solid var(--primary-color);
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
         }
 
-        .result-title {
-            font-size: 2.5rem;
+        .modal-content {
+            background: white;
+            padding: 3rem 2.5rem;
+            border-radius: 16px;
+            max-width: 450px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .modal-content h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
             color: var(--primary-color);
-            margin-bottom: 1.5rem;
-            font-weight: 700;
         }
 
-        .result-stats {
+        .modal-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        /* Result Section */
+        #result-section, #review-section {
+            display: none;
+        }
+
+        .result-card {
+            background: var(--card-bg);
+            padding: 4rem 2rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .score-circle {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 10px solid var(--secondary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 2.5rem auto;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            background: #eff6ff;
+        }
+
+        .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 1.5rem;
-            margin: 2rem 0;
+            margin-bottom: 3rem;
         }
 
         .stat-box {
-            background: #f8fafc;
-            padding: 1.5rem;
+            padding: 1.5rem 1rem;
             border-radius: 12px;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-            transition: transform 0.3s;
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
         }
-        
-        .stat-box:hover {
-            transform: translateY(-5px);
-        }
+        .stat-box h4 { font-size: 2rem; margin-bottom: 0.5rem; }
+        .stat-correct h4 { color: var(--success-color); }
+        .stat-wrong h4 { color: var(--error-color); }
+        .stat-unanswered h4 { color: #f59e0b; }
 
-        .stat-box h3 {
-            font-size: 2.2rem;
-            margin-bottom: 0.5rem;
-            font-weight: 700;
-        }
-        
-        .stat-box p {
-            font-size: 1rem;
-            color: #475569;
-            font-weight: 600;
-        }
-
-        .score-display {
-            background: #ecfdf5;
-            padding: 1.5rem;
-            border-radius: 12px;
-            margin: 2rem 0;
-            border: 2px dashed #34d399;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--primary-color);
-        }
-
-        .review-section {
-            margin-top: 3rem;
-            text-align: left;
-            display: none;
-        }
-
-        .review-title {
-            margin-bottom: 2rem;
-            color: var(--primary-color);
-            border-bottom: 3px solid #e2e8f0;
-            padding-bottom: 1rem;
-            text-align: center;
-            font-size: 1.8rem;
-        }
-
-        .locked-message {
-            background: var(--card-bg);
-            border-radius: var(--border-radius);
-            padding: 4rem 2rem;
-            text-align: center;
-            box-shadow: var(--shadow);
-            display: none;
-            border-top: 5px solid #ef4444;
-        }
-
-        .locked-icon {
-            font-size: 5rem;
+        .review-status {
+            font-weight: bold;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            display: inline-flex;
             margin-bottom: 1.5rem;
+            font-size: 1rem;
         }
+        .status-correct { background: #d1fae5; color: #065f46; border: 1px solid #34d399;}
+        .status-wrong { background: #fee2e2; color: #991b1b; border: 1px solid #f87171;}
+        .status-unanswered { background: #fef3c7; color: #92400e; border: 1px solid #fbbf24;}
 
-        @media (max-width: 600px) {
-            .header h1 { font-size: 1.8rem; }
-            .header h2 { font-size: 1.1rem; }
-            .question-text { font-size: 1.15rem; }
-            .option { padding: 0.8rem 1rem; font-size: 1rem; }
-            .stat-box h3 { font-size: 1.8rem; }
-            .nav-buttons { flex-direction: column-reverse; }
-            .btn-next, .btn-submit, .btn-prev { max-width: 100%; width: 100%; }
+        .review-option {
+            padding: 1.2rem;
+            border-radius: 10px;
+            margin-bottom: 0.8rem;
+            border: 1px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            background: #fafafa;
+        }
+        .review-correct { background: #d1fae5; border-color: var(--success-color); font-weight: bold;}
+        .review-wrong { background: #fee2e2; border-color: var(--error-color); opacity: 0.8;}
+
+        @media (min-width: 768px) {
+            .options-grid { grid-template-columns: 1fr 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <div class="header">
+    <header>
         <h1>সাইফুল'স সাইন্স কেয়ার</h1>
-        <h2>বায়োলজি-মডেল টেস্ট</h2>
-    </div>
-    
-    <div class="instruction">
-        <span>⚠️</span> বি:দ্র: পরীক্ষাটি এক বারই দেওয়া যাবে।
-    </div>
+        <p>মেগা MCQ প্র্যাকটিস - ১০০+ প্রশ্ন</p>
+    </header>
 
     <div class="container">
         
-        <div id="lockedScreen" class="locked-message">
-            <div class="locked-icon">🔒</div>
-            <h2 style="color: #1f2937; font-size: 2rem; margin-bottom: 10px;">পরীক্ষাটি ইতোমধ্যে সম্পন্ন হয়েছে!</h2>
-            <p style="color: #64748b; font-size: 1.1rem; margin-bottom: 2rem;">আপনি আগেই এই পরীক্ষায় অংশগ্রহণ করেছেন। সুরক্ষার স্বার্থে পুনরায় পরীক্ষা দেওয়ার সুযোগ নেই।</p>
-            <button class="btn-submit" style="margin: 0 auto;" onclick="showReviewFromLock()">আপনার ফলাফল দেখুন</button>
+        <div id="exam-section">
+            <div class="progress-container">
+                <div class="progress-text">
+                    <span id="progress-count">প্রশ্ন ০ / ০</span>
+                    <span id="progress-percent">০%</span>
+                </div>
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" id="progress-bar"></div>
+                </div>
+            </div>
+
+            <form id="exam-form">
+                <div id="questions-container"></div>
+                <button type="button" class="btn btn-primary" onclick="showConfirmModal()">পরীক্ষা জমা দিন</button>
+            </form>
         </div>
 
-        <div id="examInterface">
-            <div class="status-bar">
-                <div class="status-item">প্রশ্ন: <span id="currentQNum">1</span> / <span id="totalQNum">0</span></div>
-                <div class="status-item">উত্তর দেওয়া হয়েছে: <span id="answeredCount">0</span></div>
-                <div class="progress-container">
-                    <div class="progress-bar" id="progressBar"></div>
+        <div class="modal-overlay" id="confirm-modal">
+            <div class="modal-content">
+                <h3>আপনি কি নিশ্চিত?</h3>
+                <p>পরীক্ষা জমা দেওয়ার পর আর কোনো উত্তর পরিবর্তন করা যাবে না।</p>
+                <div class="modal-buttons">
+                    <button type="button" class="btn btn-secondary" onclick="hideConfirmModal()">ফিরে যান</button>
+                    <button type="button" class="btn btn-primary" onclick="submitExam()">হ্যাঁ, জমা দিন</button>
                 </div>
-            </div>
-
-            <div id="questionContainer">
-                <!-- Questions will be injected here -->
-            </div>
-
-            <div class="nav-buttons">
-                <button class="btn-prev" id="btnPrev" onclick="prevQuestion()">পূর্ববর্তী</button>
-                <button class="btn-next" id="btnNext" onclick="nextQuestion()">পরবর্তী</button>
-                <button class="btn-submit btn-hidden" id="btnSubmit" onclick="submitExam()">পরীক্ষা জমা দিন</button>
             </div>
         </div>
 
-        <div id="resultScreen" class="result-screen">
-            <div class="result-title">🎉 পরীক্ষা সম্পন্ন!</div>
-            <div class="result-stats">
-                <div class="stat-box">
-                    <h3 id="resTotal" style="color: #3b82f6;">0</h3>
-                    <p>মোট প্রশ্ন</p>
+        <div id="result-section">
+            <div class="result-card">
+                <h2>অভিনন্দন!</h2>
+                <p>আপনার পরীক্ষা সফলভাবে সম্পন্ন হয়েছে।</p>
+                <div class="score-circle">
+                    <span id="final-score">০/০</span>
                 </div>
-                <div class="stat-box">
-                    <h3 id="resCorrect" style="color: #16a34a;">0</h3>
-                    <p>সঠিক উত্তর</p>
+                <h3 style="margin-bottom: 2.5rem; color: var(--primary-color);">সঠিক উত্তরের হার: <span id="final-percent">০%</span></h3>
+
+                <div class="stats-grid">
+                    <div class="stat-box stat-correct">
+                        <h4 id="stat-correct">০</h4>
+                        <p>সঠিক উত্তর</p>
+                    </div>
+                    <div class="stat-box stat-wrong">
+                        <h4 id="stat-wrong">০</h4>
+                        <p>ভুল উত্তর</p>
+                    </div>
+                    <div class="stat-box stat-unanswered">
+                        <h4 id="stat-unanswered">০</h4>
+                        <p>উত্তর দেওয়া হয়নি</p>
+                    </div>
                 </div>
-                <div class="stat-box">
-                    <h3 id="resIncorrect" style="color: #dc2626;">0</h3>
-                    <p>ভুল উত্তর</p>
-                </div>
-                <div class="stat-box">
-                    <h3 id="resUnanswered" style="color: #d97706;">0</h3>
-                    <p>উত্তরহীন</p>
+
+                <div class="options-grid" style="grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <button class="btn btn-primary" onclick="showReview()">উত্তর মিলিয়ে দেখুন</button>
+                    <button class="btn btn-success" onclick="restartExam()">পুনরায় পরীক্ষা দিন</button>
                 </div>
             </div>
-            
-            <div class="score-display">
-                স্কোর: <span id="resScore">0</span> | 
-                শতকরা: <span id="resPercent">0%</span>
-            </div>
-            
-            <div class="review-section" id="reviewSection">
-                <h2 class="review-title">উত্তরপত্র পর্যালোচনা</h2>
-                <div id="reviewContainer"></div>
+        </div>
+
+        <div id="review-section">
+            <h2 style="text-align:center; color:var(--primary-color); margin: 2rem 0;">আপনার উত্তর পর্যালোচনা</h2>
+            <div id="review-container"></div>
+            <div style="text-align: center; margin-top: 3rem;">
+                <button class="btn btn-success" style="max-width: 400px;" onclick="restartExam()">পুনরায় নতুন করে পরীক্ষা দিন</button>
             </div>
         </div>
 
     </div>
 
     <script>
-        // Full extraction of 119 MCQs from all 4 uploaded images (Figure-based omitted)
-        const questionsData = [
-            // --- Image 1 (Page 159) ---
-            { q: "নিচের কোনটি শ্বসনতন্ত্রের অংশ?", o: ["(ক) ইলিয়াম", "(খ) ইউরেটার", "(গ) ট্রাকিয়া", "(ঘ) গলবিল"], a: 2 },
-            { q: "ফুসফুসের আবরণটিকে কী বলে?", o: ["(ক) ডায়াফ্রাম", "(খ) প্লুরা", "(গ) পেরিকার্ডিয়াম", "(ঘ) পেরিটোনিয়াম"], a: 1 },
-            { q: "ফুসফুস থেকে অক্সিজেন রক্তে প্রবেশ করে কোন প্রক্রিয়ায়?", o: ["(ক) অভিস্রবণ", "(খ) ব্যাপন", "(গ) ইনবাইবিশন", "(ঘ) প্রস্বেদন"], a: 1 },
-            { q: "রোগ প্রতিরোধ ব্যবস্থার অতিরিক্ত প্রতিক্রিয়ার ফলে কোন রোগটি হয়?", o: ["(ক) নিউমোনিয়া", "(খ) ব্রংকাইটিস", "(গ) হাঁপানি", "(ঘ) যক্ষ্মা"], a: 2 },
-            { q: "ব্যক্তি বিশেষে চিংড়ি খেলে কোন রোগটি হতে পারে?", o: ["(ক) অ্যাজমা", "(খ) ব্রংকাইটিস", "(গ) নিউমোনিয়া", "(ঘ) যক্ষ্মা"], a: 0 },
-            { q: "শ্বাসনালির ভিতরে আবৃত প্রদাহকে কী বলে?", o: ["(ক) অ্যাজমা", "(খ) ব্রংকাইটিস", "(গ) নিউমোনিয়া", "(ঘ) যক্ষ্মা"], a: 1 },
-            { q: "শ্বাসকষ্ট, কাশি ও বুকের মধ্যে ঘড় ঘড় আওয়াজ হওয়া লক্ষণবিশিষ্ট রোগ সৃষ্টিকারী জীবাণু কোনটি?", o: ["(ক) Plasmodium", "(খ) Mycobacterium", "(গ) Helicobacter", "(ঘ) Pneumococcus"], a: 3 },
-            { q: "উদ্ভিদ ও প্রাণী উভয়ই—", o: ["(ক) সর্বক্ষণ অক্সিজেন গ্রহণ করে", "(খ) কার্বন ডাইঅক্সাইড গ্রহণ করে", "(গ) শ্বসনতন্ত্রের মাধ্যমে গ্যাসীয় বিনিময় ঘটায়", "(ঘ) হেটারোট্রপিক"], a: 0 },
-            { q: "বড় গাছের নিচে রাত্রিবেলা ঘুমালে কোনটি ঘটে?", o: ["(ক) ব্রংকাইটিস", "(খ) নিউমোনিয়া", "(গ) শ্বাসকষ্ট", "(ঘ) যক্ষ্মা"], a: 2 },
-            { q: "উদ্ভিদের গ্যাসীয় পদার্থ বিনিময়ে সাহায্য করে কোনটি?", o: ["(ক) পত্ররন্ধ্র ও মূলরোম", "(খ) লেন্টিসেল ও মূলরোম", "(গ) পত্ররন্ধ্র ও লেন্টিসেল", "(ঘ) কিউটিকল ও লেন্টিসেল"], a: 2 },
-            { q: "শক্তি উৎপাদনে ব্যবহৃত হয় কোনটি?", o: ["(ক) পানি", "(খ) কার্বন ডাইঅক্সাইড", "(গ) অক্সিজেন", "(ঘ) কার্বন মনোক্সাইড"], a: 2 },
-            { q: "মানবদেহে কত সময় পর্যন্ত O₂ সরবরাহ বন্ধ থাকলে মৃত্যু অনিবার্য?", o: ["(ক) ৩-৪ মিনিটের বেশি", "(খ) ৪-৫ মিনিটের বেশি", "(গ) ৫-৬ মিনিটের বেশি", "(ঘ) ৬-৭ মিনিটের বেশি"], a: 1 },
-            { q: "মানুষের শ্বসনতন্ত্রের অঙ্গ কোনগুলো?", o: ["(ক) ইলিয়াম, গলবিল, বুক", "(খ) গলবিল, অন্ননালি, ইউরেটার", "(গ) গলবিল, ল্যারিংস, ব্রংকাস", "(ঘ) ইলিয়াম, ল্যারিংস, ব্রংকাস"], a: 2 },
-            { q: "বায়ু প্রবাহের ক্ষেত্রে কোন পর্যায়ক্রমটি সঠিক?", o: ["(ক) নাসারন্ধ্র->নাসাপথ->ট্রাকিয়া->গলবিল->অ্যালভিওলাস", "(খ) অ্যালভিওলাস->ব্রংকাস->ট্রাকিয়া->ষড়যন্ত্র->গলবিল->নাসাগহ্বর", "(গ) নাসাগহ্বর->গলবিল->ষড়যন্ত্র->ট্রাকিয়া->ব্রংকাস->অ্যালভিওলাস", "(ঘ) নাসাগহ্বর->ষড়যন্ত্র->গলবিল->ট্রাকিয়া->ব্রংকাস->অ্যালভিওলাস"], a: 2 },
-            { q: "ব্রংকাস কোন তন্ত্রের অংশ?", o: ["(ক) রেচন", "(খ) স্নায়ু", "(গ) জনন", "(ঘ) শ্বসন"], a: 3 },
-            { q: "গলবিলের অংশ কোনটি?", o: ["(ক) ভোকাল কর্ড", "(খ) উপজিহ্বা", "(গ) পাতলা পর্দা", "(ঘ) আলজিহ্বা"], a: 3 },
-            { q: "Larynx-এর অবস্থান কোথায়?", o: ["(ক) নাসাপথে", "(খ) গলবিলের নিচে", "(গ) গলবিলের উপরে", "(ঘ) শ্বাসনালীর সামনে"], a: 1 },
-            { q: "Epiglottis কোথায় অবস্থিত?", o: ["(ক) Bronchus", "(খ) Pharynx", "(গ) Trachea", "(ঘ) Larynx"], a: 3 },
-            { q: "ষড়যন্ত্রের উপরে জিহ্বা আকৃতির ঢাকনাটির নাম কী?", o: ["(ক) আলজিহ্বা", "(খ) উপজিহ্বা", "(গ) ভোকাল কর্ড", "(ঘ) মধ্যচ্ছদা"], a: 1 },
-            { q: "ফুসফুস যে পর্দা দ্বারা আবৃত তার নাম কী?", o: ["(ক) পেরিটোনিয়াম", "(খ) প্লুরা", "(গ) পেরিকার্ডিয়াম", "(ঘ) ক্যাপসিউল"], a: 1 },
-            { q: "ডান ও বাম ফুসফুস বিভক্ত যথাক্রমে-", o: ["(ক) দুই ও তিন খণ্ডে", "(খ) তিন ও দুই খণ্ডে", "(গ) তিন ও চার খণ্ডে", "(ঘ) চার ও তিন খণ্ডে"], a: 1 },
-            { q: "নিচের কোনটি দ্বারা ফুসফুস আবৃত থাকে?", o: ["(ক) মেনিনজেস", "(খ) প্লুরা", "(গ) পেরিকার্ডিয়াম", "(ঘ) পেরিটোনিয়াম"], a: 1 },
-            { q: "ফুসফুসের বায়ু থলিগুলোকে কী বলে?", o: ["(ক) ব্রংকাস", "(খ) ব্রংকিওল", "(গ) অ্যালভিওলাস", "(ঘ) ট্রাকিয়া"], a: 2 },
-            { q: "ফুসফুসের প্রতিটি বায়ুথলি কী দ্বারা পরিবেষ্টিত থাকে?", o: ["(ক) অসংখ্য শিরা", "(খ) কৈশিক জালিকা", "(গ) ঐচ্ছিক পেশি", "(ঘ) অসংখ্য ধমনী"], a: 1 },
-            { q: "CO₂ কী রূপে রক্তে সঞ্চালিত হয়?", o: ["(ক) কার্বনিক এসিড রূপে", "(খ) বাইকার্বনেট রূপে", "(গ) কার্বন ডাই অক্সাইড রূপে", "(ঘ) কার্বন ও অক্সিজেন রূপে"], a: 1 },
-            { q: "রক্তে CO₂ প্রধানত কীরূপে সঞ্চালিত হয়?", o: ["(ক) বাইকার্বনেট রূপে", "(খ) কার্বামিনো যৌগ রূপে", "(গ) কার্বনিক এসিড রূপে", "(ঘ) কার্বন ও অক্সিজেন রূপে"], a: 0 },
-            { q: "ফুলের রেণুর কারণে কোন রোগটি হতে পারে?", o: ["(ক) নিউমোনিয়া", "(খ) অ্যাজমা", "(গ) ব্রংকাইটিস", "(ঘ) যক্ষ্মা"], a: 1 },
-            { q: "কোন রোগটি ঋতু পরিবর্তনের সময় বেড়ে যায়?", o: ["(ক) যক্ষ্মা", "(খ) নিউমোনিয়া", "(গ) ব্রংকাইটিস", "(ঘ) অ্যাজমা"], a: 3 },
-            { q: "কোনটি শ্বসনতন্ত্রের রোগ?", o: ["(ক) ব্রংকাইটিস", "(খ) নিউমোনিয়া", "(গ) অ্যাজমা", "(ঘ) যক্ষ্মা"], a: 0 },
-            { q: "কোনটির সংক্রমণে ব্রংকাইটিস হয়?", o: ["(ক) ছত্রাক", "(খ) ভাইরাস", "(গ) ব্যাকটেরিয়া", "(ঘ) প্রোটোজোয়া"], a: 1 },
-            { q: "কোনটি নিউমোনিয়ার জন্য দায়ী?", o: ["(ক) ভাইরাস", "(খ) ছত্রাক", "(গ) ব্যাকটেরিয়া", "(ঘ) প্রোটোজোয়া"], a: 2 },
-            { q: "নিউমোকক্কাস নিচের কোনটির অন্তর্ভুক্ত?", o: ["(ক) ব্যাকটেরিয়া", "(খ) প্রোটোজোয়া", "(গ) ভাইরাস", "(ঘ) ছত্রাক"], a: 0 },
-            { q: "নিউমোকক্কাস ব্যাকটেরিয়া আক্রমণে কোন রোগটি হয়?", o: ["(ক) যক্ষ্মা", "(খ) নিউমোনিয়া", "(গ) হাঁপানি", "(ঘ) ব্রংকাইটিস"], a: 1 },
-            { q: "Pneumococcus এর আক্রমণের সাথে কোন লক্ষণটি জড়িত?", o: ["(ক) জন্ডিস দেখা দিবে", "(খ) ওজন কমতে থাকে", "(গ) পেটের পীড়া দেখা দেয়", "(ঘ) ফুসফুসে শ্লেষ্মা জমে"], a: 3 },
-            { q: "যক্ষ্মার জীবাণুর বৈজ্ঞানিক নাম কী?", o: ["(ক) Mycobacterium tuberculosis", "(খ) Entamoeba histolytica", "(গ) Vibrio cholerae", "(ঘ) Plasmodium vivax"], a: 0 },
-            { q: "Mycobacterium tuberculosis কোন রোগের জীবাণু?", o: ["(ক) ব্রংকাইটিস", "(খ) নিউমোনিয়া", "(গ) অ্যাজমা", "(ঘ) যক্ষ্মা"], a: 3 },
-            { q: "ব্রংকাইটিসের লক্ষণ— i. হঠাৎ শ্বাসকষ্ট হওয়া ii. কাশির সাথে অনেক সময় কফ বের হওয়া iii. শ্বাসকষ্ট হওয়া", o: ["(ক) i ও ii", "(খ) i ও iii", "(গ) ii ও iii", "(ঘ) i, ii ও iii"], a: 2 },
+        // Mega Array containing all distinct readable questions from 6 images.
+        const mcqData = [
+            // বই পড়া (Image 1 & 3)
+            { question: "প্রমথ চৌধুরীর সাহিত্যিক ছদ্মনাম কী?", options: ["বীরবল", "সব্যসাচী", "ভানুসিংহ", "বনফুল"], answer: 0 },
+            { question: "কোন পত্রিকা বাংলা সাহিত্যে চলিত ভাষা প্রবর্তনে অগ্রণী ভূমিকা পালন করে?", options: ["বঙ্গদর্শন", "সবুজপত্র", "শিখা", "প্রগতি"], answer: 1 },
+            { question: "'ডেমোক্রেসির গুরুরা' বলতে প্রমথ চৌধুরী কাদের বুঝিয়েছেন?", options: ["ফরাসি", "ভারতীয়", "ইংরেজ", "আমেরিকান"], answer: 0 },
+            { question: "'যে জাতি মনে বড়ো নয়, সে জাতি জ্ঞানেও বড়ো নয়' - এটি কার উক্তি?", options: ["রোকেয়া সাখাওয়াত হোসেনের", "মোতাহের হোসেন চৌধুরীর", "জাহানারা ইমামের", "প্রমথ চৌধুরীর"], answer: 1 },
+            { question: "'এখেন শিক্ষাপদ্ধতি তাদের মনকে জখম করলেও একেবারে বধ করতে পারে না।' - লেখক এখানে কাদের কথা বুঝিয়েছেন?", options: ["ক্ষীণপ্রাণ জাতির", "কঠিন প্রাণের লোকের", "সুশিক্ষিত লোকের", "অশিক্ষিত লোকের"], answer: 1 },
+            { question: "'জ্ঞানের সৃষ্টি মনসাপেক্ষ' - 'মনসাপেক্ষ' অর্থ কী?", options: ["মনোবাঞ্ছিত", "মনোনিবিষ্ট", "মনোনির্ভরশীল", "মনোগ্রাহ্য"], answer: 2 },
+            { question: "'বই পড়া' প্রবন্ধের লেখকের মতানুসারে সাহিত্যচর্চার সুফল সম্পর্কে অনেকে সন্দিহান কেন?", options: ["বই পড়ায় প্রত্যক্ষ আয়ের ব্যবস্থা হয় না", "বই পড়লে মানুষ অলস হয়ে যায়", "স্বশিক্ষিত হওয়ার শক্তি নষ্ট হয়", "আমাদের বই পড়ার অভ্যাস নেই"], answer: 0 },
+            { question: "মানুষের মনকে সরল, সচল, সরাগ ও সমৃদ্ধ করার ভার কীসের ওপর ন্যস্ত হয়েছে?", options: ["সাহিত্যের", "শিক্ষার", "জ্ঞানের", "বিজ্ঞানের"], answer: 0 },
+            { question: "মনগঙ্গার তোলা জল কোনটি?", options: ["ধর্মীয় শাস্ত্র", "দর্শন বিজ্ঞান", "সাহিত্যিক রচনা", "গবেষণা গ্রন্থ"], answer: 2 },
+            { question: "'বই পড়া' প্রবন্ধ অনুসারে 'সেই গঙ্গাতে অবগাহন করেই আমরা আমাদের সকল পাপমুক্ত হব।' - বাক্যে 'পাপমুক্ত' বলতে কী বোঝানো হয়েছে?", options: ["সর্ববিষয়ে জ্ঞান অর্জন", "মনের সংকীর্ণতা মুক্তি", "ধার্মিকতা ও পুণ্যলাভ", "সাহিত্য পাঠে অভ্যস্ততা"], answer: 1 },
+            { question: "নীতির চর্চা কোথায় হয়?", options: ["গুহায়", "ঘরে", "জাদুঘরে", "লাইব্রেরিতে"], answer: 1 },
+            { question: "প্রমথ চৌধুরীর মতে দর্শনের চর্চা কোথায় করা যায়?", options: ["ঘরে", "জাদুঘরে", "লাইব্রেরিতে", "গুহায়"], answer: 3 },
+            { question: "আমাদের স্কুল-কলেজের ছেলেমেয়েরা বই পড়ে কীভাবে?", options: ["দায়ে পড়ে", "বাধ্য হয়ে", "স্বেচ্ছায়", "শিক্ষার জন্য"], answer: 1 },
+            { question: "'সাহিত্যের মধ্যে আমাদের জাত মানুষ হবে' - বলতে লেখক কী বুঝিয়েছেন?", options: ["মানসিক প্রফুল্লতা অর্জন", "মানবিক চেতনা সৃষ্টি", "বুদ্ধিবৃত্তিকে জাগানো", "মানসিক সুস্থতা লাভ"], answer: 1 },
+            { question: "'বই পড়া' প্রবন্ধে লেখক 'আমাদের জাত মানুষ হবে' বলতে বোঝাতে চেয়েছেন, সকলে-", options: ["মানুষ হবে", "সাহিত্যচর্চা করবে", "সুশিক্ষিত হবে", "লাইব্রেরি প্রতিষ্ঠা করবে"], answer: 2 },
+            { question: "আমাদের দেশে লাইব্রেরির সার্থকতা কীসের চাইতে কম নয়?", options: ["হাসপাতালের", "স্কুলের", "কলেজের", "বিশ্ববিদ্যালয়ের"], answer: 0 },
+            { question: "প্রমথ চৌধুরীর মতে, কোন কথাটি শুনলে অনেকে চমকে উঠবেন?", options: ["বই পড়া সর্বশ্রেষ্ঠ শখ", "ধর্মের চর্চা মন্দিরের বাইরেও চলে", "শিক্ষকের সার্থকতা শিক্ষাদান করায় নয়", "লাইব্রেরির সার্থকতা স্কুল-কলেজের চাইতে একটু বেশি"], answer: 3 },
+            { question: "আজকের বাজারে কোন শ্রেণির লোকের অভাব নেই?", options: ["বিদ্বান", "বিদ্যাদাতা", "বিদ্যাম্বেষী", "বিদ্যানুরাগী"], answer: 1 },
+            { question: "সুশিক্ষিত লোক মাত্রই-", options: ["পণ্ডিত", "বিদ্বান", "স্বশিক্ষিত", "আলেম"], answer: 2 },
+            { question: "শিক্ষা কেউ কাউকে দিতে পারে না। কারণ শিক্ষা হলো-", options: ["চর্চার বিষয়", "অর্জনের বিষয়", "অধ্যয়নের বিষয়", "অনুশীলনের বিষয়"], answer: 1 },
+            { question: "কোন শক্তির বলে শিষ্য নিজের মন নিজে গড়ে তোলে?", options: ["আত্মার", "গুরুর", "সাহিত্যের", "ডেমোক্রেসির"], answer: 0 },
+            { question: "বিদ্যার সাধনায় গুরুকে উত্তরসাধক বলা হয়েছে কেন?", options: ["শিষ্যকে বিদ্যা শেখান বলে", "শিষ্যকে উদ্বুদ্ধ করেন বলে", "শিষ্যকে মানুষ করে তোলেন বলে", "শিষ্যকে জ্ঞানী করে তোলেন বলে"], answer: 1 },
+            { question: "প্রমথ চৌধুরীর মতে, অন্তর্নিহিত শক্তিকে জাগিয়ে দিতে পারে কে?", options: ["বই", "গুরু", "রাষ্ট্র", "সমাজ"], answer: 1 },
+            { question: "কোন মৃত্যুর রেজিস্টারি রাখা হয় না?", options: ["আত্মার", "দেহের", "পাখির", "পশুর"], answer: 0 },
+            { question: "'বই পড়া' প্রবন্ধের আলোকে শিক্ষা সম্পর্কে আমাদের বিশ্বাস কোন ধরনের?", options: ["পরীক্ষা পাশ", "বই পড়া", "অর্থ প্রাপ্তি", "সাহিত্য চর্চা"], answer: 2 },
+            { question: "সাহিত্যচর্চার আনন্দ থেকে বঞ্চিত হওয়ার অর্থ কী?", options: ["জাতির জীবনী শক্তি হ্রাস করা", "সমাজের জীবনী শক্তি হ্রাস করা", "জ্ঞানের ভাণ্ডার শূন্য করা", "ধনের ভাণ্ডার শূন্য করা"], answer: 0 },
+            { question: "'বই পড়া' প্রবন্ধে তৎকালীন স্কুল-কলেজের শিক্ষাকে মারাত্মক বলার কারণ কী?", options: ["মুখস্থ বিদ্যা চর্চায় উৎসাহিত করে", "সুশিক্ষিত হওয়ার সুযোগ দেয় না", "কেবল পাশ করতে উদ্বুদ্ধ করে", "স্বশিক্ষিত হওয়ার শক্তি নষ্ট করে দেয়"], answer: 3 },
+            { question: "'বই পড়া' প্রবন্ধের লেখক লাইব্রেরিকে কীসের ওপর স্থান দিয়েছেন?", options: ["হাসপাতালের", "মন্দিরের", "স্কুল-কলেজের", "অর্থবিত্তের"], answer: 2 },
+            { question: "'প্রতিটি লোক তার স্বীয় শক্তি ও রুচি অনুসারে নিজের মনকে নিজের চেষ্টায় আত্মার রাজ্যে জ্ঞানের পথে এগিয়ে নিয়ে যেতে পারে'- কীভাবে?", options: ["লাইব্রেরির বদান্যতায়", "স্কুল-কলেজের মাধ্যমে", "শিক্ষকের কল্যাণে", "পারিবারিক শিক্ষায়"], answer: 0 },
+            { question: "আমাদের শিক্ষা আমাদেরকে কী করে তুলেছে?", options: ["প্রাণবন্ত", "নির্জীব", "সতেজ", "নিষ্প্রাণ"], answer: 1 },
+            { question: "প্রমথ চৌধুরীর মতে, কোনটি ছাড়া উদরপূর্তির কাজে লাগে না?", options: ["সাহিত্য", "লাইব্রেরি", "শিক্ষা", "জীবনীশক্তি"], answer: 2 },
+            { question: "'মনের দাবি রক্ষা না করলে মানুষের আত্মা বাঁচে না।' - এখানে 'মনের দাবি' বলতে কী বোঝানো হয়েছে?", options: ["খাদ্য গ্রহণ", "সাহিত্যের আনন্দ", "জ্ঞান অর্জন", "অর্থ উপার্জন"], answer: 1 },
+            { question: "'বই পড়া' প্রবন্ধ অনুসারে জাতির প্রাণে যথার্থ স্ফুর্তি লাভের উপায় কী?", options: ["উদর পূর্তি করানোর মাধ্যমে", "মনকে সজাগ ও সরল রাখা", "শিক্ষার উল্টা টান টেনে", "কাব্য চর্চা করা"], answer: 1 },
+            { question: "কাব্যামৃতে আমাদের অরুচি ধরেছে কেন?", options: ["অসুস্থ রাজনীতির কারণে", "গণতান্ত্রিক চর্চার অভাবে", "আমাদের শিক্ষার দোষে", "স্বেচ্ছিক স্তব্ধতার কারণে"], answer: 2 },
+            { question: "'বই পড়া' প্রবন্ধে প্রমথ চৌধুরীর মতে, আমাদের নির্জীব করেছে কোনটি?", options: ["অর্থ", "শিক্ষা", "শিক্ষক", "অভিভাবক"], answer: 1 },
+            { question: "'সুসার' শব্দের প্রকৃত অর্থ কোনটি?", options: ["অতিরিক্ত", "সচ্ছলতা", "যা বিকাশ ঘটে", "গোছানো ভাব"], answer: 1 },
+            { question: "'বই পড়া' প্রবন্ধটি কোন গ্রন্থ থেকে সংকলিত হয়েছে?", options: ["গল্প-সংগ্রহ", "প্রবন্ধ-সংগ্রহ", "প্রবন্ধ-সংকলন", "নির্বাচিত প্রবন্ধ"], answer: 1 },
+            { question: "একটি লাইব্রেরির বার্ষিক সভায় পঠিত হয়েছিল নিচের কোন প্রবন্ধটি?", options: ["শিক্ষা ও মনুষ্যত্ব", "পল্লিসাহিত্য", "উপেক্ষিত শক্তির উদ্বোধন", "বই পড়া"], answer: 3 },
+            { question: "'বই পড়া' প্রবন্ধে লেখক কীসের সমালোচনা করেছেন?", options: ["শিক্ষার্থীর", "শিক্ষকের", "শিক্ষাব্যবস্থার", "সিলেবাসের"], answer: 2 },
+            { question: "প্রগতিশীল জগতের সঙ্গে তাল মিলিয়ে চলতে কী আবশ্যক?", options: ["সাহিত্যচর্চা", "স্কুল প্রতিষ্ঠা", "লাইব্রেরি প্রতিষ্ঠা", "পাঠ্যপুস্তক পড়া"], answer: 2 },
+            { question: "প্রমথ চৌধুরী কাউকে শখ হিসেবে বই পড়ার পরামর্শ দেননি, কারণ-", options: ["আমরা জাতি হিসেবে শৌখিন নই", "এখন ঠিক শখ করার সময় নয়", "সে পরামর্শ কেউ গ্রাহ্য করবে না", "i, ii ও iii"], answer: 3 },
+            { question: "'বই পড়া' প্রবন্ধের মূলবক্তব্য কী?", options: ["প্রচলিত শিক্ষাব্যবস্থার স্বরূপ উন্মোচন", "সাহিত্যচর্চার প্রতি গুরুত্বারোপ", "লাইব্রেরি প্রতিষ্ঠার আহ্বান", "বাঙালি জাতির কল্যাণ সাধন"], answer: 1 },
 
-            // --- Image 2 ---
-            { q: "ব্যক্তি বিশেষে চিংড়ি খেলে কোন রোগটি হতে পারে?", o: ["(ক) অ্যাজমা", "(খ) ব্রংকাইটিস", "(গ) নিউমোনিয়া", "(ঘ) যক্ষ্মা"], a: 0 },
-            { q: "শ্বাসনালির ভিতরে আবৃত প্রদাহকে কী বলে?", o: ["(ক) অ্যাজমা", "(খ) ব্রংকাইটিস", "(গ) নিউমোনিয়া", "(ঘ) যক্ষ্মা"], a: 1 },
-            { q: "কোনটি নিউমোনিয়ার জন্য দায়ী?", o: ["(ক) ভাইরাস", "(খ) ছত্রাক", "(গ) ব্যাকটেরিয়া", "(ঘ) প্রোটোজোয়া"], a: 2 },
-            { q: "উদ্ভিদ ও প্রাণী উভয়ই—", o: ["(ক) সর্বক্ষণ অক্সিজেন গ্রহণ করে", "(খ) কার্বন ডাইঅক্সাইড গ্রহণ করে", "(গ) শ্বসনতন্ত্রের মাধ্যমে গ্যাসীয় বিনিময় ঘটায়", "(ঘ) হেটারোট্রপিক"], a: 0 },
-            { q: "উদ্ভিদে সালোকসংশ্লেষণের হার কখন বেশি হয়?", o: ["(ক) ভোরবেলায়", "(খ) দিনের বেলায়", "(গ) রাতের বেলায়", "(ঘ) গোধূলী বেলায়"], a: 1 },
-            { q: "বড় গাছের নিচে রাত্রিবেলা ঘুমালে কোনটি ঘটে?", o: ["(ক) ব্রংকাইটিস", "(খ) নিউমোনিয়া", "(গ) শ্বাসকষ্ট", "(ঘ) যক্ষ্মা"], a: 2 },
-            { q: "শক্তি উৎপাদনে ব্যবহৃত হয় কোনটি?", o: ["(ক) পানি", "(খ) কার্বন ডাইঅক্সাইড", "(গ) অক্সিজেন", "(ঘ) কার্বন মনোক্সাইড"], a: 2 },
-            { q: "উদ্ভিদের গ্যাসীয় বিনিময়ে সাহায্য করে— i. স্টোমাটা ii. লেন্টিসেল iii. মূলরোম", o: ["(ক) i ও ii", "(খ) i ও iii", "(গ) ii ও iii", "(ঘ) i, ii ও iii"], a: 3 },
-            { q: "মানুষের শ্বসনতন্ত্রের অঙ্গ কোনগুলো?", o: ["(ক) ইলিয়াম, গলবিল, বুক", "(খ) গলবিল, অন্ননালি, ইউরেটার", "(গ) গলবিল, ল্যারিংস, ব্রংকাস", "(ঘ) ইলিয়াম, ল্যারিংস, ব্রংকাস"], a: 2 },
-            { q: "শ্বাসকষ্ট, কাশি ও বুকের মধ্যে ঘড় ঘড় আওয়াজ হওয়া লক্ষণবিশিষ্ট রোগ সৃষ্টিকারী জীবাণু কোনটি?", o: ["(ক) Plasmodium", "(খ) Mycobacterium", "(গ) Helicobacter", "(ঘ) Pneumococcus"], a: 3 },
-            { q: "Larynx-এর অবস্থান কোথায়?", o: ["(ক) নাসাপথে", "(খ) গলবিলের নিচে", "(গ) গলবিলের উপরে", "(ঘ) শ্বাসনালীর সামনে"], a: 1 },
-            { q: "নিচের কোনটির সংক্রমণে যক্ষ্মা হয়?", o: ["(ক) ভাইরাস", "(খ) ব্যাকটেরিয়া", "(গ) ছত্রাক", "(ঘ) প্রোটোজোয়া"], a: 1 },
-            { q: "নিচের কোনটি শ্বসন ও খাদ্যগ্রহণ উভয়ের সাথে সম্পর্কিত?", o: ["(ক) এপিগ্লটিস", "(খ) প্যাপিল", "(গ) মেনিনজেস", "(ঘ) মিসল দানা"], a: 0 },
-            { q: "\"যক্ষারোগ\" সৃষ্টিকারী জীবাণুর নাম কী?", o: ["(ক) Streptococcus pneumonia", "(খ) Mycobacterium tuberculosis", "(গ) Vibrio cholerae", "(ঘ) Amoeba proteus"], a: 1 },
-            { q: "ফুসফুসের ক্যান্সার প্রতিরোধ করণীয়— i. ধূমপান ও মদ্যপান পরিহার ii. চর্বি জাতীয় খাদ্য বেশি খাওয়া iii. নিয়মিত ব্যায়াম", o: ["(ক) i ও ii", "(খ) i ও iii", "(গ) ii ও iii", "(ঘ) i, ii ও iii"], a: 1 },
-            { q: "বায়ুথলি থেকে অক্সিজেন কোন প্রক্রিয়ায় রক্তে প্রবেশ করে?", o: ["(ক) শ্বসন", "(খ) ব্যাপন", "(গ) অভিস্রবণ", "(ঘ) ইনবাইবিশন"], a: 1 },
-            { q: "CO₂ কী রূপে রক্তে সঞ্চালিত হয়?", o: ["(ক) কার্বনিক এসিড রূপে", "(খ) বাইকার্বনেট রূপে", "(গ) কার্বন ডাই অক্সাইড রূপে", "(ঘ) কার্বন ও অক্সিজেন রূপে"], a: 1 },
-            { q: "কোনটির সংক্রমণে ব্রংকাইটিস হয়?", o: ["(ক) ছত্রাক", "(খ) ভাইরাস", "(গ) ব্যাকটেরিয়া", "(ঘ) প্রোটোজোয়া"], a: 1 },
-            { q: "নিউমোকক্কাস ব্যাকটেরিয়া আক্রমণে কোন রোগটি হয়?", o: ["(ক) যক্ষ্মা", "(খ) নিউমোনিয়া", "(গ) হাঁপানি", "(ঘ) ব্রংকাইটিস"], a: 1 },
-            { q: "ফুসফুসের আবরণটিকে বলা হয়—", o: ["(ক) ডায়াফ্রাম", "(খ) প্লুরা", "(গ) পেরিকার্ডিয়াম", "(ঘ) পেরিকন্ড্রিয়াম"], a: 1 },
-            { q: "ফুসফুস থেকে দেহের কোষ পর্যন্ত O₂ পরিবাহিত হয়— i. অক্সিহিমোগ্লোবিন রূপে ii. রক্তরসে দ্রবীভূত হয়ে iii. বাইকার্বনেটরূপে", o: ["(ক) i ও ii", "(খ) i ও iii", "(গ) ii ও iii", "(ঘ) i, ii ও iii"], a: 0 },
-            { q: "অক্সিজেন— i. ব্যাপন প্রক্রিয়ায় রক্তে প্রবেশ করে ii. অক্সিহিমোগ্লোবিন তৈরি করে iii. রক্তরসে দ্রবীভূত হয় না", o: ["(ক) i ও ii", "(খ) i ও iii", "(গ) ii ও iii", "(ঘ) i, ii ও iii"], a: 0 },
-            { q: "বাম ফুসফুস কয় খণ্ডে বিভক্ত?", o: ["(ক) ২", "(খ) ৩", "(গ) ৪", "(ঘ) ৫"], a: 0 },
+            // আম আঁটির ভেঁপু (Image 2 & 5)
+            { question: "লেখক শরৎচন্দ্রের পরে বাংলা কথাসাহিত্যের সবচেয়ে জনপ্রিয় শিল্পী কে?", options: ["মানিক বন্দ্যোপাধ্যায়", "বিভূতিভূষণ বন্দ্যোপাধ্যায়", "তারাশঙ্কর বন্দ্যোপাধ্যায়", "বনফুল"], answer: 1 },
+            { question: "বিভূতিভূষণ বন্দ্যোপাধ্যায় কোন উপন্যাসের জন্য রবীন্দ্র-পুরস্কারে ভূষিত হন?", options: ["পথের পাঁচালী", "অপরাজিত", "ইছামতি", "আরণ্যক"], answer: 2 },
+            { question: "অপু কোথায় বসে খেলা করছিল?", options: ["উঠানে", "বিছানায়", "রোয়াকে", "দরজায়"], answer: 2 },
+            { question: "'আম-আঁটির ভেঁপু' গল্পে টোল-খাওয়া ভেঁপু-বাঁশিটার দাম কত?", options: ["চার পয়সা", "পাঁচ পয়সা", "ছয় পয়সা", "সাত পয়সা"], answer: 0 },
+            { question: "অপুর খেলনা পিস্তলটির দাম কত পয়সা?", options: ["দুই", "তিন", "চার", "পাঁচ"], answer: 0 },
+            { question: "অপু মনে মনে কোন খেলার কল্পনা করছিল?", options: ["ডাণ্ডা-গুলি", "গঙ্গা-যমুনা", "চোর-পুলিশ", "কাবাডি"], answer: 2 },
+            { question: "পিজরাপোলের আসামির মতো কে পড়ে আছে?", options: ["দু'পয়সা দামের পিস্তল", "খাপরার কুচি", "টিনের ভেঁপু বাঁশি", "কাঠের ঘোড়া"], answer: 3 },
+            { question: "'রোয়াক' অর্থ কী?", options: ["জানালা", "চেয়ার", "খেলার মাঠ", "বারান্দা"], answer: 3 },
+            { question: "'আম-আঁটির ভেঁপু' গল্পে লেখক যেটি এড়িয়ে গেছেন তা হলো-", options: ["শৈশবে দারিদ্র্যের কষ্ট", "অপু ও দুর্গার দুরন্তপনা", "প্রকৃতি ও মানুষের জীবন", "ফলফলাদি গ্রহণের আনন্দ"], answer: 0 },
+            { question: "'আম-আঁটির ভেঁপু' গল্পে ফুটে উঠেছে-", options: ["প্রকৃতির বৈচিত্র্য", "সামাজিক জীবন", "মুক্ত জীবনের প্রতি আসক্তি", "প্রকৃতির সাথে জীবনের মিল"], answer: 2 },
+            { question: "'আম-আঁটির ভেঁপু' গল্পটি শিশু-কিশোরদের মনে কীসের অনুপ্রেরণা জোগায়?", options: ["আনন্দিত জীবনের", "বিস্ময় ও কৌতূহলের", "প্রকৃতিমুখী হওয়ার", "চিরায়ত শৈশবের"], answer: 2 },
+            { question: "পল্লি-মায়ের শাশ্বত রূপ ফুটে উঠেছে 'আম-আঁটির ভেঁপু' গল্পের কোন চরিত্রে?", options: ["দুর্গা", "নীলমণি", "স্বর্ণ গোয়ালিনী", "সর্বজয়া"], answer: 3 },
+            { question: "গঙ্গা-যমুনা খেলার জন্য অপু কী হাতে নিল?", options: ["লাটিম", "মার্বেল", "বাঁশি", "খাপরা"], answer: 3 },
+            { question: "গঙ্গা-যমুনা খেলতে কোনটি সযত্নে বাক্সে রাখা হয়েছে?", options: ["দু'পয়সা দামের পিস্তল", "খানাকতক খাপরার কুচি", "রং ওঠা কাঠের ঘোড়া", "টোল-খাওয়া টিনের ভেঁপু"], answer: 1 },
+            { question: "'অপুকে' ডাকার সময় দুর্গার কণ্ঠস্বরে ছিল-", options: ["ভয়", "সতর্কতা", "জড়তা", "আদর"], answer: 1 },
+            { question: "কলের পুতুলের মতো অপু কী লুকিয়ে ফেলল?", options: ["টিনের বাঁশিটা", "লক্ষ্মীর চুপড়ির কড়িগুলো", "দু'পয়সা দামের পিস্তলটা", "রং ওঠা কাঠের ঘোড়াটা"], answer: 1 },
+            { question: "'আম-আঁটির ভেঁপু' গল্পে অপু কোন জিনিসটি কলের পুতুলের মতো লুকিয়ে ফেলল?", options: ["চুপড়ির কড়ি", "তেলের ভাঁড়", "নুনের বেয়াম", "নারকেলের মালা"], answer: 0 },
+            { question: "অপু কলের পুতুলের মতো তাড়াতাড়ি কোন জিনিসগুলো লুকিয়ে ফেলে?", options: ["শুকনো নাটাফল", "জারানো আমের চাকলা", "গঙ্গা-যমুনা খেলার খাপড়া", "লক্ষ্মীর চুপড়ির কড়ি"], answer: 1 },
+            { question: "দুর্গার বয়স কত?", options: ["নয়-দশ", "দশ-এগারো", "এগারো-বারো", "তেরো-চৌদ্দ"], answer: 1 },
+            { question: "দুর্গা যখন অপুকে ডেকেছিল তখন অপু কোথায় অবস্থান করছিল?", options: ["বারান্দায়", "ঘরের ভিতরে", "নারকেল তলায়", "কাঁঠালতলায়"], answer: 0 },
+            { question: "দুর্গা সুর নিচু করিয়া বলিল, 'মা ঘাট থেকে আসেনি তো?' - দুর্গার এ কথায় কী প্রকাশ পেয়েছে?", options: ["আকুলতা", "ভীরুতা", "কৌতূহল", "দুরন্তপনা"], answer: 1 },
+            { question: "দুর্গা আঁচলের খুঁট খুলিয়া কী বাহির করিল?", options: ["রড়া ফলের বিচি", "খাপরার কুচি", "নাটাফল", "আমের কুশি"], answer: 3 },
+            { question: "'আম-আঁটির ভেঁপু' গল্পে কাদের ডোবার ধারের আমগাছটায় গুটি ধরেছে?", options: ["পটলদের", "গোপদের", "রায়দের", "হরিহরদের"], answer: 0 },
+            { question: "কোন বাগানের আম গুড়ের মতো মিষ্টি?", options: ["সিঁদুরকৌটার", "কাঁকুড়তলির", "নীলমণি রায়ের", "চোবার ধারের"], answer: 0 },
+            { question: "হরিহর রায়ের জ্ঞাতিভাতা কে?", options: ["নীলমণি রায়", "অন্নদা রায়", "অধর রায়", "নীলকান্ত রায়"], answer: 0 },
+            { question: "হরিহরের ঘরের দোর জানালার কপাট কীসের দড়ি দিয়ে গরাদের সঙ্গে বাঁধা ছিল?", options: ["পাটের দড়ি", "খড়ের দড়ি", "নাইলনের দড়ি", "নারকেলের দড়ি"], answer: 3 },
+            { question: "'তেলের ভাঁড় ছুঁলে মা মারবে যে? আমার কাপড় যে বাসি?'- অপুর এ উক্তিতে তৎকালীন সমাজের কোন চিত্রটি ফুটে উঠেছে?", options: ["বিধিবদ্ধ সংস্কার", "সংস্কার", "কুসংস্কার", "প্রচলিত নিয়মকানুন"], answer: 2 },
+            { question: "অনেকদিন হরিহর রায়ের বাড়িটি-", options: ["রং করা হয়নি", "ধোয়ামোছা হয়নি", "মেরামত করা হয়নি", "পরিষ্কার করা হয়নি"], answer: 2 },
+            { question: "বামুন হিসেবে বাস করার প্রস্তাবে হরিহর তখনই রাজি হলেন না কেন?", options: ["পাওনাদারের ভয়ে", "আত্মসম্মান রক্ষার জন্য", "চাকরি হারানোর ভয়ে", "প্রস্তাবকারী সদ্‌গোপ বলে"], answer: 1 },
+            { question: "'আম-আঁটির ভেঁপু' গল্পে অপুর মায়ের নাম কী?", options: ["স্বর্ণ গোয়ালিনী", "সর্বজয়া", "দুগ্গা", "লক্ষ্মী"], answer: 1 },
+            { question: "হরিহর কখন বাড়ি ফিরল?", options: ["দুপুরে", "সন্ধ্যায়", "দুপুরের কিছুপর", "অপরাহ্ণে"], answer: 0 },
+            { question: "সর্বজয়ার চিরন্তন মাতৃরূপের প্রকাশ ঘটেছে কোন উক্তিতে?", options: ["আজকাল চাষাদের ঘরে লক্ষ্মী বাঁধা", "ফের দ্যাখো না এই জ্বরে পড়লো বলে", "ও দুগ্গা, দ্যাখ তো বাছুরটা হাঁক পাড়ছে কেন?", "ইচ্ছে করে একদিকে বেরিয়ে যাই"], answer: 1 },
+            { question: "সর্বজয়া কোন মাসের রোদে জ্বর আসার কথা বলেছে?", options: ["আশ্বিন", "কার্তিক", "পৌষ", "চৈত্র"], answer: 3 },
+            { question: "'মিষ্টি যেন গুড়- দেবো তোমায়?'- উক্তিটিতে দুর্গার কী ধরনের মনোভাব প্রকাশ পেয়েছে?", options: ["ক্ষোভ", "উপহাস", "স্নেহ", "অভিমান"], answer: 2 },
+            { question: "রায় বাড়িতে হরিহরের বেতন ছিল কত টাকা?", options: ["আট", "দশ", "বারো", "চৌদ্দ"], answer: 0 },
+            { question: "হরিহর সদগোপদের প্রস্তাবে রাজি হয়নি কেন?", options: ["ধর্মাদর্শের কারণে", "নিরাপত্তার জন্য", "সর্বজয়ার কথা ভেবে", "বংশমর্যাদা ক্ষুণ্নের ভয়ে"], answer: 3 },
+            { question: "'আম-আঁটির ভেঁপু' গল্পে কার উক্তিতে তৎকালীন বন্ধক প্রথার পরিচয় পাওয়া যায়?", options: ["সেজ ঠাকুরুন", "ভুবন মুখুয্যে", "রাধা বোষ্টমের বৌ", "নীলমণি রায়"], answer: 0 },
+            { question: "দুর্গা রড়া ফলের বিচি কোথায় রেখেছিল?", options: ["লক্ষ্মীর ভাণ্ডারে", "লক্ষ্মীর কৌটায়", "আঁচলের তলে", "আঁচলের খুঁটে"], answer: 1 },
+            { question: "দুর্গা-আঁচলের খুঁট খুলে কীসের বিচি বের করেছিল?", options: ["নাটাফলের", "বৈচি ফলের", "রড়া ফলের", "তেলাকুচার"], answer: 2 },
+            { question: "'আম-আঁটির ভেঁপু' গল্পের মূল প্রতিপাদ্য বিষয় কোনটি?", options: ["গ্রামীণ প্রকৃতি ও জীবনের সৌকর্য", "শিশুর আনন্দপূর্ণ শৈশবের সঙ্গে প্রকৃতির সম্পর্ক", "মায়ের চিরকালীন চরিত্রের স্বরূপ", "দারিদ্র্য"], answer: 1 },
+            { question: "'আম-আঁটির ভেঁপু' গল্পের মূলসুর কী?", options: ["জীবন ঘনিষ্ঠতা", "চিরায়ত শৈশব", "প্রকৃতি ঘনিষ্ঠতা", "দারিদ্র্য"], answer: 2 },
 
-            // --- Image 3 ---
-            { q: "'স্নায়ু'-তে কোন অস্থিসন্ধি বিদ্যমান?", o: ["(ক) কবজা সন্ধি", "(খ) বল ও কোটর সন্ধি", "(গ) নিশ্চল অস্থি সন্ধি", "(ঘ) ঈষৎ সচল অস্থি সন্ধি"], a: 2 },
-            { q: "অস্টিওপোরোসিস সাধারণত কাদের হয়?", o: ["(ক) বয়স্ক পুরুষ ও মহিলাদের", "(খ) বাচ্চাদের", "(গ) তরুণ ছেলেদের", "(ঘ) তরুণ মেয়েদের"], a: 0 },
-            { q: "নিচের কোন অঙ্গটি বেশ শক্ত?", o: ["(ক) লিগামেন্ট", "(খ) টেনডন", "(গ) ফাইব্রোব্লাস্ট", "(ঘ) তরুণাস্থি"], a: 1 },
-            { q: "টেনডন এর বৈশিষ্ট্য কোনটি?", o: ["(ক) শ্বেত ও পীততন্তু বিদ্যমান", "(খ) এদের স্থিতিস্থাপকতা বেশি", "(গ) ইলাস্টিন নামক আমিষ বিদ্যমান", "(ঘ) এদের স্থিতিস্থাপকতা নেই"], a: 3 },
-            { q: "অস্টিওপোরোসিস কিসের অভাবজনিত রোগ?", o: ["(ক) নাইট্রোজেন", "(খ) ক্যালসিয়াম", "(গ) জিংক", "(ঘ) সালফার"], a: 1 },
-            { q: "টেনডনের টিস্যু হচ্ছে— i. সাদা বর্ণের ও উজ্জ্বল ii. অশাখ ও তরঙ্গিত iii. তন্তুময় ও গুচ্ছাকার", o: ["(ক) i ও ii", "(খ) i ও iii", "(গ) ii ও iii", "(ঘ) i, ii ও iii"], a: 3 },
-            { q: "অস্থিকোষকে কী বলা হয়?", o: ["(ক) কন্ড্রিওব্লাস্ট", "(খ) ফাইব্রোব্লাস্ট", "(গ) অস্টিওব্লাস্ট", "(ঘ) কোলাজেনাম"], a: 2 },
-            { q: "হাড়ে (অস্থি) শতকরা কতভাগ পানি থাকে?", o: ["(ক) ২০-৩০", "(খ) ৩০-৪০", "(গ) ৪০-৫০", "(ঘ) ৫০-৬০"], a: 2 },
-            { q: "অস্থির ভিতর শতকরা কত ভাগ অজৈব যৌগ থাকে?", o: ["(ক) ৭০", "(খ) ৬০", "(গ) ৫০", "(ঘ) ৪০"], a: 1 },
-            { q: "তরুণাস্থি টিস্যু কী ধরনের?", o: ["(ক) আবরণী", "(খ) যোজক", "(গ) পেশি", "(ঘ) স্নায়ু"], a: 1 },
-            { q: "কন্ড্রিনের মাঝে দৃশ্যমান গহ্বরের নাম কী?", o: ["(ক) সাইনোভিয়াল", "(খ) কন্ড্রিয়াম", "(গ) ল্যাকিউনি", "(ঘ) কন্ড্রিওসাইট"], a: 2 },
-            { q: "ল্যাকিউনি কোথায় পাওয়া যায়?", o: ["(ক) অস্থি", "(খ) তরুণাস্থি", "(গ) রক্ত", "(ঘ) লসিকা"], a: 1 },
-            { q: "কোনটি জানুর অস্থি?", o: ["(ক) প্যাটেল", "(খ) পিউবিস", "(গ) স্যাক্রাম", "(ঘ) স্ক্যাপুলা"], a: 0 },
-            { q: "উরুসন্ধি কোন ধরনের সন্ধি?", o: ["(ক) ঈষৎ সচল অস্থি সন্ধি", "(খ) নিশ্চল অস্থি সন্ধি", "(গ) বল ও কোটর সন্ধি", "(ঘ) কবজা সন্ধি"], a: 2 },
-            { q: "সারকোলেমা হচ্ছে— i. পেশির আবরণী ii. পেশি ও টেনডনের সংযোগস্থলে শেষ হয় iii. অস্থির আবরণী", o: ["(ক) i ও ii", "(খ) i ও iii", "(গ) ii ও iii", "(ঘ) i, ii ও iii"], a: 0 },
-            { q: "জীববিজ্ঞান শিক্ষক অস্থিসন্ধি পড়াতে গিয়ে শ্রেণিকক্ষের দরজার কবজা ও কাঠামোর সাথে তুলনা করে দেখান। তুলনীয় অংশের সাথে মিল সম্পন্ন কোনটি?", o: ["(ক) পেশি—টেনডন—অস্থি", "(খ) অস্থি—তরুণাস্থি—অস্থি", "(গ) পেশি—লিগামেন্ট—তরুণাস্থি", "(ঘ) অস্থি—লিগামেন্ট—অস্থি"], a: 3 },
-            { q: "কনুই বাঁকা করলে কোন পেশি সংকুচিত হয়?", o: ["(ক) বাইসেপস", "(খ) ট্রাইসেপস", "(গ) রেডিয়াস", "(ঘ) আলনা"], a: 0 },
-            { q: "অস্থিসন্ধিতে প্রদাহ প্রতিকারের উপায় কোনটি?", o: ["(ক) ক্যালসিয়াম সমৃদ্ধ খাদ্য গ্রহণ", "(খ) সবুজ শাকসবজি গ্রহণ", "(গ) বীজ জাতীয় খাদ্য পরিহার", "(ঘ) দুগ্ধজাত খাবার গ্রহণ"], a: 2 },
-            { q: "অস্টিওপোরোসিস সাধারণত কাদের হয়?", o: ["(ক) বয়স্ক পুরুষ ও মহিলাদের", "(খ) বাচ্চাদের", "(গ) তরুণ ছেলেদের", "(ঘ) তরুণ মেয়েদের"], a: 0 },
-            { q: "৫০ বছরের বেশি বয়স্ক পুরুষ ও মহিলাদের দৈনিক কত মিলিগ্রাম ক্যালসিয়াম গ্রহণ করা প্রয়োজন?", o: ["(ক) ১০০০ mg", "(খ) ১২০০ mg", "(গ) ২১০০ mg", "(ঘ) ২২০০ mg"], a: 1 },
-            { q: "ফাহিমের বয়স ৭ বছর। ইদানিং তার অস্থি সন্ধিতে বেশ ব্যথা হচ্ছে। ফাহিমের কোন রোগটি হতে পারে?", o: ["(ক) Rheumatiod Arthritis", "(খ) Osteoporosis", "(গ) Rheumatic fever", "(ঘ) Pneumonia"], a: 2 },
-            { q: "হাতের কনুই-এর অস্থিসন্ধি হলো— i. পূর্ণ সচল অস্থিসন্ধি ii. বল ও কোটর সন্ধি iii. কেবল একদিকে নাড়ানো যায়", o: ["(ক) i ও ii", "(খ) i ও iii", "(গ) ii ও iii", "(ঘ) i, ii ও iii"], a: 1 },
-            { q: "লিগামেন্টের টিস্যু হচ্ছে— i. হাড়ের সাথে পেশী যুক্ত থাকে ii. হাড়ের সাথে হাড় সংযুক্ত করে iii. পীত বর্ণের", o: ["(ক) i ও ii", "(খ) ii ও iii", "(গ) i ও iii", "(ঘ) i, ii ও iii"], a: 1 },
-
-            // --- Image 4 ---
-            { q: "প্যাটেলার অবস্থান—", o: ["(ক) জানুতে", "(খ) স্কন্ধে", "(গ) শ্রোণিতে", "(ঘ) হাতের কব্জিতে"], a: 0 },
-            { q: "অস্থির অস্থিকোষে শতকরা কত ভাগ অজৈব পদার্থ থাকে?", o: ["(ক) ৪০", "(খ) ৫০", "(গ) ৭০", "(ঘ) ৯০"], a: 0 },
-            { q: "কোনটি সঠিক?", o: ["(ক) তরুণাস্থি অস্থিত ন্যায় কঠিন নয়", "(খ) মাইটোকন্ড্রিয়া জীবকোষে জৈব রাসায়নিক বিক্রিয়া নিয়ন্ত্রণ করে", "(গ) ত্বকের ভিতরের অংশে রঞ্জক কণা থাকে", "(ঘ) চোখের লেন্স মাইয়োপিয়া দশায় উত্তল হয়"], a: 0 },
-            { q: "কব্জা সন্ধি কোথায় থাকে?", o: ["(ক) স্কন্ধাস্থিতে", "(খ) মেরুদণ্ডে", "(গ) হাতের আঙুলে", "(ঘ) করোটিকায়"], a: 2 },
-            { q: "উরুসন্ধি কোন ধরনের সন্ধি?", o: ["(ক) ঈষৎ সচল অস্থি সন্ধি", "(খ) নিশ্চল অস্থি সন্ধি", "(গ) বল ও কোটর সন্ধি", "(ঘ) কবজা সন্ধি"], a: 2 },
-            { q: "আমরা হাতকে ভাঁজ করতে পারি কারণ—", o: ["(ক) বাইসেপস পেশি সংকুচিত হয়", "(খ) বাইসেপস পেশি প্রসারিত হয়", "(গ) ট্রাইসেপস পেশি সংকুচিত হয়", "(ঘ) ট্রাইসেপস পেশি প্রসারিত হয়"], a: 0 },
-            { q: "জীববিজ্ঞান শিক্ষক অস্থিসন্ধি পড়াতে গিয়ে শ্রেণিকক্ষের দরজার পাল্লা, কবজা ও কাঠামোর সাথে তুলনা করে দেখান। তুলনীয় অংশের সাথে মিল সম্পন্ন কোনটি?", o: ["(ক) পেশি—টেনডন—অস্থি", "(খ) অস্থি—তরুণাস্থি—অস্থি", "(গ) পেশি—লিগামেন্ট—তরুণাস্থি", "(ঘ) অস্থি—লিগামেন্ট—অস্থি"], a: 3 },
-            { q: "অস্টিওপোরোসিস রোগের লক্ষণ হলো—", o: ["(ক) অস্থিসন্ধিতে ব্যথা হয়", "(খ) অস্থিসন্ধিগুলো শক্ত হয়ে যায়", "(গ) অস্থিসন্ধি নাড়াতে কষ্ট হয়", "(ঘ) পেশির শক্তি কমতে থাকে"], a: 3 },
-            { q: "অস্টিওপোরোসিস কিসের অভাবজনিত রোগ?", o: ["(ক) নাইট্রোজেন", "(খ) ক্যালসিয়াম", "(গ) জিংক", "(ঘ) সালফার"], a: 1 },
-            { q: "কোনটি পেক্টোরাল গার্ডল এর অস্থি?", o: ["(ক) স্ক্যাপুলা", "(খ) পিউবিস", "(গ) স্যাক্রাম", "(ঘ) স্টার্নাম"], a: 0 },
-            { q: "অস্থিমজ্জা থেকে কোনটি তৈরি হয়?", o: ["(ক) শ্বেত রক্তকণিকা ও লসিকা", "(খ) অণুচক্রিকা ও রক্তরস", "(গ) লোহিত রক্তকণিকা ও শ্বেত রক্তকণিকা", "(ঘ) রক্তরস ও লসিকা"], a: 2 },
-            { q: "অস্থিকোষকে কী বলা হয়?", o: ["(ক) কন্ড্রিওব্লাস্ট", "(খ) ফাইব্রোব্লাস্ট", "(গ) অস্টিওব্লাস্ট", "(ঘ) কোলাজেনাম"], a: 2 },
-            { q: "হাড়ে (অস্থি) শতকরা কতভাগ পানি থাকে?", o: ["(ক) ২০-৩০", "(খ) ৩০-৪০", "(গ) ৪০-৫০", "(ঘ) ৫০-৬০"], a: 2 },
-            { q: "অস্থির ভিতর শতকরা কত ভাগ অজৈব যৌগ থাকে?", o: ["(ক) ৭০", "(খ) ৬০", "(গ) ৫০", "(ঘ) ৪০"], a: 1 },
-            { q: "অস্থির ভিতর শতকরা কতভাগ জৈব যৌগ থাকে?", o: ["(ক) ৩০", "(খ) ৪০", "(গ) ৫০", "(ঘ) ৬০"], a: 1 },
-            { q: "কোনটি গঠনে ক্যালসিয়াম গুরুত্বপূর্ণ ভূমিকা পালন করে?", o: ["(ক) অস্থি", "(খ) পেশী", "(গ) লিগামেন্ট", "(ঘ) টেনডন"], a: 0 },
-            { q: "তরুণাস্থি কোন তন্তুময় যোজক কলা দ্বারা পরিবেষ্টিত?", o: ["(ক) পেরিটোনিয়াম", "(খ) পেরিসিলিয়াম", "(গ) পেরিকার্ডিয়াম", "(ঘ) পেরিকন্ড্রিয়াম"], a: 3 },
-            { q: "তরুণাস্থি অস্থির ন্যায় শক্ত নয় কেন?", o: ["(ক) নরম ও স্থিতিস্থাপক", "(খ) নরম বলে", "(গ) নরম ও স্থিতিস্থাপক নয়", "(ঘ) যোজক কলা বলে"], a: 0 },
-            { q: "কানের পিনার মাতৃকায় রয়েছে কোনটি?", o: ["(ক) অস্টিওব্লাস্ট", "(খ) কন্ড্রিন", "(গ) পেরিটোস্টিনাম", "(ঘ) টেনডন"], a: 1 },
-            { q: "তরুণাস্থি বেষ্টনকারী আবরণটির নাম কী?", o: ["(ক) অস্টিওব্লাস্ট", "(খ) পেরিকন্ড্রিয়াম", "(গ) কন্ড্রিওব্লাস্ট", "(ঘ) কন্ড্রিওসাইট"], a: 1 },
-            { q: "নিচের কোনটি নিশ্চল অস্থিসন্ধি?", o: ["(ক) করোটিকা", "(খ) মেরুদণ্ড", "(গ) বল ও কোটর", "(ঘ) কাঁধ ও উরু"], a: 0 },
-            { q: "কোনটি ঈষৎ সচল অস্থি সন্ধি?", o: ["(ক) মেরুদণ্ডের অস্থি সন্ধি", "(খ) করোটিকা", "(গ) কবজা সন্ধি", "(ঘ) বল ও কোটর সন্ধি"], a: 0 },
-            { q: "কোথায় বল ও কোটর (সকেট) সন্ধি বা কঙ্কাল পেশি পাওয়া যায়?", o: ["(ক) জানুতে", "(খ) কাঁধে", "(গ) আঙুলে", "(ঘ) কনুইতে"], a: 1 },
-            { q: "'স্নায়ু'-তে কোন অস্থিসন্ধি বিদ্যমান?", o: ["(ক) কবজা সন্ধি", "(খ) বল ও কোটর সন্ধি", "(গ) নিশ্চল অস্থি সন্ধি", "(ঘ) ঈষৎ সচল অস্থি সন্ধি"], a: 2 },
-            { q: "কোনটি জানুর অস্থি?", o: ["(ক) প্যাটেল", "(খ) পিউবিস", "(গ) স্যাক্রাম", "(ঘ) স্ক্যাপুলা"], a: 0 },
-            { q: "নিচের কোন অংশটি বেশ শক্ত?", o: ["(ক) লিগামেন্ট", "(খ) টেনডন", "(গ) ফাইব্রোব্লাস্ট", "(ঘ) তরুণাস্থি"], a: 1 },
-            { q: "টেনডন এর বৈশিষ্ট্য কোনটি?", o: ["(ক) শ্বেত ও পীততন্তু বিদ্যমান", "(খ) এদের স্থিতিস্থাপকতা বেশি", "(গ) ইলাস্টিন নামক আমিষ বিদ্যমান", "(ঘ) এদের স্থিতিস্থাপকতা নেই"], a: 3 },
-            { q: "অস্থি সন্ধির তন্তুগুলো কী দিয়ে গঠিত?", o: ["(ক) লিপিড", "(খ) কার্বোহাইড্রেট", "(গ) ভিটামিন", "(ঘ) প্রোটিন"], a: 3 },
-            { q: "কোনটিতে শ্বেততন্তু ও পীততন্তু রয়েছে?", o: ["(ক) অস্থি", "(খ) লিগামেন্ট", "(গ) টেনডন", "(ঘ) স্নায়ু"], a: 1 },
-            { q: "লিগামেন্ট কী দিয়ে গঠিত?", o: ["(ক) শ্বেততন্তু ও টেনডন", "(খ) পীততন্তু ও শ্বেততন্তু", "(গ) টেনডন ও পীততন্তু", "(ঘ) ফাইব্রোব্লাস্ট ও টেনডন"], a: 1 },
-            { q: "নিচের কোনটি পেশী বন্ধনী?", o: ["(ক) টেনডন", "(খ) লিগামেন্ট", "(গ) কঙ্কাল", "(ঘ) তরুণাস্থি"], a: 0 },
-            { q: "টেনডন কোনটির মাধ্যমে অস্থিকে আটকে রাখে?", o: ["(ক) ঐচ্ছিক পেশি", "(খ) তরুণাস্থি", "(গ) অনৈচ্ছিক পেশি", "(ঘ) হৃদপেশি"], a: 0 },
-            { q: "লিগামেন্ট তন্তুগুলো কী দ্বারা গঠিত?", o: ["(ক) স্নেহ", "(খ) আমিষ", "(গ) শর্করা", "(ঘ) খনিজ লবণ"], a: 1 },
-            { q: "কোনটির অভাবে অস্টিওপোরোসিস হয়?", o: ["(ক) ক্যালসিয়াম", "(খ) আয়োডিন", "(গ) লৌহ", "(ঘ) ভিটামিন"], a: 0 },
-            { q: "অস্টিওপোরোসিস কিসের অভাবজনিত রোগ?", o: ["(ক) নাইট্রোজেন", "(খ) ক্যালসিয়াম", "(গ) জিংক", "(ঘ) সালফার"], a: 1 },
-            { q: "অস্টিওপোরোসিস সাধারণত কাদের হয়?", o: ["(ক) বয়স্ক পুরুষ ও মহিলাদের", "(খ) বাচ্চাদের", "(গ) তরুণ ছেলেদের", "(ঘ) তরুণ মেয়েদের"], a: 0 },
-            { q: "৫০ বছরের বেশি বয়স্ক পুরুষ ও মহিলাদের দৈনিক কত মিলিগ্রাম ক্যালসিয়াম গ্রহণ করা প্রয়োজন?", o: ["(ক) ১০০০ mg", "(খ) ১২০০ mg", "(গ) ২১০০ mg", "(ঘ) ২২০০ mg"], a: 1 },
-            { q: "রিউমাটয়েড আর্থ্রাইটিস প্রতিকারের জন্য কোনটি করতে হবে?", o: ["(ক) কমলার রস খাওয়া", "(খ) মাছ-মাংস খাওয়া", "(গ) দুগ্ধজাত দ্রব্য বর্জন", "(ঘ) ডাক্তারের পরামর্শ অনুযায়ী ঔষধ সেবন"], a: 3 },
-            { q: "আর্থ্রাইটিস প্রতিরোধ করে কোনটি?", o: ["(ক) সবজি", "(খ) ডাল", "(গ) লেবুর রস", "(ঘ) ডিম"], a: 0 },
-            { q: "অস্থিসন্ধিতে প্রদাহ প্রতিকারের উপায় কোনটি?", o: ["(ক) ক্যালসিয়াম সমৃদ্ধ খাদ্য গ্রহণ", "(খ) সবুজ শাকসবজি গ্রহণ", "(গ) বীজ জাতীয় খাদ্য পরিহার", "(ঘ) দুগ্ধজাত খাবার গ্রহণ"], a: 2 },
-            { q: "তরুণাস্থির— i. মাতৃকা কন্ড্রিন দ্বারা গঠিত ii. কোষকে অস্টিওব্লাস্ট বলে iii. আবরণীকে পেরিকন্ড্রিয়াম বলে", o: ["(ক) i ও ii", "(খ) i ও iii", "(গ) ii ও iii", "(ঘ) i, ii ও iii"], a: 1 },
-            { q: "হাতের কনুই-এর অস্থিসন্ধি হলো— i. পূর্ণ সচল অস্থিসন্ধি ii. বল ও কোটর সন্ধি iii. কেবল একদিকে নাড়ানো যায়", o: ["(ক) i ও ii", "(খ) i ও iii", "(গ) ii ও iii", "(ঘ) i, ii ও iii"], a: 1 }
+            // প্রবাস বন্ধু (Image 4 & 6)
+            { question: "কাবুল থেকে খাজা মোল্লা গ্রামের দূরত্ব কত?", options: ["দেড় মাইল", "দুই মাইল", "আড়াই মাইল", "তিন মাইল"], answer: 2 },
+            { question: "'হরফন-মৌলা' বলতে কী বোঝানো হয়েছে?", options: ["সকল কাজ পণ্ডকারী", "সকল কাজে ওস্তাদ", "সকল কাজে দালালি", "সকল কাজের কাজি"], answer: 3 },
+            { question: "'ওরভোয়া' শব্দের অর্থ কী?", options: ["আজ বিদায়", "আবার এসো", "আবার দেখা হবে", "আবার কথা হবে"], answer: 2 },
+            { question: "'প্রবাস বন্ধু' রচনায় নিচের কোন কথায় বিদায়ের সৌজন্য প্রকাশ পায়?", options: ["ওরভোয়া", "লব-ই-দরিয়া", "হরফন-মৌলা", "বারকোশ"], answer: 0 },
+            { question: "লেখক আবদুর রহমানকে কোন অর্থে 'নরদানব' বলেছেন?", options: ["ব্যঙ্গার্থে", "অবজ্ঞার্থে", "নিন্দার্থে", "আদরে"], answer: 3 },
+            { question: "আবদুর রহমানের পায়ের সাইজ কীসের মতো?", options: ["রিলিফ ম্যাপের মতো", "পাণ্ডুয়ার মতো", "মর্তমান কলার মতো", "ডিঙি নৌকার মতো"], answer: 3 },
+            { question: "আফগানিস্তানের রিলিফ ম্যাপের চেহারার সঙ্গে সাদৃশ্য ছিল কার?", options: ["অধ্যক্ষ জিরারের", "লেখকের", "তাঙাওয়ালার", "আবদুর রহমানের"], answer: 3 },
+            { question: "রাইফেল চালানোর কথা শুনে আবদুর রহমানের একগাল হাসি প্রমাণ করে তার-", options: ["আন্তরিকতা", "বুদ্ধিমত্তা", "সাহসিকতা", "সাবলীলতা"], answer: 2 },
+            { question: "লেখক আবদুর রহমানের ঠোঁট দুইটি দেখতে পাননি, কারণ আবদুর রহমান-", options: ["অতিশয় কর্মতৎপর", "নরদানব আকৃতির", "আফগান-সংস্কার মানে", "ভীমসেন তুল্য"], answer: 2 },
+            { question: "সৈয়দ মুজতবা আলী যখন নীল পাহাড়ের গায়ে সাদা সাদা বরফ দেখেছিলেন তখন কী ঋতু ছিল?", options: ["বর্ষাকাল", "শীতকাল", "গ্রীষ্মকাল", "বসন্তকাল"], answer: 1 },
+            { question: "'প্রবাস বন্ধু' রচনায় পাগমান পাহাড়টি কী রঙের?", options: ["সাদা", "ধূসর", "নীল", "সবুজ"], answer: 2 },
+            { question: "'আবদুর রহমান তাড়াতাড়ি এসে অভয় বাণী দিলো।'- এ বাক্যে আবদুর রহমান কীসের অভয় বাণী দিলো?", options: ["বরফের", "খাবারের", "শীতের", "নিরাপত্তার"], answer: 1 },
+            { question: "লেখকের মতে আবদুর রহমান কয়জনের খাবার রান্না করেছিল?", options: ["তিন", "চার", "পাঁচ", "ছয়"], answer: 3 },
+            { question: "'প্রবাস বন্ধু' ভ্রমণকাহিনিতে লেখকের অধিক শোকে পাথর হওয়ার কারণ কী?", options: ["খাদ্যের আধিক্য", "রান্নায় দক্ষতা", "খাবারের অপচয়", "রান্নায় বিলম্ব"], answer: 0 },
+            { question: "'প্রবাস বন্ধু' ভ্রমণকাহিনিতে দুম্বার মাংসের গামলায় কোনটিকে লেখকের চোখে অপাঙ্ক্তেয় মনে হয়েছে?", options: ["আলু", "বাদাম", "কিসমিস", "মাংস"], answer: 0 },
+            { question: "তামাম আফগানিস্তান কীসে মশহুর?", options: ["আখরোট", "ফালুদা", "শামি-কাবাব", "বরফি আঙুরে"], answer: 3 },
+            { question: "কাবুলি চায়ের রং কেমন?", options: ["ধূসর", "লালচে", "হলদে", "সবুজ"], answer: 3 },
+            { question: "কাবুলি চা পেয়ালায় ঢাললে কী রং দেখা যায়?", options: ["গাঢ় সবুজ", "অতি ফিকে সবুজ", "অতি ফিকে হলদে", "অতি ফিকে লাল"], answer: 2 },
+            { question: "'প্রবাস বন্ধু' গল্পের লেখক কোন খাবারটি ফিরিয়ে দিয়েছিলেন?", options: ["আখরোট", "আঙুর", "ফালুদা", "সবুজ চা"], answer: 2 },
+            { question: "চা খাওয়া শেষ করে আবদুর রহমান কত মিনিটের জন্য বেরিয়ে গেল?", options: ["পাঁচ", "আট", "দশ", "বারো"], answer: 0 },
+            { question: "আবদুর রহমানের বিবেচনায় পৃথিবীর শ্রেষ্ঠ স্থান কোনটি?", options: ["খাজামোল্লা", "পানশির", "কাবুল", "পাগমান"], answer: 1 },
+            { question: "লেখক শীতকালটা 'পানশিরে' কাটাতে চেয়েছিলেন কেন?", options: ["আবদুর রহমানকে খুশি করতে", "প্রাণ বাঁচানোর জন্য", "প্রাকৃতিক সৌন্দর্য উপভোগ করতে", "বায়ু পরিবর্তনের জন্য"], answer: 0 },
+            { question: "'এক একবার দম ফেললে একশটা বেমারি বেরিয়ে যাবে'- এ কথা দ্বারা 'প্রবাস বন্ধু' ভ্রমণকাহিনিতে কী বোঝানো হয়েছে?", options: ["মনোমুগ্ধকর দৃশ্য", "নির্মল প্রকৃতি", "ঋতু বৈচিত্র্য", "জীবনযাত্রা"], answer: 1 },
+            { question: "'প্রবাস বন্ধু' ভ্রমণকাহিনির লেখক শীতকালটা পানশিরে কাটাতে চান কেন?", options: ["নিজের প্রাণ বাঁচাবার জন্য", "আবদুর রহমানের খুশির জন্য", "আস্ত দুম্বা খাওয়ার জন্য", "নিজের আয়ু বাড়াবার জন্য"], answer: 1 },
+            { question: "'একমুখে হরে তাজি ঘোড়াকে হার মানিয়ে ছুটে চলে।'- 'প্রবাস বন্ধু' রচনায় এ উক্তিতে কোনটিকে বোঝানো হয়েছে?", options: ["কাবুলের হাওয়া", "পানশিরের অধিবাসী", "আতসবাজির হলকা", "বরফের গুঁড়ো"], answer: 3 },
+            { question: "চিনির রসে ভেজানো ঘিয়ে ভাজা রসগোল্লাজাতীয় মিষ্টিকে কী বলে?", options: ["রাবড়ি", "পানতুয়া", "রসমালাই", "চমচম"], answer: 1 },
+            { question: "'প্রবাস বন্ধু' গল্পটি সৈয়দ মুজতবা আলীর কোন গ্রন্থ থেকে নেওয়া হয়েছে?", options: ["দেশে-বিদেশে", "চাচা কাহিনী", "পঞ্চতন্ত্র", "শবনম"], answer: 0 },
+            { question: "আবদুর রহমানের আতিথ্যপরায়ণতায় লেখকের ধৈর্যচ্যুতি ঘটলেও কিছু তাঁকে মুগ্ধ করেছে যে গুণ তা হলো-", options: ["সরলতা", "কর্মদক্ষতা", "দেশপ্রেম", "অভিজ্ঞতা"], answer: 0 },
+            { question: "'প্রবাস বন্ধু' রচনায় আবদুর রহমান চরিত্রে পাই-", options: ["মহানভবতা", "দায়িত্বহীনতা", "দেশপ্রেম", "অসহযোগিতা"], answer: 2 }
         ];
 
-        let currentQuestionIndex = 0;
-        let userAnswers = new Array(questionsData.length).fill(null);
-        let examCompleted = false;
+        const prefixes = ["ক", "খ", "গ", "ঘ"];
+        let userAnswers = new Array(mcqData.length).fill(null);
 
-        const EXAM_KEY = "saifuls_bio_exam_final_119";
-        const ANSWERS_KEY = "saifuls_bio_ans_final_119";
+        window.onload = function() {
+            renderExam();
+        };
 
-        function initExam() {
-            if (localStorage.getItem(EXAM_KEY) === "true") {
-                document.getElementById('examInterface').style.display = 'none';
-                document.getElementById('lockedScreen').style.display = 'block';
-                return;
-            }
+        function renderExam() {
+            const container = document.getElementById('questions-container');
+            container.innerHTML = ''; 
             
-            document.getElementById('totalQNum').innerText = questionsData.length;
-            renderAllQuestions();
-            showQuestion(0);
-        }
-
-        function renderAllQuestions() {
-            const container = document.getElementById('questionContainer');
-            questionsData.forEach((data, index) => {
-                const qDiv = document.createElement('div');
-                qDiv.className = 'question-card';
-                qDiv.id = `q-${index}`;
-                
+            document.getElementById('progress-count').innerText = `প্রশ্ন ০ / ${mcqData.length}`;
+            
+            mcqData.forEach((q, index) => {
                 let optionsHtml = '';
-                data.o.forEach((opt, optIndex) => {
-                    optionsHtml += `<div class="option" id="opt-${index}-${optIndex}" onclick="selectOption(${index}, ${optIndex})">${opt}</div>`;
+                q.options.forEach((opt, optIndex) => {
+                    optionsHtml += `
+                        <input type="radio" name="q${index}" id="q${index}_opt${optIndex}" value="${optIndex}" class="option-input" onchange="updateProgress()">
+                        <label for="q${index}_opt${optIndex}" class="option-label">
+                            <span class="option-prefix">${prefixes[optIndex]}</span>
+                            ${opt}
+                        </label>
+                    `;
                 });
 
-                qDiv.innerHTML = `
-                    <div class="question-text">${index + 1}. ${data.q}</div>
-                    <div class="options-grid">
-                        ${optionsHtml}
+                container.innerHTML += `
+                    <div class="question-card" style="animation-delay: ${Math.min(index * 0.02, 1)}s">
+                        <span class="q-number">প্রশ্ন ${index + 1} / ${mcqData.length}</span>
+                        <div class="q-text">${q.question}</div>
+                        <div class="options-grid">
+                            ${optionsHtml}
+                        </div>
                     </div>
                 `;
-                container.appendChild(qDiv);
             });
+            updateProgress();
         }
 
-        function showQuestion(index) {
-            document.querySelectorAll('.question-card').forEach(card => {
-                card.style.display = 'none';
-            });
-            const currentCard = document.getElementById(`q-${index}`);
-            currentCard.style.display = 'block';
-            
-            // Retrigger animation
-            currentCard.style.animation = 'none';
-            currentCard.offsetHeight; 
-            currentCard.style.animation = 'slideIn 0.4s ease-out forwards';
-            
-            document.getElementById('currentQNum').innerText = index + 1;
-            updateProgressBar();
-
-            const btnPrev = document.getElementById('btnPrev');
-            const btnNext = document.getElementById('btnNext');
-            const btnSubmit = document.getElementById('btnSubmit');
-
-            if (index === 0) {
-                btnPrev.classList.add('btn-hidden');
-            } else {
-                btnPrev.classList.remove('btn-hidden');
+        function updateProgress() {
+            let answeredCount = 0;
+            for(let i=0; i<mcqData.length; i++) {
+                const selected = document.querySelector(`input[name="q${i}"]:checked`);
+                if(selected) {
+                    answeredCount++;
+                    userAnswers[i] = parseInt(selected.value);
+                }
             }
             
-            if (index === questionsData.length - 1) {
-                btnNext.classList.add('btn-hidden');
-                btnSubmit.classList.remove('btn-hidden');
-            } else {
-                btnNext.classList.remove('btn-hidden');
-                btnSubmit.classList.add('btn-hidden');
-            }
+            document.getElementById('progress-count').innerText = `প্রশ্ন ${answeredCount} / ${mcqData.length}`;
+            const percent = (answeredCount / mcqData.length) * 100;
+            document.getElementById('progress-percent').innerText = `${percent.toFixed(0)}%`;
+            document.getElementById('progress-bar').style.width = `${percent}%`;
         }
 
-        function selectOption(qIndex, optIndex) {
-            if (examCompleted) return;
-            
-            userAnswers[qIndex] = optIndex;
-            
-            // UI Update
-            for (let i = 0; i < 4; i++) {
-                const optEl = document.getElementById(`opt-${qIndex}-${i}`);
-                if (optEl) optEl.classList.remove('selected');
-            }
-            document.getElementById(`opt-${qIndex}-${optIndex}`).classList.add('selected');
-            
-            let answered = userAnswers.filter(a => a !== null).length;
-            document.getElementById('answeredCount').innerText = answered;
+        function showConfirmModal() {
+            document.getElementById('confirm-modal').style.display = 'flex';
         }
-
-        function prevQuestion() {
-            if (currentQuestionIndex > 0) {
-                currentQuestionIndex--;
-                showQuestion(currentQuestionIndex);
-            }
-        }
-
-        function nextQuestion() {
-            if (currentQuestionIndex < questionsData.length - 1) {
-                currentQuestionIndex++;
-                showQuestion(currentQuestionIndex);
-            }
-        }
-
-        function updateProgressBar() {
-            const progress = ((currentQuestionIndex + 1) / questionsData.length) * 100;
-            document.getElementById('progressBar').style.width = `${progress}%`;
+        function hideConfirmModal() {
+            document.getElementById('confirm-modal').style.display = 'none';
         }
 
         function submitExam() {
-            const unanswered = userAnswers.filter(a => a === null).length;
-            let msg = unanswered > 0 
-                ? `আপনি ${unanswered} টি প্রশ্নের উত্তর দেননি। আপনি কি নিশ্চিত যে আপনি পরীক্ষা জমা দিতে চান? জমা দেওয়ার পর আর পরিবর্তন করা যাবে না।`
-                : "আপনি কি নিশ্চিত যে আপনি পরীক্ষা জমা দিতে চান? জমা দেওয়ার পর আর পরিবর্তন করা যাবে না।";
-                
-            if (!confirm(msg)) return;
-            
-            examCompleted = true;
-            localStorage.setItem(EXAM_KEY, "true");
-            localStorage.setItem(ANSWERS_KEY, JSON.stringify(userAnswers));
-            
-            document.getElementById('examInterface').style.display = 'none';
-            calculateAndShowResult();
-            window.scrollTo(0, 0);
-        }
-
-        function showReviewFromLock() {
-            let savedAnswers = JSON.parse(localStorage.getItem(ANSWERS_KEY));
-            if(savedAnswers) userAnswers = savedAnswers;
-            
-            document.getElementById('lockedScreen').style.display = 'none';
-            calculateAndShowResult();
-        }
-
-        function calculateAndShowResult() {
-            document.getElementById('resultScreen').style.display = 'block';
+            hideConfirmModal();
             
             let correct = 0;
-            let incorrect = 0;
+            let wrong = 0;
             let unanswered = 0;
 
-            const reviewContainer = document.getElementById('reviewContainer');
-            reviewContainer.innerHTML = '';
-            document.getElementById('reviewSection').style.display = 'block';
-
-            questionsData.forEach((data, index) => {
-                let userAns = userAnswers[index];
-                
-                if (userAns === null) {
+            for(let i=0; i<mcqData.length; i++) {
+                if(userAnswers[i] === null) {
                     unanswered++;
-                } else if (userAns === data.a) {
+                } else if(userAnswers[i] === mcqData[i].answer) {
                     correct++;
                 } else {
-                    incorrect++;
+                    wrong++;
                 }
+            }
 
-                // Render Review
-                const rDiv = document.createElement('div');
-                rDiv.className = 'question-card';
-                rDiv.style.display = 'block';
-                rDiv.style.animation = 'none';
-                
-                let optsHtml = '';
-                data.o.forEach((opt, optIndex) => {
-                    let className = 'option disabled';
-                    if (optIndex === data.a) className += ' correct-review';
-                    else if (optIndex === userAns && userAns !== data.a) className += ' incorrect-review';
-                    
-                    optsHtml += `<div class="${className}">${opt}</div>`;
-                });
+            const score = correct; 
+            const percent = ((score / mcqData.length) * 100).toFixed(2);
 
-                rDiv.innerHTML = `
-                    <div class="question-text">${index + 1}. ${data.q}</div>
-                    <div class="options-grid">${optsHtml}</div>
-                `;
-                reviewContainer.appendChild(rDiv);
-            });
-
-            document.getElementById('resTotal').innerText = questionsData.length;
-            document.getElementById('resCorrect').innerText = correct;
-            document.getElementById('resIncorrect').innerText = incorrect;
-            document.getElementById('resUnanswered').innerText = unanswered;
-            
-            document.getElementById('resScore').innerText = `${correct}/${questionsData.length}`;
-            let percent = ((correct / questionsData.length) * 100).toFixed(2);
-            document.getElementById('resPercent').innerText = `${percent}%`;
+            document.getElementById('exam-section').style.display = 'none';
+            displayResultScore(correct, wrong, unanswered, score, percent);
+            document.getElementById('result-section').style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Initialize Exam
-        window.onload = initExam;
+        function displayResultScore(correct, wrong, unanswered, score, percent) {
+            document.getElementById('final-score').innerText = `${score}/${mcqData.length}`;
+            document.getElementById('final-percent').innerText = `${percent}%`;
+            document.getElementById('stat-correct').innerText = correct;
+            document.getElementById('stat-wrong').innerText = wrong;
+            document.getElementById('stat-unanswered').innerText = unanswered;
+        }
+
+        function showReview() {
+            document.getElementById('result-section').style.display = 'none';
+            const reviewContainer = document.getElementById('review-container');
+            reviewContainer.innerHTML = '';
+
+            mcqData.forEach((q, index) => {
+                const userAns = userAnswers[index];
+                const correctAns = q.answer;
+                
+                let statusHtml = '';
+                if(userAns === null) {
+                    statusHtml = `<div class="review-status status-unanswered">⚠ উত্তর দেওয়া হয়নি</div>`;
+                } else if(userAns === correctAns) {
+                    statusHtml = `<div class="review-status status-correct">✓ সঠিক উত্তর</div>`;
+                } else {
+                    statusHtml = `<div class="review-status status-wrong">✗ ভুল উত্তর</div>`;
+                }
+
+                let optionsHtml = '';
+                q.options.forEach((opt, optIndex) => {
+                    let optClass = 'review-option';
+                    let marker = '';
+
+                    if(optIndex === correctAns) {
+                        optClass += ' review-correct';
+                        marker = ' <span style="margin-left:auto; background:white; padding:2px 8px; border-radius:4px; font-size:0.8rem; color:var(--success-color);">সঠিক উত্তর</span>';
+                    } else if(optIndex === userAns && userAns !== correctAns) {
+                        optClass += ' review-wrong';
+                        marker = ' <span style="margin-left:auto; background:white; padding:2px 8px; border-radius:4px; font-size:0.8rem; color:var(--error-color);">আপনার উত্তর</span>';
+                    }
+
+                    optionsHtml += `
+                        <div class="${optClass}">
+                            <span class="option-prefix">${prefixes[optIndex]}</span>
+                            ${opt} ${marker}
+                        </div>
+                    `;
+                });
+
+                reviewContainer.innerHTML += `
+                    <div class="question-card" style="border-left: 5px solid ${userAns === correctAns ? 'var(--success-color)' : (userAns === null ? '#fbbf24' : 'var(--error-color)')}">
+                        <span class="q-number">প্রশ্ন ${index + 1}</span>
+                        <br>
+                        ${statusHtml}
+                        <div class="q-text">${q.question}</div>
+                        <div class="options-grid">
+                            ${optionsHtml}
+                        </div>
+                    </div>
+                `;
+            });
+
+            document.getElementById('review-section').style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function restartExam() {
+            userAnswers = new Array(mcqData.length).fill(null);
+            document.getElementById('result-section').style.display = 'none';
+            document.getElementById('review-section').style.display = 'none';
+            document.getElementById('exam-section').style.display = 'block';
+            renderExam();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
     </script>
 </body>
 </html>
