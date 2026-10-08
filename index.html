@@ -3,699 +3,600 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>সাইফুল'স সাইন্স কেয়ার - মেগা MCQ প্র্যাকটিস</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>সাইফুল'স সাইন্স কেয়ার - Online MCQ Exam</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #1e3a8a;
-            --secondary-color: #3b82f6;
-            --bg-color: #f3f4f6;
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --success: #16a34a;
+            --danger: #dc2626;
+            --bg: #f8fafc;
             --card-bg: #ffffff;
-            --text-main: #1f2937;
-            --text-muted: #6b7280;
-            --success-color: #10b981;
-            --error-color: #ef4444;
-            --border-radius: 12px;
-            --transition: all 0.3s ease;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
         }
-
-        * {
+        body {
+            font-family: 'Noto Serif Bengali', serif;
+            background-color: var(--bg);
+            color: var(--text-main);
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: 'Noto Sans Bengali', sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
             line-height: 1.6;
         }
-
-        header {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            text-align: center;
-            padding: 2.5rem 1rem;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-            margin-bottom: 2rem;
-        }
-
-        header h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        header p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-        }
-
         .container {
-            max-width: 850px;
+            max-width: 800px;
             margin: 0 auto;
-            padding: 0 1rem 4rem 1rem;
+            padding: 20px;
         }
-
-        .progress-container {
-            background: var(--card-bg);
-            padding: 1.5rem;
-            border-radius: var(--border-radius);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-            margin-bottom: 2rem;
-            position: sticky;
-            top: 15px;
-            z-index: 100;
-            border: 1px solid #e5e7eb;
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            animation: fadeInDown 0.8s ease;
         }
-
-        .progress-text {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.8rem;
-            font-weight: 700;
-            color: var(--primary-color);
+        h1 {
+            color: var(--primary);
+            font-size: 2.2rem;
+            margin-bottom: 5px;
+        }
+        .subtitle {
+            color: var(--text-muted);
             font-size: 1.1rem;
         }
-
-        .progress-bar-bg {
-            background: #e5e7eb;
-            height: 12px;
-            border-radius: 6px;
+        .progress-container {
+            width: 100%;
+            height: 8px;
+            background-color: var(--border);
+            border-radius: 4px;
+            margin-bottom: 30px;
             overflow: hidden;
+            position: sticky;
+            top: 0;
+            z-index: 10;
         }
-
-        .progress-bar-fill {
-            background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
+        .progress-bar {
             height: 100%;
+            background-color: var(--primary);
             width: 0%;
-            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: width 0.3s ease;
         }
-
-        .question-card {
+        .card {
             background: var(--card-bg);
-            padding: 2.5rem 2rem;
-            border-radius: var(--border-radius);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            margin-bottom: 1.5rem;
-            transition: var(--transition);
-            border: 1px solid #f3f4f6;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            margin-bottom: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: fadeInUp 0.5s ease backwards;
         }
-
-        .question-card:hover {
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
-            transform: translateY(-3px);
-            border-color: #e5e7eb;
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
         }
-
-        .q-number {
-            display: inline-block;
-            background: #eff6ff;
-            color: var(--primary-color);
-            padding: 0.3rem 1rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-
-        .q-text {
-            font-size: 1.3rem;
+        .question-title {
+            font-size: 1.2rem;
             font-weight: 600;
-            margin-bottom: 1.8rem;
+            margin-bottom: 15px;
             color: var(--text-main);
-            line-height: 1.5;
         }
-
-        .options-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1rem;
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
-
         .option-label {
             display: flex;
             align-items: center;
-            padding: 1.2rem;
-            border: 2px solid #e5e7eb;
-            border-radius: 10px;
+            padding: 12px 15px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
             cursor: pointer;
-            transition: var(--transition);
-            background: #fafafa;
-            font-size: 1.1rem;
+            transition: all 0.2s ease;
         }
-
         .option-label:hover {
-            border-color: var(--secondary-color);
-            background: #eff6ff;
+            border-color: var(--primary);
+            background-color: #eff6ff;
         }
-
-        .option-input {
-            display: none;
+        .option-label input[type="radio"] {
+            margin-right: 12px;
+            transform: scale(1.2);
+            accent-color: var(--primary);
         }
-
-        .option-input:checked + .option-label {
-            border-color: var(--primary-color);
-            background: #e0e7ff;
-            font-weight: 600;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-        }
-
-        .option-prefix {
-            font-weight: bold;
-            margin-right: 15px;
-            color: var(--primary-color);
-            background: #dbeafe;
-            width: 35px;
-            height: 35px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            flex-shrink: 0;
-        }
-
-        .option-input:checked + .option-label .option-prefix {
-            background: var(--primary-color);
-            color: white;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 1.2rem 2.5rem;
-            font-size: 1.2rem;
-            font-weight: 700;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: var(--transition);
-            text-align: center;
+        .btn-submit {
+            display: block;
             width: 100%;
-            margin-top: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 15px;
+            background-color: var(--primary);
             color: white;
-            box-shadow: 0 10px 20px rgba(30, 58, 138, 0.2);
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            margin-top: 30px;
         }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 25px rgba(30, 58, 138, 0.3);
-        }
-
-        .btn-secondary {
-            background: #e5e7eb;
-            color: #374151;
+        .btn-submit:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
         }
         
-        .btn-secondary:hover {
-            background: #d1d5db;
-        }
-
-        .btn-success {
-            background: linear-gradient(135deg, var(--success-color), #059669);
-            color: white;
-            box-shadow: 0 10px 20px rgba(16, 185, 129, 0.2);
-        }
-
-        .btn-success:hover {
-            transform: translateY(-3px);
-        }
-
-        /* Modal */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(17, 24, 39, 0.7);
+        #result-section {
             display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            backdrop-filter: blur(5px);
+            animation: fadeIn 1s ease;
         }
-
-        .modal-content {
-            background: white;
-            padding: 3rem 2.5rem;
-            border-radius: 16px;
-            max-width: 450px;
-            width: 90%;
+        .score-board {
             text-align: center;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-        }
-
-        .modal-content h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-            color: var(--primary-color);
-        }
-
-        .modal-buttons {
-            display: flex;
-            gap: 1rem;
-        }
-
-        /* Result Section */
-        #result-section, #review-section {
-            display: none;
-        }
-
-        .result-card {
-            background: var(--card-bg);
-            padding: 4rem 2rem;
-            border-radius: var(--border-radius);
-            text-align: center;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-        }
-
-        .score-circle {
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            border: 10px solid var(--secondary-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 2.5rem auto;
-            font-size: 3rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            background: #eff6ff;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-            margin-bottom: 3rem;
-        }
-
-        .stat-box {
-            padding: 1.5rem 1rem;
+            padding: 30px;
+            background: linear-gradient(135deg, #eff6ff, #dbeafe);
             border-radius: 12px;
-            background: #f9fafb;
-            border: 1px solid #e5e7eb;
+            margin-bottom: 30px;
         }
-        .stat-box h4 { font-size: 2rem; margin-bottom: 0.5rem; }
-        .stat-correct h4 { color: var(--success-color); }
-        .stat-wrong h4 { color: var(--error-color); }
-        .stat-unanswered h4 { color: #f59e0b; }
-
-        .review-status {
-            font-weight: bold;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            display: inline-flex;
-            margin-bottom: 1.5rem;
-            font-size: 1rem;
-        }
-        .status-correct { background: #d1fae5; color: #065f46; border: 1px solid #34d399;}
-        .status-wrong { background: #fee2e2; color: #991b1b; border: 1px solid #f87171;}
-        .status-unanswered { background: #fef3c7; color: #92400e; border: 1px solid #fbbf24;}
-
-        .review-option {
-            padding: 1.2rem;
-            border-radius: 10px;
-            margin-bottom: 0.8rem;
-            border: 1px solid #e5e7eb;
+        .score-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: white;
             display: flex;
             align-items: center;
-            background: #fafafa;
+            justify-content: center;
+            margin: 0 auto 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            border: 8px solid var(--primary);
+            animation: scaleIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        .review-correct { background: #d1fae5; border-color: var(--success-color); font-weight: bold;}
-        .review-wrong { background: #fee2e2; border-color: var(--error-color); opacity: 0.8;}
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+        }
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        .text-success { color: var(--success); }
+        .text-danger { color: var(--danger); }
+        .performance-msg {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .review-item {
+            border-left: 4px solid var(--border);
+        }
+        .review-item.correct {
+            border-left-color: var(--success);
+            background-color: #f0fdf4;
+        }
+        .review-item.incorrect {
+            border-left-color: var(--danger);
+            background-color: #fef2f2;
+        }
+        .review-ans {
+            margin-top: 10px;
+            font-size: 0.95rem;
+        }
+        .ans-row {
+            display: flex;
+            align-items: center;
+            margin-top: 5px;
+        }
+        .ans-label {
+            font-weight: 600;
+            margin-right: 10px;
+            min-width: 90px;
+        }
+        
+        .message-box {
+            background: #fee2e2;
+            color: #991b1b;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: 600;
+            display: none;
+            border: 1px solid #f87171;
+        }
 
-        @media (min-width: 768px) {
-            .options-grid { grid-template-columns: 1fr 1fr; }
-        }
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes scaleIn { from { opacity: 0; transform: scale(0.5); } to { opacity: 1; transform: scale(1); } }
     </style>
 </head>
 <body>
 
+<div class="container">
     <header>
         <h1>সাইফুল'স সাইন্স কেয়ার</h1>
-        <p>মেগা MCQ প্র্যাকটিস - ১০০+ প্রশ্ন</p>
+        <div class="subtitle">Online MCQ Examination</div>
     </header>
 
-    <div class="container">
-        
-        <div id="exam-section">
-            <div class="progress-container">
-                <div class="progress-text">
-                    <span id="progress-count">প্রশ্ন ০ / ০</span>
-                    <span id="progress-percent">০%</span>
-                </div>
-                <div class="progress-bar-bg">
-                    <div class="progress-bar-fill" id="progress-bar"></div>
-                </div>
-            </div>
-
-            <form id="exam-form">
-                <div id="questions-container"></div>
-                <button type="button" class="btn btn-primary" onclick="showConfirmModal()">পরীক্ষা জমা দিন</button>
-            </form>
-        </div>
-
-        <div class="modal-overlay" id="confirm-modal">
-            <div class="modal-content">
-                <h3>আপনি কি নিশ্চিত?</h3>
-                <p>পরীক্ষা জমা দেওয়ার পর আর কোনো উত্তর পরিবর্তন করা যাবে না।</p>
-                <div class="modal-buttons">
-                    <button type="button" class="btn btn-secondary" onclick="hideConfirmModal()">ফিরে যান</button>
-                    <button type="button" class="btn btn-primary" onclick="submitExam()">হ্যাঁ, জমা দিন</button>
-                </div>
-            </div>
-        </div>
-
-        <div id="result-section">
-            <div class="result-card">
-                <h2>অভিনন্দন!</h2>
-                <p>আপনার পরীক্ষা সফলভাবে সম্পন্ন হয়েছে।</p>
-                <div class="score-circle">
-                    <span id="final-score">০/০</span>
-                </div>
-                <h3 style="margin-bottom: 2.5rem; color: var(--primary-color);">সঠিক উত্তরের হার: <span id="final-percent">০%</span></h3>
-
-                <div class="stats-grid">
-                    <div class="stat-box stat-correct">
-                        <h4 id="stat-correct">০</h4>
-                        <p>সঠিক উত্তর</p>
-                    </div>
-                    <div class="stat-box stat-wrong">
-                        <h4 id="stat-wrong">০</h4>
-                        <p>ভুল উত্তর</p>
-                    </div>
-                    <div class="stat-box stat-unanswered">
-                        <h4 id="stat-unanswered">০</h4>
-                        <p>উত্তর দেওয়া হয়নি</p>
-                    </div>
-                </div>
-
-                <div class="options-grid" style="grid-template-columns: 1fr 1fr; gap: 1rem;">
-                    <button class="btn btn-primary" onclick="showReview()">উত্তর মিলিয়ে দেখুন</button>
-                    <button class="btn btn-success" onclick="restartExam()">পুনরায় পরীক্ষা দিন</button>
-                </div>
-            </div>
-        </div>
-
-        <div id="review-section">
-            <h2 style="text-align:center; color:var(--primary-color); margin: 2rem 0;">আপনার উত্তর পর্যালোচনা</h2>
-            <div id="review-container"></div>
-            <div style="text-align: center; margin-top: 3rem;">
-                <button class="btn btn-success" style="max-width: 400px;" onclick="restartExam()">পুনরায় নতুন করে পরীক্ষা দিন</button>
-            </div>
-        </div>
-
+    <div id="alert-message" class="message-box">
+        আপনি ইতোমধ্যে পরীক্ষা সম্পন্ন করেছেন। দ্বিতীয়বার পরীক্ষা দেওয়ার সুযোগ নেই।
     </div>
 
-    <script>
-        // Mega Array containing all distinct readable questions from 6 images.
-        const mcqData = [
-            // বই পড়া (Image 1 & 3)
-            { question: "প্রমথ চৌধুরীর সাহিত্যিক ছদ্মনাম কী?", options: ["বীরবল", "সব্যসাচী", "ভানুসিংহ", "বনফুল"], answer: 0 },
-            { question: "কোন পত্রিকা বাংলা সাহিত্যে চলিত ভাষা প্রবর্তনে অগ্রণী ভূমিকা পালন করে?", options: ["বঙ্গদর্শন", "সবুজপত্র", "শিখা", "প্রগতি"], answer: 1 },
-            { question: "'ডেমোক্রেসির গুরুরা' বলতে প্রমথ চৌধুরী কাদের বুঝিয়েছেন?", options: ["ফরাসি", "ভারতীয়", "ইংরেজ", "আমেরিকান"], answer: 0 },
-            { question: "'যে জাতি মনে বড়ো নয়, সে জাতি জ্ঞানেও বড়ো নয়' - এটি কার উক্তি?", options: ["রোকেয়া সাখাওয়াত হোসেনের", "মোতাহের হোসেন চৌধুরীর", "জাহানারা ইমামের", "প্রমথ চৌধুরীর"], answer: 1 },
-            { question: "'এখেন শিক্ষাপদ্ধতি তাদের মনকে জখম করলেও একেবারে বধ করতে পারে না।' - লেখক এখানে কাদের কথা বুঝিয়েছেন?", options: ["ক্ষীণপ্রাণ জাতির", "কঠিন প্রাণের লোকের", "সুশিক্ষিত লোকের", "অশিক্ষিত লোকের"], answer: 1 },
-            { question: "'জ্ঞানের সৃষ্টি মনসাপেক্ষ' - 'মনসাপেক্ষ' অর্থ কী?", options: ["মনোবাঞ্ছিত", "মনোনিবিষ্ট", "মনোনির্ভরশীল", "মনোগ্রাহ্য"], answer: 2 },
-            { question: "'বই পড়া' প্রবন্ধের লেখকের মতানুসারে সাহিত্যচর্চার সুফল সম্পর্কে অনেকে সন্দিহান কেন?", options: ["বই পড়ায় প্রত্যক্ষ আয়ের ব্যবস্থা হয় না", "বই পড়লে মানুষ অলস হয়ে যায়", "স্বশিক্ষিত হওয়ার শক্তি নষ্ট হয়", "আমাদের বই পড়ার অভ্যাস নেই"], answer: 0 },
-            { question: "মানুষের মনকে সরল, সচল, সরাগ ও সমৃদ্ধ করার ভার কীসের ওপর ন্যস্ত হয়েছে?", options: ["সাহিত্যের", "শিক্ষার", "জ্ঞানের", "বিজ্ঞানের"], answer: 0 },
-            { question: "মনগঙ্গার তোলা জল কোনটি?", options: ["ধর্মীয় শাস্ত্র", "দর্শন বিজ্ঞান", "সাহিত্যিক রচনা", "গবেষণা গ্রন্থ"], answer: 2 },
-            { question: "'বই পড়া' প্রবন্ধ অনুসারে 'সেই গঙ্গাতে অবগাহন করেই আমরা আমাদের সকল পাপমুক্ত হব।' - বাক্যে 'পাপমুক্ত' বলতে কী বোঝানো হয়েছে?", options: ["সর্ববিষয়ে জ্ঞান অর্জন", "মনের সংকীর্ণতা মুক্তি", "ধার্মিকতা ও পুণ্যলাভ", "সাহিত্য পাঠে অভ্যস্ততা"], answer: 1 },
-            { question: "নীতির চর্চা কোথায় হয়?", options: ["গুহায়", "ঘরে", "জাদুঘরে", "লাইব্রেরিতে"], answer: 1 },
-            { question: "প্রমথ চৌধুরীর মতে দর্শনের চর্চা কোথায় করা যায়?", options: ["ঘরে", "জাদুঘরে", "লাইব্রেরিতে", "গুহায়"], answer: 3 },
-            { question: "আমাদের স্কুল-কলেজের ছেলেমেয়েরা বই পড়ে কীভাবে?", options: ["দায়ে পড়ে", "বাধ্য হয়ে", "স্বেচ্ছায়", "শিক্ষার জন্য"], answer: 1 },
-            { question: "'সাহিত্যের মধ্যে আমাদের জাত মানুষ হবে' - বলতে লেখক কী বুঝিয়েছেন?", options: ["মানসিক প্রফুল্লতা অর্জন", "মানবিক চেতনা সৃষ্টি", "বুদ্ধিবৃত্তিকে জাগানো", "মানসিক সুস্থতা লাভ"], answer: 1 },
-            { question: "'বই পড়া' প্রবন্ধে লেখক 'আমাদের জাত মানুষ হবে' বলতে বোঝাতে চেয়েছেন, সকলে-", options: ["মানুষ হবে", "সাহিত্যচর্চা করবে", "সুশিক্ষিত হবে", "লাইব্রেরি প্রতিষ্ঠা করবে"], answer: 2 },
-            { question: "আমাদের দেশে লাইব্রেরির সার্থকতা কীসের চাইতে কম নয়?", options: ["হাসপাতালের", "স্কুলের", "কলেজের", "বিশ্ববিদ্যালয়ের"], answer: 0 },
-            { question: "প্রমথ চৌধুরীর মতে, কোন কথাটি শুনলে অনেকে চমকে উঠবেন?", options: ["বই পড়া সর্বশ্রেষ্ঠ শখ", "ধর্মের চর্চা মন্দিরের বাইরেও চলে", "শিক্ষকের সার্থকতা শিক্ষাদান করায় নয়", "লাইব্রেরির সার্থকতা স্কুল-কলেজের চাইতে একটু বেশি"], answer: 3 },
-            { question: "আজকের বাজারে কোন শ্রেণির লোকের অভাব নেই?", options: ["বিদ্বান", "বিদ্যাদাতা", "বিদ্যাম্বেষী", "বিদ্যানুরাগী"], answer: 1 },
-            { question: "সুশিক্ষিত লোক মাত্রই-", options: ["পণ্ডিত", "বিদ্বান", "স্বশিক্ষিত", "আলেম"], answer: 2 },
-            { question: "শিক্ষা কেউ কাউকে দিতে পারে না। কারণ শিক্ষা হলো-", options: ["চর্চার বিষয়", "অর্জনের বিষয়", "অধ্যয়নের বিষয়", "অনুশীলনের বিষয়"], answer: 1 },
-            { question: "কোন শক্তির বলে শিষ্য নিজের মন নিজে গড়ে তোলে?", options: ["আত্মার", "গুরুর", "সাহিত্যের", "ডেমোক্রেসির"], answer: 0 },
-            { question: "বিদ্যার সাধনায় গুরুকে উত্তরসাধক বলা হয়েছে কেন?", options: ["শিষ্যকে বিদ্যা শেখান বলে", "শিষ্যকে উদ্বুদ্ধ করেন বলে", "শিষ্যকে মানুষ করে তোলেন বলে", "শিষ্যকে জ্ঞানী করে তোলেন বলে"], answer: 1 },
-            { question: "প্রমথ চৌধুরীর মতে, অন্তর্নিহিত শক্তিকে জাগিয়ে দিতে পারে কে?", options: ["বই", "গুরু", "রাষ্ট্র", "সমাজ"], answer: 1 },
-            { question: "কোন মৃত্যুর রেজিস্টারি রাখা হয় না?", options: ["আত্মার", "দেহের", "পাখির", "পশুর"], answer: 0 },
-            { question: "'বই পড়া' প্রবন্ধের আলোকে শিক্ষা সম্পর্কে আমাদের বিশ্বাস কোন ধরনের?", options: ["পরীক্ষা পাশ", "বই পড়া", "অর্থ প্রাপ্তি", "সাহিত্য চর্চা"], answer: 2 },
-            { question: "সাহিত্যচর্চার আনন্দ থেকে বঞ্চিত হওয়ার অর্থ কী?", options: ["জাতির জীবনী শক্তি হ্রাস করা", "সমাজের জীবনী শক্তি হ্রাস করা", "জ্ঞানের ভাণ্ডার শূন্য করা", "ধনের ভাণ্ডার শূন্য করা"], answer: 0 },
-            { question: "'বই পড়া' প্রবন্ধে তৎকালীন স্কুল-কলেজের শিক্ষাকে মারাত্মক বলার কারণ কী?", options: ["মুখস্থ বিদ্যা চর্চায় উৎসাহিত করে", "সুশিক্ষিত হওয়ার সুযোগ দেয় না", "কেবল পাশ করতে উদ্বুদ্ধ করে", "স্বশিক্ষিত হওয়ার শক্তি নষ্ট করে দেয়"], answer: 3 },
-            { question: "'বই পড়া' প্রবন্ধের লেখক লাইব্রেরিকে কীসের ওপর স্থান দিয়েছেন?", options: ["হাসপাতালের", "মন্দিরের", "স্কুল-কলেজের", "অর্থবিত্তের"], answer: 2 },
-            { question: "'প্রতিটি লোক তার স্বীয় শক্তি ও রুচি অনুসারে নিজের মনকে নিজের চেষ্টায় আত্মার রাজ্যে জ্ঞানের পথে এগিয়ে নিয়ে যেতে পারে'- কীভাবে?", options: ["লাইব্রেরির বদান্যতায়", "স্কুল-কলেজের মাধ্যমে", "শিক্ষকের কল্যাণে", "পারিবারিক শিক্ষায়"], answer: 0 },
-            { question: "আমাদের শিক্ষা আমাদেরকে কী করে তুলেছে?", options: ["প্রাণবন্ত", "নির্জীব", "সতেজ", "নিষ্প্রাণ"], answer: 1 },
-            { question: "প্রমথ চৌধুরীর মতে, কোনটি ছাড়া উদরপূর্তির কাজে লাগে না?", options: ["সাহিত্য", "লাইব্রেরি", "শিক্ষা", "জীবনীশক্তি"], answer: 2 },
-            { question: "'মনের দাবি রক্ষা না করলে মানুষের আত্মা বাঁচে না।' - এখানে 'মনের দাবি' বলতে কী বোঝানো হয়েছে?", options: ["খাদ্য গ্রহণ", "সাহিত্যের আনন্দ", "জ্ঞান অর্জন", "অর্থ উপার্জন"], answer: 1 },
-            { question: "'বই পড়া' প্রবন্ধ অনুসারে জাতির প্রাণে যথার্থ স্ফুর্তি লাভের উপায় কী?", options: ["উদর পূর্তি করানোর মাধ্যমে", "মনকে সজাগ ও সরল রাখা", "শিক্ষার উল্টা টান টেনে", "কাব্য চর্চা করা"], answer: 1 },
-            { question: "কাব্যামৃতে আমাদের অরুচি ধরেছে কেন?", options: ["অসুস্থ রাজনীতির কারণে", "গণতান্ত্রিক চর্চার অভাবে", "আমাদের শিক্ষার দোষে", "স্বেচ্ছিক স্তব্ধতার কারণে"], answer: 2 },
-            { question: "'বই পড়া' প্রবন্ধে প্রমথ চৌধুরীর মতে, আমাদের নির্জীব করেছে কোনটি?", options: ["অর্থ", "শিক্ষা", "শিক্ষক", "অভিভাবক"], answer: 1 },
-            { question: "'সুসার' শব্দের প্রকৃত অর্থ কোনটি?", options: ["অতিরিক্ত", "সচ্ছলতা", "যা বিকাশ ঘটে", "গোছানো ভাব"], answer: 1 },
-            { question: "'বই পড়া' প্রবন্ধটি কোন গ্রন্থ থেকে সংকলিত হয়েছে?", options: ["গল্প-সংগ্রহ", "প্রবন্ধ-সংগ্রহ", "প্রবন্ধ-সংকলন", "নির্বাচিত প্রবন্ধ"], answer: 1 },
-            { question: "একটি লাইব্রেরির বার্ষিক সভায় পঠিত হয়েছিল নিচের কোন প্রবন্ধটি?", options: ["শিক্ষা ও মনুষ্যত্ব", "পল্লিসাহিত্য", "উপেক্ষিত শক্তির উদ্বোধন", "বই পড়া"], answer: 3 },
-            { question: "'বই পড়া' প্রবন্ধে লেখক কীসের সমালোচনা করেছেন?", options: ["শিক্ষার্থীর", "শিক্ষকের", "শিক্ষাব্যবস্থার", "সিলেবাসের"], answer: 2 },
-            { question: "প্রগতিশীল জগতের সঙ্গে তাল মিলিয়ে চলতে কী আবশ্যক?", options: ["সাহিত্যচর্চা", "স্কুল প্রতিষ্ঠা", "লাইব্রেরি প্রতিষ্ঠা", "পাঠ্যপুস্তক পড়া"], answer: 2 },
-            { question: "প্রমথ চৌধুরী কাউকে শখ হিসেবে বই পড়ার পরামর্শ দেননি, কারণ-", options: ["আমরা জাতি হিসেবে শৌখিন নই", "এখন ঠিক শখ করার সময় নয়", "সে পরামর্শ কেউ গ্রাহ্য করবে না", "i, ii ও iii"], answer: 3 },
-            { question: "'বই পড়া' প্রবন্ধের মূলবক্তব্য কী?", options: ["প্রচলিত শিক্ষাব্যবস্থার স্বরূপ উন্মোচন", "সাহিত্যচর্চার প্রতি গুরুত্বারোপ", "লাইব্রেরি প্রতিষ্ঠার আহ্বান", "বাঙালি জাতির কল্যাণ সাধন"], answer: 1 },
+    <div id="exam-section">
+        <div class="progress-container">
+            <div id="progress-bar" class="progress-bar"></div>
+        </div>
+        <form id="exam-form">
+            <div id="questions-container"></div>
+            <button type="submit" class="btn-submit" id="submit-btn">পরীক্ষা শেষ করুন</button>
+        </form>
+    </div>
 
-            // আম আঁটির ভেঁপু (Image 2 & 5)
-            { question: "লেখক শরৎচন্দ্রের পরে বাংলা কথাসাহিত্যের সবচেয়ে জনপ্রিয় শিল্পী কে?", options: ["মানিক বন্দ্যোপাধ্যায়", "বিভূতিভূষণ বন্দ্যোপাধ্যায়", "তারাশঙ্কর বন্দ্যোপাধ্যায়", "বনফুল"], answer: 1 },
-            { question: "বিভূতিভূষণ বন্দ্যোপাধ্যায় কোন উপন্যাসের জন্য রবীন্দ্র-পুরস্কারে ভূষিত হন?", options: ["পথের পাঁচালী", "অপরাজিত", "ইছামতি", "আরণ্যক"], answer: 2 },
-            { question: "অপু কোথায় বসে খেলা করছিল?", options: ["উঠানে", "বিছানায়", "রোয়াকে", "দরজায়"], answer: 2 },
-            { question: "'আম-আঁটির ভেঁপু' গল্পে টোল-খাওয়া ভেঁপু-বাঁশিটার দাম কত?", options: ["চার পয়সা", "পাঁচ পয়সা", "ছয় পয়সা", "সাত পয়সা"], answer: 0 },
-            { question: "অপুর খেলনা পিস্তলটির দাম কত পয়সা?", options: ["দুই", "তিন", "চার", "পাঁচ"], answer: 0 },
-            { question: "অপু মনে মনে কোন খেলার কল্পনা করছিল?", options: ["ডাণ্ডা-গুলি", "গঙ্গা-যমুনা", "চোর-পুলিশ", "কাবাডি"], answer: 2 },
-            { question: "পিজরাপোলের আসামির মতো কে পড়ে আছে?", options: ["দু'পয়সা দামের পিস্তল", "খাপরার কুচি", "টিনের ভেঁপু বাঁশি", "কাঠের ঘোড়া"], answer: 3 },
-            { question: "'রোয়াক' অর্থ কী?", options: ["জানালা", "চেয়ার", "খেলার মাঠ", "বারান্দা"], answer: 3 },
-            { question: "'আম-আঁটির ভেঁপু' গল্পে লেখক যেটি এড়িয়ে গেছেন তা হলো-", options: ["শৈশবে দারিদ্র্যের কষ্ট", "অপু ও দুর্গার দুরন্তপনা", "প্রকৃতি ও মানুষের জীবন", "ফলফলাদি গ্রহণের আনন্দ"], answer: 0 },
-            { question: "'আম-আঁটির ভেঁপু' গল্পে ফুটে উঠেছে-", options: ["প্রকৃতির বৈচিত্র্য", "সামাজিক জীবন", "মুক্ত জীবনের প্রতি আসক্তি", "প্রকৃতির সাথে জীবনের মিল"], answer: 2 },
-            { question: "'আম-আঁটির ভেঁপু' গল্পটি শিশু-কিশোরদের মনে কীসের অনুপ্রেরণা জোগায়?", options: ["আনন্দিত জীবনের", "বিস্ময় ও কৌতূহলের", "প্রকৃতিমুখী হওয়ার", "চিরায়ত শৈশবের"], answer: 2 },
-            { question: "পল্লি-মায়ের শাশ্বত রূপ ফুটে উঠেছে 'আম-আঁটির ভেঁপু' গল্পের কোন চরিত্রে?", options: ["দুর্গা", "নীলমণি", "স্বর্ণ গোয়ালিনী", "সর্বজয়া"], answer: 3 },
-            { question: "গঙ্গা-যমুনা খেলার জন্য অপু কী হাতে নিল?", options: ["লাটিম", "মার্বেল", "বাঁশি", "খাপরা"], answer: 3 },
-            { question: "গঙ্গা-যমুনা খেলতে কোনটি সযত্নে বাক্সে রাখা হয়েছে?", options: ["দু'পয়সা দামের পিস্তল", "খানাকতক খাপরার কুচি", "রং ওঠা কাঠের ঘোড়া", "টোল-খাওয়া টিনের ভেঁপু"], answer: 1 },
-            { question: "'অপুকে' ডাকার সময় দুর্গার কণ্ঠস্বরে ছিল-", options: ["ভয়", "সতর্কতা", "জড়তা", "আদর"], answer: 1 },
-            { question: "কলের পুতুলের মতো অপু কী লুকিয়ে ফেলল?", options: ["টিনের বাঁশিটা", "লক্ষ্মীর চুপড়ির কড়িগুলো", "দু'পয়সা দামের পিস্তলটা", "রং ওঠা কাঠের ঘোড়াটা"], answer: 1 },
-            { question: "'আম-আঁটির ভেঁপু' গল্পে অপু কোন জিনিসটি কলের পুতুলের মতো লুকিয়ে ফেলল?", options: ["চুপড়ির কড়ি", "তেলের ভাঁড়", "নুনের বেয়াম", "নারকেলের মালা"], answer: 0 },
-            { question: "অপু কলের পুতুলের মতো তাড়াতাড়ি কোন জিনিসগুলো লুকিয়ে ফেলে?", options: ["শুকনো নাটাফল", "জারানো আমের চাকলা", "গঙ্গা-যমুনা খেলার খাপড়া", "লক্ষ্মীর চুপড়ির কড়ি"], answer: 1 },
-            { question: "দুর্গার বয়স কত?", options: ["নয়-দশ", "দশ-এগারো", "এগারো-বারো", "তেরো-চৌদ্দ"], answer: 1 },
-            { question: "দুর্গা যখন অপুকে ডেকেছিল তখন অপু কোথায় অবস্থান করছিল?", options: ["বারান্দায়", "ঘরের ভিতরে", "নারকেল তলায়", "কাঁঠালতলায়"], answer: 0 },
-            { question: "দুর্গা সুর নিচু করিয়া বলিল, 'মা ঘাট থেকে আসেনি তো?' - দুর্গার এ কথায় কী প্রকাশ পেয়েছে?", options: ["আকুলতা", "ভীরুতা", "কৌতূহল", "দুরন্তপনা"], answer: 1 },
-            { question: "দুর্গা আঁচলের খুঁট খুলিয়া কী বাহির করিল?", options: ["রড়া ফলের বিচি", "খাপরার কুচি", "নাটাফল", "আমের কুশি"], answer: 3 },
-            { question: "'আম-আঁটির ভেঁপু' গল্পে কাদের ডোবার ধারের আমগাছটায় গুটি ধরেছে?", options: ["পটলদের", "গোপদের", "রায়দের", "হরিহরদের"], answer: 0 },
-            { question: "কোন বাগানের আম গুড়ের মতো মিষ্টি?", options: ["সিঁদুরকৌটার", "কাঁকুড়তলির", "নীলমণি রায়ের", "চোবার ধারের"], answer: 0 },
-            { question: "হরিহর রায়ের জ্ঞাতিভাতা কে?", options: ["নীলমণি রায়", "অন্নদা রায়", "অধর রায়", "নীলকান্ত রায়"], answer: 0 },
-            { question: "হরিহরের ঘরের দোর জানালার কপাট কীসের দড়ি দিয়ে গরাদের সঙ্গে বাঁধা ছিল?", options: ["পাটের দড়ি", "খড়ের দড়ি", "নাইলনের দড়ি", "নারকেলের দড়ি"], answer: 3 },
-            { question: "'তেলের ভাঁড় ছুঁলে মা মারবে যে? আমার কাপড় যে বাসি?'- অপুর এ উক্তিতে তৎকালীন সমাজের কোন চিত্রটি ফুটে উঠেছে?", options: ["বিধিবদ্ধ সংস্কার", "সংস্কার", "কুসংস্কার", "প্রচলিত নিয়মকানুন"], answer: 2 },
-            { question: "অনেকদিন হরিহর রায়ের বাড়িটি-", options: ["রং করা হয়নি", "ধোয়ামোছা হয়নি", "মেরামত করা হয়নি", "পরিষ্কার করা হয়নি"], answer: 2 },
-            { question: "বামুন হিসেবে বাস করার প্রস্তাবে হরিহর তখনই রাজি হলেন না কেন?", options: ["পাওনাদারের ভয়ে", "আত্মসম্মান রক্ষার জন্য", "চাকরি হারানোর ভয়ে", "প্রস্তাবকারী সদ্‌গোপ বলে"], answer: 1 },
-            { question: "'আম-আঁটির ভেঁপু' গল্পে অপুর মায়ের নাম কী?", options: ["স্বর্ণ গোয়ালিনী", "সর্বজয়া", "দুগ্গা", "লক্ষ্মী"], answer: 1 },
-            { question: "হরিহর কখন বাড়ি ফিরল?", options: ["দুপুরে", "সন্ধ্যায়", "দুপুরের কিছুপর", "অপরাহ্ণে"], answer: 0 },
-            { question: "সর্বজয়ার চিরন্তন মাতৃরূপের প্রকাশ ঘটেছে কোন উক্তিতে?", options: ["আজকাল চাষাদের ঘরে লক্ষ্মী বাঁধা", "ফের দ্যাখো না এই জ্বরে পড়লো বলে", "ও দুগ্গা, দ্যাখ তো বাছুরটা হাঁক পাড়ছে কেন?", "ইচ্ছে করে একদিকে বেরিয়ে যাই"], answer: 1 },
-            { question: "সর্বজয়া কোন মাসের রোদে জ্বর আসার কথা বলেছে?", options: ["আশ্বিন", "কার্তিক", "পৌষ", "চৈত্র"], answer: 3 },
-            { question: "'মিষ্টি যেন গুড়- দেবো তোমায়?'- উক্তিটিতে দুর্গার কী ধরনের মনোভাব প্রকাশ পেয়েছে?", options: ["ক্ষোভ", "উপহাস", "স্নেহ", "অভিমান"], answer: 2 },
-            { question: "রায় বাড়িতে হরিহরের বেতন ছিল কত টাকা?", options: ["আট", "দশ", "বারো", "চৌদ্দ"], answer: 0 },
-            { question: "হরিহর সদগোপদের প্রস্তাবে রাজি হয়নি কেন?", options: ["ধর্মাদর্শের কারণে", "নিরাপত্তার জন্য", "সর্বজয়ার কথা ভেবে", "বংশমর্যাদা ক্ষুণ্নের ভয়ে"], answer: 3 },
-            { question: "'আম-আঁটির ভেঁপু' গল্পে কার উক্তিতে তৎকালীন বন্ধক প্রথার পরিচয় পাওয়া যায়?", options: ["সেজ ঠাকুরুন", "ভুবন মুখুয্যে", "রাধা বোষ্টমের বৌ", "নীলমণি রায়"], answer: 0 },
-            { question: "দুর্গা রড়া ফলের বিচি কোথায় রেখেছিল?", options: ["লক্ষ্মীর ভাণ্ডারে", "লক্ষ্মীর কৌটায়", "আঁচলের তলে", "আঁচলের খুঁটে"], answer: 1 },
-            { question: "দুর্গা-আঁচলের খুঁট খুলে কীসের বিচি বের করেছিল?", options: ["নাটাফলের", "বৈচি ফলের", "রড়া ফলের", "তেলাকুচার"], answer: 2 },
-            { question: "'আম-আঁটির ভেঁপু' গল্পের মূল প্রতিপাদ্য বিষয় কোনটি?", options: ["গ্রামীণ প্রকৃতি ও জীবনের সৌকর্য", "শিশুর আনন্দপূর্ণ শৈশবের সঙ্গে প্রকৃতির সম্পর্ক", "মায়ের চিরকালীন চরিত্রের স্বরূপ", "দারিদ্র্য"], answer: 1 },
-            { question: "'আম-আঁটির ভেঁপু' গল্পের মূলসুর কী?", options: ["জীবন ঘনিষ্ঠতা", "চিরায়ত শৈশব", "প্রকৃতি ঘনিষ্ঠতা", "দারিদ্র্য"], answer: 2 },
+    <div id="result-section">
+        <div class="score-board">
+            <div class="score-circle" id="score-circle">০%</div>
+            <div class="stats">
+                <div class="stat-item">
+                    <span>মোট প্রশ্ন</span>
+                    <span class="stat-value" id="total-q">০</span>
+                </div>
+                <div class="stat-item">
+                    <span>সঠিক উত্তর</span>
+                    <span class="stat-value text-success" id="correct-q">০</span>
+                </div>
+                <div class="stat-item">
+                    <span>ভুল উত্তর</span>
+                    <span class="stat-value text-danger" id="wrong-q">০</span>
+                </div>
+            </div>
+            <div class="performance-msg" id="performance-msg"></div>
+        </div>
+        
+        <h2 style="text-align: center; margin-bottom: 20px; color: var(--text-main);">আপনার উত্তরপত্র পর্যালোচনা</h2>
+        <div id="review-container"></div>
+    </div>
+</div>
 
-            // প্রবাস বন্ধু (Image 4 & 6)
-            { question: "কাবুল থেকে খাজা মোল্লা গ্রামের দূরত্ব কত?", options: ["দেড় মাইল", "দুই মাইল", "আড়াই মাইল", "তিন মাইল"], answer: 2 },
-            { question: "'হরফন-মৌলা' বলতে কী বোঝানো হয়েছে?", options: ["সকল কাজ পণ্ডকারী", "সকল কাজে ওস্তাদ", "সকল কাজে দালালি", "সকল কাজের কাজি"], answer: 3 },
-            { question: "'ওরভোয়া' শব্দের অর্থ কী?", options: ["আজ বিদায়", "আবার এসো", "আবার দেখা হবে", "আবার কথা হবে"], answer: 2 },
-            { question: "'প্রবাস বন্ধু' রচনায় নিচের কোন কথায় বিদায়ের সৌজন্য প্রকাশ পায়?", options: ["ওরভোয়া", "লব-ই-দরিয়া", "হরফন-মৌলা", "বারকোশ"], answer: 0 },
-            { question: "লেখক আবদুর রহমানকে কোন অর্থে 'নরদানব' বলেছেন?", options: ["ব্যঙ্গার্থে", "অবজ্ঞার্থে", "নিন্দার্থে", "আদরে"], answer: 3 },
-            { question: "আবদুর রহমানের পায়ের সাইজ কীসের মতো?", options: ["রিলিফ ম্যাপের মতো", "পাণ্ডুয়ার মতো", "মর্তমান কলার মতো", "ডিঙি নৌকার মতো"], answer: 3 },
-            { question: "আফগানিস্তানের রিলিফ ম্যাপের চেহারার সঙ্গে সাদৃশ্য ছিল কার?", options: ["অধ্যক্ষ জিরারের", "লেখকের", "তাঙাওয়ালার", "আবদুর রহমানের"], answer: 3 },
-            { question: "রাইফেল চালানোর কথা শুনে আবদুর রহমানের একগাল হাসি প্রমাণ করে তার-", options: ["আন্তরিকতা", "বুদ্ধিমত্তা", "সাহসিকতা", "সাবলীলতা"], answer: 2 },
-            { question: "লেখক আবদুর রহমানের ঠোঁট দুইটি দেখতে পাননি, কারণ আবদুর রহমান-", options: ["অতিশয় কর্মতৎপর", "নরদানব আকৃতির", "আফগান-সংস্কার মানে", "ভীমসেন তুল্য"], answer: 2 },
-            { question: "সৈয়দ মুজতবা আলী যখন নীল পাহাড়ের গায়ে সাদা সাদা বরফ দেখেছিলেন তখন কী ঋতু ছিল?", options: ["বর্ষাকাল", "শীতকাল", "গ্রীষ্মকাল", "বসন্তকাল"], answer: 1 },
-            { question: "'প্রবাস বন্ধু' রচনায় পাগমান পাহাড়টি কী রঙের?", options: ["সাদা", "ধূসর", "নীল", "সবুজ"], answer: 2 },
-            { question: "'আবদুর রহমান তাড়াতাড়ি এসে অভয় বাণী দিলো।'- এ বাক্যে আবদুর রহমান কীসের অভয় বাণী দিলো?", options: ["বরফের", "খাবারের", "শীতের", "নিরাপত্তার"], answer: 1 },
-            { question: "লেখকের মতে আবদুর রহমান কয়জনের খাবার রান্না করেছিল?", options: ["তিন", "চার", "পাঁচ", "ছয়"], answer: 3 },
-            { question: "'প্রবাস বন্ধু' ভ্রমণকাহিনিতে লেখকের অধিক শোকে পাথর হওয়ার কারণ কী?", options: ["খাদ্যের আধিক্য", "রান্নায় দক্ষতা", "খাবারের অপচয়", "রান্নায় বিলম্ব"], answer: 0 },
-            { question: "'প্রবাস বন্ধু' ভ্রমণকাহিনিতে দুম্বার মাংসের গামলায় কোনটিকে লেখকের চোখে অপাঙ্ক্তেয় মনে হয়েছে?", options: ["আলু", "বাদাম", "কিসমিস", "মাংস"], answer: 0 },
-            { question: "তামাম আফগানিস্তান কীসে মশহুর?", options: ["আখরোট", "ফালুদা", "শামি-কাবাব", "বরফি আঙুরে"], answer: 3 },
-            { question: "কাবুলি চায়ের রং কেমন?", options: ["ধূসর", "লালচে", "হলদে", "সবুজ"], answer: 3 },
-            { question: "কাবুলি চা পেয়ালায় ঢাললে কী রং দেখা যায়?", options: ["গাঢ় সবুজ", "অতি ফিকে সবুজ", "অতি ফিকে হলদে", "অতি ফিকে লাল"], answer: 2 },
-            { question: "'প্রবাস বন্ধু' গল্পের লেখক কোন খাবারটি ফিরিয়ে দিয়েছিলেন?", options: ["আখরোট", "আঙুর", "ফালুদা", "সবুজ চা"], answer: 2 },
-            { question: "চা খাওয়া শেষ করে আবদুর রহমান কত মিনিটের জন্য বেরিয়ে গেল?", options: ["পাঁচ", "আট", "দশ", "বারো"], answer: 0 },
-            { question: "আবদুর রহমানের বিবেচনায় পৃথিবীর শ্রেষ্ঠ স্থান কোনটি?", options: ["খাজামোল্লা", "পানশির", "কাবুল", "পাগমান"], answer: 1 },
-            { question: "লেখক শীতকালটা 'পানশিরে' কাটাতে চেয়েছিলেন কেন?", options: ["আবদুর রহমানকে খুশি করতে", "প্রাণ বাঁচানোর জন্য", "প্রাকৃতিক সৌন্দর্য উপভোগ করতে", "বায়ু পরিবর্তনের জন্য"], answer: 0 },
-            { question: "'এক একবার দম ফেললে একশটা বেমারি বেরিয়ে যাবে'- এ কথা দ্বারা 'প্রবাস বন্ধু' ভ্রমণকাহিনিতে কী বোঝানো হয়েছে?", options: ["মনোমুগ্ধকর দৃশ্য", "নির্মল প্রকৃতি", "ঋতু বৈচিত্র্য", "জীবনযাত্রা"], answer: 1 },
-            { question: "'প্রবাস বন্ধু' ভ্রমণকাহিনির লেখক শীতকালটা পানশিরে কাটাতে চান কেন?", options: ["নিজের প্রাণ বাঁচাবার জন্য", "আবদুর রহমানের খুশির জন্য", "আস্ত দুম্বা খাওয়ার জন্য", "নিজের আয়ু বাড়াবার জন্য"], answer: 1 },
-            { question: "'একমুখে হরে তাজি ঘোড়াকে হার মানিয়ে ছুটে চলে।'- 'প্রবাস বন্ধু' রচনায় এ উক্তিতে কোনটিকে বোঝানো হয়েছে?", options: ["কাবুলের হাওয়া", "পানশিরের অধিবাসী", "আতসবাজির হলকা", "বরফের গুঁড়ো"], answer: 3 },
-            { question: "চিনির রসে ভেজানো ঘিয়ে ভাজা রসগোল্লাজাতীয় মিষ্টিকে কী বলে?", options: ["রাবড়ি", "পানতুয়া", "রসমালাই", "চমচম"], answer: 1 },
-            { question: "'প্রবাস বন্ধু' গল্পটি সৈয়দ মুজতবা আলীর কোন গ্রন্থ থেকে নেওয়া হয়েছে?", options: ["দেশে-বিদেশে", "চাচা কাহিনী", "পঞ্চতন্ত্র", "শবনম"], answer: 0 },
-            { question: "আবদুর রহমানের আতিথ্যপরায়ণতায় লেখকের ধৈর্যচ্যুতি ঘটলেও কিছু তাঁকে মুগ্ধ করেছে যে গুণ তা হলো-", options: ["সরলতা", "কর্মদক্ষতা", "দেশপ্রেম", "অভিজ্ঞতা"], answer: 0 },
-            { question: "'প্রবাস বন্ধু' রচনায় আবদুর রহমান চরিত্রে পাই-", options: ["মহানভবতা", "দায়িত্বহীনতা", "দেশপ্রেম", "অসহযোগিতা"], answer: 2 }
-        ];
+<script>
+    // ১৩৭ টি প্রশ্নের সম্পূর্ণ ডাটাবেজ
+    const rawData = [
+        // Image 1 (1-30)
+        ["সুভাকে তার মা গর্ভের কলঙ্ক মনে করেন কেন?", "কর্মে অনাগ্রহী", "বাকপ্রতিবন্ধী", "সংসার বিরাগী", "শব্দহীন, সঙ্গহীন", 1],
+        ["কোনটি ফররুখ আহমদের গ্রন্থ?", "হাতের বুনন", "ধান খেত", "অনুবীক্ষা", "সাত সাগরের মাঝি", 3],
+        ["উদ্দীপকে 'জীবন বিনিময়' কবিতার কোন বিষয়টি ফুটে উঠেছে?", "মমত্ববোধ", "নিষ্ঠুরতা", "কোমলতা", "অহমিকা", 0],
+        ["উদ্দীপকের সাথে 'জীবন বিনিময়' কবিতার যে পঙ্ক্তিগুলোর মিল রয়েছে?", "i ও ii", "i ও iii", "ii ও iii", "i, ii ও iii", 0],
+        ["'আর কি হে হবে দেখা?' এতে কী প্রকাশ পেয়েছে?", "স্মৃতি", "আকাঙ্ক্ষা", "সংশয়", "প্রহসন", 2],
+        ["বাংলার প্রকৃতির রূপ বৈচিত্র্যে কবি জীবনানন্দ দাশ-", "i ও ii", "i ও iii", "ii ও iii", "i, ii ও iii", 3],
+        ["'আরেক ফাল্গুন' জহির রায়হানের কোন জাতীয় রচনা?", "প্রবন্ধ", "কাব্যগ্রন্থ", "উপন্যাস", "ছোটগল্প", 2],
+        ["'তিষ্ঠ' শব্দের অর্থ কী?", "অশান্ত হও", "গতিশীল হও", "স্থির হও", "প্রলয়ংকরী হও", 2],
+        ["বিস্তৃত দিন কীভাবে অবস্থায় পড়ে আছে?", "নিঃসঙ্গ নির্জন", "রুক্ষ বিষণ্ণ", "রৌদ্র-দগ্ধ", "বিষণ্ণ মেদুর", 0],
+        ["'তোমাকে পাওয়ার জন্যে হে স্বাধীনতা' কবিতায় 'নূতন নিশান' দ্বারা কী বোঝানো হয়েছে?", "পরাধীনতাকে", "মানচিত্রকে", "পতাকাকে", "মুক্তিযোদ্ধাকে", 2],
+        ["যেসব মানুষ অমর্ত্যজায় চিন্ময় তারা সক্ষম নয়-", "i ও ii", "i ও iii", "ii ও iii", "i, ii ও iii", 3],
+        ["'সাফা' ও 'মাওয়া' কী?", "দুটি মৃতদেহ", "দুটি পাহাড়", "সীমান্ত এলাকা", "দুটি সাগর", 1],
+        ["উদ্দীপকে 'সেই দিন এই মাঠ' কবিতার কোন ভাব ফুটে উঠেছে?", "কেউ কাউকে মনে রাখেনা", "মৃত্যু পৃথিবীর বহমানতা রোধে অক্ষম", "থেমে থাকার সময় নেই কারো", "শোক নয়, গতিই হলো জীবন ধর্ম", 1],
+        ["উদ্দীপকের প্রক্রিয়ার আবরনী যে চরণে আছে-", "i ও ii", "i ও iii", "ii ও iii", "i, ii ও iii", 3],
+        ["'আম আঁটির ভেঁপু' গল্পে টোল খাওয়া বাঁশিটির দাম কত?", "চার পয়সা", "পাঁচ পয়সা", "ছয় পয়সা", "সাত পয়সা", 0],
+        ["'কপোতাক্ষ নদ' কবিতায় কবির কাছে 'ভ্রান্তির ছলনা' কোনটি?", "স্নেহের তৃষ্ণা", "নিশার স্বপন", "মায়ামন্ত্র ধ্বনি", "কলকল ধ্বনি", 1],
+        ["'উমর ফারুক' কবিতায় কোন ওয়াক্ত নামাজের আজান শোনার কথা বোঝানো হয়েছে?", "জোহর", "আসর", "এশা", "ফজর", 3],
+        ["কোনটি জীবনানন্দ দাশের কাব্যগ্রন্থ?", "চতুষ্ক", "ঝরাপালক", "মাল্য", "মহাপৃথিবী", 1],
+        ["আশ্রয় দাতাকে চিনতে পেরে ইবনে আব্বাসের অনুভূতি কী ছিল?", "বিস্ময়পূর্ণ", "শোকার্ত", "গম্ভীর", "আহ্লাদে পুলকিত", 0],
+        ["বিবি আমেনার বুকে শোকের মাতম উঠল কেন?", "স্বামীর মৃত্যুতে", "ছেলের মৃত্যুতে", "মাতৃবিয়োগে", "বোনের মৃত্যুতে", 0],
+        ["'কৃষ্ণকুমারী' কী ধরনের রচনা?", "উপন্যাস", "ছোট গল্প", "নাটক", "প্রহসন", 2],
+        ["'আমি কোন আগন্তুক নই' কবিতায় মাছরাঙা পাখি কোথায় বসে আছে?", "ডুমুর ডালে", "জামরুল ডালে", "আম ডালে", "নিসিন্দা ঝোপে", 1],
+        ["মানুষের পুরো মনটার সাক্ষাৎ পাওয়া যায় কোথায়?", "সাহিত্যে", "আচরণে", "দর্শনে", "ধর্মনীতিতে", 0],
+        ["কবি কদম আলীকে কী হিসেবে সম্বোধন করেছেন?", "আগন্তুক", "স্বজন", "অভ্যাগত", "ভিনদেশী", 1],
+        ["'জীবন বিনিময়' কবিতায় সন্তানের প্রতি প্রদর্শন করা হয়েছে-", "i ও ii", "i ও iii", "ii ও iii", "i, ii ও iii", 0],
+        ["'জীব সত্তা' কথাটির অর্থ কী?", "মানুষের অস্তিত্ব", "বাঘের অস্তিত্ব", "জীবের অস্তিত্ব", "আনন্দের অস্তিত্ব", 0],
+        ["লেখক কয়টি বরফি আঙুর খেয়েছিল?", "গোটা ছয়েক", "গোটা পাঁচেক", "গোটা সাতেক", "গোটা আটেক", 1],
+        ["বর্ষামুখর দিনে কী শিহরায়?", "রূপসি পরি", "মাঠঘাট", "নদী-নালা", "অরণ্যের কেয়া", 3],
+        ["খলিফা মামুনের পিতার নাম কী ছিল?", "খলিফা আব্দুল্লাহ", "খলিফা আব্বাস", "খলিফা হারুন-অর-রশীদ", "খলিফা রশীদ", 2],
+        ["'সেইদিন এই মাঠ' কবিতায় কোনটি ধুলো হয়েছে বলা হয়েছে?", "বেবিলন", "চালতা ফুল", "চর", "এশিরিয়া", 0],
+        
+        // Image 2 (31-44)
+        ["আমার এরূপ বোধ ও বিশ্বাস হয় না- কার?", "খলিফার", "বন্দির", "আলী ইবনে আব্বাসের", "নতুন শাসনকর্তার", 1],
+        ["'সাদর বচনে সম্ভাষণ করিয়া বলিলেন'- কে কাকে সম্ভাষণ করেন?", "আব্বাস খলিফাকে", "খলিফা আব্বাসকে", "আব্বাস বন্দিকে", "খলিফা বন্দিকে", 3],
+        ["সুভা মুক্তির সনদ কোথায় খুঁজে পায়?", "স্বচ্ছ আকাশের সৌন্দর্যে", "বিপুল নির্বাক প্রকৃতিতে", "সর্বশী ও পাঙ্গুলির স্পর্শে", "প্রতাপের সঙ্গে সময় কাটিয়ে", 1],
+        ["'কালো চোখকে তর্জমা করতে হয় না'- কারণ-", "i ও ii", "i ও iii", "ii ও iii", "i, ii ও iii", 3],
+        ["প্রমথ চৌধুরী কোন শতকে জন্মগ্রহণ করেন?", "ঊনবিংশ", "বিংশ", "সপ্তদশ", "অষ্টাদশ", 0],
+        ["'বই পড়া' প্রবন্ধে সাহিত্য সাক্ষাৎভাবে কীসের কাজে লাগে না?", "মনস্তুষ্টির", "উদরপূর্তির", "সাহিত্যচর্চার", "লাইব্রেরি প্রতিষ্ঠার", 1],
+        ["'আম-আঁটির ভেঁপু' গল্পে ফুটে উঠেছে-", "প্রকৃতির বৈচিত্র্য", "সামাজিক জীবন", "মুক্ত জীবনের প্রতি আসক্তি", "প্রকৃতির সাথে জীবনের মিল", 0],
+        ["দুর্গা যখন অপুকে ডেকেছিল তখন অপু কোথায় অবস্থান করছিল?", "বারান্দায়", "ঘরের ভেতর", "নারকেল তলায়", "কাঁঠাল তলায়", 3],
+        ["ছাগীদুগ্ধ দিয়া হযরতের তৃষ্ণা দূর করলেন কে?", "হজরত ওমর (রাঃ)", "বিবি খাদিজা (রাঃ)", "আবু মা'বদ", "উম্মে মা'বদ", 3],
+        ["হজরত মুহম্মদ (সাঃ) কী হিসেবে তাঁর জীবন রূপায়িত করেছেন?", "প্রেম ও দয়ার মূর্ত প্রতীক", "মানুষের অনুকরণীয়", "ক্ষমার মূর্ত প্রতীক", "মানুষের শ্রেষ্ঠ আদর্শ", 3],
+        ["কারা নিমগাছের প্রশংসায় পঞ্চমুখ?", "কবিরা", "বিজ্ঞরা", "কবিরাজরা", "পাড়ার লোকেরা", 3],
+        ["নিমগাছের কোন অংশ যকৃতের জন্য উপকারী?", "ছাল", "পাতা", "ডাল", "শিকড়", 1],
+        ["'প্রবাস বন্ধু' রচনায় আবদুর রহমান চরিত্রে পাই-", "মহানুভবতা", "দায়িত্বহীনতা", "স্বদেশপ্রেম", "অসহযোগিতা", 2],
+        ["উদ্দীপকের আসাদের সঙ্গে 'একুশের গল্প' নামক ছোটগল্পের কোন চরিত্রের মিল রয়েছে?", "কমলাকান্ত", "অপু", "তপু", "মোদাব্বের", 2],
+        
+        // Image 3 (45-60)
+        ["উদ্দীপকের শহিদ আসাদের সঙ্গে উক্ত চরিত্রের ঐক্য রয়েছে-", "i ও ii", "i ও iii", "ii ও iii", "i, ii ও iii", 3],
+        ["'সখা-রীতে' শব্দটির অর্থ কী?", "বন্ধু", "বন্ধুরূপে", "বাঙালি", "বঙ্গজ জন", 1],
+        ["কোথায় অধ্যয়নকালে মধুসূদনের ইংরেজি সাহিত্যের প্রতি অনুরাগ জন্মে?", "সাগরদাঁড়ি স্কুলে", "হিন্দু কলেজে", "প্রেসিডেন্সি কলেজে", "কারমাইকেল কলেজে", 1],
+        ["'জীবন বিনিময়' কবিতায় বিষণ্ণকণ্ঠের কী মুখর হয়ে উঠেছিল?", "আকুল আবেদন", "নিষ্ঠুর নীরবতা", "নয়নে অশ্রুজল", "গোপন কানাকানি", 1],
+        ["'জীবন বিনিময়' কবিতায় কে খুশি হয়ে বাদশাজাদার প্রাণ বাঁচালেন?", "আল্লাহ", "কবিরাজ", "দরবেশ", "বাবর", 0],
+        ["'সত্যের আলো নিভিয়া' দ্বারা কী বোঝানো হয়েছে?", "জ্ঞান হারানো", "দুঃসময়ের সূচনা", "আলো প্রজ্জ্বলন", "নতুন শাসন", 1],
+        ["হজরত উমর ফারুক (রাঃ)-এর ঝুলিতে ক'খানা খুরমা রুটি ছিল?", "তিনখানা", "চারখানা", "দুখানা", "পাঁচখানা", 2],
+        ["'সেইদিন এই মাঠ' কবিতায় কবির মতে কোনটি টিকে থাকবে না?", "নদী", "নক্ষত্র", "সভ্যতা", "স্বপ্ন", 2],
+        ["'সেই দিন এই মাঠ স্তব্ধ হবে নাকো জানি'- এখানে 'মাঠ' বলতে কী বোঝানো হয়েছে?", "প্রকৃতি", "সভ্যতা", "ঐশ্বর্য", "সৌন্দর্য", 0],
+        ["রুক্ষ মাঠ কীসের সুর শোনে?", "কোকিলের সুর", "বর্ষণের সুর", "বাউলের সুর", "কান্নার সুর", 2],
+        ["তৃষিত বনের সাথে কী জেগে ওঠে?", "তৃষ্ণার্ত মন", "তৃষ্ণার্ত পথিক", "গৌরবের ফসল", "তৃষ্ণার্ত মাটি", 1],
+        ["উদ্দীপকের উপলব্দি নিচের কোন কবিতায় ব্যক্ত হয়েছে?", "আমার পরিচয়", "জীবন-সঙ্গীত", "সেইদিন এই মাঠ", "আমি কোনো আগন্তুক নই", 2],
+        ["উদ্দীপকের আলোকে আলোচ্য কবিতায় ব্যক্ত হয়েছে-", "i ও ii", "i ও iii", "ii ও iii", "i, ii ও iii", 3],
+        ["'বোশেখ' কবিতায় কোন ন্যায়বিচারক রাজার কথা বলা হয়েছে?", "শামসুদ্দিন ইলিয়াস শাহ", "খলিফা মামুন", "বাদশাহ জুলকারনাইন", "রাজা সোলেমান", 2],
+        ["'বোশেখ' কবিতায় কী শুনে তুলে ছাঁড়িয়ে দেওয়ার কথা বলা হয়েছে?", "বুনোহাঁসের ডাক", "নদীর পানি", "জেটের পাখা", "টেলিগ্রামের খাম", 3],
+        ["বৈশাখী ঝড়ো বাতাস দুখিনী মায়ের ভাতের হাঁড়ি কী করে?", "ভেঙে ফেলে", "উলটে ফেলে", "শূন্যে তোলে", "আছাড় মারে", 1],
 
-        const prefixes = ["ক", "খ", "গ", "ঘ"];
-        let userAnswers = new Array(mcqData.length).fill(null);
+        // Image 5 (61-76)
+        ["'আমি তো মরে যাব, চলে যাবো, রেখে যাব সবই' গানের কথার সাথে 'সেই দিন এই মাঠ' কবিতার কোন ভাবের সঙ্গতি আছে?", "মৃত্যু চেতনা", "প্রকৃতির বহমানতা", "মানুষের স্বপ্নময়তা", "কৃত্রিমতার ধ্বংস", 1],
+        ["কপোতাক্ষ নদের জলকে কবি কীসের সাথে তুলনা করেছেন?", "নিশার স্বপন", "স্নেহের তৃষ্ণা", "মাতৃদুগ্ধ", "মায়ামন্ত্রধ্বনি", 2],
+        ["'বোশেখ' কবিতায় ঝড়ো হাওয়া কার ঘর উড়িয়ে নিয়ে যায়?", "চাষির", "দুখিনী মায়ের", "টুনটুনি পাখির", "বাবুই পাখির", 0],
+        ["'তোমাকে পাওয়ার জন্যে, হে স্বাধীনতা' কবিতায় বর্ণিত মাঝির নাম কী?", "সগীর আলী", "মতলব মিয়া", "করিম শেখ", "রুস্তম শেখ", 1],
+        ["'আমি কোনো আগন্তুক নই' কবিতায় ডুমুরের ডালে কোন পাখি বসে আছে?", "শালিক", "দোয়েল", "টুনটুনি", "মাছরাঙা", 3],
+        ["'ঝুঁটি' কবিতায় কবি কোথায় শিহরণ দেখতে পাচ্ছেন?", "মাঠে", "অরণ্যে", "পথে", "প্রান্তরে", 1],
+        ["আসমানের তারাকে কবি সাক্ষী মেনেছেন কেন?", "সৌন্দর্যের কারণে", "উজ্জ্বলতার কারণে", "শাশ্বত অবস্থানের কারণে", "কবির খুব পছন্দের কারণে", 2],
+        ["উদ্দীপকের সাথে 'উমর ফারুক' কবিতার কোন চরণের সাদৃশ্য দেখা যায়?", "অর্ধপৃথিবী করেছে শাসন ধুলার তখতে বসি", "উষ্ট্রের পৃষ্ঠে আরাম করিয়া রহিবে বসি", "তোমারে এমন চোখের পানিতে স্মরিবো সর্বদাই", "আমি লয়ে যাব বহিয়া এ-সব দুখিনী মায়ের ঘরে", 3],
+        ["উদ্দীপক ও 'উমর ফারুক' কবিতায় ফুটে উঠেছে-", "i ও ii", "i ও iii", "ii ও iii", "i, ii ও iii", 3],
+        ["'এশিরিয়া ধুলো আজ' বলতে কবি কী বুঝিয়েছেন?", "সভ্যতা ক্ষণস্থায়ী", "মৃত্যু অনিবার্য", "প্রকৃতি চিরন্তন", "সময় বহমান", 0],
+        ["বৃষ্টির দিনে রুহি বারান্দায় খেলছিল। হঠাৎ দেখল চারদিক মেঘের ঘন আঁধারের মাঝে অপূর্ব এক আভা এলো। 'বৃষ্টি' কবিতার প্রেক্ষিতে রুহি কী দেখতে পেল?", "বিদগ্ধ-আকাশ", "পুবের হাওয়া", "মেঘের আড়ালে লুকায়িত সূর্য", "বিদ্যুৎ-রূপসি পরি", 3],
+        ["'সাকিনা বিবির কপাল ভাঙল'- এই কথাটি দ্বারা কী বোঝানো হয়েছে?", "কপালে আঘাত লাগা", "বাড়ি পুড়ে যাওয়া", "সম্ভ্রম হারানো", "বিধবা হওয়া", 3],
+        ["সম্রাট বাবরের পুত্রের নাম কী?", "হুমায়ুন", "আকবর", "শাহজাহান", "আওরঙ্গজেব", 0],
+        ["'বাতায়ন' শব্দের অর্থ কী?", "বাতাস", "জানালা", "বারান্দা", "দেয়াল", 1],
+        ["'প্রত্যুপকার' গল্পে খলিফা মামুনের প্রিয়পাত্র কে ছিলেন?", "দামেস্কের শাসনকর্তা", "আলী ইবনে আব্বাস", "জনৈক সম্ভ্রান্ত ব্যক্তি", "জনৈক প্রজা", 1],
+        ["প্রতাপের প্রধান শখ কী ছিল?", "মাছ ধরা", "তেঁতুল তলায় বসা", "সুভার সাথে গল্প করা", "অকর্মণ্য হয়ে বসে থাকা", 0],
 
-        window.onload = function() {
-            renderExam();
-        };
+        // Image 4 (77-90)
+        ["বাণীকণ্ঠের কান্নার কারণ কী ছিল?", "গৃহত্যাগের কষ্ট", "সুভাকে পাত্রস্থ করা", "পিতৃহৃদয়ের কাতরতা", "সুভার দুরবস্থা কল্পনা", 2],
+        ["উদ্দীপকে প্রকাশিত ভাব 'আম-আঁটির ভেঁপু' গল্পের কোন দিকটিকে তুলে ধরেছে?", "মানুষের চিরায়ত শৈশব", "গ্রাম বাংলা প্রকৃতি", "মা-বাবার শাশ্বত রূপ", "ভাই-বোনের সম্পর্ক", 3],
+        ["উদ্দীপকে 'আম-আঁটির ভেঁপু' গল্পের যে দিকটি অনুপস্থিত-", "i ও ii", "ii ও iii", "i ও iii", "i, ii ও iii", 0],
+        ["'মানুষ মুহম্মদ (স.)' প্রবন্ধে উল্লিখিত 'সুমহান প্রতিশোধ' কথাটি দ্বারা নবিজির কোন গুণটি তুলে ধরা হয়েছে?", "অনুগ্রহ", "সাধুতা", "মহত্ত্ব", "ত্যাগ", 2],
+        ["'বাসক পাতা, তুলসি পাতা কাশির জন্য খুব উপকারী এবং তুলসি পাতার চা ব্যথানাশক।'- এ বক্তব্যের সাথে 'নিমগাছ' গল্পের নিমগাছের সঙ্গে কোন দিকের মিল রয়েছে?", "সৌন্দর্যে", "অবয়বে", "অবহেলায়", "কল্যাণে", 3],
+        ["লাইব্রেরিকে হাসপাতালের ওপরে স্থান দেওয়ার কারণ-", "i ও ii", "i ও iii", "ii ও iii", "i, ii ও iii", 2],
+        ["'শিক্ষা ও মনুষ্যত্ব' প্রবন্ধ অনুসারে মুক্তির জন্য কয়টি উপায় অবলম্বন করতে হবে?", "দুই", "তিন", "চার", "পাঁচ", 0],
+        ["কোনটির মাঝে বাদাম-কিসমিস লুকোচুরি খেলেছিল?", "মুরগির রোস্টে", "শামী-কাবাবে", "মাংসের কোরমা", "কোফতা-পোলাওয়ে", 3],
+        ["'প্রত্যুপকার' শব্দের অর্থ কী?", "উপকার করা", "উপকার অস্বীকার করা", "উপকার করা", "উপকারীর উপকার করা", 3],
+        ["সুভাদের গ্রামের নাম কী?", "মনিপুর", "চণ্ডীপুর", "ভবানীপুর", "মনোহরপুর", 1],
+        ["'মাটির ভিতরে শিকড় অনেক দূরে চলে গেছে'- এখানে 'শিকড়' বলতে বোঝানো হয়েছে-", "নারীর সংসারের জালে আবদ্ধতা", "শিকড়ের বিস্তৃতি", "নিমগাছের অবদান", "নিমগাছটির স্থিরতা", 0],
+        ["উদ্দীপকের পলাশ 'একুশের গল্প' ছোটগল্পের কোন চরিত্রের সাথে তুলনীয়?", "রাহাত", "রেণু", "তপু", "গল্পকথক", 2],
+        ["উদ্দীপকের ঘটনার প্রেক্ষাপট যেভাবে 'একুশের গল্প' ছোটগল্পের সাথে সাদৃশ্যপূর্ণ-", "i ও ii", "i ও iii", "ii ও iii", "i, ii ও iii", 1],
+        ["'কপোতাক্ষ নদ' কবিতায় কোন চরণের মধ্যে 'সংশয়বোধ' প্রকাশ পেয়েছে?", "সতত, হে নদ, তুমি পড় মোর মনে।", "বহু দেশ দেখিয়াছি বহু নদ-দলে;", "লইছে যে নাম তব বঙ্গের সংগীতে।", "আর কি হে হবে দেখা? যতদিন যাবে,", 3],
 
-        function renderExam() {
-            const container = document.getElementById('questions-container');
-            container.innerHTML = ''; 
-            
-            document.getElementById('progress-count').innerText = `প্রশ্ন ০ / ${mcqData.length}`;
-            
-            mcqData.forEach((q, index) => {
-                let optionsHtml = '';
-                q.options.forEach((opt, optIndex) => {
-                    optionsHtml += `
-                        <input type="radio" name="q${index}" id="q${index}_opt${optIndex}" value="${optIndex}" class="option-input" onchange="updateProgress()">
-                        <label for="q${index}_opt${optIndex}" class="option-label">
-                            <span class="option-prefix">${prefixes[optIndex]}</span>
-                            ${opt}
-                        </label>
-                    `;
-                });
+        // Image 8 (91-102)
+        ["'উমর ফারুক' কবিতায় কবি ইসলামকে কীসের সঙ্গে তুলনা করেছেন?", "মরুপথ", "মরণ শশী", "পরশ-মানিক", "কালের ঘড়ি", 2],
+        ["'প্রবাস বন্ধু' রচনায় কী খেতে গিয়ে লেখকের প্রাণান্ত পর্যন্ত বিলবিল করে উঠেছিল?", "ফালুদা", "বরফি আঙুর", "কোফতা-পোলাও", "সবুজ চা", 1],
+        ["উদ্দীপকে 'জীবন বিনিময়' কবিতার যে ভাব প্রকাশিত হয়েছে তা হলো-", "i ও ii", "i ও iii", "ii ও iii", "i, ii ও iii", 3],
+        ["'তোমাকে পাওয়ার জন্যে, হে স্বাধীনতা' কবিতার 'এরাট নতুন পৃথিবীর জন্ম হতে চলেছে'- বলতে কী বোঝানো হয়েছে?", "নতুন অধ্যায়ের সৃষ্টি", "নতুন জগতের আবির্ভাব", "স্বাধীন বাংলাদেশের অভ্যুদয়", "নতুন জীবনের সৃষ্টি", 2],
+        ["'অনাগত কাল গেয়েছিল স্বপ্ন, জয় জয় হে মানব'-এই জয়গানের কারণ কী?", "সত্য প্রতিষ্ঠা", "ন্যায়বিচার প্রতিষ্ঠা", "অন্যায়ের জীবন যাপন", "সাম্য প্রতিষ্ঠা", 3],
+        ["'বোশেখ' কবিতায় বাতাসকে কার পিতা আখ্যা দেয়া হয়েছে?", "সোলেমানের", "রবীন্দ্রনাথের", "হনুমানের", "কালিদাসের", 2],
+        ["'সেই দিন এই মাঠ' কবিতায় কী ছাই হয়ে আছে?", "শান্ত বাতি", "খেয়া নৌকা", "এশিরিয়া", "বেবিলন", 2],
+        ["'তোমাকে পাওয়ার জন্যে, হে স্বাধীনতা' কবিতায় দগ্ধ ঘরের নড়বড়ে খুঁটি ধরে কে দাঁড়িয়ে আছে?", "অনাথ কিশোরী", "মোল্লাবাড়ির বিধবা", "থুত্থুড়ে বুড়ো", "অবুঝ শিশু", 1],
+        ["'বৃষ্টি' কবিতায় 'যেখানে বিস্তৃত দিন পড়ে আছে নিঃসঙ্গ নির্জন' বলতে কী বোঝায়?", "রুক্ষ মাঠ", "বন্ধুর প্রান্তর", "অতীত-স্মৃতি", "তৃষিত বন", 0],
+        ["উদ্দীপকে 'আমি কোনো আগন্তুক নই' কবিতার কোন দিকটি প্রকাশিত হয়েছে?", "প্রাকৃতিক সৌন্দর্য", "সাংস্কৃতিক ঐতিহ্য", "সামাজিক ঐক্য", "ঐতিহাসিক পটভূমি", 0],
+        ["উদ্দীপকে 'আমি কোনো আগন্তুক নই' কবিতার মূল সুর যেভাবে প্রকাশিত হয়েছে তা হলো-", "i ও ii", "i ও iii", "ii ও iii", "i, ii ও iii", 2],
+        ["'সোনার স্বপ্নের সাধ পৃথিবীতে কবে আর ঝরে'- এ চরণে প্রকাশ পেয়েছে-", "কৃত্রিমতার বিনাশ", "পৃথিবীর বহমানতা", "প্রকৃতির নিত্যতা", "মানুষের স্বপ্নময়তা", 3],
 
-                container.innerHTML += `
-                    <div class="question-card" style="animation-delay: ${Math.min(index * 0.02, 1)}s">
-                        <span class="q-number">প্রশ্ন ${index + 1} / ${mcqData.length}</span>
-                        <div class="q-text">${q.question}</div>
-                        <div class="options-grid">
-                            ${optionsHtml}
-                        </div>
-                    </div>
-                `;
-            });
+        // Image 7 (103-120)
+        ["এ চরণ দুটি 'বোশেখ' কবিতায় বর্ণিত কার কথা মনে করিয়ে দেয়?", "রবীন্দ্রনাথ ঠাকুর", "কবি কালিদাস", "রাজা সোলেমান", "মহাবীর হনুমান", 0],
+        ["'শিক্ষা কেউ কাউকে দিতে পারে না।' কারণ-", "শিক্ষা নিজে নিজেই গ্রহণ করতে হয়", "এটি অত্যন্ত শ্রমসাধ্য ব্যাপার", "এটি পরিবেশের সঙ্গে সম্পর্কিত", "এটি পুস্তক থেকে গ্রহণ করতে হয়", 0],
+        ["'নিমগাছ' গল্পে নিমগাছ কাটতে নিষেধ করেন কে?", "কবিরাজ", "বিজ্ঞরা", "কবি", "লক্ষ্মী বউ", 1],
+        ["'শিক্ষা ও মনুষ্যত্ব' প্রবন্ধে কোন চিন্তার নিগড়ে সকলে বন্দি?", "মুক্তি", "উন্নয়ন", "অন্নবস্ত্র", "অর্থ", 2],
+        ["'প্রত্যুপকার' শব্দের অর্থ কী?", "উপকারীর উপকার করা", "উপকারীর অপকার করা", "উপকারীর উপকার স্বীকার করা", "উপকারীর উপকার স্বীকার না করা", 0],
+        ["সুভা মনে মনে বিধাতার কাছে কী প্রার্থনা করত?", "বন্ধু-বান্ধব", "অসীম নির্জনতা", "অলৌকিক ক্ষমতা", "প্রতাপের সান্নিধ্য", 2],
+        ["পিতামাতার মনে সুভা সর্বদাই জাগরুক ছিল কারণ-", "তার বন্ধু নেই", "তাকে কেউ ভালোবাসে না", "তার বন্ধু নির্লিপ্ত ছিল", "তার ভবিষ্যৎ ভেবে", 3],
+        ["উদ্দীপকের শেষ দুই চরণের সঙ্গে 'নিমগাছ' গল্পের কোন লাইনটির ভাবগত ঐক্য রয়েছে?", "পাতাগুলো ছিঁড়ে শিলে পিষছে কেউ", "কচি পাতাগুলো খায়ও অনেকে", "কাটে না, কিন্তু যত্নও করে না", "মাটির ভিতরে শিকড় অনেক দূরে চলে গেছে", 3],
+        ["উদ্দীপকে 'নিমগাছ' গল্পের অনুপস্থিত দিক হলো-", "i ও ii", "i ও iii", "ii ও iii", "i, ii ও iii", 2],
+        ["'আম-আঁটির ভেঁপু' গল্পে 'তখুনি কি রাজি হতে আছে?' উক্তিতে হরিহরের কোন ধরনের মনোভাব প্রকাশ পেয়েছে?", "সরলতা", "বিচক্ষণতা", "উদারতা", "অসহায়ত্ব", 1],
+        ["উদ্দীপকের দৃশ্যকল্পে 'আম-আঁটির ভেঁপু' গল্পের কোন দিকটি প্রতিফলিত হয়েছে?", "ভাই-বোনের ঝগড়া", "শৈশবের দুরন্তপনা", "অতীতের স্মৃতি", "অর্থনৈতিক সমস্যা", 1],
+        ["কোন অজ্ঞানে খলিফা মামুনের অতি উন্নত চিত্তের পরিচয় প্রকাশ পেয়েছে?", "আলী ইবনে আব্বাসকে বন্দীর দায়িত্ব দেওয়ায়", "আলী ইবনে আব্বাসের কথায় রাগান্বিত হওয়ায়", "বিশ্বস্তভাবে বন্দীর প্রকৃত পরিচয় জানায়", "বন্দীকে সসম্মানে মুক্তি দেওয়ায়", 3],
+        ["উম্মে মা'বদের ভাষায় মহানবি (স.) এর নীরবতা কেমন ছিল?", "মধুময়", "পুলকদীপ্ত", "বিনীত নম্র", "কুণ্ঠাহীন", 2],
+        ["'কপোতাক্ষ নদ' কবিতায় কবির মন জুড়ায় কীসে?", "স্নেহের তৃষ্ণায়", "ভ্রান্তির ছলনে", "প্রেম-জলে", "বঙ্গের সঙ্গীতে", 3],
+        ["'এত একবার দম ফেলাতে একশটা বেমরি বেরিয়ে যাবে।' -একথা দ্বারা 'প্রবাস বন্ধু' ভ্রমণ কাহিনিতে কী বোঝানো হয়েছে?", "ভীষণ মাত্রা", "ঋতু বৈচিত্র্য", "নির্দয় প্রকৃতি", "মনোমুগ্ধকর দৃশ্য", 2],
+        ["উদ্দীপকটি 'একুশের গল্প' রচনায় কোন চরিত্রকে স্মরণ করিয়ে দেয়?", "তপু", "রাহাত", "গল্পের কথক", "রেণু", 0],
+        ["উদ্দীপক ও 'একুশের গল্প' রচনাকে যেভাবে ধারণ করেছে তা হলো-", "i ও ii", "i ও iii", "ii ও iii", "i, ii ও iii", 3],
+        ["'তিমির রাতের তোরণে তোরণে উষার পূর্বাভাস'- বলতে কী বোঝানো হয়েছে?", "ঘুমন্তদের রোগ মুক্তির লক্ষণ", "বাবর এর প্রার্থনা কবুল হওয়া", "বাবরের মৃত্যু শয্যা গ্রহণ", "বাবরের শান্ত অচঞ্চল মন", 0],
+
+        // Image 6 (121-137)
+        ["'উমর ফারুক' কবিতায় 'পরশ মানিক' বলা হয়েছে কাকে?", "হজরত উমর (রা.) কে", "ইসলামকে", "সাম্যবাদকে", "মহাবীর খালেদকে", 1],
+        ["'বই পড়া' প্রবন্ধে সাহিত্যচর্চাকে লেখক আবশ্যক বলেছেন কেন?", "মর্যাদা বৃদ্ধির জন্য", "প্রগতিশীল চিন্তা-ভাবনার জন্য", "উদরপূর্তির জন্য", "অর্থ-সম্পদ উপার্জনের জন্য", 1],
+        ["'বৃষ্টি' কবিতায় মেঘে মেঘে সওয়ার হয়েছে কে?", "কাজল ছায়া", "বিদগ্ধ আকাশ", "বিদ্যুৎ রূপসী পরী", "পুবের হাওয়া", 2],
+        ["'প্রত্যুপকার' গল্পে প্রকাশ পেয়েছে আলী ইবনে আব্বাসের-", "মহানুভবতা", "বিচক্ষণতা", "পরোপকারিতা", "বদান্যতা", 0],
+        ["'বোশেখ' কবিতায় বৈশাখের রুদ্র রূপের সাথে কবি কোন বিষয়টির ইঙ্গিত করেছেন?", "অত্যাচারীর অত্যাচার", "দুর্ধর্ষ শ্রেণির উৎপীড়ন", "জাগতিক চিন্তা-চেতনা", "ধ্বংসাত্মক অবস্থা", 0],
+        ["উদ্দীপকের আনোয়ার সাহেবের সাথে তোমার পঠিত কবিতার কোন চরিত্রের মিল আছে?", "হজরত উমর (রা.)", "সম্রাট বাবর", "মহাবীর খালিদ", "মুয়াজ্জিন", 0],
+        ["মেঘনা নদীর দক্ষ মাঝি কে?", "সগীর আলী", "রুস্তম শেখ", "কেষ্ট দাস", "মতলব মিয়া", 3],
+        ["উদ্দীপকের ঝুমার সাথে 'জীবন বিনিময়' কবিতার কার অমিল রয়েছে?", "বাবরের", "কবিরাজের", "দরবেশের", "হুমায়ুনের", 0],
+        ["ঝুমার সাথে এরূপ অমিল থাকার কারণ-", "i ও ii", "i ও iii", "ii ও iii", "i, ii ও iii", 2],
+        ["'আমি এমন এক নারীর সন্তান, সাধারণ শুষ্ক মাংসই ছিল যাঁহার নিত্যকার আহার্য।'-এই কথায় প্রকাশ পেয়েছে হজরত মুহম্মদ (স.) এর-", "মানবিকতাবোধ", "ঔদার্যবোধ", "মহত্ত্ববোধ", "অনাড়ম্বর জীবনবোধ", 3],
+        ["ডেমোক্রেসি কীসের সার্থকতা বোঝে না?", "সাহিত্যের", "দর্শনের", "আবৃত্তির", "অর্থের", 0],
+        ["'এ জন্য পৃথিবীতে যত স্থান আছে ঐ স্থান আমার সর্বাপেক্ষা প্রিয়।'-আলী ইবনে আব্বাসের এই উক্তিতে প্রকাশ পেয়েছে-", "উদারতা", "সহনশীলতা", "মমত্ববোধ", "মহত্ত্ববোধ", 2],
+        ["'কপোতাক্ষ নদ' কবিতায় প্রজা বলা হয়েছে কাকে?", "বারিকে", "সাগরকে", "কপোতাক্ষ নদকে", "স্বদেশকে", 2],
+        ["'নিমের হাওয়া ভালো, থাক, কেটো না।'-কথাটি বলেছিলেন-", "কবি", "কবিরাজরা", "বিজ্ঞরা", "লেখক", 2],
+        ["'প্রবাস বন্ধু' গল্পে আবদুর রহমানকে যে অর্থে 'হরফুন-মৌলা' বলা হয়েছে-", "মিষ্টভাষী", "সদালাপী", "জ্ঞান পিপাসু", "সর্ববিদ্যায় পারদর্শী", 3],
+        ["'বোশেখ' কবিতায় 'বিভেদকারী পরগাছা' বলতে বোঝানো হয়েছে সমাজের-", "শ্রমজীবীদের", "শোষকদের", "মধ্যবিত্তদের", "বিত্তশালীদের", 1],
+        ["সুভার প্রকৃত নাম কী?", "সর্বশী", "পাঙ্গুলি", "সুভাষিণী", "সুকেশিণী", 2]
+    ];
+
+    function engToBnNum(num) {
+        const bnDigits = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
+        return num.toString().replace(/\d/g, d => bnDigits[d]);
+    }
+
+    const questionsData = rawData.map((q, index) => ({
+        q: engToBnNum(index + 1) + "। " + q[0],
+        opts: [q[1], q[2], q[3], q[4]],
+        ans: q[5]
+    }));
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const isSubmitted = localStorage.getItem("saiful_mcq_submitted");
+        
+        if (isSubmitted === "true") {
+            document.getElementById("exam-section").style.display = "none";
+            document.getElementById("alert-message").style.display = "block";
+            showResultFromStorage();
+        } else {
+            renderQuestions();
             updateProgress();
         }
-
-        function updateProgress() {
-            let answeredCount = 0;
-            for(let i=0; i<mcqData.length; i++) {
-                const selected = document.querySelector(`input[name="q${i}"]:checked`);
-                if(selected) {
-                    answeredCount++;
-                    userAnswers[i] = parseInt(selected.value);
-                }
+        
+        document.getElementById("exam-form").addEventListener("change", updateProgress);
+        
+        document.getElementById("exam-form").addEventListener("submit", (e) => {
+            e.preventDefault();
+            if(confirm("আপনি কি নিশ্চিতভাবে পরীক্ষা শেষ করতে চান? একবার সাবমিট করলে আর পরিবর্তন করা যাবে না।")) {
+                evaluateExam();
             }
+        });
+    });
+    
+    function renderQuestions() {
+        const container = document.getElementById("questions-container");
+        let html = "";
+        
+        questionsData.forEach((q, index) => {
+            html += `<div class="card" style="animation-delay: ${(index % 10) * 0.05}s">
+                <div class="question-title">${q.q}</div>
+                <div class="options">`;
             
-            document.getElementById('progress-count').innerText = `প্রশ্ন ${answeredCount} / ${mcqData.length}`;
-            const percent = (answeredCount / mcqData.length) * 100;
-            document.getElementById('progress-percent').innerText = `${percent.toFixed(0)}%`;
-            document.getElementById('progress-bar').style.width = `${percent}%`;
-        }
-
-        function showConfirmModal() {
-            document.getElementById('confirm-modal').style.display = 'flex';
-        }
-        function hideConfirmModal() {
-            document.getElementById('confirm-modal').style.display = 'none';
-        }
-
-        function submitExam() {
-            hideConfirmModal();
-            
-            let correct = 0;
-            let wrong = 0;
-            let unanswered = 0;
-
-            for(let i=0; i<mcqData.length; i++) {
-                if(userAnswers[i] === null) {
-                    unanswered++;
-                } else if(userAnswers[i] === mcqData[i].answer) {
-                    correct++;
-                } else {
-                    wrong++;
-                }
-            }
-
-            const score = correct; 
-            const percent = ((score / mcqData.length) * 100).toFixed(2);
-
-            document.getElementById('exam-section').style.display = 'none';
-            displayResultScore(correct, wrong, unanswered, score, percent);
-            document.getElementById('result-section').style.display = 'block';
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function displayResultScore(correct, wrong, unanswered, score, percent) {
-            document.getElementById('final-score').innerText = `${score}/${mcqData.length}`;
-            document.getElementById('final-percent').innerText = `${percent}%`;
-            document.getElementById('stat-correct').innerText = correct;
-            document.getElementById('stat-wrong').innerText = wrong;
-            document.getElementById('stat-unanswered').innerText = unanswered;
-        }
-
-        function showReview() {
-            document.getElementById('result-section').style.display = 'none';
-            const reviewContainer = document.getElementById('review-container');
-            reviewContainer.innerHTML = '';
-
-            mcqData.forEach((q, index) => {
-                const userAns = userAnswers[index];
-                const correctAns = q.answer;
-                
-                let statusHtml = '';
-                if(userAns === null) {
-                    statusHtml = `<div class="review-status status-unanswered">⚠ উত্তর দেওয়া হয়নি</div>`;
-                } else if(userAns === correctAns) {
-                    statusHtml = `<div class="review-status status-correct">✓ সঠিক উত্তর</div>`;
-                } else {
-                    statusHtml = `<div class="review-status status-wrong">✗ ভুল উত্তর</div>`;
-                }
-
-                let optionsHtml = '';
-                q.options.forEach((opt, optIndex) => {
-                    let optClass = 'review-option';
-                    let marker = '';
-
-                    if(optIndex === correctAns) {
-                        optClass += ' review-correct';
-                        marker = ' <span style="margin-left:auto; background:white; padding:2px 8px; border-radius:4px; font-size:0.8rem; color:var(--success-color);">সঠিক উত্তর</span>';
-                    } else if(optIndex === userAns && userAns !== correctAns) {
-                        optClass += ' review-wrong';
-                        marker = ' <span style="margin-left:auto; background:white; padding:2px 8px; border-radius:4px; font-size:0.8rem; color:var(--error-color);">আপনার উত্তর</span>';
-                    }
-
-                    optionsHtml += `
-                        <div class="${optClass}">
-                            <span class="option-prefix">${prefixes[optIndex]}</span>
-                            ${opt} ${marker}
-                        </div>
-                    `;
-                });
-
-                reviewContainer.innerHTML += `
-                    <div class="question-card" style="border-left: 5px solid ${userAns === correctAns ? 'var(--success-color)' : (userAns === null ? '#fbbf24' : 'var(--error-color)')}">
-                        <span class="q-number">প্রশ্ন ${index + 1}</span>
-                        <br>
-                        ${statusHtml}
-                        <div class="q-text">${q.question}</div>
-                        <div class="options-grid">
-                            ${optionsHtml}
-                        </div>
-                    </div>
+            q.opts.forEach((opt, optIndex) => {
+                html += `
+                    <label class="option-label">
+                        <input type="radio" name="q${index}" value="${optIndex}">
+                        ${opt}
+                    </label>
                 `;
             });
-
-            document.getElementById('review-section').style.display = 'block';
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            html += `</div></div>`;
+        });
+        
+        container.innerHTML = html;
+    }
+    
+    function updateProgress() {
+        const total = questionsData.length;
+        let answered = 0;
+        
+        for(let i=0; i<total; i++) {
+            if(document.querySelector(`input[name="q${i}"]:checked`)) {
+                answered++;
+            }
         }
-
-        function restartExam() {
-            userAnswers = new Array(mcqData.length).fill(null);
-            document.getElementById('result-section').style.display = 'none';
-            document.getElementById('review-section').style.display = 'none';
-            document.getElementById('exam-section').style.display = 'block';
-            renderExam();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+        
+        const percentage = (answered / total) * 100;
+        document.getElementById("progress-bar").style.width = percentage + "%";
+    }
+    
+    function evaluateExam() {
+        const results = [];
+        let correctCount = 0;
+        let wrongCount = 0;
+        
+        questionsData.forEach((q, index) => {
+            const selectedRadio = document.querySelector(`input[name="q${index}"]:checked`);
+            const selectedVal = selectedRadio ? parseInt(selectedRadio.value) : -1;
+            
+            const isCorrect = selectedVal === q.ans;
+            if (selectedVal !== -1) {
+                if(isCorrect) correctCount++;
+                else wrongCount++;
+            } else {
+                wrongCount++;
+            }
+            
+            results.push({
+                qIndex: index,
+                selected: selectedVal,
+                correct: q.ans,
+                isCorrect: isCorrect
+            });
+        });
+        
+        const scoreData = {
+            total: questionsData.length,
+            correct: correctCount,
+            wrong: wrongCount,
+            results: results
+        };
+        
+        localStorage.setItem("saiful_mcq_submitted", "true");
+        localStorage.setItem("saiful_mcq_results", JSON.stringify(scoreData));
+        
+        document.getElementById("exam-section").style.display = "none";
+        renderResult(scoreData);
+    }
+    
+    function showResultFromStorage() {
+        const savedData = localStorage.getItem("saiful_mcq_results");
+        if(savedData) {
+            renderResult(JSON.parse(savedData));
         }
-    </script>
+    }
+    
+    function renderResult(data) {
+        document.getElementById("result-section").style.display = "block";
+        window.scrollTo(0, 0);
+        
+        const percentage = Math.round((data.correct / data.total) * 100);
+        
+        let currentScore = 0;
+        const scoreElement = document.getElementById("score-circle");
+        const timer = setInterval(() => {
+            scoreElement.innerText = engToBnNum(currentScore) + "%";
+            if(currentScore >= percentage) clearInterval(timer);
+            currentScore++;
+        }, 15);
+        
+        document.getElementById("total-q").innerText = engToBnNum(data.total);
+        document.getElementById("correct-q").innerText = engToBnNum(data.correct);
+        document.getElementById("wrong-q").innerText = engToBnNum(data.wrong);
+        
+        let msg = "";
+        if(percentage >= 80) msg = "অসাধারণ পারফরম্যান্স! চালিয়ে যান। 🌟";
+        else if(percentage >= 60) msg = "ভালো হয়েছে! তবে আরও অনুশীলনের প্রয়োজন। 👍";
+        else msg = "আপনাকে আরও বেশি মনোযোগ দিয়ে পড়তে হবে। 📚";
+        
+        document.getElementById("performance-msg").innerText = msg;
+        
+        const reviewContainer = document.getElementById("review-container");
+        let reviewHtml = "";
+        
+        data.results.forEach(res => {
+            const q = questionsData[res.qIndex];
+            const statusClass = res.isCorrect ? "correct" : "incorrect";
+            const statusText = res.isCorrect ? "<span class='text-success'>সঠিক</span>" : "<span class='text-danger'>ভুল</span>";
+            
+            const selectedText = res.selected !== -1 ? q.opts[res.selected] : "<span style='color:#94a3b8'>উত্তর দেওয়া হয়নি</span>";
+            const correctText = q.opts[res.correct];
+            
+            reviewHtml += `
+                <div class="card review-item ${statusClass}">
+                    <div class="question-title">${q.q}</div>
+                    <div class="review-ans">
+                        <div class="ans-row">
+                            <span class="ans-label">আপনার উত্তর:</span> 
+                            <span>${selectedText}</span>
+                        </div>
+                        ${!res.isCorrect ? `<div class="ans-row">
+                            <span class="ans-label text-success">সঠিক উত্তর:</span> 
+                            <span class="text-success">${correctText}</span>
+                        </div>` : ''}
+                        <div class="ans-row" style="margin-top:10px; font-weight:bold;">
+                            <span class="ans-label">স্ট্যাটাস:</span> 
+                            ${statusText}
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+        
+        reviewContainer.innerHTML = reviewHtml;
+    }
+</script>
 </body>
 </html>
