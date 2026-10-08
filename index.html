@@ -7,214 +7,350 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #2563eb;
-            --primary-hover: #1d4ed8;
+            --primary: #1e40af;
+            --primary-hover: #1e3a8a;
             --success: #16a34a;
             --danger: #dc2626;
-            --bg: #f8fafc;
+            --bg: #f1f5f9;
             --card-bg: #ffffff;
             --text-main: #1e293b;
             --text-muted: #64748b;
             --border: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
         }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
             font-family: 'Noto Serif Bengali', serif;
             background-color: var(--bg);
             color: var(--text-main);
-            margin: 0;
-            padding: 0;
             line-height: 1.6;
         }
+
         .container {
-            max-width: 800px;
+            max-width: 850px;
             margin: 0 auto;
             padding: 20px;
         }
+
+        /* Header Styles */
         header {
             text-align: center;
             margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, var(--primary), #3b82f6);
+            color: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
             animation: fadeInDown 0.8s ease;
         }
+
         h1 {
-            color: var(--primary);
-            font-size: 2.2rem;
+            font-size: 2.5rem;
             margin-bottom: 5px;
+            font-weight: 700;
         }
+
         .subtitle {
-            color: var(--text-muted);
-            font-size: 1.1rem;
+            font-size: 1.2rem;
+            opacity: 0.9;
         }
-        .progress-container {
-            width: 100%;
-            height: 8px;
-            background-color: var(--border);
-            border-radius: 4px;
-            margin-bottom: 30px;
-            overflow: hidden;
+
+        /* Progress Bar */
+        .progress-sticky {
             position: sticky;
             top: 0;
-            z-index: 10;
+            background: var(--bg);
+            padding: 15px 0;
+            z-index: 100;
         }
+
+        .progress-container {
+            width: 100%;
+            height: 10px;
+            background-color: var(--border);
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+        }
+
         .progress-bar {
             height: 100%;
-            background-color: var(--primary);
+            background-color: var(--success);
             width: 0%;
-            transition: width 0.3s ease;
+            transition: width 0.4s ease;
         }
+
+        .progress-text {
+            text-align: right;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 5px;
+            font-weight: 600;
+        }
+
+        /* Question Cards */
         .card {
             background: var(--card-bg);
             border-radius: 12px;
             padding: 25px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             margin-bottom: 20px;
+            box-shadow: var(--shadow);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             animation: fadeInUp 0.5s ease backwards;
+            border-left: 5px solid transparent;
         }
+
         .card:hover {
-            transform: translateY(-2px);
+            transform: translateY(-3px);
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            border-left-color: var(--primary);
         }
+
         .question-title {
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             font-weight: 600;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             color: var(--text-main);
         }
+
         .options {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
         }
+
         .option-label {
             display: flex;
             align-items: center;
-            padding: 12px 15px;
+            padding: 12px 18px;
             border: 2px solid var(--border);
             border-radius: 8px;
             cursor: pointer;
             transition: all 0.2s ease;
+            font-size: 1.1rem;
         }
+
         .option-label:hover {
-            border-color: var(--primary);
+            border-color: #93c5fd;
             background-color: #eff6ff;
         }
+
         .option-label input[type="radio"] {
-            margin-right: 12px;
-            transform: scale(1.2);
+            margin-right: 15px;
+            transform: scale(1.3);
             accent-color: var(--primary);
+            cursor: pointer;
         }
+
+        /* Submit Button */
         .btn-submit {
             display: block;
             width: 100%;
-            padding: 15px;
+            padding: 18px;
             background-color: var(--primary);
             color: white;
             border: none;
-            border-radius: 8px;
-            font-size: 1.2rem;
-            font-weight: 600;
+            border-radius: 12px;
+            font-size: 1.4rem;
+            font-weight: 700;
             font-family: inherit;
             cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            margin-top: 30px;
+            transition: all 0.3s ease;
+            margin-top: 40px;
+            margin-bottom: 50px;
+            box-shadow: 0 4px 6px rgba(37, 99, 235, 0.3);
         }
+
         .btn-submit:hover {
             background-color: var(--primary-hover);
             transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(37, 99, 235, 0.4);
         }
-        
+
+        /* Result Section */
         #result-section {
             display: none;
             animation: fadeIn 1s ease;
         }
+
         .score-board {
             text-align: center;
-            padding: 30px;
-            background: linear-gradient(135deg, #eff6ff, #dbeafe);
-            border-radius: 12px;
-            margin-bottom: 30px;
+            padding: 40px;
+            background: var(--card-bg);
+            border-radius: 16px;
+            margin-bottom: 40px;
+            box-shadow: var(--shadow);
+            border-top: 8px solid var(--primary);
         }
+
         .score-circle {
-            width: 150px;
-            height: 150px;
+            width: 160px;
+            height: 160px;
             border-radius: 50%;
-            background: white;
+            background: var(--bg);
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 20px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            font-size: 2.5rem;
+            margin: 0 auto 25px;
+            box-shadow: inset 0 4px 6px rgba(0,0,0,0.05);
+            font-size: 3rem;
             font-weight: 700;
             color: var(--primary);
-            border: 8px solid var(--primary);
+            border: 10px solid var(--primary);
             animation: scaleIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
         }
+
         .stats {
             display: flex;
-            justify-content: center;
-            gap: 30px;
-            font-size: 1.1rem;
-            margin-bottom: 15px;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 25px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
         }
+
         .stat-item {
             display: flex;
             flex-direction: column;
+            align-items: center;
         }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 5px;
+        }
+
         .stat-value {
-            font-size: 1.5rem;
+            font-size: 2rem;
             font-weight: 700;
         }
+
         .text-success { color: var(--success); }
         .text-danger { color: var(--danger); }
+        .text-primary { color: var(--primary); }
+
         .performance-msg {
-            font-size: 1.2rem;
-            font-weight: 600;
+            font-size: 1.4rem;
+            font-weight: 700;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: #eff6ff;
             color: var(--primary);
+            display: inline-block;
+        }
+
+        /* Review Styles */
+        .review-header {
+            text-align: center;
+            margin: 40px 0 20px;
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: 700;
+            position: relative;
         }
         
-        .review-item {
-            border-left: 4px solid var(--border);
+        .review-header::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: var(--primary);
+            margin: 10px auto;
+            border-radius: 2px;
         }
+
+        .review-item {
+            border-left-width: 6px;
+        }
+
         .review-item.correct {
             border-left-color: var(--success);
             background-color: #f0fdf4;
         }
+
         .review-item.incorrect {
             border-left-color: var(--danger);
             background-color: #fef2f2;
         }
-        .review-ans {
-            margin-top: 10px;
-            font-size: 0.95rem;
-        }
-        .ans-row {
-            display: flex;
-            align-items: center;
-            margin-top: 5px;
-        }
-        .ans-label {
-            font-weight: 600;
-            margin-right: 10px;
-            min-width: 90px;
-        }
-        
-        .message-box {
-            background: #fee2e2;
-            color: #991b1b;
+
+        .ans-box {
+            margin-top: 15px;
             padding: 15px;
             border-radius: 8px;
-            text-align: center;
-            margin-bottom: 20px;
-            font-weight: 600;
-            display: none;
-            border: 1px solid #f87171;
+            background: rgba(255,255,255,0.6);
         }
 
+        .ans-row {
+            display: flex;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .ans-label {
+            font-weight: 600;
+            min-width: 110px;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 1rem;
+            margin-top: 10px;
+        }
+
+        .badge-correct {
+            background-color: #dcfce7;
+            color: #166534;
+            border: 1px solid #bbf7d0;
+        }
+
+        .badge-incorrect {
+            background-color: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fecaca;
+        }
+
+        /* Alert Message */
+        .message-box {
+            background: #fef2f2;
+            color: #991b1b;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border: 2px solid #fecaca;
+            display: none;
+            box-shadow: var(--shadow);
+            animation: fadeInDown 0.5s ease;
+        }
+
+        /* Animations */
         @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes scaleIn { from { opacity: 0; transform: scale(0.5); } to { opacity: 1; transform: scale(1); } }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .stats { flex-direction: column; gap: 10px; }
+            h1 { font-size: 2rem; }
+            .score-circle { width: 120px; height: 120px; font-size: 2.2rem; }
+            .ans-row { flex-direction: column; margin-bottom: 12px; }
+            .ans-label { margin-bottom: 4px; }
+        }
     </style>
 </head>
 <body>
@@ -222,52 +358,56 @@
 <div class="container">
     <header>
         <h1>সাইফুল'স সাইন্স কেয়ার</h1>
-        <div class="subtitle">Online MCQ Examination</div>
+        <div class="subtitle">Online MCQ Examination - Final Model Test</div>
     </header>
 
     <div id="alert-message" class="message-box">
-        আপনি ইতোমধ্যে পরীক্ষা সম্পন্ন করেছেন। দ্বিতীয়বার পরীক্ষা দেওয়ার সুযোগ নেই।
+        ⚠️ আপনি ইতোমধ্যে এই পরীক্ষাটি সম্পন্ন করেছেন। পুনরায় পরীক্ষা দেওয়ার সুযোগ নেই।
     </div>
 
     <div id="exam-section">
-        <div class="progress-container">
-            <div id="progress-bar" class="progress-bar"></div>
+        <div class="progress-sticky">
+            <div class="progress-container">
+                <div id="progress-bar" class="progress-bar"></div>
+            </div>
+            <div class="progress-text">উত্তর দেওয়া হয়েছে: <span id="progress-count">০</span> / ১৩৭</div>
         </div>
         <form id="exam-form">
             <div id="questions-container"></div>
-            <button type="submit" class="btn-submit" id="submit-btn">পরীক্ষা শেষ করুন</button>
+            <button type="submit" class="btn-submit" id="submit-btn">পরীক্ষা সম্পন্ন করুন ও ফলাফল দেখুন</button>
         </form>
     </div>
 
     <div id="result-section">
         <div class="score-board">
+            <h2 style="margin-bottom: 20px; color: var(--text-main);">আপনার পরীক্ষার ফলাফল</h2>
             <div class="score-circle" id="score-circle">০%</div>
             <div class="stats">
                 <div class="stat-item">
-                    <span>মোট প্রশ্ন</span>
-                    <span class="stat-value" id="total-q">০</span>
+                    <span class="stat-label">মোট প্রশ্ন</span>
+                    <span class="stat-value text-primary" id="total-q">০</span>
                 </div>
                 <div class="stat-item">
-                    <span>সঠিক উত্তর</span>
+                    <span class="stat-label">সঠিক উত্তর</span>
                     <span class="stat-value text-success" id="correct-q">০</span>
                 </div>
                 <div class="stat-item">
-                    <span>ভুল উত্তর</span>
+                    <span class="stat-label">ভুল উত্তর / স্কিপ</span>
                     <span class="stat-value text-danger" id="wrong-q">০</span>
                 </div>
             </div>
             <div class="performance-msg" id="performance-msg"></div>
         </div>
         
-        <h2 style="text-align: center; margin-bottom: 20px; color: var(--text-main);">আপনার উত্তরপত্র পর্যালোচনা</h2>
+        <h2 class="review-header">উত্তরপত্র পর্যালোচনা</h2>
         <div id="review-container"></div>
     </div>
 </div>
 
 <script>
-    // ১৩৭ টি প্রশ্নের সম্পূর্ণ ডাটাবেজ
+    // ১৩৭ টি প্রশ্নের সম্পূর্ণ নির্ভুল ডেটাবেজ (ছবি থেকে সংগৃহীত)
     const rawData = [
-        // Image 1 (1-30)
+        // Image 1
         ["সুভাকে তার মা গর্ভের কলঙ্ক মনে করেন কেন?", "কর্মে অনাগ্রহী", "বাকপ্রতিবন্ধী", "সংসার বিরাগী", "শব্দহীন, সঙ্গহীন", 1],
         ["কোনটি ফররুখ আহমদের গ্রন্থ?", "হাতের বুনন", "ধান খেত", "অনুবীক্ষা", "সাত সাগরের মাঝি", 3],
         ["উদ্দীপকে 'জীবন বিনিময়' কবিতার কোন বিষয়টি ফুটে উঠেছে?", "মমত্ববোধ", "নিষ্ঠুরতা", "কোমলতা", "অহমিকা", 0],
@@ -298,8 +438,8 @@
         ["বর্ষামুখর দিনে কী শিহরায়?", "রূপসি পরি", "মাঠঘাট", "নদী-নালা", "অরণ্যের কেয়া", 3],
         ["খলিফা মামুনের পিতার নাম কী ছিল?", "খলিফা আব্দুল্লাহ", "খলিফা আব্বাস", "খলিফা হারুন-অর-রশীদ", "খলিফা রশীদ", 2],
         ["'সেইদিন এই মাঠ' কবিতায় কোনটি ধুলো হয়েছে বলা হয়েছে?", "বেবিলন", "চালতা ফুল", "চর", "এশিরিয়া", 0],
-        
-        // Image 2 (31-44)
+
+        // Image 2
         ["আমার এরূপ বোধ ও বিশ্বাস হয় না- কার?", "খলিফার", "বন্দির", "আলী ইবনে আব্বাসের", "নতুন শাসনকর্তার", 1],
         ["'সাদর বচনে সম্ভাষণ করিয়া বলিলেন'- কে কাকে সম্ভাষণ করেন?", "আব্বাস খলিফাকে", "খলিফা আব্বাসকে", "আব্বাস বন্দিকে", "খলিফা বন্দিকে", 3],
         ["সুভা মুক্তির সনদ কোথায় খুঁজে পায়?", "স্বচ্ছ আকাশের সৌন্দর্যে", "বিপুল নির্বাক প্রকৃতিতে", "সর্বশী ও পাঙ্গুলির স্পর্শে", "প্রতাপের সঙ্গে সময় কাটিয়ে", 1],
@@ -314,8 +454,8 @@
         ["নিমগাছের কোন অংশ যকৃতের জন্য উপকারী?", "ছাল", "পাতা", "ডাল", "শিকড়", 1],
         ["'প্রবাস বন্ধু' রচনায় আবদুর রহমান চরিত্রে পাই-", "মহানুভবতা", "দায়িত্বহীনতা", "স্বদেশপ্রেম", "অসহযোগিতা", 2],
         ["উদ্দীপকের আসাদের সঙ্গে 'একুশের গল্প' নামক ছোটগল্পের কোন চরিত্রের মিল রয়েছে?", "কমলাকান্ত", "অপু", "তপু", "মোদাব্বের", 2],
-        
-        // Image 3 (45-60)
+
+        // Image 3
         ["উদ্দীপকের শহিদ আসাদের সঙ্গে উক্ত চরিত্রের ঐক্য রয়েছে-", "i ও ii", "i ও iii", "ii ও iii", "i, ii ও iii", 3],
         ["'সখা-রীতে' শব্দটির অর্থ কী?", "বন্ধু", "বন্ধুরূপে", "বাঙালি", "বঙ্গজ জন", 1],
         ["কোথায় অধ্যয়নকালে মধুসূদনের ইংরেজি সাহিত্যের প্রতি অনুরাগ জন্মে?", "সাগরদাঁড়ি স্কুলে", "হিন্দু কলেজে", "প্রেসিডেন্সি কলেজে", "কারমাইকেল কলেজে", 1],
@@ -325,7 +465,7 @@
         ["হজরত উমর ফারুক (রাঃ)-এর ঝুলিতে ক'খানা খুরমা রুটি ছিল?", "তিনখানা", "চারখানা", "দুখানা", "পাঁচখানা", 2],
         ["'সেইদিন এই মাঠ' কবিতায় কবির মতে কোনটি টিকে থাকবে না?", "নদী", "নক্ষত্র", "সভ্যতা", "স্বপ্ন", 2],
         ["'সেই দিন এই মাঠ স্তব্ধ হবে নাকো জানি'- এখানে 'মাঠ' বলতে কী বোঝানো হয়েছে?", "প্রকৃতি", "সভ্যতা", "ঐশ্বর্য", "সৌন্দর্য", 0],
-        ["রুক্ষ মাঠ কীসের সুর শোনে?", "কোকিলের সুর", "বর্ষণের সুর", "বাউলের সুর", "কান্নার সুর", 2],
+        ["রুক্ষ মাঠ কীসের সুর শোনে?", "কোকিলের সুর", "বর্ষণের সুর", "বাউলের সুর", "কান্নার সুর", 0],
         ["তৃষিত বনের সাথে কী জেগে ওঠে?", "তৃষ্ণার্ত মন", "তৃষ্ণার্ত পথিক", "গৌরবের ফসল", "তৃষ্ণার্ত মাটি", 1],
         ["উদ্দীপকের উপলব্দি নিচের কোন কবিতায় ব্যক্ত হয়েছে?", "আমার পরিচয়", "জীবন-সঙ্গীত", "সেইদিন এই মাঠ", "আমি কোনো আগন্তুক নই", 2],
         ["উদ্দীপকের আলোকে আলোচ্য কবিতায় ব্যক্ত হয়েছে-", "i ও ii", "i ও iii", "ii ও iii", "i, ii ও iii", 3],
@@ -333,10 +473,10 @@
         ["'বোশেখ' কবিতায় কী শুনে তুলে ছাঁড়িয়ে দেওয়ার কথা বলা হয়েছে?", "বুনোহাঁসের ডাক", "নদীর পানি", "জেটের পাখা", "টেলিগ্রামের খাম", 3],
         ["বৈশাখী ঝড়ো বাতাস দুখিনী মায়ের ভাতের হাঁড়ি কী করে?", "ভেঙে ফেলে", "উলটে ফেলে", "শূন্যে তোলে", "আছাড় মারে", 1],
 
-        // Image 5 (61-76)
+        // Image 4 (Dhaka Board)
         ["'আমি তো মরে যাব, চলে যাবো, রেখে যাব সবই' গানের কথার সাথে 'সেই দিন এই মাঠ' কবিতার কোন ভাবের সঙ্গতি আছে?", "মৃত্যু চেতনা", "প্রকৃতির বহমানতা", "মানুষের স্বপ্নময়তা", "কৃত্রিমতার ধ্বংস", 1],
-        ["কপোতাক্ষ নদের জলকে কবি কীসের সাথে তুলনা করেছেন?", "নিশার স্বপন", "স্নেহের তৃষ্ণা", "মাতৃদুগ্ধ", "মায়ামন্ত্রধ্বনি", 2],
-        ["'বোশেখ' কবিতায় ঝড়ো হাওয়া কার ঘর উড়িয়ে নিয়ে যায়?", "চাষির", "দুখিনী মায়ের", "টুনটুনি পাখির", "বাবুই পাখির", 0],
+        ["কপোতাক্ষ নদের জলকে কবি কীসের সাথে তুলনা করেছেন?", "নিশার স্বপন", "স্নেহের তৃষ্ণা", "মাতৃস্তন্য", "মায়ামন্ত্রধ্বনি", 2],
+        ["'বোশেখ' কবিতায় ঝড়ো হাওয়া কার ঘর উড়িয়ে নিয়ে যায়?", "চাষির", "দুখিনী মায়ের", "টুনটুনি পাখির", "বাবুই পাখির", 0],
         ["'তোমাকে পাওয়ার জন্যে, হে স্বাধীনতা' কবিতায় বর্ণিত মাঝির নাম কী?", "সগীর আলী", "মতলব মিয়া", "করিম শেখ", "রুস্তম শেখ", 1],
         ["'আমি কোনো আগন্তুক নই' কবিতায় ডুমুরের ডালে কোন পাখি বসে আছে?", "শালিক", "দোয়েল", "টুনটুনি", "মাছরাঙা", 3],
         ["'ঝুঁটি' কবিতায় কবি কোথায় শিহরণ দেখতে পাচ্ছেন?", "মাঠে", "অরণ্যে", "পথে", "প্রান্তরে", 1],
@@ -344,19 +484,19 @@
         ["উদ্দীপকের সাথে 'উমর ফারুক' কবিতার কোন চরণের সাদৃশ্য দেখা যায়?", "অর্ধপৃথিবী করেছে শাসন ধুলার তখতে বসি", "উষ্ট্রের পৃষ্ঠে আরাম করিয়া রহিবে বসি", "তোমারে এমন চোখের পানিতে স্মরিবো সর্বদাই", "আমি লয়ে যাব বহিয়া এ-সব দুখিনী মায়ের ঘরে", 3],
         ["উদ্দীপক ও 'উমর ফারুক' কবিতায় ফুটে উঠেছে-", "i ও ii", "i ও iii", "ii ও iii", "i, ii ও iii", 3],
         ["'এশিরিয়া ধুলো আজ' বলতে কবি কী বুঝিয়েছেন?", "সভ্যতা ক্ষণস্থায়ী", "মৃত্যু অনিবার্য", "প্রকৃতি চিরন্তন", "সময় বহমান", 0],
-        ["বৃষ্টির দিনে রুহি বারান্দায় খেলছিল। হঠাৎ দেখল চারদিক মেঘের ঘন আঁধারের মাঝে অপূর্ব এক আভা এলো। 'বৃষ্টি' কবিতার প্রেক্ষিতে রুহি কী দেখতে পেল?", "বিদগ্ধ-আকাশ", "পুবের হাওয়া", "মেঘের আড়ালে লুকায়িত সূর্য", "বিদ্যুৎ-রূপসি পরি", 3],
+        ["'বৃষ্টি' কবিতার প্রেক্ষিতে রুহি কী দেখতে পেল?", "বিদগ্ধ-আকাশ", "পুবের হাওয়া", "মেঘের আড়ালে লুকায়িত সূর্য", "বিদ্যুৎ-রূপসি পরি", 3],
         ["'সাকিনা বিবির কপাল ভাঙল'- এই কথাটি দ্বারা কী বোঝানো হয়েছে?", "কপালে আঘাত লাগা", "বাড়ি পুড়ে যাওয়া", "সম্ভ্রম হারানো", "বিধবা হওয়া", 3],
         ["সম্রাট বাবরের পুত্রের নাম কী?", "হুমায়ুন", "আকবর", "শাহজাহান", "আওরঙ্গজেব", 0],
         ["'বাতায়ন' শব্দের অর্থ কী?", "বাতাস", "জানালা", "বারান্দা", "দেয়াল", 1],
         ["'প্রত্যুপকার' গল্পে খলিফা মামুনের প্রিয়পাত্র কে ছিলেন?", "দামেস্কের শাসনকর্তা", "আলী ইবনে আব্বাস", "জনৈক সম্ভ্রান্ত ব্যক্তি", "জনৈক প্রজা", 1],
         ["প্রতাপের প্রধান শখ কী ছিল?", "মাছ ধরা", "তেঁতুল তলায় বসা", "সুভার সাথে গল্প করা", "অকর্মণ্য হয়ে বসে থাকা", 0],
 
-        // Image 4 (77-90)
+        // Image 5 (Dhaka Board cont)
         ["বাণীকণ্ঠের কান্নার কারণ কী ছিল?", "গৃহত্যাগের কষ্ট", "সুভাকে পাত্রস্থ করা", "পিতৃহৃদয়ের কাতরতা", "সুভার দুরবস্থা কল্পনা", 2],
         ["উদ্দীপকে প্রকাশিত ভাব 'আম-আঁটির ভেঁপু' গল্পের কোন দিকটিকে তুলে ধরেছে?", "মানুষের চিরায়ত শৈশব", "গ্রাম বাংলা প্রকৃতি", "মা-বাবার শাশ্বত রূপ", "ভাই-বোনের সম্পর্ক", 3],
         ["উদ্দীপকে 'আম-আঁটির ভেঁপু' গল্পের যে দিকটি অনুপস্থিত-", "i ও ii", "ii ও iii", "i ও iii", "i, ii ও iii", 0],
         ["'মানুষ মুহম্মদ (স.)' প্রবন্ধে উল্লিখিত 'সুমহান প্রতিশোধ' কথাটি দ্বারা নবিজির কোন গুণটি তুলে ধরা হয়েছে?", "অনুগ্রহ", "সাধুতা", "মহত্ত্ব", "ত্যাগ", 2],
-        ["'বাসক পাতা, তুলসি পাতা কাশির জন্য খুব উপকারী এবং তুলসি পাতার চা ব্যথানাশক।'- এ বক্তব্যের সাথে 'নিমগাছ' গল্পের নিমগাছের সঙ্গে কোন দিকের মিল রয়েছে?", "সৌন্দর্যে", "অবয়বে", "অবহেলায়", "কল্যাণে", 3],
+        ["উদ্দীপকের সাথে 'নিমগাছ' গল্পের নিমগাছের সঙ্গে কোন দিকের মিল রয়েছে?", "সৌন্দর্যে", "অবয়বে", "অবহেলায়", "কল্যাণে", 3],
         ["লাইব্রেরিকে হাসপাতালের ওপরে স্থান দেওয়ার কারণ-", "i ও ii", "i ও iii", "ii ও iii", "i, ii ও iii", 2],
         ["'শিক্ষা ও মনুষ্যত্ব' প্রবন্ধ অনুসারে মুক্তির জন্য কয়টি উপায় অবলম্বন করতে হবে?", "দুই", "তিন", "চার", "পাঁচ", 0],
         ["কোনটির মাঝে বাদাম-কিসমিস লুকোচুরি খেলেছিল?", "মুরগির রোস্টে", "শামী-কাবাবে", "মাংসের কোরমা", "কোফতা-পোলাওয়ে", 3],
@@ -367,21 +507,26 @@
         ["উদ্দীপকের ঘটনার প্রেক্ষাপট যেভাবে 'একুশের গল্প' ছোটগল্পের সাথে সাদৃশ্যপূর্ণ-", "i ও ii", "i ও iii", "ii ও iii", "i, ii ও iii", 1],
         ["'কপোতাক্ষ নদ' কবিতায় কোন চরণের মধ্যে 'সংশয়বোধ' প্রকাশ পেয়েছে?", "সতত, হে নদ, তুমি পড় মোর মনে।", "বহু দেশ দেখিয়াছি বহু নদ-দলে;", "লইছে যে নাম তব বঙ্গের সংগীতে।", "আর কি হে হবে দেখা? যতদিন যাবে,", 3],
 
-        // Image 8 (91-102)
-        ["'উমর ফারুক' কবিতায় কবি ইসলামকে কীসের সঙ্গে তুলনা করেছেন?", "মরুপথ", "মরণ শশী", "পরশ-মানিক", "কালের ঘড়ি", 2],
-        ["'প্রবাস বন্ধু' রচনায় কী খেতে গিয়ে লেখকের প্রাণান্ত পর্যন্ত বিলবিল করে উঠেছিল?", "ফালুদা", "বরফি আঙুর", "কোফতা-পোলাও", "সবুজ চা", 1],
-        ["উদ্দীপকে 'জীবন বিনিময়' কবিতার যে ভাব প্রকাশিত হয়েছে তা হলো-", "i ও ii", "i ও iii", "ii ও iii", "i, ii ও iii", 3],
-        ["'তোমাকে পাওয়ার জন্যে, হে স্বাধীনতা' কবিতার 'এরাট নতুন পৃথিবীর জন্ম হতে চলেছে'- বলতে কী বোঝানো হয়েছে?", "নতুন অধ্যায়ের সৃষ্টি", "নতুন জগতের আবির্ভাব", "স্বাধীন বাংলাদেশের অভ্যুদয়", "নতুন জীবনের সৃষ্টি", 2],
-        ["'অনাগত কাল গেয়েছিল স্বপ্ন, জয় জয় হে মানব'-এই জয়গানের কারণ কী?", "সত্য প্রতিষ্ঠা", "ন্যায়বিচার প্রতিষ্ঠা", "অন্যায়ের জীবন যাপন", "সাম্য প্রতিষ্ঠা", 3],
-        ["'বোশেখ' কবিতায় বাতাসকে কার পিতা আখ্যা দেয়া হয়েছে?", "সোলেমানের", "রবীন্দ্রনাথের", "হনুমানের", "কালিদাসের", 2],
-        ["'সেই দিন এই মাঠ' কবিতায় কী ছাই হয়ে আছে?", "শান্ত বাতি", "খেয়া নৌকা", "এশিরিয়া", "বেবিলন", 2],
-        ["'তোমাকে পাওয়ার জন্যে, হে স্বাধীনতা' কবিতায় দগ্ধ ঘরের নড়বড়ে খুঁটি ধরে কে দাঁড়িয়ে আছে?", "অনাথ কিশোরী", "মোল্লাবাড়ির বিধবা", "থুত্থুড়ে বুড়ো", "অবুঝ শিশু", 1],
-        ["'বৃষ্টি' কবিতায় 'যেখানে বিস্তৃত দিন পড়ে আছে নিঃসঙ্গ নির্জন' বলতে কী বোঝায়?", "রুক্ষ মাঠ", "বন্ধুর প্রান্তর", "অতীত-স্মৃতি", "তৃষিত বন", 0],
-        ["উদ্দীপকে 'আমি কোনো আগন্তুক নই' কবিতার কোন দিকটি প্রকাশিত হয়েছে?", "প্রাকৃতিক সৌন্দর্য", "সাংস্কৃতিক ঐতিহ্য", "সামাজিক ঐক্য", "ঐতিহাসিক পটভূমি", 0],
-        ["উদ্দীপকে 'আমি কোনো আগন্তুক নই' কবিতার মূল সুর যেভাবে প্রকাশিত হয়েছে তা হলো-", "i ও ii", "i ও iii", "ii ও iii", "i, ii ও iii", 2],
-        ["'সোনার স্বপ্নের সাধ পৃথিবীতে কবে আর ঝরে'- এ চরণে প্রকাশ পেয়েছে-", "কৃত্রিমতার বিনাশ", "পৃথিবীর বহমানতা", "প্রকৃতির নিত্যতা", "মানুষের স্বপ্নময়তা", 3],
+        // Image 6 (Dinajpur Board cont)
+        ["'উমর ফারুক' কবিতায় 'পরশ মানিক' বলা হয়েছে কাকে?", "হজরত উমর (রা.) কে", "ইসলামকে", "সাম্যবাদকে", "মহাবীর খালেদকে", 1],
+        ["'বই পড়া' প্রবন্ধে সাহিত্যচর্চাকে লেখক আবশ্যক বলেছেন কেন?", "মর্যাদা বৃদ্ধির জন্য", "প্রগতিশীল চিন্তা-ভাবনার জন্য", "উদরপূর্তির জন্য", "অর্থ-সম্পদ উপার্জনের জন্য", 1],
+        ["'বৃষ্টি' কবিতায় মেঘে মেঘে সওয়ার হয়েছে কে?", "কাজল ছায়া", "বিদগ্ধ আকাশ", "বিদ্যুৎ রূপসী পরী", "পুবের হাওয়া", 2],
+        ["'প্রত্যুপকার' গল্পে প্রকাশ পেয়েছে আলী ইবনে আব্বাসের-", "মহানুভবতা", "বিচক্ষণতা", "পরোপকারিতা", "বদান্যতা", 0],
+        ["'বোশেখ' কবিতায় বৈশাখের রুদ্র রূপের সাথে কবি কোন বিষয়টির ইঙ্গিত করেছেন?", "অত্যাচারীর অত্যাচার", "দুর্ধর্ষ শ্রেণির উৎপীড়ন", "জাগতিক চিন্তা-চেতনা", "ধ্বংসাত্মক অবস্থা", 3],
+        ["উদ্দীপকের আনোয়ার সাহেবের সাথে তোমার পঠিত কবিতার কোন চরিত্রের মিল আছে?", "হজরত উমর (রা.)", "সম্রাট বাবর", "মহাবীর খালিদ", "মুয়াজ্জিন", 0],
+        ["মেঘনা নদীর দক্ষ মাঝি কে?", "সগীর আলী", "রুস্তম শেখ", "কেষ্ট দাস", "মতলব মিয়া", 3],
+        ["উদ্দীপকের ঝুমার সাথে 'জীবন বিনিময়' কবিতার কার অমিল রয়েছে?", "বাবরের", "কবিরাজের", "দরবেশের", "হুমায়ুনের", 3],
+        ["ঝুমার সাথে এরূপ অমিল থাকার কারণ-", "i ও ii", "i ও iii", "ii ও iii", "i, ii ও iii", 0],
+        ["'আমি এমন এক নারীর সন্তান, সাধারণ শুষ্ক মাংসই ছিল যাঁহার নিত্যকার আহার্য।'-এই কথায় প্রকাশ পেয়েছে হজরত মুহম্মদ (স.) এর-", "মানবিকতাবোধ", "ঔদার্যবোধ", "মহত্ত্ববোধ", "অনাড়ম্বর জীবনবোধ", 3],
+        ["ডেমোক্রেসি কীসের সার্থকতা বোঝে না?", "সাহিত্যের", "দর্শনের", "আবৃত্তির", "অর্থের", 0],
+        ["'এ জন্য পৃথিবীতে যত স্থান আছে ঐ স্থান আমার সর্বাপেক্ষা প্রিয়।'-আলী ইবনে আব্বাসের এই উক্তিতে প্রকাশ পেয়েছে-", "উদারতা", "সহনশীলতা", "মমত্ববোধ", "মহত্ত্ববোধ", 2],
+        ["'কপোতাক্ষ নদ' কবিতায় প্রজা বলা হয়েছে কাকে?", "বারিকে", "সাগরকে", "কপোতাক্ষ নদকে", "স্বদেশকে", 2],
+        ["'নিমের হাওয়া ভালো, থাক, কেটো না।'-কথাটি বলেছিলেন-", "কবি", "কবিরাজরা", "বিজ্ঞরা", "লেখক", 2],
+        ["'প্রবাস বন্ধু' গল্পে আবদুর রহমানকে যে অর্থে 'হরফুন-মৌলা' বলা হয়েছে-", "মিষ্টভাষী", "সদালাপী", "জ্ঞান পিপাসু", "সর্ববিদ্যায় পারদর্শী", 3],
+        ["'বোশেখ' কবিতায় 'বিভেদকারী পরগাছা' বলতে বোঝানো হয়েছে সমাজের-", "শ্রমজীবীদের", "শোষকদের", "মধ্যবিত্তদের", "বিত্তশালীদের", 1],
+        ["সুভার প্রকৃত নাম কী?", "সর্বশী", "পাঙ্গুলি", "সুভাষিণী", "সুকেশিণী", 2],
 
-        // Image 7 (103-120)
+        // Image 7 (Rajshahi Board cont)
         ["এ চরণ দুটি 'বোশেখ' কবিতায় বর্ণিত কার কথা মনে করিয়ে দেয়?", "রবীন্দ্রনাথ ঠাকুর", "কবি কালিদাস", "রাজা সোলেমান", "মহাবীর হনুমান", 0],
         ["'শিক্ষা কেউ কাউকে দিতে পারে না।' কারণ-", "শিক্ষা নিজে নিজেই গ্রহণ করতে হয়", "এটি অত্যন্ত শ্রমসাধ্য ব্যাপার", "এটি পরিবেশের সঙ্গে সম্পর্কিত", "এটি পুস্তক থেকে গ্রহণ করতে হয়", 0],
         ["'নিমগাছ' গল্পে নিমগাছ কাটতে নিষেধ করেন কে?", "কবিরাজ", "বিজ্ঞরা", "কবি", "লক্ষ্মী বউ", 1],
@@ -394,72 +539,82 @@
         ["'আম-আঁটির ভেঁপু' গল্পে 'তখুনি কি রাজি হতে আছে?' উক্তিতে হরিহরের কোন ধরনের মনোভাব প্রকাশ পেয়েছে?", "সরলতা", "বিচক্ষণতা", "উদারতা", "অসহায়ত্ব", 1],
         ["উদ্দীপকের দৃশ্যকল্পে 'আম-আঁটির ভেঁপু' গল্পের কোন দিকটি প্রতিফলিত হয়েছে?", "ভাই-বোনের ঝগড়া", "শৈশবের দুরন্তপনা", "অতীতের স্মৃতি", "অর্থনৈতিক সমস্যা", 1],
         ["কোন অজ্ঞানে খলিফা মামুনের অতি উন্নত চিত্তের পরিচয় প্রকাশ পেয়েছে?", "আলী ইবনে আব্বাসকে বন্দীর দায়িত্ব দেওয়ায়", "আলী ইবনে আব্বাসের কথায় রাগান্বিত হওয়ায়", "বিশ্বস্তভাবে বন্দীর প্রকৃত পরিচয় জানায়", "বন্দীকে সসম্মানে মুক্তি দেওয়ায়", 3],
-        ["উম্মে মা'বদের ভাষায় মহানবি (স.) এর নীরবতা কেমন ছিল?", "মধুময়", "পুলকদীপ্ত", "বিনীত নম্র", "কুণ্ঠাহীন", 2],
-        ["'কপোতাক্ষ নদ' কবিতায় কবির মন জুড়ায় কীসে?", "স্নেহের তৃষ্ণায়", "ভ্রান্তির ছলনে", "প্রেম-জলে", "বঙ্গের সঙ্গীতে", 3],
+        ["উম্মে মা'বদের ভাষায় মহানবি (স.) এর নীরবতা কেমন ছিল?", "মধুময়", "পুলকদীপ্ত", "বিনীত নম্র", "গাম্ভীর্যময়", 3],
+        ["'কপোতাক্ষ নদ' কবিতায় কবির মন জুড়ায় কীসে?", "স্নেহের তৃষ্ণায়", "ভ্রান্তির ছলনে", "প্রেম-জলে", "বঙ্গের সঙ্গীতে", 1],
         ["'এত একবার দম ফেলাতে একশটা বেমরি বেরিয়ে যাবে।' -একথা দ্বারা 'প্রবাস বন্ধু' ভ্রমণ কাহিনিতে কী বোঝানো হয়েছে?", "ভীষণ মাত্রা", "ঋতু বৈচিত্র্য", "নির্দয় প্রকৃতি", "মনোমুগ্ধকর দৃশ্য", 2],
-        ["উদ্দীপকটি 'একুশের গল্প' রচনায় কোন চরিত্রকে স্মরণ করিয়ে দেয়?", "তপু", "রাহাত", "গল্পের কথক", "রেণু", 0],
+        ["উদ্দীপকটি 'একুশের গল্প' রচনায় কোন চরিত্রকে স্মরণ করিয়ে দেয়?", "তপু", "রাহাত", "গল্পের কথক", "রেণু", 2],
         ["উদ্দীপক ও 'একুশের গল্প' রচনাকে যেভাবে ধারণ করেছে তা হলো-", "i ও ii", "i ও iii", "ii ও iii", "i, ii ও iii", 3],
         ["'তিমির রাতের তোরণে তোরণে উষার পূর্বাভাস'- বলতে কী বোঝানো হয়েছে?", "ঘুমন্তদের রোগ মুক্তির লক্ষণ", "বাবর এর প্রার্থনা কবুল হওয়া", "বাবরের মৃত্যু শয্যা গ্রহণ", "বাবরের শান্ত অচঞ্চল মন", 0],
 
-        // Image 6 (121-137)
-        ["'উমর ফারুক' কবিতায় 'পরশ মানিক' বলা হয়েছে কাকে?", "হজরত উমর (রা.) কে", "ইসলামকে", "সাম্যবাদকে", "মহাবীর খালেদকে", 1],
-        ["'বই পড়া' প্রবন্ধে সাহিত্যচর্চাকে লেখক আবশ্যক বলেছেন কেন?", "মর্যাদা বৃদ্ধির জন্য", "প্রগতিশীল চিন্তা-ভাবনার জন্য", "উদরপূর্তির জন্য", "অর্থ-সম্পদ উপার্জনের জন্য", 1],
-        ["'বৃষ্টি' কবিতায় মেঘে মেঘে সওয়ার হয়েছে কে?", "কাজল ছায়া", "বিদগ্ধ আকাশ", "বিদ্যুৎ রূপসী পরী", "পুবের হাওয়া", 2],
-        ["'প্রত্যুপকার' গল্পে প্রকাশ পেয়েছে আলী ইবনে আব্বাসের-", "মহানুভবতা", "বিচক্ষণতা", "পরোপকারিতা", "বদান্যতা", 0],
-        ["'বোশেখ' কবিতায় বৈশাখের রুদ্র রূপের সাথে কবি কোন বিষয়টির ইঙ্গিত করেছেন?", "অত্যাচারীর অত্যাচার", "দুর্ধর্ষ শ্রেণির উৎপীড়ন", "জাগতিক চিন্তা-চেতনা", "ধ্বংসাত্মক অবস্থা", 0],
-        ["উদ্দীপকের আনোয়ার সাহেবের সাথে তোমার পঠিত কবিতার কোন চরিত্রের মিল আছে?", "হজরত উমর (রা.)", "সম্রাট বাবর", "মহাবীর খালিদ", "মুয়াজ্জিন", 0],
-        ["মেঘনা নদীর দক্ষ মাঝি কে?", "সগীর আলী", "রুস্তম শেখ", "কেষ্ট দাস", "মতলব মিয়া", 3],
-        ["উদ্দীপকের ঝুমার সাথে 'জীবন বিনিময়' কবিতার কার অমিল রয়েছে?", "বাবরের", "কবিরাজের", "দরবেশের", "হুমায়ুনের", 0],
-        ["ঝুমার সাথে এরূপ অমিল থাকার কারণ-", "i ও ii", "i ও iii", "ii ও iii", "i, ii ও iii", 2],
-        ["'আমি এমন এক নারীর সন্তান, সাধারণ শুষ্ক মাংসই ছিল যাঁহার নিত্যকার আহার্য।'-এই কথায় প্রকাশ পেয়েছে হজরত মুহম্মদ (স.) এর-", "মানবিকতাবোধ", "ঔদার্যবোধ", "মহত্ত্ববোধ", "অনাড়ম্বর জীবনবোধ", 3],
-        ["ডেমোক্রেসি কীসের সার্থকতা বোঝে না?", "সাহিত্যের", "দর্শনের", "আবৃত্তির", "অর্থের", 0],
-        ["'এ জন্য পৃথিবীতে যত স্থান আছে ঐ স্থান আমার সর্বাপেক্ষা প্রিয়।'-আলী ইবনে আব্বাসের এই উক্তিতে প্রকাশ পেয়েছে-", "উদারতা", "সহনশীলতা", "মমত্ববোধ", "মহত্ত্ববোধ", 2],
-        ["'কপোতাক্ষ নদ' কবিতায় প্রজা বলা হয়েছে কাকে?", "বারিকে", "সাগরকে", "কপোতাক্ষ নদকে", "স্বদেশকে", 2],
-        ["'নিমের হাওয়া ভালো, থাক, কেটো না।'-কথাটি বলেছিলেন-", "কবি", "কবিরাজরা", "বিজ্ঞরা", "লেখক", 2],
-        ["'প্রবাস বন্ধু' গল্পে আবদুর রহমানকে যে অর্থে 'হরফুন-মৌলা' বলা হয়েছে-", "মিষ্টভাষী", "সদালাপী", "জ্ঞান পিপাসু", "সর্ববিদ্যায় পারদর্শী", 3],
-        ["'বোশেখ' কবিতায় 'বিভেদকারী পরগাছা' বলতে বোঝানো হয়েছে সমাজের-", "শ্রমজীবীদের", "শোষকদের", "মধ্যবিত্তদের", "বিত্তশালীদের", 1],
-        ["সুভার প্রকৃত নাম কী?", "সর্বশী", "পাঙ্গুলি", "সুভাষিণী", "সুকেশিণী", 2]
+        // Image 8 (Rajshahi Board)
+        ["'উমর ফারুক' কবিতায় কবি ইসলামকে কীসের সঙ্গে তুলনা করেছেন?", "মরুপথ", "মরণ শশী", "পরশ-মানিক", "কালের ঘড়ি", 2],
+        ["'প্রবাস বন্ধু' রচনায় কী খেতে গিয়ে লেখকের প্রাণান্ত পর্যন্ত বিলবিল করে উঠেছিল?", "ফালুদা", "বরফি আঙুর", "কোফতা-পোলাও", "সবুজ চা", 1],
+        ["উদ্দীপকে 'জীবন বিনিময়' কবিতার যে ভাব প্রকাশিত হয়েছে তা হলো-", "i ও ii", "i ও iii", "ii ও iii", "i, ii ও iii", 3],
+        ["'তোমাকে পাওয়ার জন্যে, হে স্বাধীনতা' কবিতার 'এরাট নতুন পৃথিবীর জন্ম হতে চলেছে'- বলতে কী বোঝানো হয়েছে?", "নতুন অধ্যায়ের সৃষ্টি", "নতুন জগতের আবির্ভাব", "স্বাধীন বাংলাদেশের অভ্যুদয়", "নতুন জীবনের সৃষ্টি", 2],
+        ["'অনাগত কাল গেয়েছিল স্বপ্ন, জয় জয় হে মানব'-এই জয়গানের কারণ কী?", "সত্য প্রতিষ্ঠা", "ন্যায়বিচার প্রতিষ্ঠা", "অন্যায়ের জীবন যাপন", "সাম্য প্রতিষ্ঠা", 3],
+        ["'বোশেখ' কবিতায় বাতাসকে কার পিতা আখ্যা দেয়া হয়েছে?", "সোলেমানের", "রবীন্দ্রনাথের", "হনুমানের", "কালিদাসের", 2],
+        ["'সেই দিন এই মাঠ' কবিতায় কী ছাই হয়ে আছে?", "শান্ত বাতি", "খেয়া নৌকা", "এশিরিয়া", "বেবিলন", 2],
+        ["'তোমাকে পাওয়ার জন্যে, হে স্বাধীনতা' কবিতায় দগ্ধ ঘরের নড়বড়ে খুঁটি ধরে কে দাঁড়িয়ে আছে?", "অনাথ কিশোরী", "মোল্লাবাড়ির বিধবা", "থুত্থুড়ে বুড়ো", "অবুঝ শিশু", 1],
+        ["'বৃষ্টি' কবিতায় 'যেখানে বিস্তৃত দিন পড়ে আছে নিঃসঙ্গ নির্জন' বলতে কী বোঝায়?", "রুক্ষ মাঠ", "বন্ধুর প্রান্তর", "অতীত-স্মৃতি", "তৃষিত বন", 0],
+        ["উদ্দীপকে 'আমি কোনো আগন্তুক নই' কবিতার কোন দিকটি প্রকাশিত হয়েছে?", "প্রাকৃতিক সৌন্দর্য", "সাংস্কৃতিক ঐতিহ্য", "সামাজিক ঐক্য", "ঐতিহাসিক পটভূমি", 0],
+        ["উদ্দীপকে 'আমি কোনো আগন্তুক নই' কবিতার মূল সুর যেভাবে প্রকাশিত হয়েছে তা হলো-", "i ও ii", "i ও iii", "ii ও iii", "i, ii ও iii", 1],
+        ["'সোনার স্বপ্নের সাধ পৃথিবীতে কবে আর ঝরে'- এ চরণে প্রকাশ পেয়েছে-", "কৃত্রিমতার বিনাশ", "পৃথিবীর বহমানতা", "প্রকৃতির নিত্যতা", "মানুষের স্বপ্নময়তা", 3]
     ];
 
+    // ইংরেজি সংখ্যাকে বাংলা সংখ্যায় রূপান্তরের ফাংশন
     function engToBnNum(num) {
         const bnDigits = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
         return num.toString().replace(/\d/g, d => bnDigits[d]);
     }
 
+    // ডেটাকে অবজেক্টে সাজানো
     const questionsData = rawData.map((q, index) => ({
         q: engToBnNum(index + 1) + "। " + q[0],
-        opts: [q[1], q[2], q[3], q[4]],
+        opts: ["ক) " + q[1], "খ) " + q[2], "গ) " + q[3], "ঘ) " + q[4]],
         ans: q[5]
     }));
 
     document.addEventListener("DOMContentLoaded", () => {
-        const isSubmitted = localStorage.getItem("saiful_mcq_submitted");
+        const isSubmitted = localStorage.getItem("saiful_exam_completed");
         
         if (isSubmitted === "true") {
+            // যদি আগে পরীক্ষা দিয়ে থাকে
             document.getElementById("exam-section").style.display = "none";
             document.getElementById("alert-message").style.display = "block";
             showResultFromStorage();
         } else {
+            // নতুন পরীক্ষা
             renderQuestions();
             updateProgress();
         }
         
+        // Progress বার আপডেট ইভেন্ট
         document.getElementById("exam-form").addEventListener("change", updateProgress);
         
+        // Submit ইভেন্ট
         document.getElementById("exam-form").addEventListener("submit", (e) => {
             e.preventDefault();
-            if(confirm("আপনি কি নিশ্চিতভাবে পরীক্ষা শেষ করতে চান? একবার সাবমিট করলে আর পরিবর্তন করা যাবে না।")) {
+            const totalAnswered = document.querySelectorAll('input[type="radio"]:checked').length;
+            const msg = totalAnswered < questionsData.length 
+                        ? `আপনি ১৩৭টির মধ্যে ${engToBnNum(totalAnswered)}টি প্রশ্নের উত্তর দিয়েছেন। আপনি কি নিশ্চিতভাবে পরীক্ষা শেষ করতে চান? (একবার সাবমিট করলে আর পরিবর্তন করা যাবে না।)`
+                        : `আপনি কি নিশ্চিতভাবে পরীক্ষা শেষ করতে চান?`;
+                        
+            if(confirm(msg)) {
                 evaluateExam();
             }
         });
     });
     
+    // HTML-এ প্রশ্নগুলো তৈরি করা
     function renderQuestions() {
         const container = document.getElementById("questions-container");
         let html = "";
         
         questionsData.forEach((q, index) => {
-            html += `<div class="card" style="animation-delay: ${(index % 10) * 0.05}s">
+            // কার্ডের জন্য অ্যানিমেশন ডিলে (যাতে সুন্দরভাবে লোড হয়)
+            const delay = (index % 10) * 0.05; 
+            
+            html += `<div class="card" style="animation-delay: ${delay}s" id="question-${index}">
                 <div class="question-title">${q.q}</div>
                 <div class="options">`;
             
@@ -478,20 +633,17 @@
         container.innerHTML = html;
     }
     
+    // প্রোগ্রেস বার আপডেট ফাংশন
     function updateProgress() {
         const total = questionsData.length;
-        let answered = 0;
-        
-        for(let i=0; i<total; i++) {
-            if(document.querySelector(`input[name="q${i}"]:checked`)) {
-                answered++;
-            }
-        }
+        let answered = document.querySelectorAll('input[type="radio"]:checked').length;
         
         const percentage = (answered / total) * 100;
         document.getElementById("progress-bar").style.width = percentage + "%";
+        document.getElementById("progress-count").innerText = engToBnNum(answered);
     }
     
+    // পরীক্ষা মূল্যায়ণ ও ডেটা সংরক্ষণ
     function evaluateExam() {
         const results = [];
         let correctCount = 0;
@@ -506,7 +658,7 @@
                 if(isCorrect) correctCount++;
                 else wrongCount++;
             } else {
-                wrongCount++;
+                wrongCount++; // স্কিপ করা প্রশ্নগুলোও ভুল হিসেবে গণ্য হবে
             }
             
             results.push({
@@ -524,33 +676,42 @@
             results: results
         };
         
-        localStorage.setItem("saiful_mcq_submitted", "true");
-        localStorage.setItem("saiful_mcq_results", JSON.stringify(scoreData));
+        // LocalStorage-এ সেভ করা (যাতে পেজ রিফ্রেশ করলেও লক থাকে)
+        localStorage.setItem("saiful_exam_completed", "true");
+        localStorage.setItem("saiful_exam_results", JSON.stringify(scoreData));
         
         document.getElementById("exam-section").style.display = "none";
         renderResult(scoreData);
     }
     
+    // পূর্বের ফলাফল দেখানো
     function showResultFromStorage() {
-        const savedData = localStorage.getItem("saiful_mcq_results");
+        const savedData = localStorage.getItem("saiful_exam_results");
         if(savedData) {
             renderResult(JSON.parse(savedData));
         }
     }
     
+    // রেজাল্ট সেকশন রেন্ডার করা
     function renderResult(data) {
         document.getElementById("result-section").style.display = "block";
-        window.scrollTo(0, 0);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
         
         const percentage = Math.round((data.correct / data.total) * 100);
         
+        // স্কোরবোর্ডের অ্যানিমেশন
         let currentScore = 0;
         const scoreElement = document.getElementById("score-circle");
-        const timer = setInterval(() => {
-            scoreElement.innerText = engToBnNum(currentScore) + "%";
-            if(currentScore >= percentage) clearInterval(timer);
-            currentScore++;
-        }, 15);
+        
+        if (percentage === 0) {
+            scoreElement.innerText = "০%";
+        } else {
+            const timer = setInterval(() => {
+                scoreElement.innerText = engToBnNum(currentScore) + "%";
+                if(currentScore >= percentage) clearInterval(timer);
+                currentScore++;
+            }, 15);
+        }
         
         document.getElementById("total-q").innerText = engToBnNum(data.total);
         document.getElementById("correct-q").innerText = engToBnNum(data.correct);
@@ -559,37 +720,37 @@
         let msg = "";
         if(percentage >= 80) msg = "অসাধারণ পারফরম্যান্স! চালিয়ে যান। 🌟";
         else if(percentage >= 60) msg = "ভালো হয়েছে! তবে আরও অনুশীলনের প্রয়োজন। 👍";
-        else msg = "আপনাকে আরও বেশি মনোযোগ দিয়ে পড়তে হবে। 📚";
+        else if(percentage >= 40) msg = "মোটামুটি হয়েছে। আপনাকে আরও বেশি পড়তে হবে। 📚";
+        else msg = "খুবই হতাশাজনক! আপনাকে আরও অনেক বেশি মনোযোগ দিয়ে পড়তে হবে। ⚠️";
         
         document.getElementById("performance-msg").innerText = msg;
         
+        // প্রতিটি প্রশ্নের Review তৈরি করা
         const reviewContainer = document.getElementById("review-container");
         let reviewHtml = "";
         
         data.results.forEach(res => {
             const q = questionsData[res.qIndex];
             const statusClass = res.isCorrect ? "correct" : "incorrect";
-            const statusText = res.isCorrect ? "<span class='text-success'>সঠিক</span>" : "<span class='text-danger'>ভুল</span>";
+            const badgeClass = res.isCorrect ? "badge-correct" : "badge-incorrect";
+            const statusText = res.isCorrect ? "সঠিক উত্তর" : "ভুল উত্তর";
             
-            const selectedText = res.selected !== -1 ? q.opts[res.selected] : "<span style='color:#94a3b8'>উত্তর দেওয়া হয়নি</span>";
+            const selectedText = res.selected !== -1 ? q.opts[res.selected] : "<span style='color:#94a3b8; font-style:italic;'>উত্তর দেওয়া হয়নি</span>";
             const correctText = q.opts[res.correct];
             
             reviewHtml += `
                 <div class="card review-item ${statusClass}">
                     <div class="question-title">${q.q}</div>
-                    <div class="review-ans">
+                    <div class="ans-box">
                         <div class="ans-row">
                             <span class="ans-label">আপনার উত্তর:</span> 
                             <span>${selectedText}</span>
                         </div>
                         ${!res.isCorrect ? `<div class="ans-row">
                             <span class="ans-label text-success">সঠিক উত্তর:</span> 
-                            <span class="text-success">${correctText}</span>
+                            <span class="text-success" style="font-weight:600;">${correctText}</span>
                         </div>` : ''}
-                        <div class="ans-row" style="margin-top:10px; font-weight:bold;">
-                            <span class="ans-label">স্ট্যাটাস:</span> 
-                            ${statusText}
-                        </div>
+                        <div class="status-badge ${badgeClass}">${statusText}</div>
                     </div>
                 </div>
             `;
