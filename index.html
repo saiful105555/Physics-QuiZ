@@ -41,7 +41,6 @@
         
         .brand-subtitle { font-size: 0.95rem; opacity: 0.9; margin-top: 5px; }
         
-        /* Fixed Mobile Blank Screen Bug by changing to block flow instead of flex centering */
         .main-container { 
             flex: 1; 
             max-width: 1200px; 
@@ -60,6 +59,7 @@
             transition: all 0.3s ease; 
         }
         
+        /* Screen toggling strictly controlled by active class */
         .screen { display: none; }
         .screen.active { display: block; animation: fadeIn 0.4s ease-in-out; }
         .hidden { display: none !important; }
@@ -234,7 +234,7 @@
                 
                 <div class="exam-info-grid">
                     <div class="info-item"><span>মোট প্রশ্ন:</span> <strong id="totalQuestionsCount">-</strong></div>
-                    <div class="info-item"><span>সময়কাল:</span> <strong>৬০ মিনিট</strong></div>
+                    <div class="info-item"><span>সময়কাল:</span> <strong>৯০ মিনিট</strong></div>
                     <div class="info-item"><span>প্রতি প্রশ্নের মান:</span> <strong>১ নম্বর</strong></div>
                     <div class="info-item"><span>নেগেটিভ মার্কিং:</span> <strong>নেই</strong></div>
                 </div>
@@ -257,13 +257,13 @@
             </div>
         </section>
 
-        <!-- 2. Exam Screen -->
-        <section id="examScreen" class="card screen hidden">
+        <!-- 2. Exam Screen (No hidden class applied here by default) -->
+        <section id="examScreen" class="card screen">
             <div class="exam-top-bar">
                 <div class="exam-progress-info">প্রশ্ন <span id="currentQNum">১</span> / <span id="totalQNum">-</span></div>
                 <div class="timer-display" id="timerDisplay">
                     <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M16.2,16.2L11,13V7H12.5V12.2L17,14.9L16.2,16.2Z"/></svg>
-                    <span id="timeRemaining">৬০:০০</span>
+                    <span id="timeRemaining">৯০:০০</span>
                 </div>
                 <button id="paletteToggleBtn" class="palette-toggle-btn">প্যালেট</button>
             </div>
@@ -309,7 +309,7 @@
         </section>
 
         <!-- 3. Result Screen -->
-        <section id="resultScreen" class="card screen hidden">
+        <section id="resultScreen" class="card screen">
             <div class="result-header">
                 <h2>ফলাফল ড্যাশবোর্ড</h2>
                 <p>সাইফুল'স সাইন্স কেয়ার - মূল্যায়ন রিপোর্ট</p>
@@ -366,8 +366,9 @@
 
     <!-- JavaScript Data and Logic -->
     <script>
-        // Question Data Array
+        // 189 Question Data Array (Previous 116 + New 73)
         const questionsData = [
+            // --- Previous 116 Questions ---
             { id:"q1", question:"আন্তর্জাতিক পদ্ধতিতে তাপমাত্রার একক কোনটি?", options:[{id:"A",text:"কেলভিন"},{id:"B",text:"সেলসিয়াস"},{id:"C",text:"ফারেনহাইট"},{id:"D",text:"ক্যালরি"}], correctAnswer:"A", explanation:"এসআই পদ্ধতিতে তাপমাত্রার একক কেলভিন।", topic:"তাপ" },
             { id:"q2", question:"একটি স্লাইড ক্যালিপার্সের মূল স্কেলের ক্ষুদ্রতম 1 ভাগের মান 1 mm হলে এবং ভার্নিয়ারের ভাগসংখ্যা 10 হলে ভার্নিয়ার ধ্রুবক কত?", options:[{id:"A",text:"0.1 mm"},{id:"B",text:"0.1 cm"},{id:"C",text:"1 cm"},{id:"D",text:"10 cm"}], correctAnswer:"A", explanation:"VC = s/n = 1mm / 10 = 0.1 mm", topic:"পরিমাপ" },
             { id:"q3", question:"প্রধান স্কেল ও ভার্নিয়ার স্কেলের দাগকাটার বৈশিষ্ট্যের উপর কোনটি নির্ভর করে?", options:[{id:"A",text:"ভার্নিয়ার সমপাতন"},{id:"B",text:"প্রধান স্কেল পাঠ"},{id:"C",text:"ভার্নিয়ার স্কেল পাঠ"},{id:"D",text:"ভার্নিয়ার ধ্রুবক"}], correctAnswer:"D", explanation:"ভার্নিয়ার ধ্রুবক দাগকাটার বৈশিষ্ট্যের উপর নির্ভর করে।", topic:"পরিমাপ" },
@@ -392,7 +393,7 @@
             { id:"q22", question:"একটি +2 কুলম্ব চার্জ এবং একটি -1 কুলম্ব চার্জ পরস্পর থেকে 10 cm দূরে রাখা হলো। চার্জ দুটির মধ্যে ক্রিয়াশীল বল কত হবে?", options:[{id:"A",text:"1.8 × 10¹² N"},{id:"B",text:"1.8 × 10¹¹ N"},{id:"C",text:"- 1.8 × 10¹¹ N"},{id:"D",text:"- 1.8 × 10¹² N"}], correctAnswer:"D", explanation:"F = (9×10⁹ × 2 × -1) / (0.1)² = -1.8 × 10¹² N", topic:"স্থির তড়িৎ" },
             { id:"q23", question:"নিচের কোনটি নবায়নযোগ্য শক্তি?", options:[{id:"A",text:"নিউক্লিয়ার"},{id:"B",text:"বায়োমাস"},{id:"C",text:"গ্যাস"},{id:"D",text:"কয়লা"}], correctAnswer:"B", explanation:"বায়োমাস একটি নবায়নযোগ্য শক্তির উৎস।", topic:"শক্তি" },
             { id:"q24", question:"নিচের কোন রঙের আলোর তরঙ্গদৈর্ঘ্য সবচেয়ে কম?", options:[{id:"A",text:"সবুজ"},{id:"B",text:"লাল"},{id:"C",text:"হলুদ"},{id:"D",text:"বেগুনি"}], correctAnswer:"D", explanation:"দৃশ্যমান আলোর মধ্যে বেগুনির তরঙ্গদৈর্ঘ্য সবচেয়ে কম।", topic:"আলো" },
-            { id:"q25", question:"দাঁতের চিকিৎসায় আয়নায় কোন ধরনের প্রতিবিম্ব গঠিত হয়?", options:[{id:"A",text:"বাস্তব ও বিবর্ধিত"},{id:"B",text:"বাস্তব ও খর্বিত"},{id:"C",text:"অবাস্তব ও বিবর্ধিত"},{id:"D",text:"অবাস্তব ও খর্বিত"}], correctAnswer:"C", explanation:"অবতল আয়নায় অবাস্তব ও বিবর্ধিত বিম্ব হয়, যা চিকিৎসায় লাগে।", topic:"আলোর প্রতিফলন" },
+            { id:"q25", question:"দাঁতের চিকিৎসায় আয়নায় কোন ধরনের প্রতিবিম্ব গঠিত হয়?", options:[{id:"A",text:"বাস্তব ও বিবর্ধিত"},{id:"B",text:"বাস্তব ও খর্বিত"},{id:"C",text:"অবাস্তব ও বিবর্ধিত"},{id:"D",text:"অবাস্তব ও খর্বিত"}], correctAnswer:"C", explanation:"অবতল আয়নায় অবাস্তব ও বিবর্ধিত বিম্ব হয়, যা চিকিৎসায় লাগে।", topic:"আলোর প্রতিফলন" },
             { id:"q26", question:"মহাকর্ষ বলের কারণে— i. তেজস্ক্রিয় নিউক্লিয়াস থেকে বিটা রশ্মি বের হয় ii. সকল প্রাণী ও বস্তু ভূ-পৃষ্ঠের সংলগ্ন থাকে iii. বস্তুর ওজন অনুভূত হয়. নিচের কোনটি সঠিক?", options:[{id:"A",text:"i ও ii"},{id:"B",text:"ii ও iii"},{id:"C",text:"i ও iii"},{id:"D",text:"i, ii ও iii"}], correctAnswer:"B", explanation:"বিটা রশ্মি বের হয় দুর্বল নিউক্লীয় বলের কারণে।", topic:"বল" },
             { id:"q27", question:"নিচের কোন মাধ্যমে শব্দের বেগ সবচেয়ে বেশি?", options:[{id:"A",text:"লোহা"},{id:"B",text:"হীরা"},{id:"C",text:"পারদ"},{id:"D",text:"পানি"}], correctAnswer:"B", explanation:"হীরার ঘনত্ব ও স্থিতিস্থাপকতা বেশি হওয়ায় এতে শব্দের বেগ সর্বাধিক।", topic:"শব্দ ও তরঙ্গ" },
             { id:"q28", question:"নিচের কোনটি লব্ধ একক?", options:[{id:"A",text:"ক্যান্ডেলা"},{id:"B",text:"কেলভিন"},{id:"C",text:"মিটার"},{id:"D",text:"জুল"}], correctAnswer:"D", explanation:"জুল হলো কাজের একক, যা লব্ধ একক।", topic:"ভৌত রাশি" },
@@ -446,7 +447,7 @@
             { id:"q76", question:"কার গলার স্বর তীক্ষ্ণ?", options:[{id:"A",text:"বৃদ্ধ"},{id:"B",text:"যুবক"},{id:"C",text:"নারী"},{id:"D",text:"পুরুষ"}], correctAnswer:"C", explanation:"নারীদের গলার স্বরের কম্পাঙ্ক বেশি হয় বলে স্বর তীক্ষ্ণ হয়।", topic:"শব্দ ও তরঙ্গ" },
             { id:"q77", question:"কোন বলের কারণে গ্যালাক্সির ভেতরে নক্ষত্ররা ঘুরপাক খায়?", options:[{id:"A",text:"বিদ্যুৎ চৌম্বকীয় বল"},{id:"B",text:"মহাকর্ষ বল"},{id:"C",text:"দুর্বল নিউক্লীয় বল"},{id:"D",text:"সবল নিউক্লীয় বল"}], correctAnswer:"B", explanation:"মহাবিশ্বের বৃহৎ বস্তুগুলোর মধ্যে মহাকর্ষ বল ক্রিয়া করে।", topic:"মহাকর্ষ" },
             { id:"q78", question:"100 cm লম্বা একটি সুতা দিয়ে 15 gm ভরের একটি বস্তু ঝুলিয়ে দেওয়া হলে বস্তুটির দোলনকাল কত হবে?", options:[{id:"A",text:"20.07 s"},{id:"B",text:"19.67 s"},{id:"C",text:"6.35 s"},{id:"D",text:"2.01 s"}], correctAnswer:"D", explanation:"T = 2π√(L/g) = 2π√(1/9.8) = 2.01 s", topic:"তরঙ্গ" },
-            { id:"q79", question:"নিচের কোনটি বিদ্যুৎ অপরিবাহী?", options:[{id:"A",text:"প্লাস্টিক"},{id:"B",text:"রূপা"},{id:"C",text:"তামা"},{id:"D",text:"সোনা"}], correctAnswer:"A", explanation:"প্লাস্টিকের মধ্য দিয়ে বিদ্যুৎ প্রবাহিত হতে পারে না।", topic:"চল তড়িৎ" },
+            { id:"q79", question:"নিচের কোনটি বিদ্যুৎ অপরিবাহী?", options:[{id:"A",text:"প্লাস্টিক"},{id:"B",text:"রূপা"},{id:"C",text:"তামা"},{id:"D",text:"সোনা"}], correctAnswer:"A", explanation:"প্লাস্টিকের মধ্য দিয়ে বিদ্যুৎ প্রবাহিত হতে পারেবিধা না।", topic:"চল তড়িৎ" },
             { id:"q80", question:"একটি বস্তুকে খাড়া উপরের দিকে 120 km/h বেগে নিক্ষেপ করা হলো। বস্তুটি সর্বোচ্চ কত উচ্চতায় উঠবে?", options:[{id:"A",text:"12.24 m"},{id:"B",text:"33.33 m"},{id:"C",text:"56.68 m"},{id:"D",text:"734.69 m"}], correctAnswer:"C", explanation:"v = 120 * 5/18 = 33.33 m/s. h = v²/(2g) = 1111 / 19.6 = 56.68 m.", topic:"গতি" },
             { id:"q81", question:"নিচের কোনটি কাজের একক?", options:[{id:"A",text:"নিউটন-মিটার"},{id:"B",text:"নিউটন/মিটার"},{id:"C",text:"N/c"},{id:"D",text:"কুলম্ব/মিটার"}], correctAnswer:"A", explanation:"কাজের একক জুল বা নিউটন-মিটার (Nm)।", topic:"কাজ, ক্ষমতা ও শক্তি" },
             { id:"q82", question:"শব্দ তরঙ্গের তীব্রতা বিস্তারের-", options:[{id:"A",text:"বর্গের সমানুপাতিক"},{id:"B",text:"সমানুপাতিক"},{id:"C",text:"ব্যস্তানুপাতিক"},{id:"D",text:"বর্গের ব্যস্তানুপাতিক"}], correctAnswer:"A", explanation:"I ∝ A²", topic:"শব্দ ও তরঙ্গ" },
@@ -483,7 +484,78 @@
             { id:"q113", question:"ভার্নিয়ার ধ্রুবক হচ্ছে মূল স্কেলের একভাগ এবং-", options:[{id:"A",text:"ভার্নিয়ার সমপাতনের পার্থক্য"},{id:"B",text:"ভার্নিয়ার সমপাতনের অনুপাত"},{id:"C",text:"ভার্নিয়ার স্কেলের মোট ভাগের অনুপাত"},{id:"D",text:"ভার্নিয়ার স্কেলের এক ভাগের পার্থক্য"}], correctAnswer:"D", explanation:"VC = s - v (মূল স্কেলের একভাগ ও ভার্নিয়ার স্কেলের একভাগের পার্থক্য)।", topic:"পরিমাপ" },
             { id:"q114", question:"ঘর্ষণ বল বৃদ্ধি পায় যদি-", options:[{id:"A",text:"পৃষ্ঠতলকে অমসৃণ করা হয়"},{id:"B",text:"চাকা ব্যবহার করা হয়"},{id:"C",text:"বল বিয়ারিং ব্যবহার করা হয়"},{id:"D",text:"লুব্রিকেন্ট ব্যবহার করা হয়"}], correctAnswer:"A", explanation:"পৃষ্ঠতল অমসৃণ হলে ঘর্ষণ বৃদ্ধি পায়।", topic:"বল" },
             { id:"q115", question:"50 kg ভরের একটি সাইকেল 36 kmh⁻¹ বেগে গতিশীল হলে ভরবেগ কত?", options:[{id:"A",text:"5 kg m s⁻¹"},{id:"B",text:"500 kg m s⁻¹"},{id:"C",text:"18 kg m s⁻¹"},{id:"D",text:"1800 kg m s⁻¹"}], correctAnswer:"B", explanation:"v = 10 m/s. p = mv = 50*10 = 500 kg m s⁻¹।", topic:"গতি ও বল" },
-            { id:"q116", question:"অনবায়নযোগ্য কোন শক্তির উৎস থেকে কার্বন-ডাইঅক্সাইড নিঃসরণ হয় না?", options:[{id:"A",text:"তেল"},{id:"B",text:"গ্যাস"},{id:"C",text:"কয়লা"},{id:"D",text:"নিউক্লিয়ার"}], correctAnswer:"D", explanation:"নিউক্লিয়ার শক্তিতে দহন হয় না, তাই CO2 নির্গত হয় না।", topic:"শক্তি" }
+            { id:"q116", question:"অনবায়নযোগ্য কোন শক্তির উৎস থেকে কার্বন-ডাইঅক্সাইড নিঃসরণ হয় না?", options:[{id:"A",text:"তেল"},{id:"B",text:"গ্যাস"},{id:"C",text:"কয়লা"},{id:"D",text:"নিউক্লিয়ার"}], correctAnswer:"D", explanation:"নিউক্লিয়ার শক্তিতে দহন হয় না, তাই CO2 নির্গত হয় না।", topic:"শক্তি" },
+
+            // --- New 73 Questions Added Here ---
+            { id:"ns1_q1", question:"কে দেখিয়েছিলেন বিশ্বব্রহ্মাণ্ড ধীরে ধীরে প্রসারিত হচ্ছে?", options:[{id:"A",text:"আইনস্টাইন"},{id:"B",text:"হাবল"},{id:"C",text:"গ্যালিলিও"},{id:"D",text:"নিউটন"}], correctAnswer:"B", explanation:"বিজ্ঞানী এডুইন হাবল প্রমাণ করেন যে বিশ্বব্রহ্মাণ্ড প্রসারিত হচ্ছে।", topic:"আধুনিক পদার্থবিজ্ঞান" },
+            { id:"ns1_q2", question:"লিওনার্দো দা ভিঞ্চি- i. দক্ষতার সাথে কিছু সাধারণ যন্ত্র উদ্ভাবন করেন ii. চিত্রশিল্পী ছিলেন iii. উড়োজাহাজ আবিষ্কার করেন", options:[{id:"A",text:"i ও ii"},{id:"B",text:"i ও iii"},{id:"C",text:"ii ও iii"},{id:"D",text:"i, ii ও iii"}], correctAnswer:"D", explanation:"তিনি একাধারে চিত্রশিল্পী, স্থপতি এবং উড়োজাহাজসহ বিভিন্ন যন্ত্রের নকশা প্রণয়নকারী ছিলেন।", topic:"বিজ্ঞানের ইতিহাস" },
+            { id:"ns1_q3", question:"সংকুচিত স্প্রিংয়ের ভিতর কোন শক্তি লুকিয়ে থাকে?", options:[{id:"A",text:"গতিশক্তি"},{id:"B",text:"স্প্রিং শক্তি"},{id:"C",text:"যান্ত্রিক শক্তি"},{id:"D",text:"বিভবশক্তি"}], correctAnswer:"D", explanation:"সংকুচিত স্প্রিং তার অবস্থানের পরিবর্তনের কারণে বিভবশক্তি অর্জন করে।", topic:"কাজ, ক্ষমতা ও শক্তি" },
+            { id:"ns1_q4", question:"কোনটি অনবায়নযোগ্য শক্তি?", options:[{id:"A",text:"সৌরশক্তি"},{id:"B",text:"বায়ুশক্তি"},{id:"C",text:"নিউক্লিয়ার শক্তি"},{id:"D",text:"ভূতাপীয় শক্তি"}], correctAnswer:"C", explanation:"নিউক্লিয়ার জ্বালানি একবার ব্যবহার হলে শেষ হয়ে যায়।", topic:"শক্তি" },
+            { id:"ns1_q5", question:"পর্যাবৃত্ত গতির উদাহরণ- i. পানির তরঙ্গ ii. হৃৎপিন্ডের স্পন্দন iii. ঘড়ির কাঁটার গতি", options:[{id:"A",text:"i ও ii"},{id:"B",text:"i ও iii"},{id:"C",text:"ii ও iii"},{id:"D",text:"i, ii ও iii"}], correctAnswer:"D", explanation:"এই তিনটিরই একটি নির্দিষ্ট সময় পরপর গতির পুনরাবৃত্তি ঘটে।", topic:"গতি" },
+            { id:"ns1_q6", question:"বাঁকা পথে গতিশীল একটি বস্তুর আদি ও শেষ অবস্থানের সরলরৈখিক দূরত্ব নিচের কোনটি নির্দেশ করে?", options:[{id:"A",text:"সরণ"},{id:"B",text:"অতিক্রান্ত দূরত্ব"},{id:"C",text:"বেগ"},{id:"D",text:"দ্রুতি"}], correctAnswer:"A", explanation:"আদি ও শেষ বিন্দুর মধ্যকার ন্যূনতম সরলরৈখিক দূরত্বকে সরণ বলে।", topic:"গতি" },
+            { id:"ns1_q7", question:"গ্যালাক্সির ভিতর নক্ষত্ররা ঘুরপাক খায় কোন বলের জন্য?", options:[{id:"A",text:"সবল নিউক্লিয় বল"},{id:"B",text:"দুর্বল নিউক্লিয় বল"},{id:"C",text:"তাড়িত চৌম্বক বল"},{id:"D",text:"মহাকর্ষ বল"}], correctAnswer:"D", explanation:"মহাবিশ্বের বৃহৎ বস্তুগুলোর মধ্যে মহাকর্ষ বল কাজ করে।", topic:"মহাকর্ষ" },
+            { id:"ns1_q8", question:"পানির ঘনত্ব কেরোসিনের ঘনত্বের কত গুণ? (বিশুদ্ধ পানি ধরে)", options:[{id:"A",text:"800"},{id:"B",text:"8"},{id:"C",text:"1.25"},{id:"D",text:"0.8"}], correctAnswer:"C", explanation:"বিশুদ্ধ পানির ঘনত্ব 1000 kg/m³। তাই 1000 / 800 = 1.25 গুণ।", topic:"পদার্থের অবস্থা ও চাপ" },
+            { id:"ns1_q9", question:"কাঠের- i. ঘনত্ব 500 kg m⁻³ ii. ওজন অপসারিত তরলের ওজনের সমান iii. সমুদ্রে ডুবে থাকবে 48.5%", options:[{id:"A",text:"i ও ii"},{id:"B",text:"i ও iii"},{id:"C",text:"ii ও iii"},{id:"D",text:"i, ii ও iii"}], correctAnswer:"D", explanation:"পানিতে অর্ধেক ডোবে তাই ঘনত্ব 500. সমুদ্রে ডুববে 500/1030 = 48.5%. ভাসমান বস্তুর ওজন অপসারিত তরলের সমান।", topic:"পদার্থের অবস্থা ও চাপ" },
+            { id:"ns1_q10", question:"40° সেলসিয়াস তাপমাত্রা কত ফারেনহাইটের সমান?", options:[{id:"A",text:"40 °F"},{id:"B",text:"72 °F"},{id:"C",text:"104 °F"},{id:"D",text:"313 °F"}], correctAnswer:"C", explanation:"F = (40 × 9/5) + 32 = 72 + 32 = 104°F", topic:"তাপ" },
+            { id:"ns1_q11", question:"10° C তাপমাত্রায় একটি দণ্ডের দৈর্ঘ্য 5 m, 110° C তাপমাত্রায় দণ্ডটির দৈর্ঘ্য 5.0167 m । এর দৈর্ঘ্য প্রসারণ সহগ কত?", options:[{id:"A",text:"29940 K⁻¹"},{id:"B",text:"0.33 K⁻¹"},{id:"C",text:"0.000835 K⁻¹"},{id:"D",text:"0.0000334 K⁻¹"}], correctAnswer:"D", explanation:"α = ΔL / (L×ΔT) = 0.0167 / (5 × 100) = 0.0000334 K⁻¹", topic:"তাপ" },
+            { id:"ns1_q12", question:"কোন কম্পাঙ্কের শব্দ দ্বারা শব্দ দূষণ সম্ভব?", options:[{id:"A",text:"12 Hz"},{id:"B",text:"52 Hz"},{id:"C",text:"21,000 Hz"},{id:"D",text:"100,000 Hz"}], correctAnswer:"B", explanation:"শ্রাব্যতার পাল্লা 20Hz-20kHz। শুধুমাত্র 52Hz এই সীমার মধ্যে আছে, যা উচ্চমাত্রায় শব্দ দূষণ করতে পারে।", topic:"শব্দ ও তরঙ্গ" },
+            { id:"ns1_q13", question:"দুটি শব্দ আলাদাভাবে শুনতে হলে দুটি শব্দের মাঝে কমপক্ষে সময়ের ব্যবধান কত থাকা দরকার?", options:[{id:"A",text:"0.5 sec"},{id:"B",text:"0.1 sec"},{id:"C",text:"0.2 sec"},{id:"D",text:"0.3 sec"}], correctAnswer:"B", explanation:"মানুষের মস্তিস্কে শব্দের রেশ 0.1 সেকেন্ড স্থায়ী হয়।", topic:"শব্দ ও তরঙ্গ" },
+            { id:"ns1_q14", question:"অপটিক্যাল ফাইবারের ভিতরের অংশকে কী বলে?", options:[{id:"A",text:"ক্ল্যাড"},{id:"B",text:"সরু কাচ তন্তু"},{id:"C",text:"কোর"},{id:"D",text:"আলোক নল"}], correctAnswer:"C", explanation:"ভিতরের অংশকে কোর এবং বাইরের আবরণকে ক্ল্যাডিং বলে।", topic:"আলো" },
+            { id:"ns1_q15", question:"কোনো বস্তুতে চার্জের উপস্থিতি নির্ণয়ের জন্য নিচের কোন যন্ত্রটি ব্যবহৃত হয়?", options:[{id:"A",text:"ইলেকট্রোস্কোপ"},{id:"B",text:"ভ্যান ডি গ্রাফ মেশিন"},{id:"C",text:"ক্যাপাসিটর"},{id:"D",text:"জেনারেটর"}], correctAnswer:"A", explanation:"ইলেকট্রোস্কোপ বা তড়িৎবীক্ষণ যন্ত্র দিয়ে চার্জের উপস্থিতি মাপা হয়।", topic:"স্থির তড়িৎ" },
+            { id:"ns1_q16", question:"কুলম্ব ধ্রুবকের একক হচ্ছে-", options:[{id:"A",text:"Nm²C⁻²"},{id:"B",text:"Nm²C⁻¹"},{id:"C",text:"N⁻¹m⁻²C²"},{id:"D",text:"Nm⁻²C⁻²"}], correctAnswer:"A", explanation:"কুলম্ব ধ্রুবকের একক Nm²C⁻²।", topic:"স্থির তড়িৎ" },
+            { id:"ns1_q17", question:"সাম্য বল ক্রিয়াশীল- i. জাহাজ পানিতে ভাসার সময় ii. একটি বস্তুর উপর থেকে নিচে পড়ার সময় iii. কোনো ব্যক্তি চেয়ারে বসে থাকার সময়", options:[{id:"A",text:"i ও ii"},{id:"B",text:"ii ও iii"},{id:"C",text:"i ও iii"},{id:"D",text:"i, ii ও iii"}], correctAnswer:"C", explanation:"নিচে পড়ার সময় ত্বরণ থাকে তাই সেটি অসাম্য বল।", topic:"বল" },
+            { id:"ns1_q18", question:"তাপমাত্রা বাড়ালে কোন পদার্থের বিদ্যুৎ প্রবাহ বৃদ্ধি পায়?", options:[{id:"A",text:"তামা"},{id:"B",text:"লোহা"},{id:"C",text:"জিংক"},{id:"D",text:"সিলিকন"}], correctAnswer:"D", explanation:"অর্ধপরিবাহী (যেমন সিলিকন) এর তাপমাত্রা বাড়ালে রোধ কমে ও বিদ্যুৎ প্রবাহ বাড়ে।", topic:"চল তড়িৎ" },
+            { id:"ns1_q19", question:"কোনো পরিবাহীর দুই প্রান্তের বিভব পার্থক্য 220 V এবং তড়িৎ প্রবাহ 20 A হলে রোধ কত?", options:[{id:"A",text:"240 Ω"},{id:"B",text:"220 Ω"},{id:"C",text:"11 Ω"},{id:"D",text:"0.0909 Ω"}], correctAnswer:"C", explanation:"R = V/I = 220/20 = 11 Ω", topic:"চল তড়িৎ" },
+            { id:"ns1_q20", question:"নিচের কোনটি চৌম্বক ক্ষেত্র সৃষ্টি করে?", options:[{id:"A",text:"তড়িৎবাহী তার"},{id:"B",text:"গ্যালভানোমিটার"},{id:"C",text:"মাল্টিমিটার"},{id:"D",text:"তড়িৎ নিরপেক্ষ তার"}], correctAnswer:"A", explanation:"তড়িৎ প্রবাহিত হলে তার চারদিকে চৌম্বক ক্ষেত্র সৃষ্টি হয়।", topic:"বিদ্যুৎ ও চুম্বক" },
+            { id:"ns1_q21", question:"নিচের কোনটির বিশেষ চৌম্বক ধর্ম আছে?", options:[{id:"A",text:"অ্যালুমিনিয়াম"},{id:"B",text:"কোবাল্ট"},{id:"C",text:"তামা"},{id:"D",text:"লেড"}], correctAnswer:"B", explanation:"কোবাল্ট একটি ফেরোচৌম্বক পদার্থ।", topic:"বিদ্যুৎ ও চুম্বক" },
+            { id:"ns1_q22", question:"লেন্সের ক্ষমতা ধনাত্মক হলে- i. লেন্সটির ফোকাস দূরত্ব ধনাত্মক হবে ii. লেন্সটি বাস্তব ও অবাস্তব উভয় প্রতিবিম্ব সৃষ্টি করতে পারে iii. লেন্সটি হ্রস্ব-দৃষ্টির প্রতিকারে সহায়ক", options:[{id:"A",text:"i ও ii"},{id:"B",text:"i ও iii"},{id:"C",text:"ii ও iii"},{id:"D",text:"i, ii ও iii"}], correctAnswer:"A", explanation:"উত্তল লেন্সের ক্ষমতা ধনাত্মক। এটি দীর্ঘ-দৃষ্টির প্রতিকারে ব্যবহৃত হয়, হ্রস্ব-দৃষ্টির নয়।", topic:"আলোর প্রতিসরণ" },
+            { id:"ns1_q23", question:"কে প্রথম ইউরেনিয়াম থেকে তেজস্ক্রিয় রশ্মির অস্তিত্ব প্রমাণ করেন?", options:[{id:"A",text:"আরনেস্ট রাদারফোর্ড"},{id:"B",text:"পিয়ারে কুরি"},{id:"C",text:"হেনরি বেকেরেল"},{id:"D",text:"মেরি কুরি"}], correctAnswer:"C", explanation:"বিজ্ঞানী হেনরি বেকেরেল প্রথম তেজস্ক্রিয়তা আবিষ্কার করেন।", topic:"আধুনিক পদার্থবিজ্ঞান" },
+            { id:"ns2_q1", question:"এক পিকোফ্যারাড সমান কত ফ্যারাড?", options:[{id:"A",text:"10⁻¹⁵"},{id:"B",text:"10⁻¹²"},{id:"C",text:"10¹²"},{id:"D",text:"10¹⁵"}], correctAnswer:"B", explanation:"পিকো (pico) এর মান 10⁻¹²।", topic:"স্থির তড়িৎ" },
+            { id:"ns2_q2", question:"10 গিগাজুল এর সঠিক সংকেত কোনটি?", options:[{id:"A",text:"10 gj"},{id:"B",text:"10 Gj"},{id:"C",text:"10 gJ"},{id:"D",text:"10 GJ"}], correctAnswer:"D", explanation:"গিগাজুল এর সংকেত GJ।", topic:"পরিমাপ" },
+            { id:"ns2_q3", question:"কোনো গাড়ির বেগ 15 m s⁻¹ থেকে সুষমভাবে বৃদ্ধি পেয়ে 10 sec পর 75 m s⁻¹ হয়। গাড়িটির ত্বরণ কত?", options:[{id:"A",text:"2 m s⁻²"},{id:"B",text:"3 m s⁻²"},{id:"C",text:"6 m s⁻²"},{id:"D",text:"5 m s⁻²"}], correctAnswer:"C", explanation:"a = (75-15)/10 = 60/10 = 6 m/s²", topic:"গতি" },
+            { id:"ns2_q4", question:"বস্তুর ভরবেগের পরিবর্তনের হার তার উপর প্রযুক্ত বলের-", options:[{id:"A",text:"ব্যস্তানুপাতিক"},{id:"B",text:"বর্গের সমানুপাতিক"},{id:"C",text:"সমানুপাতিক"},{id:"D",text:"বর্গের ব্যস্তানুপাতিক"}], correctAnswer:"C", explanation:"এটি নিউটনের গতির ২য় সূত্র।", topic:"বল" },
+            { id:"ns2_q5", question:"10 kg ভরের একটি স্থির বস্তুর উপর 100 N বল 0.1 s সময়ব্যাপী ক্রিয়া করলে- i. ত্বরণ 10 m s⁻² ii. ভরবেগের পরিবর্তন 10 kg m s⁻¹ iii. বলের ঘাত 10 Ns", options:[{id:"A",text:"i ও ii"},{id:"B",text:"i ও iii"},{id:"C",text:"ii ও iii"},{id:"D",text:"i, ii ও iii"}], correctAnswer:"D", explanation:"a = 100/10 = 10; Δp = F×t = 10; ঘাত বল = Δp = 10।", topic:"বল" },
+            { id:"ns2_q6", question:"কোন সূত্রের সাহায্যে বস্তুর ভরকে শক্তিতে রূপান্তর করা সম্ভব?", options:[{id:"A",text:"E = 1/2 mv²"},{id:"B",text:"E = mgh"},{id:"C",text:"E = mc²"},{id:"D",text:"F = ma"}], correctAnswer:"C", explanation:"আইনস্টাইনের ভর-শক্তি সমীকরণ E = mc²।", topic:"শক্তি" },
+            { id:"ns2_q7", question:"40 kg ভরের এক বালক 12 s-এ 6 m উঁচু সিঁড়ি অতিক্রম করলে তার ক্ষমতা কত ওয়াট হবে?", options:[{id:"A",text:"20"},{id:"B",text:"32.66"},{id:"C",text:"196"},{id:"D",text:"786"}], correctAnswer:"C", explanation:"P = mgh/t = (40×9.8×6) / 12 = 196 W", topic:"কাজ, ক্ষমতা ও শক্তি" },
+            { id:"ns2_q8", question:"সমান আয়তনবিশিষ্ট নিচের পদার্থের মধ্যে কোনটি বেশি ভারী?", options:[{id:"A",text:"লোহা"},{id:"B",text:"সোনা"},{id:"C",text:"পারদ"},{id:"D",text:"রূপা"}], correctAnswer:"B", explanation:"সোনার ঘনত্ব সবচেয়ে বেশি (19300 kg/m³)।", topic:"পদার্থের অবস্থা ও চাপ" },
+            { id:"ns2_q9", question:" ছুরির একপাশ তীক্ষ্ণ হওয়ার কারণ কী?", options:[{id:"A",text:"বল বৃদ্ধি"},{id:"B",text:"ঘর্ষণ বৃদ্ধি"},{id:"C",text:"চাপ বৃদ্ধি"},{id:"D",text:"ত্বরণ বৃদ্ধি"}], correctAnswer:"C", explanation:"ক্ষেত্রফল কমলে চাপ বৃদ্ধি পায় (P=F/A)।", topic:"পদার্থের অবস্থা ও চাপ" },
+            { id:"ns2_q10", question:"ত্রিমাত্রিক সিসমিক সার্ভেতে প্রতিফলিত তরঙ্গকে কীসের সাহায্যে ধারণ করা যায়?", options:[{id:"A",text:"গ্রিড"},{id:"B",text:"ট্রান্সডিউসার"},{id:"C",text:"জিওফোন"},{id:"D",text:"মনিটর"}], correctAnswer:"C", explanation:"সিসমিক সার্ভেতে শব্দ বা তরঙ্গ ধারণ করতে জিওফোন ব্যবহৃত হয়।", topic:"শব্দ ও তরঙ্গ" },
+            { id:"ns2_q11", question:"10° C তাপমাত্রায় শব্দের দ্রুতি 338 m s⁻¹ হলে 30° C তাপমাত্রায় শূন্য মাধ্যমে শব্দের দ্রুতি কত?", options:[{id:"A",text:"1014 m s⁻¹"},{id:"B",text:"350 m s⁻¹"},{id:"C",text:"332 m s⁻¹"},{id:"D",text:"0 m s⁻¹"}], correctAnswer:"D", explanation:"শূন্য মাধ্যমে শব্দের বেগ সর্বদা শূন্য (0)।", topic:"শব্দ ও তরঙ্গ" },
+            { id:"ns2_q12", question:"একটি বস্তুর দৈর্ঘ্য এবং একটি উত্তল দর্পণের বিবর্ধন যথাক্রমে 0.8 m এবং 0.5 হলে, প্রতিবিম্বের দৈর্ঘ্য কত?", options:[{id:"A",text:"0.40 cm"},{id:"B",text:"40 cm"},{id:"C",text:"160 cm"},{id:"D",text:"400 cm"}], correctAnswer:"B", explanation:"L' = 0.5 × 0.8 = 0.4 m = 40 cm।", topic:"আলোর প্রতিফলন" },
+            { id:"ns2_q13", question:"বস্তুর কোন অবস্থানের জন্য অবতল দর্পণে সৃষ্ট বিম্ব পর্দায় ফেলা যায় না?", options:[{id:"A",text:"P ও F এর মাঝে"},{id:"B",text:"F ও C এর মাঝে"},{id:"C",text:"C ও অসীমের মাঝে"},{id:"D",text:"অসীমে"}], correctAnswer:"A", explanation:"মেরু (P) ও ফোকাস (F) এর মাঝে রাখলে অবাস্তব বিম্ব হয় যা পর্দায় ফেলা যায় না।", topic:"আলোর প্রতিফলন" },
+            { id:"ns2_q14", question:"বিটা কণা আসলে কী?", options:[{id:"A",text:"প্রোটন"},{id:"B",text:"ইলেকট্রন"},{id:"C",text:"নিউট্রন"},{id:"D",text:"নিউক্লিয়াস"}], correctAnswer:"B", explanation:"বিটা কণা হলো দ্রুতগামী ইলেকট্রন।", topic:"আধুনিক পদার্থবিজ্ঞান" },
+            { id:"ns2_q15", question:"পানির সাপেক্ষে বায়ুর প্রতিসরাঙ্ক 0.75 এবং বায়ুতে আলোর বেগ 3 × 10⁸ m s⁻¹ হলে পানিতে আলোর বেগ কত?", options:[{id:"A",text:"4.43 × 10⁸ m s⁻¹"},{id:"B",text:"2.50 × 10⁸ m s⁻¹"},{id:"C",text:"3.99 × 10⁸ m s⁻¹"},{id:"D",text:"2.25 × 10⁸ m s⁻¹"}], correctAnswer:"D", explanation:"বায়ুর সাপেক্ষে পানির প্রতিসরাঙ্ক = 1/0.75 = 1.33। পানিতে বেগ = 3×10⁸ / 1.33 = 2.25 × 10⁸ m/s।", topic:"আলোর প্রতিসরণ" },
+            { id:"ns2_q16", question:"কোন প্রক্রিয়ায় শরীরের নির্দিষ্ট অঙ্গের ভেতর তীব্র আলো ফেলা হয়?", options:[{id:"A",text:"প্রতিফলন"},{id:"B",text:"প্রতিসরণ"},{id:"C",text:"পূর্ণঅভ্যন্তরীণ প্রতিফলন"},{id:"D",text:"ব্যতিচার"}], correctAnswer:"C", explanation:"এন্ডোস্কোপিতে পূর্ণঅভ্যন্তরীণ প্রতিফলনের মাধ্যমে আলো ফেলা হয়।", topic:"আলোর প্রতিসরণ" },
+            { id:"ns2_q17", question:"একটি আহিত বস্তুর চারদিকে যে অঞ্চল জুড়ে এর প্রভাব থাকে তাকে কি বলে?", options:[{id:"A",text:"তড়িৎ তীব্রতা"},{id:"B",text:"তড়িৎ বলরেখা"},{id:"C",text:"তড়িৎ ক্ষেত্র"},{id:"D",text:"তড়িৎ বল"}], correctAnswer:"C", explanation:"আহিত বস্তুর প্রভাব সৃষ্টিকারী অঞ্চলকে তড়িৎ ক্ষেত্র বলে।", topic:"স্থির তড়িৎ" },
+            { id:"ns2_q18", question:"30 C এর একটি আধান থেকে 40 cm দূরবর্তী কোন বিন্দুর তড়িৎ ক্ষেত্রের তীব্রতা কত?", options:[{id:"A",text:"16.88 × 10¹¹ NC⁻¹"},{id:"B",text:"1.69 × 10¹⁰ NC⁻¹"},{id:"C",text:"1688 NC⁻¹"},{id:"D",text:"16.88 × 10¹¹ N"}], correctAnswer:"A", explanation:"E = (9×10⁹ × 30) / (0.4)² = 16.875 × 10¹¹ NC⁻¹।", topic:"স্থির তড়িৎ" },
+            { id:"ns2_q19", question:"পরিবাহীর দৈর্ঘ্য অর্ধেক করা হলে রোধের কী পরিবর্তন হবে?", options:[{id:"A",text:"1/4 গুণ"},{id:"B",text:"1/2 গুণ"},{id:"C",text:"2 গুণ"},{id:"D",text:"4 গুণ"}], correctAnswer:"B", explanation:"রোধ দৈর্ঘ্যের সমানুপাতিক (R ∝ L)। তাই দৈর্ঘ্য অর্ধেক হলে রোধ অর্ধেক হবে।", topic:"চল তড়িৎ" },
+            { id:"ns2_q20", question:"তামার রোধকত্ব কোনটি?", options:[{id:"A",text:"1.6 × 10⁻⁸ Ωm"},{id:"B",text:"1.68 × 10⁻⁸ Ωm"},{id:"C",text:"2.44 × 10⁻⁸ Ωm"},{id:"D",text:"5.5 × 10⁻⁸ Ωm"}], correctAnswer:"B", explanation:"তামার স্ট্যান্ডার্ড রোধকত্ব 1.68 × 10⁻⁸ Ωm।", topic:"চল তড়িৎ" },
+            { id:"ns2_q21", question:"ত্বরণের পরিবর্তন হয়- i. মানের পরিবর্তন হলে ii. দিকের পরিবর্তন হলে iii. মান ও দিক উভয়ের পরিবর্তন হলে", options:[{id:"A",text:"i ও ii"},{id:"B",text:"i ও iii"},{id:"C",text:"ii ও iii"},{id:"D",text:"i, ii ও iii"}], correctAnswer:"D", explanation:"ত্বরণ ভেক্টর রাশি, তাই মান বা দিক যেকোনোটি পরিবর্তন হলেই ত্বরণ পরিবর্তিত হয়।", topic:"গতি" },
+            { id:"ns2_q22", question:"একটি ট্রান্সফর্মারের মুখ্য ও গৌণ কুণ্ডলীর পাকসংখ্যা যথাক্রমে 50 ও 250। মুখ্য কুণ্ডলীতে 220 V প্রদান করা হলে গৌণ কুণ্ডলীর ভোল্টেজ কত হবে?", options:[{id:"A",text:"250 V"},{id:"B",text:"500 V"},{id:"C",text:"1100 V"},{id:"D",text:"1420 V"}], correctAnswer:"C", explanation:"Vs = 220 × (250/50) = 1100 V", topic:"বিদ্যুৎ ও চুম্বক" },
+            { id:"ns2_q23", question:"ট্রান্সফর্মারটি (স্টেপ-আপ) ব্যবহার করা যাবে- i. টিভি চালাতে ii. বাসা বাড়িতে বিদ্যুৎ সরবরাহ করতে iii. দূর দূরান্তে তড়িৎ প্রেরণে", options:[{id:"A",text:"i"},{id:"B",text:"ii"},{id:"C",text:"iii"},{id:"D",text:"i, ii ও iii"}], correctAnswer:"C", explanation:"স্টেপ-আপ ট্রান্সফর্মার ভোল্টেজ বাড়িয়ে দূর-দূরান্তে বিদ্যুৎ পাঠাতে ব্যবহৃত হয়।", topic:"বিদ্যুৎ ও চুম্বক" },
+            { id:"ns3_q1", question:"আধুনিক বিজ্ঞানের জনক কাকে বলা হয়?", options:[{id:"A",text:"গ্যালিলিও"},{id:"B",text:"নিউটন"},{id:"C",text:"আইনস্টাইন"},{id:"D",text:"আর্কিমিডিস"}], correctAnswer:"A", explanation:"গ্যালিলিওকে আধুনিক বিজ্ঞানের জনক ধরা হয়।", topic:"বিজ্ঞানের ইতিহাস" },
+            { id:"ns3_q2", question:"স্থির বস্তুর অবস্থাকে কী বলে?", options:[{id:"A",text:"স্থিতি"},{id:"B",text:"গতি"},{id:"C",text:"চলমান"},{id:"D",text:"জড়তা"}], correctAnswer:"A", explanation:"সময়ের সাথে পারিপার্শ্বিকের সাপেক্ষে বস্তুর স্থির থাকাকে স্থিতি বলে।", topic:"গতি" },
+            { id:"ns3_q3", question:"সাইকেলের প্যাডেলের গতি কোন ধরনের গতি?", options:[{id:"A",text:"চলন গতি"},{id:"B",text:"স্পন্দন গতি"},{id:"C",text:"দোলন গতি"},{id:"D",text:"ঘূর্ণন গতি"}], correctAnswer:"D", explanation:"প্যাডেল অক্ষের চারদিকে ঘোরে তাই এটি ঘূর্ণন গতির উদাহরণ।", topic:"গতি" },
+            { id:"ns3_q4", question:"তাপ ও তাপমাত্রার ক্ষেত্রে- i. 1 ক্যালরি = 2.4 জুল ii. তাপমাত্রা হচ্ছে শক্তির একটি বিশেষ নির্দেশক iii. আন্তর্জাতিক পদ্ধতি চালুর পূর্বে তাপের একক ছিল ক্যালরি", options:[{id:"A",text:"i"},{id:"B",text:"ii"},{id:"C",text:"ii ও iii"},{id:"D",text:"i, ii ও iii"}], correctAnswer:"C", explanation:"1 ক্যালরি = 4.2 জুল (2.4 নয়)। তাই i ভুল।", topic:"তাপ" },
+            { id:"ns3_q5", question:"বোসন কী ধরনের কণা?", options:[{id:"A",text:"মৌলিক কণা"},{id:"B",text:"যৌগিক কণা"},{id:"C",text:"রাসায়নিক কণা"},{id:"D",text:"দুর্বল কণা"}], correctAnswer:"A", explanation:"স্ট্যান্ডার্ড মডেলে বোসন একটি মৌলিক কণা।", topic:"আধুনিক পদার্থবিজ্ঞান" },
+            { id:"ns3_q6", question:"একটি সুর শলাকার কম্পাঙ্ক 2 kHz। সুর শলাকা থেকে সৃষ্ট তরঙ্গের পর্যায়কাল কত?", options:[{id:"A",text:"0.000 5 s"},{id:"B",text:"0.005 s"},{id:"C",text:"0.05 s"},{id:"D",text:"0.5 s"}], correctAnswer:"A", explanation:"T = 1/f = 1/2000 = 0.0005 s।", topic:"শব্দ ও তরঙ্গ" },
+            { id:"ns3_q7", question:"সৃষ্ট তরঙ্গের ক্ষেত্রে (বায়ুতে বেগ 340 m/s)- i. যান্ত্রিক তরঙ্গ ii. তরঙ্গদৈর্ঘ্য 0.17 m iii. তরঙ্গশীর্ষ ও তরঙ্গপাদ সৃষ্টি হয়", options:[{id:"A",text:"i ও ii"},{id:"B",text:"i ও iii"},{id:"C",text:"ii ও iii"},{id:"D",text:"i, ii ও iii"}], correctAnswer:"A", explanation:"λ = 340/2000 = 0.17m। শব্দ তরঙ্গ অনুদৈর্ঘ্য, তাই এতে তরঙ্গশীর্ষ/পাদ সৃষ্টি হয় না (সংকোচন-প্রসারণ হয়)।", topic:"শব্দ ও তরঙ্গ" },
+            { id:"ns3_q8", question:"নিউটনের গতির প্রথম সূত্র থেকে কোন দুটি বিষয়ের ধারণা পাওয়া যায়?", options:[{id:"A",text:"বল ও জড়তা"},{id:"B",text:"বল ও ভরবেগ"},{id:"C",text:"জড়তা ও ভরবেগ"},{id:"D",text:"জড়তা ও শক্তি"}], correctAnswer:"A", explanation:"১ম সূত্র থেকে বলের সংজ্ঞা এবং জড়তার ধারণা পাওয়া যায়।", topic:"বল" },
+            { id:"ns3_q9", question:"বিদ্যুতের খুঁটি ও ট্রান্সফর্মারের মধ্যে আকর্ষণ বল কোনটি?", options:[{id:"A",text:"মহাকর্ষ বল"},{id:"B",text:"বিদ্যুৎ চুম্বকীয় বল"},{id:"C",text:"ইলেকট্রো উইক বল"},{id:"D",text:"নিউক্লিয় বল"}], correctAnswer:"A", explanation:"যেকোনো দুটি ভরের মধ্যে মহাকর্ষ বল কাজ করে। সামগ্রিকভাবে খুঁটি ও ট্রান্সফর্মার চার্জ নিরপেক্ষ।", topic:"মহাকর্ষ" },
+            { id:"ns3_q10", question:"ম্যাচ বাক্সের একটি কাঠি দিয়ে বাক্সে 3N বলে ঘষা হলো। কাঠিটিকে 4 cm টানা হলে কাঠি ঘষতে কত শক্তি ব্যয় হলো?", options:[{id:"A",text:"0.12 J"},{id:"B",text:"1.2 J"},{id:"C",text:"1.176 J"},{id:"D",text:"12 J"}], correctAnswer:"A", explanation:"W = F × s = 3 × 0.04 = 0.12 J।", topic:"কাজ, ক্ষমতা ও শক্তি" },
+            { id:"ns3_q11", question:"শক্তির সবচেয়ে সাধারণ রূপ কোনটি?", options:[{id:"A",text:"তাপশক্তি"},{id:"B",text:"আলোকশক্তি"},{id:"C",text:"সৌরশক্তি"},{id:"D",text:"যান্ত্রিক শক্তি"}], correctAnswer:"D", explanation:"প্রকৃতিতে যান্ত্রিক শক্তিই (গতি ও বিভব) সবচেয়ে সাধারণ রূপ।", topic:"শক্তি" },
+            { id:"ns3_q12", question:"Absolute Zero-এর ক্ষেত্রে নিচের কোনটি সঠিক?", options:[{id:"A",text:"0° C"},{id:"B",text:"32° F"},{id:"C",text:"-273.15 K"},{id:"D",text:"-459.67° F"}], correctAnswer:"D", explanation:"পরম শূন্য তাপমাত্রা = 0 K = -273.15°C = -459.67°F। (অপশন C তে K দেওয়া, তাই ভুল)।", topic:"তাপ" },
+            { id:"ns3_q13", question:"নিচের কোনটি দৃশ্যমান আলোর তরঙ্গদৈর্ঘ্যের সীমা নির্দেশ করে?", options:[{id:"A",text:"300 nm - 700 nm"},{id:"B",text:"400 nm - 700 nm"},{id:"C",text:"300 μm - 700 μm"},{id:"D",text:"400 μm - 700 μm"}], correctAnswer:"B", explanation:"দৃশ্যমান আলোর তরঙ্গদৈর্ঘ্য 400 nm থেকে 700 nm পর্যন্ত।", topic:"আলো" },
+            { id:"ns3_q14", question:"সমতল আয়নায় সৃষ্ট বিম্ব অসদ ও- i. সোজা ii. খর্বিত iii. বিবর্ধিত", options:[{id:"A",text:"i"},{id:"B",text:"ii"},{id:"C",text:"iii"},{id:"D",text:"i ও iii"}], correctAnswer:"A", explanation:"সমতল দর্পণে বিম্ব সর্বদা লক্ষ্যবস্তুর সমান হয়।", topic:"আলোর প্রতিফলন" },
+            { id:"ns3_q15", question:"প্রতিসরণাঙ্কের একক কোনটি?", options:[{id:"A",text:"রেডিয়ান"},{id:"B",text:"ডিগ্রি"},{id:"C",text:"একক নেই"},{id:"D",text:"মিলিমিটার"}], correctAnswer:"C", explanation:"প্রতিসরণাঙ্ক দুটি একই রাশির (বেগের) অনুপাত, তাই এর কোনো একক নেই।", topic:"আলোর প্রতিসরণ" },
+            { id:"ns3_q16", question:"আপতন কোণ ও সংকট কোণের মান সমান হলে প্রতিসৃত রশ্মি ও বিভেদ তলের মধ্যবর্তী কোণ কত?", options:[{id:"A",text:"90°"},{id:"B",text:"60°"},{id:"C",text:"45°"},{id:"D",text:"0°"}], correctAnswer:"D", explanation:"সংকট কোণে আপতিত হলে প্রতিসরণ কোণ 90° হয়, অর্থাৎ রশ্মি বিভেদ তল ঘেঁষে যায়। তাই বিভেদ তলের সাথে কোণ 0°।", topic:"আলোর প্রতিসরণ" },
+            { id:"ns3_q17", question:"প্রোটনের চার্জ কত?", options:[{id:"A",text:"-1.6 × 10⁻¹⁹ C"},{id:"B",text:"+1.6 × 10⁻¹⁹ C"},{id:"C",text:"+1.6 × 10⁻¹⁸ C"},{id:"D",text:"+1.6 × 10⁻¹⁷ C"}], correctAnswer:"B", explanation:"প্রোটনের চার্জ ধনাত্মক (+1.6 × 10⁻¹⁹ C)।", topic:"স্থির তড়িৎ" },
+            { id:"ns3_q18", question:"চোখের ভিতর লোহার গুঁড়া ঢুকলে তা বের করার জন্য কোনটি ব্যবহৃত হয়?", options:[{id:"A",text:"পানি"},{id:"B",text:"গ্যাস"},{id:"C",text:"তড়িৎচুম্বক"},{id:"D",text:"ফোটন বার"}], correctAnswer:"C", explanation:"চিকিৎসকরা সূক্ষ্ম লোহার কণা বের করতে তড়িৎচুম্বক ব্যবহার করেন।", topic:"বিদ্যুৎ ও চুম্বক" },
+            { id:"ns3_q19", question:"মৌলিক কণিকার মধ্যে সবচেয়ে হালকা কোনটি?", options:[{id:"A",text:"প্রোটন"},{id:"B",text:"পজিট্রন"},{id:"C",text:"নিউট্রন"},{id:"D",text:"ইলেকট্রন"}], correctAnswer:"D", explanation:"ইলেকট্রন প্রোটন বা নিউট্রনের চেয়ে প্রায় 1836 গুণ হালকা।", topic:"আধুনিক পদার্থবিজ্ঞান" },
+            { id:"ns3_q20", question:"আধানের প্রকৃতি নির্ণয় করা যায় কোন যন্ত্রের সাহায্যে?", options:[{id:"A",text:"অ্যামিটার"},{id:"B",text:"গ্যালভানোমিটার"},{id:"C",text:"তড়িৎবীক্ষণ যন্ত্র"},{id:"D",text:"ভোল্টমিটার"}], correctAnswer:"C", explanation:"তড়িৎবীক্ষণ যন্ত্র বা ইলেকট্রোস্কোপ আধানের অস্তিত্ব ও প্রকৃতি নির্ণয়ে ব্যবহৃত হয়।", topic:"স্থির তড়িৎ" },
+            { id:"ns3_q21", question:"সাধারণ যে ব্যাটারি সেলগুলো ব্যবহার করা হয় তার বিভব পার্থক্য কত?", options:[{id:"A",text:"4.5 V"},{id:"B",text:"3.5 V"},{id:"C",text:"1.5 V"},{id:"D",text:"1.25 V"}], correctAnswer:"C", explanation:"পেন্সিল বা ড্রাই সেলের ভোল্টেজ 1.5 V হয়।", topic:"চল তড়িৎ" },
+            { id:"ns3_q22", question:"নিচের কোনটি অর্ধ-পরিবাহী?", options:[{id:"A",text:"কাচ"},{id:"B",text:"সিলিকন"},{id:"C",text:"নাইক্রোম"},{id:"D",text:"হীরা"}], correctAnswer:"B", explanation:"সিলিকন, জার্মেনিয়াম ইত্যাদি অর্ধপরিবাহী পদার্থ।", topic:"চল তড়িৎ" },
+            { id:"ns3_q23", question:"বিদ্যুৎ প্রবাহ তারের চারদিকে কী সৃষ্টি করে?", options:[{id:"A",text:"চৌম্বক ক্ষেত্র"},{id:"B",text:"চাপ"},{id:"C",text:"বল"},{id:"D",text:"প্রাবল্য"}], correctAnswer:"A", explanation:"বিজ্ঞানী অরস্টেড প্রমাণ করেন বিদ্যুৎ প্রবাহ চৌম্বক ক্ষেত্র সৃষ্টি করে।", topic:"বিদ্যুৎ ও চুম্বক" }
         ];
 
         // Core App Variables
@@ -492,7 +564,7 @@
             currentQuestionIndex: 0,
             answers: {},
             markedForReview: {},
-            timeLeft: 60 * 60, // 60 minutes
+            timeLeft: 90 * 60, // 90 minutes for 189 questions
             timerInterval: null,
             isSubmitted: false
         };
@@ -529,7 +601,7 @@
             totalQuestionsCount.innerText = questionsData.length + 'টি';
             totalQNum.innerText = questionsData.length;
 
-            const savedState = localStorage.getItem('saiful_physics_mcq');
+            const savedState = localStorage.getItem('saiful_physics_final_v3');
             if (savedState) {
                 try {
                     const parsed = JSON.parse(savedState);
@@ -543,7 +615,7 @@
                             renderPalette();
                             return;
                         } else {
-                            localStorage.removeItem('saiful_physics_mcq');
+                            localStorage.removeItem('saiful_physics_final_v3');
                         }
                     }
                 } catch (e) { console.error("Error loading state:", e); }
@@ -554,8 +626,10 @@
             const name = studentNameInput.value.trim();
             if (!name) { alert('আপনার নাম লিখুন।'); studentNameInput.focus(); return; }
             state.studentName = name;
+            
             startScreen.classList.remove('active');
             examScreen.classList.add('active');
+            
             startTimer();
             renderQuestion();
             renderPalette();
@@ -675,7 +749,7 @@
         function submitExam(isAuto = false) {
             if (state.timerInterval) clearInterval(state.timerInterval);
             state.isSubmitted = true;
-            localStorage.removeItem('saiful_physics_mcq');
+            localStorage.removeItem('saiful_physics_final_v3');
             examScreen.classList.remove('active'); resultScreen.classList.add('active');
             
             let correct = 0, incorrect = 0, unanswered = 0;
@@ -717,11 +791,14 @@
             document.getElementById('answerReviewContainer').classList.toggle('hidden');
         });
         
-        document.getElementById('restartBtn').addEventListener('click', () => location.reload());
+        document.getElementById('restartBtn').addEventListener('click', () => {
+            localStorage.removeItem('saiful_physics_final_v3');
+            location.reload();
+        });
 
         function saveState() {
             if (!state.isSubmitted && state.studentName) {
-                localStorage.setItem('saiful_physics_mcq', JSON.stringify(state));
+                localStorage.setItem('saiful_physics_final_v3', JSON.stringify(state));
             }
         }
         
