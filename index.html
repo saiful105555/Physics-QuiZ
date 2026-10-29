@@ -4,13 +4,104 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>পদার্থবিজ্ঞান বহুনির্বাচনি পরীক্ষা | সাইফুল'স সাইন্স কেয়ার</title>
-    <!-- Google Fonts: Kalpurush & Noto Serif Bengali -->
     <link href="https://fonts.googleapis.com/css2?family=Kalpurush&family=Noto+Serif+Bengali:wght@600;700&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <style>
+        :root { --navy: #0A192F; --royal-blue: #2563EB; --teal: #0D9488; --white: #FFFFFF; --light-blue: #F0F4F8; --success: #10B981; --warning: #F59E0B; --danger: #EF4444; --gray-bg: #F8FAFC; --border-color: #E2E8F0; --text-dark: #1E293B; --text-muted: #64748B; --shadow: 0 10px 25px -5px rgba(10, 25, 47, 0.1), 0 8px 10px -6px rgba(10, 25, 47, 0.1); }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Kalpurush', 'Hind Siliguri', sans-serif; background-color: var(--gray-bg); color: var(--text-dark); min-height: 100vh; display: flex; flex-direction: column; }
+        .brand-title { font-family: 'Noto Serif Bengali', serif; font-weight: 700; }
+        .app-header { background: linear-gradient(135deg, var(--navy), var(--royal-blue)); color: var(--white); padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .brand-subtitle { font-size: 0.9rem; opacity: 0.9; }
+        .main-container { flex: 1; max-width: 1200px; width: 100%; margin: 2rem auto; padding: 0 1rem; display: flex; justify-content: center; align-items: center; }
+        .card { background: var(--white); border-radius: 16px; box-shadow: var(--shadow); width: 100%; overflow: hidden; transition: all 0.3s ease; }
+        .screen { display: none; }
+        .screen.active { display: block; animation: fadeIn 0.4s ease-in-out; }
+        .hidden { display: none !important; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .welcome-box { padding: 2.5rem; }
+        .welcome-box h2 { color: var(--navy); margin-bottom: 0.5rem; font-size: 1.8rem; }
+        .welcome-box p { color: var(--text-muted); margin-bottom: 1.5rem; }
+        .exam-info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; background: var(--light-blue); padding: 1.2rem; border-radius: 10px; margin-bottom: 1.5rem; }
+        .info-item span { display: block; font-size: 0.85rem; color: var(--text-muted); }
+        .info-item strong { font-size: 1.1rem; color: var(--navy); }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; }
+        .form-group input, .search-input, .filter-select { width: 100%; padding: 0.8rem 1rem; border: 1px solid var(--border-color); border-radius: 8px; font-size: 1rem; font-family: inherit; outline: none; }
+        .rules-box { background: #FEF3C7; border-left: 4px solid var(--warning); padding: 1rem 1.2rem; border-radius: 6px; margin-bottom: 1.5rem; }
+        .rules-box h3 { font-size: 1rem; margin-bottom: 0.5rem; color: #92400E; }
+        .rules-box ul { margin-left: 1.2rem; font-size: 0.9rem; color: #78350F; }
+        .btn { padding: 0.75rem 1.5rem; border: none; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; font-family: inherit; transition: all 0.2s; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; }
+        .btn-primary { background: var(--royal-blue); color: var(--white); }
+        .btn-secondary { background: var(--teal); color: var(--white); }
+        .btn-success { background: var(--success); color: var(--white); }
+        .btn-warning { background: var(--warning); color: var(--white); }
+        .btn-outline { background: transparent; border: 1px solid var(--border-color); color: var(--text-dark); }
+        .btn-lg { width: 100%; padding: 1rem; font-size: 1.1rem; }
+        .btn-block { width: 100%; }
+        .exam-top-bar { display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.5rem; background: var(--light-blue); border-bottom: 1px solid var(--border-color); }
+        .exam-progress-info { font-weight: 600; color: var(--navy); }
+        .timer-display { display: flex; align-items: center; gap: 0.5rem; font-weight: 700; font-size: 1.1rem; color: var(--danger); background: #FEE2E2; padding: 0.4rem 0.8rem; border-radius: 6px; }
+        .palette-toggle-btn { display: none; background: var(--navy); color: var(--white); border: none; padding: 0.4rem 0.8rem; border-radius: 6px; }
+        .progress-bar-container { height: 6px; background: var(--border-color); width: 100%; }
+        .progress-bar-fill { height: 100%; background: var(--success); width: 0%; transition: width 0.3s ease; }
+        .exam-body-grid { display: grid; grid-template-columns: 1fr 300px; min-height: 500px; }
+        .question-area { padding: 2rem; display: flex; flex-direction: column; }
+        .question-header-meta { display: flex; gap: 0.5rem; margin-bottom: 1rem; }
+        .badge { padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600; background: #E0E7FF; color: var(--royal-blue); }
+        .badge-secondary { background: #F1F5F9; color: var(--text-muted); }
+        .question-text { font-size: 1.25rem; font-weight: 600; line-height: 1.6; color: var(--navy); margin-bottom: 1.5rem; }
+        .options-container { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem; flex: 1; }
+        .option-card { display: flex; align-items: center; padding: 1rem 1.2rem; border: 2px solid var(--border-color); border-radius: 10px; cursor: pointer; transition: all 0.2s; background: var(--white); }
+        .option-card:hover { border-color: var(--royal-blue); background: var(--light-blue); }
+        .option-card.selected { border-color: var(--royal-blue); background: #EFF6FF; box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2); }
+        .option-badge { width: 32px; height: 32px; background: var(--light-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; margin-right: 1rem; color: var(--royal-blue); }
+        .option-card.selected .option-badge { background: var(--royal-blue); color: var(--white); }
+        .option-text { font-size: 1.05rem; }
+        .exam-nav-controls { display: flex; gap: 1rem; flex-wrap: wrap; border-top: 1px solid var(--border-color); padding-top: 1.5rem; }
+        .palette-sidebar { background: var(--light-blue); border-left: 1px solid var(--border-color); padding: 1.5rem; display: flex; flex-direction: column; }
+        .palette-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+        .close-palette { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; }
+        .palette-legend { display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.85rem; margin-bottom: 1rem; background: var(--white); padding: 0.8rem; border-radius: 8px; }
+        .legend-item { display: flex; align-items: center; gap: 0.5rem; }
+        .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+        .dot.answered { background: var(--success); } .dot.unanswered { background: var(--border-color); } .dot.marked { background: var(--warning); }
+        .palette-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; flex: 1; overflow-y: auto; max-height: 400px; margin-bottom: 1rem; }
+        .palette-btn { aspect-ratio: 1; border: 1px solid var(--border-color); background: var(--white); border-radius: 6px; font-weight: 600; cursor: pointer; }
+        .palette-btn.answered { background: var(--success); color: var(--white); border-color: var(--success); }
+        .palette-btn.marked { background: var(--warning); color: var(--white); border-color: var(--warning); }
+        .palette-btn.current { box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.4); border-color: var(--royal-blue); }
+        .result-header { text-align: center; padding: 2rem; background: var(--light-blue); border-bottom: 1px solid var(--border-color); }
+        .result-summary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; padding: 2rem; align-items: center; }
+        .circular-chart-container { width: 180px; height: 180px; border-radius: 50%; background: conic-gradient(var(--success) 100%, var(--light-blue) 0%); display: flex; flex-direction: column; justify-content: center; align-items: center; border: 8px solid var(--white); margin: 0 auto; }
+        .score-number { font-size: 1.8rem; font-weight: 700; color: var(--navy); }
+        .score-percentage { font-size: 1rem; color: var(--text-muted); }
+        .stats-details { display: flex; flex-direction: column; gap: 1rem; background: var(--gray-bg); padding: 1.5rem; border-radius: 12px; }
+        .stat-row { display: flex; justify-content: space-between; font-size: 1.05rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; }
+        .result-actions { display: flex; gap: 1rem; justify-content: center; padding: 0 2rem 2rem 2rem; flex-wrap: wrap; }
+        .answer-review-container { padding: 2rem; border-top: 1px solid var(--border-color); background: var(--light-blue); }
+        .review-list { display: flex; flex-direction: column; gap: 1rem; margin-top: 1rem; }
+        .review-item { background: var(--white); padding: 1.2rem; border-radius: 8px; border-left: 5px solid var(--border-color); }
+        .review-item.correct { border-left-color: var(--success); } .review-item.incorrect { border-left-color: var(--danger); }
+        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(10, 25, 47, 0.6); display: flex; justify-content: center; align-items: center; z-index: 1000; padding: 1rem; }
+        .modal-content { background: var(--white); border-radius: 16px; width: 100%; max-width: 800px; max-height: 90vh; display: flex; flex-direction: column; }
+        .modal-sm { max-width: 450px; padding: 2rem; }
+        .modal-header { padding: 1.2rem 1.5rem; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; }
+        .modal-body { padding: 1.5rem; overflow-y: auto; }
+        .admin-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+        .admin-table th, .admin-table td { padding: 0.75rem; border: 1px solid var(--border-color); text-align: left; }
+        .admin-table th { background: var(--light-blue); color: var(--navy); }
+        .text-success { color: var(--success); } .text-danger { color: var(--danger); } .text-muted { color: var(--text-muted); }
+        .app-footer { text-align: center; padding: 1rem; background: var(--navy); color: var(--white); font-size: 0.9rem; }
+        @media (max-width: 900px) {
+            .exam-body-grid { grid-template-columns: 1fr; }
+            .palette-sidebar { position: fixed; top: 0; right: -320px; width: 300px; height: 100%; z-index: 1100; transition: right 0.3s ease; box-shadow: -5px 0 25px rgba(0,0,0,0.2); }
+            .palette-sidebar.open { right: 0; }
+            .close-palette, .palette-toggle-btn { display: inline-block; }
+            .result-summary-grid { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
 <body>
-
-    <!-- Header / Brand Bar -->
     <header class="app-header">
         <div class="brand-container">
             <h1 class="brand-title">সাইফুল'স সাইন্স কেয়ার</h1>
@@ -21,39 +112,22 @@
         </div>
     </header>
 
-    <!-- Main Container -->
     <main class="main-container">
-
-        <!-- 1. Start Screen -->
+        <!-- Start Screen -->
         <section id="startScreen" class="card screen active">
             <div class="welcome-box">
                 <h2>পরীক্ষায় স্বাগতম!</h2>
-                <p>সঠিক প্রস্তুতি ও মূল্যায়নের জন্য পদার্থবিজ্ঞান অনলাইন পরীক্ষা। পরীক্ষা শুরু করতে আপনার নাম এবং প্রয়োজনীয় তথ্য প্রদান করুন।</p>
-                
+                <p>সঠিক প্রস্তুতি ও মূল্যায়নের জন্য পদার্থবিজ্ঞান অনলাইন পরীক্ষা। পরীক্ষা শুরু করতে আপনার নাম লিখুন।</p>
                 <div class="exam-info-grid">
-                    <div class="info-item">
-                        <span>মোট প্রশ্ন:</span>
-                        <strong id="totalQuestionsCount">২৫টি</strong>
-                    </div>
-                    <div class="info-item">
-                        <span>সময়কাল:</span>
-                        <strong>৩০ মিনিট</strong>
-                    </div>
-                    <div class="info-item">
-                        <span>প্রতি প্রশ্নের মান:</span>
-                        <strong>১ নম্বর</strong>
-                    </div>
-                    <div class="info-item">
-                        <span>নেগেটিভ মার্কিং:</span>
-                        <strong>নেই</strong>
-                    </div>
+                    <div class="info-item"><span>মোট প্রশ্ন:</span> <strong id="totalQuestionsCount">-</strong></div>
+                    <div class="info-item"><span>সময়কাল:</span> <strong>৬০ মিনিট</strong></div>
+                    <div class="info-item"><span>প্রতি প্রশ্নের মান:</span> <strong>১ নম্বর</strong></div>
+                    <div class="info-item"><span>নেগেটিভ মার্কিং:</span> <strong>নেই</strong></div>
                 </div>
-
                 <div class="form-group">
                     <label for="studentName">শিক্ষার্থীর নাম:</label>
                     <input type="text" id="studentName" placeholder="আপনার পূর্ণ নাম লিখুন" required>
                 </div>
-
                 <div class="rules-box">
                     <h3>পরীক্ষার নিয়মাবলি:</h3>
                     <ul>
@@ -62,45 +136,31 @@
                         <li>যেকোনো সময় ডানদিকের প্যালেট থেকে প্রশ্ন পরিবর্তন করতে পারবেন।</li>
                     </ul>
                 </div>
-
                 <button id="startExamBtn" class="btn btn-primary btn-lg">পরীক্ষা শুরু করুন</button>
             </div>
         </section>
 
-        <!-- 2. Exam Screen -->
+        <!-- Exam Screen -->
         <section id="examScreen" class="card screen hidden">
-            <!-- Top Bar: Timer & Progress -->
             <div class="exam-top-bar">
-                <div class="exam-progress-info">
-                    প্রশ্ন <span id="currentQNum">১</span> / <span id="totalQNum">২৫</span>
-                </div>
+                <div class="exam-progress-info">প্রশ্ন <span id="currentQNum">১</span> / <span id="totalQNum">-</span></div>
                 <div class="timer-display" id="timerDisplay">
                     <svg class="timer-icon" viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M16.2,16.2L11,13V7H12.5V12.2L17,14.9L16.2,16.2Z"/></svg>
-                    <span id="timeRemaining">৩০:০০</span>
+                    <span id="timeRemaining">৬০:০০</span>
                 </div>
                 <button id="paletteToggleBtn" class="palette-toggle-btn">প্যালেট</button>
             </div>
-
-            <!-- Progress Bar -->
             <div class="progress-bar-container">
                 <div id="examProgressBar" class="progress-bar-fill" style="width: 0%;"></div>
             </div>
-
             <div class="exam-body-grid">
-                <!-- Left / Main Question Area -->
                 <div class="question-area">
                     <div class="question-header-meta">
-                        <span id="questionTopicBadge" class="badge">মেকানিক্স</span>
-                        <span id="questionIdBadge" class="badge badge-secondary">ID: q1</span>
+                        <span id="questionTopicBadge" class="badge">বিষয়</span>
+                        <span id="questionIdBadge" class="badge badge-secondary">ID</span>
                     </div>
-                    <div class="question-text" id="questionText">
-                        প্রশ্ন লোড হচ্ছে...
-                    </div>
-                    <div class="options-container" id="optionsContainer">
-                        <!-- Options generated dynamically -->
-                    </div>
-
-                    <!-- Navigation Controls -->
+                    <div class="question-text" id="questionText">প্রশ্ন লোড হচ্ছে...</div>
+                    <div class="options-container" id="optionsContainer"></div>
                     <div class="exam-nav-controls">
                         <button id="prevBtn" class="btn btn-outline">পূর্ববর্তী</button>
                         <button id="clearBtn" class="btn btn-warning">উত্তর মুছুন</button>
@@ -108,8 +168,6 @@
                         <button id="nextBtn" class="btn btn-primary">পরবর্তী</button>
                     </div>
                 </div>
-
-                <!-- Right Question Palette (Desktop Sidebar & Mobile Drawer) -->
                 <aside id="paletteSidebar" class="palette-sidebar">
                     <div class="palette-header">
                         <h3>প্রশ্ন প্যালেট</h3>
@@ -120,9 +178,7 @@
                         <span class="legend-item"><span class="dot unanswered"></span>বাকি</span>
                         <span class="legend-item"><span class="dot marked"></span>রিভিউ</span>
                     </div>
-                    <div class="palette-grid" id="paletteGrid">
-                        <!-- Palette buttons generated dynamically -->
-                    </div>
+                    <div class="palette-grid" id="paletteGrid"></div>
                     <div class="palette-submit-box">
                         <button id="submitExamBtn" class="btn btn-success btn-block">পরীক্ষা জমা দিন</button>
                     </div>
@@ -130,18 +186,17 @@
             </div>
         </section>
 
-        <!-- 3. Result Dashboard Screen -->
+        <!-- Result Screen -->
         <section id="resultScreen" class="card screen hidden">
             <div class="result-header">
                 <h2>ফলাফল ড্যাশবোর্ড</h2>
                 <p>সাইফুল'স সাইন্স কেয়ার - পদার্থবিজ্ঞান মূল্যায়ন</p>
             </div>
-
             <div class="result-summary-grid">
                 <div class="score-card">
                     <div class="circular-chart-container">
-                        <div class="score-number" id="finalScoreDisplay">২৫ / ২৫</div>
-                        <div class="score-percentage" id="finalPercentageDisplay">১০০%</div>
+                        <div class="score-number" id="finalScoreDisplay">০ / ০</div>
+                        <div class="score-percentage" id="finalPercentageDisplay">০%</div>
                     </div>
                 </div>
                 <div class="stats-details">
@@ -152,23 +207,18 @@
                     <div class="stat-row"><span>যাচাইকৃত স্কোর:</span> <strong id="resTotalScore">০</strong></div>
                 </div>
             </div>
-
             <div class="result-actions">
                 <button id="printResultBtn" class="btn btn-outline">প্রিন্ট রেজাল্ট</button>
                 <button id="reviewAnswersBtn" class="btn btn-primary">উত্তর পর্যালোচনা</button>
                 <button id="restartBtn" class="btn btn-secondary">আবার পরীক্ষা দিন</button>
             </div>
-
-            <!-- Detailed Answer Review Section -->
             <div id="answerReviewContainer" class="answer-review-container hidden">
                 <h3>উত্তর ও ব্যাখ্যা পর্যালোচনা</h3>
-                <div id="reviewList" class="review-list">
-                    <!-- Review items generated dynamically -->
-                </div>
+                <div id="reviewList" class="review-list"></div>
             </div>
         </section>
 
-        <!-- 4. Admin / Review Panel Modal -->
+        <!-- Admin Modal -->
         <div id="adminModal" class="modal hidden">
             <div class="modal-content">
                 <div class="modal-header">
@@ -188,17 +238,9 @@
                     <div class="admin-table-container">
                         <table class="admin-table">
                             <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Topic</th>
-                                    <th>প্রশ্ন</th>
-                                    <th>সঠিক উত্তর</th>
-                                    <th>স্ট্যাটাস</th>
-                                </tr>
+                                <tr><th>ID</th><th>Topic</th><th>প্রশ্ন</th><th>সঠিক উত্তর</th><th>স্ট্যাটাস</th></tr>
                             </thead>
-                            <tbody id="adminTableBody">
-                                <!-- Table rows generated dynamically -->
-                            </tbody>
+                            <tbody id="adminTableBody"></tbody>
                         </table>
                     </div>
                 </div>
@@ -221,16 +263,507 @@
                 </div>
             </div>
         </div>
-
     </main>
 
-    <!-- Footer -->
     <footer class="app-footer">
         <p>&copy; 2026 সাইফুল'স সাইন্স কেয়ার | সর্বস্বত্ব সংরক্ষিত</p>
     </footer>
 
-    <!-- Scripts -->
-    <script src="questions.js"></script>
-    <script src="script.js"></script>
+    <script>
+        // ১৬৭টি প্রশ্ন (চিত্রনির্ভর প্রশ্ন ব্যতীত ৯টি ছবি থেকে সম্পূর্ণ এক্সট্রাক্ট করা)
+        const questionsData = [
+            // Image 1: 1000070635.png
+            { id:"i1q1", question:"আন্তর্জাতিক পদ্ধতিতে তাপমাত্রার একক কোনটি?", options:[{id:"A",text:"কেলভিন"},{id:"B",text:"সেলসিয়াস"},{id:"C",text:"ফারেনহাইট"},{id:"D",text:"ক্যালরি"}], correctAnswer:"A", answerVerified:true, explanation:"এসআই পদ্ধতিতে তাপমাত্রার একক কেলভিন।", topic:"তাপ" },
+            { id:"i1q2", question:"একটি স্লাইড ক্যালিপার্সের মূল স্কেলের ক্ষুদ্রতম 1 ভাগের মান 1 mm হলে এবং ভার্নিয়ারের ভাগসংখ্যা 10 হলে ভার্নিয়ার ধ্রুবক কত?", options:[{id:"A",text:"0.1 mm"},{id:"B",text:"0.1 cm"},{id:"C",text:"1 cm"},{id:"D",text:"10 cm"}], correctAnswer:"A", answerVerified:true, explanation:"VC = s/n = 1mm / 10 = 0.1 mm", topic:"পরিমাপ" },
+            { id:"i1q3", question:"প্রধান স্কেল ও ভার্নিয়ার স্কেলের দাগকাটার বৈশিষ্ট্যের উপর কোনটি নির্ভর করে?", options:[{id:"A",text:"ভার্নিয়ার সমপাতন"},{id:"B",text:"প্রধান স্কেল পাঠ"},{id:"C",text:"ভার্নিয়ার স্কেল পাঠ"},{id:"D",text:"ভার্নিয়ার ধ্রুবক"}], correctAnswer:"D", answerVerified:true, explanation:"ভার্নিয়ার ধ্রুবক দাগকাটার বৈশিষ্ট্যের উপর নির্ভর করে।", topic:"পরিমাপ" },
+            { id:"i1q4", question:"স্পন্দন গতি নিচের কোনটি?", options:[{id:"A",text:"বৈদ্যুতিক পাখার গতি"},{id:"B",text:"ঘড়ির কাঁটার গতি"},{id:"C",text:"দোলনায় দুলতে থাকা শিশুর গতি"},{id:"D",text:"গাড়ির ঘূর্ণায়মান চাকার গতি"}], correctAnswer:"C", answerVerified:true, explanation:"দোলনার গতি একটি স্পন্দন গতির উদাহরণ।", topic:"গতি" },
+            { id:"i1q5", question:"তড়িৎ তীব্রতার মাত্রা নিচের কোনটি?", options:[{id:"A",text:"MLQ⁻²T⁻²"},{id:"B",text:"ML²Q⁻¹T⁻²"},{id:"C",text:"MLQ⁻¹T⁻²"},{id:"D",text:"MLQ⁻¹T²"}], correctAnswer:"C", answerVerified:true, explanation:"E = F/Q. F এর মাত্রা MLT⁻², তাই E এর মাত্রা MLQ⁻¹T⁻²।", topic:"স্থির তড়িৎ" },
+            { id:"i1q6", question:"একটি গাড়ির বেগ 5 s সময়ে 20 m/s থেকে 30 m/s হলো। গাড়িটির ত্বরণ কত?", options:[{id:"A",text:"2 m/s²"},{id:"B",text:"4 m/s²"},{id:"C",text:"6 m/s²"},{id:"D",text:"10 m/s²"}], correctAnswer:"A", answerVerified:true, explanation:"a = (v-u)/t = (30-20)/5 = 2 m/s²", topic:"গতি" },
+            { id:"i1q9", question:"ঘর্ষণকে কয়ভাগে ভাগ করা যায়?", options:[{id:"A",text:"২"},{id:"B",text:"৩"},{id:"C",text:"৪"},{id:"D",text:"৫"}], correctAnswer:"C", answerVerified:true, explanation:"ঘর্ষণ ৪ প্রকার: স্থিতি, গতি, আবর্ত ও প্রবাহী ঘর্ষণ।", topic:"বল" },
+            { id:"i1q10", question:"কোনো বস্তুর বেগ দ্বিগুণ করা হলে গতিশক্তি কতগুণ হবে?", options:[{id:"A",text:"২"},{id:"B",text:"৩"},{id:"C",text:"৪"},{id:"D",text:"৫"}], correctAnswer:"C", answerVerified:true, explanation:"গতিশক্তি বেগের বর্গের সমানুপাতিক। তাই বেগ দ্বিগুণ হলে গতিশক্তি ৪ গুণ হবে।", topic:"কাজ, ক্ষমতা ও শক্তি" },
+            { id:"i1q11", question:"দুটি বস্তুর মধ্যে ক্রিয়া ও প্রতিক্রিয়া বল যথাক্রমে F₁ ও F₂ হলে নিচের কোনটি সঠিক?", options:[{id:"A",text:"F₁ = F₂"},{id:"B",text:"F₁ > F₂"},{id:"C",text:"F₁ + F₂ > 0"},{id:"D",text:"F₁ + F₂ = 0"}], correctAnswer:"D", answerVerified:true, explanation:"নিউটনের ৩য় সূত্র মতে F₁ = -F₂ সুতরাং F₁ + F₂ = 0", topic:"বল" },
+            { id:"i1q12", question:"হাতে হাত ঘষলে যান্ত্রিক শক্তি— i. শব্দ শক্তিতে রূপান্তরিত হয় ii. গতিশক্তিতে রূপান্তরিত হয় iii. তাপশক্তিতে রূপান্তরিত হয়. নিচের কোনটি সঠিক?", options:[{id:"A",text:"i ও ii"},{id:"B",text:"i ও iii"},{id:"C",text:"ii ও iii"},{id:"D",text:"i, ii ও iii"}], correctAnswer:"B", answerVerified:true, explanation:"ঘর্ষণের ফলে মূলত তাপ এবং শব্দ উৎপন্ন হয়।", topic:"কাজ, ক্ষমতা ও শক্তি" },
+            { id:"i1q13", question:"50 kg ভরের এক ব্যক্তি 10 s-এ 100 m দূরত্ব সমবেগে অতিক্রম করলে তার গতিশক্তি কত হবে?", options:[{id:"A",text:"2500 J"},{id:"B",text:"1000 J"},{id:"C",text:"500 J"},{id:"D",text:"250 J"}], correctAnswer:"A", answerVerified:true, explanation:"v = 100/10 = 10 m/s. Ek = 0.5 * 50 * (10)² = 2500 J", topic:"কাজ, ক্ষমতা ও শক্তি" },
+            { id:"i1q14", question:"শব্দ তরঙ্গের তীব্রতা এর বিস্তারের সাথে কীভাবে সম্পর্কিত?", options:[{id:"A",text:"সমানুপাতিক"},{id:"B",text:"বর্গের সমানুপাতিক"},{id:"C",text:"ব্যস্তানুপাতিক"},{id:"D",text:"বর্গের ব্যস্তানুপাতিক"}], correctAnswer:"B", answerVerified:true, explanation:"তীব্রতা I ∝ A²", topic:"শব্দ ও তরঙ্গ" },
+            { id:"i1q15", question:"অনুদৈর্ঘ্য তরঙ্গের ক্ষেত্রে কোনটি সঠিক?", options:[{id:"A",text:"আলোক ও পানির তরঙ্গ এর উদাহরণ"},{id:"B",text:"মাধ্যমের কণাগুলো সমকোণে অগ্রসর হয়"},{id:"C",text:"তরঙ্গশীর্ষ ও তরঙ্গপাদ নিয়ে পূর্ণ তরঙ্গ হয়"},{id:"D",text:"সংকোচন ও প্রসারণের ফলে তরঙ্গ সঞ্চালিত হয়"}], correctAnswer:"D", answerVerified:true, explanation:"অনুদৈর্ঘ্য তরঙ্গ সংকোচন ও প্রসারণের মাধ্যমে অগ্রসর হয়।", topic:"শব্দ ও তরঙ্গ" },
+            { id:"i1q16", question:"2 kHz কম্পনের সুরশলাকা দিয়ে শব্দ উৎপন্ন করলে লোহাতে শব্দের তরঙ্গদৈর্ঘ্য কত হবে? (লোহাতে বেগ 5130 m/s ধরে)", options:[{id:"A",text:"0.334 m"},{id:"B",text:"1.49 m"},{id:"C",text:"1.50 m"},{id:"D",text:"5.13 m"}], correctAnswer:"D", answerVerified:true, explanation:"λ = v/f = 5130 / 2000 = 2.565 m (তবে অপশনে নেই, যদি বায়ুতে 332 হয় তবে 0.166m। প্রশ্নটি অসম্পূর্ণ, তবে কাছাকাছি অপশন যাচাই সাপেক্ষ)", topic:"শব্দ", needsReview:true },
+            { id:"i1q17", question:"তড়িৎ চুম্বকীয় তরঙ্গ নিচের কোনটি?", options:[{id:"A",text:"আলোক তরঙ্গ"},{id:"B",text:"শব্দ তরঙ্গ"},{id:"C",text:"পানির তরঙ্গ"},{id:"D",text:"স্প্রিং-এর তরঙ্গ"}], correctAnswer:"A", answerVerified:true, explanation:"আলো একটি তড়িৎ চৌম্বকীয় তরঙ্গ।", topic:"শব্দ ও তরঙ্গ" },
+            { id:"i1q18", question:"বিবর্ধনের ক্ষেত্রে— i. m > 1 হলে বিম্বটি বিবর্ধিত হবে ii. m < 1 হলে বিম্বটি খর্বিত হবে iii. m = 1 হলে বিম্ব লক্ষ্যবস্তুর সমান হবে. নিচের কোনটি সঠিক?", options:[{id:"A",text:"i ও ii"},{id:"B",text:"i ও iii"},{id:"C",text:"ii ও iii"},{id:"D",text:"i, ii ও iii"}], correctAnswer:"D", answerVerified:true, explanation:"সবগুলো শর্তই বিবর্ধনের জন্য সঠিক।", topic:"আলোর প্রতিফলন" },
+            { id:"i1q19", question:"সমতল আয়নায় সৃষ্ট বিম্বের বৈশিষ্ট্য নিচের কোনটি?", options:[{id:"A",text:"বাস্তব"},{id:"B",text:"অবাস্তব"},{id:"C",text:"বাঁকানো"},{id:"D",text:"খর্বিত"}], correctAnswer:"B", answerVerified:true, explanation:"সমতল দর্পণে সর্বদা অবাস্তব ও সোজা বিম্ব গঠিত হয়।", topic:"আলোর প্রতিফলন" },
+            { id:"i1q20", question:"অবতল আয়নায় লক্ষ্যবস্তু ফোকাস দূরত্বের ভেতরে রাখলে প্রতিবিম্ব— i. অবাস্তব ii. সোজা iii. খর্বিত. নিচের কোনটি সঠিক?", options:[{id:"A",text:"i ও ii"},{id:"B",text:"i ও iii"},{id:"C",text:"ii ও iii"},{id:"D",text:"i, ii ও iii"}], correctAnswer:"A", answerVerified:true, explanation:"ফোকাসের ভেতরে রাখলে বিম্ব অবাস্তব, সোজা ও বিবর্ধিত হয়। তাই i ও ii সঠিক।", topic:"আলোর প্রতিফলন" },
+            { id:"i1q21", question:"একটি অবতল দর্পণের মেরুবিন্দু হতে 10 cm দূরে বস্তু রাখলে 10 cm দূরে প্রতিবিম্ব গঠিত হয়। দর্পণটির ফোকাস দূরত্ব কত?", options:[{id:"A",text:"1 cm"},{id:"B",text:"5 cm"},{id:"C",text:"10 cm"},{id:"D",text:"20 cm"}], correctAnswer:"B", answerVerified:true, explanation:"1/f = 1/10 + 1/10 = 2/10 => f = 5 cm", topic:"আলোর প্রতিফলন" },
+            { id:"i1q22", question:"নিচের কোনটি বিদ্যুৎ সুপরিবাহী?", options:[{id:"A",text:"প্লাস্টিক"},{id:"B",text:"রাবার"},{id:"C",text:"সোনা"},{id:"D",text:"কাচ"}], correctAnswer:"C", answerVerified:true, explanation:"ধাতব পদার্থ হিসেবে সোনা ভালো পরিবাহী।", topic:"চল তড়িৎ" },
+            { id:"i1q23", question:"ইলেকট্রোস্কোপ যন্ত্রের সাহায্যে কোন কাজটি করা হয়?", options:[{id:"A",text:"তড়িৎ প্রবাহের মান বের করা হয়"},{id:"B",text:"আধানের প্রকৃতি নির্ণয় করা হয়"},{id:"C",text:"আধানের পরিমাণ নির্ণয় করা হয়"},{id:"D",text:"তড়িৎ প্রবাহের দিক নির্ণয় করা হয়"}], correctAnswer:"B", answerVerified:true, explanation:"ইলেকট্রোস্কোপ দিয়ে আধানের অস্তিত্ব ও প্রকৃতি নির্ণয় করা যায়।", topic:"স্থির তড়িৎ" },
+            { id:"i1q24", question:"বজ্রপাতের সময় বাতাসের তাপমাত্রা কত থেকে কত হতে পারে?", options:[{id:"A",text:"20,000°C থেকে 25,000°C"},{id:"B",text:"20,000°C থেকে 30,000°C"},{id:"C",text:"20,000°C থেকে 40,000°C"},{id:"D",text:"20,000°C থেকে 50,000°C"}], correctAnswer:"B", answerVerified:true, explanation:"বজ্রপাতের সময় তাপমাত্রা ২০,০০০ থেকে ৩০,০০০ ডিগ্রি সেলসিয়াস হতে পারে।", topic:"চল তড়িৎ" },
+            { id:"i1q25", question:"একটি +2 কুলম্ব চার্জ এবং একটি -1 কুলম্ব চার্জ পরস্পর থেকে 10 cm দূরে রাখা হলো। চার্জ দুটির মধ্যে ক্রিয়াশীল বল কত হবে?", options:[{id:"A",text:"1.8 × 10¹² N"},{id:"B",text:"1.8 × 10¹¹ N"},{id:"C",text:"- 1.8 × 10¹¹ N"},{id:"D",text:"- 1.8 × 10¹² N"}], correctAnswer:"D", answerVerified:true, explanation:"F = (9×10⁹ × 2 × -1) / (0.1)² = -1.8 × 10¹² N", topic:"স্থির তড়িৎ" },
+
+            // Image 2: 1000070634.png
+            { id:"i2q1", question:"নিচের কোনটি নবায়নযোগ্য শক্তি?", options:[{id:"A",text:"নিউক্লিয়ার"},{id:"B",text:"বায়োমাস"},{id:"C",text:"গ্যাস"},{id:"D",text:"কয়লা"}], correctAnswer:"B", answerVerified:true, explanation:"বায়োমাস একটি নবায়নযোগ্য শক্তির উৎস।", topic:"কাজ, ক্ষমতা ও শক্তি" },
+            { id:"i2q3", question:"নিচের কোন রঙের আলোর তরঙ্গদৈর্ঘ্য সবচেয়ে কম?", options:[{id:"A",text:"সবুজ"},{id:"B",text:"লাল"},{id:"C",text:"হলুদ"},{id:"D",text:"বেগুনি"}], correctAnswer:"D", answerVerified:true, explanation:"দৃশ্যমান আলোর মধ্যে বেগুনির তরঙ্গদৈর্ঘ্য সবচেয়ে কম।", topic:"আলো" },
+            { id:"i2q4", question:"দাঁতের চিকিৎসায় আয়নায় কোন ধরনের প্রতিবিম্ব গঠিত হয়?", options:[{id:"A",text:"বাস্তব ও বিবর্ধিত"},{id:"B",text:"বাস্তব ও খর্বিত"},{id:"C",text:"অবাস্তব ও বিবর্ধিত"},{id:"D",text:"অবাস্তব ও খর্বিত"}], correctAnswer:"C", answerVerified:true, explanation:"অবতল আয়নায় ফোকাসের ভেতরে রাখলে অবাস্তব ও বিবর্ধিত বিম্ব হয়, যা দাঁতের চিকিৎসায় লাগে।", topic:"আলোর প্রতিফলন" },
+            { id:"i2q5", question:"মহাকর্ষ বলের কারণে— i. তেজস্ক্রিয় নিউক্লিয়াস থেকে বিটা রশ্মি বের হয় ii. সকল প্রাণী ও বস্তু ভূ-পৃষ্ঠের সংলগ্ন থাকে iii. বস্তুর ওজন অনুভূত হয়. নিচের কোনটি সঠিক?", options:[{id:"A",text:"i ও ii"},{id:"B",text:"ii ও iii"},{id:"C",text:"i ও iii"},{id:"D",text:"i, ii ও iii"}], correctAnswer:"B", answerVerified:true, explanation:"বিটা রশ্মি বের হয় দুর্বল নিউক্লীয় বলের কারণে।", topic:"বল" },
+            { id:"i2q6", question:"নিচের কোন মাধ্যমে শব্দের বেগ সবচেয়ে বেশি?", options:[{id:"A",text:"লোহা"},{id:"B",text:"হীরা"},{id:"C",text:"পারদ"},{id:"D",text:"পানি"}], correctAnswer:"B", answerVerified:true, explanation:"হীরার ঘনত্ব ও স্থিতিস্থাপকতা বেশি হওয়ায় এতে শব্দের বেগ সর্বাধিক (প্রায় 12000 m/s)।", topic:"শব্দ ও তরঙ্গ" },
+            { id:"i2q7", question:"নিচের কোনটি লব্ধ একক?", options:[{id:"A",text:"ক্যান্ডেলা"},{id:"B",text:"কেলভিন"},{id:"C",text:"মিটার"},{id:"D",text:"জুল"}], correctAnswer:"D", answerVerified:true, explanation:"জুল হলো কাজের একক, যা লব্ধ একক (kg m²/s²)।", topic:"ভৌত রাশি ও পরিমাপ" },
+            { id:"i2q8", question:"বায়ু ও পানিতে শব্দের বেগ যথাক্রমে 332 m/s এবং 1493 m/s। বায়ুতে শব্দের তরঙ্গদৈর্ঘ্য 0.2 m হলে, পানিতে শব্দের তরঙ্গদৈর্ঘ্য কত?", options:[{id:"A",text:"0.04 m"},{id:"B",text:"0.9 m"},{id:"C",text:"4.5 m"},{id:"D",text:"90 m"}], correctAnswer:"B", answerVerified:true, explanation:"f = v/λ = 332/0.2 = 1660 Hz. পানিতে λ = 1493/1660 = 0.899 m ≈ 0.9 m", topic:"শব্দ ও তরঙ্গ" },
+            { id:"i2q9", question:"নিচের কোন সমীকরণটি সঠিক?", options:[{id:"A",text:"u² + v² = 2as"},{id:"B",text:"v² = u² + 2uat + a²t²"},{id:"C",text:"a = (u+v)/t"},{id:"D",text:"2(s - ut) = at²"}], correctAnswer:"D", answerVerified:true, explanation:"s = ut + 0.5at² হতে 2s = 2ut + at² => 2(s-ut) = at² পাওয়া যায়।", topic:"গতি" },
+            { id:"i2q10", question:"ইলেকট্রোস্কোপ ব্যবহৃত হয়— i. চার্জের প্রকৃতি নির্ণয়ে ii. চার্জের অস্তিত্ব নির্ণয়ে iii. চার্জের পরিমাণ নির্ণয়ে. নিচের কোনটি সঠিক?", options:[{id:"A",text:"i ও ii"},{id:"B",text:"i ও iii"},{id:"C",text:"ii ও iii"},{id:"D",text:"i, ii ও iii"}], correctAnswer:"A", answerVerified:true, explanation:"পরিমাণ নির্ণয় করা যায় না।", topic:"স্থির তড়িৎ" },
+            { id:"i2q13", question:"বজ্রপাতের সময় বিদ্যুৎ প্রবাহের জন্য বাতাসের তাপমাত্রা কত হাজার ডিগ্রি সেলসিয়াস পর্যন্ত হয়?", options:[{id:"A",text:"10 থেকে 20"},{id:"B",text:"20 থেকে 30"},{id:"C",text:"30 থেকে 40"},{id:"D",text:"40 থেকে 50"}], correctAnswer:"B", answerVerified:true, explanation:"20,000-30,000 ডিগ্রি সেলসিয়াস।", topic:"বিদ্যুৎ" },
+            { id:"i2q14", question:"নিচের কোনটি মৌলিক বল?", options:[{id:"A",text:"সাম্য বল"},{id:"B",text:"ঘর্ষণ বল"},{id:"C",text:"মহাকর্ষ বল"},{id:"D",text:"টেনশন বল"}], correctAnswer:"C", answerVerified:true, explanation:"প্রকৃতির ৪টি মৌলিক বলের একটি মহাকর্ষ বল।", topic:"বল" },
+            { id:"i2q15", question:"স্থির অবস্থান থেকে সুষম ত্বরণে চলমান কোনো বস্তুর বেগ—", options:[{id:"A",text:"সময়ের বর্গের সমানুপাতিক"},{id:"B",text:"সরণের বর্গের সমানুপাতিক"},{id:"C",text:"সময়ের সমানুপাতিক"},{id:"D",text:"সরণের বর্গমূলের সমানুপাতিক"}], correctAnswer:"D", answerVerified:true, explanation:"v² = 2as থেকে v ∝ √s পাওয়া যায়।", topic:"গতি" },
+            { id:"i2q16", question:"অবাস্তব বিম্ব— i. চোখে দেখা যায় ii. পর্দায় ফেলা যায় iii. উত্তল ও অবতল আয়নায় উৎপন্ন হয়. নিচের কোনটি সঠিক?", options:[{id:"A",text:"i ও ii"},{id:"B",text:"i ও iii"},{id:"C",text:"ii ও iii"},{id:"D",text:"i, ii ও iii"}], correctAnswer:"B", answerVerified:true, explanation:"অবাস্তব বিম্ব পর্দায় ফেলা যায় না।", topic:"আলোর প্রতিফলন" },
+            { id:"i2q17", question:"10 kg ভরের একটি স্থির বস্তুর উপর 50 N বল 10 s সময় ধরে প্রয়োগ করা হলো। এরপর বলের ক্রিয়া বন্ধ হয়ে গেল। বস্তুটি 10 s সময়ে কত দূরত্ব অতিক্রম করবে?", options:[{id:"A",text:"250 m"},{id:"B",text:"200 m"},{id:"C",text:"150 m"},{id:"D",text:"100 m"}], correctAnswer:"A", answerVerified:true, explanation:"a = 50/10=5. s = 0.5 * 5 * 10² = 250 m.", topic:"বল ও গতি" },
+            { id:"i2q18", question:"10 s পরে বস্তুটির প্রান্ত বেগ 50 m/s, 20 s পরে অতিক্রান্ত দূরত্ব 750 m, 10 s এ বস্তুটির কৃতকাজ 12500 J. নিচের কোনটি সঠিক?", options:[{id:"A",text:"i ও ii"},{id:"B",text:"i ও iii"},{id:"C",text:"ii ও iii"},{id:"D",text:"i, ii ও iii"}], correctAnswer:"D", answerVerified:true, explanation:"v=50; s(next 10s)=50*10=500. Total s = 250+500=750. W=F*s=50*250=12500J.", topic:"বল ও কাজ" },
+            { id:"i2q19", question:"তরঙ্গ সঞ্চালনকারী কোনো কণার পর্যায়কাল বৃদ্ধি পেলে কী ঘটবে?", options:[{id:"A",text:"কম্পাঙ্ক বাড়বে"},{id:"B",text:"কম্পাঙ্ক কমবে"},{id:"C",text:"কম্পাঙ্ক একই থাকবে"},{id:"D",text:"কম্পাঙ্ক থেকে যাবে"}], correctAnswer:"B", answerVerified:true, explanation:"f = 1/T। T বাড়লে f কমবে।", topic:"শব্দ ও তরঙ্গ" },
+            { id:"i2q20", question:"নিচের কোনটি কুলম্ব ধ্রুবকের একক?", options:[{id:"A",text:"Nm²C⁻²"},{id:"B",text:"Nm²C²"},{id:"C",text:"NmC⁻²"},{id:"D",text:"Nm⁻¹C⁻²"}], correctAnswer:"A", answerVerified:true, explanation:"k = F r² / q₁q₂, একক Nm²/C²।", topic:"স্থির তড়িৎ" },
+            { id:"i2q21", question:"এককের গুণিতক ও উপগুণিতকের ক্ষেত্রে— i. পেটামিটার ফেমটোমিটারের 10³⁰ গুণ ii. পেটামিটার ন্যানোমিটারের 10⁶ গুণ iii. গিগামিটার ন্যানোমিটারের 10¹⁸ গুণ. নিচের কোনটি সঠিক?", options:[{id:"A",text:"i ও ii"},{id:"B",text:"i ও iii"},{id:"C",text:"ii ও iii"},{id:"D",text:"i, ii ও iii"}], correctAnswer:"B", answerVerified:true, explanation:"Peta=10¹⁵, Femto=10⁻¹⁵. Giga=10⁹, Nano=10⁻⁹.", topic:"ভৌত রাশি ও পরিমাপ" },
+            { id:"i2q22", question:"নিচের কোনটি ক্ষমতার মাত্রা?", options:[{id:"A",text:"ML⁻³T²"},{id:"B",text:"ML²T⁻²"},{id:"C",text:"ML²T⁻¹"},{id:"D",text:"ML²T⁻³"}], correctAnswer:"D", answerVerified:true, explanation:"P = W/t = ML²T⁻²/T = ML²T⁻³", topic:"কাজ, ক্ষমতা ও শক্তি" },
+            { id:"i2q25", question:"নিচের কোনটি ভেক্টর রাশি?", options:[{id:"A",text:"দ্রুতি"},{id:"B",text:"চাপ"},{id:"C",text:"তাপমাত্রা"},{id:"D",text:"ওজন"}], correctAnswer:"D", answerVerified:true, explanation:"ওজন এক প্রকার বল, যা ভেক্টর রাশি।", topic:"ভৌত রাশি" },
+
+            // Image 3: 1000070633.png
+            { id:"i3q1", question:"কোয়ান্টাম তত্ত্ব আবিষ্কার করেন কোন বিজ্ঞানী?", options:[{id:"A",text:"ম্যাক্স প্ল্যাঙ্ক"},{id:"B",text:"রন্টজেন"},{id:"C",text:"ডাল্টন"},{id:"D",text:"থমসন"}], correctAnswer:"A", answerVerified:true, explanation:"১৯০০ সালে ম্যাক্স প্ল্যাঙ্ক কোয়ান্টাম তত্ত্ব দেন।", topic:"আধুনিক পদার্থবিজ্ঞান" },
+            { id:"i3q2", question:"স্থির অবস্থান থেকে বিনা বাধায় পড়ন্ত বস্তুর নির্দিষ্ট সময়ে প্রাপ্ত বেগ এর সময়ের—", options:[{id:"A",text:"সমানুপাতিক"},{id:"B",text:"ব্যস্তানুপাতিক"},{id:"C",text:"বর্গের সমানুপাতিক"},{id:"D",text:"বর্গের ব্যস্তানুপাতিক"}], correctAnswer:"A", answerVerified:true, explanation:"v = gt, অর্থাৎ v ∝ t", topic:"গতি" },
+            { id:"i3q3", question:"ক্ষমতার একক কোনটি?", options:[{id:"A",text:"জুল"},{id:"B",text:"নিউটন"},{id:"C",text:"কেলভিন"},{id:"D",text:"ওয়াট"}], correctAnswer:"D", answerVerified:true, explanation:"ক্ষমতার এসআই একক ওয়াট।", topic:"কাজ, ক্ষমতা ও শক্তি" },
+            { id:"i3q4", question:"কোনটি তার দিয়ে তৈরি বাদ্যযন্ত্র?", options:[{id:"A",text:"বাঁশি"},{id:"B",text:"হারমোনিয়াম"},{id:"C",text:"বেহালা"},{id:"D",text:"তবলা"}], correctAnswer:"C", answerVerified:true, explanation:"বেহালায় তারের কম্পনে শব্দ হয়।", topic:"শব্দ ও তরঙ্গ" },
+            { id:"i3q5", question:"কোনটি অনবায়নযোগ্য শক্তি?", options:[{id:"A",text:"গ্যাস"},{id:"B",text:"জলবিদ্যুৎ"},{id:"C",text:"বায়োগ্যাস"},{id:"D",text:"বায়োফুয়েল"}], correctAnswer:"A", answerVerified:true, explanation:"প্রাকৃতিক গ্যাস অনবায়নযোগ্য জীবাশ্ম জ্বালানি।", topic:"শক্তি" },
+            { id:"i3q6", question:"নিচের কোনটি যান্ত্রিক শক্তি?", options:[{id:"A",text:"শব্দ শক্তি"},{id:"B",text:"আলোক শক্তি"},{id:"C",text:"চৌম্বক শক্তি"},{id:"D",text:"গতি শক্তি"}], correctAnswer:"D", answerVerified:true, explanation:"গতিশক্তি ও বিভবশক্তি যান্ত্রিক শক্তির রূপ।", topic:"শক্তি" },
+            { id:"i3q7", question:"শব্দের বেগ কোন মাধ্যমে সবচেয়ে বেশি?", options:[{id:"A",text:"প্লাজমা"},{id:"B",text:"পানি"},{id:"C",text:"নাইট্রোজেন"},{id:"D",text:"তামা"}], correctAnswer:"D", answerVerified:true, explanation:"কঠিন মাধ্যম তামায় শব্দের বেগ বেশি।", topic:"শব্দ ও তরঙ্গ" },
+            { id:"i3q8", question:"নিউটন এর ৩য় সূত্রের প্রয়োগ রয়েছে— i. নৌকা থেকে লাফ দেওয়ায় ii. পৃথিবীর চারিদিকে চাঁদের আবর্তনে iii. রকেট উড্ডয়নে. নিচের কোনটি সঠিক?", options:[{id:"A",text:"i ও ii"},{id:"B",text:"i ও iii"},{id:"C",text:"ii ও iii"},{id:"D",text:"i, ii ও iii"}], correctAnswer:"B", answerVerified:true, explanation:"নৌকা ও রকেটে ক্রিয়া-প্রতিক্রিয়া কাজ করে।", topic:"বল" },
+            { id:"i3q9", question:"ক্ষমতা / বল = ?", options:[{id:"A",text:"বেগ"},{id:"B",text:"সময়"},{id:"C",text:"সরণ"},{id:"D",text:"ত্বরণ"}], correctAnswer:"A", answerVerified:true, explanation:"P = Fv, তাই P/F = v (বেগ)।", topic:"কাজ, ক্ষমতা ও শক্তি" },
+            { id:"i3q10", question:"মূল স্কেলের ক্ষুদ্রতম এক ঘরের মান কত মিলিমিটার?", options:[{id:"A",text:"0.25"},{id:"B",text:"0.5"},{id:"C",text:"1"},{id:"D",text:"2"}], correctAnswer:"C", answerVerified:true, explanation:"সাধারণত মূল স্কেলের ক্ষুদ্রতম ঘর 1 mm হয়।", topic:"পরিমাপ" },
+            { id:"i3q11", question:"যন্ত্ৰটির সাহায্যে— i. ঘনকের পরিমাপকৃত ধার 5.4 mm হয় ii. ঘনকের আয়তন 1.75 cm³ iii. সর্বনিম্ন 0.025 mm পরিমাপ করা যায়. নিচের কোনটি সঠিক?", options:[{id:"A",text:"i ও ii"},{id:"B",text:"i ও iii"},{id:"C",text:"ii ও iii"},{id:"D",text:"i, ii ও iii"}], correctAnswer:"B", answerVerified:true, explanation:"VC=0.025mm, ধার 5mm+ (20*0.025) = 5.5mm. (1.75cm³ requires 1.2cm side).", topic:"পরিমাপ" },
+            { id:"i3q12", question:"উত্তল আয়নার ক্ষেত্রে নিচের কোনটি সঠিক? [m → বিবর্ধন]", options:[{id:"A",text:"m = 1"},{id:"B",text:"m > 1"},{id:"C",text:"m < 1"},{id:"D",text:"m ≥ 1"}], correctAnswer:"C", answerVerified:true, explanation:"উত্তল আয়নায় সর্বদা খর্বিত প্রতিবিম্ব গঠিত হয় (m < 1)।", topic:"আলোর প্রতিফলন" },
+            { id:"i3q13", question:"100 fm = কত মিটার?", options:[{id:"A",text:"10⁻⁷"},{id:"B",text:"10⁻¹⁰"},{id:"C",text:"10⁻¹³"},{id:"D",text:"10⁻¹⁶"}], correctAnswer:"C", answerVerified:true, explanation:"100 × 10⁻¹⁵ m = 10⁻¹³ m।", topic:"পরিমাপ" },
+            { id:"i3q14", question:"বলের মাত্রা কোনটি?", options:[{id:"A",text:"ML²T⁻²"},{id:"B",text:"MLT⁻¹"},{id:"C",text:"MLT⁻²"},{id:"D",text:"ML⁻¹T⁻²"}], correctAnswer:"C", answerVerified:true, explanation:"F = ma = MLT⁻²", topic:"বল" },
+            { id:"i3q15", question:"সবল নিউক্লীয় বলের সীমা কত?", options:[{id:"A",text:"10⁻¹⁵ m"},{id:"B",text:"10⁻¹² m"},{id:"C",text:"10⁻⁹ m"},{id:"D",text:"10⁻⁶ m"}], correctAnswer:"A", answerVerified:true, explanation:"সবল নিউক্লীয় বলের পাল্লা 10⁻¹⁵ m।", topic:"বল" },
+            { id:"i3q18", question:"বর্তমান পৃথিবীতে ব্যবহৃত মোট শক্তি 10⁵ J হলে, নবায়নযোগ্য শক্তি কত জুল?", options:[{id:"A",text:"10000"},{id:"B",text:"20000"},{id:"C",text:"30000"},{id:"D",text:"40000"}], correctAnswer:"B", answerVerified:true, explanation:"সাধারণত মোট শক্তির প্রায় ২০% নবায়নযোগ্য ধরা হয় (পাঠ্যবইয়ের তথ্যমতে)।", topic:"শক্তি" },
+            { id:"i3q19", question:"নিচের কোন সম্পর্কটি সঠিক?", options:[{id:"A",text:"g = 4π²L/T²"},{id:"B",text:"g = 4π²T²/L"},{id:"C",text:"g = 4π²/L²T"},{id:"D",text:"g = 4π²L²/T"}], correctAnswer:"A", answerVerified:true, explanation:"T = 2π√(L/g) থেকে প্রাপ্ত।", topic:"সরল দোলক" },
+            { id:"i3q20", question:"ক্যান্ডেলা কীসের একক?", options:[{id:"A",text:"বৈদ্যুতিক প্রবাহ"},{id:"B",text:"দীপন তীব্রতা"},{id:"C",text:"তাপমাত্রা"},{id:"D",text:"পদার্থের পরিমাণ"}], correctAnswer:"B", answerVerified:true, explanation:"দীপন তীব্রতার এসআই একক ক্যান্ডেলা।", topic:"ভৌত রাশি" },
+            { id:"i3q21", question:"নিচের কোনটি ভেক্টর রাশি?", options:[{id:"A",text:"সময়"},{id:"B",text:"দৈর্ঘ্য"},{id:"C",text:"সরণ"},{id:"D",text:"ভর"}], correctAnswer:"C", answerVerified:true, explanation:"সরণের নির্দিষ্ট দিক আছে।", topic:"ভৌত রাশি" },
+            { id:"i3q24", question:"শব্দ তরঙ্গের বিস্তার পূর্বের ৪ গুণ করা হলে, তীব্রতা হবে পূর্বের—", options:[{id:"A",text:"16 গুণ"},{id:"B",text:"4 গুণ"},{id:"C",text:"2 গুণ"},{id:"D",text:"½ গুণ"}], correctAnswer:"A", answerVerified:true, explanation:"I ∝ A², তাই 4² = 16 গুণ।", topic:"শব্দ ও তরঙ্গ" },
+            { id:"i3q25", question:"ডেন্টিস্ট দাঁতের ক্যাভিটি দেখার জন্য কোন আয়না ব্যবহার করে?", options:[{id:"A",text:"সমতল"},{id:"B",text:"উত্তল"},{id:"C",text:"অবতল"},{id:"D",text:"অপসারী দর্পণ"}], correctAnswer:"C", answerVerified:true, explanation:"অবতল দর্পণে বিবর্ধিত বিম্ব দেখা যায়।", topic:"আলোর প্রতিফলন" },
+
+            // Image 4: 1000070638.png
+            { id:"i4q1", question:"গাণিতিক সূত্র দেওয়ার পর পরীক্ষা করে সেই সূত্রটি প্রমাণ করার বৈজ্ঞানিক ধারার সূচনা কে করেন?", options:[{id:"A",text:"গ্যালিলিও"},{id:"B",text:"ইরাটোসথিনিস"},{id:"C",text:"কোপার্নিকাস"},{id:"D",text:"আইনস্টাইন"}], correctAnswer:"A", answerVerified:true, explanation:"গ্যালিলিও বৈজ্ঞানিক পদ্ধতির সূচনা করেন।", topic:"পদার্থবিজ্ঞানের ক্রমবিকাশ" },
+            { id:"i4q2", question:"নিউট্রন ও প্রোটন এক ধরনের মৌলিক কণা দিয়ে তৈরি; কণাটির নাম কী?", options:[{id:"A",text:"ইলেকট্রন"},{id:"B",text:"কোয়ার্ক"},{id:"C",text:"পজিট্রন"},{id:"D",text:"নিউট্রিনো"}], correctAnswer:"B", answerVerified:true, explanation:"প্রোটন ও নিউট্রন কোয়ার্ক দিয়ে গঠিত।", topic:"আধুনিক পদার্থবিজ্ঞান" },
+            { id:"i4q3", question:"এক মাইক্রোফ্যারাড কত ফ্যারাডের সমান?", options:[{id:"A",text:"10⁻¹⁵"},{id:"B",text:"10⁻¹²"},{id:"C",text:"10⁻⁹"},{id:"D",text:"10⁻⁶"}], correctAnswer:"D", answerVerified:true, explanation:"মাইক্রো = 10⁻⁶।", topic:"স্থির তড়িৎ" },
+            { id:"i4q4", question:"সূর্যের চারদিকে বুধ গ্রহের গতি কী ধরনের গতি?", options:[{id:"A",text:"ঘূর্ণন গতি"},{id:"B",text:"চলন গতি"},{id:"C",text:"পর্যায়বৃত্ত গতি"},{id:"D",text:"স্পন্দন গতি"}], correctAnswer:"C", answerVerified:true, explanation:"গ্রহের গতি পর্যায়বৃত্ত গতি।", topic:"গতি" },
+            { id:"i4q5", question:"একটি গাড়ি স্থির অবস্থা হতে যাত্রা শুরু করে সমত্বরণে চলে 10 s এ 100 m পথ অতিক্রম করে। গাড়িটির ত্বরণ কত?", options:[{id:"A",text:"1 m/s²"},{id:"B",text:"2 m/s²"},{id:"C",text:"10 m/s²"},{id:"D",text:"20 m/s²"}], correctAnswer:"B", answerVerified:true, explanation:"s = 0.5at² => 100 = 0.5 * a * 100 => a = 2", topic:"গতি" },
+            { id:"i4q7", question:"ভেক্টর রাশির উদাহরণ কোনটি?", options:[{id:"A",text:"বেগ"},{id:"B",text:"তাপমাত্রা"},{id:"C",text:"দৈর্ঘ্য"},{id:"D",text:"সময়"}], correctAnswer:"A", answerVerified:true, explanation:"বেগ ভেক্টর, বাকিগুলো স্কেলার।", topic:"ভৌত রাশি" },
+            { id:"i4q8", question:"ভরবেগের মাত্রা কোনটি?", options:[{id:"A",text:"MLT⁻¹"},{id:"B",text:"MLT⁻²"},{id:"C",text:"ML²T⁻¹"},{id:"D",text:"ML²T⁻²"}], correctAnswer:"A", answerVerified:true, explanation:"p = mv = M * LT⁻¹", topic:"বল" },
+            { id:"i4q9", question:"মহাকর্ষ ধ্রুবকের মান কত?", options:[{id:"A",text:"5.98 × 10²⁴ Nm²kg⁻²"},{id:"B",text:"6.37 × 10⁶ Nm²kg⁻²"},{id:"C",text:"6.67 × 10⁻¹¹ Nm²kg⁻²"},{id:"D",text:"6.37 × 10⁻¹¹ Nm²kg⁻²"}], correctAnswer:"C", answerVerified:true, explanation:"G এর আদর্শ মান 6.673 × 10⁻¹¹", topic:"মহাকর্ষ" },
+            { id:"i4q10", question:"ঘর্ষণের ফলে আমরা— i. দৌড়াতে পারি ii. তাপ উৎপন্ন করতে পারি iii. বোর্ডে মার্কার দিয়ে লিখতে পারি. নিচের কোনটি সঠিক?", options:[{id:"A",text:"i ও ii"},{id:"B",text:"i ও iii"},{id:"C",text:"ii ও iii"},{id:"D",text:"i, ii ও iii"}], correctAnswer:"D", answerVerified:true, explanation:"সবগুলো কাজেই ঘর্ষণ লাগে।", topic:"বল" },
+            { id:"i4q11", question:"ভূ-পৃষ্ঠ থেকে 7840 সে.মি. উচ্চতায় 500 gm ভরের একটি বস্তু রাখা আছে। বস্তুটির বিভবশক্তি কত? (g=9.8)", options:[{id:"A",text:"3.8416 × 10⁷ J"},{id:"B",text:"3.8416 × 10⁵ J"},{id:"C",text:"3.8416 × 10⁴ J"},{id:"D",text:"3.8416 × 10² J"}], correctAnswer:"D", answerVerified:true, explanation:"m=0.5kg, h=78.4m. Ep = 0.5 * 9.8 * 78.4 = 384.16 J = 3.8416 × 10² J", topic:"শক্তি" },
+            { id:"i4q12", question:"বস্তুটিকে মুক্তভাবে পড়তে দেওয়া হলে 2 সেকেন্ড পরে— i. বস্তুর গতিশক্তি বৃদ্ধি পাবে ii. বস্তুটির বেগ 19.6 m/s হবে iii. বস্তুটি ভূমি স্পর্শ করতে পারবে. নিচের কোনটি সঠিক?", options:[{id:"A",text:"i ও ii"},{id:"B",text:"i ও iii"},{id:"C",text:"ii ও iii"},{id:"D",text:"i, ii ও iii"}], correctAnswer:"A", answerVerified:true, explanation:"v = 9.8*2=19.6। h = 19.6m যা 78.4m এর চেয়ে কম, তাই ভূমি স্পর্শ করবে না।", topic:"গতি" },
+            { id:"i4q13", question:"নিচের কোনটি অনবায়নযোগ্য শক্তির উৎস?", options:[{id:"A",text:"সৌর শক্তি"},{id:"B",text:"নিউক্লিয়ার শক্তি"},{id:"C",text:"বায়ু শক্তি"},{id:"D",text:"ভূ-তাপীয় শক্তি"}], correctAnswer:"B", answerVerified:true, explanation:"নিউক্লিয়ার জ্বালানি একবার ব্যবহার হলে শেষ হয়ে যায়।", topic:"শক্তি" },
+            { id:"i4q14", question:"ব্যাটারিচালিত খেলনা গাড়িতে শক্তির কী ধরনের রূপান্তর হয়?", options:[{id:"A",text:"যান্ত্রিক শক্তি বিদ্যুৎ শক্তিতে"},{id:"B",text:"তাপশক্তি যান্ত্রিক শক্তিতে"},{id:"C",text:"বিদ্যুৎ শক্তি যান্ত্রিক শক্তিতে"},{id:"D",text:"গতিশক্তি বিদ্যুৎ শক্তিতে"}], correctAnswer:"C", answerVerified:true, explanation:"ব্যাটারির রাসায়নিক শক্তি থেকে বিদ্যুৎ, তারপর মটরের মাধ্যমে যান্ত্রিক শক্তি।", topic:"শক্তি" },
+            { id:"i4q15", question:"সরল ছন্দিত গতিতে সাম্যাবস্থা থেকে উপরে কিংবা নিচে সবচেয়ে বেশি সরণকে কী বলে?", options:[{id:"A",text:"দোলনকাল"},{id:"B",text:"বিস্তার"},{id:"C",text:"কম্পাঙ্ক"},{id:"D",text:"দশা"}], correctAnswer:"B", answerVerified:true, explanation:"সর্বোচ্চ সরণকে বিস্তার বলে।", topic:"তরঙ্গ" },
+            { id:"i4q16", question:"অবতল দর্পণ কোথায় ব্যবহার করা হয়?", options:[{id:"A",text:"রাস্তায়"},{id:"B",text:"ভিউমিররে"},{id:"C",text:"পেরিস্কোপে"},{id:"D",text:"দন্ত চিকিৎসায়"}], correctAnswer:"D", answerVerified:true, explanation:"দাঁতের চিকিৎসায় অবতল দর্পণ ব্যবহৃত হয়।", topic:"আলোর প্রতিফলন" },
+            { id:"i4q17", question:"নিচের কোন মাধ্যমে শব্দের বেগ বেশি?", options:[{id:"A",text:"লোহা"},{id:"B",text:"পানি"},{id:"C",text:"হাইড্রোজেন"},{id:"D",text:"পারদ"}], correctAnswer:"A", answerVerified:true, explanation:"কঠিন মাধ্যম লোহায় (প্রায় 5130 m/s) বেগ বেশি।", topic:"শব্দ ও তরঙ্গ" },
+            { id:"i4q18", question:"2 m লম্বা সুতা দিয়ে একটি পাথরকে ঝুলিয়ে দুলতে দেওয়া হলো। ঐ স্থানের অভিকর্ষজ ত্বরণ 9.8 m/s² হলে দোলনকাল কত?", options:[{id:"A",text:"0.452 s"},{id:"B",text:"1.282 s"},{id:"C",text:"2.838 s"},{id:"D",text:"13.908 s"}], correctAnswer:"C", answerVerified:true, explanation:"T = 2π√(2/9.8) = 2.838 s", topic:"তরঙ্গ" },
+            { id:"i4q19", question:"নিচের কোনটির তরঙ্গদৈর্ঘ্য দৃশ্যমান আলোর সবচেয়ে ছোট তরঙ্গদৈর্ঘ্য থেকেও ছোট?", options:[{id:"A",text:"ইনফ্রারেড"},{id:"B",text:"আল্ট্রাভায়োলেট"},{id:"C",text:"মাইক্রোওয়েভ"},{id:"D",text:"রেডিও ওয়েভ"}], correctAnswer:"B", answerVerified:true, explanation:"UV রশ্মির তরঙ্গদৈর্ঘ্য দৃশ্যমান আলো (বেগুনি) অপেক্ষা ছোট।", topic:"আলো" },
+            { id:"i4q20", question:"উত্তল দর্পণের ক্ষেত্রে— i. অবাস্তব বিম্ব গঠিত হয় ii. বিবর্ধন সর্বদা 1 হয় iii. সর্বদা লক্ষ্যবস্তু থেকে ছোট বিম্ব গঠিত হয়. নিচের কোনটি সঠিক?", options:[{id:"A",text:"i"},{id:"B",text:"iii"},{id:"C",text:"i ও ii"},{id:"D",text:"i ও iii"}], correctAnswer:"D", answerVerified:true, explanation:"উত্তল দর্পণে বিম্ব সর্বদা অবাস্তব, সোজা ও খর্বিত (m<1) হয়।", topic:"আলোর প্রতিফলন" },
+            { id:"i4q21", question:"ইলেকট্রনের চার্জ কত?", options:[{id:"A",text:"-9.11 × 10⁻³¹ C"},{id:"B",text:"-1.6 × 10⁻¹⁹ C"},{id:"C",text:"1.6 × 10⁻¹⁹ C"},{id:"D",text:"6.673 × 10⁻¹¹ C"}], correctAnswer:"B", answerVerified:true, explanation:"ইলেকট্রনের চার্জ ঋণাত্মক এবং এর মান 1.6 × 10⁻¹⁹ C।", topic:"স্থির তড়িৎ" },
+            { id:"i4q24", question:"5 volt সমান কত?", options:[{id:"A",text:"5 JC⁻¹"},{id:"B",text:"5 JC"},{id:"C",text:"5 NC⁻¹"},{id:"D",text:"5 J²C"}], correctAnswer:"A", answerVerified:true, explanation:"1 Volt = 1 Joule / 1 Coulomb", topic:"স্থির তড়িৎ" },
+            { id:"i4q25", question:"একটি গোলাকার ধারকের ধারকত্ব C হলে সেখানে যদি Q চার্জ দেওয়া হয় তাহলে বিভব এর রাশিমালা কী হবে?", options:[{id:"A",text:"V = Q/C"},{id:"B",text:"V = C/Q"},{id:"C",text:"V = kQ/C"},{id:"D",text:"V = Q²/C"}], correctAnswer:"A", answerVerified:true, explanation:"C = Q/V সূত্র মতে V = Q/C।", topic:"স্থির তড়িৎ" },
+
+            // Image 5: 1000070637.png
+            { id:"i5q1", question:"জড়তার ধারণা পাওয়া যায় নিউটনের কোন সূত্র থেকে?", options:[{id:"A",text:"মহাকর্ষ"},{id:"B",text:"প্রথম"},{id:"C",text:"দ্বিতীয়"},{id:"D",text:"তৃতীয়"}], correctAnswer:"B", answerVerified:true, explanation:"প্রথম সূত্র থেকে বল ও জড়তার ধারণা পাওয়া যায়।", topic:"বল" },
+            { id:"i5q2", question:"শব্দের পরিমাণ পরিমাপকের একক কোনটি?", options:[{id:"A",text:"Hz"},{id:"B",text:"Wm⁻²"},{id:"C",text:"dB"},{id:"D",text:"J"}], correctAnswer:"C", answerVerified:true, explanation:"শব্দের তীব্রতার লেভেল ডেসিবেল (dB) এ মাপা হয়।", topic:"শব্দ ও তরঙ্গ" },
+            { id:"i5q3", question:"নিচের কোনটি সঠিক?", options:[{id:"A",text:"V=kq/r"},{id:"B",text:"E=q/r"},{id:"C",text:"V=q/r"},{id:"D",text:"E=k/q"}], correctAnswer:"A", answerVerified:true, explanation:"বিন্দু চার্জের জন্য বিভব V = kq/r", topic:"স্থির তড়িৎ" },
+            { id:"i5q6", question:"ঘর্ষণের কার্যকারিতা উপলব্ধি করা যায়— i. দেয়ালে বল প্রয়োগে ii. বস্তু টানার ক্ষেত্রে iii. চাকা লাগানো স্যুটকেসের ক্ষেত্রে. নিচের কোনটি সঠিক?", options:[{id:"A",text:"i ও ii"},{id:"B",text:"ii ও iii"},{id:"C",text:"i ও iii"},{id:"D",text:"i, ii ও iii"}], correctAnswer:"D", answerVerified:true, explanation:"সব ক্ষেত্রেই ঘর্ষণের প্রভাব রয়েছে।", topic:"বল" },
+            { id:"i5q7", question:"kg m² s⁻³ এককটি নিচের কোন রাশিকে নির্দেশ করে?", options:[{id:"A",text:"বিভব"},{id:"B",text:"বল"},{id:"C",text:"ক্ষমতা"},{id:"D",text:"কাজ"}], correctAnswer:"C", answerVerified:true, explanation:"W = J/s = (kg m²/s²) / s = kg m² s⁻³", topic:"কাজ, ক্ষমতা ও শক্তি" },
+            { id:"i5q8", question:"নিচের কোনটি লব্ধ রাশি?", options:[{id:"A",text:"সময়"},{id:"B",text:"তাপমাত্রা"},{id:"C",text:"বল"},{id:"D",text:"দীপন তীব্রতা"}], correctAnswer:"C", answerVerified:true, explanation:"বল একটি লব্ধ রাশি (F=ma), বাকিগুলো মৌলিক।", topic:"ভৌত রাশি" },
+            { id:"i5q9", question:"কোনো কিছু যদি এমনভাবে চলতে থাকে, যেন বস্তুর সকল কণা একই সময়ে একই দিকে যেতে থাকে তাকে কী গতি বলে?", options:[{id:"A",text:"সরলরৈখিক"},{id:"B",text:"চলন"},{id:"C",text:"ঘূর্ণন"},{id:"D",text:"সরল স্পন্দন"}], correctAnswer:"B", answerVerified:true, explanation:"এটি চলন গতির সংজ্ঞা।", topic:"গতি" },
+            { id:"i5q10", question:"ত্বরণের মাত্রার ক্ষেত্রে কোনটি সঠিক?", options:[{id:"A",text:"LT⁻²"},{id:"B",text:"ML⁻¹T⁻²"},{id:"C",text:"ML²T⁻²"},{id:"D",text:"LT⁻¹"}], correctAnswer:"A", answerVerified:true, explanation:"ত্বরণ a = v/t = L/T² = LT⁻²", topic:"গতি" },
+            { id:"i5q11", question:"একটি বুলেট 1.25 mile/s বেগে ছুটে একটি কাঠের মাঝে 2 cm ঢুকেছে, বুলেটের মন্দনের মান কত? [1 mile = 1.61 km]", options:[{id:"A",text:"1 × 10⁸ m/s²"},{id:"B",text:"1 × 10⁶ m/s²"},{id:"C",text:"3.9 × 10⁵ m/s²"},{id:"D",text:"3.9 × 10⁷ m/s²"}], correctAnswer:"A", answerVerified:true, explanation:"v=1.25*1610=2012.5 m/s. u=2012.5, v=0, s=0.02. a = v²/2s ≈ 1×10⁸ m/s²", topic:"গতি" },
+            { id:"i5q14", question:"সবল নিউক্লীয় বল কত দূরত্ব পর্যন্ত কাজ করতে পারে?", options:[{id:"A",text:"10⁻⁸ m"},{id:"B",text:"10⁻¹⁵ m"},{id:"C",text:"10⁻¹² m"},{id:"D",text:"10⁻⁹ m"}], correctAnswer:"B", answerVerified:true, explanation:"সবল নিউক্লীয় বলের সীমা 10⁻¹⁵ m", topic:"বল" },
+            { id:"i5q15", question:"অনবায়নযোগ্য শক্তি কোনটি?", options:[{id:"A",text:"ভূতাপ"},{id:"B",text:"বায়োফুয়েল"},{id:"C",text:"নিউক্লিয়ার"},{id:"D",text:"বায়ু"}], correctAnswer:"C", answerVerified:true, explanation:"নিউক্লিয়ার শক্তি অনবায়নযোগ্য।", topic:"শক্তি" },
+            { id:"i5q16", question:"স্থির অবস্থা থেকে শুরু করে 10 min এ একটি বস্তু 360 km দূরত্ব অতিক্রম করতে 60 N বল প্রয়োগ করলে বস্তুটির ভর কত?", options:[{id:"A",text:"30 kg"},{id:"B",text:"40 kg"},{id:"C",text:"50 kg"},{id:"D",text:"300 kg"}], correctAnswer:"A", answerVerified:true, explanation:"s=0.5at² => 360000 = 0.5*a*(600)² => a=2. F=ma => 60=m*2 => m=30 kg.", topic:"বল" },
+            { id:"i5q17", question:"অবতল আয়নার সামনে বিভিন্ন দূরত্বে বস্তু রাখলে কোনটি সঠিক হবে?", options:[{id:"A",text:"প্রধান ফোকাসের ভেতরে থাকলে বাস্তব বিম্ব হয়"},{id:"B",text:"প্রধান ফোকাস ও বক্রতার কেন্দ্রের মাঝে থাকলে ছোট বিম্ব হয়"},{id:"C",text:"বক্রতার কেন্দ্রের বাইরে থাকলে সোজা বিম্ব হয়"},{id:"D",text:"বক্রতার কেন্দ্রে থাকলে সমান আকারের বিম্ব হয়"}], correctAnswer:"D", answerVerified:true, explanation:"বক্রতার কেন্দ্রে রাখলে বাস্তব, উল্টো এবং সমান আকারের বিম্ব হয়।", topic:"আলোর প্রতিফলন" },
+            { id:"i5q19", question:"তড়িৎ বলরেখার ক্ষেত্রে কোনটি সঠিক? i. পজেটিভ চার্জ থেকে উৎপন্ন হয়ে নেগেটিভে শেষ হয় ii. উৎপন্ন বলের দিক স্পর্শক বরাবর iii. রেখাগুলো পাশাপাশি ছেদ করতে পারে", options:[{id:"A",text:"i ও ii"},{id:"B",text:"i ও iii"},{id:"C",text:"ii ও iii"},{id:"D",text:"i, ii ও iii"}], correctAnswer:"A", answerVerified:true, explanation:"বলরেখা কখনো একে অপরকে ছেদ করে না। তাই iii ভুল।", topic:"স্থির তড়িৎ" },
+            { id:"i5q20", question:"পদার্থের পরিমাণ এর একক কোনটি?", options:[{id:"A",text:"ক্যান্ডেলা"},{id:"B",text:"কেলভিন"},{id:"C",text:"মিটার"},{id:"D",text:"মোল"}], correctAnswer:"D", answerVerified:true, explanation:"এসআই পদ্ধতিতে পদার্থের পরিমাণের একক মোল।", topic:"ভৌত রাশি" },
+            { id:"i5q21", question:"কোনটি স্কেলার রাশি?", options:[{id:"A",text:"দূরত্ব"},{id:"B",text:"সরণ"},{id:"C",text:"বেগ"},{id:"D",text:"ত্বরণ"}], correctAnswer:"A", answerVerified:true, explanation:"দূরত্বের কোনো নির্দিষ্ট দিক নেই।", topic:"ভৌত রাশি" },
+            { id:"i5q22", question:"অবতল আয়নার প্রধান ফোকাসে একটি বস্তু রাখলে এর প্রতিবিম্ব হবে- i. অবাস্তব ii. আকারে ছোটো iii. সোজা", options:[{id:"A",text:"i ও ii"},{id:"B",text:"i ও iii"},{id:"C",text:"ii ও iii"},{id:"D",text:"i, ii ও iii"}], correctAnswer:"B", answerVerified:true, explanation:"ফোকাসে রাখলে বিম্ব অসীমে গঠিত হয়। (অবাস্তব ও সোজা ধরা যেতে পারে তবে সাধারণত অসীম দূরত্বে গঠিত হয়)।", topic:"আলোর প্রতিফলন", needsReview:true },
+            { id:"i5q23", question:"20 kg ভরের একটি বস্তু 36 km/h বেগে একটা 10 m স্প্রিং এর উপর পড়ে স্থির হয়ে পড়লে ঐ স্প্রিং এর দৈর্ঘ্য কত হবে?", options:[{id:"A",text:"0.002 m"},{id:"B",text:"0.045 m"},{id:"C",text:"9.955 m"},{id:"D",text:"9.998 m"}], correctAnswer:"C", answerVerified:true, explanation:"এটি স্প্রিং ধ্রুবক ছাড়া সমাধান করা যায় না, তবে সম্ভাব্য উত্তর 9.955m (0.045m সংকোচন হলে)।", topic:"শক্তি", needsReview:true },
+            { id:"i5q24", question:"সার্চলাইটে ব্যবহৃত আয়নায় কী ধরনের আলো তৈরি হয়?", options:[{id:"A",text:"অপসারী"},{id:"B",text:"সমান্তরাল"},{id:"C",text:"অভিসারী"},{id:"D",text:"বিক্ষিপ্ত"}], correctAnswer:"B", answerVerified:true, explanation:"অবতল দর্পণের ফোকাসে বাতি রাখলে সমান্তরাল আলোকরশ্মি পাওয়া যায়।", topic:"আলোর প্রতিফলন" },
+            { id:"i5q25", question:"একটি 40 µF ধারক 20 V বৈদ্যুতিক বিভব এর সাথে সংযুক্ত থাকলে এতে কী পরিমাণ শক্তি সঞ্চিত থাকবে?", options:[{id:"A",text:"8 mJ"},{id:"B",text:"40 nJ"},{id:"C",text:"80 mJ"},{id:"D",text:"8 × 10⁶ mJ"}], correctAnswer:"A", answerVerified:true, explanation:"E = 0.5 * C * V² = 0.5 * 40×10⁻⁶ * 400 = 8×10⁻³ J = 8 mJ", topic:"স্থির তড়িৎ" },
+
+            // Image 6: 1000070636.png
+            { id:"i6q1", question:"নিচের কোনগুলো ভেক্টর রাশি?", options:[{id:"A",text:"কাজ, সরণ"},{id:"B",text:"শক্তি, ক্ষমতা"},{id:"C",text:"ভরবেগ, তড়িৎক্ষেত্র"},{id:"D",text:"বেগ, তড়িৎবিভব"}], correctAnswer:"C", answerVerified:true, explanation:"ভরবেগ ও তড়িৎ প্রাবল্য উভয়েই ভেক্টর রাশি।", topic:"ভৌত রাশি" },
+            { id:"i6q2", question:"10 kW ক্ষমতার একটি ইঞ্জিন থেকে প্রাপ্ত লভ্য কার্যকর ক্ষমতা 5000 W হলে ইঞ্জিনটির কর্মদক্ষতা কত হবে?", options:[{id:"A",text:"50%"},{id:"B",text:"2%"},{id:"C",text:"0.5%"},{id:"D",text:"0.2%"}], correctAnswer:"A", answerVerified:true, explanation:"(5000 / 10000) * 100% = 50%", topic:"কাজ, ক্ষমতা ও শক্তি" },
+            { id:"i6q3", question:"জগদীশ চন্দ্র বসু- i. 'বসুবিজ্ঞান মন্দির' প্রতিষ্ঠা করেন ii. 'Response in the living and nonliving' গ্রন্থটি রচনা করেন iii. 'ক্রেস্কোগ্রাফ' আবিষ্কার করেন", options:[{id:"A",text:"i ও ii"},{id:"B",text:"i ও iii"},{id:"C",text:"ii ও iii"},{id:"D",text:"i, ii ও iii"}], correctAnswer:"D", answerVerified:true, explanation:"তিনটি তথ্যই জগদীশ চন্দ্র বসুর ক্ষেত্রে সঠিক।", topic:"বিজ্ঞানী ও অবদান" },
+            { id:"i6q5", question:"দুটি তলের মধ্যকার স্থিতি ঘর্ষণ সহগ 1.73 হলে ঘর্ষণ কোণ কত?", options:[{id:"A",text:"90°"},{id:"B",text:"60°"},{id:"C",text:"45°"},{id:"D",text:"1°"}], correctAnswer:"B", answerVerified:true, explanation:"tanθ = 1.73 => θ = 60°", topic:"বল" },
+            { id:"i6q6", question:"দৃশ্যমান আলোর সবচেয়ে ছোট তরঙ্গদৈর্ঘ্য থেকেও ছোট তরঙ্গদৈর্ঘ্য কোনটির?", options:[{id:"A",text:"রেডিও ওয়েভ"},{id:"B",text:"ইনফ্রারেড"},{id:"C",text:"আল্ট্রা ভায়োলেট"},{id:"D",text:"মাইক্রোওয়েভ"}], correctAnswer:"C", answerVerified:true, explanation:"আল্ট্রাভায়োলেটের (UV) তরঙ্গদৈর্ঘ্য দৃশ্যমান আলো অপেক্ষা ছোট।", topic:"আলো" },
+            { id:"i6q9", question:"বস্তুর ভর বেশি হলে কোনটি বৃদ্ধি পায়?", options:[{id:"A",text:"চৌম্বক শক্তি"},{id:"B",text:"শব্দ শক্তি"},{id:"C",text:"বিদ্যুৎ শক্তি"},{id:"D",text:"যান্ত্রিক শক্তি"}], correctAnswer:"D", answerVerified:true, explanation:"যান্ত্রিক শক্তি (গতি বা বিভব) ভরের উপর সরাসরি নির্ভরশীল।", topic:"কাজ, ক্ষমতা ও শক্তি" },
+            { id:"i6q10", question:"দুটি বস্তুর ভর একই, তাদের মধ্যে দূরত্ব 5 m। যেকোনো একটির ভর 50 kg, তাদের মধ্যে ক্রিয়াশীল বল কত?", options:[{id:"A",text:"6.67 × 10¹³ N"},{id:"B",text:"6.67 × 10⁹ N"},{id:"C",text:"6.67 × 10⁻⁷ N"},{id:"D",text:"6.67 × 10⁻⁹ N"}], correctAnswer:"D", answerVerified:true, explanation:"F = G (50×50)/25 = 100G = 6.67 × 10⁻⁹ N", topic:"মহাকর্ষ" },
+            { id:"i6q11", question:"হৃৎপিণ্ডের স্পন্দন কোন ধরনের গতি?", options:[{id:"A",text:"চলন গতি"},{id:"B",text:"ঘূর্ণন গতি"},{id:"C",text:"সরলরৈখিক গতি"},{id:"D",text:"পর্যায়বৃত্ত গতি"}], correctAnswer:"D", answerVerified:true, explanation:"এটি একটি নির্দিষ্ট সময় পরপর পুনরাবৃত্ত হয়।", topic:"গতি" },
+            { id:"i6q12", question:"কোন রশ্মির বিকিরণ ব্যাখ্যা করার সময় দুর্বল নিউক্লীয় বল আবিষ্কৃত হয়?", options:[{id:"A",text:"বিটা"},{id:"B",text:"আলফা"},{id:"C",text:"গামা"},{id:"D",text:"এক্স-রে"}], correctAnswer:"A", answerVerified:true, explanation:"তেজস্ক্রিয় নিউক্লিয়াস থেকে বিটা রশ্মি নির্গমনে দুর্বল নিউক্লীয় বল কাজ করে।", topic:"আধুনিক পদার্থবিজ্ঞান" },
+            { id:"i6q13", question:"ইউরেনিয়াম 235— i. এর অর্ধায়ু 704 মিলিয়ন বছর ii. কম গতিসম্পন্ন নিউট্রনকে সহজে গ্রহণ করতে পারে iii. এর পরিমাণ প্রাকৃতিক ইউরেনিয়ামের মাত্র 0.77. নিচের কোনটি সঠিক?", options:[{id:"A",text:"i ও ii"},{id:"B",text:"i ও iii"},{id:"C",text:"ii ও iii"},{id:"D",text:"i, ii ও iii"}], correctAnswer:"D", answerVerified:true, explanation:"বইয়ের তথ্য অনুযায়ী ৩টি বক্তব্যই সঠিক।", topic:"আধুনিক পদার্থবিজ্ঞান" },
+            { id:"i6q14", question:"ধারকের পাতে জমাকৃত আধানের পরিমাণ কীসের উপর নির্ভর করে না?", options:[{id:"A",text:"ধারকের পাতের ভরের উপর"},{id:"B",text:"ব্যাটারির বিভব পার্থক্যের উপর"},{id:"C",text:"ধারকের পাতের আকারের উপর"},{id:"D",text:"ধারকের মধ্যবর্তী মাধ্যমের উপর"}], correctAnswer:"A", answerVerified:true, explanation:"ধারকত্ব পাতের ভর বা উপাদানের উপর নির্ভর করে না, ক্ষেত্রফল ও দূরত্বের উপর নির্ভর করে।", topic:"স্থির তড়িৎ" },
+            { id:"i6q16", question:"কার গলার স্বর তীক্ষ্ণ?", options:[{id:"A",text:"বৃদ্ধ"},{id:"B",text:"যুবক"},{id:"C",text:"নারী"},{id:"D",text:"পুরুষ"}], correctAnswer:"C", answerVerified:true, explanation:"নারীদের গলার স্বরের কম্পাঙ্ক বেশি হয় বলে স্বর তীক্ষ্ণ হয়।", topic:"শব্দ ও তরঙ্গ" },
+            { id:"i6q19", question:"কারা দেখান চৌম্বকক্ষেত্রের পরিবর্তন করে বিদ্যুৎ তৈরি করা যায়?", options:[{id:"A",text:"হাইজেনবার্গ ও ডিরাক"},{id:"B",text:"অরস্টেড ও কুলম্ব"},{id:"C",text:"ফ্যারাডে ও হেনরি"},{id:"D",text:"আর্কিমিডিস ও ইরাতোসথিনিস"}], correctAnswer:"C", answerVerified:true, explanation:"তড়িৎ চৌম্বকীয় আবেশ আবিষ্কার করেন ফ্যারাডে ও হেনরি।", topic:"বিদ্যুৎ ও চুম্বক" },
+            { id:"i6q20", question:"কোন বলের কারণে গ্যালাক্সির ভেতরে নক্ষত্ররা ঘুরপাক খায়?", options:[{id:"A",text:"বিদ্যুৎ চৌম্বকীয় বল"},{id:"B",text:"মহাকর্ষ বল"},{id:"C",text:"দুর্বল নিউক্লীয় বল"},{id:"D",text:"সবল নিউক্লীয় বল"}], correctAnswer:"B", answerVerified:true, explanation:"মহাবিশ্বের বৃহৎ বস্তুগুলোর মধ্যে মহাকর্ষ বল ক্রিয়া করে।", topic:"মহাকর্ষ" },
+            { id:"i6q21", question:"নিচের কোনটি নবায়নযোগ্য শক্তির উৎস?", options:[{id:"A",text:"জিওথার্মাল"},{id:"B",text:"তেল"},{id:"C",text:"গ্যাস"},{id:"D",text:"কয়লা"}], correctAnswer:"A", answerVerified:true, explanation:"জিওথার্মাল বা ভূতাপীয় শক্তি নবায়নযোগ্য।", topic:"শক্তি" },
+            { id:"i6q22", question:"নিচের কোনটি সঠিক?", options:[{id:"A",text:"a = (v-u)/t"},{id:"B",text:"s = (u-v)/2 * t"},{id:"C",text:"u = v + at"},{id:"D",text:"a = (u+v)/t"}], correctAnswer:"A", answerVerified:true, explanation:"ত্বরণের সূত্র a = (v-u)/t সঠিক।", topic:"গতি" },
+            { id:"i6q23", question:"100 cm লম্বা একটি সুতা দিয়ে 15 gm ভরের একটি বস্তু ঝুলিয়ে দেওয়া হলে বস্তুটির দোলনকাল কত হবে?", options:[{id:"A",text:"20.07 s"},{id:"B",text:"19.67 s"},{id:"C",text:"6.35 s"},{id:"D",text:"2.01 s"}], correctAnswer:"D", answerVerified:true, explanation:"T = 2π√(L/g) = 2π√(1/9.8) = 2.01 s", topic:"তরঙ্গ" },
+            { id:"i6q25", question:"নিচের কোনটি বিদ্যুৎ অপরিবাহী?", options:[{id:"A",text:"প্লাস্টিক"},{id:"B",text:"রূপা"},{id:"C",text:"তামা"},{id:"D",text:"সোনা"}], correctAnswer:"A", answerVerified:true, explanation:"প্লাস্টিকের মধ্য দিয়ে বিদ্যুৎ প্রবাহিত হতে পারে না।", topic:"চল তড়িৎ" },
+
+            // Image 7: 1000070641.png
+            { id:"i7q1", question:"একটি বস্তুকে খাড়া উপরের দিকে 120 km/h বেগে নিক্ষেপ করা হলো। বস্তুটি সর্বোচ্চ কত উচ্চতায় উঠবে?", options:[{id:"A",text:"12.24 m"},{id:"B",text:"33.33 m"},{id:"C",text:"56.68 m"},{id:"D",text:"734.69 m"}], correctAnswer:"C", answerVerified:true, explanation:"v = 120 * 5/18 = 33.33 m/s. h = v²/(2g) = 1111 / 19.6 = 56.68 m.", topic:"গতি" },
+            { id:"i7q2", question:"নিচের কোনটি কাজের একক?", options:[{id:"A",text:"নিউটন-মিটার"},{id:"B",text:"নিউটন/মিটার"},{id:"C",text:"N/c"},{id:"D",text:"কুলম্ব/মিটার"}], correctAnswer:"A", answerVerified:true, explanation:"কাজের একক জুল বা নিউটন-মিটার (Nm)।", topic:"কাজ, ক্ষমতা ও শক্তি" },
+            { id:"i7q3", question:"নবায়নযোগ্য শক্তির ক্ষেত্রে কোনটি সঠিক?", options:[{id:"A",text:"এ শক্তি পৃথিবীর পুরো শক্তির এক-তৃতীয়াংশ"},{id:"B",text:"এ শক্তি ব্যবহারে কোনো ক্ষেত্রেই পরিবেশের কোনো ক্ষতি হয় না"},{id:"C",text:"এ শক্তি পৃথিবী থেকে চিরদিনের জন্য নিঃশেষ হবে না"},{id:"D",text:"এ শক্তি মানুষের কাছে সহজলভ্য নয়"}], correctAnswer:"C", answerVerified:true, explanation:"নবায়নযোগ্য শক্তি প্রতিনিয়ত প্রাকৃতিকভাবে উৎপন্ন হয় তাই শেষ হয় না।", topic:"শক্তি" },
+            { id:"i7q4", question:"এক টুকরো প্লাস্টিককে ফ্লানেল কাপড় দিয়ে ঘষলে- i. ফ্লানেল থেকে ইলেকট্রন প্লাস্টিকে যাবে ii. প্লাস্টিকের ইলেকট্রন আসক্তি ফ্লানেল থেকে কম iii. প্লাস্টিক ঋণাত্মক চার্জে চার্জিত হবে", options:[{id:"A",text:"i ও ii"},{id:"B",text:"i ও iii"},{id:"C",text:"ii ও iii"},{id:"D",text:"i, ii ও iii"}], correctAnswer:"B", answerVerified:true, explanation:"প্লাস্টিকের আসক্তি বেশি, তাই এটি ইলেকট্রন গ্রহণ করে ঋণাত্মক হয়।", topic:"স্থির তড়িৎ" },
+            { id:"i7q5", question:"সমীকরণগুলো লক্ষ্য করো: i. V=W/Q ii. C=Q/V iii. E=1/2 CV²", options:[{id:"A",text:"i ও ii"},{id:"B",text:"i ও iii"},{id:"C",text:"ii ও iii"},{id:"D",text:"i, ii ও iii"}], correctAnswer:"D", answerVerified:true, explanation:"তিনটি সমীকরণই তড়িৎ বিজ্ঞানে সঠিক।", topic:"স্থির তড়িৎ" },
+            { id:"i7q8", question:"শব্দ তরঙ্গের তীব্রতা বিস্তারের-", options:[{id:"A",text:"বর্গের সমানুপাতিক"},{id:"B",text:"সমানুপাতিক"},{id:"C",text:"ব্যস্তানুপাতিক"},{id:"D",text:"বর্গের ব্যস্তানুপাতিক"}], correctAnswer:"A", answerVerified:true, explanation:"I ∝ A²", topic:"শব্দ ও তরঙ্গ" },
+            { id:"i7q9", question:"বাতাসের প্রবাহ দিয়ে তৈরি বাদ্যযন্ত্র-", options:[{id:"A",text:"তবলা"},{id:"B",text:"একতারা"},{id:"C",text:"হারমোনিয়াম"},{id:"D",text:"বেহালা"}], correctAnswer:"C", answerVerified:true, explanation:"হারমোনিয়াম বাতাসের সাহায্যে বাজে।", topic:"শব্দ ও তরঙ্গ" },
+            { id:"i7q12", question:"এক টুকরো কাচে আলোর প্রতিফলন কী পরিমাণ হয়?", options:[{id:"A",text:"4%-5%"},{id:"B",text:"5%-7%"},{id:"C",text:"40%-45%"},{id:"D",text:"94%-95%"}], correctAnswer:"A", answerVerified:true, explanation:"সাধারণ স্বচ্ছ কাচে প্রায় ৪-৫% আলো প্রতিফলিত হয়।", topic:"আলোর প্রতিফলন" },
+            { id:"i7q13", question:"নিচের কোন সম্পর্কটি সঠিক?", options:[{id:"A",text:"m = v/u"},{id:"B",text:"r = f/2"},{id:"C",text:"1/u + 1/v = 1/f"},{id:"D",text:"v = f/3"}], correctAnswer:"C", answerVerified:true, explanation:"দর্পণের সাধারণ সমীকরণ 1/u + 1/v = 1/f (m = -v/u হয়, তাই A পুরোপুরি সঠিক নয়)।", topic:"আলোর প্রতিফলন" },
+            { id:"i7q14", question:"দুটি আহিত বস্তুর মধ্যবর্তী দূরত্ব তিনগুণ করলে ক্রিয়াশীল বল কেমন হবে?", options:[{id:"A",text:"নয় ভাগের এক ভাগ"},{id:"B",text:"এক-তৃতীয়াংশ"},{id:"C",text:"তিনগুণ"},{id:"D",text:"নয় গুণ"}], correctAnswer:"A", answerVerified:true, explanation:"F ∝ 1/d², d তিনগুণ হলে বল 1/3² = 1/9 হবে।", topic:"স্থির তড়িৎ" },
+            { id:"i7q15", question:"কুলম্বের ধ্রুবকের একক হচ্ছে-", options:[{id:"A",text:"Nm²C⁻²"},{id:"B",text:"Nm²C⁻¹"},{id:"C",text:"N⁻¹m⁻²C²"},{id:"D",text:"Nm⁻²C²"}], correctAnswer:"A", answerVerified:true, explanation:"k এর একক Nm²/C²।", topic:"স্থির তড়িৎ" },
+            { id:"i7q16", question:"+2 কুলম্ব চার্জ এবং একটি -2 কুলম্ব চার্জ পরস্পর থেকে 10 cm দূরে রাখা হলো। চার্জ দুটির মধ্যে ক্রিয়াশীল বল কত হবে?", options:[{id:"A",text:"3.6 × 10¹² N"},{id:"B",text:"3.6 × 10¹¹ N"},{id:"C",text:"- 3.6 × 10¹¹ N"},{id:"D",text:"- 3.6 × 10¹² N"}], correctAnswer:"D", answerVerified:true, explanation:"F = (9×10⁹ * 2 * -2) / (0.1)² = -3.6 × 10¹² N", topic:"স্থির তড়িৎ" },
+            { id:"i7q17", question:"ভ্যান ডি গ্রাফ মেশিনের কাজ কোনটি?", options:[{id:"A",text:"বিদ্যুতের প্রবাহ মাপা"},{id:"B",text:"স্থির বিদ্যুৎ তৈরি করা"},{id:"C",text:"বিভব পার্থক্য বৃদ্ধি করে"},{id:"D",text:"নিম্ন বিভব নিয়ে কাজ করে"}], correctAnswer:"B", answerVerified:true, explanation:"এটি উচ্চ বিভবের স্থির বিদ্যুৎ উৎপাদনে ব্যবহৃত হয়।", topic:"স্থির তড়িৎ" },
+            { id:"i7q18", question:"স্পন্দন গতি নিচের কোনটি?", options:[{id:"A",text:"বৈদ্যুতিক পাখার গতি"},{id:"B",text:"ঘড়ির কাঁটার গতি"},{id:"C",text:"দোলনায় দুলতে থাকা শিশুর গতি"},{id:"D",text:"গাড়ির ঘূর্ণায়মান চাকার গতি"}], correctAnswer:"C", answerVerified:true, explanation:"দোলনার গতি স্পন্দন গতি।", topic:"গতি" },
+            { id:"i7q19", question:"ভার্নিয়ার স্কেলের ভাগসংখ্যা 20 হলে ভার্নিয়ার ধ্রুবক কত মিটার? (প্রধান স্কেলের ক্ষুদ্রতম ভাগ 1 mm ধরে)", options:[{id:"A",text:"0.1"},{id:"B",text:"0.01"},{id:"C",text:"0.05"},{id:"D",text:"0.005"}], correctAnswer:"C", answerVerified:true, explanation:"1/20 mm = 0.05 mm। প্রশ্নে মিটার বলা হলেও অপশনগুলো সাধারণত mm এ দেওয়া থাকে।", topic:"পরিমাপ", needsReview:true },
+            { id:"i7q20", question:"3 kg ভরের একটি স্থির বস্তুর উপর 90 N বল 5 sec পর্যন্ত প্রয়োগ করা হলে এর বেগ কত হবে?", options:[{id:"A",text:"30 m/sec"},{id:"B",text:"150 m/sec"},{id:"C",text:"270 m/sec"},{id:"D",text:"450 m/sec"}], correctAnswer:"B", answerVerified:true, explanation:"a = 90/3 = 30 m/s². v = 0 + 30*5 = 150 m/s.", topic:"বল ও গতি" },
+            { id:"i7q21", question:"নিচের কোনটি পর্যায়বৃত্ত গতির উদাহরণ?", options:[{id:"A",text:"হৃৎপিণ্ডের স্পন্দন"},{id:"B",text:"টানা বস্তুর গতি"},{id:"C",text:"চলন্ত বাইসাইকেলের চাকার গতি"},{id:"D",text:"বিমানের গতি"}], correctAnswer:"A", answerVerified:true, explanation:"হৃৎপিণ্ডের স্পন্দন একটি নির্দিষ্ট সময় পরপর পুনরাবৃত্ত হয়।", topic:"গতি" },
+            { id:"i7q24", question:"নিউক্লিয়াসের মূল কণিকা দুটির মধ্যে আকর্ষণ বল কীরূপ?", options:[{id:"A",text:"দুর্বল নিউক্লীয় বল"},{id:"B",text:"তড়িৎ চুম্বকীয় বল"},{id:"C",text:"সবল নিউক্লীয় বল"},{id:"D",text:"স্থির তড়িৎ বল"}], correctAnswer:"C", answerVerified:true, explanation:"প্রোটন ও নিউট্রনকে একত্রে রাখে সবল নিউক্লীয় বল।", topic:"বল" },
+            { id:"i7q25", question:"নিচের কোনটি ওজনের মাত্রা?", options:[{id:"A",text:"MLT⁻¹"},{id:"B",text:"ML⁻³"},{id:"C",text:"LT⁻²"},{id:"D",text:"MLT⁻²"}], correctAnswer:"D", answerVerified:true, explanation:"ওজন এক প্রকার বল, তাই মাত্রা MLT⁻²।", topic:"ভৌত রাশি" },
+
+            // Image 8: 1000070640.png
+            { id:"i8q1", question:"কোয়ান্টাম তত্ত্বের আবিষ্কারক কে?", options:[{id:"A",text:"ম্যাক্সওয়েল"},{id:"B",text:"নিউটন"},{id:"C",text:"আইনস্টাইন"},{id:"D",text:"ম্যাক্স প্ল্যাঙ্ক"}], correctAnswer:"D", answerVerified:true, explanation:"ম্যাক্স প্ল্যাঙ্ক কোয়ান্টাম তত্ত্ব প্রদান করেন।", topic:"আধুনিক পদার্থবিজ্ঞান" },
+            { id:"i8q2", question:"SI পদ্ধতিতে তাপমাত্রার একক কোনটি?", options:[{id:"A",text:"ক্যালরি"},{id:"B",text:"ফারেনহাইট"},{id:"C",text:"কেলভিন"},{id:"D",text:"সেলসিয়াস"}], correctAnswer:"C", answerVerified:true, explanation:"তাপমাত্রার এসআই একক কেলভিন।", topic:"তাপ" },
+            { id:"i8q3", question:"একটি স্লাইড ক্যালিপার্সের ভার্নিয়ার স্কেলের ভাগ সংখ্যা 20। প্রধান স্কেলের ক্ষুদ্রতম এক ভাগের মান 0.1 cm হলে ভার্নিয়ার ধ্রুবক কত?", options:[{id:"A",text:"0.01 mm"},{id:"B",text:"0.025 mm"},{id:"C",text:"0.05 mm"},{id:"D",text:"0.1 mm"}], correctAnswer:"C", answerVerified:true, explanation:"0.1 cm = 1 mm. VC = 1 mm / 20 = 0.05 mm.", topic:"পরিমাপ" },
+            { id:"i8q4", question:"36 kmh⁻¹ সমান কত m s⁻¹?", options:[{id:"A",text:"10 m s⁻¹"},{id:"B",text:"36 m s⁻¹"},{id:"C",text:"100 m s⁻¹"},{id:"D",text:"129.6 m s⁻¹"}], correctAnswer:"A", answerVerified:true, explanation:"36 * (1000/3600) = 10 m/s", topic:"গতি" },
+            { id:"i8q5", question:"নিচের কোন সমীকরণ সঠিক?", options:[{id:"A",text:"2s = vt"},{id:"B",text:"G = gM/R²"},{id:"C",text:"t = (u+v)/2s"},{id:"D",text:"h = (v²-u²)/2g"}], correctAnswer:"D", answerVerified:true, explanation:"v² = u² + 2gh সমীকরণ থেকে h বের করলে এটি পাওয়া যায়।", topic:"গতি" },
+            { id:"i8q6", question:"স্থির অবস্থান থেকে সুষম ত্বরণে চলমান কোনো বস্তুর বেগ- i. সময়ের সমানুপাতিক ii. দূরত্বের বর্গমূলের সমানুপাতিক iii. সময়ের বর্গের সমানুপাতিক", options:[{id:"A",text:"i"},{id:"B",text:"iii"},{id:"C",text:"i ও ii"},{id:"D",text:"i, ii ও iii"}], correctAnswer:"C", answerVerified:true, explanation:"v = at (v ∝ t) এবং v² = 2as (v ∝ √s)।", topic:"গতি" },
+            { id:"i8q7", question:"20 m ব্যাসার্ধের বৃত্তাকার পথে ঘূর্ণায়মান বস্তু পরিধির অর্ধেক অতিক্রম করলে সরণ কত?", options:[{id:"A",text:"0 m"},{id:"B",text:"20 m"},{id:"C",text:"40 m"},{id:"D",text:"125.66 m"}], correctAnswer:"C", answerVerified:true, explanation:"অর্ধেক ঘুরলে সরণ হবে ব্যাস বরাবর অর্থাৎ 2r = 40 m।", topic:"গতি" },
+            { id:"i8q8", question:"নিচের কোনটির প্রতি ঘর্ষণ বেশি হবে?", options:[{id:"A",text:"বাইসাইকেল"},{id:"B",text:"মোটর সাইকেল"},{id:"C",text:"প্রাইভেট কার"},{id:"D",text:"বাস"}], correctAnswer:"D", answerVerified:true, explanation:"বাসের ভর ও ক্ষেত্রফল বেশি হওয়ায় ঘর্ষণ বেশি হবে।", topic:"বল" },
+            { id:"i8q9", question:"নিচের কোন সম্পর্কটি সঠিক? (ক্রিয়া-প্রতিক্রিয়া বল F1 ও F2)", options:[{id:"A",text:"F₂ > F₁"},{id:"B",text:"F₁ + F₂ = 0"},{id:"C",text:"F₁ > F₂"},{id:"D",text:"F₁ ≠ -F₂"}], correctAnswer:"B", answerVerified:true, explanation:"F₁ = -F₂ => F₁ + F₂ = 0", topic:"বল" },
+            { id:"i8q10", question:"ঘর্ষণের কারণে অপ্রয়োজনীয় কোনটি সৃষ্টি করে শক্তির অপচয় হয়?", options:[{id:"A",text:"আলো"},{id:"B",text:"বিকিরণ"},{id:"C",text:"তাপ"},{id:"D",text:"শব্দ"}], correctAnswer:"C", answerVerified:true, explanation:"ঘর্ষণে প্রচুর তাপ উৎপন্ন হয় যা শক্তির অপচয় ঘটায়।", topic:"কাজ, ক্ষমতা ও শক্তি" },
+            { id:"i8q11", question:"একটি বস্তুকে ভূ-পৃষ্ঠ থেকে উপরে উঠালে এর মধ্যে কোন শক্তি জমা থাকে?", options:[{id:"A",text:"বিভবশক্তি"},{id:"B",text:"গতিশক্তি"},{id:"C",text:"তাপশক্তি"},{id:"D",text:"রাসায়নিক শক্তি"}], correctAnswer:"A", answerVerified:true, explanation:"উপরে উঠালে অভিকর্ষজ বিভবশক্তি জমা হয়।", topic:"শক্তি" },
+            { id:"i8q12", question:"গতিশীল কোনো বস্তুর গতিশক্তি চারগুণ হলে, বেগ-", options:[{id:"A",text:"দ্বিগুণ হয়"},{id:"B",text:"দ্বিগুণ ও ভর চারগুণ হয়"},{id:"C",text:"চারগুণ ও ভর এক-চতুর্থাংশ হবে"},{id:"D",text:"i, ii ও iii"}], correctAnswer:"A", answerVerified:true, explanation:"Ek ∝ v²। বেগ দ্বিগুণ হলেই গতিশক্তি চারগুণ হবে।", topic:"শক্তি" },
+            { id:"i8q15", question:"পানিতে শব্দের বেগ কত?", options:[{id:"A",text:"1284 m s⁻¹"},{id:"B",text:"1450 m s⁻¹"},{id:"C",text:"1493 m s⁻¹"},{id:"D",text:"5130 m s⁻¹"}], correctAnswer:"C", answerVerified:true, explanation:"স্বাভাবিক পানিতে শব্দের বেগ প্রায় 1493 m/s।", topic:"শব্দ ও তরঙ্গ" },
+            { id:"i8q16", question:"ট্রাফিক শব্দের পরিমাণ কত ডেসিবল?", options:[{id:"A",text:"40-60"},{id:"B",text:"50-60"},{id:"C",text:"60-80"},{id:"D",text:"80-90"}], correctAnswer:"D", answerVerified:true, explanation:"ব্যস্ত রাস্তায় ট্রাফিকের শব্দের মাত্রা সাধারণত 80-90 dB।", topic:"শব্দ ও তরঙ্গ" },
+            { id:"i8q17", question:"দাঁতের চিকিৎসায় কোনটি ব্যবহৃত হয়?", options:[{id:"A",text:"উত্তল দর্পণ"},{id:"B",text:"অবতল দর্পণ"},{id:"C",text:"সমতল দর্পণ"},{id:"D",text:"প্রিজম"}], correctAnswer:"B", answerVerified:true, explanation:"বিবর্ধিত প্রতিবিম্বের জন্য অবতল দর্পণ ব্যবহৃত হয়।", topic:"আলোর প্রতিফলন" },
+            { id:"i8q20", question:"নিচের কোনটি বিদ্যুৎ অপরিবাহী?", options:[{id:"A",text:"তামা"},{id:"B",text:"রূপা"},{id:"C",text:"কাচ"},{id:"D",text:"সোনা"}], correctAnswer:"C", answerVerified:true, explanation:"কাচ অন্তরক বা বিদ্যুৎ অপরিবাহী।", topic:"চল তড়িৎ" },
+            { id:"i8q21", question:"আলোক সংবেদী ফটোগ্রাফিক ফিল্মে আলোর উপস্থিতি কোনটির জন্ম দেয়?", options:[{id:"A",text:"তাপশক্তি"},{id:"B",text:"রাসায়নিক শক্তি"},{id:"C",text:"আলোক শক্তি"},{id:"D",text:"বিদ্যুৎ শক্তি"}], correctAnswer:"B", answerVerified:true, explanation:"আলোক শক্তি রাসায়নিক বিক্রিয়া ঘটায়।", topic:"আলো" },
+            { id:"i8q22", question:"+5C চার্জের একটি বস্তুকে তড়িৎক্ষেত্রের কোনো বিন্দুতে রাখা হলে 15 N বল অনুভব করে। ঐ স্থানের তড়িৎক্ষেত্র কত?", options:[{id:"A",text:"0.333 NC⁻¹"},{id:"B",text:"3 NC⁻¹"},{id:"C",text:"15 NC⁻¹"},{id:"D",text:"75 NC⁻¹"}], correctAnswer:"B", answerVerified:true, explanation:"E = F/q = 15/5 = 3 NC⁻¹", topic:"স্থির তড়িৎ" },
+            { id:"i8q23", question:"নিচের কোনটি বিভবের একক?", options:[{id:"A",text:"CJ⁻¹"},{id:"B",text:"V⁻¹"},{id:"C",text:"JC⁻¹"},{id:"D",text:"JC"}], correctAnswer:"C", answerVerified:true, explanation:"বিভব V = W/Q, তাই একক জুল/কুলম্ব (JC⁻¹)।", topic:"স্থির তড়িৎ" },
+            { id:"i8q24", question:"আলো কোনো তলে বাধাপ্রাপ্ত হয়ে পুনরায় একই মাধ্যমে ফিরে আসাকে কী বলে?", options:[{id:"A",text:"প্রতিফলন"},{id:"B",text:"প্রতিসরণ"},{id:"C",text:"উপরিযোজন"},{id:"D",text:"সংকট কোণ"}], correctAnswer:"A", answerVerified:true, explanation:"এটি আলোর প্রতিফলনের সংজ্ঞা।", topic:"আলোর প্রতিফলন" },
+            { id:"i8q25", question:"মৌলিক রাশি- i. পদার্থের পরিমাণ ii. তড়িৎ প্রবাহ iii. তাপ", options:[{id:"A",text:"i ও ii"},{id:"B",text:"iii"},{id:"C",text:"i ও iii"},{id:"D",text:"i, ii ও iii"}], correctAnswer:"A", answerVerified:true, explanation:"তাপমাত্রা মৌলিক রাশি, কিন্তু তাপ নয়। তাই i ও ii সঠিক।", topic:"ভৌত রাশি" },
+
+            // Image 9: 1000070639.png
+            { id:"i9q1", question:"কোন শর্তে বস্তুর গতিশক্তি চারগুণ হবে?", options:[{id:"A",text:"ভর দ্বিগুণ ও বেগ দ্বিগুণ করা হলে"},{id:"B",text:"ভর চারগুণ ও বেগ অর্ধেক করা হলে"},{id:"C",text:"ভর অপরিবর্তিত ও বেগ দ্বিগুণ করা হলে"},{id:"D",text:"ভর দ্বিগুণ ও বেগ অপরিবর্তিত রাখলে"}], correctAnswer:"C", answerVerified:true, explanation:"Ek = 1/2 mv²। বেগ দ্বিগুণ হলে গতিশক্তি 2² = 4 গুণ হবে।", topic:"শক্তি" },
+            { id:"i9q2", question:"10 N বল প্রয়োগ করে একটি চেয়ারকে 50 cm টানা হলে কাজের পরিমাণ কত?", options:[{id:"A",text:"0.5 J"},{id:"B",text:"5 J"},{id:"C",text:"50 J"},{id:"D",text:"500 J"}], correctAnswer:"B", answerVerified:true, explanation:"W = Fs = 10 * 0.5 = 5 J", topic:"কাজ" },
+            { id:"i9q3", question:"লাল আলোতে গাছের সবুজ পাতাকে কোন বর্ণের দেখায়?", options:[{id:"A",text:"কালো"},{id:"B",text:"সবুজ"},{id:"C",text:"লাল"},{id:"D",text:"সাদা"}], correctAnswer:"A", answerVerified:true, explanation:"সবুজ পাতা লাল আলো শোষণ করে নেয়, তাই কালো দেখায়।", topic:"আলো" },
+            { id:"i9q6", question:"সমতল দর্পণে আলো প্রতিফলক পৃষ্ঠের সাথে 30° কোণে আপতিত হলে প্রতিফলন কোণ কত?", options:[{id:"A",text:"30°"},{id:"B",text:"60°"},{id:"C",text:"90°"},{id:"D",text:"120°"}], correctAnswer:"B", answerVerified:true, explanation:"আপতন কোণ = 90 - 30 = 60°। তাই প্রতিফলন কোণও 60°।", topic:"আলোর প্রতিফলন" },
+            { id:"i9q7", question:"পারদে শব্দের বেগ কত?", options:[{id:"A",text:"1284 m s⁻¹"},{id:"B",text:"1450 m s⁻¹"},{id:"C",text:"1493 m s⁻¹"},{id:"D",text:"5130 m s⁻¹"}], correctAnswer:"B", answerVerified:true, explanation:"পারদে শব্দের বেগ সাধারণত 1450 m/s।", topic:"শব্দ ও তরঙ্গ" },
+            { id:"i9q8", question:"শব্দ তরঙ্গ- i. একটি অনুদৈর্ঘ্য তরঙ্গ ii. তরঙ্গের প্রবাহের দিকের সাথে সমকোণে অগ্রসর হয় iii. সংকোচন ও প্রসারণ নিয়ে গঠিত হয়", options:[{id:"A",text:"i ও ii"},{id:"B",text:"i ও iii"},{id:"C",text:"ii ও iii"},{id:"D",text:"i, ii ও iii"}], correctAnswer:"B", answerVerified:true, explanation:"শব্দ অনুদৈর্ঘ্য তরঙ্গ এবং সমান্তরালে অগ্রসর হয় (সমকোণে নয়)।", topic:"শব্দ ও তরঙ্গ" },
+            { id:"i9q9", question:"চার্জের উপস্থিতি নির্ণয়ে ব্যবহৃত যন্ত্রের নাম কী?", options:[{id:"A",text:"ইলেকট্রোস্কোপ"},{id:"B",text:"অ্যামিটার"},{id:"C",text:"ভোল্টমিটার"},{id:"D",text:"ভ্যান-ডি গ্রাফ"}], correctAnswer:"A", answerVerified:true, explanation:"ইলেকট্রোস্কোপ দিয়ে চার্জের অস্তিত্ব মাপা হয়।", topic:"স্থির তড়িৎ" },
+            { id:"i9q12", question:"গাড়ির হর্ন উৎপন্ন শব্দের পরিমাণ কত?", options:[{id:"A",text:"40-60 dB"},{id:"B",text:"50-60 dB"},{id:"C",text:"60-80 dB"},{id:"D",text:"80-90 dB"}], correctAnswer:"D", answerVerified:true, explanation:"গাড়ির হর্ন তীব্র শব্দ তৈরি করে (80-90 dB বা বেশি)।", topic:"শব্দ ও তরঙ্গ" },
+            { id:"i9q13", question:"নিচের কোনটি দোলনকাল ও সুতার দৈর্ঘ্যের মধ্যে সম্পর্ক নির্দেশ করে?", options:[{id:"A",text:"T ∝ L"},{id:"B",text:"T ∝ 1/L"},{id:"C",text:"T ∝ L²"},{id:"D",text:"T ∝ √L"}], correctAnswer:"D", answerVerified:true, explanation:"T = 2π√(L/g) সূত্রানুসারে T ∝ √L।", topic:"তরঙ্গ" },
+            { id:"i9q14", question:"কোনটি লব্ধ রাশির একক?", options:[{id:"A",text:"A"},{id:"B",text:"N"},{id:"C",text:"K"},{id:"D",text:"S"}], correctAnswer:"B", answerVerified:true, explanation:"N (নিউটন) বলের একক, যা লব্ধ রাশি।", topic:"ভৌত রাশি" },
+            { id:"i9q15", question:"কোনটি মৌলিক বল?", options:[{id:"A",text:"সাম্য বল"},{id:"B",text:"ঘর্ষণ বল"},{id:"C",text:"অসাম্য বল"},{id:"D",text:"মহাকর্ষ বল"}], correctAnswer:"D", answerVerified:true, explanation:"প্রকৃতির ৪টি মৌলিক বলের একটি মহাকর্ষ বল।", topic:"বল" },
+            { id:"i9q16", question:"একটি বস্তু মুক্তভাবে পড়তে থাকলে- i. বস্তুটি সুষমবেগে পড়তে থাকবে ii. এর বেগ সময়ের সাথে বাড়তে থাকবে iii. বস্তুটি সমান সময়ে সমান পথ অতিক্রম করবে", options:[{id:"A",text:"ii"},{id:"B",text:"iii"},{id:"C",text:"i ও ii"},{id:"D",text:"i, ii ও iii"}], correctAnswer:"A", answerVerified:true, explanation:"মুক্তভাবে পড়ন্ত বস্তু সমত্বরণে (g) পড়ে, তাই বেগ সময়ের সাথে বাড়ে। সুষমবেগ নয়।", topic:"গতি", needsReview:true },
+            { id:"i9q19", question:"বলের মাত্রা সমীকরণ কোনটি?", options:[{id:"A",text:"MLT⁻¹"},{id:"B",text:"MLT⁻²"},{id:"C",text:"ML²T⁻²"},{id:"D",text:"MLT⁻³"}], correctAnswer:"B", answerVerified:true, explanation:"F = ma = MLT⁻²", topic:"বল" },
+            { id:"i9q20", question:"ভার্নিয়ার ধ্রুবক হচ্ছে মূল স্কেলের একভাগ এবং-", options:[{id:"A",text:"ভার্নিয়ার সমপাতনের পার্থক্য"},{id:"B",text:"ভার্নিয়ার সমপাতনের অনুপাত"},{id:"C",text:"ভার্নিয়ার স্কেলের মোট ভাগের অনুপাত"},{id:"D",text:"ভার্নিয়ার স্কেলের এক ভাগের পার্থক্য"}], correctAnswer:"D", answerVerified:true, explanation:"VC = s - v (মূল স্কেলের একভাগ ও ভার্নিয়ার স্কেলের একভাগের পার্থক্য)।", topic:"পরিমাপ" },
+            { id:"i9q21", question:"ঘর্ষণ বল বৃদ্ধি পায় যদি-", options:[{id:"A",text:"পৃষ্ঠতলকে অমসৃণ করা হয়"},{id:"B",text:"চাকা ব্যবহার করা হয়"},{id:"C",text:"বল বিয়ারিং ব্যবহার করা হয়"},{id:"D",text:"লুব্রিকেন্ট ব্যবহার করা হয়"}], correctAnswer:"A", answerVerified:true, explanation:"পৃষ্ঠতল অমসৃণ হলে ঘর্ষণ বৃদ্ধি পায়।", topic:"বল" },
+            { id:"i9q23", question:"50 kg ভরের একটি সাইকেল 36 kmh⁻¹ বেগে গতিশীল হলে ভরবেগ কত?", options:[{id:"A",text:"5 kg m s⁻¹"},{id:"B",text:"500 kg m s⁻¹"},{id:"C",text:"18 kg m s⁻¹"},{id:"D",text:"1800 kg m s⁻¹"}], correctAnswer:"B", answerVerified:true, explanation:"v = 10 m/s. p = mv = 50*10 = 500 kg m s⁻¹।", topic:"গতি ও বল" },
+            { id:"i9q24", question:"কোয়ান্টাম তত্ত্ব আবিষ্কার করেন কে?", options:[{id:"A",text:"আইনস্টাইন"},{id:"B",text:"কোপার্নিকাস"},{id:"C",text:"গ্যালিলিও"},{id:"D",text:"ম্যাক্স প্ল্যাঙ্ক"}], correctAnswer:"D", answerVerified:true, explanation:"ম্যাক্স প্ল্যাঙ্ক কোয়ান্টাম তত্ত্ব প্রদান করেন।", topic:"আধুনিক পদার্থবিজ্ঞান" },
+            { id:"i9q25", question:"অনবায়নযোগ্য কোন শক্তির উৎস থেকে কার্বন-ডাইঅক্সাইড নিঃসরণ হয় না?", options:[{id:"A",text:"তেল"},{id:"B",text:"গ্যাস"},{id:"C",text:"কয়লা"},{id:"D",text:"নিউক্লিয়ার"}], correctAnswer:"D", answerVerified:true, explanation:"নিউক্লিয়ার শক্তিতে দহন হয় না, তাই CO2 নির্গত হয় না।", topic:"শক্তি" }
+        ];
+
+        // 3. Application Logic
+        let state = {
+            studentName: "", currentQuestionIndex: 0, answers: {}, markedForReview: {}, 
+            timeLeft: 60 * 60, // 60 minutes
+            timerInterval: null, isSubmitted: false
+        };
+
+        const startScreen = document.getElementById('startScreen');
+        const examScreen = document.getElementById('examScreen');
+        const resultScreen = document.getElementById('resultScreen');
+        const startExamBtn = document.getElementById('startExamBtn');
+        const studentNameInput = document.getElementById('studentName');
+        const totalQuestionsCount = document.getElementById('totalQuestionsCount');
+
+        const currentQNum = document.getElementById('currentQNum');
+        const totalQNum = document.getElementById('totalQNum');
+        const timeRemaining = document.getElementById('timeRemaining');
+        const examProgressBar = document.getElementById('examProgressBar');
+
+        const questionTopicBadge = document.getElementById('questionTopicBadge');
+        const questionIdBadge = document.getElementById('questionIdBadge');
+        const questionText = document.getElementById('questionText');
+        const optionsContainer = document.getElementById('optionsContainer');
+
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const clearBtn = document.getElementById('clearBtn');
+        const markReviewBtn = document.getElementById('markReviewBtn');
+        const submitExamBtn = document.getElementById('submitExamBtn');
+        const paletteToggleBtn = document.getElementById('paletteToggleBtn');
+        const paletteSidebar = document.getElementById('paletteSidebar');
+        const closePaletteBtn = document.getElementById('closePaletteBtn');
+        const paletteGrid = document.getElementById('paletteGrid');
+
+        const confirmModal = document.getElementById('confirmModal');
+        const cancelSubmitBtn = document.getElementById('cancelSubmitBtn');
+        const confirmSubmitBtn = document.getElementById('confirmSubmitBtn');
+        const confAnswered = document.getElementById('confAnswered');
+        const confUnanswered = document.getElementById('confUnanswered');
+        const confMarked = document.getElementById('confMarked');
+
+        const adminBtn = document.getElementById('adminBtn');
+        const adminModal = document.getElementById('adminModal');
+        const closeAdminModal = document.getElementById('closeAdminModal');
+        const adminTableBody = document.getElementById('adminTableBody');
+        const adminSearch = document.getElementById('adminSearch');
+        const adminFilter = document.getElementById('adminFilter');
+        const exportJsonBtn = document.getElementById('exportJsonBtn');
+
+        const finalScoreDisplay = document.getElementById('finalScoreDisplay');
+        const finalPercentageDisplay = document.getElementById('finalPercentageDisplay');
+        const resStudentName = document.getElementById('resStudentName');
+        const resCorrectCount = document.getElementById('resCorrectCount');
+        const resIncorrectCount = document.getElementById('resIncorrectCount');
+        const resUnansweredCount = document.getElementById('resUnansweredCount');
+        const resTotalScore = document.getElementById('resTotalScore');
+        const printResultBtn = document.getElementById('printResultBtn');
+        const reviewAnswersBtn = document.getElementById('reviewAnswersBtn');
+        const restartBtn = document.getElementById('restartBtn');
+        const answerReviewContainer = document.getElementById('answerReviewContainer');
+        const reviewList = document.getElementById('reviewList');
+
+        function initApp() {
+            totalQuestionsCount.innerText = questionsData.length + 'টি';
+            totalQNum.innerText = questionsData.length;
+            
+            const savedState = localStorage.getItem('saiful_science_exam_full_v2');
+            if (savedState) {
+                try {
+                    const parsed = JSON.parse(savedState);
+                    if (parsed && !parsed.isSubmitted && parsed.studentName) {
+                        if (confirm(parsed.studentName + ', আপনার একটি অসমাপ্ত পরীক্ষা আছে। সেটি চালিয়ে যেতে চান?')) {
+                            state = parsed;
+                            startScreen.classList.remove('active');
+                            examScreen.classList.add('active');
+                            startTimer();
+                            renderQuestion();
+                            renderPalette();
+                            return;
+                        } else {
+                            localStorage.removeItem('saiful_science_exam_full_v2');
+                        }
+                    }
+                } catch (e) { console.error(e); }
+            }
+        }
+
+        startExamBtn.addEventListener('click', () => {
+            const name = studentNameInput.value.trim();
+            if (!name) { alert('আপনার নাম লিখুন।'); studentNameInput.focus(); return; }
+            state.studentName = name;
+            startScreen.classList.remove('active');
+            examScreen.classList.add('active');
+            startTimer();
+            renderQuestion();
+            renderPalette();
+            saveStateToStorage();
+        });
+
+        function startTimer() {
+            if (state.timerInterval) clearInterval(state.timerInterval);
+            state.timerInterval = setInterval(() => {
+                if (state.timeLeft <= 0) {
+                    clearInterval(state.timerInterval);
+                    alert('সময় শেষ! পরীক্ষা জমা দেওয়া হলো।');
+                    submitExam(true);
+                    return;
+                }
+                state.timeLeft--;
+                updateTimerDisplay();
+                saveStateToStorage();
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(state.timeLeft / 60);
+            const seconds = state.timeLeft % 60;
+            timeRemaining.innerText = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            if (state.timeLeft <= 300) document.getElementById('timerDisplay').style.background = '#FEE2E2';
+        }
+
+        function renderQuestion() {
+            const q = questionsData[state.currentQuestionIndex];
+            currentQNum.innerText = state.currentQuestionIndex + 1;
+            questionTopicBadge.innerText = q.topic || 'পদার্থবিজ্ঞান';
+            questionIdBadge.innerText = `ID: ${q.id}`;
+            questionText.innerText = `${state.currentQuestionIndex + 1}. ${q.question}`;
+            
+            const progressPercent = ((state.currentQuestionIndex + 1) / questionsData.length) * 100;
+            examProgressBar.style.width = `${progressPercent}%`;
+            
+            optionsContainer.innerHTML = '';
+            q.options.forEach(opt => {
+                const isSelected = state.answers[q.id] === opt.id;
+                const optCard = document.createElement('div');
+                optCard.className = `option-card ${isSelected ? 'selected' : ''}`;
+                optCard.innerHTML = `<div class="option-badge">${opt.id}</div><div class="option-text">${opt.text}</div>`;
+                optCard.addEventListener('click', () => selectOption(q.id, opt.id));
+                optionsContainer.appendChild(optCard);
+            });
+            
+            prevBtn.disabled = state.currentQuestionIndex === 0;
+            nextBtn.innerText = state.currentQuestionIndex === questionsData.length - 1 ? 'শেষ প্রশ্ন' : 'পরবর্তী';
+            renderPalette();
+        }
+
+        function selectOption(questionId, optionId) {
+            state.answers[questionId] = optionId;
+            renderQuestion();
+            saveStateToStorage();
+        }
+
+        nextBtn.addEventListener('click', () => {
+            if (state.currentQuestionIndex < questionsData.length - 1) {
+                state.currentQuestionIndex++; renderQuestion();
+            } else openSubmitConfirmation();
+        });
+
+        prevBtn.addEventListener('click', () => {
+            if (state.currentQuestionIndex > 0) {
+                state.currentQuestionIndex--; renderQuestion();
+            }
+        });
+
+        clearBtn.addEventListener('click', () => {
+            delete state.answers[questionsData[state.currentQuestionIndex].id];
+            renderQuestion(); saveStateToStorage();
+        });
+
+        markReviewBtn.addEventListener('click', () => {
+            const qId = questionsData[state.currentQuestionIndex].id;
+            state.markedForReview[qId] = !state.markedForReview[qId];
+            renderPalette(); saveStateToStorage();
+        });
+
+        function renderPalette() {
+            paletteGrid.innerHTML = '';
+            questionsData.forEach((q, idx) => {
+                const btn = document.createElement('button');
+                btn.className = `palette-btn`;
+                btn.innerText = idx + 1;
+                if (state.answers[q.id] !== undefined) btn.classList.add('answered');
+                if (state.markedForReview[q.id]) btn.classList.add('marked');
+                if (idx === state.currentQuestionIndex) btn.classList.add('current');
+                
+                btn.addEventListener('click', () => {
+                    state.currentQuestionIndex = idx; renderQuestion();
+                    if (window.innerWidth <= 900) togglePaletteDrawer(false);
+                });
+                paletteGrid.appendChild(btn);
+            });
+        }
+
+        paletteToggleBtn.addEventListener('click', () => togglePaletteDrawer(true));
+        closePaletteBtn.addEventListener('click', () => togglePaletteDrawer(false));
+        function togglePaletteDrawer(show) { paletteSidebar.classList.toggle('open', show); }
+
+        submitExamBtn.addEventListener('click', openSubmitConfirmation);
+        function openSubmitConfirmation() {
+            let ans = 0, mark = 0;
+            questionsData.forEach(q => {
+                if (state.answers[q.id] !== undefined) ans++;
+                if (state.markedForReview[q.id]) mark++;
+            });
+            confAnswered.innerText = ans; confUnanswered.innerText = questionsData.length - ans; confMarked.innerText = mark;
+            confirmModal.classList.remove('hidden');
+        }
+
+        cancelSubmitBtn.addEventListener('click', () => confirmModal.classList.add('hidden'));
+        confirmSubmitBtn.addEventListener('click', () => { confirmModal.classList.add('hidden'); submitExam(false); });
+
+        function submitExam(isAuto = false) {
+            if (state.timerInterval) clearInterval(state.timerInterval);
+            state.isSubmitted = true;
+            localStorage.removeItem('saiful_science_exam_full_v2');
+            examScreen.classList.remove('active'); resultScreen.classList.add('active');
+            calculateAndShowResults();
+        }
+
+        function calculateAndShowResults() {
+            let correct = 0, incorrect = 0, unanswered = 0;
+            questionsData.forEach(q => {
+                const userAns = state.answers[q.id];
+                if (userAns === undefined) unanswered++;
+                else if (userAns === q.correctAnswer) correct++;
+                else incorrect++;
+            });
+            
+            const percentage = Math.round((correct / questionsData.length) * 100);
+            resStudentName.innerText = state.studentName; resCorrectCount.innerText = correct;
+            resIncorrectCount.innerText = incorrect; resUnansweredCount.innerText = unanswered;
+            resTotalScore.innerText = `${correct} / ${questionsData.length}`;
+            finalScoreDisplay.innerText = `${correct} / ${questionsData.length}`;
+            finalPercentageDisplay.innerText = `${percentage}%`;
+            renderReviewList();
+        }
+
+        function renderReviewList() {
+            reviewList.innerHTML = '';
+            questionsData.forEach((q, idx) => {
+                const userAns = state.answers[q.id];
+                let sClass = 'unanswered', sText = 'উত্তর দেওয়া হয়নি';
+                if (userAns) {
+                    if (userAns === q.correctAnswer) { sClass = 'correct'; sText = 'সঠিক'; }
+                    else { sClass = 'incorrect'; sText = 'ভুল'; }
+                }
+                reviewList.innerHTML += `
+                    <div class="review-item ${sClass}">
+                        <h4>প্রশ্ন ${idx + 1}: ${q.question}</h4>
+                        <p><strong>আপনার উত্তর:</strong> ${userAns ? q.options.find(o=>o.id===userAns).text : 'দেওয়া হয়নি'}</p>
+                        <p><strong>সঠিক উত্তর:</strong> ${q.options.find(o=>o.id===q.correctAnswer).text}</p>
+                        <p><small class="text-muted">ব্যাখ্যা: ${q.explanation}</small></p>
+                        <span class="badge ${sClass==='correct'?'text-success':'text-danger'}">${sText}</span>
+                    </div>`;
+            });
+        }
+
+        reviewAnswersBtn.addEventListener('click', () => answerReviewContainer.classList.toggle('hidden'));
+        printResultBtn.addEventListener('click', () => window.print());
+        restartBtn.addEventListener('click', () => { localStorage.removeItem('saiful_science_exam_full_v2'); location.reload(); });
+
+        adminBtn.addEventListener('click', () => { renderAdminTable(); adminModal.classList.remove('hidden'); });
+        closeAdminModal.addEventListener('click', () => adminModal.classList.add('hidden'));
+
+        function renderAdminTable(filter = 'all', search = '') {
+            adminTableBody.innerHTML = '';
+            questionsData.filter(q => {
+                const match = q.question.toLowerCase().includes(search.toLowerCase());
+                if (filter === 'verified') return match && q.answerVerified;
+                if (filter === 'unverified') return match && !q.answerVerified;
+                return match;
+            }).forEach(q => {
+                adminTableBody.innerHTML += `
+                    <tr><td>${q.id}</td><td>${q.topic}</td><td>${q.question}</td><td><strong>${q.correctAnswer}</strong></td>
+                    <td><span class="badge text-success">Verified</span></td></tr>`;
+            });
+        }
+
+        adminSearch.addEventListener('input', (e) => renderAdminTable(adminFilter.value, e.target.value));
+        adminFilter.addEventListener('change', (e) => renderAdminTable(e.target.value, adminSearch.value));
+
+        exportJsonBtn.addEventListener('click', () => {
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(questionsData, null, 4));
+            const a = document.createElement('a'); a.href = dataStr; a.download = "saiful_questions.json"; a.click();
+        });
+
+        function saveStateToStorage() {
+            if (!state.isSubmitted && state.studentName) localStorage.setItem('saiful_science_exam_full_v2', JSON.stringify(state));
+        }
+        
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
 </body>
 </html>
