@@ -3,16 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>সাইফুল'স সাইন্স কেয়ার - সাধারণ গণিত</title>
-    <!-- Google Fonts for Bengali -->
+    <title>সাইফুল's সাইন্স কেয়ার - সাধারণ গণিত</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@500;700&display=swap" rel="stylesheet">
-    
     <style>
-        /* CSS Variables */
         :root {
-            --primary: #0a192f;      /* Navy Blue */
-            --secondary: #2563EB;    /* Royal Blue */
-            --accent: #F59E0B;       /* Golden Accent */
+            --primary: #0a192f;
+            --secondary: #2563EB;
+            --accent: #F59E0B;
             --white: #ffffff;
             --bg-gradient: linear-gradient(135deg, #e0eaf5 0%, #b8c6db 100%);
             --text-dark: #1e293b;
@@ -20,451 +17,108 @@
             --success: #10b981;
             --danger: #ef4444;
             --font-heading: 'Noto Serif Bengali', serif;
-            --font-body: 'Kalpurush', 'Hind Siliguri', sans-serif;
+            --font-body: 'Kalpurush', sans-serif;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: var(--font-body); background: var(--bg-gradient); color: var(--text-dark); min-height: 100vh; display: flex; flex-direction: column; }
+        h1, h2, h3 { font-family: var(--font-heading); font-weight: 700; }
+        
+        .glass-panel { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.5); border-radius: 20px; box-shadow: 0 10px 30px rgba(10, 25, 47, 0.1); }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
+        
+        .btn { padding: 12px 24px; border: none; border-radius: 8px; font-size: 1.1rem; font-family: var(--font-body); font-weight: bold; cursor: pointer; transition: all 0.3s ease; }
+        .btn-primary { background: var(--secondary); color: var(--white); box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3); }
+        .btn-primary:hover { background: #1d4ed8; transform: translateY(-2px); }
+        .btn-accent { background: var(--accent); color: var(--primary); }
+        .btn-accent:hover { background: #d97706; color: var(--white); transform: translateY(-2px); }
+        .btn-outline { background: transparent; border: 2px solid var(--secondary); color: var(--secondary); }
+        .btn-outline:hover { background: var(--secondary); color: var(--white); }
 
-        body {
-            font-family: var(--font-body);
-            background: var(--bg-gradient);
-            color: var(--text-dark);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
+        .screen { display: none; animation: fadeIn 0.5s ease; }
+        .screen.active { display: flex; flex-direction: column; flex-grow: 1; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        h1, h2, h3 {
-            font-family: var(--font-heading);
-            font-weight: 700;
-        }
+        header { text-align: center; padding: 20px 0; margin-bottom: 10px; color: var(--primary); }
+        header h1 { font-size: 2.8rem; text-shadow: 1px 1px 2px rgba(0,0,0,0.1); }
+        header h2 { font-size: 1.3rem; color: var(--secondary); margin-top: 5px; }
 
-        /* Utility Classes */
-        .glass-panel {
-            background: rgba(255, 255, 255, 0.75);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(10, 25, 47, 0.1);
+        /* Animated Marquee */
+        .marquee-wrapper {
+            overflow: hidden; white-space: nowrap; width: 100%;
+            background: rgba(255,255,255,0.4); padding: 12px 0;
+            border-radius: 10px; border: 1px solid rgba(255,255,255,0.5);
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.05); margin-bottom: 25px;
         }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
+        .marquee-text {
+            display: inline-block; font-size: 1.3rem; font-family: var(--font-heading);
+            font-weight: 700; padding-left: 100%;
+            background: linear-gradient(90deg, #2563EB, #F59E0B, #ef4444, #10b981, #2563EB);
+            background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            animation: textShine 3s linear infinite, scrollLeft 25s linear infinite;
         }
-
-        .btn {
-            padding: 12px 24px;
-            border: none;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            font-family: var(--font-body);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: bold;
-        }
-
-        .btn-primary {
-            background-color: var(--secondary);
-            color: var(--white);
-            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
-        }
-
-        .btn-primary:hover {
-            background-color: #1d4ed8;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
-        }
-
-        .btn-accent {
-            background-color: var(--accent);
-            color: var(--primary);
-            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
-        }
-
-        .btn-accent:hover {
-            background-color: #d97706;
-            color: var(--white);
-            transform: translateY(-2px);
-        }
-
-        .btn-outline {
-            background: transparent;
-            border: 2px solid var(--secondary);
-            color: var(--secondary);
-        }
-
-        .btn-outline:hover {
-            background: var(--secondary);
-            color: var(--white);
-        }
-
-        /* Screens */
-        .screen {
-            display: none;
-            animation: fadeIn 0.5s ease;
-        }
-        .screen.active {
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Header */
-        header {
-            text-align: center;
-            padding: 20px 0;
-            margin-bottom: 20px;
-            color: var(--primary);
-        }
-
-        header h1 {
-            font-size: 2.5rem;
-            color: var(--primary);
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-        }
-        header h2 {
-            font-size: 1.2rem;
-            color: var(--secondary);
-            margin-top: 5px;
-        }
+        @keyframes textShine { to { background-position: 200% center; } }
+        @keyframes scrollLeft { 0% { transform: translate(0, 0); } 100% { transform: translate(-100%, 0); } }
 
         /* Welcome Screen */
-        #welcome-screen {
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            height: 70vh;
-        }
-
-        .welcome-card {
-            padding: 40px;
-            max-width: 600px;
-            width: 100%;
-        }
-
-        .welcome-info {
-            margin: 30px 0;
-            font-size: 1.2rem;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-
-        .info-box {
-            background: rgba(255,255,255,0.5);
-            padding: 15px;
-            border-radius: 10px;
-            border: 1px solid rgba(255,255,255,0.8);
-        }
+        #welcome-screen { justify-content: center; align-items: center; text-align: center; height: 60vh; }
+        .welcome-card { padding: 40px; max-width: 600px; width: 100%; }
+        .welcome-info { margin: 30px 0; font-size: 1.2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .info-box { background: rgba(255,255,255,0.6); padding: 15px; border-radius: 10px; }
 
         /* Exam Screen */
-        .exam-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: var(--primary);
-            color: var(--white);
-            padding: 15px 25px;
-            border-radius: 15px;
-            margin-bottom: 20px;
-            box-shadow: 0 5px 15px rgba(10, 25, 47, 0.2);
-        }
+        .exam-header { display: flex; justify-content: space-between; align-items: center; background: var(--primary); color: var(--white); padding: 15px 25px; border-radius: 15px; margin-bottom: 20px; }
+        .timer { font-size: 1.5rem; font-weight: bold; color: var(--accent); }
+        .progress-container { width: 100%; height: 8px; background: rgba(255,255,255,0.2); border-radius: 4px; margin-top: 10px; overflow: hidden; }
+        .progress-bar { height: 100%; background: var(--accent); width: 0%; transition: width 0.3s; }
+        
+        .exam-layout { display: grid; grid-template-columns: 1fr 320px; gap: 25px; flex-grow: 1; }
+        .question-area { padding: 30px; display: flex; flex-direction: column; justify-content: space-between; }
+        .question-text { font-size: 1.4rem; font-weight: bold; margin-bottom: 25px; line-height: 1.6; color: var(--primary); }
+        .options-grid { display: grid; gap: 15px; margin-bottom: 30px; }
+        
+        .option-label { display: flex; align-items: center; padding: 15px 20px; background: rgba(255, 255, 255, 0.6); border: 2px solid transparent; border-radius: 10px; cursor: pointer; transition: 0.2s; font-size: 1.1rem; }
+        .option-label:hover { background: #fff; border-color: var(--secondary); }
+        .option-label input { display: none; }
+        .option-label.selected { background: rgba(37, 99, 235, 0.1); border-color: var(--secondary); font-weight: bold; }
+        .option-prefix { width: 35px; height: 35px; border-radius: 50%; background: var(--white); display: flex; justify-content: center; align-items: center; margin-right: 15px; font-weight: bold; color: var(--secondary); box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .option-label.selected .option-prefix { background: var(--secondary); color: var(--white); }
 
-        .timer {
-            font-size: 1.4rem;
-            font-weight: bold;
-            color: var(--accent);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .progress-container {
-            width: 100%;
-            height: 8px;
-            background: rgba(255,255,255,0.2);
-            border-radius: 4px;
-            margin-top: 10px;
-            overflow: hidden;
-        }
-
-        .progress-bar {
-            height: 100%;
-            background: var(--accent);
-            width: 0%;
-            transition: width 0.3s ease;
-        }
-
-        .exam-layout {
-            display: grid;
-            grid-template-columns: 1fr 300px;
-            gap: 25px;
-            flex-grow: 1;
-        }
-
-        /* Question Area */
-        .question-area {
-            padding: 30px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .question-text {
-            font-size: 1.4rem;
-            font-weight: bold;
-            margin-bottom: 25px;
-            line-height: 1.6;
-            color: var(--primary);
-        }
-
-        .options-grid {
-            display: grid;
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-
-        .option-label {
-            display: flex;
-            align-items: center;
-            padding: 15px 20px;
-            background: rgba(255, 255, 255, 0.6);
-            border: 2px solid transparent;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-size: 1.1rem;
-        }
-
-        .option-label:hover {
-            background: rgba(255, 255, 255, 0.9);
-            border-color: var(--secondary);
-        }
-
-        .option-label input {
-            display: none;
-        }
-
-        .option-label.selected {
-            background: rgba(37, 99, 235, 0.1);
-            border-color: var(--secondary);
-            font-weight: bold;
-            box-shadow: 0 4px 10px rgba(37, 99, 235, 0.1);
-        }
-
-        .option-prefix {
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            background: var(--white);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-right: 15px;
-            font-weight: bold;
-            color: var(--secondary);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        .option-label.selected .option-prefix {
-            background: var(--secondary);
-            color: var(--white);
-        }
-
-        .exam-controls {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(0,0,0,0.1);
-        }
-
+        .exam-controls { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(0,0,0,0.1); }
+        
         /* Navigation Palette */
-        .nav-palette {
-            padding: 20px;
-            height: fit-content;
-        }
-
-        .nav-palette h3 {
-            margin-bottom: 15px;
-            text-align: center;
-            color: var(--primary);
-        }
-
-        .palette-grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 10px;
-        }
-
-        .palette-btn {
-            aspect-ratio: 1;
-            border-radius: 8px;
-            border: none;
-            background: rgba(255,255,255,0.8);
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.2s;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-
-        .palette-btn:hover {
-            background: #e2e8f0;
-        }
-
-        .palette-btn.answered {
-            background: var(--secondary);
-            color: var(--white);
-        }
-
-        .palette-btn.current {
-            border: 3px solid var(--accent);
-            transform: scale(1.1);
-        }
-
-        .submit-section {
-            margin-top: 25px;
-            text-align: center;
-        }
+        .nav-palette { padding: 20px; max-height: 70vh; display: flex; flex-direction: column; }
+        .nav-palette h3 { margin-bottom: 15px; text-align: center; color: var(--primary); }
+        .palette-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; overflow-y: auto; padding-right: 5px; flex-grow: 1; }
+        .palette-btn { padding: 10px 0; border-radius: 6px; border: none; background: rgba(255,255,255,0.9); font-weight: bold; cursor: pointer; font-size: 0.9rem; transition: 0.2s; }
+        .palette-btn:hover { background: #e2e8f0; }
+        .palette-btn.answered { background: var(--secondary); color: var(--white); }
+        .palette-btn.current { border: 3px solid var(--accent); transform: scale(1.05); }
 
         /* Result Screen */
-        .result-container {
-            max-width: 900px;
-            margin: 0 auto;
-            width: 100%;
-        }
-
-        .score-card {
-            text-align: center;
-            padding: 40px;
-            margin-bottom: 30px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .score-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; height: 5px;
-            background: var(--accent);
-        }
-
-        .circular-chart {
-            display: block;
-            margin: 0 auto 20px;
-            max-width: 150px;
-            max-height: 150px;
-        }
+        .result-container { max-width: 900px; margin: 0 auto; width: 100%; }
+        .score-card { text-align: center; padding: 40px; margin-bottom: 30px; position: relative; }
+        .score-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px; background: var(--accent); border-radius: 20px 20px 0 0; }
+        
+        .circular-chart { display: block; margin: 0 auto 20px; max-width: 150px; }
         .circle-bg { fill: none; stroke: #eee; stroke-width: 3.8; }
-        .circle {
-            fill: none;
-            stroke: var(--success);
-            stroke-width: 3.8;
-            stroke-linecap: round;
-            animation: progress 1s ease-out forwards;
-        }
-        @keyframes progress {
-            0% { stroke-dasharray: 0 100; }
-        }
+        .circle { fill: none; stroke: var(--success); stroke-width: 3.8; stroke-linecap: round; animation: progress 1s ease-out forwards; }
+        @keyframes progress { 0% { stroke-dasharray: 0 100; } }
         .percentage { fill: var(--primary); font-family: var(--font-heading); font-size: 0.5em; text-anchor: middle; font-weight: bold; }
 
-        .stat-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-            margin-top: 30px;
-        }
-
-        .stat-box {
-            padding: 15px;
-            background: rgba(255,255,255,0.5);
-            border-radius: 10px;
-            font-weight: bold;
-        }
+        .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-top: 30px; }
+        .stat-box { padding: 15px; background: rgba(255,255,255,0.7); border-radius: 10px; font-weight: bold; }
         .stat-box.success { border-bottom: 4px solid var(--success); }
         .stat-box.danger { border-bottom: 4px solid var(--danger); }
         .stat-box.warning { border-bottom: 4px solid var(--accent); }
         .stat-box.info { border-bottom: 4px solid var(--secondary); }
 
-        .review-section {
-            margin-top: 40px;
-        }
+        .review-card { padding: 20px; margin-bottom: 20px; }
+        .review-option { padding: 10px 15px; margin-top: 10px; border-radius: 8px; background: rgba(255,255,255,0.5); display: flex; align-items: center; }
+        .review-option.correct { background: rgba(16, 185, 129, 0.2); border: 1px solid var(--success); color: #047857; font-weight: bold; }
+        .review-option.incorrect { background: rgba(239, 68, 68, 0.2); border: 1px solid var(--danger); color: #b91c1c; }
 
-        .review-card {
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-
-        .review-option {
-            padding: 10px 15px;
-            margin-top: 10px;
-            border-radius: 8px;
-            background: rgba(255,255,255,0.5);
-            display: flex;
-            align-items: center;
-        }
-
-        .review-option.correct {
-            background: rgba(16, 185, 129, 0.2);
-            border: 1px solid var(--success);
-            color: #047857;
-            font-weight: bold;
-        }
-
-        .review-option.incorrect {
-            background: rgba(239, 68, 68, 0.2);
-            border: 1px solid var(--danger);
-            color: #b91c1c;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 900px) {
-            .exam-layout {
-                grid-template-columns: 1fr;
-            }
-            .nav-palette {
-                order: 2;
-            }
-            .question-area {
-                order: 1;
-            }
-            .stat-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-        @media (max-width: 600px) {
-            .exam-header {
-                flex-direction: column;
-                gap: 10px;
-                text-align: center;
-            }
-            .welcome-info {
-                grid-template-columns: 1fr;
-            }
-            .exam-controls {
-                flex-direction: column;
-                gap: 15px;
-            }
-            .exam-controls button {
-                width: 100%;
-            }
-        }
+        @media (max-width: 900px) { .exam-layout { grid-template-columns: 1fr; } .nav-palette { max-height: 300px; } .stat-grid { grid-template-columns: 1fr 1fr; } }
     </style>
 </head>
 <body>
@@ -472,295 +126,289 @@
     <div class="container">
         <header>
             <h1>সাইফুল'স সাইন্স কেয়ার</h1>
-            <h2>সাধারণ গণিত - বহুনির্বাচনি পরীক্ষা</h2>
+            <h2>সাধারণ গণিত (বহুনির্বাচনি পরীক্ষা)</h2>
         </header>
 
-        <!-- Welcome Screen -->
+        <div class="marquee-wrapper">
+            <div class="marquee-text">
+                ✦ সাধারণ গণিত মেগা এক্সামে আপনাকে স্বাগতম! ✦ প্রতিটি প্রশ্ন সতর্কতার সাথে সমাধান করুন ✦ সাইফুল'স সাইন্স কেয়ার - আপনার সফলতার বিশ্বস্ত সঙ্গী ✦
+            </div>
+        </div>
+
         <div id="welcome-screen" class="screen active">
             <div class="glass-panel welcome-card">
-                <h2>পরীক্ষায় আপনাকে স্বাগতম!</h2>
+                <h2>পরীক্ষায় অংশগ্রহণের নিয়মাবলি</h2>
                 <div class="welcome-info">
                     <div class="info-box">
                         <h3>মোট প্রশ্ন</h3>
-                        <p id="total-q-display" style="font-size: 1.5rem; color: var(--secondary); font-weight: bold;">৩০ টি</p>
+                        <p id="total-q-display" style="font-size: 1.5rem; color: var(--secondary); font-weight: bold;">--</p>
                     </div>
                     <div class="info-box">
                         <h3>মোট সময়</h3>
-                        <p style="font-size: 1.5rem; color: var(--accent); font-weight: bold;">৩০ মিনিট</p>
+                        <p id="total-t-display" style="font-size: 1.5rem; color: var(--accent); font-weight: bold;">--</p>
                     </div>
                 </div>
-                <p style="margin-bottom: 25px; color: var(--text-light);">প্রতিটি প্রশ্নের মান ১। কোনো নেগেটিভ মার্কিং নেই। পরীক্ষা শেষে সাথে সাথেই ফলাফল দেখতে পারবেন।</p>
+                <p style="margin-bottom: 25px; color: var(--text-light);">প্রতিটি প্রশ্নের মান ১। কোনো নেগেটিভ মার্কিং নেই। সব প্রশ্নের উত্তর দেওয়ার চেষ্টা করুন। পরীক্ষা শেষে স্বয়ংক্রিয় ফলাফল প্রকাশ করা হবে।</p>
                 <button class="btn btn-primary" style="width: 100%; padding: 15px; font-size: 1.2rem;" onclick="startExam()">পরীক্ষা শুরু করুন</button>
             </div>
         </div>
 
-        <!-- Exam Screen -->
         <div id="exam-screen" class="screen">
             <div class="exam-header">
-                <div>
+                <div style="flex-grow: 1; padding-right: 20px;">
                     <h3>পরীক্ষা চলছে...</h3>
-                    <div class="progress-container">
-                        <div class="progress-bar" id="progress-bar"></div>
-                    </div>
-                    <p style="font-size: 0.9rem; margin-top: 5px;">উত্তর দেওয়া হয়েছে: <span id="answered-count">0</span> / 30</p>
+                    <div class="progress-container"><div class="progress-bar" id="progress-bar"></div></div>
+                    <p style="font-size: 0.9rem; margin-top: 5px;">উত্তর দেওয়া হয়েছে: <span id="answered-count">0</span></p>
                 </div>
-                <div class="timer" id="timer">
-                    ⏱ 30:00
-                </div>
+                <div class="timer" id="timer">⏱ --:--</div>
             </div>
 
             <div class="exam-layout">
-                <!-- Question Area -->
                 <div class="glass-panel question-area">
                     <div>
                         <h3 style="color: var(--text-light); margin-bottom: 10px;">প্রশ্ন: <span id="current-q-num">1</span></h3>
-                        <div class="question-text" id="question-text">
-                            প্রশ্ন লোড হচ্ছে...
-                        </div>
-                        <div class="options-grid" id="options-container">
-                            <!-- Options will be injected here -->
-                        </div>
+                        <div class="question-text" id="question-text">লোড হচ্ছে...</div>
+                        <div class="options-grid" id="options-container"></div>
                     </div>
-                    
                     <div class="exam-controls">
                         <button class="btn btn-outline" id="btn-prev" onclick="prevQuestion()">পূর্ববর্তী প্রশ্ন</button>
                         <button class="btn btn-primary" id="btn-next" onclick="nextQuestion()">পরবর্তী প্রশ্ন</button>
                     </div>
                 </div>
 
-                <!-- Navigation Sidebar -->
                 <div class="glass-panel nav-palette">
                     <h3>প্রশ্ন নেভিগেশন</h3>
-                    <div class="palette-grid" id="palette-container">
-                        <!-- Buttons injected via JS -->
-                    </div>
-                    <div class="submit-section">
-                        <button class="btn btn-accent" style="width: 100%;" onclick="confirmSubmit()">পরীক্ষা শেষ করুন</button>
-                    </div>
+                    <div class="palette-grid" id="palette-container"></div>
+                    <button class="btn btn-accent" style="width: 100%; margin-top: 15px;" onclick="confirmSubmit()">পরীক্ষা শেষ করুন</button>
                 </div>
             </div>
         </div>
 
-        <!-- Result Screen -->
         <div id="result-screen" class="screen">
             <div class="result-container">
                 <div class="glass-panel score-card">
-                    <h2>পরীক্ষার ফলাফল</h2>
-                    <h3 id="grade-display" style="color: var(--accent); margin: 10px 0 20px; font-size: 1.8rem;">Grade: A+</h3>
-                    
+                    <h2>চূড়ান্ত ফলাফল</h2>
+                    <h3 id="grade-display" style="color: var(--accent); margin: 10px 0 20px; font-size: 1.8rem;">--</h3>
                     <svg viewBox="0 0 36 36" class="circular-chart">
                         <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
                         <path class="circle" id="result-circle" stroke-dasharray="0, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
                         <text x="18" y="20.35" class="percentage" id="score-percentage">0%</text>
                     </svg>
-
                     <div class="stat-grid">
-                        <div class="stat-box info">
-                            <p>মোট প্রশ্ন</p>
-                            <h3 id="res-total">30</h3>
-                        </div>
-                        <div class="stat-box success">
-                            <p>সঠিক</p>
-                            <h3 id="res-correct">0</h3>
-                        </div>
-                        <div class="stat-box danger">
-                            <p>ভুল</p>
-                            <h3 id="res-wrong">0</h3>
-                        </div>
-                        <div class="stat-box warning">
-                            <p>উত্তর দেওয়া হয়নি</p>
-                            <h3 id="res-skipped">0</h3>
-                        </div>
+                        <div class="stat-box info"><p>মোট প্রশ্ন</p><h3 id="res-total">0</h3></div>
+                        <div class="stat-box success"><p>সঠিক</p><h3 id="res-correct">0</h3></div>
+                        <div class="stat-box danger"><p>ভুল</p><h3 id="res-wrong">0</h3></div>
+                        <div class="stat-box warning"><p>উত্তর দেওয়া হয়নি</p><h3 id="res-skipped">0</h3></div>
                     </div>
-                    
                     <button class="btn btn-primary" style="margin-top: 30px;" onclick="location.reload()">পুনরায় পরীক্ষা দিন</button>
                 </div>
-
-                <div class="review-section" id="review-container">
-                    <h2 style="text-align: center; color: var(--primary); margin-bottom: 20px;">উত্তরমালা ও গাণিতিক বিশ্লেষণ</h2>
-                    <!-- Review cards injected here -->
-                </div>
+                <div class="review-section" id="review-container"></div>
             </div>
         </div>
     </div>
 
     <script>
-        // MCQ Database with solved answers based on provided text
+        // Data Array containing ~145 mathematical MCQs (Combined Sets)
         const questions = [
-            {
-                q: "যে সংখ্যাকে p/q আকারে প্রকাশ করা যায় না, যেখানে p ও q পূর্ণসংখ্যা এবং q ≠ 0। সে সংখ্যাকে কি বলা হয়?",
-                options: ["মূলদ সংখ্যা", "অমূলদ সংখ্যা", "ধনাত্মক সংখ্যা", "যৌগিক সংখ্যা"],
-                ans: 1 // খ
-            },
-            {
-                q: "{x ∈ N : x মৌলিক সংখ্যা এবং x ≤ 5} সেটটির তালিকা পদ্ধতি নিচের কোনটি?",
-                options: ["{1, 3, 5}", "{2, 3, 5}", "{5, 7, 11}", "{3, 5}"],
-                ans: 1 // খ
-            },
-            {
-                q: "কোন সেটের উপাদান সংখ্যা 5 হলে, শক্তি সেটের উপাদান সংখ্যা কত?",
-                options: ["5", "10", "25", "32"],
-                ans: 3 // ঘ
-            },
-            {
-                q: "a² - 4a + 1 = 0 হলে a + 1/a = কত?",
-                options: ["-4", "0", "1", "4"],
-                ans: 3 // ঘ
-            },
-            {
-                q: "a² - 4a + 1 = 0 হলে a³ - 1/a³ এর মান কত?",
-                options: ["2√3", "12", "30√3", "52"],
-                ans: 2 // গ
-            },
-            {
-                q: "যদি log_x 400 = 4 হয় ভিত্তি কোনটি?",
-                options: ["2√5", "3√5", "-2√5", "± 2√5"],
-                ans: 0 // ক
-            },
-            {
-                q: "a/b = 49 হলে log₇ a - log₇ b = কত?",
-                options: ["0", "2", "5", "7"],
-                ans: 1 // খ
-            },
-            {
-                q: "(x - 3)² = x² - 6x + 9 এটি— i. একটি অভেদ ii. একটি সমীকরণ iii. x এর সকল মানের জন্য সিদ্ধ হয়। নিচের কোনটি সঠিক?",
-                options: ["i ও ii", "i ও iii", "ii ও iii", "i, ii ও iii"],
-                ans: 3 // ঘ
-            },
-            {
-                q: "জ্যামিতি গণিত শাস্ত্রের একটি—",
-                options: ["ভাষা", "প্রাচীন শাখা", "পরিমাপের বিষয়", "গাণিতিক শাখা"],
-                ans: 1 // খ
-            },
-            {
-                q: "25° কোণের পূরক কোণের পরিমাণ কত?",
-                options: ["25°", "50°", "65°", "75°"],
-                ans: 2 // গ
-            },
-            {
-                q: "একটি নির্দিষ্ট চতুর্ভুজ অঙ্কনের জন্য কয়টি স্বতন্ত্র উপাত্তের প্রয়োজন?",
-                options: ["2", "3", "4", "5"],
-                ans: 3 // ঘ
-            },
-            {
-                q: "3 সে.মি. ব্যাসার্ধবিশিষ্ট বৃত্তের কেন্দ্র থেকে 2 সে.মি. দূরবর্তী জ্যা এর দৈর্ঘ্য কত?",
-                options: ["10 সে.মি.", "5 সে.মি.", "2√5 সে.মি.", "√5 সে.মি."],
-                ans: 2 // গ
-            },
-            {
-                q: "tan² θ cosec² θ = কত?",
-                options: ["tan² θ", "sin² θ", "cos² θ", "sec² θ"],
-                ans: 3 // ঘ
-            },
-            {
-                q: "6 মিটার দীর্ঘ একটি গাছের ছায়ার দৈর্ঘ্য 6√3 মিটার হলে, গাছের শীর্ষ বিন্দুর উন্নতি কোণ কত?",
-                options: ["0°", "30°", "45°", "60°"],
-                ans: 1 // খ
-            },
-            {
-                q: "একটি ত্রিভুজের তিনটি কোণের অনুপাত 2 : 3 : 5 হলে, বৃহত্তম কোণটি ক্ষুদ্রতম কোণটির কতগুণ?",
-                options: ["5/2 গুণ", "5/3 গুণ", "3/5 গুণ", "2/5 গুণ"],
-                ans: 0 // ক
-            },
-            {
-                q: "সমকোণী ত্রিভুজের সমকোণ সংলগ্ন বাহুদ্বয় 3 এবং 4 সে. মি. হলে তার অতিভুজের মান কত?",
-                options: ["7 সে. মি.", "5 সে. মি.", "6 সে. মি.", "8 সে. মি."],
-                ans: 1 // খ
-            },
-            {
-                q: "একটি বর্গের কর্ণের দৈর্ঘ্য 6√2 মিটার হলে, এর ক্ষেত্রফল কত বর্গমিটার?",
-                options: ["36", "24", "18", "6"],
-                ans: 0 // ক
-            },
-            {
-                q: "একটি বর্গের পরিসীমা 36 মিটার। এর একটি কর্ণের দৈর্ঘ্য কত?",
-                options: ["6√2 মিটার", "6√3 মিটার", "9√2 মিটার", "9√3 মিটার"],
-                ans: 2 // গ
-            },
-            {
-                q: "নিচের কোনটি নির্ণয়ের জন্য ক্রমযোজিত গণসংখ্যা সারণি প্রয়োজন?",
-                options: ["গাণিতিক গড়", "ব্যবধি", "প্রচুরক", "মধ্যক"],
-                ans: 3 // ঘ
-            },
-            {
-                q: "7 + 10 + 13 + 16 + ....... ধারাটির পরপর দুইটি পদের পার্থক্য কত?",
-                options: ["1", "2", "3", "17"],
-                ans: 2 // গ
-            },
-            {
-                q: "A = {1, 2}, B = {2, 3} এবং C = {3, 4} হলে, A U B U C এর উপাদান সংখ্যা কত?",
-                options: ["4", "5", "6", "7"],
-                ans: 0 // ক
-            },
-            {
-                q: "2x - 1/3x = 2 হলে 3x - 1/2x এর মান কত?",
-                options: ["2/3", "3/2", "3", "4"],
-                ans: 2 // গ
-            },
-            {
-                q: "8^(x²) = 2^(3x) হলে, x এর মান কত?",
-                options: ["0, -2", "1, 1", "0, 1", "0, 3"],
-                ans: 2 // গ
-            },
-            {
-                q: "log_x 9 = -2 হলে, x এর মান কত?",
-                options: ["- 1/3", "1/3", "3", "± 1/3"],
-                ans: 1 // খ
-            },
-            {
-                q: "দুইটি বীজগাণিতিক রাশি x ও y এর গুণফল xy = 0 হলে— i. x = 0 অথবা y = 0 ii. x = 0, যখন y ≠ 0 iii. y = 0, যখন x ≠ 0। নিচের কোনটি সঠিক?",
-                options: ["i ও ii", "i ও iii", "ii ও iii", "i, ii ও iii"],
-                ans: 3 // ঘ
-            },
-            {
-                q: "180° - 4x° এর সম্পূরক কোণের অর্ধেকের মান কত?",
-                options: ["x°/2", "2x°", "90° - 2x°", "90° + 2x°"],
-                ans: 1 // খ
-            },
-            {
-                q: "সমকোণী ত্রিভুজে 70° কোণ অঙ্কনের ক্ষেত্রে, নিচের কোনটি সঠিক?",
-                options: ["অতিভুজ = লম্ব", "ভূমি < লম্ব", "ভূমি > লম্ব", "ভূমি = লম্ব"],
-                ans: 1 // খ
-            },
-            {
-                q: "দুইটি সংখ্যার অনুপাত 5 : 6 এবং তাদের ল.সা.গু. 150 হলে, গ.সা.গু. কত?",
-                options: ["5", "6", "11", "30"],
-                ans: 0 // ক
-            },
-            {
-                q: "3x - y = 12 এবং 6x + 2y = 17 সমীকরণদ্বয়— i. পরস্পর অনির্ভরশীল ii. পরস্পর সমঞ্জস iii. এর একটিমাত্র সমাধান আছে। নিচের কোনটি সঠিক?",
-                options: ["i ও ii", "i ও iii", "ii ও iii", "i, ii ও iii"],
-                ans: 3 // ঘ
-            },
-            {
-                q: "2, 13, 7, 3, 8, 5 নম্বরগুলোর মধ্যক কত?",
-                options: ["5", "6", "7", "13"],
-                ans: 1 // খ
-            }
+            // Set 1
+            {q:"যে সংখ্যাকে p/q আকারে প্রকাশ করা যায় না, যেখানে p ও q পূর্ণসংখ্যা এবং q ≠ 0। সে সংখ্যাকে কি বলা হয়?", options:["মূলদ সংখ্যা", "অমূলদ সংখ্যা", "ধনাত্মক সংখ্যা", "যৌগিক সংখ্যা"], ans:1},
+            {q:"{x ∈ N : x মৌলিক সংখ্যা এবং x ≤ 5} সেটটির তালিকা পদ্ধতি নিচের কোনটি?", options:["{1, 3, 5}", "{2, 3, 5}", "{5, 7, 11}", "{3, 5}"], ans:1},
+            {q:"কোন সেটের উপাদান সংখ্যা 5 হলে, শক্তি সেটের উপাদান সংখ্যা কত?", options:["5", "10", "25", "32"], ans:3},
+            {q:"a² - 4a + 1 = 0 হলে a + 1/a = কত?", options:["-4", "0", "1", "4"], ans:3},
+            {q:"a² - 4a + 1 = 0 হলে a³ - 1/a³ এর মান কত?", options:["2√3", "12", "30√3", "52"], ans:2},
+            {q:"যদি log_x 400 = 4 হয় ভিত্তি কোনটি?", options:["2√5", "3√5", "-2√5", "± 2√5"], ans:0},
+            {q:"a/b = 49 হলে log₇ a - log₇ b = কত?", options:["0", "2", "5", "7"], ans:1},
+            {q:"(x - 3)² = x² - 6x + 9 এটি— i. একটি অভেদ ii. একটি সমীকরণ iii. x এর সকল মানের জন্য সিদ্ধ হয় নিচের কোনটি সঠিক?", options:["i ও ii", "i ও iii", "ii ও iii", "i, ii ও iii"], ans:3},
+            {q:"জ্যামিতি গণিত শাস্ত্রের একটি—", options:["ভাষা", "প্রাচীন শাখা", "পরিমাপের বিষয়", "গাণিতিক শাখা"], ans:1},
+            {q:"25° কোণের পূরক কোণের পরিমাণ কত?", options:["25°", "50°", "65°", "75°"], ans:2},
+            {q:"ত্রিভুজের তিনটি বাহু দেওয়া থাকলে কয়টি ত্রিভুজ আঁকা সম্ভব?", options:["অসংখ্য", "তিনটি", "দুইটি", "একটি"], ans:3},
+            {q:"একটি নির্দিষ্ট চতুর্ভুজ অঙ্কনের জন্য কয়টি স্বতন্ত্র উপাত্তের প্রয়োজন?", options:["2", "3", "4", "5"], ans:3},
+            {q:"3 সে.মি. ব্যাসার্ধবিশিষ্ট বৃত্তের কেন্দ্র থেকে 2 সে.মি. দূরবর্তী জ্যা এর দৈর্ঘ্য কত?", options:["10 সে.মি.", "5 সে.মি.", "2√5 সে.মি.", "√5 সে.মি."], ans:2},
+            {q:"বৃত্তের ক্ষেত্রে— i. অর্ধবৃত্তস্থ কোণ এক সরলকোণ ii. যে কোনো জ্যা এর লম্বদ্বিখণ্ডক কেন্দ্রগামী iii. বৃত্তের সমান সমান জ্যা এর মধ্যবিন্দুগুলো সমবৃত্ত নিচের কোনটি সঠিক?", options:["i ও ii", "i ও iii", "ii ও iii", "i, ii ও iii"], ans:3},
+            {q:"tan² θ cosec² θ = কত?", options:["tan² θ", "sin² θ", "cos² θ", "sec² θ"], ans:3},
+            {q:"যদি √2 cos (A - B) = 1, 2sin (A + B) = √3 হয়, তাহলে A এর মান নিচের কোনটি?", options:["7 1/2°", "52 1/2°", "23 1/2°", "17 1/2°"], ans:1},
+            {q:"6 মিটার দীর্ঘ একটি গাছের ছায়ার দৈর্ঘ্য 6√3 মিটার হলে, গাছের শীর্ষ বিন্দুর উন্নতি কোণ কত?", options:["0°", "30°", "45°", "60°"], ans:1},
+            {q:"2amn = x(m² + n²) হলে √(a+x) / √(a-x) = কত?", options:["m/n", "(m+n)/(m-n)", "(m-n)/(m+n)", "n/m"], ans:1},
+            {q:"একটি ত্রিভুজের তিনটি কোণের অনুপাত 2 : 3 : 5 হলে, বৃহত্তম কোণটি ক্ষুদ্রতম কোণটির কতগুণ?", options:["5/2 গুণ", "5/3 গুণ", "3/5 গুণ", "2/5 গুণ"], ans:0},
+            {q:"2x + y = 3 এবং 4x + 2y = 6 সমীকরণদ্বয়— i. পরস্পর নির্ভরশীল ii. পরস্পর সমঞ্জস iii. অসংখ্য সমাধান আছে নিচের কোনটি সঠিক?", options:["i ও ii", "i ও iii", "ii ও iii", "i, ii ও iii"], ans:3},
+            {q:"2 + 1 + 4 + 7 + ..... একটি ধারা। ধারাটির সাধারণ পদ কত?", options:["3n - 1", "3n + 1", "3n - 5", "3n + 5"], ans:2},
+            {q:"ধারাটির ১ম দশ পদের সমষ্টি কত?", options:["115", "125", "145", "155"], ans:3},
+            {q:"∆ ABC ও ∆ DEF সদৃশ। AB = 2, BC = 3, DE = 3 হলে EF = ?", options:["3", "4", "4.5", "5.5"], ans:2},
+            {q:"এক লোক 12 কি. মি. ঠিক উত্তর দিকে গেল। সেখান থেকে পূর্বে 5 কি.মি. গমন করল। নির্দিষ্ট অবস্থান থেকে কতদূরে অবস্থান করবে?", options:["17 কি. মি.", "15 কি. মি.", "13 কি. মি.", "20 কি. মি."], ans:2},
+            {q:"সমকোণী ত্রিভুজের সমকোণ সংলগ্ন বাহুদ্বয় 3 এবং 4 সে. মি. হলে তার অতিভুজের মান কত?", options:["7 সে. মি.", "5 সে. মি.", "6 সে. মি.", "8 সে. মি."], ans:1},
+            {q:"একটি বর্গের কর্ণের দৈর্ঘ্য 6√2 মিটার হলে, এর ক্ষেত্রফল কত বর্গমিটার?", options:["36", "24", "18", "6"], ans:0},
+            {q:"একটি বর্গের পরিসীমা 36 মিটার। এর একটি কর্ণের দৈর্ঘ্য কত?", options:["6√2 মিটার", "6√3 মিটার", "9√2 মিটার", "9√3 মিটার"], ans:2},
+            {q:"নিচের কোনটি নির্ণয়ের জন্য ক্রমযোজিত গণসংখ্যা সারণি প্রয়োজন?", options:["গাণিতিক গড়", "ব্যবধি", "প্রচুরক", "মধ্যক"], ans:3},
+            {q:"লেখ নির্দিষ্ট করতে কতগুলো বিন্দু নেওয়া আবশ্যক?", options:["একটি", "একাধিক", "দুইটি বা ততোধিক", "অসংখ্য"], ans:2},
+            {q:"গড় নির্ণয়ের ক্ষেত্রে, অনুমিত গড়, a = 32, u_i = -3, h = 6 হলে, x_i = কত?", options:["14", "16", "20", "26"], ans:0},
+            // Set 2
+            {q:"সকল পূর্ণ এবং ভগ্নাংশ সংখ্যাকে বলা হয়—", options:["অমূলদ সংখ্যা", "মূলদ সংখ্যা", "স্বাভাবিক সংখ্যা", "অঋণাত্মক সংখ্যা"], ans:1},
+            {q:"A = {1, 2}, B = {2, 3} এবং C = {3, 4} হলে A U B U C এর উপাদান সংখ্যা কত?", options:["4", "5", "6", "7"], ans:0},
+            {q:"P(A ∩ B) এর সঠিক মান কোনটি?", options:["(2, ∅)", "{{2}, ∅}", "{2}", "∅"], ans:1},
+            {q:"2x - 1/3x = 2 হলে 3x - 1/2x এর মান কত?", options:["2/3", "3/2", "3", "4"], ans:2},
+            {q:"যদি x(2x - 5) = 1/3 হয় তবে 8x³ - 1/27x³ = কত?", options:["135", "125", "115", "110"], ans:0},
+            {q:"8^(x²) = 2^(3x) হলে, x এর মান কত?", options:["0, -2", "1, 1", "0, 1", "0, 3"], ans:2},
+            {q:"log_x 9 = -2 হলে, x এর মান কত?", options:["- 1/3", "1/3", "3", "± 1/3"], ans:1},
+            {q:"দুইটি বীজগাণিতিক রাশি x ও y এর গুণফল xy = 0 হলে— i. x = 0 অথবা y = 0 ii. x = 0, যখন y ≠ 0 iii. y = 0, যখন x ≠ 0 নিচের কোনটি সঠিক?", options:["i ও ii", "i ও iii", "ii ও iii", "i, ii ও iii"], ans:3},
+            {q:"A ও B দুইটি অভিন্ন বিন্দু হলে, তাদের মধ্যবর্তী দূরত্ব কত?", options:["AB > 0", "AB < 0", "AB = 0", "AB ≠ 0"], ans:2},
+            {q:"180° - 4x° এর সম্পূরক কোণের অর্ধেকের মান কত?", options:["x°/2", "2x°", "90° - 2x°", "90° + 2x°"], ans:1},
+            {q:"সমকোণী ত্রিভুজে 70° কোণ অঙ্কনের ক্ষেত্রে, নিচের কোনটি সঠিক?", options:["অতিভুজ = লম্ব", "ভূমি < লম্ব", "ভূমি > লম্ব", "ভূমি = লম্ব"], ans:1},
+            {q:"দুইটি বাহু ও কতগুলো কোণ দেওয়া থাকলে একটি চতুর্ভুজ আঁকা যায়?", options:["1টি", "2টি", "3টি", "4টি"], ans:2},
+            {q:"বৃত্তের— i. যে কোনো জ্যা এর লম্ব সমদ্বিখণ্ডক কেন্দ্রগামী ii. কেন্দ্র থেকে সমদূরবর্তী সকল জ্যা পরস্পর সমান iii. একই চাপের উপর দণ্ডায়মান বৃত্তস্থ কোণ কেন্দ্রস্থ কোণের অর্ধেক। নিচের কোনটি সঠিক?", options:["i ও ii", "i ও iii", "ii ও iii", "i, ii ও iii"], ans:3},
+            {q:"কোনো বৃত্তের অধিচাপে অন্তর্লিখিত কোণ—", options:["সূক্ষ্মকোণ", "সমকোণ", "স্থূলকোণ", "পূরক কোণ"], ans:0},
+            {q:"cosec θ √(sec² θ - 1) = ?", options:["sec θ", "cos θ", "sin θ", "tan θ"], ans:0},
+            {q:"sec(90° - θ) = 5/3 হলে cosec θ - cot θ = কত?", options:["3/5", "1/3", "1/5", "2/3"], ans:1},
+            {q:"একটি খুঁটির দৈর্ঘ্য এবং তার ছায়ার দৈর্ঘ্য সমান হলে সূর্যের উন্নতি কোণ কত হবে?", options:["0°", "30°", "45°", "90°"], ans:2},
+            {q:"দুইটি সংখ্যার অনুপাত 5 : 6 এবং তাদের ল.সা.গু. 150 হলে, গ.সা.গু. কত?", options:["5", "6", "11", "30"], ans:0},
+            {q:"দুইটি সংখ্যার অনুপাত 4 : 5 এবং এদের ল.সা.গু. 120 হলে, বৃহত্তম সংখ্যাটি কত?", options:["20", "24", "30", "120"], ans:2},
+            {q:"3x - y = 12 এবং 6x + 2y = 17 সমীকরণদ্বয়— i. পরস্পর অনির্ভরশীল ii. পরস্পর সমঞ্জস iii. এর একটিমাত্র সমাধান আছে। নিচের কোনটি সঠিক?", options:["i ও ii", "i ও iii", "ii ও iii", "i, ii ও iii"], ans:2},
+            {q:"7 + 10 + 13 + 16 + ....... ধারাটির পরপর দুইটি পদের পার্থক্য কত?", options:["1", "2", "3", "17"], ans:2},
+            {q:"কোনো ধারার যেকোনো পদ ও তার পূর্ববর্তী পদের পার্থক্য সব সময় সমান হলে, ধারাটি কোন ধরনের ধারা?", options:["সমান্তর ধারা", "গুণোত্তর ধারা", "গুণিতক ধারা", "ভগ্নাংশের ধারা"], ans:0},
+            {q:"∆ABC এবং ∆DEF সদৃশ এবং AB : DE = 2 : 3 হলে AC : DF = কত?", options:["1 : 2", "2 : 3", "3 : 4", "4 : 5"], ans:1},
+            {q:"একটি সমদ্বিবাহু সমকোণী ত্রিভুজের সমান বাহুদ্বয়ের প্রতিটির দৈর্ঘ্য 6 সেমি। ত্রিভুজটির ক্ষেত্রফল কত বর্গ সেমি?", options:["72", "36", "18", "12"], ans:2},
+            {q:"একটি সুষম পঞ্চভুজের প্রতিবাহুর দৈর্ঘ্য 4 মিটার হলে, এর ক্ষেত্রফল কত বর্গমিটার?", options:["20.35", "27.53", "28.53", "28.78"], ans:1},
+            {q:"কোনো শ্রেণির নিম্নসীমা 30 এবং শ্রেণিমধ্যমান 32 হলে, ঐ শ্রেণির ঊর্ধ্বসীমা কত?", options:["37", "35", "34", "33"], ans:2},
+            {q:"পরীক্ষায় প্রাপ্ত জিপিএ কোন ধরনের চলক?", options:["বিচ্ছিন্ন চলক", "অবিচ্ছিন্ন চলক", "অবিন্যস্ত চলক", "বিন্যস্ত চলক"], ans:0},
+            {q:"2, 13, 7, 3, 8, 5 নম্বরগুলোর মধ্যক কত?", options:["5", "6", "7", "13"], ans:1},
+            // Set 3
+            {q:"2.2̇3̇, 0.43̇2̇ ও 1.53̇2̇ এর সদৃশ ভগ্নাংশে আবৃত্ত অঙ্ক সংখ্যা হবে—", options:["2টি", "3টি", "5টি", "6টি"], ans:0},
+            {q:"A = {x : x² - 2x = 0} হলে A এর তালিকা পদ্ধতিতে প্রকাশিত সেট কোনটি?", options:["{0}", "{ }", "{2}", "{0, 2}"], ans:3},
+            {q:"সার্বিক সেট U = {5, 6, 7, 8} হলে A = {6, 8} এর পূরক সেট কত?", options:["{5, 6}", "{6, 7}", "{7, 8}", "{5, 7}"], ans:3},
+            {q:"x² + 2 = 3x হলে x + 2/x এর মান কত?", options:["-3", "3", "-2", "4"], ans:1},
+            {q:"x² + 2 = 3x হলে x³ + 8/x³ এর মান নিচের কোনটি?", options:["9", "18", "21", "27"], ans:0},
+            {q:"2^(2x-6) = 3^(2x-6) হলে x এর মান কত?", options:["0", "1", "2", "3"], ans:3},
+            {q:"log_x (1/25) = -2 হলে x এর মান কত?", options:["±5", "5", "± 1/5", "1/5"], ans:1},
+            {q:"বীজগণিতে— i. সকল বীজগাণিতীয় সূত্রই অভেদ ii. অভেদে (=) চিহ্নের পরিবর্তে (≡) চিহ্ন ব্যবহৃত হয় iii. সকল সমীকরণ সূত্র নয় নিচের কোনটি সঠিক?", options:["i ও ii", "i ও iii", "ii ও iii", "i, ii ও iii"], ans:3},
+            {q:"নিচের কোনটি ত্রি-মাত্রিক বস্তু?", options:["রশ্মি", "রেখা", "তল", "গোলক"], ans:3},
+            {q:"∠A = x° এবং ∠B হলো ∠A এর পূরক কোণ। তাহলে ∠B = ?", options:["x°", "y°", "90° + x°", "90° - x°"], ans:3},
+            {q:"তিনটি বাহুর দৈর্ঘ্য (সে. মি.) দেওয়া হলো। কোন ক্ষেত্রে ত্রিভুজ অঙ্কন সম্ভব?", options:["3, 5, 6", "4, 5, 9", "5, 6, 12", "6, 7, 16"], ans:0},
+            {q:"একটি কর্ণের দৈর্ঘ্য দেয়া থাকলে নিচের কোনটি আঁকা যাবে?", options:["রম্বস", "বর্গ", "আয়ত", "সামান্তরিক"], ans:1},
+            {q:"26 cm ব্যাসবিশিষ্ট বৃত্তের কেন্দ্র থেকে 5 cm দূরে অবস্থিত জ্যা এর দৈর্ঘ্য কত?", options:["12 cm", "18 cm", "21 cm", "24 cm"], ans:3},
+            {q:"অধিচাপে অন্তর্লিখিত কোণ—", options:["পূরক কোণ", "সূক্ষ্মকোণ", "স্থূলকোণ", "সমকোণ"], ans:1},
+            {q:"cos 2A = 0 হলে, tan 2A এর মান কত?", options:["0", "1", "√3", "অসংজ্ঞায়িত"], ans:3},
+            {q:"'Trigonometry' শব্দটির 'metron' অর্থ কী?", options:["পরিমাপ", "ধার", "তিন", "কোন"], ans:0},
+            {q:"সমকোণী ত্রিভুজে 50° কোণ অঙ্কনের ক্ষেত্রে নিচের কোনটি সঠিক?", options:["ভূমি > লম্ব", "ভূমি < লম্ব", "ভূমি = লম্ব", "লম্ব = অতিভুজ"], ans:1},
+            {q:"বৃত্তের ব্যাসার্ধ দ্বিগুণ করলে ক্ষেত্রফল কতগুণ বাড়বে?", options:["তিনগুণ", "চারগুণ", "আটগুণ", "নয়গুণ"], ans:1},
+            {q:"দুইটি সংখ্যার অনুপাত 7 : 5 এবং এদের গ.সা.গু. 4 হলে, সংখ্যা দুইটির অন্তরফল কত?", options:["4", "8", "10", "14"], ans:1},
+            {q:"x - 2y = 5 ও 2x - 4y = 10 সমীকরণ জোট— i. সমঞ্জস ii. নির্ভরশীল iii. অসংখ্য সমাধান আছে", options:["i ও ii", "i ও iii", "ii ও iii", "i, ii ও iii"], ans:3},
+            {q:"কোনো সমান্তর ধারার ১ম পদ 2 এবং সাধারণ অন্তর 3 হলে, ধারাটির n তম পদ কত?", options:["3n + 1", "n(3n + 1)/2", "3n - 1", "n(3n - 1)/2"], ans:2},
+            {q:"ঐ ধারাটির প্রথম ৮ পদের যোগফল কত?", options:["23", "25", "100", "124"], ans:2},
+            {q:"19 সে.মি. রেখাংশকে কোনো বিন্দু 6 : 13 অনুপাতে অন্তর্বিভক্ত করে। এর এক অংশের দৈর্ঘ্য 6 সে.মি. হলে, অপর অংশের দৈর্ঘ্য কত?", options:["6 সে.মি.", "7 সে.মি.", "13 সে.মি.", "19 সে.মি."], ans:2},
+            {q:"কোনো বর্গক্ষেত্রের ক্ষেত্রফল তার কর্ণের উপর অঙ্কিত বর্গক্ষেত্রের ক্ষেত্রফলের—", options:["অর্ধেক", "সমান", "দ্বিগুণ", "চারগুণ"], ans:0},
+            {q:"সম উচ্চতার ∆ ABC এর ভূমি BC এর অর্ধেকের উপর অঙ্কিত সামান্তরিকের ক্ষেত্রফল—", options:["ত্রিভুজক্ষেত্রটির ক্ষেত্রফলের সমান", "অর্ধেক", "দ্বিগুণ", "কোনোটিই নয়"], ans:0},
+            {q:"একটি সমদ্বিবাহু সমকোণী ত্রিভুজের সমান বাহুদ্বয়ের প্রতিটির দৈর্ঘ্য 6 সেমি। ত্রিভুজটির ক্ষেত্রফল কত বর্গ সেমি?", options:["72", "36", "18", "12"], ans:2},
+            {q:"একটি সুষম পঞ্চভুজের প্রতিবাহুর দৈর্ঘ্য 4 মিটার হলে, এর ক্ষেত্রফল কত বর্গমিটার?", options:["20.35", "27.53", "28.53", "28.78"], ans:1},
+            {q:"নিচের কোনটি বিচ্ছিন্ন চলক?", options:["বয়স", "উচ্চতা", "ওজন", "জনসংখ্যা"], ans:3},
+            {q:"3 থেকে 23 পর্যন্ত যে সংখ্যাগুলো 3 দ্বারা নিঃশেষে বিভাজ্য সেগুলোর মধ্যক কত?", options:["9", "12", "15", "18"], ans:1},
+            {q:"10, 4, 6, 8 ও 14 এর মধ্যক কত?", options:["6", "7", "8", "9"], ans:2},
+            // Set 4
+            {q:"কোনো ভগ্নাংশের লব ও হরকে স্বাভাবিক সংখ্যায় প্রকাশ করতে পারলে ঐ সংখ্যাটি কোন ধরনের সংখ্যা?", options:["অমূলদ সংখ্যা", "মূলদ সংখ্যা", "অসীম অনাবৃত্ত দশমিক ভগ্নাংশ সংখ্যা", "উপরের কোনোটিই নয়"], ans:1},
+            {q:"দুইটি অমূলদ সংখ্যার— i. যোগফল সর্বদা অমূলদ সংখ্যা ii. বিয়োগফল সর্বদা মূলদ ও অমূলদ উভয় সংখ্যা হতে পারে iii. গুণফল মূলদও হতে পারে, অমূলদও হতে পারে", options:["i ও ii", "i ও iii", "ii ও iii", "i, ii ও iii"], ans:2},
+            {q:"যে সেটের উপাদান সংখ্যা গণনা করে নির্ধারণ করা যায় না, তাকে কী বলা হয়?", options:["সমান্তরাল সেট", "অসমান্তরাল সেট", "সসীম সেট", "অসীম সেট"], ans:3},
+            {q:"যদি f(x) = x³ + px² - 6x - 9 হয়, তবে p এর কোন মানের জন্য f(-3) = 0 হবে?", options:["- 4", "- 2", "2", "6"], ans:2},
+            {q:"p + q = 5, p - q = 3 হলে, p² + q² এর মান কত?", options:["34", "19", "17", "8"], ans:2},
+            {q:"x² + x - 2 এর উৎপাদকে বিশ্লেষিত রূপ কোনটি?", options:["(x - 1)(x - 2)", "(x - 1)(x + 2)", "(x + 1)(x - 2)", "(x + 1)(x + 2)"], ans:1},
+            {q:"log₁₂ 2√3 - log₁₂ 2 = কত?", options:["0", "1", "1/2", "3/2"], ans:2},
+            {q:"0.6262 এর বৈজ্ঞানিক রূপ কোনটি?", options:["626.2 × 10⁻¹", "62.62 × 10⁻²", "6.262 × 10⁻¹", "6.262 × 10⁻²"], ans:2},
+            {q:"√(2x - 3) + 5 = 2 সমীকরণ— i. একটি একচলক বিশিষ্ট সমীকরণ ii. এর সমাধান সেট s = { } iii. এর সমাধান x = 6", options:["i ও ii", "i ও iii", "ii ও iii", "i, ii ও iii"], ans:0},
+            {q:"জ্যামিতি শব্দের অর্থ কী?", options:["পরিমাপ", "ভূমি", "ভূমির পরিমাপ", "তল"], ans:2},
+            {q:"সমকোণী ত্রিভুজের সূক্ষ্মকোণদ্বয়ের যোগফল কত?", options:["45°", "80°", "90°", "180°"], ans:2},
+            {q:"সমবাহু ত্রিভুজের প্রত্যেকটি কোণের পরিমাণ কত?", options:["60°", "90°", "180°", "360°"], ans:0},
+            {q:"তিনটি কোণ দেওয়া থাকলে বিভিন্ন ক্ষেত্রফলের কতগুলো ত্রিভুজ অঙ্কন করা সম্ভব?", options:["দুইটি", "তিনটি", "চারটি", "অসংখ্য"], ans:3},
+            {q:"sin 3A = cos 3A হলে A এর মান কত?", options:["15°", "20°", "25°", "30°"], ans:0},
+            {q:"sec θ √(1 - cos² θ) = কত?", options:["sin θ", "cos θ", "tan θ", "cot θ"], ans:2},
+            {q:"একটি দ্রব্য 20% ক্ষতিতে বিক্রয় করা হলো, ক্রয়মূল্য ও বিক্রয়মূল্যের অনুপাত কোনটি?", options:["4 : 5", "5 : 4", "5 : 6", "6 : 5"], ans:1},
+            {q:"পিতা ও পুত্রের বর্তমান বয়স যথাক্রমে 40 বছর এবং 10 বছর। 5 বছর পর তাদের বয়সের অনুপাত কত হবে?", options:["4 : 1", "3 : 1", "1 : 4", "1 : 3"], ans:1},
+            {q:"3x + 2y = 5 এবং 6x + 5y = 2 সমীকরণজোটটি কোন ধরনের?", options:["সমঞ্জস", "অসমঞ্জস", "নির্ভরশীল", "সমঞ্জস ও নির্ভরশীল"], ans:0},
+            {q:"প্রথম n সংখ্যক স্বাভাবিক জোড় সংখ্যার সমষ্টি কত?", options:["n²", "2n²", "n² + n", "2n + 1"], ans:2},
+            {q:"4 + 8 + 16 + ..... ধারাটির সাধারণ পদ কত?", options:["2ⁿ⁻¹", "2ⁿ⁺¹", "8ⁿ⁻¹", "8ⁿ⁺¹"], ans:1},
+            {q:"H অক্ষরটির ঘূর্ণন কোণ কত?", options:["30°", "60°", "90°", "180°"], ans:3},
+            {q:"সমকোণী ত্রিভুজের তিনটি বাহু যথাক্রমে— i. 3 cm, 4 cm, 5 cm ii. 5 cm, 12 cm, 13 cm iii. 6 cm, 8 cm, 12 cm", options:["i ও ii", "i ও iii", "ii ও iii", "i, ii ও iii"], ans:0},
+            {q:"সমবাহু ত্রিভুজের উচ্চতা 3√3 হলে, ত্রিভুজটির বাহুর দৈর্ঘ্য কত?", options:["27√3 / 4", "6", "1/6", "27/4"], ans:1},
+            {q:"একটি বৃত্তের ব্যাস 26 মিটার হলে পরিধি কত মিটার?", options:["13π", "26π", "39π", "52π"], ans:1},
+            {q:"2, 4, 5, 8, 7, 12, 4, 15 উপাত্তের মধ্যক কত?", options:["2", "4", "6", "7"], ans:2},
+            {q:"অনুসন্ধানাধীন উপাত্ত পরিসংখ্যানের কী নির্দেশ করে?", options:["ট্যালি চিহ্ন", "কাঁচামাল", "চলক", "ফলাফল"], ans:1},
+            // Set 5
+            {q:"-4, -3, -2, -1, 0, 1, 2, 3, 4 সংখ্যাগুলো কোন ধরনের সংখ্যা?", options:["ধনাত্মক সংখ্যা", "ঋণাত্মক সংখ্যা", "পূর্ণসংখ্যা", "অমূলদ সংখ্যা"], ans:2},
+            {q:"{x ∈ N : x² > 9 এবং x³ < 220} = ?", options:["{4, 5, 6}", "{3, 4, 5, 6}", "{4, 5}", "{3, 4, 5}"], ans:0},
+            {q:"A = {x : x বিজোড় মৌলিক সংখ্যা এবং x ≤ 19} হলে A সেটের উপাদান সংখ্যা কয়টি?", options:["6টি", "7টি", "8টি", "9টি"], ans:1},
+            {q:"9x² + 16y² এর সাথে কত যোগ করলে যোগফল পূর্ণবর্গ রাশি হবে?", options:["6xy", "12xy", "24xy", "144xy"], ans:2},
+            {q:"যদি 4ab = 2, a + b = √8, হয় তবে a - b = কী?", options:["√10", "√6", "√8", "√2"], ans:1},
+            {q:"(4^x + 4^x + 4^x + 4^x) ÷ 4.4^x = কত?", options:["4^2x", "2^3x", "4^(x+1)", "1"], ans:3},
+            {q:"x, y ∈ R, n ∈ N এবং a > 1 হলে, i. a⁰ = 1 ii. x^n = y যখন x = y^(1/n) iii. a⁻ⁿ = 1/aⁿ নিচের কোনটি সঠিক?", options:["i ও ii", "i ও iii", "ii ও iii", "i, ii ও iii"], ans:3},
+            {q:"m - n = m + n হলে, n এর মান নিচের কোনটি?", options:["2", "- 1", "0", "1"], ans:2},
+            {q:"a এর দৈর্ঘ্য ও প্রস্থ আছে কিন্তু কোনো উচ্চতা নাই। a দ্বারা কী বোঝানো হয়েছে?", options:["রেখা", "বিন্দু", "তল", "ঘনবস্তু"], ans:2},
+            {q:"a কত মাত্রিক?", options:["এক মাত্রিক", "দ্বিমাত্রিক", "তিন মাত্রিক", "চার মাত্রিক"], ans:1},
+            {q:"একটি ত্রিভুজের দুইটি বাহুর দৈর্ঘ্য 3 সে.মি. ও 8 সে.মি. হলে তৃতীয় বাহুর দৈর্ঘ্য কত সে.মি.? (সম্ভাব্য)", options:["6", "4", "3", "11"], ans:0},
+            {q:"একটি মাত্র বাহুর দৈর্ঘ্য দেওয়া থাকলে কোন ত্রিভুজ আঁকা সম্ভব?", options:["সমকোণী", "সমবাহু", "সমদ্বিবাহু", "স্থূলকোণী"], ans:1},
+            {q:"একটি বৃত্তের ব্যাস 26 সে.মি. হলে, এর পরিধি কত?", options:["530.9 সে.মি.", "81.68 সে.মি.", "40.84 সে.মি.", "13 সে.মি."], ans:1},
+            {q:"জ্যা AB = 8 cm এবং OD = (AD - 1) cm হলে, ব্যাসার্ধ কত cm?", options:["3", "4", "5", "6"], ans:2},
+            {q:"অতিভুজ 5 একক ও বিপরীত বাহু 3 একক হলে, tan θ = ?", options:["3/5", "3/4", "4/5", "4/3"], ans:1},
+            {q:"θ = 0° কোণের ক্ষেত্রে— i. cosec θ ও cot θ অসংজ্ঞায়িত ii. প্রান্তীয় বাহু ও আদি বাহু একই রশ্মি iii. sec θ ও tan θ সংজ্ঞায়িত", options:["i ও ii", "i ও iii", "ii ও iii", "i, ii ও iii"], ans:3},
+            {q:"একটি নারিকেল গাছের ছায়ার দৈর্ঘ্য 10√3 মিটার এবং শীর্ষবিন্দু ছায়ার শেষ প্রান্তের সাথে 30° উন্নতি কোণ তৈরি করে। গাছটির উচ্চতা কত মিটার?", options:["10", "20", "25", "30"], ans:0},
+            {q:"যদি a : b = 3 : 4, b : c = 6 : 7 হয় তবে a : b : c = কত?", options:["7 : 12 : 14", "3 : 6 : 7", "4 : 6 : 7", "9 : 12 : 14"], ans:3},
+            {q:"বৃত্তের পরিধি ও ব্যাসার্ধের অনুপাত কত?", options:["2 : π", "2π : 1", "1 : 2π", "1 : π"], ans:1},
+            {q:"সরল সমীকরণের চলকগুলো কত ঘাতবিশিষ্ট হয়?", options:["এক", "দুই", "তিন", "চার"], ans:0},
+            {q:"log 3 + log 9 + log 27 + ..... ধারাটির দশম পদ = ?", options:["55 log 3", "30 log 3", "20 log 3", "10 log 3"], ans:3},
+            {q:"1 + 3 + 5 + .... + 21 ধারাটির কততম পদ শেষ পদ?", options:["9", "11", "13", "15"], ans:1},
+            {q:"দুইটি সদৃশ ত্রিভুজের অনুরূপ বাহুগুলোর অনুপাত ধ্রুবক, সর্বসম ত্রিভুজ সর্বদা সদৃশ।", options:["i ও ii", "ii ও iii", "i ও iii", "i, ii ও iii"], ans:2},
+            {q:"সমবাহু ∆ ABC এ AD ⊥ BC এবং BC = 2 একক। AD এর দৈর্ঘ্য কত একক?", options:["√3", "2√3", "√3/2", "√3/4"], ans:0},
+            {q:"∆ ABD এর ক্ষেত্রফল কত বর্গ একক?", options:["2√3", "√3", "√3/2", "√3/4"], ans:2},
+            {q:"∆ ABC এ AB = BC = CA = 6 সে.মি. হলে, মধ্যমা AD = কত সে.মি.?", options:["2√3", "3√3", "3√5", "6√2"], ans:1},
+            {q:"একটি সমবাহু ত্রিভুজের ক্ষেত্রফল 18√3 বর্গ সে.মি. হলে, এর পরিসীমা কত সে.মি.?", options:["6√2", "12√2", "16√2", "18√2"], ans:3},
+            {q:"১০ম শ্রেণির শিক্ষার্থীদের গণিতে সর্বনিম্ন নম্বর 35 ও পরিসর 56 হলে সর্বোচ্চ নম্বর কত?", options:["80", "85", "96", "90"], ans:3},
+            {q:"পরিসর 110 এবং শ্রেণিসংখ্যা 10 হলে, শ্রেণি ব্যবধান কত?", options:["10", "11", "12", "13"], ans:1},
+            {q:"অজিভ রেখার ক্ষেত্রে নিচের কোনটি সঠিক?", options:["ঊর্ধ্বগামী", "নিম্নগামী", "সমান্তরাল", "উল্লম্ব"], ans:0},
+            // Set 6
+            {q:"2 বাদে অন্যান্য মৌলিক সংখ্যা কী?", options:["জোড়", "বিজোড়", "ঋণাত্মক", "উপরের কোনোটিই নয়"], ans:1},
+            {q:"A = {x : x² - 3x = 0} হলে, A এর তালিকা পদ্ধতিতে প্রকাশিত সেট কোনটি?", options:["{3}", "{0, 3}", "{ }", "{0}"], ans:1},
+            {q:"B = {x ∈ N : 2 ≤ x ≤ 4} হলে— i. মৌলিক সংখ্যা 2টি ii. P(B) এর উপাদান ৪টি iii. 2 দ্বারা বিভাজ্য 1টি", options:["i ও ii", "i ও iii", "ii ও iii", "i, ii ও iii"], ans:0},
+            {q:"x - 1/x = 7 হলে x / (x² - 6x - 1) এর মান কত হবে?", options:["1/12", "1/2", "1", "2"], ans:2},
+            {q:"a + b = √3, a - b = 1 হলে, 4ab এর মান নিচের কোনটি?", options:["4", "√3 + 1", "2", "√3 - 1"], ans:2},
+            {q:"∛a = √5 হলে a এর মান নিচের কোনটি?", options:["√5", "5", "3√5", "5√5"], ans:3},
+            {q:"√(x) × x² এর মান কত?", options:["x^(5/2)", "x^4", "x³", "x²"], ans:0},
+            {q:"একটি আয়তাকার জমির দৈর্ঘ্য প্রস্থের 3 গুণ এবং পরিসীমা 36 মিটার হলে, প্রস্থ কত মিটার?", options:["5.7", "4.5", "5.6", "6.4"], ans:1},
+            {q:"50° কোণের সম্পূরক কোণ কত?", options:["60°", "130°", "150°", "90°"], ans:1},
+            {q:"রেখাংশের কয়টি প্রান্ত বিন্দু আছে?", options:["দুইটি", "তিনটি", "একটি", "অসংখ্য"], ans:0},
+            {q:"কমপক্ষে কয়টি উপাত্ত দেওয়া থাকলে একটি ত্রিভুজ আঁকা যায়?", options:["1", "2", "3", "4"], ans:2},
+            {q:"তিন বাহুর দৈর্ঘ্য দেওয়া আছে। কোন ক্ষেত্রে ত্রিভুজ আঁকা সম্ভব?", options:["4, 6, 10", "6, 7, 12", "5, 6, 12", "6, 7, 14"], ans:1},
+            {q:"কোন বৃত্তে একই চাপের উপর দণ্ডায়মান কেন্দ্রস্থ কোণের মান x + 60° এবং বৃত্তস্থ কোণের মান x + 5° হলে x এর মান কত?", options:["50°", "60°", "70°", "80°"], ans:0},
+            {q:"সমবাহু ∆ ABC এর পরিকেন্দ্র O হলে, ∠AOB এর মান কত?", options:["120°", "90°", "60°", "30°"], ans:0},
+            {q:"5 sin A = 3 হলে tan A = কত?", options:["4/5", "5/4", "3/4", "4/3"], ans:2},
+            {q:"tan θ + sec θ = 0.4 হলে, tan θ - sec θ = কত?", options:["- 2.5", "- 1.2", "1.2", "2.5"], ans:0},
+            {q:"একটি ত্রিভুজের তিনটি বাহুর অনুপাত 3 : 4 : 5 এবং পরিসীমা 36 সে.মি. হলে ক্ষুদ্রতম ও বৃহত্তম বাহুর বিয়োগফল কত?", options:["9", "6", "5", "2"], ans:1},
+            {q:"ত্রিভুজটির ক্ষেত্রফল কত বর্গ সে. মি.?", options:["6", "54", "67", "90"], ans:1},
+            {q:"x - y - 4 = 0 এবং 3x - 3y - 5 = 0 সমীকরণ জোটের বৈশিষ্ট্য কোনটি?", options:["সঙ্গতিপূর্ণ", "অসঙ্গতিপূর্ণ", "নির্ভরশীল", "সমাধান অনন্য"], ans:1},
+            {q:"a - a + a - a + ....... ধারাটির 21 তম পদ কত?", options:["- a", "0", "a", "21 a"], ans:2},
+            {q:"কোনো সমান্তর ধারার ১ম পদ a = 5, সাধারণ অন্তর d = 7 হলে, 22 তম পদ কত?", options:["138", "82", "152", "159"], ans:2},
+            {q:"∆ PQR ও ∆ MNO সদৃশ হলে— i. ∠P = ∠M, ∠Q = ∠N, ∠R = ∠O ii. PQ/MN = QR/NO iii. ক্ষেত্রফল অনুপাত", options:["i ও ii", "i ও iii", "ii ও iii", "i, ii ও iii"], ans:3},
+            {q:"একটি সমকোণী ত্রিভুজের ক্ষেত্রফল 144 বর্গ একক। সমকোণ সন্নিহিত বাহুদ্বয়ের একটির দৈর্ঘ্য 12 একক হলে অপরটি কত?", options:["15 একক", "24 একক", "20 একক", "30 একক"], ans:1},
+            {q:"যে চতুর্ভুজের বিপরীত বাহুগুলো সমান কিন্তু কোণগুলো সমকোণ নয় তাকে কী বলে?", options:["আয়তক্ষেত্র", "বর্গক্ষেত্র", "সামান্তরিক", "রম্বস"], ans:2},
+            {q:"সমবাহু ত্রিভুজের পরিসীমা 6 সে.মি. হলে, ক্ষেত্রফল কত বর্গ সে.মি.?", options:["√3 / 2", "√3", "2√3", "9√3"], ans:1},
+            {q:"একটি সমবাহু ত্রিভুজের প্রত্যেক বাহুর দৈর্ঘ্য 1 মিটার কমালে ক্ষেত্রফল 3√3 বর্গমিটার কমে যায়। ত্রিভুজটির বাহুর দৈর্ঘ্য কত?", options:["4.5 সে.মি.", "5.5 সে.মি.", "6.5 সে.মি.", "7.5 সে.মি."], ans:2},
+            {q:"নিচের কোনটি বিচ্ছিন্ন চলকের উদাহরণ?", options:["বয়স", "তাপমাত্রা", "জনসংখ্যা", "ওজন"], ans:2},
+            {q:"13, 19, 17, 14, 16, 15, 18, 20 উপাত্তের গাণিতিক গড় কত?", options:["15.5", "16.5", "17.5", "18.5"], ans:1},
+            {q:"13, 19, 17, 14, 16, 15, 18, 20 উপাত্তের মধ্যক কোনটি?", options:["8.5", "9.5", "15.5", "16.5"], ans:3}
         ];
 
         let currentQuestion = 0;
         let answers = new Array(questions.length).fill(null);
-        let timeLeft = 30 * 60; // 30 minutes in seconds
+        let timeLeft = questions.length * 60; // 1 minute per question
         let timerInterval;
-
         const prefixes = ['ক', 'খ', 'গ', 'ঘ'];
 
-        // Initialize App
         function init() {
             document.getElementById('total-q-display').innerText = `${questions.length} টি`;
+            document.getElementById('total-t-display').innerText = `${questions.length} মিনিট`;
             createPalette();
         }
 
         function createPalette() {
             const container = document.getElementById('palette-container');
-            container.innerHTML = '';
             questions.forEach((_, index) => {
                 const btn = document.createElement('button');
-                btn.className = 'palette-btn';
-                btn.innerText = index + 1;
-                btn.onclick = () => jumpToQuestion(index);
-                btn.id = `pal-btn-${index}`;
+                btn.className = 'palette-btn'; btn.innerText = index + 1;
+                btn.onclick = () => jumpToQuestion(index); btn.id = `pal-btn-${index}`;
                 container.appendChild(btn);
             });
         }
@@ -768,74 +416,46 @@
         function startExam() {
             document.getElementById('welcome-screen').classList.remove('active');
             document.getElementById('exam-screen').classList.add('active');
-            loadQuestion(0);
-            startTimer();
+            loadQuestion(0); startTimer();
         }
 
         function loadQuestion(index) {
             currentQuestion = index;
             document.getElementById('current-q-num').innerText = currentQuestion + 1;
             document.getElementById('question-text').innerText = questions[index].q;
-            
-            const optionsContainer = document.getElementById('options-container');
-            optionsContainer.innerHTML = '';
+            const optionsContainer = document.getElementById('options-container'); optionsContainer.innerHTML = '';
             
             questions[index].options.forEach((opt, i) => {
                 const label = document.createElement('label');
                 label.className = `option-label ${answers[currentQuestion] === i ? 'selected' : ''}`;
-                label.innerHTML = `
-                    <div class="option-prefix">${prefixes[i]}</div>
-                    <span>${opt}</span>
-                    <input type="radio" name="option" value="${i}" ${answers[currentQuestion] === i ? 'checked' : ''} onchange="selectOption(${i})">
-                `;
+                label.innerHTML = `<div class="option-prefix">${prefixes[i]}</div><span>${opt}</span>
+                    <input type="radio" name="option" value="${i}" ${answers[currentQuestion] === i ? 'checked' : ''} onchange="selectOption(${i})">`;
                 optionsContainer.appendChild(label);
             });
-
-            // Buttons state
+            
             document.getElementById('btn-prev').style.visibility = currentQuestion === 0 ? 'hidden' : 'visible';
             document.getElementById('btn-next').innerText = currentQuestion === questions.length - 1 ? 'শেষ করুন' : 'পরবর্তী প্রশ্ন';
-
             updatePaletteUI();
         }
 
-        function selectOption(optIndex) {
-            answers[currentQuestion] = optIndex;
-            loadQuestion(currentQuestion); // refresh UI for selected state
-            updateProgress();
-        }
-
-        function nextQuestion() {
-            if (currentQuestion < questions.length - 1) {
-                loadQuestion(currentQuestion + 1);
-            } else {
-                confirmSubmit();
-            }
-        }
-
-        function prevQuestion() {
-            if (currentQuestion > 0) {
-                loadQuestion(currentQuestion - 1);
-            }
-        }
-
-        function jumpToQuestion(index) {
-            loadQuestion(index);
-        }
+        function selectOption(optIndex) { answers[currentQuestion] = optIndex; loadQuestion(currentQuestion); updateProgress(); }
+        function nextQuestion() { currentQuestion < questions.length - 1 ? loadQuestion(currentQuestion + 1) : confirmSubmit(); }
+        function prevQuestion() { if (currentQuestion > 0) loadQuestion(currentQuestion - 1); }
+        function jumpToQuestion(index) { loadQuestion(index); }
 
         function updatePaletteUI() {
             questions.forEach((_, i) => {
                 const btn = document.getElementById(`pal-btn-${i}`);
                 btn.classList.remove('current');
                 if (answers[i] !== null) btn.classList.add('answered');
-                if (i === currentQuestion) btn.classList.add('current');
+                if (i === currentQuestion) { btn.classList.add('current'); btn.scrollIntoView({ block: "nearest" }); }
             });
         }
 
         function updateProgress() {
             const answeredCount = answers.filter(a => a !== null).length;
-            document.getElementById('answered-count').innerText = answeredCount;
-            const percent = (answeredCount / questions.length) * 100;
-            document.getElementById('progress-bar').style.width = `${percent}%`;
+            document.getElementById('answered-count').innerText = `${answeredCount} / ${questions.length}`;
+            document.getElementById('progress-bar').style.width = `${(answeredCount / questions.length) * 100}%`;
         }
 
         function startTimer() {
@@ -844,24 +464,13 @@
                 const m = Math.floor(timeLeft / 60).toString().padStart(2, '0');
                 const s = (timeLeft % 60).toString().padStart(2, '0');
                 document.getElementById('timer').innerText = `⏱ ${m}:${s}`;
-                
-                if (timeLeft <= 0) {
-                    clearInterval(timerInterval);
-                    alert("সময় শেষ! আপনার পরীক্ষা স্বয়ংক্রিয়ভাবে জমা দেওয়া হচ্ছে।");
-                    submitExam();
-                }
+                if (timeLeft <= 0) { clearInterval(timerInterval); alert("সময় শেষ! খাতা জমা দেওয়া হচ্ছে।"); submitExam(); }
             }, 1000);
         }
 
         function confirmSubmit() {
             const unanswered = answers.filter(a => a === null).length;
-            let msg = "আপনি কি নিশ্চিত যে পরীক্ষাটি জমা দিতে চান?";
-            if (unanswered > 0) {
-                msg = `আপনার এখনো ${unanswered} টি প্রশ্নের উত্তর দেওয়া বাকি আছে। ` + msg;
-            }
-            if (confirm(msg)) {
-                submitExam();
-            }
+            if (confirm(unanswered > 0 ? `আপনার ${unanswered}টি প্রশ্ন বাকি আছে। জমা দিতে চান?` : "পরীক্ষা জমা দিতে চান?")) submitExam();
         }
 
         function submitExam() {
@@ -873,83 +482,37 @@
 
         function calculateResults() {
             let correct = 0, wrong = 0, skipped = 0;
-            
             const reviewContainer = document.getElementById('review-container');
             reviewContainer.innerHTML = '<h2 style="text-align: center; color: var(--primary); margin-bottom: 20px;">উত্তরমালা বিশ্লেষণ</h2>';
 
             questions.forEach((q, i) => {
                 const userAns = answers[i];
                 let statusClass = '';
-                
-                if (userAns === null) {
-                    skipped++;
-                } else if (userAns === q.ans) {
-                    correct++;
-                    statusClass = 'correct';
-                } else {
-                    wrong++;
-                    statusClass = 'incorrect';
-                }
+                if (userAns === null) skipped++; else if (userAns === q.ans) { correct++; statusClass = 'correct'; } else { wrong++; statusClass = 'incorrect'; }
 
-                // Generate Review Card
-                const card = document.createElement('div');
-                card.className = 'glass-panel review-card';
-                
+                const card = document.createElement('div'); card.className = 'glass-panel review-card';
                 let optionsHTML = '';
                 q.options.forEach((opt, optIndex) => {
-                    let optClass = 'review-option';
-                    let suffix = '';
-                    
-                    if (optIndex === q.ans) {
-                        optClass += ' correct';
-                        suffix = ' ✔ (সঠিক উত্তর)';
-                    } else if (optIndex === userAns) {
-                        optClass += ' incorrect';
-                        suffix = ' ✖ (আপনার উত্তর)';
-                    }
-
-                    optionsHTML += `
-                        <div class="${optClass}">
-                            <strong>${prefixes[optIndex]}.</strong> &nbsp; ${opt} ${suffix}
-                        </div>
-                    `;
+                    let optClass = 'review-option'; let suffix = '';
+                    if (optIndex === q.ans) { optClass += ' correct'; suffix = ' ✔ (সঠিক)'; } else if (optIndex === userAns) { optClass += ' incorrect'; suffix = ' ✖ (আপনার উত্তর)'; }
+                    optionsHTML += `<div class="${optClass}"><strong>${prefixes[optIndex]}.</strong> &nbsp; ${opt} ${suffix}</div>`;
                 });
-
-                card.innerHTML = `
-                    <h4 style="color: var(--primary); margin-bottom: 10px;">প্রশ্ন ${i + 1}: ${q.q}</h4>
-                    ${optionsHTML}
-                `;
+                card.innerHTML = `<h4 style="color: var(--primary); margin-bottom: 10px;">প্রশ্ন ${i + 1}: ${q.q}</h4>${optionsHTML}`;
                 reviewContainer.appendChild(card);
             });
 
-            // Update Stats
             document.getElementById('res-total').innerText = questions.length;
-            document.getElementById('res-correct').innerText = correct;
-            document.getElementById('res-wrong').innerText = wrong;
-            document.getElementById('res-skipped').innerText = skipped;
+            document.getElementById('res-correct').innerText = correct; document.getElementById('res-wrong').innerText = wrong; document.getElementById('res-skipped').innerText = skipped;
 
-            // Calculate Percentage & Grade
             const percentage = Math.round((correct / questions.length) * 100);
-            let grade = 'F';
-            if(percentage >= 80) grade = 'A+ (চমৎকার)';
-            else if(percentage >= 70) grade = 'A (খুব ভালো)';
-            else if(percentage >= 60) grade = 'A- (ভালো)';
-            else if(percentage >= 50) grade = 'B (মোটামুটি)';
-            else if(percentage >= 40) grade = 'C (উত্তীর্ণ)';
-            else grade = 'F (অকৃতকার্য)';
-
+            let grade = percentage >= 80 ? 'A+ (চমৎকার)' : percentage >= 70 ? 'A (খুব ভালো)' : percentage >= 60 ? 'A- (ভালো)' : percentage >= 50 ? 'B (মোটামুটি)' : percentage >= 40 ? 'C (উত্তীর্ণ)' : 'F (অকৃতকার্য)';
             document.getElementById('grade-display').innerText = `গ্রেড: ${grade}`;
             
-            // Animate Circular Chart
             const circle = document.getElementById('result-circle');
             document.getElementById('score-percentage').innerText = `${percentage}%`;
             circle.style.strokeDasharray = `${percentage}, 100`;
-            if(percentage >= 80) circle.style.stroke = "var(--success)";
-            else if(percentage >= 50) circle.style.stroke = "var(--accent)";
-            else circle.style.stroke = "var(--danger)";
+            circle.style.stroke = percentage >= 80 ? "var(--success)" : percentage >= 50 ? "var(--accent)" : "var(--danger)";
         }
-
-        // Initialize on load
         window.onload = init;
     </script>
 </body>
