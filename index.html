@@ -3,393 +3,756 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>সাইফুল'স সাইন্স কেয়ার - সাধারণ গণিত MCQ</title>
-    
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;600&family=Noto+Serif+Bengali:wght@600;700&display=swap" rel="stylesheet">
-    
+    <title>সাইফুল'স সাইন্স কেয়ার - পদার্থবিজ্ঞান পরীক্ষা</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        navy: '#0a192f', royal: '#1d4ed8', gold: '#ffd700',
-                    },
-                    fontFamily: {
-                        serif: ['"Noto Serif Bengali"', 'serif'],
-                        sans: ['"Noto Sans Bengali"', 'sans-serif']
-                    }
-                }
-            }
-        }
-    </script>
-
-    <!-- KaTeX for Math Rendering -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
-
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@600;700&display=swap" rel="stylesheet">
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+    
     <style>
-        body { background: linear-gradient(135deg, #0a192f 0%, #112240 50%, #1d4ed8 100%); background-attachment: fixed; color: white; }
-        .glass-card { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); }
-        .option-label { transition: all 0.3s ease; }
-        input[type="radio"]:checked + .option-label { background-color: rgba(255, 215, 0, 0.2); border-color: #ffd700; box-shadow: 0 0 15px rgba(255, 215, 0, 0.3); }
-        .nav-btn { transition: all 0.2s ease; }
-        .nav-btn:hover:not(:disabled) { transform: translateY(-2px); }
+        /* Custom Fonts */
+        @font-face {
+            font-family: 'Kalpurush';
+            src: local('Kalpurush'), url('https://themes.googleusercontent.com/static/fonts/earlyaccess/notosansbengali/v4/NotoSansBengali-Regular.ttf') format('truetype');
+        }
+        body {
+            font-family: 'Kalpurush', sans-serif;
+            background: linear-gradient(135deg, #0A192F 0%, #1D4ED8 100%);
+            background-attachment: fixed;
+            color: #FFFFFF;
+            min-height: 100vh;
+        }
+        .title-font { font-family: 'Noto Serif Bengali', serif; }
+        
+        /* Glassmorphism Styles */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .glass-panel {
+            background: rgba(10, 25, 47, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); }
-        ::-webkit-scrollbar-thumb { background: #ffd700; border-radius: 4px; }
-        .progress-circle { background: conic-gradient(#ffd700 var(--progress), rgba(255,255,255,0.1) 0deg); }
+        ::-webkit-scrollbar-thumb { background: #F59E0B; border-radius: 4px; }
+        
+        /* Radio Button Customization */
+        .option-label {
+            transition: all 0.3s ease;
+        }
+        input[type="radio"]:checked + .option-label {
+            background: #F59E0B;
+            color: #0A192F;
+            border-color: #F59E0B;
+            font-weight: bold;
+            transform: scale(1.02);
+        }
+        
+        /* Circular Progress Chart */
+        .circular-chart { display: block; margin: 0 auto; max-width: 80%; max-height: 250px; }
+        .circle-bg { fill: none; stroke: rgba(255,255,255,0.1); stroke-width: 3.8; }
+        .circle { fill: none; stroke-width: 2.8; stroke-linecap: round; transition: stroke-dasharray 1.5s ease-out; }
+        .circular-chart.gold .circle { stroke: #F59E0B; }
+        .percentage { fill: #F59E0B; font-family: 'Noto Serif Bengali', serif; font-size: 0.5em; text-anchor: middle; font-weight: bold; }
+        
+        /* Animations */
+        .fade-in { animation: fadeIn 0.4s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
-<body class="font-sans min-h-screen flex flex-col antialiased selection:bg-gold selection:text-navy">
+<body class="antialiased selection:bg-amber-500 selection:text-navy-900">
 
-    <header class="glass-card sticky top-0 z-50 p-4 border-b border-white/10">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-full bg-gold flex items-center justify-center text-navy font-bold text-xl"><i class="fa-solid fa-atom"></i></div>
-                <h1 class="font-serif text-xl md:text-2xl font-bold text-gold tracking-wider">সাইফুল'স সাইন্স কেয়ার</h1>
-            </div>
-            <div id="header-timer" class="hidden font-mono text-lg md:text-xl font-bold bg-navy/50 px-4 py-2 rounded-lg border border-gold/30 text-gold">
-                <i class="fa-regular fa-clock mr-2"></i><span id="time-display">00:00</span>
-            </div>
-        </div>
-    </header>
+    <!-- App Container -->
+    <div id="app" class="max-w-5xl mx-auto p-4 min-h-screen flex flex-col justify-center">
 
-    <main class="flex-grow flex items-center justify-center p-4">
-        
-        <!-- Welcome Screen -->
-        <div id="welcome-screen" class="glass-card rounded-2xl p-8 max-w-2xl w-full text-center">
-            <h2 class="font-serif text-3xl md:text-4xl font-bold text-white mb-2">সাধারণ গণিত</h2>
-            <p class="text-gold text-lg md:text-xl mb-8 font-semibold">(বহুনির্বাচনি পরীক্ষা)</p>
+        <!-- 1. Welcome Screen -->
+        <div id="welcome-screen" class="glass-card rounded-3xl p-8 md:p-12 text-center fade-in">
+            <div class="inline-block p-4 rounded-full bg-white/10 mb-6 border border-white/20">
+                <i class="fa-solid fa-atom text-5xl text-amber-500"></i>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold text-amber-500 title-font mb-2">সাইফুল'স সাইন্স কেয়ার</h1>
+            <h2 class="text-2xl text-white/90 mb-8">পদার্থবিজ্ঞান (বহুনির্বাচনি পরীক্ষা)</h2>
             
-            <div class="grid grid-cols-2 gap-4 mb-8 text-left">
-                <div class="bg-white/5 p-4 rounded-xl border border-white/10">
-                    <p class="text-sm text-gray-400">মোট প্রশ্ন ও পূর্ণমান</p>
-                    <p class="text-2xl font-bold text-white" id="ws-total-q">0</p>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10 text-left">
+                <div class="glass-panel p-4 rounded-xl text-center">
+                    <p class="text-white/60 text-sm">মোট প্রশ্ন</p>
+                    <p class="text-2xl font-bold text-amber-400" id="total-q-display">০</p>
                 </div>
-                <div class="bg-white/5 p-4 rounded-xl border border-white/10">
-                    <p class="text-sm text-gray-400">মোট সময়</p>
-                    <p class="text-2xl font-bold text-white" id="ws-time">0 মি.</p>
+                <div class="glass-panel p-4 rounded-xl text-center">
+                    <p class="text-white/60 text-sm">পূর্ণমান</p>
+                    <p class="text-2xl font-bold text-amber-400" id="total-marks-display">০</p>
+                </div>
+                <div class="glass-panel p-4 rounded-xl text-center">
+                    <p class="text-white/60 text-sm">প্রতিটি প্রশ্নের মান</p>
+                    <p class="text-2xl font-bold text-amber-400">১</p>
+                </div>
+                <div class="glass-panel p-4 rounded-xl text-center">
+                    <p class="text-white/60 text-sm">সময়</p>
+                    <p class="text-2xl font-bold text-amber-400">১৫০ মিনিট</p>
                 </div>
             </div>
-            <button onclick="startExam()" class="bg-gold hover:bg-yellow-400 text-navy font-bold py-3 px-8 rounded-full text-lg w-full md:w-auto shadow-[0_0_20px_rgba(255,215,0,0.4)] transition-transform hover:-translate-y-1">
+            
+            <button onclick="startExam()" class="bg-gradient-to-r from-amber-500 to-yellow-400 text-slate-900 font-bold text-xl px-12 py-4 rounded-full shadow-lg hover:shadow-amber-500/50 hover:scale-105 transition-all duration-300">
                 <i class="fa-solid fa-play mr-2"></i> পরীক্ষা শুরু করুন
             </button>
         </div>
 
-        <!-- Exam Screen -->
-        <div id="exam-screen" class="hidden w-full max-w-6xl grid grid-cols-1 lg:grid-cols-4 gap-6">
-            <div class="lg:col-span-3 glass-card rounded-2xl p-6 md:p-8 flex flex-col">
-                <div class="flex justify-between items-center mb-6 pb-4 border-b border-white/10">
-                    <span class="text-lg font-semibold text-gray-300">প্রশ্ন: <span id="current-q-num" class="text-gold text-xl font-bold">1</span> / <span id="total-q-num"></span></span>
-                    <span class="bg-royal/50 px-3 py-1 rounded text-sm text-blue-200">মান: ১</span>
+        <!-- 2. Exam Screen -->
+        <div id="exam-screen" class="hidden fade-in flex-grow flex flex-col">
+            <!-- Header: Timer & Progress -->
+            <div class="glass-card rounded-2xl p-4 mb-6 flex justify-between items-center sticky top-2 z-50">
+                <div class="flex-1">
+                    <div class="flex justify-between text-sm mb-1 text-white/80">
+                        <span><i class="fa-solid fa-chart-line text-amber-400"></i> অগ্রগতি</span>
+                        <span id="progress-text">০ / ১৫১</span>
+                    </div>
+                    <div class="w-full bg-white/10 rounded-full h-2">
+                        <div id="progress-bar" class="bg-amber-500 h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
+                    </div>
                 </div>
-                <div class="flex-grow">
-                    <h3 id="question-text" class="text-xl md:text-2xl font-medium leading-relaxed mb-8"></h3>
-                    <div id="options-container" class="space-y-4"></div>
-                </div>
-                <div class="mt-8 pt-6 border-t border-white/10 flex justify-between gap-4">
-                    <button onclick="prevQuestion()" id="btn-prev" class="nav-btn bg-white/10 hover:bg-white/20 px-6 py-2 rounded-lg font-medium disabled:opacity-50"><i class="fa-solid fa-chevron-left mr-2"></i> পূর্ববর্তী</button>
-                    <button onclick="nextQuestion()" id="btn-next" class="nav-btn bg-royal hover:bg-blue-600 px-6 py-2 rounded-lg font-medium border border-blue-400/50">পরবর্তী <i class="fa-solid fa-chevron-right ml-2"></i></button>
+                <div class="ml-6 glass-panel px-4 py-2 rounded-lg border border-amber-500/30 flex items-center text-amber-400 font-bold text-lg">
+                    <i class="fa-regular fa-clock mr-2 animate-pulse"></i>
+                    <span id="timer">০২:৩০:০০</span>
                 </div>
             </div>
 
-            <div class="glass-card rounded-2xl p-6 lg:h-[600px] flex flex-col">
-                <h4 class="font-serif text-lg font-bold mb-4 text-center border-b border-white/10 pb-2">নেভিগেশন</h4>
-                <div id="palette-grid" class="grid grid-cols-5 gap-2 overflow-y-auto pr-2 custom-scrollbar flex-grow content-start"></div>
-                <div class="mt-4 pt-4 border-t border-white/10">
-                    <div class="w-full bg-white/10 rounded-full h-2 mb-4"><div id="progress-bar" class="bg-gold h-2 rounded-full transition-all duration-300" style="width: 0%"></div></div>
-                    <button onclick="confirmSubmit()" class="w-full bg-green-600 hover:bg-green-500 py-3 rounded-lg font-bold shadow-[0_0_15px_rgba(34,197,94,0.4)]"><i class="fa-solid fa-check-double mr-2"></i> জমা দিন</button>
+            <!-- Main Question Area -->
+            <div class="flex flex-col md:flex-row gap-6 flex-grow">
+                <!-- Question Card -->
+                <div class="glass-card rounded-2xl p-6 md:p-8 flex-grow relative">
+                    <span class="absolute -top-4 left-6 bg-blue-600 text-white px-4 py-1 rounded-full text-sm font-bold shadow-lg border border-white/20">
+                        প্রশ্ন <span id="current-q-num">১</span>
+                    </span>
+                    
+                    <div id="context-box" class="hidden bg-white/10 border-l-4 border-amber-500 p-4 rounded-r-lg mb-6 mt-4 text-white/90 italic">
+                        <!-- Context text goes here -->
+                    </div>
+                    
+                    <h3 id="question-text" class="text-xl md:text-2xl mt-4 mb-8 leading-relaxed font-semibold"></h3>
+                    
+                    <div id="options-container" class="space-y-4">
+                        <!-- Options will be generated here -->
+                    </div>
+
+                    <div class="mt-10 flex justify-between items-center">
+                        <button onclick="prevQuestion()" id="btn-prev" class="px-6 py-2 rounded-lg bg-white/10 hover:bg-white/20 transition disabled:opacity-30 disabled:cursor-not-allowed">
+                            <i class="fa-solid fa-arrow-left mr-2"></i> পূর্ববর্তী
+                        </button>
+                        <button onclick="nextQuestion()" id="btn-next" class="px-6 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 transition shadow-lg shadow-blue-500/30 font-bold">
+                            পরবর্তী <i class="fa-solid fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Navigation Grid Sidebar -->
+                <div class="glass-card rounded-2xl p-4 w-full md:w-72 flex flex-col h-[500px]">
+                    <h4 class="text-center font-bold text-white/80 border-b border-white/10 pb-3 mb-4 title-font">প্রশ্ন নেভিগেশন</h4>
+                    <div id="nav-grid" class="flex-grow overflow-y-auto grid grid-cols-5 gap-2 content-start pr-2">
+                        <!-- Navigation buttons -->
+                    </div>
+                    <button onclick="confirmSubmit()" class="mt-4 w-full bg-green-500 hover:bg-green-400 text-white font-bold py-3 rounded-lg shadow-lg shadow-green-500/30 transition">
+                        <i class="fa-solid fa-check-double mr-2"></i> সাবমিট করুন
+                    </button>
                 </div>
             </div>
         </div>
 
-        <!-- Result Screen -->
-        <div id="result-screen" class="hidden w-full max-w-4xl glass-card rounded-2xl p-8">
-            <div class="text-center mb-10">
-                <h2 class="font-serif text-3xl font-bold text-gold mb-2">ফলাফল ড্যাশবোর্ড</h2>
-                <p class="text-gray-300 text-lg" id="result-msg"></p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10 items-center">
-                <div class="flex flex-col items-center justify-center">
-                    <div id="circular-chart" class="progress-circle w-40 h-40 rounded-full flex items-center justify-center mb-4" style="--progress: 0%;">
-                        <div class="w-32 h-32 bg-navy rounded-full flex items-center justify-center flex-col">
-                            <span id="score-percentage" class="text-3xl font-bold text-white">0%</span>
+        <!-- 3. Result Screen -->
+        <div id="result-screen" class="hidden fade-in">
+            <div class="glass-card rounded-3xl p-8 text-center max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold text-amber-400 title-font mb-2">ফলাফল</h2>
+                <p id="grade-text" class="text-xl text-white/80 mb-8">অভিনন্দন! আপনি সফলভাবে পরীক্ষা শেষ করেছেন।</p>
+                
+                <div class="flex flex-col md:flex-row items-center justify-center gap-10 mb-10">
+                    <div class="w-48 h-48 relative">
+                        <svg viewBox="0 0 36 36" class="circular-chart gold">
+                            <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                            <path id="score-circle" class="circle" stroke-dasharray="0, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                            <text id="score-percentage" x="18" y="20.35" class="percentage">0%</text>
+                        </svg>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-4 text-left">
+                        <div class="glass-panel p-4 rounded-xl border-l-4 border-blue-500">
+                            <p class="text-white/60 text-sm">মোট প্রশ্ন</p>
+                            <p class="text-2xl font-bold" id="res-total">১৫০</p>
+                        </div>
+                        <div class="glass-panel p-4 rounded-xl border-l-4 border-green-500">
+                            <p class="text-white/60 text-sm">সঠিক উত্তর</p>
+                            <p class="text-2xl font-bold text-green-400" id="res-correct">০</p>
+                        </div>
+                        <div class="glass-panel p-4 rounded-xl border-l-4 border-red-500">
+                            <p class="text-white/60 text-sm">ভুল উত্তর</p>
+                            <p class="text-2xl font-bold text-red-400" id="res-wrong">০</p>
+                        </div>
+                        <div class="glass-panel p-4 rounded-xl border-l-4 border-gray-500">
+                            <p class="text-white/60 text-sm">উত্তর দেওয়া হয়নি</p>
+                            <p class="text-2xl font-bold text-gray-400" id="res-unanswered">০</p>
                         </div>
                     </div>
-                    <div id="grade-display" class="text-xl font-bold px-4 py-1 rounded bg-gold text-navy"></div>
                 </div>
-                <div class="md:col-span-2 grid grid-cols-2 gap-4">
-                    <div class="bg-white/5 p-4 rounded-xl border border-white/10 text-center"><p class="text-gray-400">মোট</p><p class="text-2xl font-bold" id="res-total">0</p></div>
-                    <div class="bg-white/5 p-4 rounded-xl border border-green-500/30 text-center"><p class="text-gray-400">সঠিক</p><p class="text-2xl font-bold text-green-400" id="res-correct">0</p></div>
-                    <div class="bg-white/5 p-4 rounded-xl border border-red-500/30 text-center"><p class="text-gray-400">ভুল</p><p class="text-2xl font-bold text-red-400" id="res-wrong">0</p></div>
-                    <div class="bg-white/5 p-4 rounded-xl border border-yellow-500/30 text-center"><p class="text-gray-400">বাদ দেওয়া</p><p class="text-2xl font-bold text-yellow-400" id="res-skipped">0</p></div>
+
+                <div class="flex justify-center gap-4">
+                    <button onclick="location.reload()" class="bg-white/10 hover:bg-white/20 px-6 py-3 rounded-lg transition">
+                        <i class="fa-solid fa-rotate-right mr-2"></i> পুনরায় শুরু
+                    </button>
+                    <button onclick="toggleReview()" class="bg-blue-600 hover:bg-blue-500 px-6 py-3 rounded-lg font-bold shadow-lg shadow-blue-500/30 transition">
+                        <i class="fa-solid fa-list-check mr-2"></i> উত্তরপত্র দেখুন
+                    </button>
                 </div>
             </div>
-            <div class="flex justify-center gap-4 border-t border-white/10 pt-8">
-                <button onclick="showAnswerSheet()" class="nav-btn bg-royal hover:bg-blue-600 px-6 py-2 rounded-lg font-medium"><i class="fa-solid fa-book-open mr-2"></i> উত্তরপত্র</button>
-                <button onclick="location.reload()" class="nav-btn bg-white/10 hover:bg-white/20 px-6 py-2 rounded-lg font-medium"><i class="fa-solid fa-rotate-right mr-2"></i> পুনরায় পরীক্ষা</button>
-            </div>
-        </div>
 
-        <!-- Answer Sheet -->
-        <div id="answer-sheet-screen" class="hidden w-full max-w-4xl glass-card rounded-2xl p-6 md:p-8">
-            <div class="flex justify-between items-center mb-6 pb-4 border-b border-white/10">
-                <h2 class="font-serif text-2xl font-bold text-gold">বিস্তারিত উত্তরপত্র</h2>
-                <button onclick="document.getElementById('answer-sheet-screen').classList.add('hidden'); document.getElementById('result-screen').classList.remove('hidden');" class="bg-white/10 hover:bg-white/20 px-4 py-2 rounded"><i class="fa-solid fa-arrow-left mr-2"></i> ড্যাশবোর্ড</button>
-            </div>
-            <div id="answers-container" class="space-y-6"></div>
-        </div>
-
-    </main>
-
-    <!-- Modal -->
-    <div id="submit-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden items-center justify-center z-[100] opacity-0 transition-opacity">
-        <div class="bg-navy border border-gold/30 p-8 rounded-2xl max-w-md w-full text-center shadow-2xl" id="modal-content">
-            <h3 class="text-2xl font-bold text-white mb-4">পরীক্ষা জমা দেবেন?</h3>
-            <p class="text-gray-300 mb-6" id="modal-unanswered-text"></p>
-            <div class="flex gap-4">
-                <button onclick="closeModal()" class="flex-1 bg-white/10 py-2 rounded-lg">ফিরে যান</button>
-                <button onclick="submitExam()" class="flex-1 bg-green-600 hover:bg-green-500 py-2 rounded-lg font-bold">হ্যাঁ, জমা দিন</button>
+            <!-- Answer Review Section -->
+            <div id="review-section" class="hidden mt-8 max-w-4xl mx-auto space-y-4 pb-12 fade-in">
+                <!-- Review cards will be generated here -->
             </div>
         </div>
     </div>
 
-    <script>
-        // All Questions with optimized keys (q=question, o=options, c=correct index, e=explanation)
-        const questions = [
-            { q: "A সেটের উপাদান সংখ্যা \\(n\\) হলে A এর উপসেটের সংখ্যা কত?", o: ["\\(2n - 1\\)", "\\(2^n\\)", "\\(2^n - 1\\)", "\\(2^n - 2\\)"], c: 1, e: "সূত্রানুযায়ী উপসেটের সংখ্যা \\(2^n\\)।" },
-            { q: "B সেট থেকে A সেটে একটি সম্পর্ক R হলে নিচের কোনটি সঠিক?", o: ["\\(R \\subset A \\times B\\)", "\\(R \\subset A \\times B\\)", "\\(R \\subset (A \\cup B)\\)", "\\(R \\subset B \\times A\\)"], c: 3, e: "B থেকে A সেটে সম্পর্ক হলো B ও A এর কার্তেসীয় গুণজের উপসেট।" },
-            { q: "\\(p - \\frac{1}{p} = 7\\) হলে \\((p + \\frac{1}{p})^2\\) এর মান কত?", o: ["45", "47", "51", "53"], c: 3, e: "\\((a+b)^2 = (a-b)^2 + 4ab = 7^2 + 4 = 53\\)।" },
-            { q: "\\(x + \\frac{1}{x} = 5\\) হলে, i. \\(x^2 - \\frac{1}{x^2} = 5\\sqrt{21}\\) ii. \\(x^3 - \\frac{1}{x^3} = 110\\) iii. \\(x^2 - 5x + 1 = 0\\)", o: ["i, ii", "ii, iii", "i, iii", "i, ii, iii"], c: 2, e: "i ও iii সঠিক। ii ভুল কারণ কিউবের মান আলাদা হবে।" },
-            { q: "\\(x^3 - y^3 = 63\\) এবং \\(xy = 4\\) হলে \\(x - y\\) এর মান কত?", o: ["1", "2", "3", "4"], c: 2, e: "\\((x-y)^3 + 3xy(x-y) = 63\\)। মান 3 বসালে সমীকরণ সিদ্ধ হয়।" },
-            { q: "\\(18x^3 + 15x^2 - x - 2\\) এর একটি উৎপাদক কোনটি?", o: ["\\(3x + 1\\)", "\\(3x - 2\\)", "\\(2x + 1\\)", "\\(2x - 1\\)"], c: 0, e: "ভাগশেষ উপপাদ্য অনুযায়ী \\(x = -1/3\\) বসালে মান 0 হয়, তাই \\(3x+1\\) উৎপাদক।" },
-            { q: "একটি চতুর্ভুজের কর্ণদ্বয় পরস্পরকে সমকোণে সমদ্বিখণ্ডিত করলে তা একটি —।", o: ["আয়ত", "রম্বস", "সামান্তরিক", "ট্রাপিজিয়াম"], c: 1, e: "রম্বস এবং বর্গের কর্ণ সমকোণে সমদ্বিখণ্ডিত করে।" },
-            { q: "6 সে.মি. এবং 4 সে.মি. ব্যাসার্ধের দুইটি বৃত্ত বহিঃস্থভাবে স্পর্শ করলে কেন্দ্রদ্বয়ের দূরত্ব কত?", o: ["2", "4", "5", "10"], c: 3, e: "বহিঃস্থভাবে স্পর্শ করলে দূরত্ব = ব্যাসার্ধের যোগফল = 6 + 4 = 10।" },
-            { q: "একটি বর্গ একটি বৃত্তে অন্তর্লিখিত। বৃত্তের ও বর্গের ক্ষেত্রফলের অনুপাত কত?", o: ["\\(\\pi : \\sqrt{2}\\)", "\\(\\pi : 2\\)", "\\(\\pi : 2\\sqrt{2}\\)", "\\(\\pi : 4\\)"], c: 1, e: "বৃত্তের ব্যাস = বর্গের কর্ণ। সমাধান করলে ক্ষেত্রফলের অনুপাত \\(\\pi : 2\\) হয়।" },
-            { q: "\\(\\sin^2\\theta + \\cos^2\\theta = ?\\)", o: ["1", "2", "4", "16"], c: 0, e: "এটি একটি মৌলিক ত্রিকোণমিতিক অভেদ।" },
-            { q: "\\(\\frac{\\sin\\theta}{x} = \\frac{\\cos\\theta}{y}\\) হলে \\(\\text{cosec }\\theta = ?\\)", o: ["\\(\\frac{x^2+y^2}{y}\\)", "\\(\\frac{x^2+y^2}{x}\\)", "\\(\\frac{\\sqrt{x^2+y^2}}{y}\\)", "\\(\\frac{\\sqrt{x^2+y^2}}{x}\\)"], c: 3, e: "\\(\\tan\\theta = x/y\\)। পিথাগোরাস অনুযায়ী অতিভুজ \\(\\sqrt{x^2+y^2}\\)।" },
-            { q: "\\(\\text{cosec } x = \\sqrt{2} = 2 \\cos y\\) হলে \\(\\cot (x+y) = ?\\)", o: ["0", "\\(\\frac{1}{\\sqrt{3}}\\)", "\\(\\sqrt{3}\\)", "অসংজ্ঞায়িত"], c: 0, e: "x=45, y=45। \\(\\cot(90) = 0\\)।" },
-            { q: "কোনো বর্গক্ষেত্রের বাহুর দৈর্ঘ্য 10% বৃদ্ধি পেলে ক্ষেত্রফল শতকরা কত বৃদ্ধি পাবে?", o: ["10%", "20%", "21%", "44%"], c: 2, e: "শর্টকাট: \\(10 + 10 + (10 \\times 10)/100 = 21\\%\\)।" },
-            { q: "A = \\{a, b, c, d, e\\} এর প্রকৃত উপসেটের সংখ্যা কত?", o: ["31", "32", "33", "64"], c: 0, e: "\\(2^5 - 1 = 32 - 1 = 31\\)।" },
-            { q: "ধাপ বিচ্যুতি -2, শ্রেণি মধ্যমান 33 এবং শ্রেণি ব্যবধান 5 হলে অনুমিত গড় কত?", o: ["23", "28", "38", "43"], c: 0, e: "\\(33 + (-2 \\times 5) = 23\\)।" },
-            { q: "a, b, c ক্রমিক সমানুপাতী হলে— i. \\(b^2 = ac\\) ii. \\(2b = a + c\\) iii. \\(\\frac{a + b}{b} = \\frac{b + c}{c}\\)", o: ["i, ii", "ii, iii", "i, iii", "i, ii, iii"], c: 2, e: "i এবং iii সমানুপাতের ধর্ম।" },
-            { q: "একটি বৃত্তাংশের ক্ষেত্রফল 77 বর্গমিটার এবং বৃত্তের ব্যাসার্ধ 21 মিটার। কেন্দ্রে উৎপন্ন কোণ কত?", o: ["\\(15^\\circ\\)", "\\(20^\\circ\\)", "\\(25^\\circ\\)", "\\(30^\\circ\\)"], c: 1, e: "সূত্র: \\(\\frac{\\theta}{360} \\times \\pi r^2 = 77\\)।" },
-            { q: "একটি সুষম অষ্টভুজের একটি কোণের মান কত?", o: ["\\(72^\\circ\\)", "\\(108^\\circ\\)", "\\(135^\\circ\\)", "\\(360^\\circ\\)"], c: 2, e: "অন্তঃস্থ কোণ = \\(\\frac{(8-2)\\times 180}{8} = 135^\\circ\\)।" },
-            { q: "সামান্তরিকের দুই বাহুর অনুপাত 2:3 এবং পরিসীমা 60 সে.মি.। বৃহত্তম বাহু কত?", o: ["6", "12", "18", "24"], c: 2, e: "2(2x+3x) = 60 => 10x=60 => x=6। বৃহত্তম বাহু 3x=18।" },
-            { q: "সামান্তরিকের বাহু 12 ও 18 এবং কোণ \\(30^\\circ\\)। ক্ষেত্রফল কত?", o: ["54", "108", "162", "216"], c: 1, e: "ক্ষেত্রফল = ab sin\\theta = 12 \\times 18 \\times \\sin(30) = 108।" },
-            { q: "একটি ঘনকের আয়তন 64 ঘন সে.মি. হলে পৃষ্ঠতলের কর্ণের দৈর্ঘ্য কত?", o: ["\\(4\\sqrt{2}\\)", "\\(4\\sqrt{3}\\)", "\\(8\\sqrt{2}\\)", "\\(8\\sqrt{3}\\)"], c: 0, e: "বাহু a=4। পৃষ্ঠতলের কর্ণ = \\(a\\sqrt{2} = 4\\sqrt{2}\\)।" },
-            { q: "7, 15, 6, 9, 7, 11, 8, 14 উপাত্তসমূহের মধ্যক কত?", o: ["10.5", "8.5", "7.5", "6.5"], c: 1, e: "ক্রমানুসারে সাজালে ৪র্থ ও ৫ম পদের গড় = 8.5।" },
-            { q: "যোজিত গণসংখ্যা প্রয়োজন— i. গড় নির্ণয়ে ii. মধ্যক নির্ণয়ে iii. অজিভ রেখা নির্ণয়ে", o: ["i, ii", "ii, iii", "i, iii", "i, ii, iii"], c: 1, e: "মধ্যক এবং অজিভ রেখার জন্য যোজিত গণসংখ্যা লাগে।" },
-            { q: "একটি নির্দিষ্ট চতুর্ভুজ আঁকার জন্য কয়টি স্বতন্ত্র উপাত্ত প্রয়োজন?", o: ["2", "3", "4", "5"], c: 3, e: "চতুর্ভুজ আঁকতে ৫টি স্বতন্ত্র উপাত্ত প্রয়োজন।" },
-            { q: "নিচের কোনটি ফাঁকা সেট?", o: ["\\(19 < x < 23\\) এর মাঝে মৌলিক সংখ্যা", "\\(19 \\le x \\le 23\\) মৌলিক", "\\(19 < x < 23\\) বিজোড়", "সবগুলো"], c: 0, e: "19 ও 23 এর মাঝে কোনো মৌলিক সংখ্যা নেই।" },
-            { q: "স্পর্শকের স্পর্শবিন্দুর মধ্য দিয়ে অঙ্কিত ব্যাসার্ধের সাথে স্পর্শকের কোণ কত?", o: ["\\(30^\\circ\\)", "\\(45^\\circ\\)", "\\(60^\\circ\\)", "\\(90^\\circ\\)"], c: 3, e: "স্পর্শক ও স্পর্শবিন্দুগামী ব্যাসার্ধ পরস্পর লম্ব।" },
-            { q: "\\(f(x)\\) এর একটি উৎপাদক \\((2x - 3)\\) হলে, নিচের কোনটির মান 0?", o: ["\\(f(-3/2)\\)", "\\(f(1/2)\\)", "\\(f(-2/3)\\)", "\\(f(3/2)\\)"], c: 3, e: "\\(2x-3=0 \\Rightarrow x=3/2\\)।" },
-            { q: "বৃত্তে অন্তর্লিখিত সামান্তরিক একটি—", o: ["আয়তক্ষেত্র", "বর্গ", "রম্বস", "সামান্তরিক"], c: 0, e: "বৃত্তস্থ সামান্তরিক সর্বদা একটি আয়তক্ষেত্র।" },
-            { q: "\\(\\frac{1}{\\sqrt{a}} = \\sqrt{a} - 2\\) হলে \\((a\\sqrt{a} - \\frac{1}{a\\sqrt{a}})\\) = কত?", o: ["2", "8", "14", "\\(a\\sqrt{a}\\)"], c: 2, e: "মান নির্ণয়ের সূত্র প্রয়োগ করলে উত্তর 14 হয়।" },
-            { q: "দুইটি বৃত্তের ব্যাসার্ধ 4 ও 3 সে.মি। অন্তঃস্থভাবে স্পর্শ করলে কেন্দ্রের দূরত্ব কত?", o: ["12", "7", "5", "1"], c: 3, e: "অন্তঃস্পর্শ করলে দূরত্ব = ব্যাসার্ধের বিয়োগফল = 1।" },
-            { q: "সামান্তরিকের পরিসীমা 28 এবং বাহুর অনুপাত 4:3। বৃহত্তম বাহু কত?", o: ["4", "6", "7", "8"], c: 3, e: "2(4x+3x)=28 => x=2। বৃহত্তম বাহু 8।" },
-            { q: "নিচের কোনটি অঙ্কনের জন্য শুধুমাত্র পরিসীমা জানা প্রয়োজন?", o: ["আয়তক্ষেত্র", "বর্গ", "রম্বস", "সামান্তরিক"], c: 1, e: "বর্গের চার বাহু সমান, তাই শুধু পরিসীমা জানলেই আঁকা যায়।" },
-            { q: "A = \\{a, b, c, d\\} হলে A এর প্রকৃত উপসেট সংখ্যা কত?", o: ["4", "14", "15", "16"], c: 2, e: "\\(2^4 - 1 = 15\\)।" },
-            { q: "একটি পণ্য 20% ক্ষতিতে বিক্রয় করা হলো। বিক্রয়মূল্য ও ক্রয়মূল্যের অনুপাত কত?", o: ["2 : 5", "5 : 4", "4 : 5", "1 : 5"], c: 2, e: "বিক্রয়মূল্য 80, ক্রয়মূল্য 100। অনুপাত 80:100 = 4:5।" },
-            { q: "\\(8 + p - 7p^2\\) এর একটি উৎপাদক কোনটি?", o: ["\\(1 - p\\)", "\\(1 + p\\)", "\\(8 - p\\)", "\\(7 + p\\)"], c: 1, e: "মিডল টার্ম করলে \\((1+p)(8-7p)\\) পাওয়া যায়।" },
-            { q: "\\(f(x) = x^3 + kx^2 - 4x - 8\\) হলে, k এর কোন মানের জন্য \\(f(-2) = 0\\) হবে?", o: ["-2", "0", "2", "8"], c: 2, e: "x=-2 বসালে 4k-8=0 => k=2।" },
-            { q: "\\(\\frac{\\sec\\theta + \\tan\\theta}{\\sec\\theta - \\tan\\theta} = 3\\) হলে, \\(\\sin\\theta = \\text{কত?}\\)", o: ["-1/2", "1/2", "2", "-2"], c: 1, e: "যোজন-বিয়োজন করলে \\(\\sec\\theta / \\tan\\theta = 2 \\Rightarrow 1/\\sin\\theta = 2 \\Rightarrow \\sin\\theta = 1/2\\)।" },
-            { q: "একটি সমকোণী ত্রিভুজের পরিকেন্দ্র কোথায় অবস্থিত?", o: ["অতিভুজের উপর", "ত্রিভুজের অভ্যন্তরে", "ত্রিভুজের বাইরে", "ভূমির উপর"], c: 0, e: "সমকোণী ত্রিভুজের পরিকেন্দ্র অতিভুজের মধ্যবিন্দুতে থাকে।" },
-            { q: "একটি বর্গের বাহুর দৈর্ঘ্য b হলে, এর পরিসীমা ও কর্ণের অনুপাত কত?", o: ["\\(1 : 4\\sqrt{2}\\)", "\\(1 : 2\\sqrt{2}\\)", "\\(4\\sqrt{2} : 1\\)", "\\(2\\sqrt{2} : 1\\)"], c: 3, e: "\\(4b : b\\sqrt{2} = 4 : \\sqrt{2} = 2\\sqrt{2} : 1\\)।" },
-            { q: "\\(x : y = 2 : 3\\) হলে, \\(\\frac{6x + y}{3x + 2y}\\) এর মান কত?", o: ["4/5", "5/6", "5/4", "6/5"], c: 2, e: "x=2, y=3 বসালে \\(15/12 = 5/4\\)।" },
-            { q: "একটি ত্রিভুজের কয়টি বহির্বৃত্ত অঙ্কন করা যায়?", o: ["2", "3", "0", "1"], c: 1, e: "ত্রিভুজের প্রতিটি বাহুকে বর্ধিত করে মোট ৩টি বহির্বৃত্ত আঁকা যায়।" },
-            { q: "একটি ঘনকের আয়তন \\(24\\sqrt{3}\\) হলে, এর কর্ণের দৈর্ঘ্য কত?", o: ["\\(2\\sqrt{9}\\)", "\\(3\\sqrt{2}\\)", "\\(8\\sqrt{3}\\)", "\\(8\\sqrt{2}\\)"], c: 0, e: "বাহু \\(a = 2\\sqrt{3}\\)। কর্ণ = \\(a\\sqrt{3} = 6\\)। অপশনে \\(2\\sqrt{9} = 6\\)।" },
-            { q: "একটি বইয়ের দাম 30 টাকা যা এর প্রকৃত মূল্যের 60%। প্রকৃত মূল্য কত?", o: ["10", "50", "60", "90"], c: 1, e: "60% = 30 হলে 100% = 50 টাকা।" },
-            { q: "A = \\{1, 2, 3\\} এবং B = \\{a, b, 2\\} হলে \\(A \\cap B\\) এর প্রকৃত উপসেট—", o: ["\\{a, b, 1, 2, 3\\}", "\\{a, b\\}", "\\{1, 2, 3\\}", "\\(\\emptyset\\)"], c: 3, e: "ছেদ সেট = \\{2\\}। প্রকৃত উপসেট = ফাঁকা সেট \\(\\emptyset\\)।" },
-            { q: "\\(x = 7 + 4\\sqrt{3}\\) হলে \\(x^2 + \\frac{1}{x^2}\\) = কত?", o: ["190", "194", "198", "200"], c: 1, e: "\\(x+1/x = 14\\)। বর্গ করলে \\(196 - 2 = 194\\)।" },
-            { q: "y = 2x + 3 ফাংশনের লেখচিত্রটি— i. একটি সরলরেখা ii. একটি বৃত্ত iii. (1, 5) বিন্দুগামী", o: ["i, ii", "i, iii", "ii, iii", "i, ii, iii"], c: 1, e: "এটি রৈখিক সমীকরণ তাই সরলরেখা এবং (1,5) বসালে 5=5 হয়।" },
-            { q: "3, 10, 0, 5, 15, 0 এর প্রচুরক কত?", o: ["0", "3", "5", "6.5"], c: 0, e: "0 সর্বাধিক ২ বার আছে।" },
-            { q: "20-30, 30-40... শ্রেণিতে শ্রেণি ব্যবধান কত?", o: ["9", "10", "11", "12"], c: 1, e: "অবিচ্ছিন্ন শ্রেণিসীমায় ব্যবধান 30-20 = 10।" },
-            { q: "নির্দিষ্ট চতুর্ভুজ অঙ্কনের জন্য কয়টি স্বতন্ত্র উপাত্ত প্রয়োজন?", o: ["৫টি", "৪টি", "৩টি", "২টি"], c: 0, e: "সঠিক উত্তর ৫টি।" },
-            { q: "শুধু পরিসীমা জানা থাকলে আঁকা যায়— i. সুষম চতুর্ভুজ ii. সুষম ত্রিভুজ", o: ["i, ii", "ii, iii", "i, iii", "i, ii, iii"], c: 0, e: "বর্গ ও সমবাহু ত্রিভুজ শুধু পরিসীমা দিয়ে আঁকা যায়।" },
-            { q: "অধিচাপে অন্তর্লিখিত কোণের পরিমাণ হতে পারে?", o: ["\\(80^\\circ\\)", "\\(100^\\circ\\)", "\\(110^\\circ\\)", "\\(180^\\circ\\)"], c: 0, e: "অধিচাপের কোণ সূক্ষ্মকোণ হয় (<90)।" },
-            { q: "বৃত্তের বহিঃস্থ কোনো বিন্দু থেকে ঐ বৃত্তে সর্বোচ্চ কয়টি স্পর্শক আঁকা যায়?", o: ["1", "2", "3", "4"], c: 1, e: "বহিঃস্থ বিন্দু থেকে ঠিক ২টি স্পর্শক আঁকা সম্ভব।" },
-            { q: "\\(\\tan^2 A - \\sec^2 A + \\frac{3}{2}\\) = কত?", o: ["1/2", "3/2", "5/2", "7/2"], c: 0, e: "\\(\\tan^2 - \\sec^2 = -1\\)। \\(-1 + 1.5 = 0.5 = 1/2\\)।" },
-            { q: "একটি রম্বসের দুটি কর্ণের দৈর্ঘ্য 12 ও 16 হলে ক্ষেত্রফল কত?", o: ["192", "144", "128", "96"], c: 3, e: "\\(0.5 \\times 12 \\times 16 = 96\\)।" },
-            { q: "কোনো বর্গের বাহুর দৈর্ঘ্য 10% হ্রাস পেলে ক্ষেত্রফল শতকরা কত হ্রাস পাবে?", o: ["1%", "10%", "19%", "21%"], c: 2, e: "শর্টকাট: \\(-10 -10 + 100/100 = -19\\%\\)।" },
-            { q: "\\(x + \\frac{1}{x} = \\sqrt{5}\\) হলে, i. \\(x^2 - \\sqrt{5}x = -1\\) ii. \\(x - \\frac{1}{x} = 1\\)", o: ["ii, iii", "i, ii", "i, iii", "i, ii, iii"], c: 1, e: "i ও ii গাণিতিকভাবে সঠিক।" },
-            { q: "একটি দ্রব্য 10% ক্ষতিতে বিক্রয় করা হলে, বিক্রয়মূল্য ও ক্রয়মূল্যের অনুপাত কত?", o: ["9 : 10", "10 : 9", "11 : 9", "5 : 6"], c: 0, e: "90:100 = 9:10।" },
-            { q: "কোনো বৃত্তের উপচাপে অন্তর্লিখিত কোণ—", o: ["স্থূলকোণ", "সূক্ষ্মকোণ", "সমকোণ", "প্রবৃদ্ধকোণ"], c: 0, e: "উপচাপের অন্তর্লিখিত কোণ স্থূলকোণ।" },
-            { q: "ত্রিভুজের তিনটি বাহুর দৈর্ঘ্য দেওয়া হলো। কোন ক্ষেত্রে ত্রিভুজ অঙ্কন সম্ভব?", o: ["5, 6, 18", "6, 7, 19", "7, 8, 17", "9, 6, 13"], c: 3, e: "ত্রিভুজের যেকোনো দুই বাহুর যোগফল তৃতীয় বাহু অপেক্ষা বৃহত্তর। (9+6 > 13)।" },
-            { q: "\\(\\tan\\theta = \\frac{1}{\\sqrt{3}}\\) হলে, \\(\\sin\\theta = \\text{কত?}\\)", o: ["\\(\\frac{\\sqrt{3}}{2}\\)", "\\(1/2\\)", "\\(\\sqrt{2}\\)", "\\(\\sqrt{3}\\)"], c: 1, e: "\\(\\theta = 30^\\circ\\)। \\(\\sin(30^\\circ) = 1/2\\)।" },
-            { q: "একটি বর্গের এক বাহুর দৈর্ঘ্য a হলে, বর্গটির কর্ণের উপর অঙ্কিত বর্গের ক্ষেত্রফল কত?", o: ["\\(a^2\\)", "\\(a\\sqrt{2}\\)", "\\(2a^2\\)", "\\(4a^2\\)"], c: 2, e: "কর্ণ = \\(a\\sqrt{2}\\)। এর বর্গ = \\(2a^2\\)।" },
-            { q: "একটি সমবাহু ত্রিভুজের ক্ষেত্রফল \\(4\\sqrt{3}\\) হলে, বাহুর দৈর্ঘ্য কত?", o: ["16", "4", "\\(\\frac{\\sqrt{3}}{4}\\)", "\\(\\sqrt{3}\\)"], c: 1, e: "\\(\\frac{\\sqrt{3}}{4}a^2 = 4\\sqrt{3} \\Rightarrow a^2 = 16 \\Rightarrow a=4\\)।" },
-            { q: "5 সে.মি. ব্যাসার্ধবিশিষ্ট বৃত্তের কেন্দ্র থেকে জ্যা এর লম্ব দূরত্ব 3 সে.মি.। জ্যা এর দৈর্ঘ্য কত?", o: ["16", "10", "8", "6"], c: 2, e: "পিথাগোরাস দিয়ে অর্ধেক জ্যা = 4। সম্পূর্ণ জ্যা = 8।" },
-            { q: "নিচের কোনটি বিচ্ছিন্ন চলক?", o: ["তাপমাত্রা", "বয়স", "উচ্চতা", "জনসংখ্যা"], c: 3, e: "জনসংখ্যা গণনা করা যায় (ভগ্নাংশ হয় না), তাই বিচ্ছিন্ন চলক।" },
-            { q: "1 থেকে 30 এর মধ্যে মৌলিক সংখ্যাগুলোর মধ্যক কত?", o: ["12", "13", "19", "23"], c: 0, e: "মোট ১০টি মৌলিক সংখ্যা। মধ্যক = (11+13)/2 = 12।" },
-            { q: "A = \\{1, 2, 3, 4\\} হলে A এর প্রকৃত উপসেট কয়টি?", o: ["4", "14", "15", "16"], c: 2, e: "\\(2^4 - 1 = 15\\)।" },
-            { q: "A = \\{3, 5\\}, B = \\{1, 3, 4\\} হলে, \\(B \\setminus A = \\text{কত?}\\)", o: ["\\{1, 4\\}", "\\{1, 3\\}", "\\{3, 4\\}", "\\{1, 5\\}"], c: 0, e: "B থেকে A এর উপাদান (3) বাদ দিলে \\{1, 4\\} থাকে।" },
-            { q: "\\(a + b = \\sqrt{5}, a - b = 1\\) হলে, \\(2(a^2 + b^2)\\) এর মান কত?", o: ["6", "4", "\\(\\sqrt{5} + 1\\)", "\\(\\sqrt{5} - 1\\)"], c: 0, e: "সূত্র: \\((a+b)^2 + (a-b)^2 = 5 + 1 = 6\\)।" }
-        ];
+    <!-- Modal for Submit Confirmation -->
+    <div id="submit-modal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] flex items-center justify-center fade-in">
+        <div class="glass-card bg-[#0A192F] p-8 rounded-2xl max-w-md w-full mx-4 border border-amber-500/30">
+            <h3 class="text-2xl font-bold text-white mb-4 title-font">পরীক্ষা শেষ করতে চান?</h3>
+            <p id="modal-warning" class="text-amber-400 mb-6"></p>
+            <div class="flex justify-end gap-3">
+                <button onclick="document.getElementById('submit-modal').classList.add('hidden')" class="px-5 py-2 rounded-lg bg-white/10 hover:bg-white/20 transition">বাতিল</button>
+                <button onclick="submitExam()" class="px-5 py-2 rounded-lg bg-green-500 hover:bg-green-400 text-white font-bold transition shadow-lg shadow-green-500/30">হ্যাঁ, সাবমিট করুন</button>
+            </div>
+        </div>
+    </div>
 
-        // State & Initialization
-        let currentQuestionIndex = 0;
-        let userAnswers = new Array(questions.length).fill(null);
-        let examTimeMinutes = questions.length; // 1 min per question
-        let timeLeft = examTimeMinutes * 60;
+    <!-- RAW DATA INJECTION -->
+    <script type="text/plain" id="raw-data">
+১. 1 হেপ্টো 1 ন্যানোর কত গুণ? (ক) 10^6 (খ) 10^9 (গ) 10^{11} (ঘ) 10^{15}
+২. ত্বরণের মাত্রা কোনটি? (ক) \text{LT}^{-1} (খ) \text{LT}^{-2} (গ) \text{L}^2\text{T}^{-1} (ঘ) \text{L}^2\text{T}^{-2}
+৩. নিচের কোন রাশিগুলো ভেক্টর রাশি? (ক) দ্রুতি, কাজ ও বেগ (খ) তড়িৎ বিভব, সরণ ও ত্বরণ (গ) দ্রুতি, সরণ ও বেগ (ঘ) ভরবেগ, সরণ ও ওজন
+৪. নিচের কোন পদার্থের পরিবাহিতা সর্বাধিক? (ক) বাতাস (খ) গ্রাফাইট (গ) তামা (ঘ) রুপা
+৫. 5 \text{ ms}^{-1} বেগে গতিশীল 10 \text{ kg} ভরের একটি বস্তুর উপর গতির দিকে আরও 20 \text{ J} শক্তি প্রদান করা হলো। বস্তুটির বেগ কত হবে? (ক) 3.8 \text{ ms}^{-1} (খ) 5.39 \text{ ms}^{-1} (গ) 14.5 \text{ ms}^{-1} (ঘ) 29 \text{ ms}^{-1}
+৬. 20 \text{ kg} ভরের কোনো স্থির বস্তুকে 10 \text{ N} বলে ধাক্কা দিলে 5 \text{ s} পর এর ভরবেগ কত হবে? (ক) 2.5 \text{ kg m s}^{-1} (খ) 50 \text{ kg m s}^{-1} (গ) 100 \text{ kg m s}^{-1} (ঘ) 200 \text{ kg m s}^{-1}
+৭. শূন্য মাধ্যমে শব্দের দ্রুতি কত? (ক) 1008 \text{ m s}^{-1} (খ) 354 \text{ m s}^{-1} (গ) 348 \text{ m s}^{-1} (ঘ) 0 \text{ m s}^{-1}
+৮. এক পিকোফ্যারাড সমান কত ফ্যারাড? (ক) 10^{-15} (খ) 10^{-12} (গ) 10^{12} (ঘ) 10^{15}
+৯. মহাকর্ষীয় ধ্রুবক G এর একক নিচের কোনটি? (ক) \text{N m}^2 \text{kg}^{-2} (খ) \text{N m}^2 \text{kg}^2 (গ) \text{N m kg}^{-1} (ঘ) \text{N m}^2 \text{kg}^{-1}
+১০. প্রধান অক্ষ ফোকাস তলের সাথে কত কোণ উৎপন্ন করে? (ক) 0^\circ (খ) 45^\circ (গ) 90^\circ (ঘ) 180^\circ
+১১. একজন সুস্থ মানুষের দেহের তাপমাত্রা 36.89^\circ\text{C}। ফারেনহাইট স্কেলে তার পাঠ কত হবে? (ক) 332.01^\circ\text{F} (খ) 98.4^\circ\text{F} (গ) 66.4^\circ\text{F} (ঘ) 20.49^\circ\text{F}
+১২. অস্পর্শ বল- i. দুটি বস্তুর মধ্যে ক্রিয়াশীল মহাকর্ষ বল ii. দুটি বস্তুর মধ্যে সংঘর্ষের সময় ক্রিয়াশীল বল iii. দুটি আহিত বস্তুর মধ্যে ক্রিয়াশীল তড়িৎ বল নিচের কোনটি সঠিক? (ক) i ও ii (খ) i ও iii (গ) ii ও iii (ঘ) i, ii ও iii
+১৩. নিচের কোন পদার্থের বিভব শক্তি শূন্য? (ক) পানি (খ) পারদ (গ) লোহা (ঘ) কার্বন ডাইঅক্সাইড
+১৪. কর্কের ঘনত্ব 0.25 \times 10^3 \text{ kg/m}^3 হলে পানিতে ভাসিয়ে দিলে তার কত শতাংশ পানির নিচে থাকবে? (ক) 25% (খ) 15% (গ) 10% (ঘ) 5%
+১৫. একটি ট্রান্সফর্মারের মুখ্য কুণ্ডলীর পাকসংখ্যা 50 এবং ভোল্টেজ 210 V এর গৌণ কুণ্ডলীর ভোল্টেজ 420 V হলে পাকসংখ্যা কত? (ক) 25 (খ) 100 (গ) 105 (ঘ) 210
+১৬. ভূ-পৃষ্ঠের সমুদ্র সমতল থেকে যত উপরে উঠা যায়- i. বায়ুমণ্ডলের ওজন তত বৃদ্ধি পায় ii. বায়ুর ঘনত্ব তত হ্রাস পায় iii. বায়ুর চাপ তত হ্রাস পায় নিচের কোনটি সঠিক? (ক) i ও ii (খ) i ও iii (গ) ii ও iii (ঘ) i, ii ও iii
+১৭. তাপের একককে ভরের একক দিয়ে ভাগ করলে কিসের একক পাওয়া যায়? (ক) চাপ (খ) আপেক্ষিক সুপ্ততাপ (গ) আপেক্ষিক তাপ (ঘ) তাপধারণ ক্ষমতা
+নিচের তথ্যের ভিত্তিতে ১৮ ও ১৯নং প্রশ্নের উত্তর দাও : 10 \text{ cm} ফোকাস দূরত্বের একটি অবতল দর্পণ থেকে 15 \text{ cm} দূরে 5 \text{ cm} দৈর্ঘ্যের একটি বস্তু রাখা হলে 8 \text{ cm} দৈর্ঘ্যের প্রতিবিম্ব তৈরি হয়।
+১৮. রৈখিক বিবর্ধন কত হবে? (ক) 1/2 (খ) 1.6 (গ) 0.625 (ঘ) 2
+১৯. প্রতিবিম্বের দূরত্ব কত হবে? (ক) 6 \text{ cm} (খ) 25 \text{ cm} (গ) 30 \text{ cm} (ঘ) 150 \text{ cm}
+২০. কোনো একটি নির্দিষ্ট তারের আপেক্ষিক রোদ নিচের কোনটির উপর নির্ভরশীল? (ক) তাপমাত্রা (খ) দৈর্ঘ্য (গ) ক্ষেত্রফল (ঘ) আয়তন
+২১. লেন্সের ক্ষমতা ধনাত্মক হলে- i. লেন্সটির ফোকাস দূরত্ব ধনাত্মক হবে ii. লেন্সটি বাস্তব ও অবাস্তব উভয় প্রতিবিম্ব সৃষ্টি করতে পারে iii. লেন্সটি হ্রস্ব দৃষ্টির প্রতিকারে সহায়ক নিচের কোনটি সঠিক? (ক) i ও ii (খ) i ও iii (গ) ii ও iii (ঘ) i, ii ও iii
+২২. অপটিক্যাল ফাইবারের ভিতরের অংশকে কী বলে? (ক) ক্ল্যাড (খ) সরু কাচ তন্তু (গ) কোর (ঘ) আলোক নল
+২৩. ইলেকট্রিক ফিল্ড পরিবর্তন করতে হলে পটেনশিয়াল- (ক) বৃদ্ধি করতে হবে (খ) হ্রাস করতে হবে (গ) পরিবর্তন করতে হবে (ঘ) অপরিবর্তিত থাকবে
+নিচের তথ্যের ভিত্তিতে ২৪ ও ২৫নং প্রশ্নের উত্তর দাও : স্লাইড ক্যালিপার্সের সাহায্যে পরিমাপকৃত বস্তুর দৈর্ঘ্য পাওয়া গেল 3.485 \text{ cm}। ভার্নিয়ার ধ্রুবক 0.05 \text{ mm}। প্রধান স্কেল পাঠ 3.4 \text{ cm}।
+২৪. ভার্নিয়ার স্কেলের ভাগসংখ্যা কত? (ক) 10 (খ) 20 (গ) 50 (ঘ) 100
+২৫. ভার্নিয়ার সমপাতন কত? (ক) 7 (খ) 17 (গ) 7 \text{ mm} (ঘ) 17 \text{ mm}
+২৬. মুক্তভাবে পড়ন্ত বস্তুর বেগ বৃদ্ধির হারকে বলে- (ক) কাজ (খ) দ্রুতি (গ) ত্বরণ (ঘ) অভিকর্ষজ ত্বরণ
+২৭. 72 \text{ km h}^{-1} বেগে চলন্ত একটি গাড়িতে 4\text{s} যাবৎ 1.5 \text{ m s}^{-2} ত্বরণ প্রয়োগ করা হলো। শেষ বেগ কত? (ক) 3.9 \text{ s}^{-1} (খ) 20 \text{ m s}^{-1} (গ) 26 \text{ m s}^{-1} (ঘ) 39 \text{ m s}^{-1}
+২৮. টায়ার এবং রাস্তার মধ্যবর্তী ঘর্ষণ বল নির্ভর করে কোনটির উপর? (ক) টায়ারের ভর (খ) গাড়ির ব্রেক (গ) গাড়ির ওজন (ঘ) গাড়ির ভর
+২৯. কোন ঘর্ষণের কারণে আমরা পিছলে পড়ে যাই না? (ক) গতি ঘর্ষণ (খ) স্থিতি ঘর্ষণ (গ) প্রবাহী ঘর্ষণ (ঘ) আবর্ত ঘর্ষণ
+৩০. গাছ থেকে আম নিচের দিকে পড়তে থাকলে- i. গতিশক্তি বৃদ্ধি পায় ii. বিভবশক্তি হ্রাস পায় iii. মোটশক্তি অপরিবর্তিত থাকে নিচের কোনটি সঠিক? (ক) i ও ii (খ) i ও iii (গ) ii ও iii (ঘ) i, ii ও iii
+৩১. 3 \text{ kg} ও 9 \text{ kg} ভরের দুটি গতিশীল বস্তুর বেগের অনুপাত কত হলে বস্তু দুটির গতিশক্তি সমান হবে? (ক) 1:\sqrt{3} (খ) \sqrt{3}:1 (গ) 1:3 (ঘ) 3:1
+৩২. প্যাসকেলের সূত্রের ক্ষেত্রে নিচের কোনটি সঠিক? (ক) বল হ্রাস পায় (খ) আয়তন বৃদ্ধি পায় (গ) শক্তি বৃদ্ধি পায় (ঘ) কাজ একই থাকে
+৩৩. বায়ুচাপ পরিমাপের যন্ত্রের নাম কী? (ক) থার্মোমিটার (খ) ব্যারোমিটার (গ) ম্যানোমিটার (ঘ) সিসমোমিটার
+৩৪. বৈদ্যুতিক মোটরের অংশ নয়? (ক) ক্ষেত্র চুম্বক (খ) আর্মেচার (গ) পিস্টন (ঘ) ব্রাশ
+৩৫. পরিবাহী তারের কুণ্ডলীর মধ্যে চৌম্বকক্ষেত্রের পরিবর্তন করে কোনটি তৈরি করা হয়েছে? (ক) বৈদ্যুতিক মোটর (খ) ট্রান্সফর্মার (গ) বিদ্যুৎ জেনারেটর (ঘ) ট্রানজিস্টর
+৩৬. ক্যান্সার নিরাময়ে নিচের কোনটি ব্যবহার করা হয়? (ক) ইলেকট্রন (খ) তেজস্ক্রিয়তা (গ) প্রোটন (ঘ) নিউট্রন
+নিচের উদ্দীপকের আলোকে ৩৭ ও ৩৮নং প্রশ্নের উত্তর দাও : 25^\circ \text{C} তাপমাত্রায় 2 মোল গ্যাসীয় পদার্থের আয়তন 200 ঘন সে.মি.। সার্বজনীন গ্যাস ধ্রুবক 8.314 \text{ J K}^{-1} \text{ mol}^{-1}।
+৩৭. উদ্দীপকের পদার্থটির আয়তন প্রসারণ সহগ- i. পরম তাপমাত্রার বিপরীত ii. এর মান 8.314 \text{ J K}^{-1} \text{ mol}^{-1} iii. এর এসআই একক \text{K}^{-1} নিচের কোনটি সঠিক? (ক) i (খ) i ও ii (গ) i ও iii (ঘ) ii ও iii
+৩৮. উদ্দীপকের গ্যাসীয় পদার্থের চাপ কত? (ক) 2.48 \times 10^1 \text{ atm} (খ) 2.45 \times 10^2 \text{ atm} (গ) 2.07 \times 10^6 \text{ atm} (ঘ) 2.48 \times 10^7 \text{ atm}
+৩৯. বাতাসে শব্দের বেগ 340 \text{ m s}^{-1} এবং প্রতিধ্বনি শোনার সময় 1.5 \text{ s} হলে, উৎস এবং প্রতিফলক তলের মধ্যবর্তী দূরত্ব কত? (ক) 250 \text{ m} (খ) 255 \text{ m} (গ) 260 \text{ m} (ঘ) 265 \text{ m}
+৪০. সাধারণ এক টুকরা কাচে আলো পড়লে কতটুকু প্রতিফলিত হয়? (ক) 0.4%–0.5% (খ) 4%–5% (গ) 14%–15% (ঘ) 24%–25%
+৪১. সূর্যের আলোর ক্ষেত্রে- i. এটি তাড়িত চৌম্বক তরঙ্গ ii. এটি এক ধরনের অনুপ্রস্থ তরঙ্গ iii. কম্পাঙ্ক বেশি হলে বেগও বেশি হয় নিচের কোনটি সঠিক? (ক) i ও ii (খ) i ও iii (গ) ii ও iii (ঘ) i, ii ও iii
+৪২. নিচের কোনটির তরঙ্গদৈর্ঘ্য বেশি? (ক) ইনফ্রারেড (খ) লাল (গ) অতিবেগুনি (ঘ) বেগুনি
+৪৩. একটি অবতল লেন্সের ফোকাস দূরত্ব 25 \text{ cm} হলে এর ক্ষমতা কত? (ক) -0.04 \text{ D} (খ) -0.25 \text{ D} (গ) -2.5 \text{ D} (ঘ) -4 \text{ D}
+৪৪. অপটিক্যাল ফাইবারে কোনটি ঘটে? (ক) প্রতিসরণ (খ) প্রতিফলন (গ) পূর্ণ অভ্যন্তরীণ প্রতিফলন (ঘ) শ্রবণোত্তর কম্পন
+৪৫. দুটি আধানের গুণফল তিনগুণ হলে এদের মধ্যবর্তী বলের কী ঘটবে? (ক) এক-তৃতীয়াংশ হবে (খ) অর্ধেক হবে (গ) দ্বিগুণ হবে (ঘ) তিনগুণ হবে
+৪৬. একটি আহিত বস্তুর কাছে এনে কোনো অনাহিত বস্তুকে আহিত করার পদ্ধতিকে কী বলে? (ক) আহিত (খ) তড়িৎ আবেশ (গ) পরিবহন (ঘ) ঘর্ষণ
+৪৭. 5 \text{ }\Omega মানের চারটি রোধ সমান্তরালে সংযোগ দিলে তুল্যরোধ কত হবে? (ক) 1.25 \text{ }\Omega (খ) 0.8 \text{ }\Omega (গ) 0.25 \text{ }\Omega (ঘ) 0.2 \text{ }\Omega
+৪৮. একটি বাল্বের গায়ে 23 \text{ W}-220 \text{ V} লেখা আছে। বাল্বটির রোধ কত? (ক) 2.10 \times 10^3 \text{ }\Omega (খ) 5.06 \times 10^3 \text{ }\Omega (গ) 4.15 \times 10^{-1} \text{ }\Omega (ঘ) 4.75 \times 10^{-4} \text{ }\Omega
+৪৯. 20 \text{ m} ব্যাসবিশিষ্ট বৃত্তাকার পথে পরিধির একচতুর্থাংশ অতিক্রম করলে সরণ কত? (ক) 7.854 \text{ m} (খ) 5 \text{ m} (গ) 10 \text{ m} (ঘ) 14.14 \text{ m}
+৫০. বেগের মাত্রা কোনটি? (ক) \text{LT}^{-2} (খ) \text{L}^{-1}\text{T} (গ) \text{L}^{-1}\text{T}^{-2} (ঘ) \text{LT}^{-1}
+৫১. নিচের কোন দুটি বস্তুর মধ্যে অভিকর্ষ বল ক্রিয়া করে? (ক) চন্দ্র ও সূর্য (খ) পৃথিবী ও বই (গ) বুধ ও শুক্র (ঘ) চেয়ার ও টেবিল
+৫২. 500 \text{ gm} ভরের একটি বস্তুর উপর 5 \text{ N} বল প্রয়োগ করা হলে এর ত্বরণ কত হবে? (ক) 0.01 \text{ m s}^{-2} (খ) 2.5 \text{ m s}^{-2} (গ) 10 \text{ m s}^{-2} (ঘ) 100 \text{ m s}^{-2}
+৫৩. কম্পাঙ্ক ও পর্যায়কালের সম্পর্ক কীরূপ? (ক) সমানুপাতিক (খ) ব্যস্তানুপাতিক (গ) বর্গের সমানুপাতিক (ঘ) বর্গের ব্যস্তানুপাতিক
+৫৪. 10 \text{ kg} ভরের একটি বস্তু পানিতে নিমজ্জিত করলে এর ওজন অর্ধেক হয়ে যায়। পানির প্লবতা কত? (ক) 5 \text{ N} (খ) 10 \text{ N} (গ) 49 \text{ N} (ঘ) 98 \text{ N}
+৫৫. সুপ্ততাপ কোনটির পরিবর্তন ঘটায়? (ক) পদার্থের অবস্থার (খ) তাপমাত্রার (গ) গলনাঙ্কের (ঘ) স্ফুটনাঙ্কের
+৫৬. স্থিতিস্থাপক সীমার মধ্যে- i. পীড়ন বিকৃতির সমানুপাতিক ii. পীড়ন ও বিকৃতির অনুপাত ধ্রুব iii. পীড়ন বিকৃতির ব্যস্তানুপাতিক নিচের কোনটি সঠিক? (ক) i ও ii (খ) ii ও iii (গ) i ও iii (ঘ) i, ii ও iii
+৫৭. কম্পাঙ্ক 50 \text{ Hz} হলে পর্যায়কাল কত হবে? (ক) 0.05 \text{ s} (খ) 0.02 \text{ s} (গ) 5 \text{ s} (ঘ) 2 \text{ s}
+৫৮. এক ন্যানো সেকেন্ড সমান কত মাইক্রো সেকেন্ড? (ক) 10^3 (খ) 0.001 (গ) 0.00001 (ঘ) 10^{-6}
+৫৯. নিচের কোনটি মৌলিক একক? (ক) N (খ) J (গ) Pa (ঘ) K
+নিচের তথ্যের আলোকে ৬০ ও ৬১নং প্রশ্নের উত্তর দাও : দর্পণ হতে 50 \text{ cm} দূরে বস্তু রাখলে 50 \text{ cm} দূরেই বাস্তব বিম্ব পাওয়া যায়।
+৬০. দর্পণটির ফোকাস দূরত্ব কত? (ক) 0.25 \text{ m} (খ) 0.50 \text{ m} (গ) 1.00 \text{ m} (ঘ) 2.50 \text{ m}
+৬১. বস্তুটি দর্পণ হতে আরও 10 \text{ cm} দূরে রাখলে সৃষ্ট প্রতিবিম্বের ক্ষেত্রে- i. বিবর্ধন < 1 এবং ঋণাত্মক ii. অবস্থান C ও F এর মাঝে iii. প্রকৃতি বাস্তব ও উল্টো নিচের কোনটি সঠিক? (ক) i (খ) iii (গ) i ও ii (ঘ) i, ii ও iii
+৬২. পানিতে আলোর বেগ হলো- (ক) 1.24 \times 10^8 \text{ m s}^{-1} (খ) 2 \times 10^8 \text{ m s}^{-1} (গ) 2.26 \times 10^8 \text{ m s}^{-1} (ঘ) 3 \times 10^8 \text{ m s}^{-1}
+৬৩. দুটি গোলীয় পৃষ্ঠ দ্বারা সীমাবদ্ধ কোনো স্বচ্ছ প্রতিসারক মাধ্যমকে বলা হয়- (ক) দর্পণ (খ) আতসি কাচ (গ) লেন্স (ঘ) অপটিক্যাল ফাইবার
+৬৪. তড়িৎ তীব্রতার একক কোনটি? (ক) \text{Nm} (খ) \text{Nm}^{-1} (গ) \text{Nm}^2\text{C}^{-2} (ঘ) \text{NC}^{-1}
+৬৫. +10 \text{ C} চার্জ থেকে 100 \text{ m} দূরত্বে কোনো বিন্দুতে বিভব কত? (ক) 9 \times 10^9 \text{ V} (খ) 4.5 \times 10^8 \text{ V} (গ) 4.5 \times 10^9 \text{ V} (ঘ) 9 \times 10^8 \text{ V}
+৬৬. পরিবাহীর রোধকে অতিক্রম করার জন্য তড়িৎশক্তির একটি অংশ কীসে রূপান্তরিত হয়? (ক) আলোকে (খ) তাপে (গ) শব্দে (ঘ) সবগুলোই
+৬৭. বর্তনীতে অধিক তড়িৎ প্রবাহ প্রতিরোধের জন্য কোনটি ব্যবহৃত হয়? (ক) সার্কিট ব্রেকার (খ) ফিউজ (গ) সুইচ (ঘ) ভূ-সংযোগ তার
+৬৮. একটি ট্রান্সফর্মারের মুখ্য কুণ্ডলীতে ভোল্টেজ 5 \text{ V} এবং প্রবাহ 3 \text{ A}। গৌণ কুণ্ডলীর ভোল্টেজ 10 \text{ V} হলে গৌণ কুণ্ডলীর প্রবাহ কত? (ক) 0.15 \text{ A} (খ) 15 \text{ A} (গ) 1.5 \text{ A} (ঘ) 1.6 \text{ A}
+৬৯. একটি ট্রান্সফর্মারের মুখ্য কুণ্ডলীর ভোল্টেজ 12 \text{ V} এবং তড়িৎ প্রবাহ 3 \text{ A}। গৌণ কুণ্ডলীর তড়িৎ প্রবাহ 4 \text{ A} হলে, গৌণ কুণ্ডলীর ভোল্টেজ কত? (ক) 3 \text{ V} (খ) 9 \text{ V} (গ) 16 \text{ V} (ঘ) 36 \text{ V}
+৭০. অল্প জায়গায় অনেক বেশি ট্রানজিস্টর বসানোর প্রক্রিয়াকে বলা হয়? (ক) VSLI (খ) VLSI (গ) FPGA (ঘ) FET
+৭১. কে সূর্যগ্রহণের ভবিষ্যদ্বাণী করেছিলেন? (ক) থেলিস (খ) ডেমোক্রিটাস (গ) এরিস্টটল (ঘ) আরিস্টারাকস
+৭২. নিচের কোনটি স্কেলার রাশি? (ক) চাপ (খ) বল (গ) সরণ (ঘ) ওজন
+৭৩. যান্ত্রিক তরঙ্গের ক্ষেত্রে ঘটে- i. প্রতিসরণ ii. বিচ্ছুরণ iii. উপরিপাতন নিচের কোনটি সঠিক? (ক) i ও ii (খ) i ও iii (গ) ii ও iii (ঘ) i, ii ও iii
+৭৪. শূন্যস্থানে কুলম্বের ধ্রুবকের মান কত? (ক) 9 \times 10^9 \text{ Nm}^2\text{C}^{-2} (খ) 9 \times 10^9 \text{ Nm}^2\text{C}^{-1} (গ) 9 \times 10^9 \text{ Nm}^{-1}\text{C}^{-2} (ঘ) 9 \times 10^9 \text{ Nm}^{-1}\text{C}^{-1}
+৭৫. একটি ইলেকট্রনের চার্জ কত? (ক) -1.6 \times 10^{-19} \text{ C} (খ) -9 \times 10^9 \text{ C} (গ) 1.6 \times 10^{-19} \text{ C} (ঘ) 9 \times 10^9 \text{ C}
+৭৬. ফ্লানেল কাপড়ের সাথে ইবোনাইট দণ্ড ঘষলে- i. উভয়েই ঋণাত্মক আধানে আহিত হয় ii. ফ্লানেল কাপড় ধনাত্মক আধানে আহিত হয় iii. ইবোনাইট দণ্ড ঋণাত্মক আধানে পরিণত হয় নিচের কোনটি সঠিক? (ক) i ও ii (খ) ii ও iii (গ) i ও iii (ঘ) i, ii ও iii
+৭৭. নিউটনের গতির দ্বিতীয় সূত্র থেকে কোনটির পরিমাপ পাওয়া যায়? (ক) ভর (খ) জড়তা (গ) বল (ঘ) ওজন
+৭৮. কমিউটেটর কী দিয়ে তৈরি করা হয়? (ক) অ্যালুমিনিয়াম (খ) তামা (গ) ইস্পাত (ঘ) লোহা
+৭৯. তড়িৎচৌম্বকীয় বর্ণালিতে দৃশ্যমান আলোর সবচেয়ে বড় তরঙ্গদৈর্ঘ্য থেকেও বড় হয়, সেটাকে আমরা কী বলি? (ক) আলট্রাভায়োলেট (খ) এক্স-রে (গ) গামা-রে (ঘ) ইনফ্রারেড
+৮০. অপটিক্যাল ফাইবারে পদার্থের প্রতিসরণাঙ্ক কত? (ক) 1.7 (খ) 1.5 (গ) 1.33 (ঘ) 0.75
+৮১. নিচের কোনটি নবায়নযোগ্য শক্তির উৎস? (ক) ডিজেল (খ) মিথেন (গ) বায়োমাস (ঘ) কয়লা
+৮২. তরলের প্রসারণ বলতে বোঝায়- i. প্রকৃত প্রসারণকে ii. আপাত প্রসারণকে iii. প্রকৃত প্রসারণ ও আপাত প্রসারণকে নিচের কোনটি সঠিক? (ক) i ও ii (খ) ii ও iii (গ) i ও iii (ঘ) i, ii ও iii
+৮৩. কোনটির উপর তরলের বাষ্পায়ন নির্ভর করে? (ক) ঘনত্ব (খ) উচ্চতা (গ) আয়তন (ঘ) প্রকৃতি
+৮৪. উত্তল দর্পণে কোন প্রতিবিম্ব উৎপন্ন হয় না? (ক) অসদ (খ) সোজা (গ) বাস্তব (ঘ) আকারে ছোট
+৮৫. নিচের কোন রশ্নির দ্রুতি 3 \times 10^8 \text{ m s}^{-1}? (ক) আলফা (খ) বিটা (গ) গামা (ঘ) এক্স-রে
+৮৬. বিভিন্ন উদ্দীপনায় উদ্ভিদের সাড়া দেওয়ার প্রকৃতি কী রকম? (ক) রাসায়নিক (খ) জৈবিক (গ) বৈদ্যুতিক (ঘ) ভৌত
+নিচের উদ্দীপকটি পড় এবং ৮৭ ও ৮৮নং প্রশ্নের উত্তর দাও : 22 \text{ V} এর একটি বাল্ব জ্বালাতে 2 \text{ A} বিদ্যুৎ প্রয়োজন। আমাদের দেশের সরবরাহ লাইনের ভোল্টেজ 220 \text{ V}। বাল্বটি জ্বালানোর জন্য একটি উপযোগী ট্রান্সফর্মার নির্বাচন করা হলো।
+৮৭. বাল্বটির ক্ষমতা কত? (ক) 10 \text{ W} (খ) 11 \text{ W} (গ) 22 \text{ W} (ঘ) 44 \text{ W}
+৮৮. ট্রান্সফর্মারে মুখ্য ও গৌণ কুণ্ডলীর পাকসংখ্যার অনুপাত কত? (ক) 1:11 (খ) 11:1 (গ) 10:1 (ঘ) 1:10
+৮৯. চাপের মাত্রা কোনটি? (ক) \text{ML}^{-3} (খ) \text{ML}^2\text{T}^{-3} (গ) \text{ML}^2\text{T}^{-2} (ঘ) \text{ML}^{-1}\text{T}^{-2}
+৯০. নিচের কোনটি emf নির্ণয়ের সূত্র? (ক) W \times Q (খ) \frac{W}{Q} (গ) \frac{Q}{W} (ঘ) \frac{1}{Q}
+৯১. কোন শর্তে বস্তুর গতিশক্তি চারগুণ হবে? (ক) ভর দ্বিগুণ ও বেগ দ্বিগুণ করা হলে (খ) ভর চারগুণ ও বেগ অর্ধেক করা হলে (গ) ভর অপরিবর্তিত ও বেগ দ্বিগুণ করা হলে (ঘ) ভর দ্বিগুণ ও বেগ অপরিবর্তিত রাখলে
+৯২. 10 \text{ N} বল প্রয়োগ করে একটি চেয়ারকে 50 \text{ cm} টানা হলে কাজের পরিমাণ কত? (ক) 0.5 \text{ J} (খ) 5 \text{ J} (গ) 50 \text{ J} (ঘ) 500 \text{ J}
+৯৩. লাল আলোতে গাছের সবুজ পাতাকে কোন বর্ণের দেখায়? (ক) কালো (খ) সবুজ (গ) লাল (ঘ) সাদা
+৯৪. সমতল দর্পণে আলো প্রতিফলক পৃষ্ঠের সাথে 30^\circ কোণে আপতিত হলে প্রতিফলন কোণ কত? (ক) 30^\circ (খ) 60^\circ (গ) 90^\circ (ঘ) 120^\circ
+৯৫. পারদে শব্দের বেগ কত? (ক) 1284 \text{ m s}^{-1} (খ) 1450 \text{ m s}^{-1} (গ) 1493 \text{ m s}^{-1} (ঘ) 5130 \text{ m s}^{-1}
+৯৬. শব্দ তরঙ্গ- i. একটি অনুদৈর্ঘ্য তরঙ্গ ii. তরঙ্গ প্রবাহের দিকের সাথে সমকোণে অগ্রসর হয় iii. সংকোচন ও প্রসারণ নিয়ে গঠিত হয় নিচের কোনটি সঠিক? (ক) i ও ii (খ) i ও iii (গ) ii ও iii (ঘ) i, ii ও iii
+৯৭. চার্জের উপস্থিতি নির্ণয়ে ব্যবহৃত যন্ত্রের নাম কী? (ক) ইলেকট্রোস্কোপ (খ) অ্যামিটার (গ) ভোল্টমিটার (ঘ) ভ্যান-ডি গ্রাফ
+৯৮. গাড়ির দ্বারা উৎপন্ন শব্দের পরিমাণ কত? (ক) 40 - 60 \text{ dB} (খ) 50 - 60 \text{ dB} (গ) 60 - 80 \text{ dB} (ঘ) 80 - 90 \text{ dB}
+৯৯. নিচের কোনটি দোলনকাল ও সুতার দৈর্ঘ্যের মধ্যে সম্পর্ক নির্দেশ করে? (ক) T \propto l (খ) T \propto \frac{1}{l} (গ) T \propto l^2 (ঘ) T \propto \sqrt{l}
+১০০. কোনটি লব্ধ রাশির একক? (ক) A (খ) K (গ) N (ঘ) S
+১০১. কোনটি মৌলিক বল? (ক) সাম্য বল (খ) ঘর্ষণ বল (গ) অসাম্য বল (ঘ) মহাকর্ষ বল
+১০২. একটি বস্তু মুক্তভাবে পড়তে থাকলে- i. বস্তুটি সুষমবেগে পড়তে থাকবে ii. এর বেগ সময়ের সাথে বাড়তে থাকবে iii. বস্তুটি সমান সময়ে সমান পথ অতিক্রম করবে নিচের কোনটি সঠিক? (ক) i (খ) ii ও iii (গ) i ও iii (ঘ) i, ii ও iii
+১০৩. বলের মাত্রা সমীকরণ কোনটি? (ক) \text{MLT}^{-1} (খ) \text{ML}^{-1}\text{T}^{-2} (গ) \text{MLT}^{-2} (ঘ) \text{MLT}^{-3}
+১০৪. ভার্নিয়ার ধ্রুবক হচ্ছে মূল স্কেলের একভাগ এবং- (ক) ভার্নিয়ার সমপাতনের পার্থক্য (খ) ভার্নিয়ার সমপাতনের অনুপাত (গ) ভার্নিয়ার স্কেলের মোট ভাগের অনুপাত (ঘ) ভার্নিয়ার স্কেলের এক ভাগের পার্থক্য
+১০৫. ঘর্ষণ বল বৃদ্ধি পায় যদি- (ক) পৃষ্ঠতলকে অমসৃণ করা হয় (খ) চাকা ব্যবহার করা হয় (গ) বল বিয়ারিং ব্যবহার করা হয় (ঘ) লুব্রিকেন্ট ব্যবহার করা হয়
+১০৬. 50 \text{ kg} ভরের একটি সাইকেল 36 \text{ kmh}^{-1} বেগে গতিশীল হলে ভরবেগ কত? (ক) 5 \text{ kg m s}^{-1} (খ) 500 \text{ kg m s}^{-1} (গ) 18 \text{ kg m s}^{-1} (ঘ) 1800 \text{ kg m s}^{-1}
+১০৭. কোয়ান্টাম তত্ত্ব আবিষ্কার করেন কে? (ক) আইনস্টাইন (খ) কোপার্নিকাস (গ) গ্যালিলিও (ঘ) ম্যাক্স প্লাঙ্ক
+১০৮. অনবায়নযোগ্য কোন শক্তির উৎস থেকে কার্বন-ডাইঅক্সাইড নিঃসরণ হয় না? (ক) তেল (খ) গ্যাস (গ) কয়লা (ঘ) নিউক্লিয়ার
+১০৯. আন্তর্জাতিক পদ্ধতিতে তাপমাত্রার একক কোনটি? (ক) কেলভিন (খ) সেলসিয়াস (গ) ফারেনহাইট (ঘ) ক্যালরি
+১১০. একটি স্লাইড ক্যালিপার্সের মূল স্কেলের ছোট ১ ভাগের মান 1 \text{ mm} হলে এবং ভার্নিয়ারের ভাগসংখ্যা 10 হলে ভার্নিয়ার ধ্রুবক কত? (ক) 0.1 \text{ mm} (খ) 0.1 \text{ cm} (গ) 1 \text{ cm} (ঘ) 10 \text{ cm}
+১১১. প্রধান স্কেল ও ভার্নিয়ার স্কেলের দাগকাটার বৈশিষ্ট্যের উপর কোনটি নির্ভর করে? (ক) ভার্নিয়ার সমপাতন (খ) প্রধান স্কেল পাঠ (গ) ভার্নিয়ার স্কেল পাঠ (ঘ) ভার্নিয়ার ধ্রুবক
+১১২. স্পন্দন গতি নিচের কোনটি? (ক) বৈদ্যুতিক পাখার গতি (খ) ঘড়ির কাঁটার গতি (গ) দোলনায় দুলতে থাকা শিশুর গতি (ঘ) গাড়ির ঘূর্ণায়মান চাকার গতি
+১১৩. তড়িৎ তীব্রতার মাত্রা নিচের কোনটি? (ক) \text{MLQ}^{-2}\text{T}^{-2} (খ) \text{ML}^2\text{Q}^{-1}\text{T}^{-2} (গ) \text{MLQ}^{-1}\text{T}^{-2} (ঘ) \text{MLQ}^{-1}\text{T}^2
+১১৪. একটি গাড়ির বেগ 5 \text{ s} সময়ে 20 \text{ m s}^{-1} থেকে 30 \text{ m s}^{-1} হলো। গাড়িটির ত্বরণ কত? (ক) 2 \text{ m s}^{-2} (খ) 4 \text{ m s}^{-2} (গ) 6 \text{ m s}^{-2} (ঘ) 10 \text{ m s}^{-2}
+১১৫. ঘর্ষণকে কয়ভাগে ভাগ করা যায়? (ক) ২ (খ) ৩ (গ) ৪ (ঘ) ৫
+১১৬. কোনো বস্তুর বেগ দ্বিগুণ করা হলে গতিশক্তি কয়গুণ বেড়ে যাবে? (ক) ২ (খ) ৩ (গ) ৪ (ঘ) ৫
+১১৭. দুটি বস্তুর মধ্যে ক্রিয়া ও প্রতিক্রিয়া বল যথাক্রমে F_1 ও F_2 হলে নিচের কোনটি সঠিক? (ক) F_1 = F_2 (খ) F_1 > F_2 (গ) F_1 + F_2 > 0 (ঘ) F_1 + F_2 = 0
+১১৮. হাতে হাত ঘষলে যান্ত্রিক শক্তি- i. শব্দ শক্তিতে রূপান্তরিত হয় ii. গতিশক্তিতে রূপান্তরিত হয় iii. তাপশক্তিতে রূপান্তরিত হয় নিচের কোনটি সঠিক? (ক) i ও ii (খ) i ও iii (গ) ii ও iii (ঘ) i, ii ও iii
+১১৯. 50 \text{ kg} ভরের এক ব্যক্তি 10 \text{ s}-এ 100 \text{ m} দূরত্ব অতিক্রম করলে তার গতিশক্তি কত হবে? (ক) 2500 \text{ J} (খ) 1000 \text{ J} (গ) 500 \text{ J} (ঘ) 250 \text{ J}
+১২০. শব্দ তরঙ্গের তীব্রতা এর বিস্তারের সাথে কীভাবে সম্পর্কিত? (ক) সমানুপাতিক (খ) বর্গের সমানুপাতিক (গ) ব্যস্তানুপাতিক (ঘ) বর্গের ব্যস্তানুপাতিক
+১২১. অনুদৈর্ঘ্য তরঙ্গের ক্ষেত্রে কোনটি সঠিক? (ক) আলোক ও পানির তরঙ্গ এ তরঙ্গের উদাহরণ (খ) মাধ্যমের কণাগুলো স্পন্দনের দিকের সাথে সমকোণে অগ্রসর হয় (গ) একটি তরঙ্গশীর্ষ ও তরঙ্গপাত নিয়ে পূর্ণ তরঙ্গ হয় (ঘ) সংকোচন ও প্রসারণের ফলে তরঙ্গ সঞ্চালিত হয়
+১২২. 2 \text{ kHz} কম্পনের সুরশলাকা দিয়ে শব্দ উৎপন্ন করলে লোহাতে শব্দের তরঙ্গদৈর্ঘ্য কত হবে? (ক) 0.334 \text{ m} (খ) 1.49 \text{ m} (গ) 1.50 \text{ m} (ঘ) 5.13 \text{ m}
+১২৩. তড়িৎ চুম্বকীয় তরঙ্গ নিচের কোনটি? (ক) আলোক তরঙ্গ (খ) শব্দ তরঙ্গ (গ) পানির তরঙ্গ (ঘ) স্প্রিং-এর তরঙ্গ
+১২৪. বিবর্ধনের ক্ষেত্রে- i. m > 1 হলে বিম্বটি বিবর্ধিত হবে ii. m < 1 হলে বিম্বটি খর্বিত হবে iii. m = 1 হলে বিম্ব লক্ষ্যবস্তুর সমান হবে নিচের কোনটি সঠিক? (ক) i ও ii (খ) i ও iii (গ) ii ও iii (ঘ) i, ii ও iii
+১২৫. সমতল আয়নায় সৃষ্ট বিম্বের বৈশিষ্ট্য নিচের কোনটি? (ক) বাস্তব (খ) অবাস্তব (গ) বাঁকানো (ঘ) খর্বিত
+১২৬. অবতল আয়নায় লক্ষ্যবস্তু ফোকাস দূরত্বের ভিতরে রাখলে প্রতিবিম্ব- i. অবাস্তব ii. সোজা iii. খর্বিত নিচের কোনটি সঠিক? (ক) i ও ii (খ) i ও iii (গ) ii ও iii (ঘ) i, ii ও iii
+১২৭. একটি অবতল দর্পণের মেরুবিন্দু হতে 10 \text{ cm} দূরে বস্তু রাখলে 10 \text{ cm} দূরে প্রতিবিম্ব গঠিত হয়। দর্পণটির ফোকাস দূরত্ব কত? (ক) 1 \text{ cm} (খ) 5 \text{ cm} (গ) 10 \text{ cm} (ঘ) 20 \text{ cm}
+১২৮. নিচের কোনটি বিদ্যুৎ সুপরিবাহী? (ক) প্লাস্টিক (খ) রাবার (গ) সোনা (ঘ) কাচ
+১২৯. ইলেকট্রোস্কোপ যন্ত্রের সাহায্যে কোন কাজটি করা হয়? (ক) তড়িৎ প্রবাহের মান বের করা হয় (খ) আধানের প্রকৃতি নির্ণয় করা হয় (গ) আধানের পরিমাণ নির্ণয় করা হয় (ঘ) তড়িৎ প্রবাহের দিক নির্ণয় করা হয়
+১৩০. বজ্রপাতের সময় বাতাসের তাপমাত্রা কত থেকে কত হতে পারে? (ক) 20,000^\circ\text{C} থেকে 25,000^\circ\text{C} (খ) 20,000^\circ\text{C} থেকে 30,000^\circ\text{C} (গ) 20,000^\circ\text{C} থেকে 40,000^\circ\text{C} (ঘ) 20,000^\circ\text{C} থেকে 50,000^\circ\text{C}
+১৩১. একটি +2 কুলম্ব চার্জ এবং একটি -1 কুলম্ব চার্জ পরস্পর থেকে 10 \text{ cm} দূরে রাখা হলো। চার্জ দুটির মধ্যে ক্রিয়াশীল বল কত হবে? (ক) 1.8 \times 10^{12} \text{ N} (খ) 1.8 \times 10^{11} \text{ N} (গ) -1.8 \times 10^{11} \text{ N} (ঘ) -1.8 \times 10^{12} \text{ N}
+১৩২. গাণিতিক সূত্র দেওয়ার পর পরীক্ষা করে সেই সূত্রটি প্রমাণ করার বৈজ্ঞানিক ধারার সূচনা কে করেন? (ক) গ্যালিলিও (খ) ইরাটোস্থিনিস (গ) কোপার্নিকাস (ঘ) আইনস্টাইন
+১৩৩. নিউট্রন ও প্রোটন এক ধরনের মৌলিক কণা দিয়ে তৈরি; কণাটির নাম কী? (ক) ইলেকট্রন (খ) কোয়ার্ক (গ) পজিট্রন (ঘ) নিউট্রিনো
+১৩৪. এক মাইক্রোফ্যারাড কত ফ্যারাডের সমান? (ক) 10^{-15} (খ) 10^{-12} (গ) 10^{-9} (ঘ) 10^{-6}
+১৩৫. সূর্যের চারদিকে বুধ গ্রহের গতি কী ধরনের গতি? (ক) ঘূর্ণন গতি (খ) চলন গতি (গ) পর্যায়বৃত্ত গতি (ঘ) স্পন্দন গতি
+নিচের উদ্দীপকটি পড়ো এবং ১৩৬ ও ১৩৭নং প্রশ্নের উত্তর দাও : একটি গাড়ি স্থির অবস্থা হতে যাত্রা শুরু করে সমত্বরণে চলে 10 s এ 100 m পথ অতিক্রম করে এবং এর পরে প্রাপ্ত বেগে চলতে থাকে।
+১৩৬. গাড়িটির ত্বরণ কত? (ক) 1 \text{ m s}^{-2} (খ) 2 \text{ m s}^{-2} (গ) 10 \text{ m s}^{-2} (ঘ) 20 \text{ m s}^{-2}
+১৩৭. ভেক্টর রাশির উদাহরণ কোনটি? (ক) বেগ (খ) তাপমাত্রা (গ) দৈর্ঘ্য (ঘ) সময়
+১৩৮. ভরবেগের মাত্রা কোনটি? (ক) \text{MLT}^{-1} (খ) \text{MLT}^{-2} (গ) \text{ML}^2\text{T}^{-1} (ঘ) \text{ML}^2\text{T}^{-2}
+১৩৯. মহাকর্ষ ধ্রুবকের মান কত? (ক) 5.98 \times 10^{24} \text{ N m}^2\text{kg}^{-2} (খ) 6.37 \times 10^6 \text{ N m}^2\text{kg}^{-2} (গ) 6.67 \times 10^{-11} \text{ N m}^2\text{kg}^{-2} (ঘ) 6.37 \times 10^{-11} \text{ N m}^2\text{kg}^{-2}
+১৪০. ঘর্ষণের ফলে আমরা- i. দাঁড়াতে পারি ii. তাপ উৎপন্ন করতে পারি iii. বোর্ডে মার্কার দিয়ে লিখতে পারি নিচের কোনটি সঠিক? (ক) i ও ii (খ) i ও iii (গ) ii ও iii (ঘ) i, ii ও iii
+নিচের তথ্যের আলোকে ১৪১ ও ১৪২নং প্রশ্নের উত্তর দাও : ভূ-পৃষ্ঠ থেকে 7840 \text{ সে.মি.} উচ্চতায় 500 \text{ gm} ভরের একটি বস্তু রাখা আছে। [অভিকর্ষজ ত্বরণ g = 9.8 \text{ m s}^{-2}]
+১৪১. বস্তুটির বিভবশক্তি কত? (ক) 3.8416 \times 10^7 \text{ J} (খ) 3.8416 \times 10^5 \text{ J} (গ) 3.8416 \times 10^4 \text{ J} (ঘ) 3.8416 \times 10^2 \text{ J}
+১৪২. বস্তুটিকে মুক্তভাবে পড়তে দেওয়া হলে 2 সেকেন্ড পরে- i. বস্তুর গতিশক্তি বৃদ্ধি পাবে ii. বস্তুটির বেগ 19.6 \text{ m s}^{-1} হবে iii. বস্তুটি ভূমি স্পর্শ করতে পারবে নিচের কোনটি সঠিক? (ক) i ও ii (খ) i ও iii (গ) ii ও iii (ঘ) i, ii ও iii
+১৪৩. নিচের কোনটি অনবায়নযোগ্য শক্তির উৎস? (ক) সৌর শক্তি (খ) নিউক্লিয়ার শক্তি (গ) বায়ু শক্তি (ঘ) ভূ-তাপীয় শক্তি
+১৪৪. ব্যাটারিচালিত খেলনা গাড়িতে শক্তির কী ধরনের রূপান্তর হয়? (ক) যান্ত্রিক শক্তি বিদ্যুৎ শক্তিতে রূপান্তরিত হয় (খ) তাপশক্তি যান্ত্রিক শক্তিতে রূপান্তরিত হয় (গ) বিদ্যুৎ শক্তি যান্ত্রিক শক্তিতে রূপান্তরিত হয় (ঘ) গতিশক্তি বিদ্যুৎ শক্তিতে রূপান্তরিত হয়
+১৪৫. সরল ছন্দিত গতিতে সাম্যাবস্থা থেকে উপরে কিংবা নিচে সবচেয়ে বেশি সরণকে কী বলে? (ক) দোলনকাল (খ) বিস্তার (গ) কম্পাঙ্ক (ঘ) দশা
+১৪৬. অবতল দর্পণ কোথায় ব্যবহার করা হয়? (ক) রাস্তায় (খ) ভিউমিররে (গ) পেরিস্কোপে (ঘ) দন্ত চিকিৎসায়
+১৪৭. নিচের কোন মাধ্যমে শব্দের বেগ বেশি? (ক) লোহা (খ) পানি (গ) হাইড্রোজেন (ঘ) পারদ
+১৪৮. 2 \text{ m} লম্বা সুতা দিয়ে একটি পাথরকে ঝুলিয়ে দুলতে দেওয়া হলো। ঐ স্থানের অভিকর্ষজ ত্বরণ 9.8 \text{ m s}^{-2} হলে দোলনকাল কত? (ক) 0.452 \text{ s} (খ) 1.282 \text{ s} (গ) 2.838 \text{ s} (ঘ) 13.908 \text{ s}
+১৪৯. নিচের কোনটির তরঙ্গদৈর্ঘ্য দৃশ্যমান আলোর সবচেয়ে ছোট তরঙ্গদৈর্ঘ্য থেকেও ছোট? (ক) ইনফ্রারেড (খ) আলট্রাভায়োলেট (গ) মাইক্রোওয়েভ (ঘ) রেডিও ওয়েভ
+১৫০. উত্তল দর্পণের ক্ষেত্রে- i. অবাস্তব বিম্ব গঠিত হয় ii. বিবর্ধন সর্বদা 1 হয় iii. সর্বদা লক্ষ্যবস্তু থেকে ছোট বিম্ব গঠিত হয় নিচের কোনটি সঠিক? (ক) i ও ii (খ) i ও iii (গ) ii ও iii (ঘ) i, ii ও iii
+১৫১. 5 \text{ volt} সমান কত? (ক) 5 \text{ JC}^{-1} (খ) 5 \text{ JC} (গ) 5 \text{ NC}^{-1} (ঘ) 5 \text{ J}^{-1}\text{C}
+    </script>
+
+    <!-- App Logic -->
+    <script>
+        // Answer Key Mapping (0=ক, 1=খ, 2=গ, 3=ঘ)
+        // প্রতিটি গাণিতিক ও থিওরিটিক্যাল প্রশ্ন সমাধান করে কি তৈরি করা হয়েছে
+        const answerKey = {
+            1:2, 2:1, 3:3, 4:3, 5:1, 6:1, 7:3, 8:1, 9:0, 10:2, 11:1, 12:1, 13:3, 14:0, 15:1,
+            16:2, 17:1, 18:1, 19:2, 20:0, 21:0, 22:2, 23:2, 24:1, 25:1, 26:3, 27:2, 28:2, 29:1, 30:3,
+            31:1, 32:3, 33:1, 34:2, 35:2, 36:1, 37:2, 38:1, 39:1, 40:1, 41:0, 42:1, 43:3, 44:2, 45:3,
+            46:1, 47:0, 48:0, 49:3, 50:3, 51:1, 52:2, 53:1, 54:2, 55:0, 56:0, 57:1, 58:1, 59:3, 60:0,
+            61:3, 62:2, 63:2, 64:3, 65:3, 66:1, 67:1, 68:2, 69:1, 70:1, 71:0, 72:0, 73:3, 74:0, 75:0,
+            76:1, 77:2, 78:1, 79:3, 80:1, 81:2, 82:2, 83:3, 84:2, 85:1, 86:2, 87:3, 88:2, 89:3, 90:1,
+            91:2, 92:1, 93:0, 94:1, 95:1, 96:1, 97:0, 98:3, 99:3, 100:2, 101:3, 102:1, 103:2, 104:3,
+            105:0, 106:1, 107:3, 108:3, 109:0, 110:0, 111:3, 112:2, 113:2, 114:0, 115:2, 116:2, 117:3,
+            118:1, 119:0, 120:1, 121:3, 122:null, 123:0, 124:3, 125:1, 126:0, 127:1, 128:2, 129:1, 130:1,
+            131:3, 132:0, 133:1, 134:3, 135:2, 136:1, 137:0, 138:0, 139:2, 140:3, 141:3, 142:0,
+            143:1, 144:2, 145:1, 146:3, 147:0, 148:2, 149:1, 150:1, 151:0
+        };
+
+        // Utility: Convert Bengali Numeral String to English Integer
+        function bnToEn(bnStr) {
+            const bnToEnMap = {'০':0, '১':1, '২':2, '৩':3, '৪':4, '৫':5, '৬':6, '৭':7, '৮':8, '৯':9};
+            return parseInt(bnStr.split('').map(c => bnToEnMap[c] || c).join(''));
+        }
+
+        // Utility: Format LaTeX like strings for HTML (superscripts, subscripts, math symbols)
+        function formatMath(text) {
+            let res = text.replace(/\\text\{([^}]+)\}/g, "$1");
+            res = res.replace(/\^\{([^}]+)\}/g, "<sup>$1</sup>");
+            res = res.replace(/\^([0-9A-Za-z\-]+)/g, "<sup>$1</sup>");
+            res = res.replace(/\\times/g, " × ");
+            res = res.replace(/\\sqrt\{([^}]+)\}/g, "√$1");
+            res = res.replace(/\\Omega/g, "Ω");
+            res = res.replace(/\\circ/g, "°");
+            res = res.replace(/\\frac\{([^}]+)\}\{([^}]+)\}/g, "($1/$2)");
+            res = res.replace(/\\propto/g, "∝");
+            return res;
+        }
+
+        // Parse Data
+        const questions = [];
+        const rawText = document.getElementById('raw-data').textContent;
+        const lines = rawText.split('\n');
+        
+        let currentContext = "";
+        let targetIds = [];
+
+        lines.forEach(line => {
+            line = line.trim();
+            if(!line) return;
+
+            if (line.startsWith("নিচের তথ্যের") || line.startsWith("নিচের উদ্দীপকটি")) {
+                currentContext = formatMath(line);
+                const nums = line.match(/([১-৯][০-৯]*)/g);
+                if(nums) targetIds = nums;
+                return;
+            }
+
+            const regex = /^([১-৯][০-৯]*)\.\s*(.*?)\s*\(ক\)\s*(.*?)\s*\(খ\)\s*(.*?)\s*\(গ\)\s*(.*?)\s*\(ঘ\)\s*(.*)$/;
+            const match = line.match(regex);
+            
+            if (match) {
+                const id = match[1];
+                let context = "";
+                if (targetIds.includes(id)) {
+                    context = currentContext;
+                }
+
+                questions.push({
+                    id: id,
+                    context: context,
+                    text: formatMath(match[2]),
+                    options: [
+                        formatMath(match[3]),
+                        formatMath(match[4]),
+                        formatMath(match[5]),
+                        formatMath(match[6])
+                    ],
+                    correctIndex: answerKey[bnToEn(id)]
+                });
+            }
+        });
+
+        // App State
+        let currentIndex = 0;
+        let userAnswers = {};
+        let timeRemaining = 150 * 60; // 150 minutes in seconds
         let timerInterval;
 
-        const toBn = num => String(num).replace(/\d/g, d => '০১২৩৪৫৬৭৮৯'[d]);
-
-        document.getElementById('ws-total-q').innerText = toBn(questions.length);
-        document.getElementById('ws-time').innerText = toBn(examTimeMinutes) + ' মিনিট';
-        document.getElementById('total-q-num').innerText = toBn(questions.length);
+        // Init Display
+        document.getElementById('total-q-display').innerText = questions.length.toLocaleString('bn-BD');
+        document.getElementById('total-marks-display').innerText = questions.length.toLocaleString('bn-BD');
 
         function startExam() {
             document.getElementById('welcome-screen').classList.add('hidden');
             document.getElementById('exam-screen').classList.remove('hidden');
-            document.getElementById('header-timer').classList.remove('hidden');
-            buildPalette(); renderQuestion(); startTimer();
-        }
-
-        function startTimer() {
-            const display = document.getElementById('time-display');
-            timerInterval = setInterval(() => {
-                if (timeLeft <= 0) { clearInterval(timerInterval); submitExam(); return; }
-                timeLeft--;
-                display.innerText = `${toBn(Math.floor(timeLeft / 60)).padStart(2,'০')}:${toBn(timeLeft % 60).padStart(2,'০')}`;
-                if(timeLeft < 300) document.getElementById('header-timer').classList.replace('text-gold', 'text-red-500');
-            }, 1000);
-        }
-
-        function buildPalette() {
-            const grid = document.getElementById('palette-grid');
-            grid.innerHTML = '';
-            questions.forEach((_, idx) => {
-                const btn = document.createElement('button');
-                btn.id = `pal-btn-${idx}`;
-                btn.className = `w-10 h-10 rounded-lg font-bold border transition-colors flex items-center justify-center bg-white/10 text-gray-300 border-white/20`;
-                btn.innerText = toBn(idx + 1);
-                btn.onclick = () => { currentQuestionIndex = idx; renderQuestion(); };
-                grid.appendChild(btn);
-            });
+            renderNavGrid();
+            renderQuestion();
+            startTimer();
         }
 
         function renderQuestion() {
-            const q = questions[currentQuestionIndex];
-            document.getElementById('current-q-num').innerText = toBn(currentQuestionIndex + 1);
-            document.getElementById('question-text').innerHTML = `${toBn(currentQuestionIndex + 1)}. ${q.q}`;
+            const q = questions[currentIndex];
             
-            const optsCont = document.getElementById('options-container');
-            optsCont.innerHTML = '';
-            const prefixes = ['ক', 'খ', 'গ', 'ঘ'];
-            
-            q.o.forEach((opt, idx) => {
-                const isChecked = userAnswers[currentQuestionIndex] === idx ? 'checked' : '';
-                optsCont.insertAdjacentHTML('beforeend', `
-                    <label class="block relative cursor-pointer group">
-                        <input type="radio" name="opt" value="${idx}" class="absolute opacity-0 w-0 h-0" ${isChecked} onchange="userAnswers[${currentQuestionIndex}]=${idx}; updatePalette();">
-                        <div class="option-label bg-white/5 border border-white/10 rounded-xl p-4 flex gap-4 hover:bg-white/10">
-                            <div class="w-8 h-8 rounded-full bg-navy border border-white/20 flex items-center justify-center shrink-0 font-bold">${prefixes[idx]}</div>
-                            <div class="text-lg w-full">${opt}</div>
-                        </div>
-                    </label>
-                `);
-            });
-
-            document.getElementById('btn-prev').disabled = currentQuestionIndex === 0;
-            const nextBtn = document.getElementById('btn-next');
-            if (currentQuestionIndex === questions.length - 1) {
-                nextBtn.innerHTML = 'জমা দিন'; nextBtn.classList.replace('bg-royal', 'bg-green-600'); nextBtn.onclick = confirmSubmit;
+            // Context logic
+            const contextBox = document.getElementById('context-box');
+            if(q.context) {
+                contextBox.innerHTML = `<i class="fa-solid fa-circle-info mr-2"></i> ${q.context}`;
+                contextBox.classList.remove('hidden');
             } else {
-                nextBtn.innerHTML = 'পরবর্তী <i class="fa-solid fa-chevron-right ml-2"></i>'; nextBtn.classList.replace('bg-green-600', 'bg-royal'); nextBtn.onclick = nextQuestion;
+                contextBox.classList.add('hidden');
             }
 
-            updatePalette();
-            renderMathInElement(document.getElementById('question-text'), { delimiters: [{left: "\\(", right: "\\)", display: false}] });
-            renderMathInElement(optsCont, { delimiters: [{left: "\\(", right: "\\)", display: false}] });
+            // Number and Text
+            document.getElementById('current-q-num').innerText = q.id;
+            document.getElementById('question-text').innerHTML = `${q.id}. ${q.text}`;
+
+            // Options
+            const optsContainer = document.getElementById('options-container');
+            optsContainer.innerHTML = '';
+            
+            const prefixes = ['ক', 'খ', 'গ', 'ঘ'];
+            
+            q.options.forEach((opt, idx) => {
+                const checked = userAnswers[currentIndex] === idx ? 'checked' : '';
+                optsContainer.innerHTML += `
+                    <label class="block relative cursor-pointer">
+                        <input type="radio" name="q-option" value="${idx}" class="peer sr-only" onchange="selectOption(${idx})" ${checked}>
+                        <div class="option-label p-4 rounded-xl border border-white/20 bg-white/5 hover:bg-white/10 flex items-center">
+                            <span class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center mr-4 font-bold text-amber-400 border border-amber-400/50">${prefixes[idx]}</span>
+                            <span class="text-lg">${opt}</span>
+                        </div>
+                    </label>
+                `;
+            });
+
+            // Button States
+            document.getElementById('btn-prev').disabled = currentIndex === 0;
+            
+            if(currentIndex === questions.length - 1) {
+                document.getElementById('btn-next').innerHTML = '<i class="fa-solid fa-check-double mr-2"></i> সাবমিট';
+                document.getElementById('btn-next').onclick = confirmSubmit;
+                document.getElementById('btn-next').classList.replace('bg-blue-600', 'bg-green-600');
+                document.getElementById('btn-next').classList.replace('hover:bg-blue-500', 'hover:bg-green-500');
+            } else {
+                document.getElementById('btn-next').innerHTML = 'পরবর্তী <i class="fa-solid fa-arrow-right ml-2"></i>';
+                document.getElementById('btn-next').onclick = nextQuestion;
+                document.getElementById('btn-next').classList.replace('bg-green-600', 'bg-blue-600');
+                document.getElementById('btn-next').classList.replace('hover:bg-green-500', 'hover:bg-blue-500');
+            }
+            
+            updateProgress();
+            updateNavGridHighlight();
         }
 
-        function updatePalette() {
-            const progress = (userAnswers.filter(a => a !== null).length / questions.length) * 100;
-            document.getElementById('progress-bar').style.width = `${progress}%`;
+        function selectOption(optIndex) {
+            userAnswers[currentIndex] = optIndex;
+            updateProgress();
+            updateNavGridHighlight();
+            
+            // Auto advance (Optional - for smoother UX)
+            setTimeout(() => {
+                if(currentIndex < questions.length - 1) nextQuestion();
+            }, 400);
+        }
 
-            questions.forEach((_, idx) => {
-                const btn = document.getElementById(`pal-btn-${idx}`);
-                btn.className = `w-10 h-10 rounded-lg font-bold border transition-colors flex items-center justify-center ${userAnswers[idx] !== null ? 'bg-green-500 text-white border-green-600' : 'bg-white/10 text-gray-300 border-white/20'} ${idx === currentQuestionIndex ? 'ring-2 ring-gold scale-110' : ''}`;
+        function nextQuestion() {
+            if (currentIndex < questions.length - 1) {
+                currentIndex++;
+                renderQuestion();
+            }
+        }
+
+        function prevQuestion() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                renderQuestion();
+            }
+        }
+
+        function jumpToQuestion(index) {
+            currentIndex = index;
+            renderQuestion();
+        }
+
+        function renderNavGrid() {
+            const grid = document.getElementById('nav-grid');
+            grid.innerHTML = '';
+            questions.forEach((q, i) => {
+                grid.innerHTML += `<button id="nav-btn-${i}" onclick="jumpToQuestion(${i})" class="w-10 h-10 rounded-lg bg-white/5 border border-white/10 hover:bg-white/20 transition text-sm font-bold flex items-center justify-center">${q.id}</button>`;
             });
         }
 
-        function nextQuestion() { if (currentQuestionIndex < questions.length - 1) { currentQuestionIndex++; renderQuestion(); } }
-        function prevQuestion() { if (currentQuestionIndex > 0) { currentQuestionIndex--; renderQuestion(); } }
-
-        function confirmSubmit() {
-            const missing = userAnswers.filter(a => a === null).length;
-            document.getElementById('modal-unanswered-text').innerText = missing > 0 ? `আপনি ${toBn(missing)}টি প্রশ্নের উত্তর দেননি।` : `আপনি সব প্রশ্নের উত্তর দিয়েছেন।`;
-            const modal = document.getElementById('submit-modal');
-            modal.classList.remove('hidden'); modal.classList.add('flex');
-            setTimeout(() => modal.classList.remove('opacity-0'), 10);
+        function updateNavGridHighlight() {
+            questions.forEach((_, i) => {
+                const btn = document.getElementById(`nav-btn-${i}`);
+                if (!btn) return;
+                
+                // Reset
+                btn.className = "w-10 h-10 rounded-lg border transition text-sm font-bold flex items-center justify-center";
+                
+                if (i === currentIndex) {
+                    btn.classList.add('bg-blue-600', 'border-blue-400', 'text-white', 'shadow-lg');
+                } else if (userAnswers[i] !== undefined) {
+                    btn.classList.add('bg-amber-500', 'border-amber-400', 'text-slate-900');
+                } else {
+                    btn.classList.add('bg-white/5', 'border-white/10', 'text-white/80', 'hover:bg-white/20');
+                }
+            });
         }
 
-        function closeModal() {
-            const modal = document.getElementById('submit-modal');
-            modal.classList.add('opacity-0');
-            setTimeout(() => { modal.classList.add('hidden'); modal.classList.remove('flex'); }, 300);
+        function updateProgress() {
+            const answeredCount = Object.keys(userAnswers).length;
+            const total = questions.length;
+            const percent = (answeredCount / total) * 100;
+            
+            document.getElementById('progress-bar').style.width = `${percent}%`;
+            document.getElementById('progress-text').innerText = `${answeredCount.toLocaleString('bn-BD')} / ${total.toLocaleString('bn-BD')}`;
+        }
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timeRemaining--;
+                if(timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    submitExam();
+                }
+                
+                const hrs = Math.floor(timeRemaining / 3600);
+                const mins = Math.floor((timeRemaining % 3600) / 60);
+                const secs = timeRemaining % 60;
+                
+                const format = (n) => n.toString().padStart(2, '0').replace(/\d/g, d => '০১২৩৪৫৬৭৮৯'[d]);
+                document.getElementById('timer').innerText = `${format(hrs)}:${format(mins)}:${format(secs)}`;
+            }, 1000);
+        }
+
+        function confirmSubmit() {
+            const answered = Object.keys(userAnswers).length;
+            const unans = questions.length - answered;
+            
+            const warningText = unans > 0 
+                ? `আপনি ${unans.toLocaleString('bn-BD')} টি প্রশ্নের উত্তর দেননি। আপনি কি নিশ্চিত যে আপনি পরীক্ষা শেষ করতে চান?` 
+                : `আপনি সমস্ত প্রশ্নের উত্তর দিয়েছেন। পরীক্ষা জমা দেবেন?`;
+                
+            document.getElementById('modal-warning').innerText = warningText;
+            document.getElementById('submit-modal').classList.remove('hidden');
         }
 
         function submitExam() {
-            clearInterval(timerInterval); closeModal();
+            clearInterval(timerInterval);
+            document.getElementById('submit-modal').classList.add('hidden');
             document.getElementById('exam-screen').classList.add('hidden');
-            document.getElementById('header-timer').classList.add('hidden');
             
-            let cor = 0, wr = 0, sk = 0;
-            userAnswers.forEach((ans, i) => { if (ans === null) sk++; else if (ans === questions[i].c) cor++; else wr++; });
-            
-            const perc = Math.round((cor / questions.length) * 100);
-            document.getElementById('res-total').innerText = toBn(questions.length);
-            document.getElementById('res-correct').innerText = toBn(cor);
-            document.getElementById('res-wrong').innerText = toBn(wr);
-            document.getElementById('res-skipped').innerText = toBn(sk);
-            document.getElementById('score-percentage').innerText = toBn(perc) + '%';
-            
-            let grade = perc>=80 ? 'A+' : perc>=70 ? 'A' : perc>=60 ? 'A-' : perc>=50 ? 'B' : perc>=40 ? 'C' : 'F';
-            document.getElementById('grade-display').innerText = `Grade: ${grade}`;
-            document.getElementById('result-msg').innerText = perc>=80 ? 'অসাধারণ পারফরম্যান্স!' : perc>=50 ? 'ভালো করেছেন, আরও উন্নতি সম্ভব।' : 'আপনাকে আরও পড়তে হবে।';
-
-            document.getElementById('result-screen').classList.remove('hidden');
-            setTimeout(() => document.getElementById('circular-chart').style.setProperty('--progress', perc + '%'), 500);
-            genAnswerSheet();
+            calculateAndShowResult();
         }
 
-        function showAnswerSheet() {
-            document.getElementById('result-screen').classList.add('hidden');
-            document.getElementById('answer-sheet-screen').classList.remove('hidden');
-        }
+        function calculateAndShowResult() {
+            let correct = 0, wrong = 0;
+            const total = questions.length;
 
-        function genAnswerSheet() {
-            const cont = document.getElementById('answers-container');
-            const pre = ['ক', 'খ', 'গ', 'ঘ'];
             questions.forEach((q, i) => {
-                const uAns = userAnswers[i], isCor = uAns === q.c, isSk = uAns === null;
-                const badge = isCor ? '<span class="text-green-400 bg-green-500/20 px-2 rounded">সঠিক</span>' : isSk ? '<span class="text-yellow-400 bg-yellow-500/20 px-2 rounded">বাদ দেওয়া</span>' : '<span class="text-red-400 bg-red-500/20 px-2 rounded">ভুল</span>';
-                
-                let opts = '';
-                q.o.forEach((o, oi) => {
-                    const style = oi === q.c ? 'text-green-400 font-bold bg-green-500/10' : (oi === uAns ? 'text-red-400 line-through bg-red-500/10' : 'text-gray-400');
-                    opts += `<p class="${style} rounded px-2 py-1 mb-1">${pre[oi]}) ${o}</p>`;
-                });
-
-                cont.insertAdjacentHTML('beforeend', `
-                    <div class="bg-white/5 p-5 rounded-xl border ${isCor ? 'border-green-500/30' : isSk ? 'border-white/10' : 'border-red-500/30'}">
-                        <div class="flex justify-between items-start mb-3"><h4 class="text-lg pr-4">${toBn(i+1)}. ${q.q}</h4>${badge}</div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-2 mb-3">${opts}</div>
-                        <div class="bg-blue-900/30 p-2 rounded text-sm text-blue-200"><strong>ব্যাখ্যা:</strong> ${q.e}</div>
-                    </div>
-                `);
+                if (userAnswers[i] !== undefined) {
+                    if (userAnswers[i] === q.correctIndex) correct++;
+                    else wrong++;
+                }
             });
-            renderMathInElement(document.getElementById('answer-sheet-screen'), { delimiters: [{left: "\\(", right: "\\)", display: false}] });
+
+            const unans = total - (correct + wrong);
+            const percent = Math.round((correct / total) * 100);
+
+            document.getElementById('res-total').innerText = total.toLocaleString('bn-BD');
+            document.getElementById('res-correct').innerText = correct.toLocaleString('bn-BD');
+            document.getElementById('res-wrong').innerText = wrong.toLocaleString('bn-BD');
+            document.getElementById('res-unanswered').innerText = unans.toLocaleString('bn-BD');
+            
+            document.getElementById('score-percentage').innerText = `${percent.toLocaleString('bn-BD')}%`;
+            
+            // Animate SVG Circle
+            setTimeout(() => {
+                document.getElementById('score-circle').style.strokeDasharray = `${percent}, 100`;
+            }, 500);
+
+            // Grade logic
+            let msg = "";
+            if (percent >= 80) msg = "অসাধারণ! আপনার প্রস্তুতি চমৎকার (A+)";
+            else if (percent >= 70) msg = "খুব ভালো! আপনার প্রস্তুতি ভালো (A)";
+            else if (percent >= 60) msg = "উত্তম! তবে আরও অনুশীলনের প্রয়োজন (A-)";
+            else if (percent >= 50) msg = "মোটামুটি! আপনাকে আরও মনোযোগ দিতে হবে (B)";
+            else msg = "উদ্বেগজনক! আপনাকে প্রচুর পড়াশোনা করতে হবে (F)";
+            
+            document.getElementById('grade-text').innerText = msg;
+            
+            document.getElementById('result-screen').classList.remove('hidden');
+            generateReviewSheet();
+        }
+
+        function toggleReview() {
+            const rev = document.getElementById('review-section');
+            rev.classList.toggle('hidden');
+        }
+
+        function generateReviewSheet() {
+            const revSec = document.getElementById('review-section');
+            const prefixes = ['ক', 'খ', 'গ', 'ঘ'];
+            revSec.innerHTML = '<h3 class="text-2xl font-bold text-center text-white mb-6 border-b border-white/20 pb-4">বিস্তারিত উত্তরপত্র</h3>';
+            
+            questions.forEach((q, i) => {
+                const userAns = userAnswers[i];
+                const isCorrect = userAns === q.correctIndex;
+                const isUnanswered = userAns === undefined;
+                
+                let statusBadge = '';
+                let borderClass = '';
+                
+                if (isUnanswered) {
+                    statusBadge = '<span class="bg-gray-500 text-white text-xs px-2 py-1 rounded">উত্তর দেওয়া হয়নি</span>';
+                    borderClass = 'border-gray-500';
+                } else if (q.correctIndex === null) {
+                    statusBadge = '<span class="bg-amber-500 text-slate-900 text-xs px-2 py-1 rounded">যাচাইয়ের জন্য চিহ্নিত</span>';
+                    borderClass = 'border-amber-500';
+                } else if (isCorrect) {
+                    statusBadge = '<span class="bg-green-500 text-white text-xs px-2 py-1 rounded"><i class="fa-solid fa-check mr-1"></i> সঠিক</span>';
+                    borderClass = 'border-green-500';
+                } else {
+                    statusBadge = '<span class="bg-red-500 text-white text-xs px-2 py-1 rounded"><i class="fa-solid fa-xmark mr-1"></i> ভুল</span>';
+                    borderClass = 'border-red-500';
+                }
+
+                let optHTML = '<div class="grid grid-cols-1 md:grid-cols-2 gap-2 mt-4">';
+                q.options.forEach((opt, oIdx) => {
+                    let optClass = 'bg-white/5 text-white/70';
+                    
+                    if (q.correctIndex !== null) {
+                        if (oIdx === q.correctIndex) {
+                            optClass = 'bg-green-500/20 border-green-500 text-green-400 font-bold'; // Correct Ans
+                        } else if (oIdx === userAns) {
+                            optClass = 'bg-red-500/20 border-red-500 text-red-400 line-through'; // Wrong user ans
+                        }
+                    } else if (oIdx === userAns) {
+                         optClass = 'bg-amber-500/20 border-amber-500 text-amber-400';
+                    }
+
+                    optHTML += `<div class="p-3 rounded-lg border border-white/10 ${optClass} flex items-center">
+                        <span class="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center mr-3 text-xs">${prefixes[oIdx]}</span>
+                        ${opt}
+                    </div>`;
+                });
+                optHTML += '</div>';
+
+                const card = `
+                    <div class="glass-card p-6 rounded-2xl border-l-4 ${borderClass}">
+                        <div class="flex justify-between items-start mb-2">
+                            <h4 class="text-lg font-bold">প্রশ্ন ${q.id}: ${q.text}</h4>
+                            ${statusBadge}
+                        </div>
+                        ${optHTML}
+                    </div>
+                `;
+                revSec.innerHTML += card;
+            });
         }
     </script>
 </body>
