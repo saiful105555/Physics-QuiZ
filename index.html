@@ -77,12 +77,12 @@
             background: #dc2626;
         }
 
-        /* A4 Size Landscape: 297mm x 210mm - Strict 1-Page Containment with Narrow Margin */
+        /* A4 Size Landscape: 297mm x 210mm - Strict 1-Page Containment */
         .page {
             width: 297mm;  
             height: 209mm; 
             margin: 8px auto;
-            padding: 2.5mm 3.5mm;
+            padding: 2mm 3.5mm 3mm 3.5mm;
             background-color: #ffffff;   
             border: 1px solid #cbd5e1;
             box-shadow: 0 10px 15px rgba(0,0,0,0.1);
@@ -97,7 +97,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 2px;
+            margin-bottom: 1px;
             flex-shrink: 0;
         }
         
@@ -121,12 +121,13 @@
             font-size: 7.5pt;
             font-weight: bold;
             border-bottom: var(--thick-border);
+            line-height: 1.1;
         }
         .box-left .box-value {
-            font-size: 13pt;
+            font-size: 12.5pt;
             font-weight: bold;
-            padding: 0px;
-            line-height: 1.15;
+            padding: 1px 0;
+            line-height: 1.05;
             color: #b91c1c;
         }
 
@@ -136,10 +137,10 @@
             background-color: #fef08a;
             text-align: center;
             padding: 2px 3px;
-            font-size: 7pt;
+            font-size: 6.8pt;
             font-weight: bold;
             color: #854d0e;
-            line-height: 1.1;
+            line-height: 1.05;
         }
 
         .header-center {
@@ -160,13 +161,13 @@
         }
 
         .header-logo {
-            width: 46px;
-            height: 46px;
+            width: 44px;
+            height: 44px;
             object-fit: contain;
         }
 
         .school-name {
-            font-size: 17pt;
+            font-size: 16.5pt;
             font-weight: bold;
             color: #0f172a;
             margin: 0;
@@ -204,7 +205,8 @@
             padding: 1px 10px;
             border-radius: 8px;
             font-weight: 900;
-            font-size: 9.5pt;
+            font-size: 9pt;
+            line-height: 1.1;
         }
 
         .box-right {
@@ -216,14 +218,14 @@
             text-align: left;
             width: 165px;
             background-color: #f8fafc;
-            line-height: 1.15;
+            line-height: 1.1;
         }
 
-        /* Full-Page Table Calibration for A4 Landscape */
+        /* Locked Row Heights so Tick Marks Never Expand Table */
         table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 8.5pt;
+            font-size: 8.2pt;
             table-layout: fixed;
             border: var(--thick-border);
             flex-shrink: 0;
@@ -234,18 +236,19 @@
             padding: 0px 1px;
             text-align: center;
             vertical-align: middle;
-            height: 20px; 
-            max-height: 20px;
+            height: 17.5px; 
+            max-height: 17.5px;
+            line-height: 1 !important;
             overflow: hidden;
             white-space: nowrap;
         }
         thead tr:first-child th {
-            height: 22px;
-            max-height: 22px;
+            height: 19px;
+            max-height: 19px;
         }
         thead tr:last-child th {
-            height: 36px;
-            max-height: 36px;
+            height: 31px;
+            max-height: 31px;
         }
         th {
             background-color: #f8f9fa;
@@ -258,7 +261,8 @@
         td:nth-child(2) {
             text-align: left;
             padding-left: 4px;
-            font-size: 8.5pt;
+            font-size: 8.2pt;
+            line-height: 1 !important;
             cursor: text;
         }
         td:nth-child(2):hover { background: #fef08a; }
@@ -288,7 +292,8 @@
         .slot-cell {
             cursor: pointer;
             transition: 0.1s;
-            font-size: 9.5pt;
+            font-size: 8.5pt;
+            line-height: 1 !important;
             user-select: none;
         }
         .slot-cell:hover {
@@ -301,48 +306,52 @@
 
         .row-total {
             font-weight: bold;
-            font-size: 9pt;
+            font-size: 8.5pt;
+            line-height: 1 !important;
             color: #1d4ed8;
         }
         .total-row td {
             border-top: var(--thick-border);
             border-bottom: var(--thick-border);
             font-weight: bold;
-            font-size: 9pt;
-            height: 20px;
-            max-height: 20px;
+            font-size: 8.5pt;
+            height: 18px;
+            max-height: 18px;
+            line-height: 1 !important;
         }
         
         .vertical-text {
             writing-mode: vertical-rl;
             transform: rotate(180deg);
             white-space: nowrap;
-            font-size: 6.8pt;
+            font-size: 6.5pt;
+            line-height: 1;
             display: inline-block;
-            padding: 1px 0;
+            padding: 0;
         }
         .date-header {
             font-size: 6.5pt;
-            line-height: 1.05;
-            padding: 1px 0;
+            line-height: 1.02 !important;
+            padding: 0;
         }
 
-        /* Distinct and Clear Signature Area */
+        /* Always Visible Signature Section */
         .signature-section {
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
-            padding: 0 35px;
+            padding: 0 35px 2px 35px;
             font-weight: bold;
             font-size: 9.5pt;
             flex-shrink: 0;
-            height: 46px;
+            height: 36px;
             margin-top: 2px;
         }
         .signature-box {
             text-align: center;
             width: 150px;
-            padding-top: 3px;
+            padding-top: 2px;
+            line-height: 1.1;
             border-top: 1.5px dashed #000;
         }
 
@@ -366,7 +375,7 @@
                 box-shadow: none !important;
                 width: 297mm !important;
                 height: 209mm !important;
-                padding: 2.5mm 3.5mm !important;
+                padding: 2mm 3.5mm 3mm 3.5mm !important;
                 page-break-after: avoid !important;
                 page-break-before: avoid !important;
                 page-break-inside: avoid !important;
@@ -480,7 +489,6 @@
     <script>
         const STORAGE_KEY = 'ibne_taimiya_exam_roster_cache_v1';
 
-        // Default 27 teachers (26 fixed + 1 empty default row for 27th)
         const defaultTeachers = [
             "জনাব এ.এম. আখতার হোসেন", 
             '" মো: সিরাজুল ইসলাম খান (C.T)', 
@@ -508,7 +516,7 @@
             '" মো: মাহমুদুল হাসান',
             '" মো: মনির হোসেন', 
             '" ফয়সাল বিন সাঈদ', 
-            "" // 27th slot is blank by default
+            ""
         ];
 
         const tbody = document.getElementById('rosterBody');
@@ -520,7 +528,6 @@
             });
         }
 
-        // Save current state (ticks + edited teacher names) to localStorage
         function saveToCache() {
             const rows = document.querySelectorAll('#rosterBody tr');
             const state = {
@@ -542,7 +549,6 @@
             localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
         }
 
-        // Load saved state from localStorage
         function loadFromCache() {
             const raw = localStorage.getItem(STORAGE_KEY);
             if (!raw) return null;
@@ -553,7 +559,6 @@
             }
         }
 
-        // Build Table Rows
         function renderTable() {
             tbody.innerHTML = '';
             const savedState = loadFromCache();
@@ -675,7 +680,6 @@
             document.getElementById('footer-grand-total').innerText = banglaGrandTotal;
         }
 
-        // Clear Cache Memory Function
         function clearRosterCache() {
             const confirmed = confirm("আপনি কি নিশ্চিত যে ক্যাশ মেমোরি ক্লিয়ার করে সব টিক মার্ক মুছে ফেলতে চান?");
             if (confirmed) {
@@ -684,7 +688,6 @@
             }
         }
 
-        // Initialize on page load
         renderTable();
     </script>
 </body>
