@@ -2,7 +2,7 @@
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
-    <title>Exam Roster & Teacher Attendance - A4 Landscape Perfect Fit</title>
+    <title>Master Exam Roster & Attendance (Optimized Spacing) - Ibne Taimiya School & College</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;700&display=swap');
         
@@ -25,21 +25,50 @@
         }
 
         .no-print-bar {
-            background: #1e293b;
+            background: #0f172a;
             color: white;
-            padding: 8px;
+            padding: 10px;
             text-align: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.15);
             position: sticky;
             top: 0;
             z-index: 1000;
+        }
+
+        .shift-selector {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+            flex-wrap: wrap;
+        }
+
+        .btn-shift {
+            background: #334155;
+            color: #e2e8f0;
+            border: 2px solid #475569;
+            padding: 5px 16px;
+            font-size: 11pt;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            font-family: inherit;
+            transition: 0.2s;
+        }
+        .btn-shift:hover { background: #475569; }
+        .btn-shift.active {
+            background: #f59e0b;
+            color: #000;
+            border-color: #fbbf24;
+            box-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
         }
 
         .action-buttons {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             flex-wrap: wrap;
         }
 
@@ -47,52 +76,71 @@
             background: #10b981;
             color: white;
             border: none;
-            padding: 6px 14px;
-            font-size: 11pt;
-            border-radius: 8px;
+            padding: 6px 13px;
+            font-size: 10pt;
+            border-radius: 6px;
             cursor: pointer;
             font-weight: bold;
             font-family: inherit;
-            transition: 0.3s;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            transition: 0.2s;
         }
-        .btn-download:hover {
-            background: #059669;
-        }
+        .btn-download:hover { background: #059669; }
 
         .btn-attendance {
             background: #2563eb;
             color: white;
             border: none;
-            padding: 6px 14px;
-            font-size: 11pt;
-            border-radius: 8px;
+            padding: 6px 13px;
+            font-size: 10pt;
+            border-radius: 6px;
             cursor: pointer;
             font-weight: bold;
             font-family: inherit;
-            transition: 0.3s;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            transition: 0.2s;
         }
-        .btn-attendance:hover {
-            background: #1d4ed8;
+        .btn-attendance:hover { background: #1d4ed8; }
+
+        .btn-attendance-2 {
+            background: #7c3aed;
+            color: white;
+            border: none;
+            padding: 6px 13px;
+            font-size: 10pt;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-family: inherit;
+            transition: 0.2s;
         }
+        .btn-attendance-2:hover { background: #6d28d9; }
+
+        .btn-reset {
+            background: #f97316;
+            color: white;
+            border: none;
+            padding: 6px 13px;
+            font-size: 10pt;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-family: inherit;
+            transition: 0.2s;
+        }
+        .btn-reset:hover { background: #ea580c; }
 
         .btn-clear {
             background: #ef4444;
             color: white;
             border: none;
-            padding: 6px 14px;
-            font-size: 11pt;
-            border-radius: 8px;
+            padding: 6px 13px;
+            font-size: 10pt;
+            border-radius: 6px;
             cursor: pointer;
             font-weight: bold;
             font-family: inherit;
-            transition: 0.3s;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            transition: 0.2s;
         }
-        .btn-clear:hover {
-            background: #dc2626;
-        }
+        .btn-clear:hover { background: #dc2626; }
 
         /* A4 Size Landscape: 297mm x 210mm - Strict 1-Page Containment */
         .page {
@@ -259,24 +307,33 @@
             font-weight: bold;
         }
 
-        /* ==================== TABLE 1: ROSTER TABLE ==================== */
-        .roster-table th, .roster-table td {
-            height: 17.5px !important; 
-            max-height: 17.5px !important;
-            min-height: 17.5px !important;
-            line-height: 17.5px !important;
+        /* Dynamic Row Height Calibration */
+        body.rows-25 .roster-table th, body.rows-25 .roster-table td, body.rows-25 .total-row td {
+            height: 18.8px !important; max-height: 18.8px !important; min-height: 18.8px !important; line-height: 18.8px !important;
         }
+        body.rows-26 .roster-table th, body.rows-26 .roster-table td, body.rows-26 .total-row td {
+            height: 18.2px !important; max-height: 18.2px !important; min-height: 18.2px !important; line-height: 18.2px !important;
+        }
+        body.rows-27 .roster-table th, body.rows-27 .roster-table td, body.rows-27 .total-row td {
+            height: 17.5px !important; max-height: 17.5px !important; min-height: 17.5px !important; line-height: 17.5px !important;
+        }
+
+        body.rows-25 .attendance-table th, body.rows-25 .attendance-table td {
+            height: 19.8px !important; max-height: 19.8px !important; min-height: 19.8px !important; line-height: 19.8px !important;
+        }
+        body.rows-26 .attendance-table th, body.rows-26 .attendance-table td {
+            height: 19.2px !important; max-height: 19.2px !important; min-height: 19.2px !important; line-height: 19.2px !important;
+        }
+        body.rows-27 .attendance-table th, body.rows-27 .attendance-table td {
+            height: 18.5px !important; max-height: 18.5px !important; min-height: 18.5px !important; line-height: 18.5px !important;
+        }
+
+        /* ==================== TABLE 1: ROSTER TABLE ==================== */
         .roster-table thead tr:first-child th {
-            height: 19px !important;
-            max-height: 19px !important;
-            min-height: 19px !important;
-            line-height: 19px !important;
+            height: 19px !important; max-height: 19px !important; min-height: 19px !important; line-height: 19px !important;
         }
         .roster-table thead tr:last-child th {
-            height: 31px !important;
-            max-height: 31px !important;
-            min-height: 31px !important;
-            line-height: 14px !important;
+            height: 31px !important; max-height: 31px !important; min-height: 31px !important; line-height: 14px !important;
         }
         .roster-table th:nth-child(1) { width: 3.2%; } 
         .roster-table th:nth-child(2) { width: 17.5%; }  
@@ -317,13 +374,8 @@
             font-size: 9pt;
             user-select: none;
         }
-        .slot-cell:hover {
-            background: #dbeafe;
-        }
-        .slot-cell.ticked {
-            font-weight: 900;
-            color: #000;
-        }
+        .slot-cell:hover { background: #dbeafe; }
+        .slot-cell.ticked { font-weight: 900; color: #000; }
 
         .row-total {
             font-weight: bold;
@@ -335,10 +387,6 @@
             border-bottom: var(--thick-border);
             font-weight: bold;
             font-size: 8.5pt;
-            height: 17.5px !important;
-            max-height: 17.5px !important;
-            min-height: 17.5px !important;
-            line-height: 17.5px !important;
         }
         
         .vertical-text {
@@ -356,26 +404,14 @@
             padding: 0;
         }
 
-        /* ==================== TABLE 2: ATTENDANCE TABLE ==================== */
-        .attendance-table th, .attendance-table td {
-            height: 18.5px !important;
-            max-height: 18.5px !important;
-            min-height: 18.5px !important;
-            line-height: 18.5px !important;
-        }
+        /* ==================== TABLE 2 & 3: ATTENDANCE TABLES (Optimized Spacing) ==================== */
         .attendance-table thead tr:first-child th {
-            height: 20px !important;
-            max-height: 20px !important;
-            min-height: 20px !important;
-            line-height: 20px !important;
+            height: 20px !important; max-height: 20px !important; min-height: 20px !important; line-height: 20px !important;
             font-size: 6.5pt;
             background-color: #f1f5f9;
         }
         .attendance-table thead tr:last-child th {
-            height: 20px !important;
-            max-height: 20px !important;
-            min-height: 20px !important;
-            line-height: 20px !important;
+            height: 20px !important; max-height: 20px !important; min-height: 20px !important; line-height: 20px !important;
             font-size: 6.5pt;
         }
         .attendance-table td:nth-child(2) {
@@ -388,7 +424,6 @@
             font-weight: 900;
             color: #000;
         }
-        /* নামের পর এবং প্রতিটি ডেইটের (স্বাক্ষর ঘরের) পর মোটা দাগ */
         .thick-right {
             border-right: var(--thick-border) !important;
         }
@@ -438,50 +473,52 @@
                 page-break-inside: avoid !important;
                 break-inside: avoid !important;
             }
-            body.print-roster-only #attendancePage {
-                display: none !important;
-            }
-            body.print-roster-only #rosterPage {
-                page-break-after: avoid !important;
-            }
-            body.print-attendance-only #rosterPage {
-                display: none !important;
-            }
-            body.print-attendance-only #attendancePage {
-                page-break-after: avoid !important;
-            }
-            body.print-both #rosterPage {
-                page-break-after: always !important;
-            }
-            body.print-both #attendancePage {
-                page-break-after: avoid !important;
-            }
+
+            body.print-roster-only #attendancePage1,
+            body.print-roster-only #attendancePage2 { display: none !important; }
+            body.print-roster-only #rosterPage { page-break-after: avoid !important; }
+
+            body.print-att1-only #rosterPage,
+            body.print-att1-only #attendancePage2 { display: none !important; }
+            body.print-att1-only #attendancePage1 { page-break-after: avoid !important; }
+
+            body.print-att2-only #rosterPage,
+            body.print-att2-only #attendancePage1 { display: none !important; }
+            body.print-att2-only #attendancePage2 { page-break-after: avoid !important; }
+
+            body.print-all #rosterPage,
+            body.print-all #attendancePage1 { page-break-after: always !important; }
+            body.print-all #attendancePage2 { page-break-after: avoid !important; }
+
             td:nth-child(2):hover { background: transparent; }
             .bidro-box {
                 background-color: #fef08a !important;
                 border: 2px solid #000 !important;
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
             }
             .shift-badge {
                 background-color: #dbeafe !important;
                 border: 2px solid #2563eb !important;
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
             }
         }
     </style>
 </head>
-<body class="print-both">
+<body class="print-all rows-26">
 
     <div class="no-print-bar">
-        <h2 style="margin: 0 0 3px 0; font-size: 14pt;">রোস্টার ও শিক্ষক হাজিরা প্যানেল (A4 Landscape - Auto Sync)</h2>
-        <p style="margin: 0 0 6px 0; color:#cbd5e1; font-size:10pt;">উপরের রোস্টারে টিক দিলে নিচের হাজিরা শিট অটোমেটিক তৈরি হবে এবং ক্যাশ মেমোরিতে সেভ থাকবে।</p>
+        <div class="shift-selector">
+            <span style="font-weight:bold; font-size:11pt; margin-right:4px;">শিফট নির্বাচন করুন:</span>
+            <button class="btn-shift active" id="btn-joba" onclick="switchShift('joba')">🌺 জবা (২৬ জন)</button>
+            <button class="btn-shift" id="btn-shapla" onclick="switchShift('shapla')">🌸 শাপলা (২৫ জন)</button>
+            <button class="btn-shift" id="btn-beli" onclick="switchShift('beli')">🌼 বেলি (২৭ জন)</button>
+            <button class="btn-shift" id="btn-bokul" onclick="switchShift('bokul')">🏵️ বকুল (২৬ জন)</button>
+        </div>
         <div class="action-buttons">
-            <button class="btn-download" onclick="printSection('roster')">🖨️ শুধু রোস্টার প্রিন্ট/PDF</button>
-            <button class="btn-attendance" onclick="printSection('attendance')">🖨️ শুধু হাজিরা শিট প্রিন্ট/PDF</button>
-            <button class="btn-download" style="background:#0d9488;" onclick="printSection('both')">🖨️ দুটি একসাথে প্রিন্ট/PDF</button>
-            <button class="btn-clear" onclick="clearRosterCache()">🗑️ ক্লিয়ার ক্যাশ (Clear Cache)</button>
+            <button class="btn-download" onclick="printSection('roster')">🖨️ শুধু রোস্টার</button>
+            <button class="btn-attendance" onclick="printSection('att1')">🖨️ হাজিরা (১ম বেলা)</button>
+            <button class="btn-attendance-2" onclick="printSection('att2')">🖨️ হাজিরা (২য় বেলা)</button>
+            <button class="btn-download" style="background:#0d9488;" onclick="printSection('all')">🖨️ ৩টি পেইজ একসাথে প্রিন্ট/PDF</button>
+            <button class="btn-reset" onclick="resetToAutoSchedule()">🔄 ৮০ জনের অটো-রোটেশন রিসেট</button>
+            <button class="btn-clear" onclick="clearAllTicks()">🗑️ সব টিক মুছুন (Blank)</button>
         </div>
     </div>
 
@@ -508,7 +545,7 @@
             </div>
             
             <div class="box-right-container">
-                <div class="shift-badge">শিফট: জবা</div>
+                <div class="shift-badge shift-name-display">শিফট: জবা</div>
                 <div class="box-right">
                     ১ম বেলা : ৭.৩০ থেকে ১০.৩০টা<br>
                     ২য় বেলা : ১.৩০ থেকে ৪.৩০টা
@@ -565,12 +602,12 @@
     </section>
 
     <!-- ==================== পেজ ২: শিক্ষক হাজিরা শিট (১ম বেলা) ==================== -->
-    <section class="page" id="attendancePage">
+    <section class="page" id="attendancePage1">
         <div class="header-container">
             <div class="left-header-group">
                 <div class="box-left">
                     <div class="box-title">সর্বমোট ডিউটি (১ম বেলা)</div>
-                    <div class="box-value" id="attendance-grand-total">০</div>
+                    <div class="box-value" id="attendance1-grand-total">০</div>
                 </div>
                 <div class="bidro-box">
                     বি:দ্র: পরীক্ষা শুরুর ২০ মিনিট পূর্বে কক্ষে অবস্থান করতে হবে।
@@ -587,7 +624,7 @@
             </div>
             
             <div class="box-right-container">
-                <div class="shift-badge">শিফট: জবা</div>
+                <div class="shift-badge shift-name-display">শিফট: জবা</div>
                 <div class="box-right">
                     ১ম বেলা : ৭.৩০ থেকে ১০.৩০টা<br>
                     ২য় বেলা : ১.৩০ থেকে ৪.৩০টা
@@ -596,13 +633,13 @@
         </div>
 
         <table class="attendance-table">
-            <!-- colgroup দিয়ে D ঘর ন্যারো (0.95%), হল ঘর এক ধাপ বড় (1.90%) এবং স্বাক্ষর ঘর প্রশস্ত (3.70%) রাখা হয়েছে -->
+            <!-- নামের কলামের ডানপাশের ফাঁকা জায়গা কমিয়ে নাম ৮.২%, D কলাম ০.৮%, হল কলাম ১.৮% এবং সিগনেচার ঘর ৪.২৫% করা হয়েছে -->
             <colgroup>
                 <col style="width: 2.8%;">
-                <col style="width: 12.05%;">
+                <col style="width: 8.2%;">
                 <script>
                     for(let i=0; i<13; i++){
-                        document.write('<col style="width: 0.95%;"><col style="width: 1.90%;"><col style="width: 3.70%;">');
+                        document.write('<col style="width: 0.8%;"><col style="width: 1.8%;"><col style="width: 4.25%;">');
                     }
                 </script>
             </colgroup>
@@ -612,11 +649,17 @@
                     <th rowspan="2" class="thick-right">পর্যবেক্ষকদের নাম</th>
                     <script>
                         const attDates = [
+                            "১৭/১৭/২৬", "১৮/১১/২৬", "১৯/১১/২৬", "২২/১১/২৬", 
+                            "২৩/১১/২৬", "২৪/১১/২৬", "২৫/১১/২৬", "২৬/১১/২৬", 
+                            "২৯/১১/২৬", "৩০/১১/২৬", "০১/১২/২৬", "০২/১২/২৬", "০৩/১২/২৬"
+                        ];
+                        // Date labels fix
+                        const attDatesReal = [
                             "১৭/১১/২৬", "১৮/১১/২৬", "১৯/১১/২৬", "২২/১১/২৬", 
                             "২৩/১১/২৬", "২৪/১১/২৬", "২৫/১১/২৬", "২৬/১১/২৬", 
                             "২৯/১১/২৬", "৩০/১১/২৬", "০১/১২/২৬", "০২/১২/২৬", "০৩/১২/২৬"
                         ];
-                        attDates.forEach(d => {
+                        attDatesReal.forEach(d => {
                             document.write(`<th colspan="3" class="thick-right">${d}</th>`);
                         });
                     </script>
@@ -629,7 +672,77 @@
                     </script>
                 </tr>
             </thead>
-            <tbody id="attendanceBody">
+            <tbody id="attendanceBody1">
+            </tbody>
+        </table>
+        
+        <div class="signature-section">
+            <div class="signature-box">অধ্যক্ষ</div>
+            <div class="signature-box">পরীক্ষা নিয়ন্ত্রক</div>
+            <div class="signature-box">প্রস্তুতকারী</div>
+        </div>
+    </section>
+
+    <!-- ==================== পেজ ৩: শিক্ষক হাজিরা শিট (২য় বেলা) ==================== -->
+    <section class="page" id="attendancePage2">
+        <div class="header-container">
+            <div class="left-header-group">
+                <div class="box-left">
+                    <div class="box-title">সর্বমোট ডিউটি (২য় বেলা)</div>
+                    <div class="box-value" id="attendance2-grand-total">০</div>
+                </div>
+                <div class="bidro-box">
+                    বি:দ্র: পরীক্ষা শুরুর ২০ মিনিট পূর্বে কক্ষে অবস্থান করতে হবে।
+                </div>
+            </div>
+            
+            <div class="header-center">
+                <div class="school-title-wrapper">
+                    <img src="https://lh3.googleusercontent.com/d/1ZmxR46CCr7Ge5UntTMM_TbTeMJfdiqTD" alt="Logo" class="header-logo">
+                    <div class="school-name">ইবনে তাইমিয়া স্কুল এন্ড কলেজ</div>
+                </div>
+                <div class="exam-name">বার্ষিক পরীক্ষা-২০২৬ খ্রিস্টাব্দ</div>
+                <div class="roster-title">শিক্ষক হাজিরা শিট (২য় বেলা)</div>
+            </div>
+            
+            <div class="box-right-container">
+                <div class="shift-badge shift-name-display">শিফট: জবা</div>
+                <div class="box-right">
+                    ১ম বেলা : ৭.৩০ থেকে ১০.৩০টা<br>
+                    ২য় বেলা : ১.৩০ থেকে ৪.৩০টা
+                </div>
+            </div>
+        </div>
+
+        <table class="attendance-table">
+            <colgroup>
+                <col style="width: 2.8%;">
+                <col style="width: 8.2%;">
+                <script>
+                    for(let i=0; i<13; i++){
+                        document.write('<col style="width: 0.8%;"><col style="width: 1.8%;"><col style="width: 4.25%;">');
+                    }
+                </script>
+            </colgroup>
+            <thead>
+                <tr>
+                    <th rowspan="2">ক্র.নং</th>
+                    <th rowspan="2" class="thick-right">পর্যবেক্ষকদের নাম</th>
+                    <script>
+                        attDatesReal.forEach(d => {
+                            document.write(`<th colspan="3" class="thick-right">${d}</th>`);
+                        });
+                    </script>
+                </tr>
+                <tr class="sub-header-row">
+                    <script>
+                        for(let i=0; i<13; i++){
+                            document.write('<th>D</th><th>হল</th><th class="thick-right">স্বাক্ষর</th>');
+                        }
+                    </script>
+                </tr>
+            </thead>
+            <tbody id="attendanceBody2">
             </tbody>
         </table>
         
@@ -641,38 +754,150 @@
     </section>
 
     <script>
-        const STORAGE_KEY = 'ibne_taimiya_exam_roster_cache_v1';
+        const SHIFTS_CONFIG = {
+            joba: {
+                title: "শিফট: জবা",
+                storageKey: "ibne_taimiya_auto_roster_joba_v3",
+                priorityShift: 1,
+                helperCount: 14,
+                step: 14,
+                teachers: [
+                    "জনাব এ.এম. আখতার হোসেন", 
+                    '" মো: সিরাজুল ইসলাম খান (C.T)', 
+                    '" মো: গোলাম আযম (C.T)',
+                    '" কবির আহমেদ', 
+                    '" মু: নুর নবী (C.T)', 
+                    '" হেদায়েত উল্যাহ সবুজ (C.T)',
+                    '" আবুল বাশার চৌধুরী (C.T)', 
+                    "আব্দুর রাজ্জাক", 
+                    '" মাও. কামাল উদ্দিন (C.T)',
+                    '" মোঃ শাহাদাত হোসাইন (C.T)', 
+                    '" আলমগীর হোসেন (C.T)', 
+                    '" মহসীন আল মামুন (C.T)',
+                    '" মোঃ হোসাইন (C.T)', 
+                    '" মোঃ কাউছার হাবিব (C.T)', 
+                    '" তোফায়েল আহমদ খন্দ. (C.T)',
+                    '" মোঃ শাহিন আলম (C.T)', 
+                    '" মমিনুর রহমান (C.T)', 
+                    '" জাকারিয়া হাবীব (C.T)',
+                    "সাইফুল ইসলাম (ইঞ্জিঃ)", 
+                    '" সাইফুল ইসলাম (C.T)', 
+                    '" মোঃ ইকবাল তানিম',
+                    '" মোস্তাফিজুর রহমান', 
+                    '" নাছির উদ্দিন', 
+                    '" মো: মাহমুদুল হাসান',
+                    '" মো: মনির হোসেন', 
+                    '" ফয়সাল বিন সাঈদ'
+                ]
+            },
+            shapla: {
+                title: "শিফট: শাপলা",
+                storageKey: "ibne_taimiya_auto_roster_shapla_v3",
+                priorityShift: 1,
+                helperCount: 13,
+                step: 13,
+                teachers: [
+                    "জনাব মো: আবদুল কাদির",
+                    '" মোঃ শাহানুর রহমান',
+                    '" নুরে আলম সাথী',
+                    '" আনোয়ার হোসেন',
+                    '" মো: কামরুল ফারুক',
+                    '" বাহার উদ্দিন',
+                    '" গোলাম মহিউদ্দিন',
+                    '" রায়হান হোসেন',
+                    '" জিয়াউর রহমান',
+                    '" মাও. আল আমিন',
+                    '" ইসরাফিল ভূঁইয়া',
+                    '" সাখাওয়াত হোসাইন',
+                    '" একিউএম জাহিদুল বারী',
+                    '" সাইফুদ্দিন মোঃ রাশেদ',
+                    '" মোঃ মঈন উদ্দিন',
+                    '" মো. জাকির হোসাইন',
+                    '" জোবায়ের হোসেন',
+                    '" গোলাম মোস্তফা',
+                    '" ওমর ফারুক',
+                    '" মানিক হোসেন',
+                    '" আশিকুর রহমান সবুজ',
+                    '" ফরিদ আহমেদ',
+                    '" বোরহান উদ্দিন',
+                    '" আরমান হোসেন',
+                    '" রাশেদুল হাসান'
+                ]
+            },
+            beli: {
+                title: "শিফট: বেলি",
+                storageKey: "ibne_taimiya_auto_roster_beli_v3",
+                priorityShift: 2,
+                helperCount: 15,
+                step: 15,
+                teachers: [
+                    "জনাব শেখ রেজাউল হোসেন",
+                    '" মো: জাফর হাসান',
+                    '" ছালেহ আহমাদ',
+                    '" মোঃ ফজলুল হক',
+                    '" মাহফুজুর রহমান',
+                    '" মোঃ সাজ্জাদ হোসেন',
+                    '" মো: ইলিয়াছ মিয়া',
+                    '" মো: মাঈন উদ্দিন',
+                    '" মো: মহসিন-১',
+                    '" মো: মহি উদ্দিন',
+                    '" জামাল উদ্দিন',
+                    '" মোঃ আব্দুল হালিম',
+                    '" মো: শহীদুল্লাহ',
+                    '" মোজাম্মেল হক মুন্সী',
+                    '" জাকির হোসেন',
+                    '" শাহাদাত হোসেন',
+                    '" মু.আব্দুল্লাহ আল নোমান',
+                    '" এস. এম. মাসুম',
+                    '" রাকিবুল হাসান',
+                    '" আবু ইউসুফ',
+                    '" নজরুল ইসলাম',
+                    '" মোঃ বোরহান উদ্দিন',
+                    '" সাফায়েত উল্লাহ্',
+                    '" তুহিনুর রহমান',
+                    '" মিজানুর রহমান',
+                    '" শাকিল হোসেন',
+                    '" আবু সহল মোঃ জাবালুন নূর'
+                ]
+            },
+            bokul: {
+                title: "শিফট: বকুল",
+                storageKey: "ibne_taimiya_auto_roster_bokul_v3",
+                priorityShift: 2,
+                helperCount: 14,
+                step: 14,
+                teachers: [
+                    "জনাব মো: মিজানুর রহমান-৩",
+                    '" মো: মিজানুর রহমান-৪',
+                    '" মো: আবুল হোসেন ফারুক',
+                    '" মো: সাইফুল ইসলাম-১',
+                    '" মো: দুলাল হোসেন চৌধুরী',
+                    '" মো: নিজাম উদ্দীন মজুমদার',
+                    '" মোহাম্মদ আব্দুর রহমান',
+                    '" মোস্তফা কামাল',
+                    '" মো: জহিরুল ইসলাম',
+                    '" ফরহাদ আল ফয়সাল',
+                    '" সিরাজুস সালেহীন',
+                    '" মোহাম্মদ মহসিন-২',
+                    '" সাইফুল ইসলাম মিয়াজী',
+                    '" মাও. মহিউদ্দিন',
+                    '" মো: স্বপন মজুমদার',
+                    '" মো: সিফাতুল মোস্তফা',
+                    '" কাওছার আহমেদ',
+                    '" মো: ইউছুফ আলী',
+                    '" মোহাম্মদ হোসাইন',
+                    '" বিল্লাল হোসেন',
+                    '" এমরান হোসেন',
+                    '" আবু মু. সজিব',
+                    '" মাসুদ আলম',
+                    '" বায়জিদুল ইসলাম মজু.',
+                    '" কাওছার হামিদ জীবন',
+                    '" [২৬ নং শিক্ষক - নাম এডিট করুন]'
+                ]
+            }
+        };
 
-        const defaultTeachers = [
-            "জনাব এ.এম. আখতার হোসেন", 
-            '" মো: সিরাজুল ইসলাম খান (C.T)', 
-            '" মো: গোলাম আযম (C.T)',
-            '" কবির আহমেদ', 
-            '" মু: নুর নবী (C.T)', 
-            '" হেদায়েত উল্যাহ সবুজ (C.T)',
-            '" আবুল বাশার চৌধুরী (C.T)', 
-            "আব্দুর রাজ্জাক", 
-            '" মাও. কামাল উদ্দিন (C.T)',
-            '" মোঃ শাহাদাত হোসাইন (C.T)', 
-            '" আলমগীর হোসেন (C.T)', 
-            '" মহসীন আল মামুন (C.T)',
-            '" মোঃ হোসাইন (C.T)', 
-            '" মোঃ কাউছার হাবিব (C.T)', 
-            '" তোফায়েল আহমদ খন্দ. (C.T)',
-            '" মোঃ শাহিন আলম (C.T)', 
-            '" মমিনুর রহমান (C.T)', 
-            '" জাকারিয়া হাবীব (C.T)',
-            "সাইফুল ইসলাম (ইঞ্জিঃ)", 
-            '" সাইফুল ইসলাম (C.T)', 
-            '" মোঃ ইকবাল তানিম',
-            '" মোস্তাফিজুর রহমান', 
-            '" নাছির উদ্দিন', 
-            '" মো: মাহমুদুল হাসান',
-            '" মো: মনির হোসেন', 
-            '" ফয়সাল বিন সাঈদ', 
-            ""
-        ];
-
+        let currentShiftKey = 'joba';
         const tbody = document.getElementById('rosterBody');
 
         function toBengaliNum(num) {
@@ -682,7 +907,37 @@
             });
         }
 
+        function buildAutoSchedule(shiftKey) {
+            const cfg = SHIFTS_CONFIG[shiftKey];
+            const n = cfg.teachers.length;
+            const ticks = Array.from({ length: n }, () => new Array(26).fill(0));
+
+            for (let d = 0; d < 13; d++) {
+                const start = (d * cfg.step) % n;
+                const helpers = new Set();
+                for (let k = 0; k < cfg.helperCount; k++) {
+                    helpers.add((start + k) % n);
+                }
+
+                for (let t = 0; t < n; t++) {
+                    if (cfg.priorityShift === 1) {
+                        ticks[t][d * 2] = 1;
+                        ticks[t][d * 2 + 1] = helpers.has(t) ? 1 : 0;
+                    } else {
+                        ticks[t][d * 2 + 1] = 1;
+                        ticks[t][d * 2] = helpers.has(t) ? 1 : 0;
+                    }
+                }
+            }
+
+            return {
+                names: [...cfg.teachers],
+                ticks: ticks
+            };
+        }
+
         function saveToCache() {
+            const cfg = SHIFTS_CONFIG[currentShiftKey];
             const rows = document.querySelectorAll('#rosterBody tr');
             const state = {
                 names: [],
@@ -700,33 +955,52 @@
                 state.ticks.push(rowTicks);
             });
 
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+            localStorage.setItem(cfg.storageKey, JSON.stringify(state));
             generateAttendance();
         }
 
         function loadFromCache() {
-            const raw = localStorage.getItem(STORAGE_KEY);
-            if (!raw) return null;
+            const cfg = SHIFTS_CONFIG[currentShiftKey];
+            const raw = localStorage.getItem(cfg.storageKey);
+            if (!raw) {
+                const autoState = buildAutoSchedule(currentShiftKey);
+                localStorage.setItem(cfg.storageKey, JSON.stringify(autoState));
+                return autoState;
+            }
             try {
                 return JSON.parse(raw);
             } catch (e) {
-                return null;
+                return buildAutoSchedule(currentShiftKey);
             }
+        }
+
+        function switchShift(shiftKey) {
+            currentShiftKey = shiftKey;
+            const cfg = SHIFTS_CONFIG[shiftKey];
+
+            document.querySelectorAll('.btn-shift').forEach(btn => btn.classList.remove('active'));
+            document.getElementById('btn-' + shiftKey).classList.add('active');
+
+            document.querySelectorAll('.shift-name-display').forEach(el => {
+                el.innerText = cfg.title;
+            });
+
+            document.body.classList.remove('rows-25', 'rows-26', 'rows-27');
+            document.body.classList.add('rows-' + cfg.teachers.length);
+
+            renderTable();
         }
 
         function renderTable() {
             tbody.innerHTML = '';
+            const cfg = SHIFTS_CONFIG[currentShiftKey];
             const savedState = loadFromCache();
 
-            defaultTeachers.forEach((defaultName, index) => {
+            cfg.teachers.forEach((defaultName, index) => {
                 let tr = document.createElement('tr');
                 const currentName = (savedState && savedState.names && savedState.names[index] !== undefined)
                     ? savedState.names[index]
                     : defaultName;
-
-                if (index === 26 && currentName.trim() === '') {
-                    tr.classList.add('empty-row');
-                }
                 
                 let tdSl = document.createElement('td');
                 tdSl.innerText = toBengaliNum(index + 1) + ".";
@@ -739,17 +1013,6 @@
                 tdName.spellcheck = false;
                 
                 tdName.addEventListener('input', function() {
-                    if (index === 26) {
-                        if (this.innerText.trim() !== '') {
-                            tr.classList.remove('empty-row');
-                        } else {
-                            tr.classList.add('empty-row');
-                            tr.querySelectorAll('.slot-cell').forEach(cell => {
-                                cell.classList.remove('ticked');
-                                cell.innerText = '';
-                            });
-                        }
-                    }
                     calculateTotals();
                     saveToCache();
                 });
@@ -761,17 +1024,12 @@
                     tdSlot.className = 'slot-cell';
 
                     const isTicked = savedState && savedState.ticks && savedState.ticks[index] && savedState.ticks[index][i] === 1;
-                    if (isTicked && !(index === 26 && currentName.trim() === '')) {
+                    if (isTicked) {
                         tdSlot.classList.add('ticked');
                         tdSlot.innerText = '✔';
                     }
 
                     tdSlot.addEventListener('click', function() {
-                        const row = this.closest('tr');
-                        if (row.classList.contains('empty-row')) {
-                            return;
-                        }
-
                         this.classList.toggle('ticked');
                         this.innerText = this.classList.contains('ticked') ? '✔' : '';
                         calculateTotals();
@@ -797,13 +1055,7 @@
             let colTotals = new Array(26).fill(0);
             const rows = document.querySelectorAll('#rosterBody tr');
             
-            rows.forEach((row, rIdx) => {
-                if (rIdx === 26 && row.classList.contains('empty-row')) {
-                    const totalCell = row.querySelector('.row-total');
-                    if (totalCell) totalCell.innerText = '';
-                    return;
-                }
-
+            rows.forEach((row) => {
                 const slots = row.querySelectorAll('.slot-cell');
                 let rowTotal = 0;
                 slots.forEach((slot, index) => {
@@ -836,13 +1088,14 @@
             document.getElementById('footer-grand-total').innerText = banglaGrandTotal;
         }
 
-        function generateAttendance() {
-            const attBody = document.getElementById('attendanceBody');
+        function renderShiftAttendance(tbodyId, totalElementId, shiftOffset) {
+            const attBody = document.getElementById(tbodyId);
             attBody.innerHTML = '';
+            const cfg = SHIFTS_CONFIG[currentShiftKey];
             const savedState = loadFromCache();
-            let firstShiftTotal = 0;
+            let shiftTotal = 0;
 
-            for (let i = 0; i < 27; i++) {
+            for (let i = 0; i < cfg.teachers.length; i++) {
                 let tr = document.createElement('tr');
 
                 let tdSl = document.createElement('td');
@@ -852,7 +1105,7 @@
 
                 const currentName = (savedState && savedState.names && savedState.names[i] !== undefined)
                     ? savedState.names[i]
-                    : defaultTeachers[i];
+                    : cfg.teachers[i];
 
                 let tdName = document.createElement('td');
                 tdName.className = 'thick-right';
@@ -860,22 +1113,19 @@
                 tr.appendChild(tdName);
 
                 for (let d = 0; d < 13; d++) {
-                    let slotIndex = d * 2; // ১ম বেলার ইনডেক্স
+                    let slotIndex = (d * 2) + shiftOffset;
                     const isTicked = savedState && savedState.ticks && savedState.ticks[i] && savedState.ticks[i][slotIndex] === 1 && currentName.trim() !== '';
 
-                    if (isTicked) firstShiftTotal++;
+                    if (isTicked) shiftTotal++;
 
-                    // D ঘর (ন্যারো, টিক চিহ্ন বসবে)
                     let tdD = document.createElement('td');
                     tdD.className = 'attendance-tick';
                     tdD.innerText = isTicked ? '✔' : '';
                     tr.appendChild(tdD);
 
-                    // হল ঘর (খালি)
                     let tdHall = document.createElement('td');
                     tr.appendChild(tdHall);
 
-                    // স্বাক্ষর ঘর (প্রশস্ত + ডানপাশে মোটা দাগ)
                     let tdSign = document.createElement('td');
                     tdSign.className = 'thick-right';
                     tr.appendChild(tdSign);
@@ -884,30 +1134,52 @@
                 attBody.appendChild(tr);
             }
 
-            document.getElementById('attendance-grand-total').innerText = toBengaliNum(firstShiftTotal);
+            document.getElementById(totalElementId).innerText = toBengaliNum(shiftTotal);
+        }
+
+        function generateAttendance() {
+            renderShiftAttendance('attendanceBody1', 'attendance1-grand-total', 0);
+            renderShiftAttendance('attendanceBody2', 'attendance2-grand-total', 1);
         }
 
         function printSection(mode) {
-            document.body.className = '';
+            const rowClass = 'rows-' + SHIFTS_CONFIG[currentShiftKey].teachers.length;
+            document.body.className = rowClass;
             if (mode === 'roster') {
                 document.body.classList.add('print-roster-only');
-            } else if (mode === 'attendance') {
-                document.body.classList.add('print-attendance-only');
+            } else if (mode === 'att1') {
+                document.body.classList.add('print-att1-only');
+            } else if (mode === 'att2') {
+                document.body.classList.add('print-att2-only');
             } else {
-                document.body.classList.add('print-both');
+                document.body.classList.add('print-all');
             }
             window.print();
         }
 
-        function clearRosterCache() {
-            const confirmed = confirm("আপনি কি নিশ্চিত যে ক্যাশ মেমোরি ক্লিয়ার করে সব টিক মার্ক মুছে ফেলতে চান?");
-            if (confirmed) {
-                localStorage.removeItem(STORAGE_KEY);
+        function resetToAutoSchedule() {
+            const cfg = SHIFTS_CONFIG[currentShiftKey];
+            if (confirm(cfg.title + "-এর ডিউটি রোস্টারটি কি আবার ৮০ জনের মূল গাণিতিক নিয়মে রিসেট করতে চান?")) {
+                const autoState = buildAutoSchedule(currentShiftKey);
+                localStorage.setItem(cfg.storageKey, JSON.stringify(autoState));
                 renderTable();
             }
         }
 
-        renderTable();
+        function clearAllTicks() {
+            const cfg = SHIFTS_CONFIG[currentShiftKey];
+            if (confirm(cfg.title + "-এর সব টিক মার্ক মুছে খালি (Blank) করতে চান?")) {
+                const n = cfg.teachers.length;
+                const blankState = {
+                    names: [...cfg.teachers],
+                    ticks: Array.from({ length: n }, () => new Array(26).fill(0))
+                };
+                localStorage.setItem(cfg.storageKey, JSON.stringify(blankState));
+                renderTable();
+            }
+        }
+
+        switchShift('joba');
     </script>
 </body>
 </html>
