@@ -2,676 +2,417 @@
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
-    <title>Master Exam Roster & Attendance - Ibne Taimiya School & College</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ইবনে তাইমিয়া স্কুল এন্ড কলেজ | ডিউটি রোস্টার পোর্টাল</title>
+    
+    <!-- Google Fonts: Hind Siliguri -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;700&display=swap');
-        :root { --thick-border: 2px solid #000; --thin-border: 1px solid #333; }
-        * { box-sizing: border-box; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
-        body { font-family: 'Noto Serif Bengali', serif; margin: 0; padding: 0; background: #e2e8f0; }
+        * {
+            font-family: 'Hind Siliguri', sans-serif;
+        }
 
-        .no-print-bar { background: #0f172a; color: white; padding: 10px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.15); position: sticky; top: 0; z-index: 1000; }
-        .shift-selector, .action-buttons { display: flex; justify-content: center; align-items: center; gap: 8px; flex-wrap: wrap; }
-        .shift-selector { margin-bottom: 8px; }
-        .btn-shift { background: #334155; color: #e2e8f0; border: 2px solid #475569; padding: 5px 16px; font-size: 11pt; border-radius: 20px; cursor: pointer; font-weight: bold; font-family: inherit; transition: 0.2s; }
-        .btn-shift:hover { background: #475569; }
-        .btn-shift.active { background: #f59e0b; color: #000; border-color: #fbbf24; box-shadow: 0 0 10px rgba(245,158,11,0.5); }
+        body {
+            background-color: #060b19;
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(244, 63, 94, 0.12) 0%, transparent 40%),
+                radial-gradient(circle at 85% 15%, rgba(168, 85, 247, 0.12) 0%, transparent 40%),
+                radial-gradient(circle at 15% 85%, rgba(245, 158, 11, 0.10) 0%, transparent 40%),
+                radial-gradient(circle at 85% 85%, rgba(16, 185, 129, 0.12) 0%, transparent 40%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
 
-        .btn-download, .btn-attendance, .btn-attendance-2, .btn-reset, .btn-clear { color: white; border: none; padding: 6px 13px; font-size: 10pt; border-radius: 6px; cursor: pointer; font-weight: bold; font-family: inherit; transition: 0.2s; }
-        .btn-download { background: #10b981; } .btn-download:hover { background: #059669; }
-        .btn-attendance { background: #2563eb; } .btn-attendance:hover { background: #1d4ed8; }
-        .btn-attendance-2 { background: #7c3aed; } .btn-attendance-2:hover { background: #6d28d9; }
-        .btn-reset { background: #f97316; } .btn-reset:hover { background: #ea580c; }
-        .btn-clear { background: #ef4444; } .btn-clear:hover { background: #dc2626; }
+        /* Subtle Modern Grid Overlay */
+        .bg-grid {
+            background-size: 40px 40px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        }
 
-        .page { width: 297mm; height: 209mm; margin: 8px auto; padding: 2mm 3.5mm; background: #fff; border: 1px solid #cbd5e1; box-shadow: 0 10px 15px rgba(0,0,0,0.1); display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; position: relative; }
-        .header-container { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1px; flex-shrink: 0; }
-        .left-header-group { display: flex; flex-direction: column; gap: 2px; width: 135px; }
-        .box-left { border: var(--thick-border); border-radius: 4px; overflow: hidden; text-align: center; width: 100%; }
-        .box-left .box-title { background: #f1f5f9; padding: 1px; font-size: 7pt; font-weight: bold; border-bottom: var(--thick-border); }
-        .box-left .box-value { font-size: 12pt; font-weight: bold; line-height: 1.1; color: #b91c1c; }
-        .bidro-box { border: var(--thick-border); border-radius: 4px; background: #fef08a; text-align: center; padding: 2px 3px; font-size: 6.5pt; font-weight: bold; color: #854d0e; line-height: 1.05; }
+        /* Perfect Round Floating Logo Container */
+        .logo-container {
+            position: relative;
+            width: 160px;
+            height: 160px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: smoothFloat 4.5s ease-in-out infinite;
+        }
 
-        .header-center { text-align: center; flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-        .school-title-wrapper { display: flex; align-items: center; justify-content: center; gap: 8px; }
-        .header-logo { width: 42px; height: 42px; object-fit: contain; }
-        .school-name { font-size: 16pt; font-weight: bold; color: #0f172a; margin: 0; line-height: 1.0; }
-        .exam-name { font-size: 9pt; font-weight: bold; margin: 1px 0 0 0; line-height: 1.0; }
-        .roster-title { font-size: 8.5pt; font-weight: bold; display: inline-block; border-bottom: 2px solid #000; margin-top: 1px; line-height: 1.0; }
+        /* Soft Ambient Backlight behind Round Logo */
+        .logo-backlight {
+            position: absolute;
+            inset: 5px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.5) 0%, rgba(168, 85, 247, 0.3) 60%, transparent 80%);
+            filter: blur(22px);
+            animation: pulseGlow 3.5s ease-in-out infinite alternate;
+            z-index: 0;
+        }
 
-        .box-right-container { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
-        .shift-badge { background: #dbeafe; border: 2px solid #2563eb; color: #1e3a8a; padding: 1px 10px; border-radius: 6px; font-weight: 900; font-size: 9pt; }
-        .box-right { border: var(--thick-border); border-radius: 4px; padding: 2px 5px; font-size: 7.2pt; font-weight: bold; text-align: left; width: 160px; background: #f8fafc; line-height: 1.1; }
+        /* Perfectly Cropped Circular Logo Wrapper */
+        .logo-circle-wrapper {
+            position: relative;
+            z-index: 2;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            background: #ffffff;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 0 3px rgba(255, 255, 255, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
 
-        table { width: 100%; border-collapse: collapse; font-size: 8.2pt; table-layout: fixed; border: var(--thick-border); flex-shrink: 0; margin-bottom: 0; }
-        th, td { border: var(--thin-border); padding: 0; text-align: center; vertical-align: middle; overflow: hidden; white-space: nowrap; }
-        th { background: #f8f9fa; font-weight: bold; }
+        .logo-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scale(1.05);
+            transition: transform 0.5s ease;
+        }
 
-        body.rows-25 .roster-table tbody td, body.rows-25 .total-row td { height: 19.2px !important; line-height: 19.2px !important; }
-        body.rows-26 .roster-table tbody td, body.rows-26 .total-row td { height: 18.2px !important; line-height: 18.2px !important; }
-        body.rows-27 .roster-table tbody td, body.rows-27 .total-row td { height: 17.5px !important; line-height: 17.5px !important; }
+        .logo-container:hover .logo-circle-wrapper {
+            transform: scale(1.08) rotate(3deg);
+            box-shadow: 0 20px 40px rgba(56, 189, 248, 0.4), 0 0 0 4px rgba(56, 189, 248, 0.6);
+        }
 
-        body.rows-25 .attendance-table tbody td { height: 20.25px !important; line-height: 20.25px !important; }
-        body.rows-26 .attendance-table tbody td { height: 19.25px !important; line-height: 19.25px !important; }
-        body.rows-27 .attendance-table tbody td { height: 18.5px !important; line-height: 18.5px !important; }
+        @keyframes smoothFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
 
-        .roster-table thead tr:first-child th { height: 24px !important; background: #e2e8f0; color: #000; }
-        .roster-table thead tr:last-child th { height: 28px !important; line-height: 13px !important; }
-        .roster-table th:nth-child(1) { width: 2.8%; }
-        .roster-table th:nth-child(2) { width: 13.5%; }
-        .roster-table td:nth-child(2) { text-align: left; padding-left: 3px; font-size: 7.8pt; cursor: text; }
-        .roster-table td:nth-child(2):hover { background: #fef08a; }
-        [contenteditable]:focus { outline: 1px solid #2563eb; background: #fff; }
+        @keyframes pulseGlow {
+            0% { transform: scale(0.92); opacity: 0.65; }
+            100% { transform: scale(1.15); opacity: 1; }
+        }
 
-        .roster-table thead tr:first-child th:nth-child(2), .roster-table thead tr:first-child th:nth-child(n+3),
-        .roster-table thead tr:last-child th:nth-child(even), .roster-table tbody td:nth-child(2),
-        .roster-table tbody td:nth-child(even):not(:last-child), .roster-table tfoot td { border-right: var(--thick-border); }
-        .roster-table tfoot td:first-child { border-right: none; }
-        .roster-table tfoot td:nth-child(2) { border-right: var(--thick-border); }
+        /* Premium Glassmorphism Shift Cards */
+        .roster-card {
+            position: relative;
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 1.5rem;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+        }
 
-        .slot-cell { cursor: pointer; font-size: 9pt; user-select: none; }
-        .slot-cell:hover { background: #dbeafe; }
-        .slot-cell.ticked { font-weight: 900; color: #000; }
-        .row-total { font-weight: bold; font-size: 8.5pt; color: #1d4ed8; }
-        .total-row td { border-top: var(--thick-border); border-bottom: var(--thick-border); font-weight: bold; font-size: 8.5pt; }
-        .vertical-text { writing-mode: vertical-rl; transform: rotate(180deg); font-size: 6.5pt; display: inline-block; line-height: 1; }
+        .roster-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--card-accent);
+            opacity: 0.85;
+            transition: height 0.3s ease;
+        }
 
-        .date-header { font-size: 7.6pt !important; font-weight: 900 !important; line-height: 1.08 !important; color: #000 !important; padding: 1px 0 !important; }
-        .day-label { font-size: 7.2pt; font-weight: 900; color: #0f172a; }
+        .roster-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255, 255, 255, 0.18);
+            box-shadow: 0 25px 50px -12px var(--card-shadow);
+        }
 
-        .attendance-table thead tr:first-child th { height: 24px !important; line-height: 1.08 !important; font-size: 7.3pt !important; font-weight: 900 !important; color: #000 !important; background: #e2e8f0; }
-        .attendance-table thead tr:last-child th { height: 18px !important; line-height: 18px !important; font-size: 6.5pt; }
-        .attendance-table td:nth-child(2) { text-align: left; padding-left: 4px; font-size: 7.5pt; }
-        .attendance-tick { font-size: 7.5pt; font-weight: 900; color: #000; }
-        .thick-right { border-right: var(--thick-border) !important; }
-        .sub-header-row th { border-bottom: var(--thick-border) !important; }
+        /* Action Button Shimmer */
+        .download-btn {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.35s ease;
+        }
 
-        .signature-section { display: flex; justify-content: space-between; align-items: flex-end; padding: 0 35px; font-weight: bold; font-size: 9pt; flex-shrink: 0; height: 32px; margin-top: 1px; }
-        .signature-box { text-align: center; width: 140px; padding-top: 2px; border-top: 1.5px dashed #000; line-height: 1.1; }
+        .download-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -120%;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transform: skewX(-20deg);
+            transition: left 0.65s ease;
+        }
 
-        @media print {
-            @page { size: A4 landscape; margin: 0mm; }
-            html, body { width: 297mm; background: #fff; margin: 0 !important; padding: 0 !important; }
-            .no-print-bar { display: none !important; }
-            .page { margin: 0 !important; border: none !important; box-shadow: none !important; width: 297mm !important; height: 209mm !important; padding: 2mm 3.5mm !important; page-break-inside: avoid !important; break-inside: avoid !important; }
-            body.print-roster-only #attendancePage1, body.print-roster-only #attendancePage2 { display: none !important; }
-            body.print-roster-only #rosterPage { page-break-after: avoid !important; }
-            body.print-att1-only #rosterPage, body.print-att1-only #attendancePage2 { display: none !important; }
-            body.print-att1-only #attendancePage1 { page-break-after: avoid !important; }
-            body.print-att2-only #rosterPage, body.print-att2-only #attendancePage1 { display: none !important; }
-            body.print-att2-only #attendancePage2 { page-break-after: avoid !important; }
-            body.print-all #rosterPage, body.print-all #attendancePage1 { page-break-after: always !important; }
-            body.print-all #attendancePage2 { page-break-after: avoid !important; }
-            td:nth-child(2):hover { background: transparent; }
+        .roster-card:hover .download-btn::after {
+            left: 140%;
+        }
+
+        /* Entrance Stagger Animation */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUpAnim 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes fadeUpAnim {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
-<body class="print-all rows-26">
+<body class="bg-grid text-slate-100 flex flex-col justify-between min-h-screen py-10 px-4 sm:px-6 lg:px-8">
 
-    <div class="no-print-bar">
-        <div class="shift-selector">
-            <span style="font-weight:bold; font-size:11pt;">শিফট নির্বাচন করুন:</span>
-            <button class="btn-shift active" id="btn-joba" onclick="switchShift('joba')">🌺 জবা (২৬ জন)</button>
-            <button class="btn-shift" id="btn-shapla" onclick="switchShift('shapla')">🌸 শাপলা (২৫ জন)</button>
-            <button class="btn-shift" id="btn-beli" onclick="switchShift('beli')">🌼 বেলি (২৬ জন)</button>
-            <button class="btn-shift" id="btn-bokul" onclick="switchShift('bokul')">🏵️ বকুল (২৫ জন)</button>
+    <main class="max-w-5xl w-full mx-auto my-auto">
+        
+        <!-- ================= HEADER SECTION ================= -->
+        <header class="text-center mb-12 fade-up">
+            
+            <!-- Perfectly Round Shape Animated Logo -->
+            <div class="logo-container mb-5">
+                <div class="logo-backlight"></div>
+                <div class="logo-circle-wrapper">
+                    <img 
+                        src="https://drive.google.com/thumbnail?id=1ZmxR46CCr7Ge5UntTMM_TbTeMJfdiqTD&sz=w1000" 
+                        onerror="this.onerror=null; this.src='https://lh3.googleusercontent.com/d/1ZmxR46CCr7Ge5UntTMM_TbTeMJfdiqTD';"
+                        alt="ইবনে তাইমিয়া স্কুল এন্ড কলেজ লোগো" 
+                        class="logo-img"
+                    >
+                </div>
+            </div>
+
+            <!-- Institution Name -->
+            <h1 class="text-3xl sm:text-5xl font-bold tracking-tight text-white mb-3 drop-shadow-sm">
+                ইবনে তাইমিয়া স্কুল এন্ড কলেজ
+            </h1>
+
+            <!-- Subtitle Pill -->
+            <div class="inline-flex items-center gap-2.5 px-5 py-2 rounded-full bg-slate-900/90 border border-slate-700/80 shadow-inner">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                <h2 class="text-base sm:text-xl font-semibold bg-gradient-to-r from-sky-300 via-indigo-200 to-rose-300 bg-clip-text text-transparent">
+                    শিফট ভিত্তিক ডিউটি রোস্টার ডাউনলোড
+                </h2>
+            </div>
+        </header>
+
+        <!-- ================= 4 SHIFT ROSTER CARDS ================= -->
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-7">
+
+            <!-- 1. জবা শিফট -->
+            <div class="roster-card p-6 sm:p-7 fade-up" style="--card-accent: linear-gradient(90deg, #f43f5e, #fb7185); --card-shadow: rgba(244, 63, 94, 0.22); animation-delay: 0.1s;">
+                <div class="flex items-center justify-between mb-6">
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-2xl bg-rose-500/15 border border-rose-500/30 flex items-center justify-center text-rose-400 text-2xl shadow-inner">
+                            <i class="fa-solid fa-spa"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs font-semibold uppercase tracking-wider text-rose-400 block mb-0.5">
+                                Shift 01 • PDF Roster
+                            </span>
+                            <h3 class="text-2xl font-bold text-white">
+                                জবা শিফট ডিউটি রোস্টার
+                            </h3>
+                        </div>
+                    </div>
+                    <span class="w-10 h-10 rounded-full bg-slate-800/80 border border-slate-700 flex items-center justify-center text-slate-400">
+                        <i class="fa-solid fa-file-pdf text-rose-400"></i>
+                    </span>
+                </div>
+
+                <button 
+                    onclick="startDirectDownload('joba', this)"
+                    class="download-btn w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-500 hover:to-pink-500 text-white font-semibold text-base sm:text-lg shadow-lg shadow-rose-600/30 flex items-center justify-center gap-3 active:scale-[0.98] cursor-pointer">
+                    <i class="fa-solid fa-download"></i>
+                    <span>জবা শিফট ডিউটি রোস্টার</span>
+                </button>
+            </div>
+
+            <!-- 2. শাপলা শিফট -->
+            <div class="roster-card p-6 sm:p-7 fade-up" style="--card-accent: linear-gradient(90deg, #a855f7, #ec4899); --card-shadow: rgba(168, 85, 247, 0.22); animation-delay: 0.2s;">
+                <div class="flex items-center justify-between mb-6">
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-2xl bg-purple-500/15 border border-purple-500/30 flex items-center justify-center text-purple-400 text-2xl shadow-inner">
+                            <i class="fa-brands fa-canadian-maple-leaf"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs font-semibold uppercase tracking-wider text-purple-400 block mb-0.5">
+                                Shift 02 • PDF Roster
+                            </span>
+                            <h3 class="text-2xl font-bold text-white">
+                                শাপলা শিফট ডিউটি রোস্টার
+                            </h3>
+                        </div>
+                    </div>
+                    <span class="w-10 h-10 rounded-full bg-slate-800/80 border border-slate-700 flex items-center justify-center text-slate-400">
+                        <i class="fa-solid fa-file-pdf text-purple-400"></i>
+                    </span>
+                </div>
+
+                <button 
+                    onclick="startDirectDownload('shapla', this)"
+                    class="download-btn w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-purple-600 to-fuchsia-600 hover:from-purple-500 hover:to-fuchsia-500 text-white font-semibold text-base sm:text-lg shadow-lg shadow-purple-600/30 flex items-center justify-center gap-3 active:scale-[0.98] cursor-pointer">
+                    <i class="fa-solid fa-download"></i>
+                    <span>শাপলা শিফট ডিউটি রোস্টার</span>
+                </button>
+            </div>
+
+            <!-- 3. বকুল শিফট -->
+            <div class="roster-card p-6 sm:p-7 fade-up" style="--card-accent: linear-gradient(90deg, #f59e0b, #ea580c); --card-shadow: rgba(245, 158, 11, 0.22); animation-delay: 0.3s;">
+                <div class="flex items-center justify-between mb-6">
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-2xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-400 text-2xl shadow-inner">
+                            <i class="fa-solid fa-sun"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs font-semibold uppercase tracking-wider text-amber-400 block mb-0.5">
+                                Shift 03 • PDF Roster
+                            </span>
+                            <h3 class="text-2xl font-bold text-white">
+                                বকুল শিফট ডিউটি রোস্টার
+                            </h3>
+                        </div>
+                    </div>
+                    <span class="w-10 h-10 rounded-full bg-slate-800/80 border border-slate-700 flex items-center justify-center text-slate-400">
+                        <i class="fa-solid fa-file-pdf text-amber-400"></i>
+                    </span>
+                </div>
+
+                <button 
+                    onclick="startDirectDownload('bokul', this)"
+                    class="download-btn w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-white font-semibold text-base sm:text-lg shadow-lg shadow-amber-600/30 flex items-center justify-center gap-3 active:scale-[0.98] cursor-pointer">
+                    <i class="fa-solid fa-download"></i>
+                    <span>বকুল শিফট ডিউটি রোস্টার</span>
+                </button>
+            </div>
+
+            <!-- 4. বেলি শিফট -->
+            <div class="roster-card p-6 sm:p-7 fade-up" style="--card-accent: linear-gradient(90deg, #10b981, #0d9488); --card-shadow: rgba(16, 185, 129, 0.22); animation-delay: 0.4s;">
+                <div class="flex items-center justify-between mb-6">
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-2xl shadow-inner">
+                            <i class="fa-solid fa-seedling"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs font-semibold uppercase tracking-wider text-emerald-400 block mb-0.5">
+                                Shift 04 • PDF Roster
+                            </span>
+                            <h3 class="text-2xl font-bold text-white">
+                                বেলি শিফট ডিউটি রোস্টার
+                            </h3>
+                        </div>
+                    </div>
+                    <span class="w-10 h-10 rounded-full bg-slate-800/80 border border-slate-700 flex items-center justify-center text-slate-400">
+                        <i class="fa-solid fa-file-pdf text-emerald-400"></i>
+                    </span>
+                </div>
+
+                <button 
+                    onclick="startDirectDownload('beli', this)"
+                    class="download-btn w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-semibold text-base sm:text-lg shadow-lg shadow-emerald-600/30 flex items-center justify-center gap-3 active:scale-[0.98] cursor-pointer">
+                    <i class="fa-solid fa-download"></i>
+                    <span>বেলি শিফট ডিউটি রোস্টার</span>
+                </button>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Minimal Footer -->
+    <footer class="text-center text-slate-500 text-xs sm:text-sm mt-14">
+        <p>© ২০২৬ ইবনে তাইমিয়া স্কুল এন্ড কলেজ • সর্বস্বত্ব সংরক্ষিত</p>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div id="downloadToast" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none bg-slate-900/95 border border-emerald-500/40 text-white px-5 py-3.5 rounded-2xl shadow-2xl flex items-center gap-3.5 backdrop-blur-md">
+        <div class="w-9 h-9 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-lg">
+            <i class="fa-solid fa-check"></i>
         </div>
-        <div class="action-buttons">
-            <button class="btn-download" onclick="printSection('roster')">🖨️ শুধু রোস্টার</button>
-            <button class="btn-attendance" onclick="printSection('att1')">🖨️ হাজিরা (১ম বেলা)</button>
-            <button class="btn-attendance-2" onclick="printSection('att2')">🖨️ হাজিরা (২য় বেলা)</button>
-            <button class="btn-download" style="background:#0d9488;" onclick="printSection('all')">🖨️ ৩টি পেইজ একসাথে প্রিন্ট/PDF</button>
-            <button class="btn-reset" onclick="resetToAutoSchedule()">🔄 ডিফল্ট অটো-রোটেশন রিসেট</button>
-            <button class="btn-clear" onclick="clearAllTicks()">🗑️ সব টিক মুছুন (Blank)</button>
+        <div>
+            <h4 id="toastHeading" class="font-bold text-sm text-emerald-300">ডাউনলোড শুরু হয়েছে</h4>
+            <p class="text-xs text-slate-300">আপনার ডিভাইসে পিডিএফ ফাইলটি সরাসরি সেভ হচ্ছে...</p>
         </div>
     </div>
 
-    <!-- পেজ ১: মূল ডিউটি রোস্টার -->
-    <section class="page" id="rosterPage">
-        <div class="header-container">
-            <div class="left-header-group">
-                <div class="box-left"><div class="box-title">সর্বমোট ডিউটি</div><div class="box-value" id="header-grand-total">০</div></div>
-                <div class="bidro-box">বি:দ্র: পরীক্ষা শুরুর ২০ মিনিট পূর্বে কক্ষে অবস্থান করতে হবে।</div>
-            </div>
-            <div class="header-center">
-                <div class="school-title-wrapper">
-                    <img src="https://lh3.googleusercontent.com/d/1ZmxR46CCr7Ge5UntTMM_TbTeMJfdiqTD" alt="Logo" class="header-logo">
-                    <div class="school-name">ইবনে তাইমিয়া স্কুল এন্ড কলেজ</div>
-                </div>
-                <div class="exam-name">বার্ষিক পরীক্ষা-২০২৬ খ্রিস্টাব্দ</div>
-                <div class="roster-title">ডিউটি রোস্টার</div>
-            </div>
-            <div class="box-right-container">
-                <div class="shift-badge shift-name-display">শিফট: জবা</div>
-                <div class="box-right">১ম বেলা : ৭.৩০ থেকে ১০.৩০টা<br>২য় বেলা : ১.৩০ থেকে ৪.৩০টা</div>
-            </div>
-        </div>
-
-        <table class="roster-table">
-            <thead>
-                <tr>
-                    <th rowspan="2">ক্র.নং</th>
-                    <th rowspan="2">পর্যবেক্ষকদের নাম</th>
-                    <script>
-                        const examDates = [
-                            { d: "১৭/১১/২৬", day: "(মঙ্গল)" }, { d: "১৮/১১/২৬", day: "(বুধ)" },
-                            { d: "১৯/১১/২৬", day: "(বৃহস্পতি)" }, { d: "২২/১১/২৬", day: "(রবি)" },
-                            { d: "২৩/১১/২৬", day: "(সোম)" }, { d: "২৪/১১/২৬", day: "(মঙ্গল)" },
-                            { d: "২৫/১১/২৬", day: "(বুধ)" }, { d: "২৬/১১/২৬", day: "(বৃহস্পতি)" },
-                            { d: "২৯/১১/২৬", day: "(রবি)" }, { d: "৩০/১১/২৬", day: "(সোম)" },
-                            { d: "০১/১২/২৬", day: "(মঙ্গল)" }, { d: "০২/১২/২৬", day: "(বুধ)" },
-                            { d: "০৩/১২/২৬", day: "(বৃহস্পতি)" }
-                        ];
-                        examDates.forEach(item => {
-                            document.write(`<th colspan="2" class="date-header">${item.d}<br><span class="day-label">${item.day}</span></th>`);
-                        });
-                    </script>
-                    <th rowspan="2" style="width: 3.4%;">মোট</th>
-                </tr>
-                <tr>
-                    <script>
-                        for(let i=0; i<13; i++) document.write('<th><div class="vertical-text">১ম বেলা</div></th><th><div class="vertical-text">২য় বেলা</div></th>');
-                    </script>
-                </tr>
-            </thead>
-            <tbody id="rosterBody"></tbody>
-            <tfoot>
-                <tr class="total-row">
-                    <td colspan="2" style="text-align: right; padding-right: 12px;">মোট =</td>
-                    <script>for(let i=0; i<26; i++) document.write('<td></td>');</script>
-                    <td id="footer-grand-total" style="color: #b91c1c;">০</td>
-                </tr>
-            </tfoot>
-        </table>
-
-        <div class="signature-section">
-            <div class="signature-box">অধ্যক্ষ</div>
-            <div class="signature-box">পরীক্ষা নিয়ন্ত্রক</div>
-            <div class="signature-box">প্রস্তুতকারী</div>
-        </div>
-    </section>
-
-    <!-- পেজ ২: শিক্ষক হাজিরা শিট (১ম বেলা) -->
-    <section class="page" id="attendancePage1">
-        <div class="header-container">
-            <div class="left-header-group">
-                <div class="box-left"><div class="box-title">সর্বমোট ডিউটি (১ম বেলা)</div><div class="box-value" id="attendance1-grand-total">০</div></div>
-                <div class="bidro-box">বি:দ্র: পরীক্ষা শুরুর ২০ মিনিট পূর্বে কক্ষে অবস্থান করতে হবে।</div>
-            </div>
-            <div class="header-center">
-                <div class="school-title-wrapper">
-                    <img src="https://lh3.googleusercontent.com/d/1ZmxR46CCr7Ge5UntTMM_TbTeMJfdiqTD" alt="Logo" class="header-logo">
-                    <div class="school-name">ইবনে তাইমিয়া স্কুল এন্ড কলেজ</div>
-                </div>
-                <div class="exam-name">বার্ষিক পরীক্ষা-২০২৬ খ্রিস্টাব্দ</div>
-                <div class="roster-title">শিক্ষক হাজিরা শিট (১ম বেলা)</div>
-            </div>
-            <div class="box-right-container">
-                <div class="shift-badge shift-name-display">শিফট: জবা</div>
-                <div class="box-right">১ম বেলা : ৭.৩০ থেকে ১০.৩০টা<br>২য় বেলা : ১.৩০ থেকে ৪.৩০টা</div>
-            </div>
-        </div>
-
-        <table class="attendance-table">
-            <colgroup>
-                <col style="width: 2.8%;"><col style="width: 13.0%;">
-                <script>for(let i=0; i<13; i++) document.write('<col style="width: 0.75%;"><col style="width: 1.75%;"><col style="width: 4.15%;">');</script>
-            </colgroup>
-            <thead>
-                <tr>
-                    <th rowspan="2">ক্র.নং</th>
-                    <th rowspan="2" class="thick-right">পর্যবেক্ষকদের নাম</th>
-                    <script>examDates.forEach(item => document.write(`<th colspan="3" class="thick-right">${item.d}<br>${item.day}</th>`));</script>
-                </tr>
-                <tr class="sub-header-row">
-                    <script>for(let i=0; i<13; i++) document.write('<th>D</th><th>হল</th><th class="thick-right">স্বাক্ষর</th>');</script>
-                </tr>
-            </thead>
-            <tbody id="attendanceBody1"></tbody>
-        </table>
-
-        <div class="signature-section">
-            <div class="signature-box">অধ্যক্ষ</div>
-            <div class="signature-box">পরীক্ষা নিয়ন্ত্রক</div>
-            <div class="signature-box">প্রস্তুতকারী</div>
-        </div>
-    </section>
-
-    <!-- পেজ ৩: শিক্ষক হাজিরা শিট (২য় বেলা) -->
-    <section class="page" id="attendancePage2">
-        <div class="header-container">
-            <div class="left-header-group">
-                <div class="box-left"><div class="box-title">সর্বমোট ডিউটি (২য় বেলা)</div><div class="box-value" id="attendance2-grand-total">০</div></div>
-                <div class="bidro-box">বি:দ্র: পরীক্ষা শুরুর ২০ মিনিট পূর্বে কক্ষে অবস্থান করতে হবে।</div>
-            </div>
-            <div class="header-center">
-                <div class="school-title-wrapper">
-                    <img src="https://lh3.googleusercontent.com/d/1ZmxR46CCr7Ge5UntTMM_TbTeMJfdiqTD" alt="Logo" class="header-logo">
-                    <div class="school-name">ইবনে তাইমিয়া স্কুল এন্ড কলেজ</div>
-                </div>
-                <div class="exam-name">বার্ষিক পরীক্ষা-২০২৬ খ্রিস্টাব্দ</div>
-                <div class="roster-title">শিক্ষক হাজিরা শিট (২য় বেলা)</div>
-            </div>
-            <div class="box-right-container">
-                <div class="shift-badge shift-name-display">শিফট: জবা</div>
-                <div class="box-right">১ম বেলা : ৭.৩০ থেকে ১০.৩০টা<br>২য় বেলা : ১.৩০ থেকে ৪.৩০টা</div>
-            </div>
-        </div>
-
-        <table class="attendance-table">
-            <colgroup>
-                <col style="width: 2.8%;"><col style="width: 13.0%;">
-                <script>for(let i=0; i<13; i++) document.write('<col style="width: 0.75%;"><col style="width: 1.75%;"><col style="width: 4.15%;">');</script>
-            </colgroup>
-            <thead>
-                <tr>
-                    <th rowspan="2">ক্র.নং</th>
-                    <th rowspan="2" class="thick-right">পর্যবেক্ষকদের নাম</th>
-                    <script>examDates.forEach(item => document.write(`<th colspan="3" class="thick-right">${item.d}<br>${item.day}</th>`));</script>
-                </tr>
-                <tr class="sub-header-row">
-                    <script>for(let i=0; i<13; i++) document.write('<th>D</th><th>হল</th><th class="thick-right">স্বাক্ষর</th>');</script>
-                </tr>
-            </thead>
-            <tbody id="attendanceBody2"></tbody>
-        </table>
-
-        <div class="signature-section">
-            <div class="signature-box">অধ্যক্ষ</div>
-            <div class="signature-box">পরীক্ষা নিয়ন্ত্রক</div>
-            <div class="signature-box">প্রস্তুতকারী</div>
-        </div>
-    </section>
+    <!-- Hidden Iframe Container for Zero-Tab Same-Page Direct Download -->
+    <div id="hiddenDownloadContainer" style="display: none;"></div>
 
     <script>
-        const SHIFTS_CONFIG = {
+        // Google Drive File IDs mapped from provided links
+        const SHIFT_FILES = {
             joba: {
-                title: "শিফট: জবা", storageKey: "ibne_taimiya_roster_joba_v12", priorityShift: 1,
-                teachers: [
-                    "জনাব এ.এম. আখতার হোসেন", '" মো: সিরাজুল ইসলাম খান (C.T)', '" মো: গোলাম আযম (C.T)',
-                    '" কবির আহমেদ', '" মু: নুর নবী (C.T)', '" হেদায়েত উল্যাহ সবুজ (C.T)',
-                    '" আবুল বাশার চৌধুরী (C.T)', "আব্দুর রাজ্জাক", '" মাও. কামাল উদ্দিন (C.T)',
-                    '" মোঃ শাহাদাত হোসাইন (C.T)', '" আলমগীর হোসেন (C.T)', '" মহসীন আল মামুন (C.T)',
-                    '" মোঃ হোসাইন (C.T)', '" মোঃ কাউছার হাবিব (C.T)', '" তোফায়েল আহমদ খন্দ. (C.T)',
-                    '" মোঃ শাহিন আলম (C.T)', '" মমিনুর রহমান (C.T)', '" জাকারিয়া হাবীব (C.T)',
-                    "সাইফুল ইসলাম (ইঞ্জিঃ)", '" সাইফুল ইসলাম (C.T)', '" মোঃ ইকবাল তানিম',
-                    '" মোস্তাফিজুর রহমান', '" নাছির উদ্দিন', '" মো: মাহমুদুল হাসান',
-                    '" মো: মনির হোসেন', '" ফয়সাল বিন সাঈদ'
-                ]
+                name: 'জবা শিফট ডিউটি রোস্টার',
+                id: '1hbJjccDFuMn52InMpXgztRtsXkoEmCcQ'
             },
             shapla: {
-                title: "শিফট: শাপলা", storageKey: "ibne_taimiya_roster_shapla_v12", priorityShift: 1,
-                teachers: [
-                    "জনাব মো: আবদুল কাদির", '" মোঃ শাহানুর রহমান', '" নুরে আলম সাথী',
-                    '" আনোয়ার হোসেন', '" মো: কামরুল ফারুক', '" বাহার উদ্দিন',
-                    '" গোলাম মহিউদ্দিন', '" রায়হান হোসেন', '" জিয়াউর রহমান',
-                    '" মাও. আল আমিন', '" ইসরাফিল ভূঁইয়া', '" সাখাওয়াত হোসাইন',
-                    '" একিউএম জাহিদুল বারী', '" সাইফুদ্দিন মোঃ রাশেদ', '" মোঃ মঈন উদ্দিন',
-                    '" মো. জাকির হোসাইন', '" জোবায়ের হোসেন', '" গোলাম মোস্তফা',
-                    '" ওমর ফারুক', '" মানিক হোসেন', '" আশিকুর রহমান সবুজ',
-                    '" ফরিদ আহমেদ', '" বোরহান উদ্দিন', '" আরমান হোসেন', '" রাশেদুল হাসান'
-                ]
-            },
-            beli: {
-                title: "শিফট: বেলি", storageKey: "ibne_taimiya_roster_beli_v12", priorityShift: 2,
-                teachers: [
-                    "জনাব শেখ রেজাউল হোসেন", '" ছালেহ আহমাদ', '" মোঃ ফজলুল হক',
-                    '" মাহফুজুর রহমান', '" মোঃ সাজ্জাদ হোসেন', '" মো: ইলিয়াছ মিয়া',
-                    '" মো: মাঈন উদ্দিন', '" মো: মহসিন-১', '" মো: মহি উদ্দিন',
-                    '" জামাল উদ্দিন', '" মোঃ আব্দুল হালিম', '" মো: শহীদুল্লাহ',
-                    '" মোজাম্মেল হক মুন্সী', '" জাকির হোসেন', '" শাহাদাত হোসেন',
-                    '" মু.আব্দুল্লাহ আল নোমান', '" এস. এম. মাসুম', '" রাকিবুল হাসান',
-                    '" আবু ইউসুফ', '" নজরুল ইসলাম', '" মোঃ বোরহান উদ্দিন',
-                    '" সাফায়েত উল্লাহ্', '" তুহিনুর রহমান', '" মিজানুর রহমান',
-                    '" শাকিল হোসেন', '" আবু সহল মোঃ জাবালুন নূর'
-                ]
+                name: 'শাপলা শিফট ডিউটি রোস্টার',
+                id: '16q2R6n0Hbxrq__rt6BPx_KIONHLZDQb3'
             },
             bokul: {
-                title: "শিফট: বকুল", storageKey: "ibne_taimiya_roster_bokul_v12", priorityShift: 2,
-                teachers: [
-                    "জনাব মো: মিজানুর রহমান-৩", '" মো: মিজানুর রহমান-৪', '" মো: আবুল হোসেন ফারুক',
-                    '" মো: সাইফুল ইসলাম-১', '" মো: দুলাল হোসেন চৌধুরী', '" মো: নিজাম উদ্দীন মজুমদার',
-                    '" মোহাম্মদ আব্দুর রহমান', '" মোস্তফা কামাল', '" মো: জহিরুল ইসলাম',
-                    '" ফরহাদ আল ফয়সাল', '" সিরাজুস সালেহীন', '" মোহাম্মদ মহসিন-২',
-                    '" সাইফুল ইসলাম মিয়াজী', '" মাও. মহিউদ্দিন', '" মো: স্বপন মজুমদার',
-                    '" মো: সিফাতুল মোস্তফা', '" কাওছার আহমেদ', '" মো: ইউছুফ আলী',
-                    '" মোহাম্মদ হোসাইন', '" বিল্লাল হোসেন', '" এমরান হোসেন',
-                    '" আবু মু. সজিব', '" মাসুদ আলম', '" বায়জিদুল ইসলাম মজু.',
-                    '" কাওছার হামিদ জীবন'
-                ]
+                name: 'বকুল শিফট ডিউটি রোস্টার',
+                id: '1q05_4D0z7ELIiUk4Se4MpdVyMO7pMO--'
+            },
+            beli: {
+                name: 'বেলি শিফট ডিউটি রোস্টার',
+                id: '1y46KLpm2mwsr3Kxvf05mjU3xyHnjlEC1'
             }
         };
 
-        let currentShiftKey = 'joba';
-        const tbody = document.getElementById('rosterBody');
+        function startDirectDownload(shiftKey, btn) {
+            const fileInfo = SHIFT_FILES[shiftKey];
+            if (!fileInfo) return;
 
-        function toBengaliNum(num) {
-            const d = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
-            return num.toString().replace(/[0-9]/g, w => d[w]);
-        }
+            // Direct Google Drive Binary Download Stream URL
+            const directDownloadUrl = `https://drive.google.com/uc?export=download&id=${fileInfo.id}`;
 
-        function buildAutoSchedule(shiftKey) {
-            const cfg = SHIFTS_CONFIG[shiftKey];
-            const n = cfg.teachers.length;
-            const ticks = Array.from({ length: n }, () => new Array(26).fill(0));
+            // Button Loading Animation
+            const originalContent = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = `<i class="fa-solid fa-circle-notch fa-spin"></i> <span>ডাউনলোড হচ্ছে...</span>`;
 
-            if (shiftKey === 'joba') {
-                const specialS1Days = new Set([0, 1, 2, 4, 5, 6, 7, 9, 10, 11, 12]);
-                const specialS2Days = new Set([0, 1, 2, 6, 7, 9, 11, 12]);
-                const t14S1Days = new Set([0, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
-                const t14S2Days = new Set([0, 3, 4, 6, 7, 9, 10, 12]);
+            // Trigger download inside a hidden iframe so the browser NEVER leaves or opens a new page
+            const container = document.getElementById('hiddenDownloadContainer');
+            const iframe = document.createElement('iframe');
+            iframe.style.display = 'none';
+            iframe.src = directDownloadUrl;
+            container.appendChild(iframe);
 
-                for (let d = 0; d < 13; d++) {
-                    for(let t=0; t<n; t++) {
-                        if ([2, 5, 10].includes(t)) {
-                            ticks[t][d*2] = specialS1Days.has(d) ? 1 : 0;
-                            ticks[t][d*2+1] = specialS2Days.has(d) ? 1 : 0;
-                        } else if (t === 14) {
-                            ticks[t][d*2] = t14S1Days.has(d) ? 1 : 0;
-                            ticks[t][d*2+1] = t14S2Days.has(d) ? 1 : 0;
-                        } else {
-                            ticks[t][d*2] = 1;
-                        }
-                    }
+            // Show notification toast
+            showDownloadToast(`${fileInfo.name} ডাউনলোড হচ্ছে`);
+
+            // Restore button state smoothly
+            setTimeout(() => {
+                btn.disabled = false;
+                btn.innerHTML = `<i class="fa-solid fa-circle-check"></i> <span>ডাউনলোড সম্পন্ন</span>`;
+                setTimeout(() => {
+                    btn.innerHTML = originalContent;
+                }, 2000);
+            }, 1400);
+
+            // Clean up hidden iframe after download stream starts
+            setTimeout(() => {
+                if (container.contains(iframe)) {
+                    container.removeChild(iframe);
                 }
-                
-                let targets = {};
-                for(let t=0; t<n; t++) {
-                    if ([2,5,10,14].includes(t)) continue;
-                    if (t < 6) targets[t] = 19;
-                    else if (t >= 20) targets[t] = 21;
-                    else targets[t] = 20; 
-                }
-                targets[19] = 21; 
-
-                for(let d=0; d<13; d++) {
-                    let s2Assigned = 0;
-                    if (specialS2Days.has(d)) s2Assigned += 3;
-                    if (t14S2Days.has(d)) s2Assigned += 1;
-                    let needed = 14 - s2Assigned;
-                    
-                    let available = Object.keys(targets).map(Number);
-                    available.sort((a,b) => {
-                        let remA = targets[a] - ticks[a].reduce((sum, val)=>sum+val, 0);
-                        let remB = targets[b] - ticks[b].reduce((sum, val)=>sum+val, 0);
-                        if (remB !== remA) return remB - remA;
-                        return b - a; 
-                    });
-                    for(let i=0; i<needed; i++) ticks[available[i]][d*2+1] = 1;
-                }
-                return { names: [...cfg.teachers], ticks };
-            }
-
-            if (shiftKey === 'shapla') {
-                for (let t=0; t<n; t++) {
-                    for (let d=0; d<13; d++) ticks[t][d*2] = 1;
-                }
-                let targets = {};
-                for(let t=0; t<n; t++) targets[t] = (t < 5) ? 20 : 21;
-                
-                for(let d=0; d<13; d++) {
-                    let needed = 15;
-                    let available = [];
-                    for(let t=0; t<n; t++) available.push(t);
-                    available.sort((a,b) => {
-                        let remA = targets[a] - ticks[a].reduce((sum, val)=>sum+val, 0);
-                        let remB = targets[b] - ticks[b].reduce((sum, val)=>sum+val, 0);
-                        if (remB !== remA) return remB - remA;
-                        return b - a;
-                    });
-                    for(let i=0; i<needed; i++) ticks[available[i]][d*2+1] = 1;
-                }
-                return { names: [...cfg.teachers], ticks };
-            }
-
-            if (shiftKey === 'beli') {
-                for (let t=0; t<n; t++) {
-                    for (let d=0; d<13; d++) {
-                        if (d === 9 && t >= 20) ticks[t][d*2+1] = 0;
-                        else ticks[t][d*2+1] = 1;
-                    }
-                }
-                let targets = {};
-                for(let t=0; t<n; t++) targets[t] = (t < 18) ? 20 : 21;
-                
-                for(let d=0; d<13; d++) {
-                    let needed = 15;
-                    let available = [];
-                    for(let t=0; t<n; t++) available.push(t);
-                    
-                    for(let t=0; t<n; t++) {
-                        if (ticks[t][d*2+1] === 0) {
-                            ticks[t][d*2] = 1;
-                            needed--;
-                            available = available.filter(x => x !== t);
-                        }
-                    }
-                    
-                    available.sort((a,b) => {
-                        let remA = targets[a] - ticks[a].reduce((sum, val)=>sum+val, 0);
-                        let remB = targets[b] - ticks[b].reduce((sum, val)=>sum+val, 0);
-                        if (remB !== remA) return remB - remA;
-                        return b - a;
-                    });
-                    for(let i=0; i<needed; i++) ticks[available[i]][d*2] = 1;
-                }
-                return { names: [...cfg.teachers], ticks };
-            }
-
-            if (shiftKey === 'bokul') {
-                for (let t=0; t<n; t++) {
-                    for (let d=0; d<13; d++) {
-                        if (d === 9 && t >= 19) ticks[t][d*2+1] = 0;
-                        else ticks[t][d*2+1] = 1;
-                    }
-                }
-                let targets = {};
-                for(let t=0; t<n; t++) targets[t] = (t < 24) ? 20 : 21;
-                
-                for(let d=0; d<13; d++) {
-                    let needed = 14;
-                    let available = [];
-                    for(let t=0; t<n; t++) available.push(t);
-                    
-                    for(let t=0; t<n; t++) {
-                        if (ticks[t][d*2+1] === 0) {
-                            ticks[t][d*2] = 1;
-                            needed--;
-                            available = available.filter(x => x !== t);
-                        }
-                    }
-                    
-                    available.sort((a,b) => {
-                        let remA = targets[a] - ticks[a].reduce((sum, val)=>sum+val, 0);
-                        let remB = targets[b] - ticks[b].reduce((sum, val)=>sum+val, 0);
-                        if (remB !== remA) return remB - remA;
-                        return b - a;
-                    });
-                    for(let i=0; i<needed; i++) ticks[available[i]][d*2] = 1;
-                }
-                return { names: [...cfg.teachers], ticks };
-            }
+            }, 30000);
         }
 
-        function saveToCache() {
-            const cfg = SHIFTS_CONFIG[currentShiftKey];
-            const rows = document.querySelectorAll('#rosterBody tr');
-            const state = { names: [], ticks: [] };
-            rows.forEach(row => {
-                state.names.push(row.querySelector('td:nth-child(2)').innerText);
-                const rowTicks = [];
-                row.querySelectorAll('.slot-cell').forEach(slot => rowTicks.push(slot.classList.contains('ticked') ? 1 : 0));
-                state.ticks.push(rowTicks);
-            });
-            localStorage.setItem(cfg.storageKey, JSON.stringify(state));
-            generateAttendance();
+        function showDownloadToast(titleText) {
+            const toast = document.getElementById('downloadToast');
+            document.getElementById('toastHeading').innerText = titleText;
+            toast.classList.remove('translate-y-24', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-24', 'opacity-0');
+            }, 4000);
         }
-
-        function loadFromCache() {
-            const cfg = SHIFTS_CONFIG[currentShiftKey];
-            const raw = localStorage.getItem(cfg.storageKey);
-            if (!raw) {
-                const autoState = buildAutoSchedule(currentShiftKey);
-                localStorage.setItem(cfg.storageKey, JSON.stringify(autoState));
-                return autoState;
-            }
-            try { return JSON.parse(raw); } catch (e) { return buildAutoSchedule(currentShiftKey); }
-        }
-
-        function switchShift(shiftKey) {
-            currentShiftKey = shiftKey;
-            const cfg = SHIFTS_CONFIG[shiftKey];
-            document.querySelectorAll('.btn-shift').forEach(btn => btn.classList.remove('active'));
-            document.getElementById('btn-' + shiftKey).classList.add('active');
-            document.querySelectorAll('.shift-name-display').forEach(el => el.innerText = cfg.title);
-            document.body.classList.remove('rows-25', 'rows-26', 'rows-27');
-            document.body.classList.add('rows-' + cfg.teachers.length);
-            renderTable();
-        }
-
-        function renderTable() {
-            tbody.innerHTML = '';
-            const cfg = SHIFTS_CONFIG[currentShiftKey];
-            const savedState = loadFromCache();
-
-            cfg.teachers.forEach((defaultName, index) => {
-                let tr = document.createElement('tr');
-                const currentName = (savedState && savedState.names && savedState.names[index] !== undefined) ? savedState.names[index] : defaultName;
-
-                let tdSl = document.createElement('td');
-                tdSl.innerText = toBengaliNum(index + 1) + ".";
-                tdSl.style.fontWeight = "bold";
-                tr.appendChild(tdSl);
-
-                let tdName = document.createElement('td');
-                tdName.innerText = currentName;
-                tdName.setAttribute('contenteditable', 'true');
-                tdName.spellcheck = false;
-                tdName.addEventListener('input', () => { calculateTotals(); saveToCache(); });
-                tr.appendChild(tdName);
-
-                for (let i = 0; i < 26; i++) {
-                    let tdSlot = document.createElement('td');
-                    tdSlot.className = 'slot-cell';
-                    if (savedState && savedState.ticks && savedState.ticks[index] && savedState.ticks[index][i] === 1) {
-                        tdSlot.classList.add('ticked');
-                        tdSlot.innerText = '✔';
-                    }
-                    tdSlot.addEventListener('click', function() {
-                        this.classList.toggle('ticked');
-                        this.innerText = this.classList.contains('ticked') ? '✔' : '';
-                        calculateTotals();
-                        saveToCache();
-                    });
-                    tr.appendChild(tdSlot);
-                }
-
-                let tdTotal = document.createElement('td');
-                tdTotal.className = 'row-total';
-                tr.appendChild(tdTotal);
-                tbody.appendChild(tr);
-            });
-            calculateTotals();
-            generateAttendance();
-        }
-
-        function calculateTotals() {
-            let grandTotal = 0;
-            let colTotals = new Array(26).fill(0);
-            document.querySelectorAll('#rosterBody tr').forEach(row => {
-                let rowTotal = 0;
-                row.querySelectorAll('.slot-cell').forEach((slot, idx) => {
-                    if (slot.classList.contains('ticked')) { rowTotal++; colTotals[idx]++; }
-                });
-                row.querySelector('.row-total').innerText = rowTotal > 0 ? toBengaliNum(rowTotal) : '';
-                grandTotal += rowTotal;
-            });
-
-            const footerCells = document.querySelectorAll('.total-row td');
-            for (let i = 0; i < 26; i++) {
-                footerCells[i + 1].innerText = colTotals[i] > 0 ? toBengaliNum(colTotals[i]) : '';
-            }
-            const banglaGrand = toBengaliNum(grandTotal);
-            document.getElementById('header-grand-total').innerText = banglaGrand;
-            document.getElementById('footer-grand-total').innerText = banglaGrand;
-        }
-
-        function renderShiftAttendance(tbodyId, totalElementId, shiftOffset) {
-            const attBody = document.getElementById(tbodyId);
-            attBody.innerHTML = '';
-            const cfg = SHIFTS_CONFIG[currentShiftKey];
-            const savedState = loadFromCache();
-            let shiftTotal = 0;
-
-            for (let i = 0; i < cfg.teachers.length; i++) {
-                let tr = document.createElement('tr');
-                let tdSl = document.createElement('td');
-                tdSl.innerText = toBengaliNum(i + 1) + ".";
-                tdSl.style.fontWeight = "bold";
-                tr.appendChild(tdSl);
-
-                const currentName = (savedState && savedState.names && savedState.names[i] !== undefined) ? savedState.names[i] : cfg.teachers[i];
-                let tdName = document.createElement('td');
-                tdName.className = 'thick-right';
-                tdName.innerText = currentName;
-                tr.appendChild(tdName);
-
-                for (let d = 0; d < 13; d++) {
-                    let slotIndex = (d * 2) + shiftOffset;
-                    const isTicked = savedState && savedState.ticks && savedState.ticks[i] && savedState.ticks[i][slotIndex] === 1 && currentName.trim() !== '';
-                    if (isTicked) shiftTotal++;
-
-                    let tdD = document.createElement('td');
-                    tdD.className = 'attendance-tick';
-                    tdD.innerText = isTicked ? '✔' : '';
-                    tr.appendChild(tdD);
-
-                    let tdHall = document.createElement('td');
-                    tr.appendChild(tdHall);
-
-                    let tdSign = document.createElement('td');
-                    tdSign.className = 'thick-right';
-                    tr.appendChild(tdSign);
-                }
-                attBody.appendChild(tr);
-            }
-            document.getElementById(totalElementId).innerText = toBengaliNum(shiftTotal);
-        }
-
-        function generateAttendance() {
-            renderShiftAttendance('attendanceBody1', 'attendance1-grand-total', 0);
-            renderShiftAttendance('attendanceBody2', 'attendance2-grand-total', 1);
-        }
-
-        function printSection(mode) {
-            document.body.className = 'rows-' + SHIFTS_CONFIG[currentShiftKey].teachers.length;
-            if (mode === 'roster') document.body.classList.add('print-roster-only');
-            else if (mode === 'att1') document.body.classList.add('print-att1-only');
-            else if (mode === 'att2') document.body.classList.add('print-att2-only');
-            else document.body.classList.add('print-all');
-            window.print();
-        }
-
-        function resetToAutoSchedule() {
-            const cfg = SHIFTS_CONFIG[currentShiftKey];
-            if (confirm(cfg.title + "-এর ডিউটি রোস্টারটি কি ডিফল্ট নিয়মে রিসেট করতে চান?")) {
-                localStorage.setItem(cfg.storageKey, JSON.stringify(buildAutoSchedule(currentShiftKey)));
-                renderTable();
-            }
-        }
-
-        function clearAllTicks() {
-            const cfg = SHIFTS_CONFIG[currentShiftKey];
-            if (confirm(cfg.title + "-এর সব টিক মার্ক মুছে খালি (Blank) করতে চান?")) {
-                const n = cfg.teachers.length;
-                localStorage.setItem(cfg.storageKey, JSON.stringify({
-                    names: [...cfg.teachers],
-                    ticks: Array.from({ length: n }, () => new Array(26).fill(0))
-                }));
-                renderTable();
-            }
-        }
-
-        switchShift('joba');
     </script>
 </body>
 </html>
