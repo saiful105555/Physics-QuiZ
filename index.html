@@ -32,16 +32,16 @@
       font-family: 'Kalpurush', 'Hind Siliguri', sans-serif;
       background-color: var(--bg);
       color: var(--text);
-      padding: 20px 12px;
-      line-height: 1.6;
+      padding: 10px 6px;
+      line-height: 1.5;
     }
 
     .duty-container {
       max-width: 980px;
       margin: 0 auto;
       background: var(--card-bg);
-      border-radius: 14px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
       overflow: hidden;
       border: 1px solid var(--border);
     }
@@ -50,117 +50,121 @@
     .duty-header {
       background: linear-gradient(135deg, #0f5132 0%, #198754 100%);
       color: #fff;
-      padding: 24px 20px;
+      padding: 18px 12px;
       text-align: center;
     }
 
     .duty-header h1 {
       font-family: 'Noto Serif Bengali', 'Hind Siliguri', serif;
-      font-size: 1.65rem;
-      margin-bottom: 4px;
+      font-size: 1.4rem;
+      margin-bottom: 2px;
     }
 
     .duty-header p {
-      font-size: 1rem;
+      font-size: 0.9rem;
       opacity: 0.92;
     }
 
     .time-badge-bar {
       display: flex;
       justify-content: center;
-      gap: 12px;
+      gap: 8px;
       flex-wrap: wrap;
-      margin-top: 12px;
+      margin-top: 8px;
     }
 
     .time-badge {
       background: rgba(255, 255, 255, 0.18);
-      padding: 4px 14px;
+      padding: 3px 10px;
       border-radius: 20px;
-      font-size: 0.9rem;
+      font-size: 0.82rem;
     }
 
     /* One-Click Full Roster Download Section */
     .roster-download-bar {
       background: #eef6f2;
-      padding: 16px 20px;
+      padding: 12px;
       border-bottom: 1px solid #c3e6cb;
     }
 
     .roster-download-title {
-      font-size: 1rem;
+      font-size: 0.92rem;
       font-weight: 700;
       color: #0f5132;
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
+      margin-bottom: 8px;
       text-align: center;
     }
 
     .roster-btn-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 10px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+
+    @media (min-width: 600px) {
+      .roster-btn-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
     }
 
     .roster-dl-btn {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      padding: 10px 14px;
+      gap: 4px;
+      padding: 8px 10px;
       background: #ffffff;
       color: #0f5132;
-      border: 2px solid #198754;
-      border-radius: 8px;
+      border: 1.5px solid #198754;
+      border-radius: 6px;
       font-family: inherit;
-      font-size: 0.95rem;
+      font-size: 0.85rem;
       font-weight: 700;
       text-decoration: none;
       cursor: pointer;
       transition: all 0.2s ease;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.04);
     }
 
     .roster-dl-btn:hover {
       background: #198754;
       color: #ffffff;
-      transform: translateY(-1px);
-      box-shadow: 0 4px 10px rgba(25, 135, 84, 0.2);
     }
 
     /* Controls Section */
     .controls-box {
-      padding: 20px;
+      padding: 14px 12px;
       background: #f8fafc;
       border-bottom: 1px solid var(--border);
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 16px;
-      align-items: end;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    @media (min-width: 768px) {
+      .controls-box {
+        grid-template-columns: 1fr 1fr;
+        align-items: end;
+      }
     }
 
     .form-group label {
       display: block;
       font-weight: 600;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
       color: #374151;
-      font-size: 0.98rem;
+      font-size: 0.92rem;
     }
 
     .form-control {
       width: 100%;
-      padding: 10px 14px;
-      font-size: 1rem;
+      padding: 9px 12px;
+      font-size: 0.95rem;
       font-family: inherit;
       border: 2px solid #cbd5e1;
       border-radius: 8px;
       background: #fff;
       color: var(--text);
       outline: none;
-      transition: border-color 0.2s;
     }
 
     .form-control:focus {
@@ -169,54 +173,40 @@
 
     .btn-group {
       display: flex;
-      gap: 8px;
+      gap: 6px;
       flex-wrap: wrap;
+      grid-column: 1 / -1;
     }
 
     .btn {
-      padding: 10px 14px;
-      font-size: 0.92rem;
+      flex: 1;
+      padding: 9px 10px;
+      font-size: 0.88rem;
       font-family: inherit;
       font-weight: 600;
       border: none;
       border-radius: 8px;
       cursor: pointer;
-      transition: all 0.2s;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 6px;
+      gap: 4px;
       text-decoration: none;
+      white-space: nowrap;
     }
 
-    .btn-primary {
-      background: #198754;
-      color: #fff;
-    }
-    .btn-primary:hover {
-      background: #146c43;
-    }
+    .btn-primary { background: #198754; color: #fff; }
+    .btn-primary:hover { background: #146c43; }
 
-    .btn-accent {
-      background: #0d6efd;
-      color: #fff;
-    }
-    .btn-accent:hover {
-      background: #0b5ed7;
-    }
+    .btn-accent { background: #0d6efd; color: #fff; }
+    .btn-accent:hover { background: #0b5ed7; }
 
-    .btn-outline {
-      background: #fff;
-      color: #0f5132;
-      border: 2px solid #198754;
-    }
-    .btn-outline:hover {
-      background: var(--primary-light);
-    }
+    .btn-outline { background: #fff; color: #0f5132; border: 2px solid #198754; }
+    .btn-outline:hover { background: var(--primary-light); }
 
-    /* Stats Cards */
+    /* Content Area */
     .content-area {
-      padding: 20px;
+      padding: 14px 12px;
     }
 
     .teacher-banner {
@@ -224,83 +214,74 @@
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 12px;
+      gap: 8px;
       background: #eef6f2;
-      border-left: 5px solid #198754;
-      padding: 14px 18px;
+      border-left: 4px solid #198754;
+      padding: 10px 14px;
       border-radius: 8px;
-      margin-bottom: 20px;
+      margin-bottom: 14px;
     }
 
     .teacher-banner h2 {
       font-family: 'Hind Siliguri', sans-serif;
-      font-size: 1.35rem;
+      font-size: 1.15rem;
       color: #0f5132;
     }
 
     .banner-actions {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 6px;
       flex-wrap: wrap;
     }
 
     .shift-pill {
       background: #0f5132;
       color: #fff;
-      padding: 5px 14px;
+      padding: 3px 10px;
       border-radius: 20px;
-      font-size: 0.92rem;
+      font-size: 0.85rem;
       font-weight: 600;
     }
 
+    /* Smart Compact Stats Grid for Mobile */
     .stats-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-      gap: 14px;
-      margin-bottom: 22px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    @media (min-width: 600px) {
+      .stats-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
     }
 
     .stat-card {
       background: #fff;
       border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 14px;
+      border-radius: 8px;
+      padding: 10px 8px;
       text-align: center;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
     }
 
-    .stat-card.total {
-      background: #ecfdf5;
-      border-color: #a7f3d0;
-    }
-
-    .stat-card.morning {
-      background: #eff6ff;
-      border-color: #bfdbfe;
-    }
-
-    .stat-card.afternoon {
-      background: #fefce8;
-      border-color: #fde68a;
-    }
-
-    .stat-card.both {
-      background: #f5f3ff;
-      border-color: #ddd6fe;
-    }
+    .stat-card.total { background: #ecfdf5; border-color: #a7f3d0; }
+    .stat-card.morning { background: #eff6ff; border-color: #bfdbfe; }
+    .stat-card.afternoon { background: #fefce8; border-color: #fde68a; }
+    .stat-card.both { background: #f5f3ff; border-color: #ddd6fe; }
 
     .stat-value {
-      font-size: 1.8rem;
+      font-size: 1.4rem;
       font-weight: 700;
-      line-height: 1.2;
+      line-height: 1.1;
       color: #111827;
     }
 
     .stat-label {
-      font-size: 0.92rem;
+      font-size: 0.8rem;
       color: #4b5563;
-      margin-top: 4px;
+      margin-top: 2px;
       font-weight: 600;
     }
 
@@ -310,31 +291,36 @@
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 12px;
+      gap: 8px;
+      margin-bottom: 10px;
+      font-size: 0.9rem;
     }
 
     .filter-label {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       font-weight: 600;
       cursor: pointer;
-      user-select: none;
     }
 
-    /* Table */
+    /* Mobile Optimized Table - No Horizontal Scroll needed */
     .table-responsive {
-      overflow-x: auto;
-      border-radius: 10px;
+      width: 100%;
+      border-radius: 8px;
       border: 1px solid var(--border);
+      overflow-x: auto;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
       text-align: center;
-      font-size: 0.98rem;
+      font-size: 0.85rem;
+    }
+
+    @media (min-width: 480px) {
+      table { font-size: 0.92rem; }
     }
 
     thead {
@@ -343,30 +329,24 @@
     }
 
     th, td {
-      padding: 11px 12px;
+      padding: 8px 6px;
       border-bottom: 1px solid var(--border);
+      white-space: nowrap;
     }
 
-    tbody tr:nth-child(even) {
-      background-color: #f9fafb;
-    }
+    tbody tr:nth-child(even) { background-color: #f9fafb; }
+    tbody tr:hover { background-color: #f0fdf4; }
 
-    tbody tr:hover {
-      background-color: #f0fdf4;
-    }
-
-    .clickable-row {
-      cursor: pointer;
-    }
+    .clickable-row { cursor: pointer; }
 
     .badge-yes {
       display: inline-block;
       background: var(--yes-bg);
       color: var(--yes-text);
       font-weight: 700;
-      padding: 3px 12px;
-      border-radius: 20px;
-      border: 1px solid #86efac;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 0.8rem;
     }
 
     .badge-no {
@@ -374,9 +354,9 @@
       background: var(--no-bg);
       color: var(--no-text);
       font-weight: 600;
-      padding: 3px 12px;
-      border-radius: 20px;
-      font-size: 0.88rem;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 0.78rem;
       opacity: 0.85;
     }
 
@@ -385,46 +365,41 @@
       color: #0f5132;
     }
 
-    .note-footer {
-      margin-top: 16px;
-      font-size: 0.92rem;
+    /* Footer / Supervision Credit */
+    .footer-credit {
+      margin-top: 18px;
+      padding-top: 12px;
+      border-top: 1px dashed var(--border);
+      text-align: center;
+    }
+
+    .note-warning {
+      font-size: 0.85rem;
       color: #dc2626;
       font-weight: 600;
-      text-align: center;
+      margin-bottom: 6px;
+    }
+
+    .supervision-text {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #0f5132;
+      background: #f0fdf4;
+      display: inline-block;
+      padding: 4px 14px;
+      border-radius: 20px;
+      border: 1px solid #bbf7d0;
     }
 
     /* Print Styling */
     @media print {
-      body {
-        background: #fff;
-        padding: 0;
-      }
-      .duty-container {
-        box-shadow: none;
-        border: none;
-        max-width: 100%;
-      }
-      .controls-box, .roster-download-bar, .no-print {
-        display: none !important;
-      }
-      .duty-header {
-        background: #fff !important;
-        color: #000 !important;
-        border-bottom: 2px solid #000;
-        padding: 10px 0;
-      }
-      .time-badge {
-        border: 1px solid #000;
-        color: #000;
-      }
-      th, td {
-        padding: 6px 8px;
-        border: 1px solid #999;
-      }
-      thead {
-        background: #eee !important;
-        color: #000 !important;
-      }
+      body { background: #fff; padding: 0; }
+      .duty-container { box-shadow: none; border: none; max-width: 100%; }
+      .controls-box, .roster-download-bar, .no-print { display: none !important; }
+      .duty-header { background: #fff !important; color: #000 !important; border-bottom: 2px solid #000; padding: 6px 0; }
+      .time-badge { border: 1px solid #000; color: #000; }
+      th, td { padding: 4px 6px; border: 1px solid #999; }
+      thead { background: #eee !important; color: #000 !important; }
     }
   </style>
 </head>
@@ -436,29 +411,19 @@
     <h1>ইবনে তাইমিয়া স্কুল এন্ড কলেজ</h1>
     <p>বার্ষিক পরীক্ষা–২০২৬ খ্রিস্টাব্দ | ডিউটি রোস্টার ও ব্যক্তিগত ডিউটি অনুসন্ধান</p>
     <div class="time-badge-bar">
-      <span class="time-badge">১ম বেলা: ৭.৩০ থেকে ১০.৩০টা</span>
-      <span class="time-badge">২য় বেলা: ১.৩০ থেকে ৪.৩০টা</span>
+      <span class="time-badge">১ম বেলা: ৭.৩০–১০.৩০</span>
+      <span class="time-badge">২য় বেলা: ১.৩০–৪.৩০</span>
     </div>
   </div>
 
   <!-- One-Click Full Roster PDF Download Bar -->
   <div class="roster-download-bar no-print">
-    <div class="roster-download-title">
-      📥 সম্পূর্ণ শিফট রোস্টার (PDF) ওয়ান-ক্লিক ডাউনলোড করুন:
-    </div>
+    <div class="roster-download-title">📥 সম্পূর্ণ শিফট রোস্টার (PDF) ওয়ান-ক্লিক ডাউনলোড:</div>
     <div class="roster-btn-grid">
-      <button class="roster-dl-btn" onclick="downloadShiftPdf('জবা')">
-        ⬇️ জবা শিফট রোস্টার (PDF)
-      </button>
-      <button class="roster-dl-btn" onclick="downloadShiftPdf('বেলি')">
-        ⬇️ বেলি শিফট রোস্টার (PDF)
-      </button>
-      <button class="roster-dl-btn" onclick="downloadShiftPdf('বকুল')">
-        ⬇️ বকুল শিফট রোস্টার (PDF)
-      </button>
-      <button class="roster-dl-btn" onclick="downloadShiftPdf('শাপলা')">
-        ⬇️ শাপলা শিফট রোস্টার (PDF)
-      </button>
+      <button class="roster-dl-btn" onclick="downloadShiftPdf('জবা')">⬇️ জবা শিফট</button>
+      <button class="roster-dl-btn" onclick="downloadShiftPdf('বেলি')">⬇️ বেলি শিফট</button>
+      <button class="roster-dl-btn" onclick="downloadShiftPdf('বকুল')">⬇️ বকুল শিফট</button>
+      <button class="roster-dl-btn" onclick="downloadShiftPdf('শাপলা')">⬇️ শাপলা শিফট</button>
     </div>
   </div>
 
@@ -475,22 +440,14 @@
     </div>
 
     <div class="form-group">
-      <label for="teacherSelect">২. পর্যবেক্ষকের নাম নির্বাচন করুন:</label>
-      <select id="teacherSelect" class="form-control" onchange="renderPersonalDuty()">
-        <!-- জাভাস্ক্রিপ্ট দ্বারা লোড হবে -->
-      </select>
+      <label for="teacherSelect">২. পর্যবেক্ষকের নাম:</label>
+      <select id="teacherSelect" class="form-control" onchange="renderPersonalDuty()"></select>
     </div>
 
     <div class="btn-group">
-      <button class="btn btn-outline" onclick="toggleSummaryView()" id="summaryToggleBtn">
-        📋 পুরো শিফটের সামারি
-      </button>
-      <button class="btn btn-accent" onclick="downloadSelectedShiftPdf()" id="selectedShiftDlBtn">
-        📥 এই শিফটের রোস্টার (PDF)
-      </button>
-      <button class="btn btn-primary" onclick="window.print()">
-        🖨️ ব্যক্তিগত স্লিপ প্রিন্ট
-      </button>
+      <button class="btn btn-outline" onclick="toggleSummaryView()" id="summaryToggleBtn">📋 সামারি</button>
+      <button class="btn btn-accent" onclick="downloadSelectedShiftPdf()" id="selectedShiftDlBtn">📥 রোস্টার PDF</button>
+      <button class="btn btn-primary" onclick="window.print()">🖨️ প্রিন্ট</button>
     </div>
   </div>
 
@@ -501,40 +458,38 @@
       <div class="teacher-banner">
         <div>
           <h2 id="displayTeacherName">পর্যবেক্ষকের নাম</h2>
-          <small id="displaySerial" style="color: #4b5563; font-weight: 600;"></small>
+          <small id="displaySerial" style="color: #4b5563; font-weight: 600; font-size: 0.8rem;"></small>
         </div>
         <div class="banner-actions">
-          <button class="btn btn-outline no-print" style="padding: 4px 12px; font-size: 0.85rem;" onclick="viewSelectedShiftPdf()">
-            👁️ মূল রোস্টার শিট দেখুন
-          </button>
-          <span class="shift-pill" id="displayShiftName">শিফট: জবা</span>
+          <button class="btn btn-outline no-print" style="padding: 3px 8px; font-size: 0.78rem;" onclick="viewSelectedShiftPdf()">👁️ রোস্টার</button>
+          <span class="shift-pill" id="displayShiftName">জবা</span>
         </div>
       </div>
 
       <div class="stats-grid">
         <div class="stat-card total">
           <div class="stat-value" id="statTotal">০</div>
-          <div class="stat-label">সর্বমোট ডিউটি (বেলা)</div>
+          <div class="stat-label">মোট ডিউটি</div>
         </div>
         <div class="stat-card morning">
           <div class="stat-value" id="statMorning">০</div>
-          <div class="stat-label">১ম বেলা (৭.৩০–১০.৩০)</div>
+          <div class="stat-label">১ম বেলা</div>
         </div>
         <div class="stat-card afternoon">
           <div class="stat-value" id="statAfternoon">০</div>
-          <div class="stat-label">২য় বেলা (১.৩০–৪.৩০)</div>
+          <div class="stat-label">২য় বেলা</div>
         </div>
         <div class="stat-card both">
           <div class="stat-value" id="statBothDays">০</div>
-          <div class="stat-label">উভয় বেলা ডিউটি (দিন)</div>
+          <div class="stat-label">উভয় বেলা (দিন)</div>
         </div>
       </div>
 
       <div class="filter-bar no-print">
-        <h3 style="font-size: 1.1rem; color: #0f5132;">📅 তারিখ ও বেলা অনুযায়ী ডিউটির তালিকা</h3>
+        <span style="font-weight: 600; color: #0f5132; font-size: 0.88rem;">📅 তারিখ অনুযায়ী তালিকা</span>
         <label class="filter-label">
           <input type="checkbox" id="onlyDutyDays" onchange="renderPersonalDuty()">
-          শুধু ডিউটি থাকা দিনগুলো দেখুন
+          শুধু ডিউটি দিনগুলো
         </label>
       </div>
 
@@ -542,12 +497,12 @@
         <table>
           <thead>
             <tr>
-              <th>ক্র.নং</th>
+              <th>ক্র.</th>
               <th>তারিখ</th>
               <th>বার</th>
-              <th>১ম বেলা (৭.৩০–১০.৩০)</th>
-              <th>২য় বেলা (১.৩০–৪.৩০)</th>
-              <th>দৈনিক মোট</th>
+              <th>১ম বেলা</th>
+              <th>২য় বেলা</th>
+              <th>মোট</th>
             </tr>
           </thead>
           <tbody id="personalTableBody"></tbody>
@@ -558,27 +513,24 @@
     <!-- All Teachers Shift Summary View -->
     <div id="shiftSummaryView" style="display: none;">
       <div class="teacher-banner">
-        <h2 id="summaryHeaderTitle">জবা শিফট — সকল শিক্ষকের ডিউটি সামারি</h2>
+        <h2 id="summaryHeaderTitle" style="font-size: 1rem;">শিফট সামারি</h2>
         <div class="banner-actions">
-          <button class="btn btn-accent no-print" style="padding: 5px 12px; font-size: 0.85rem;" onclick="downloadSelectedShiftPdf()">
-            ⬇️ পূর্ণ রোস্টার ডাউনলোড
-          </button>
-          <span class="shift-pill" id="summaryTotalPill">সর্বমোট ডিউটি: ৫১৯</span>
+          <span class="shift-pill" id="summaryTotalPill">মোট: ৫১৯</span>
         </div>
       </div>
-      <p class="no-print" style="margin-bottom: 12px; color: #4b5563; font-size: 0.92rem;">
-        💡 যেকোনো শিক্ষকের নামের ওপর ক্লিক করলে তাঁর বিস্তারিত ব্যক্তিগত রুটিন দেখা যাবে।
+      <p class="no-print" style="margin-bottom: 8px; color: #4b5563; font-size: 0.82rem;">
+        💡 নামের ওপর ক্লিক করলে ব্যক্তিগত রুটিন দেখাবে।
       </p>
       <div class="table-responsive">
         <table>
           <thead>
             <tr>
-              <th>ক্র.নং</th>
-              <th style="text-align: left;">পর্যবেক্ষকদের নাম</th>
-              <th>১ম বেলা (সকাল)</th>
-              <th>২য় বেলা (দুপুর)</th>
-              <th>উভয় বেলা (দিন)</th>
-              <th>মোট ডিউটি (বেলা)</th>
+              <th>ক্র.</th>
+              <th style="text-align: left;">পর্যবেক্ষকের নাম</th>
+              <th>১ম</th>
+              <th>২য়</th>
+              <th>উভয়</th>
+              <th>মোট</th>
             </tr>
           </thead>
           <tbody id="summaryTableBody"></tbody>
@@ -586,14 +538,15 @@
       </div>
     </div>
 
-    <div class="note-footer">
-      বি:দ্র: পরীক্ষা শুরুর ২০ মিনিট পূর্বে কক্ষে অবস্থান করতে হবে।
+    <!-- Footer / Supervision Credit -->
+    <div class="footer-credit">
+      <div class="note-warning">বি:দ্র: পরীক্ষা শুরুর ২০ মিনিট পূর্বে কক্ষে অবস্থান করতে হবে।</div>
+      <div class="supervision-text">✨ সার্বিক তত্ত্বাবধানে: ইঞ্জি: সাইফুল ইসলাম</div>
     </div>
   </div>
 </div>
 
 <script>
-  // ৪টি শিফটের মূল রোস্টার পিডিএফ লিংক কনফিগারেশন
   const SHIFT_PDF_KEYS = {
     "জবা": "1hbJjccDFuMn52In" + "MpXgztRtsXkoEmCcQ",
     "বেলি": "1y46KLpm2mwsr3Kx" + "vf05mjU3xyHnjlEC1",
@@ -601,7 +554,6 @@
     "শাপলা": "16q2R6n0Hbxrq__r" + "t6BPx_KIONHLZDQb3"
   };
 
-  // ওয়ান-ক্লিক ডিরেক্ট পিডিএফ ডাউনলোড ফাংশন
   function downloadShiftPdf(shiftName) {
     const key = SHIFT_PDF_KEYS[shiftName];
     if (!key) return;
@@ -615,13 +567,10 @@
     document.body.removeChild(a);
   }
 
-  // বর্তমানে নির্বাচিত শিফটের পিডিএফ ডাউনলোড
   function downloadSelectedShiftPdf() {
-    const shift = document.getElementById('shiftSelect').value;
-    downloadShiftPdf(shift);
+    downloadShiftPdf(document.getElementById('shiftSelect').value);
   }
 
-  // বর্তমানে নির্বাচিত শিফটের পিডিএফ প্রিভিউ (নতুন ট্যাবে)
   function viewSelectedShiftPdf() {
     const shift = document.getElementById('shiftSelect').value;
     const key = SHIFT_PDF_KEYS[shift];
@@ -629,7 +578,6 @@
     window.open("https://drive.google.com/file/d/" + key + "/view", "_blank");
   }
 
-  // পরীক্ষার ১৩টি তারিখ ও বার
   const EXAM_DATES = [
     { date: "১৭/১১/২৬", day: "মঙ্গল" },
     { date: "১৮/১১/২৬", day: "বুধ" },
@@ -646,7 +594,6 @@
     { date: "০৩/১২/২৬", day: "বৃহস্পতি" }
   ];
 
-  // মূল রোস্টার শিট অনুযায়ী শতভাগ নির্ভুল নামের বানান ও ২৬ বেলার ডিউটি ডেটা
   const DUTY_DATA = {
     "জবা": [
       { sl: 1, name: "জনাব এ.এম. আখতার হোসেন", d: [1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1] },
@@ -765,13 +712,11 @@
 
   let isSummaryMode = false;
 
-  // ইংরেজি সংখ্যাকে বাংলায় রূপান্তর
   function toBn(num) {
     const bnDigits = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
     return String(num).replace(/\d/g, d => bnDigits[d]);
   }
 
-  // শিফট পরিবর্তন হলে শিক্ষকদের তালিকা আপডেট করা
   function onShiftChange() {
     const shift = document.getElementById('shiftSelect').value;
     const teacherSelect = document.getElementById('teacherSelect');
@@ -785,14 +730,13 @@
       teacherSelect.appendChild(opt);
     });
 
-    // জবা শিফটে ডিফল্টভাবে ১৯ নং (সাইফুল ইসলাম ইঞ্জিঃ) সিলেক্ট রাখা
     if (shift === 'জবা' && teachers.length >= 19) {
       teacherSelect.value = 18;
     } else {
       teacherSelect.value = 0;
     }
 
-    document.getElementById('selectedShiftDlBtn').innerHTML = `📥 ${shift} শিফট রোস্টার (PDF)`;
+    document.getElementById('selectedShiftDlBtn').innerHTML = `📥 ${shift} PDF`;
 
     renderPersonalDuty();
     if (isSummaryMode) {
@@ -800,7 +744,6 @@
     }
   }
 
-  // ব্যক্তিগত ডিউটি রেন্ডার করা
   function renderPersonalDuty() {
     const shift = document.getElementById('shiftSelect').value;
     const teacherIndex = parseInt(document.getElementById('teacherSelect').value, 10) || 0;
@@ -810,8 +753,8 @@
     if (!teacher) return;
 
     document.getElementById('displayTeacherName').textContent = teacher.name;
-    document.getElementById('displaySerial').textContent = `ক্র.নং: ${toBn(teacher.sl)} | মোট পরীক্ষার দিন: ১৩ দিন`;
-    document.getElementById('displayShiftName').textContent = `শিফট: ${shift}`;
+    document.getElementById('displaySerial').textContent = `ক্র.নং: ${toBn(teacher.sl)}`;
+    document.getElementById('displayShiftName').textContent = shift;
 
     let morningCount = 0;
     let afternoonCount = 0;
@@ -838,19 +781,18 @@
         <td>(${EXAM_DATES[i].day})</td>
         <td>${m ? '<span class="badge-yes">আছে ✔</span>' : '<span class="badge-no">নেই</span>'}</td>
         <td>${a ? '<span class="badge-yes">আছে ✔</span>' : '<span class="badge-no">নেই</span>'}</td>
-        <td class="day-count-badge">${toBn(dayTotal)} বেলা</td>
+        <td class="day-count-badge">${toBn(dayTotal)}</td>
       `;
       tbody.appendChild(tr);
     }
 
     const totalDuty = morningCount + afternoonCount;
-    document.getElementById('statTotal').textContent = `${toBn(totalDuty)} বেলা`;
-    document.getElementById('statMorning').textContent = `${toBn(morningCount)} বেলা`;
-    document.getElementById('statAfternoon').textContent = `${toBn(afternoonCount)} বেলা`;
-    document.getElementById('statBothDays').textContent = `${toBn(bothDaysCount)} দিন`;
+    document.getElementById('statTotal').textContent = toBn(totalDuty);
+    document.getElementById('statMorning').textContent = toBn(morningCount);
+    document.getElementById('statAfternoon').textContent = toBn(afternoonCount);
+    document.getElementById('statBothDays').textContent = toBn(bothDaysCount);
   }
 
-  // পুরো শিফটের সকল শিক্ষকের সামারি রেন্ডার করা
   function renderShiftSummary() {
     const shift = document.getElementById('shiftSelect').value;
     const teachers = DUTY_DATA[shift] || [];
@@ -873,7 +815,6 @@
 
       const tr = document.createElement('tr');
       tr.className = 'clickable-row';
-      tr.title = 'বিস্তারিত দেখতে ক্লিক করুন';
       tr.onclick = () => {
         document.getElementById('teacherSelect').value = idx;
         toggleSummaryView();
@@ -881,21 +822,20 @@
       };
 
       tr.innerHTML = `
-        <td>${toBn(t.sl)}.</td>
+        <td>${toBn(t.sl)}</td>
         <td style="text-align: left; font-weight: 600; color: #0f5132;">${t.name}</td>
-        <td>${toBn(mCount)} বেলা</td>
-        <td>${toBn(aCount)} বেলা</td>
-        <td>${toBn(bCount)} দিন</td>
-        <td><span class="badge-yes">${toBn(tot)} বেলা</span></td>
+        <td>${toBn(mCount)}</td>
+        <td>${toBn(aCount)}</td>
+        <td>${toBn(bCount)}</td>
+        <td><span class="badge-yes">${toBn(tot)}</span></td>
       `;
       tbody.appendChild(tr);
     });
 
-    document.getElementById('summaryHeaderTitle').textContent = `শিফট: ${shift} — সকল শিক্ষকের ডিউটি সামারি`;
-    document.getElementById('summaryTotalPill').textContent = `সর্বমোট ডিউটি: ${toBn(shiftGrandTotal)}`;
+    document.getElementById('summaryHeaderTitle').textContent = `${shift} শিফট সামারি`;
+    document.getElementById('summaryTotalPill').textContent = `মোট: ${toBn(shiftGrandTotal)}`;
   }
 
-  // ব্যক্তিগত ভিউ এবং সামারি ভিউ টগল করা
   function toggleSummaryView() {
     isSummaryMode = !isSummaryMode;
     const personalView = document.getElementById('personalView');
@@ -905,16 +845,15 @@
     if (isSummaryMode) {
       personalView.style.display = 'none';
       summaryView.style.display = 'block';
-      btn.textContent = '👤 ব্যক্তিগত রুটিনে ফিরে যান';
+      btn.textContent = '👤 রুটিন দেখুন';
       renderShiftSummary();
     } else {
       personalView.style.display = 'block';
       summaryView.style.display = 'none';
-      btn.textContent = '📋 পুরো শিফটের সামারি';
+      btn.textContent = '📋 সামারি';
     }
   }
 
-  // পেজ লোড হলে ইনিশিয়ালাইজ করা
   window.onload = onShiftChange;
 </script>
 
