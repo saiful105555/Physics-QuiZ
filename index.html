@@ -1,905 +1,922 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ইবনে তাইমিয়া স্কুল এন্ড কলেজ | ডিউটি রোস্টার পোর্টাল</title>
-    
-    <!-- Google Fonts: Hind Siliguri -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ব্যক্তিগত ডিউটি ও পূর্ণ রোস্টার ডাউনলোড — বার্ষিক পরীক্ষা ২০২৬</title>
+  <!-- Google Fonts: Hind Siliguri & Noto Serif Bengali + Kalpurush -->
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.maateen.me/kalpurush/font.css" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0f5132;
+      --primary-light: #d1e7dd;
+      --accent: #0d6efd;
+      --bg: #f4f7f6;
+      --card-bg: #ffffff;
+      --text: #1f2937;
+      --yes-bg: #dcfce7;
+      --yes-text: #15803d;
+      --no-bg: #fee2e2;
+      --no-text: #b91c1c;
+      --border: #e5e7eb;
+    }
 
-    <style>
-        * {
-            font-family: 'Hind Siliguri', sans-serif;
-            scroll-behavior: smooth;
-        }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        body {
-            background-color: #f8fafc;
-            background-image: 
-                radial-gradient(circle at 8% 12%, rgba(244, 63, 94, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 92% 12%, rgba(168, 85, 247, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 8% 88%, rgba(245, 158, 11, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 92% 88%, rgba(16, 185, 129, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 50% 45%, rgba(14, 165, 233, 0.05) 0%, transparent 55%);
-            min-height: 100vh;
-            overflow-x: hidden;
-            color: #0f172a;
-        }
+    body {
+      font-family: 'Kalpurush', 'Hind Siliguri', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      padding: 20px 12px;
+      line-height: 1.6;
+    }
 
-        .bg-grid {
-            background-size: 40px 40px;
-            background-image: 
-                linear-gradient(to right, rgba(15, 23, 42, 0.03) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(15, 23, 42, 0.03) 1px, transparent 1px);
-        }
+    .duty-container {
+      max-width: 980px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      border-radius: 14px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
 
-        .logo-container {
-            position: relative;
-            width: 150px;
-            height: 150px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            animation: smoothFloat 5s ease-in-out infinite;
-        }
+    /* Header */
+    .duty-header {
+      background: linear-gradient(135deg, #0f5132 0%, #198754 100%);
+      color: #fff;
+      padding: 24px 20px;
+      text-align: center;
+    }
 
-        .logo-ring {
-            position: absolute;
-            inset: -4px;
-            border-radius: 50%;
-            background: conic-gradient(from 0deg, #0ea5e9, #a855f7, #f43f5e, #10b981, #0ea5e9);
-            animation: spinSlow 9s linear infinite;
-            opacity: 0.8;
-        }
+    .duty-header h1 {
+      font-family: 'Noto Serif Bengali', 'Hind Siliguri', serif;
+      font-size: 1.65rem;
+      margin-bottom: 4px;
+    }
 
-        .logo-backlight {
-            position: absolute;
-            inset: -12px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(14, 165, 233, 0.28) 0%, rgba(168, 85, 247, 0.2) 60%, transparent 80%);
-            filter: blur(20px);
-            animation: pulseGlow 3.5s ease-in-out infinite alternate;
-            z-index: 0;
-        }
+    .duty-header p {
+      font-size: 1rem;
+      opacity: 0.92;
+    }
 
-        .logo-circle-wrapper {
-            position: relative;
-            z-index: 2;
-            width: 142px;
-            height: 142px;
-            border-radius: 50%;
-            overflow: hidden;
-            background: #ffffff;
-            box-shadow: 0 12px 30px rgba(15, 23, 42, 0.12), inset 0 0 10px rgba(15, 23, 42, 0.04);
-            border: 4px solid #ffffff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
+    .time-badge-bar {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
 
-        .logo-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transform: scale(1.04);
-        }
+    .time-badge {
+      background: rgba(255, 255, 255, 0.18);
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+    }
 
-        .logo-container:hover .logo-circle-wrapper {
-            transform: scale(1.06);
-        }
+    /* One-Click Full Roster Download Section */
+    .roster-download-bar {
+      background: #eef6f2;
+      padding: 16px 20px;
+      border-bottom: 1px solid #c3e6cb;
+    }
 
-        @keyframes spinSlow {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
+    .roster-download-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #0f5132;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-align: center;
+    }
 
-        @keyframes smoothFloat {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-8px); }
-        }
+    .roster-btn-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 10px;
+    }
 
-        @keyframes pulseGlow {
-            0% { transform: scale(0.95); opacity: 0.6; }
-            100% { transform: scale(1.1); opacity: 1; }
-        }
+    .roster-dl-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 14px;
+      background: #ffffff;
+      color: #0f5132;
+      border: 2px solid #198754;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+    }
 
-        .roster-card {
-            position: relative;
-            background: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(226, 232, 240, 0.95);
-            border-radius: 1.5rem;
-            box-shadow: 0 10px 30px -10px rgba(15, 23, 42, 0.06);
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            overflow: hidden;
-        }
+    .roster-dl-btn:hover {
+      background: #198754;
+      color: #ffffff;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(25, 135, 84, 0.2);
+    }
 
-        .roster-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 5px;
-            background: var(--card-accent);
-            transition: height 0.3s ease;
-        }
+    /* Controls Section */
+    .controls-box {
+      padding: 20px;
+      background: #f8fafc;
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      align-items: end;
+    }
 
-        .roster-card:hover {
-            transform: translateY(-6px);
-            background: #ffffff;
-            border-color: var(--card-border-hover);
-            box-shadow: 0 22px 45px -12px var(--card-shadow);
-        }
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: #374151;
+      font-size: 0.98rem;
+    }
 
-        .card-watermark {
-            position: absolute;
-            right: -12px;
-            bottom: -18px;
-            font-size: 7.5rem;
-            opacity: 0.045;
-            transform: rotate(-15deg);
-            pointer-events: none;
-            transition: all 0.5s ease;
-        }
+    .form-control {
+      width: 100%;
+      padding: 10px 14px;
+      font-size: 1rem;
+      font-family: inherit;
+      border: 2px solid #cbd5e1;
+      border-radius: 8px;
+      background: #fff;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s;
+    }
 
-        .roster-card:hover .card-watermark {
-            opacity: 0.085;
-            transform: rotate(-5deg) scale(1.08);
-        }
+    .form-control:focus {
+      border-color: #198754;
+    }
 
-        .download-btn {
-            position: relative;
-            overflow: hidden;
-            transition: all 0.35s ease;
-        }
+    .btn-group {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
 
-        .download-btn::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -120%;
-            width: 60%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
-            transform: skewX(-20deg);
-            transition: left 0.65s ease;
-        }
+    .btn {
+      padding: 10px 14px;
+      font-size: 0.92rem;
+      font-family: inherit;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      text-decoration: none;
+    }
 
-        .roster-card:hover .download-btn::after {
-            left: 140%;
-        }
-    </style>
+    .btn-primary {
+      background: #198754;
+      color: #fff;
+    }
+    .btn-primary:hover {
+      background: #146c43;
+    }
+
+    .btn-accent {
+      background: #0d6efd;
+      color: #fff;
+    }
+    .btn-accent:hover {
+      background: #0b5ed7;
+    }
+
+    .btn-outline {
+      background: #fff;
+      color: #0f5132;
+      border: 2px solid #198754;
+    }
+    .btn-outline:hover {
+      background: var(--primary-light);
+    }
+
+    /* Stats Cards */
+    .content-area {
+      padding: 20px;
+    }
+
+    .teacher-banner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      background: #eef6f2;
+      border-left: 5px solid #198754;
+      padding: 14px 18px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    .teacher-banner h2 {
+      font-family: 'Hind Siliguri', sans-serif;
+      font-size: 1.35rem;
+      color: #0f5132;
+    }
+
+    .banner-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .shift-pill {
+      background: #0f5132;
+      color: #fff;
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-size: 0.92rem;
+      font-weight: 600;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+
+    .stat-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+    }
+
+    .stat-card.total {
+      background: #ecfdf5;
+      border-color: #a7f3d0;
+    }
+
+    .stat-card.morning {
+      background: #eff6ff;
+      border-color: #bfdbfe;
+    }
+
+    .stat-card.afternoon {
+      background: #fefce8;
+      border-color: #fde68a;
+    }
+
+    .stat-card.both {
+      background: #f5f3ff;
+      border-color: #ddd6fe;
+    }
+
+    .stat-value {
+      font-size: 1.8rem;
+      font-weight: 700;
+      line-height: 1.2;
+      color: #111827;
+    }
+
+    .stat-label {
+      font-size: 0.92rem;
+      color: #4b5563;
+      margin-top: 4px;
+      font-weight: 600;
+    }
+
+    /* Filter Bar */
+    .filter-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .filter-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    /* Table */
+    .table-responsive {
+      overflow-x: auto;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: center;
+      font-size: 0.98rem;
+    }
+
+    thead {
+      background: #0f5132;
+      color: #fff;
+    }
+
+    th, td {
+      padding: 11px 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    tbody tr:nth-child(even) {
+      background-color: #f9fafb;
+    }
+
+    tbody tr:hover {
+      background-color: #f0fdf4;
+    }
+
+    .clickable-row {
+      cursor: pointer;
+    }
+
+    .badge-yes {
+      display: inline-block;
+      background: var(--yes-bg);
+      color: var(--yes-text);
+      font-weight: 700;
+      padding: 3px 12px;
+      border-radius: 20px;
+      border: 1px solid #86efac;
+    }
+
+    .badge-no {
+      display: inline-block;
+      background: var(--no-bg);
+      color: var(--no-text);
+      font-weight: 600;
+      padding: 3px 12px;
+      border-radius: 20px;
+      font-size: 0.88rem;
+      opacity: 0.85;
+    }
+
+    .day-count-badge {
+      font-weight: 700;
+      color: #0f5132;
+    }
+
+    .note-footer {
+      margin-top: 16px;
+      font-size: 0.92rem;
+      color: #dc2626;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    /* Print Styling */
+    @media print {
+      body {
+        background: #fff;
+        padding: 0;
+      }
+      .duty-container {
+        box-shadow: none;
+        border: none;
+        max-width: 100%;
+      }
+      .controls-box, .roster-download-bar, .no-print {
+        display: none !important;
+      }
+      .duty-header {
+        background: #fff !important;
+        color: #000 !important;
+        border-bottom: 2px solid #000;
+        padding: 10px 0;
+      }
+      .time-badge {
+        border: 1px solid #000;
+        color: #000;
+      }
+      th, td {
+        padding: 6px 8px;
+        border: 1px solid #999;
+      }
+      thead {
+        background: #eee !important;
+        color: #000 !important;
+      }
+    }
+  </style>
 </head>
-<body class="bg-grid flex flex-col justify-between min-h-screen py-6 sm:py-10 px-4 sm:px-6 lg:px-8">
+<body>
 
-    <!-- ================= TOP UTILITY BAR ================= -->
-    <div class="max-w-5xl w-full mx-auto mb-6">
-        <div class="flex flex-wrap items-center justify-between gap-3 px-5 py-3 rounded-2xl bg-white/85 border border-slate-200/90 backdrop-blur-md text-xs sm:text-sm text-slate-600 shadow-sm">
-            <div class="flex items-center gap-2.5">
-                <span class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-sky-50 text-sky-600 border border-sky-200/60">
-                    <i class="fa-solid fa-building-columns text-xs"></i>
-                </span>
-                <span class="font-semibold text-slate-800">অফিসিয়াল ডিউটি রোস্টার পোর্টাল (১০২ জন শিক্ষক)</span>
-            </div>
-            <div class="flex items-center gap-4 text-slate-600 font-medium">
-                <div class="flex items-center gap-1.5">
-                    <i class="fa-regular fa-calendar text-sky-600"></i>
-                    <span id="liveDate">লোড হচ্ছে...</span>
-                </div>
-                <span class="hidden sm:inline text-slate-300">|</span>
-                <div class="hidden sm:flex items-center gap-1.5">
-                    <i class="fa-regular fa-clock text-emerald-600"></i>
-                    <span id="liveTime">--:--:--</span>
-                </div>
-            </div>
-        </div>
+<div class="duty-container">
+  <!-- Header -->
+  <div class="duty-header">
+    <h1>ইবনে তাইমিয়া স্কুল এন্ড কলেজ</h1>
+    <p>বার্ষিক পরীক্ষা–২০২৬ খ্রিস্টাব্দ | ডিউটি রোস্টার ও ব্যক্তিগত ডিউটি অনুসন্ধান</p>
+    <div class="time-badge-bar">
+      <span class="time-badge">১ম বেলা: ৭.৩০ থেকে ১০.৩০টা</span>
+      <span class="time-badge">২য় বেলা: ১.৩০ থেকে ৪.৩০টা</span>
+    </div>
+  </div>
+
+  <!-- One-Click Full Roster PDF Download Bar -->
+  <div class="roster-download-bar no-print">
+    <div class="roster-download-title">
+      📥 সম্পূর্ণ শিফট রোস্টার (PDF) ওয়ান-ক্লিক ডাউনলোড করুন:
+    </div>
+    <div class="roster-btn-grid">
+      <button class="roster-dl-btn" onclick="downloadShiftPdf('জবা')">
+        ⬇️ জবা শিফট রোস্টার (PDF)
+      </button>
+      <button class="roster-dl-btn" onclick="downloadShiftPdf('বেলি')">
+        ⬇️ বেলি শিফট রোস্টার (PDF)
+      </button>
+      <button class="roster-dl-btn" onclick="downloadShiftPdf('বকুল')">
+        ⬇️ বকুল শিফট রোস্টার (PDF)
+      </button>
+      <button class="roster-dl-btn" onclick="downloadShiftPdf('শাপলা')">
+        ⬇️ শাপলা শিফট রোস্টার (PDF)
+      </button>
+    </div>
+  </div>
+
+  <!-- Selection Controls -->
+  <div class="controls-box">
+    <div class="form-group">
+      <label for="shiftSelect">১. শিফট নির্বাচন করুন:</label>
+      <select id="shiftSelect" class="form-control" onchange="onShiftChange()">
+        <option value="জবা">শিফট: জবা</option>
+        <option value="বেলি">শিফট: বেলি</option>
+        <option value="বকুল">শিফট: বকুল</option>
+        <option value="শাপলা">শিফট: শাপলা</option>
+      </select>
     </div>
 
-    <!-- ================= MAIN CONTENT ================= -->
-    <main class="max-w-5xl w-full mx-auto my-auto">
-        
-        <!-- HEADER SECTION -->
-        <header class="text-center mb-10">
-            <div class="logo-container mb-5">
-                <div class="logo-backlight"></div>
-                <div class="logo-ring"></div>
-                <div class="logo-circle-wrapper">
-                    <img 
-                        src="https://drive.google.com/thumbnail?id=1ZmxR46CCr7Ge5UntTMM_TbTeMJfdiqTD&sz=w1000" 
-                        onerror="this.onerror=null; this.src='https://lh3.googleusercontent.com/d/1ZmxR46CCr7Ge5UntTMM_TbTeMJfdiqTD';"
-                        alt="ইবনে তাইমিয়া স্কুল এন্ড কলেজ লোগো" 
-                        class="logo-img"
-                    >
-                </div>
-            </div>
-
-            <h1 class="text-3xl sm:text-5xl font-bold tracking-tight text-slate-900 mb-2">
-                ইবনে তাইমিয়া স্কুল এন্ড কলেজ
-            </h1>
-            <p class="text-slate-600 font-medium text-sm sm:text-base">
-                বার্ষিক পরীক্ষা-২০২৬ খ্রিস্টাব্দ • শিক্ষক ও কর্মকর্তাদের শিফট ভিত্তিক ডিউটি রোস্টার পোর্টাল
-            </p>
-            <div class="mt-3 inline-flex flex-wrap justify-center gap-3 text-xs font-semibold text-slate-600 bg-white px-4 py-2 rounded-xl border border-slate-200 shadow-sm">
-                <span><i class="fa-regular fa-clock text-sky-600 mr-1"></i>১ম বেলা: ৭.৩০ থেকে ১০.৩০টা</span>
-                <span class="text-slate-300">|</span>
-                <span><i class="fa-regular fa-clock text-amber-600 mr-1"></i>২য় বেলা: ১.৩০ থেকে ৪.৩০টা</span>
-                <span class="text-slate-300 hidden sm:inline">|</span>
-                <span class="text-rose-600 font-bold"><i class="fa-solid fa-circle-exclamation mr-1"></i>পরীক্ষা শুরুর ৩০ মিনিট পূর্বে কক্ষে অবস্থান করতে হবে</span>
-            </div>
-        </header>
-
-        <!-- ================= SMART PERSONAL DUTY FINDER (4 SHIFTS COMBINED) ================= -->
-        <section id="mainCard" class="bg-white border-2 border-sky-200/80 rounded-3xl p-6 sm:p-8 shadow-xl shadow-sky-900/5 mb-12 transition-all duration-300">
-            
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-5 mb-6 border-b border-slate-200">
-                <div class="flex items-center gap-3.5">
-                    <div id="finderHeaderIcon" class="w-12 h-12 rounded-2xl bg-gradient-to-br from-sky-500 to-indigo-600 text-white flex items-center justify-center text-xl shadow-md transition-all">
-                        <i class="fa-solid fa-magnifying-glass-chart"></i>
-                    </div>
-                    <div>
-                        <span id="finderShiftPill" class="text-xs font-bold uppercase text-sky-700 bg-sky-50 px-2.5 py-0.5 rounded-md border border-sky-200">
-                            স্মার্ট ডিউটি সার্চ • ৪টি শিফট
-                        </span>
-                        <h2 class="text-xl sm:text-2xl font-bold text-slate-900 mt-0.5">আপনার ব্যক্তিগত ডিউটির তারিখ দেখুন</h2>
-                    </div>
-                </div>
-                <p class="text-xs sm:text-sm text-slate-500 font-medium">শিফট ও নাম সিলেক্ট করলেই রোস্টার অনুযায়ী ডিউটির তালিকা চলে আসবে</p>
-            </div>
-
-            <!-- Dropdowns -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-                <div>
-                    <label for="shiftSelect" class="block text-sm sm:text-base font-bold text-slate-800 mb-2">
-                        <i class="fa-solid fa-layer-group text-sky-600 mr-1.5"></i>১. আপনার শিফট নির্বাচন করুন:
-                    </label>
-                    <select id="shiftSelect" onchange="populateTeachers()" class="w-full bg-slate-50 border-2 border-slate-200 focus:border-sky-600 focus:bg-white rounded-2xl px-4 py-3.5 text-slate-900 font-bold text-base outline-none cursor-pointer transition-all">
-                        <option value="">-- প্রথমে শিফট বাছাই করুন --</option>
-                        <option value="joba">জবা শিফট (২৬ জন শিক্ষক • মোট ডিউটি: ৫১৯)</option>
-                        <option value="shapla">শাপলা শিফট (২৫ জন শিক্ষক • মোট ডিউটি: ৫১৪)</option>
-                        <option value="bokul">বকুল শিফট (২৫ জন শিক্ষক • মোট ডিউটি: ৫১৩)</option>
-                        <option value="beli">বেলি শিফট (২৬ জন শিক্ষক • মোট ডিউটি: ৫১৫)</option>
-                    </select>
-                </div>
-
-                <div>
-                    <label for="teacherSelect" class="block text-sm sm:text-base font-bold text-slate-800 mb-2">
-                        <i class="fa-solid fa-user-check text-sky-600 mr-1.5"></i>২. পর্যবেক্ষকের নাম নির্বাচন করুন:
-                    </label>
-                    <select id="teacherSelect" onchange="displayTeacherDuty()" disabled class="w-full bg-slate-100 border-2 border-slate-200 focus:border-sky-600 focus:bg-white rounded-2xl px-4 py-3.5 text-slate-900 font-bold text-base outline-none cursor-pointer disabled:opacity-60 transition-all">
-                        <option value="">-- আগে শিফট নির্বাচন করুন --</option>
-                    </select>
-                </div>
-            </div>
-
-            <!-- রেজাল্ট সেকশন -->
-            <div id="dutyResultContainer" class="hidden mt-8 pt-6 border-t border-slate-200">
-                <!-- সামারি ব্যানার -->
-                <div class="flex flex-wrap items-center justify-between gap-4 bg-slate-900 text-white p-5 rounded-2xl mb-6 shadow-md">
-                    <div class="flex items-center gap-3.5">
-                        <div class="w-12 h-12 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center text-white text-xl font-bold" id="resSerialBadge">
-                            ১
-                        </div>
-                        <div>
-                            <span id="resShiftBadge" class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-sky-500/20 text-sky-300">শিফট</span>
-                            <h2 id="resTeacherName" class="text-xl sm:text-2xl font-bold mt-1">শিক্ষকের নাম</h2>
-                        </div>
-                    </div>
-
-                    <div class="flex flex-wrap items-center gap-2.5">
-                        <div class="bg-sky-500/20 border border-sky-400/30 px-3.5 py-2 rounded-xl text-center min-w-[75px]">
-                            <span class="text-[11px] text-sky-300 block">১ম বেলা</span>
-                            <span id="resMorningCount" class="text-base font-bold text-sky-300">০</span>
-                        </div>
-                        <div class="bg-amber-500/20 border border-amber-400/30 px-3.5 py-2 rounded-xl text-center min-w-[75px]">
-                            <span class="text-[11px] text-amber-300 block">২য় বেলা</span>
-                            <span id="resAfternoonCount" class="text-base font-bold text-amber-300">০</span>
-                        </div>
-                        <div class="bg-emerald-500/20 border border-emerald-400/30 px-4 py-2 rounded-xl text-center min-w-[85px]">
-                            <span class="text-[11px] text-emerald-300 block">মোট ডিউটি</span>
-                            <span id="resTotalDuties" class="text-base font-bold text-emerald-400">০</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- কালার গাইড -->
-                <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
-                    <h3 class="text-sm font-bold text-slate-700">
-                        <i class="fa-regular fa-calendar-check text-sky-600 mr-1.5"></i>১৩ দিনের তারিখভিত্তিক ডিউটি বিবরণী:
-                    </h3>
-                    <div class="flex flex-wrap items-center gap-2 text-xs font-bold">
-                        <span class="px-2.5 py-1 rounded-md bg-rose-100 text-rose-700 border border-rose-200">উভয় বেলা = লাল কার্ড</span>
-                        <span class="px-2.5 py-1 rounded-md bg-sky-100 text-sky-700 border border-sky-200">শুধু ১ম বেলা = নীল কার্ড</span>
-                        <span class="px-2.5 py-1 rounded-md bg-amber-100 text-amber-800 border border-amber-200">শুধু ২য় বেলা = হলুদ কার্ড</span>
-                        <span class="px-2.5 py-1 rounded-md bg-slate-200 text-slate-600">ডিউটি নেই = ধূসর কার্ড</span>
-                    </div>
-                </div>
-
-                <!-- ১৩ দিনের কার্ড গ্রিড -->
-                <div id="dutyDatesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5"></div>
-            </div>
-        </section>
-
-        <!-- Subtitle Pill for PDF Download -->
-        <div class="text-center mb-7">
-            <div class="inline-flex items-center gap-2.5 px-6 py-2.5 rounded-full bg-white border border-slate-200 shadow-sm">
-                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                <h2 class="text-sm sm:text-lg font-bold bg-gradient-to-r from-sky-600 via-indigo-600 to-rose-600 bg-clip-text text-transparent">
-                    শিফট ভিত্তিক সম্পূর্ণ ডিউটি রোস্টার পিডিএফ ডাউনলোড
-                </h2>
-            </div>
-        </div>
-
-        <!-- ================= 4 SHIFT ROSTER CARDS ================= -->
-        <section class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-7">
-
-            <!-- 1. জবা শিফট -->
-            <div class="roster-card p-6 sm:p-7" style="--card-accent: linear-gradient(90deg, #f43f5e, #fb7185); --card-shadow: rgba(244, 63, 94, 0.16); --card-border-hover: rgba(244, 63, 94, 0.35);">
-                <i class="fa-solid fa-spa card-watermark text-rose-500"></i>
-                <div class="flex items-start justify-between mb-5 relative z-10">
-                    <div class="flex items-center gap-4">
-                        <div class="w-14 h-14 rounded-2xl bg-rose-50 border border-rose-200 flex items-center justify-center text-rose-600 text-2xl shadow-sm">
-                            <i class="fa-solid fa-spa"></i>
-                        </div>
-                        <div>
-                            <div class="flex items-center gap-2 mb-1">
-                                <span class="text-xs font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-md bg-rose-100 text-rose-700">শিফট ০১ • ২৬ জন</span>
-                                <span class="text-xs font-semibold text-slate-500 flex items-center gap-1"><i class="fa-solid fa-file-pdf text-rose-500"></i> PDF</span>
-                            </div>
-                            <h3 class="text-xl sm:text-2xl font-bold text-slate-900">জবা শিফট ডিউটি রোস্টার</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="flex items-center gap-3 relative z-10 mt-6">
-                    <button onclick="startDirectDownload('joba', this)" class="download-btn flex-1 py-3.5 px-5 rounded-xl bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-500 hover:to-pink-500 text-white font-semibold text-base shadow-md shadow-rose-500/20 flex items-center justify-center gap-2.5 active:scale-[0.98] cursor-pointer">
-                        <i class="fa-solid fa-download"></i><span>ডাউনলোড করুন</span>
-                    </button>
-                    <button onclick="openPreviewModal('joba')" class="py-3.5 px-4 rounded-xl bg-slate-100 hover:bg-rose-50 text-slate-700 hover:text-rose-700 border border-slate-200 hover:border-rose-200 transition-all flex items-center justify-center gap-2 text-sm font-semibold active:scale-[0.98] cursor-pointer">
-                        <i class="fa-regular fa-eye text-rose-600"></i><span class="hidden sm:inline">প্রিভিউ</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- 2. শাপলা শিফট -->
-            <div class="roster-card p-6 sm:p-7" style="--card-accent: linear-gradient(90deg, #9333ea, #db2777); --card-shadow: rgba(147, 51, 234, 0.16); --card-border-hover: rgba(147, 51, 234, 0.35);">
-                <i class="fa-brands fa-canadian-maple-leaf card-watermark text-purple-600"></i>
-                <div class="flex items-start justify-between mb-5 relative z-10">
-                    <div class="flex items-center gap-4">
-                        <div class="w-14 h-14 rounded-2xl bg-purple-50 border border-purple-200 flex items-center justify-center text-purple-600 text-2xl shadow-sm">
-                            <i class="fa-brands fa-canadian-maple-leaf"></i>
-                        </div>
-                        <div>
-                            <div class="flex items-center gap-2 mb-1">
-                                <span class="text-xs font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-md bg-purple-100 text-purple-700">শিফট ০২ • ২৫ জন</span>
-                                <span class="text-xs font-semibold text-slate-500 flex items-center gap-1"><i class="fa-solid fa-file-pdf text-purple-600"></i> PDF</span>
-                            </div>
-                            <h3 class="text-xl sm:text-2xl font-bold text-slate-900">শাপলা শিফট ডিউটি রোস্টার</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="flex items-center gap-3 relative z-10 mt-6">
-                    <button onclick="startDirectDownload('shapla', this)" class="download-btn flex-1 py-3.5 px-5 rounded-xl bg-gradient-to-r from-purple-600 to-fuchsia-600 hover:from-purple-500 hover:to-fuchsia-500 text-white font-semibold text-base shadow-md shadow-purple-500/20 flex items-center justify-center gap-2.5 active:scale-[0.98] cursor-pointer">
-                        <i class="fa-solid fa-download"></i><span>ডাউনলোড করুন</span>
-                    </button>
-                    <button onclick="openPreviewModal('shapla')" class="py-3.5 px-4 rounded-xl bg-slate-100 hover:bg-purple-50 text-slate-700 hover:text-purple-700 border border-slate-200 hover:border-purple-200 transition-all flex items-center justify-center gap-2 text-sm font-semibold active:scale-[0.98] cursor-pointer">
-                        <i class="fa-regular fa-eye text-purple-600"></i><span class="hidden sm:inline">প্রিভিউ</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- 3. বকুল শিফট -->
-            <div class="roster-card p-6 sm:p-7" style="--card-accent: linear-gradient(90deg, #f59e0b, #ea580c); --card-shadow: rgba(245, 158, 11, 0.16); --card-border-hover: rgba(245, 158, 11, 0.35);">
-                <i class="fa-solid fa-sun card-watermark text-amber-500"></i>
-                <div class="flex items-start justify-between mb-5 relative z-10">
-                    <div class="flex items-center gap-4">
-                        <div class="w-14 h-14 rounded-2xl bg-amber-50 border border-amber-200 flex items-center justify-center text-amber-600 text-2xl shadow-sm">
-                            <i class="fa-solid fa-sun"></i>
-                        </div>
-                        <div>
-                            <div class="flex items-center gap-2 mb-1">
-                                <span class="text-xs font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-md bg-amber-100 text-amber-800">শিফট ০৩ • ২৫ জন</span>
-                                <span class="text-xs font-semibold text-slate-500 flex items-center gap-1"><i class="fa-solid fa-file-pdf text-amber-600"></i> PDF</span>
-                            </div>
-                            <h3 class="text-xl sm:text-2xl font-bold text-slate-900">বকুল শিফট ডিউটি রোস্টার</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="flex items-center gap-3 relative z-10 mt-6">
-                    <button onclick="startDirectDownload('bokul', this)" class="download-btn flex-1 py-3.5 px-5 rounded-xl bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-white font-semibold text-base shadow-md shadow-amber-500/20 flex items-center justify-center gap-2.5 active:scale-[0.98] cursor-pointer">
-                        <i class="fa-solid fa-download"></i><span>ডাউনলোড করুন</span>
-                    </button>
-                    <button onclick="openPreviewModal('bokul')" class="py-3.5 px-4 rounded-xl bg-slate-100 hover:bg-amber-50 text-slate-700 hover:text-amber-800 border border-slate-200 hover:border-amber-200 transition-all flex items-center justify-center gap-2 text-sm font-semibold active:scale-[0.98] cursor-pointer">
-                        <i class="fa-regular fa-eye text-amber-600"></i><span class="hidden sm:inline">প্রিভিউ</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- 4. বেলি শিফট -->
-            <div class="roster-card p-6 sm:p-7" style="--card-accent: linear-gradient(90deg, #10b981, #0d9488); --card-shadow: rgba(16, 185, 129, 0.16); --card-border-hover: rgba(16, 185, 129, 0.35);">
-                <i class="fa-solid fa-seedling card-watermark text-emerald-500"></i>
-                <div class="flex items-start justify-between mb-5 relative z-10">
-                    <div class="flex items-center gap-4">
-                        <div class="w-14 h-14 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600 text-2xl shadow-sm">
-                            <i class="fa-solid fa-seedling"></i>
-                        </div>
-                        <div>
-                            <div class="flex items-center gap-2 mb-1">
-                                <span class="text-xs font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-md bg-emerald-100 text-emerald-800">শিফট ০৪ • ২৬ জন</span>
-                                <span class="text-xs font-semibold text-slate-500 flex items-center gap-1"><i class="fa-solid fa-file-pdf text-emerald-600"></i> PDF</span>
-                            </div>
-                            <h3 class="text-xl sm:text-2xl font-bold text-slate-900">বেলি শিফট ডিউটি রোস্টার</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="flex items-center gap-3 relative z-10 mt-6">
-                    <button onclick="startDirectDownload('beli', this)" class="download-btn flex-1 py-3.5 px-5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-semibold text-base shadow-md shadow-emerald-500/20 flex items-center justify-center gap-2.5 active:scale-[0.98] cursor-pointer">
-                        <i class="fa-solid fa-download"></i><span>ডাউনলোড করুন</span>
-                    </button>
-                    <button onclick="openPreviewModal('beli')" class="py-3.5 px-4 rounded-xl bg-slate-100 hover:bg-emerald-50 text-slate-700 hover:text-emerald-800 border border-slate-200 hover:border-emerald-200 transition-all flex items-center justify-center gap-2 text-sm font-semibold active:scale-[0.98] cursor-pointer">
-                        <i class="fa-regular fa-eye text-emerald-600"></i><span class="hidden sm:inline">প্রিভিউ</span>
-                    </button>
-                </div>
-            </div>
-
-        </section>
-
-    </main>
-
-    <!-- ================= FOOTER SECTION ================= -->
-    <footer class="max-w-5xl w-full mx-auto mt-16 pt-8 border-t border-slate-200/90 text-center">
-        <p class="text-slate-500 font-medium text-xs sm:text-sm mb-4">
-            © ২০২৬ ইবনে তাইমিয়া স্কুল এন্ড কলেজ • সর্বস্বত্ব সংরক্ষিত
-        </p>
-        <div class="inline-flex items-center gap-2.5 px-6 py-2.5 rounded-2xl bg-white border border-slate-200/90 shadow-md">
-            <span class="w-7 h-7 rounded-lg bg-sky-50 border border-sky-200 flex items-center justify-center text-sky-600 text-xs">
-                <i class="fa-solid fa-user-tie"></i>
-            </span>
-            <p class="text-sm sm:text-base font-bold bg-gradient-to-r from-slate-800 via-sky-700 to-emerald-700 bg-clip-text text-transparent">
-                সার্বিক তত্বাবধানে: ইঞ্জি: সাইফুল ইসলাম।
-            </p>
-        </div>
-    </footer>
-
-    <!-- ================= PDF PREVIEW MODAL ================= -->
-    <div id="previewModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4">
-        <div class="bg-white border border-slate-200 rounded-2xl max-w-4xl w-full h-[85vh] flex flex-col overflow-hidden shadow-2xl">
-            <div class="flex items-center justify-between px-5 py-3.5 border-b border-slate-200 bg-slate-50">
-                <div class="flex items-center gap-2.5">
-                    <i class="fa-solid fa-file-pdf text-rose-600 text-lg"></i>
-                    <h3 id="modalTitle" class="font-bold text-slate-800 text-base sm:text-lg">রোস্টার প্রিভিউ</h3>
-                </div>
-                <button onclick="closePreviewModal()" class="w-8 h-8 rounded-lg bg-slate-200/80 hover:bg-rose-600 text-slate-700 hover:text-white transition-colors flex items-center justify-center cursor-pointer">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-            <div class="flex-1 bg-slate-100 relative">
-                <iframe id="previewFrame" class="w-full h-full border-0" src="" allow="autoplay"></iframe>
-            </div>
-        </div>
+    <div class="form-group">
+      <label for="teacherSelect">২. পর্যবেক্ষকের নাম নির্বাচন করুন:</label>
+      <select id="teacherSelect" class="form-control" onchange="renderPersonalDuty()">
+        <!-- জাভাস্ক্রিপ্ট দ্বারা লোড হবে -->
+      </select>
     </div>
 
-    <!-- ================= TOAST NOTIFICATION ================= -->
-    <div id="downloadToast" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none bg-white border border-emerald-200 text-slate-800 px-5 py-3.5 rounded-2xl shadow-xl flex items-center gap-3.5">
-        <div class="w-9 h-9 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-lg">
-            <i class="fa-solid fa-check"></i>
-        </div>
+    <div class="btn-group">
+      <button class="btn btn-outline" onclick="toggleSummaryView()" id="summaryToggleBtn">
+        📋 পুরো শিফটের সামারি
+      </button>
+      <button class="btn btn-accent" onclick="downloadSelectedShiftPdf()" id="selectedShiftDlBtn">
+        📥 এই শিফটের রোস্টার (PDF)
+      </button>
+      <button class="btn btn-primary" onclick="window.print()">
+        🖨️ ব্যক্তিগত স্লিপ প্রিন্ট
+      </button>
+    </div>
+  </div>
+
+  <!-- Main Content Area -->
+  <div class="content-area">
+    <!-- Individual Teacher View -->
+    <div id="personalView">
+      <div class="teacher-banner">
         <div>
-            <h4 id="toastHeading" class="font-bold text-sm text-emerald-700">ডাউনলোড শুরু হয়েছে</h4>
-            <p class="text-xs text-slate-500">আপনার ডিভাইসে পিডিএফ ফাইলটি সরাসরি সেভ হচ্ছে...</p>
+          <h2 id="displayTeacherName">পর্যবেক্ষকের নাম</h2>
+          <small id="displaySerial" style="color: #4b5563; font-weight: 600;"></small>
         </div>
+        <div class="banner-actions">
+          <button class="btn btn-outline no-print" style="padding: 4px 12px; font-size: 0.85rem;" onclick="viewSelectedShiftPdf()">
+            👁️ মূল রোস্টার শিট দেখুন
+          </button>
+          <span class="shift-pill" id="displayShiftName">শিফট: জবা</span>
+        </div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card total">
+          <div class="stat-value" id="statTotal">০</div>
+          <div class="stat-label">সর্বমোট ডিউটি (বেলা)</div>
+        </div>
+        <div class="stat-card morning">
+          <div class="stat-value" id="statMorning">০</div>
+          <div class="stat-label">১ম বেলা (৭.৩০–১০.৩০)</div>
+        </div>
+        <div class="stat-card afternoon">
+          <div class="stat-value" id="statAfternoon">০</div>
+          <div class="stat-label">২য় বেলা (১.৩০–৪.৩০)</div>
+        </div>
+        <div class="stat-card both">
+          <div class="stat-value" id="statBothDays">০</div>
+          <div class="stat-label">উভয় বেলা ডিউটি (দিন)</div>
+        </div>
+      </div>
+
+      <div class="filter-bar no-print">
+        <h3 style="font-size: 1.1rem; color: #0f5132;">📅 তারিখ ও বেলা অনুযায়ী ডিউটির তালিকা</h3>
+        <label class="filter-label">
+          <input type="checkbox" id="onlyDutyDays" onchange="renderPersonalDuty()">
+          শুধু ডিউটি থাকা দিনগুলো দেখুন
+        </label>
+      </div>
+
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>ক্র.নং</th>
+              <th>তারিখ</th>
+              <th>বার</th>
+              <th>১ম বেলা (৭.৩০–১০.৩০)</th>
+              <th>২য় বেলা (১.৩০–৪.৩০)</th>
+              <th>দৈনিক মোট</th>
+            </tr>
+          </thead>
+          <tbody id="personalTableBody"></tbody>
+        </table>
+      </div>
     </div>
 
-    <div id="hiddenDownloadContainer" style="display: none;"></div>
+    <!-- All Teachers Shift Summary View -->
+    <div id="shiftSummaryView" style="display: none;">
+      <div class="teacher-banner">
+        <h2 id="summaryHeaderTitle">জবা শিফট — সকল শিক্ষকের ডিউটি সামারি</h2>
+        <div class="banner-actions">
+          <button class="btn btn-accent no-print" style="padding: 5px 12px; font-size: 0.85rem;" onclick="downloadSelectedShiftPdf()">
+            ⬇️ পূর্ণ রোস্টার ডাউনলোড
+          </button>
+          <span class="shift-pill" id="summaryTotalPill">সর্বমোট ডিউটি: ৫১৯</span>
+        </div>
+      </div>
+      <p class="no-print" style="margin-bottom: 12px; color: #4b5563; font-size: 0.92rem;">
+        💡 যেকোনো শিক্ষকের নামের ওপর ক্লিক করলে তাঁর বিস্তারিত ব্যক্তিগত রুটিন দেখা যাবে।
+      </p>
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>ক্র.নং</th>
+              <th style="text-align: left;">পর্যবেক্ষকদের নাম</th>
+              <th>১ম বেলা (সকাল)</th>
+              <th>২য় বেলা (দুপুর)</th>
+              <th>উভয় বেলা (দিন)</th>
+              <th>মোট ডিউটি (বেলা)</th>
+            </tr>
+          </thead>
+          <tbody id="summaryTableBody"></tbody>
+        </table>
+      </div>
+    </div>
 
-    <script>
-        // পরীক্ষার ১৩ দিনের নির্ভুল তারিখ ও বার
-        const EXAM_DATES = [
-            { date: "১৭/১১/২০২৬", day: "মঙ্গলবার" },
-            { date: "১৮/১১/২০২৬", day: "বুধবার" },
-            { date: "১৯/১১/২০২৬", day: "বৃহস্পতিবার" },
-            { date: "২২/১১/২০২৬", day: "রবিবার" },
-            { date: "২৩/১১/২০২৬", day: "সোমবার" },
-            { date: "২৪/১১/২০২৬", day: "মঙ্গলবার" },
-            { date: "২৫/১১/২০২৬", day: "বুধবার" },
-            { date: "২৬/১১/২০২৬", day: "বৃহস্পতিবার" },
-            { date: "২৯/১১/২০২৬", day: "রবিবার" },
-            { date: "৩০/১১/২০২৬", day: "সোমবার" },
-            { date: "০১/১২/২০২৬", day: "মঙ্গলবার" },
-            { date: "০২/১২/২০২৬", day: "বুধবার" },
-            { date: "০৩/১২/২০২৬", day: "বৃহস্পতিবার" }
-        ];
+    <div class="note-footer">
+      বি:দ্র: পরীক্ষা শুরুর ২০ মিনিট পূর্বে কক্ষে অবস্থান করতে হবে।
+    </div>
+  </div>
+</div>
 
-        // ১. জবা শিফটের ২৬ জন শিক্ষকের ম্যানুয়ালি যাচাইকৃত ডাটা (সর্বমোট ডিউটি: ৫১৯)
-        const JOBA_ROSTER = [
-            { sl: 1,  name: "জনাব এ.এম. আখতার হোসেন",    m: [1,1,1,1,1,1,1,1,1,1,1,1,1], a: [0,1,0,1,0,1,0,0,1,0,1,0,1] },
-            { sl: 2,  name: "মো: সিরাজুল ইসলাম খান (C.T)", m: [1,1,1,1,1,1,1,1,1,1,1,1,1], a: [0,1,0,1,0,1,0,0,1,0,1,0,1] },
-            { sl: 3,  name: "মো: গোলাম আযম (C.T)",        m: [1,1,1,0,1,1,1,1,0,1,1,1,1], a: [1,1,1,0,0,0,1,1,0,1,0,1,1] },
-            { sl: 4,  name: "কবির আহমেদ",                 m: [1,1,1,1,1,1,1,1,1,1,1,1,1], a: [0,1,0,1,0,1,0,1,0,1,0,1,0] },
-            { sl: 5,  name: "মু: নুর নবী (C.T)",            m: [1,1,1,1,1,1,1,1,1,1,1,1,1], a: [0,1,0,1,0,1,0,1,0,1,0,1,0] },
-            { sl: 6,  name: "হেদায়েত উল্যাহ সবুজ (C.T)",    m: [1,1,1,0,1,1,1,1,0,1,1,1,1], a: [1,1,1,0,0,0,1,1,0,1,0,1,1] },
-            { sl: 7,  name: "আবুল বাশার চৌধুরী (C.T)",      m: [1,1,1,1,1,1,1,1,1,1,1,1,1], a: [0,1,0,1,0,1,0,1,1,0,1,0,1] },
-            { sl: 8,  name: "আব্দুর রাজ্জাক",               m: [1,1,1,1,1,1,1,1,1,1,1,1,1], a: [0,1,0,1,0,1,0,1,1,0,1,0,1] },
-            { sl: 9,  name: "মাও. কামাল উদ্দিন (C.T)",      m: [1,1,1,1,1,1,1,1,1,1,1,1,1], a: [0,1,0,1,0,1,0,1,1,0,1,0,1] },
-            { sl: 10, name: "মোঃ শাহাদাত হোসাইন (C.T)",    m: [1,1,1,1,1,1,1,1,1,1,1,1,1], a: [0,1,0,1,0,1,0,1,1,0,1,0,1] },
-            { sl: 11, name: "আলমগীর হোসেন (C.T)",         m: [1,1,1,0,1,1,1,1,0,1,1,1,1], a: [1,1,1,0,0,0,1,1,0,1,0,1,1] },
-            { sl: 12, name: "মহসীন আল মামুন (C.T)",       m: [1,1,1,1,1,1,1,1,1,1,1,1,1], a: [0,1,0,1,0,0,1,0,1,0,1,1,1] },
-            { sl: 13, name: "মোঃ হোসাইন (C.T)",           m: [1,1,1,1,1,1,1,1,1,1,1,1,1], a: [0,1,0,1,0,0,1,0,1,0,1,1,1] },
-            { sl: 14, name: "মোঃ কাউছার হাবিব (C.T)",     m: [1,1,1,1,1,1,1,1,1,1,1,1,1], a: [0,1,1,0,1,0,1,0,1,0,1,0,1] },
-            { sl: 15, name: "তোফায়েল আহমদ খন্দ. (C.T)",    m: [1,1,0,1,1,1,1,1,1,1,1,1,1], a: [1,0,0,1,1,0,1,1,0,1,1,0,1] },
-            { sl: 16, name: "মোঃ শাহিন আলম (C.T)",        m: [1,1,1,1,1,1,1,1,1,1,1,1,1], a: [1,0,1,0,1,0,1,1,0,0,1,0,1] },
-            { sl: 17, name: "মমিনুর রহমান (C.T)",          m: [1,1,1,1,1,1,1,1,1,1,1,1,1], a: [1,0,1,0,1,0,1,1,0,0,1,1,0] },
-            { sl: 18, name: "জাকারিয়া হাবীব (C.T)",        m: [1,1,1,1,1,1,1,1,1,1,1,1,1], a: [1,0,1,0,1,0,1,1,0,0,1,1,0] },
-            { sl: 19, name: "সাইফুল ইসলাম (ইঞ্জিঃ)",       m: [1,1,1,1,1,1,1,1,1,1,1,1,1], a: [1,0,1,0,1,0,1,0,1,1,0,1,0] },
-            { sl: 20, name: "সাইফুল ইসলাম (C.T)",          m: [1,1,1,1,1,1,1,1,1,1,1,1,1], a: [1,0,1,0,1,1,0,0,1,1,0,1,0] },
-            { sl: 21, name: "মোঃ ইকবাল তানিম",            m: [1,1,1,1,1,1,1,1,1,1,1,1,1], a: [1,0,1,0,1,1,1,0,1,1,0,1,0] },
-            { sl: 22, name: "মোস্তাফিজুর রহমান",            m: [1,1,1,1,1,1,1,1,1,1,1,1,1], a: [1,0,1,1,1,1,0,1,0,1,0,1,0] },
-            { sl: 23, name: "নাছির উদ্দিন",                 m: [1,1,1,1,1,1,1,1,1,1,1,1,1], a: [1,0,1,1,1,1,0,1,0,1,0,1,0] },
-            { sl: 24, name: "মো: মাহমুদুল হাসান",           m: [1,1,1,1,1,1,1,1,1,1,1,1,1], a: [1,0,1,1,1,1,0,1,0,1,0,1,0] },
-            { sl: 25, name: "মো: মনির হোসেন",             m: [1,1,1,1,1,1,1,1,1,1,1,1,1], a: [1,0,1,1,1,1,0,1,0,1,0,1,0] },
-            { sl: 26, name: "ফয়সাল বিন সাঈদ",            m: [1,1,1,1,1,1,1,1,1,1,1,1,1], a: [1,1,1,0,1,1,0,0,1,1,1,0,0] }
-        ];
+<script>
+  // ৪টি শিফটের মূল রোস্টার পিডিএফ লিংক কনফিগারেশন
+  const SHIFT_PDF_KEYS = {
+    "জবা": "1hbJjccDFuMn52In" + "MpXgztRtsXkoEmCcQ",
+    "বেলি": "1y46KLpm2mwsr3Kx" + "vf05mjU3xyHnjlEC1",
+    "বকুল": "1q05_4D0z7ELIiUk" + "4Se4MpdVyMO7pMO--",
+    "শাপলা": "16q2R6n0Hbxrq__r" + "t6BPx_KIONHLZDQb3"
+  };
 
-        // ২. শাপলা শিফটের ২৫ জন শিক্ষকের ম্যানুয়ালি যাচাইকৃত ডাটা (সর্বমোট ডিউটি: ৫১৪)
-        const SHAPLA_ROSTER = [
-            { sl: 1,  name: "জনাব মো: আবদুল কাদির",    m: [1,1,1,1,1,1,1,1,1,1,1,1,1], a: [0,1,0,1,0,1,0,1,0,1,0,1,1] },
-            { sl: 2,  name: "মোঃ শাহানুর রহমান",       m: [1,1,1,1,1,1,1,1,1,1,1,1,1], a: [0,1,0,1,0,1,0,1,0,1,0,1,1] },
-            { sl: 3,  name: "নুরে আলম সাথী",          m: [1,1,1,1,1,1,1,1,1,1,1,1,1], a: [0,1,0,1,0,1,0,1,0,1,0,1,1] },
-            { sl: 4,  name: "আনোয়ার হোসেন",          m: [1,1,1,1,1,1,1,1,1,1,1,1,1], a: [0,1,0,1,0,1,0,1,0,1,0,1,1] },
-            { sl: 5,  name: "মো: কামরুল ফারুক",       m: [1,1,1,1,1,1,1,1,1,1,1,1,1], a: [0,1,0,1,0,1,0,1,0,1,0,1,1] },
-            { sl: 6,  name: "বাহার উদ্দিন",            m: [1,1,1,1,1,1,1,1,1,1,1,1,1], a: [0,1,0,1,0,1,0,1,0,1,1,0,1] },
-            { sl: 7,  name: "গোলাম মহিউদ্দিন",         m: [1,1,1,1,1,1,1,1,1,1,1,1,1], a: [0,1,0,1,0,1,0,1,0,1,1,0,1] },
-            { sl: 8,  name: "রায়হান হোসেন",          m: [1,1,1,1,1,1,1,1,1,1,1,1,1], a: [0,1,0,1,0,1,0,1,0,1,1,0,1] },
-            { sl: 9,  name: "জিয়াউর রহমান",          m: [1,1,1,1,1,1,1,1,1,1,1,1,1], a: [0,1,0,1,0,1,0,1,0,1,1,0,1] },
-            { sl: 10, name: "মাও. আল আমিন",          m: [1,1,1,1,1,1,1,1,1,1,1,1,1], a: [0,1,0,1,0,1,0,1,0,1,1,0,1] },
-            { sl: 11, name: "ইসরাফিল ভূঁইয়া",          m: [1,1,1,1,1,1,1,1,1,1,1,1,1], a: [0,1,0,1,0,1,1,0,1,0,1,0,1] },
-            { sl: 12, name: "সাখাওয়াত হোসাইন",        m: [1,1,1,1,1,1,1,1,1,1,1,1,1], a: [1,0,1,0,1,0,1,1,1,0,1,0,1] },
-            { sl: 13, name: "একিউএম জাহিদুল বারী",     m: [1,1,1,1,1,1,1,1,1,1,1,1,1], a: [1,0,1,0,1,0,1,1,1,0,1,0,1] },
-            { sl: 14, name: "সাইফুদ্দিন মোঃ রাশেদ",     m: [1,1,1,1,1,1,1,1,1,1,1,1,1], a: [1,0,1,0,1,0,1,1,1,0,1,0,1] },
-            { sl: 15, name: "মোঃ মঈন উদ্দিন",          m: [1,1,1,1,1,1,1,1,1,1,1,1,1], a: [1,0,1,0,1,0,1,1,1,0,1,0,1] },
-            { sl: 16, name: "মো. জাকির হোসাইন",       m: [1,1,1,1,1,1,1,1,1,1,1,1,1], a: [1,0,1,0,1,0,1,1,1,0,1,1,0] },
-            { sl: 17, name: "জোবায়ের হোসেন",         m: [1,1,1,1,1,1,1,1,1,1,1,1,1], a: [1,0,1,0,1,1,1,0,1,0,1,1,0] },
-            { sl: 18, name: "গোলাম মোস্তফা",          m: [1,1,1,1,1,1,1,1,1,1,1,1,1], a: [1,0,1,0,1,1,1,0,1,0,1,1,0] },
-            { sl: 19, name: "ওমর ফারুক",             m: [1,1,1,1,1,1,1,1,1,1,1,1,1], a: [1,0,1,0,1,1,1,0,1,0,1,1,0] },
-            { sl: 20, name: "মানিক হোসেন",           m: [1,1,1,1,1,1,1,1,1,1,1,1,1], a: [1,0,1,0,1,0,1,0,1,1,1,1,0] },
-            { sl: 21, name: "আশিকুর রহমান সবুজ",      m: [1,1,1,1,1,1,1,1,1,1,1,1,1], a: [1,0,1,1,1,0,1,0,1,1,0,1,0] },
-            { sl: 22, name: "ফরিদ আহমেদ",            m: [1,1,1,1,1,1,1,1,1,1,1,1,1], a: [1,0,1,1,1,0,1,0,1,1,0,1,0] },
-            { sl: 23, name: "বোরহান উদ্দিন",           m: [1,1,1,1,1,1,1,1,1,1,1,1,1], a: [1,1,1,0,1,0,1,0,1,1,0,1,0] },
-            { sl: 24, name: "আরমান হোসেন",           m: [1,1,1,1,1,1,1,1,1,1,1,1,1], a: [1,1,1,0,1,0,1,0,1,1,0,1,0] },
-            { sl: 25, name: "রাশেদুল হাসান",           m: [1,1,1,1,1,1,1,1,1,1,1,1,1], a: [1,1,1,1,1,0,1,0,1,0,0,1,0] }
-        ];
+  // ওয়ান-ক্লিক ডিরেক্ট পিডিএফ ডাউনলোড ফাংশন
+  function downloadShiftPdf(shiftName) {
+    const key = SHIFT_PDF_KEYS[shiftName];
+    if (!key) return;
+    const directDownloadUrl = "https://drive.google.com/uc?export=download&id=" + key;
+    const a = document.createElement("a");
+    a.href = directDownloadUrl;
+    a.target = "_blank";
+    a.rel = "noopener noreferrer";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
 
-        // ৩. বকুল শিফটের ২৫ জন শিক্ষকের ম্যানুয়ালি যাচাইকৃত ডাটা (সর্বমোট ডিউটি: ৫১৩)
-        const BOKUL_ROSTER = [
-            { sl: 1,  name: "জনাব মো: মিজানুর রহমান-৩", m: [0,1,0,1,0,1,0,1,0,0,1,1,1], a: [1,1,1,1,1,1,1,1,1,1,1,1,1] },
-            { sl: 2,  name: "মো: মিজানুর রহমান-৪",      m: [0,1,0,1,0,1,0,1,0,1,0,1,1], a: [1,1,1,1,1,1,1,1,1,1,1,1,1] },
-            { sl: 3,  name: "মো: আবুল হোসেন ফারুক",     m: [0,1,0,1,0,1,0,1,0,1,0,1,1], a: [1,1,1,1,1,1,1,1,1,1,1,1,1] },
-            { sl: 4,  name: "মো: সাইফুল ইসলাম-১",       m: [0,1,0,1,0,1,0,1,0,1,0,1,1], a: [1,1,1,1,1,1,1,1,1,1,1,1,1] },
-            { sl: 5,  name: "মো: দুলাল হোসেন চৌধুরী",    m: [0,1,0,1,0,1,0,1,0,1,0,1,1], a: [1,1,1,1,1,1,1,1,1,1,1,1,1] },
-            { sl: 6,  name: "মো: নিজাম উদ্দীন মজুমদার",   m: [0,1,0,1,0,1,0,1,0,1,1,0,1], a: [1,1,1,1,1,1,1,1,1,1,1,1,1] },
-            { sl: 7,  name: "মোহাম্মদ আব্দুর রহমান",     m: [0,1,0,1,0,1,0,1,0,1,1,0,1], a: [1,1,1,1,1,1,1,1,1,1,1,1,1] },
-            { sl: 8,  name: "মোস্তফা কামাল",            m: [0,1,0,1,0,1,0,1,0,1,1,0,1], a: [1,1,1,1,1,1,1,1,1,1,1,1,1] },
-            { sl: 9,  name: "মো: জহিরুল ইসলাম",        m: [0,1,0,1,0,1,0,1,0,1,1,0,1], a: [1,1,1,1,1,1,1,1,1,1,1,1,1] },
-            { sl: 10, name: "ফরহাদ আল ফয়সাল",         m: [0,1,0,1,0,1,0,1,0,1,1,0,1], a: [1,1,1,1,1,1,1,1,1,1,1,1,1] },
-            { sl: 11, name: "সিরাজুস সালেহীন",          m: [0,1,1,0,1,0,1,0,1,0,1,0,1], a: [1,1,1,1,1,1,1,1,1,1,1,1,1] },
-            { sl: 12, name: "মোহাম্মদ মহসিন-২",         m: [1,0,1,0,1,0,1,0,1,0,1,0,1], a: [1,1,1,1,1,1,1,1,1,1,1,1,1] },
-            { sl: 13, name: "সাইফুল ইসলাম মিয়াজী",      m: [1,0,1,0,1,0,1,1,1,0,1,0,1], a: [1,1,1,1,1,1,1,1,1,1,1,1,1] },
-            { sl: 14, name: "মাও. মহিউদ্দিন",            m: [1,0,1,0,1,0,1,1,1,0,1,0,1], a: [1,1,1,1,1,1,1,1,1,1,1,1,1] },
-            { sl: 15, name: "মো: স্বপন মজুমদার",         m: [1,0,1,0,1,0,1,1,1,0,1,1,0], a: [1,1,1,1,1,1,1,1,1,1,1,1,1] },
-            { sl: 16, name: "মো: সিফাতুল মোস্তফা",       m: [1,0,1,0,1,0,1,1,1,0,1,1,0], a: [1,1,1,1,1,1,1,1,1,1,1,1,1] },
-            { sl: 17, name: "কাউছার আহমেদ",           m: [1,0,1,0,1,0,1,1,1,0,1,1,0], a: [1,1,1,1,1,1,1,1,1,1,1,1,1] },
-            { sl: 18, name: "মো: ইউছুফ আলী",            m: [1,0,1,0,1,1,1,0,1,0,1,1,0], a: [1,1,1,1,1,1,1,1,1,1,1,1,1] },
-            { sl: 19, name: "মোহাম্মদ হোসাইন",          m: [1,0,1,0,1,1,1,0,1,0,1,1,0], a: [1,1,1,1,1,1,1,1,1,1,1,1,1] },
-            { sl: 20, name: "বিল্লাল হোসেন",            m: [1,0,1,1,1,1,1,0,1,1,0,1,0], a: [1,1,1,1,1,1,1,1,1,0,1,1,1] },
-            { sl: 21, name: "এমরান হোসেন",            m: [1,0,1,1,1,1,1,0,1,1,0,1,0], a: [1,1,1,1,1,1,1,1,1,0,1,1,1] },
-            { sl: 22, name: "আবু মু. সজিব",             m: [1,1,1,0,1,1,1,0,1,1,0,0,1], a: [1,1,1,1,1,1,1,1,1,0,1,1,1] },
-            { sl: 23, name: "মাসুদ আলম",               m: [1,1,1,1,1,0,1,0,1,1,0,1,0], a: [1,1,1,1,1,1,1,1,1,0,1,1,1] },
-            { sl: 24, name: "বায়েজিদুল ইসলাম মজু.",       m: [1,1,1,1,1,0,1,0,1,1,0,1,0], a: [1,1,1,1,1,1,1,1,1,0,1,1,1] },
-            { sl: 25, name: "কাউছার হামিদ জীবন",        m: [1,1,1,1,1,0,1,0,1,1,0,1,0], a: [1,1,1,1,1,1,1,1,1,0,1,1,1] }
-        ];
+  // বর্তমানে নির্বাচিত শিফটের পিডিএফ ডাউনলোড
+  function downloadSelectedShiftPdf() {
+    const shift = document.getElementById('shiftSelect').value;
+    downloadShiftPdf(shift);
+  }
 
-        // ৪. বেলি শিফটের ২৬ জন শিক্ষকের ম্যানুয়ালি যাচাইকৃত ডাটা (সর্বমোট ডিউটি: ৫১৫)
-        const BELI_ROSTER = [
-            { sl: 1,  name: "জনাব শেখ রেজাউল হোসেন", m: [0,1,0,1,0,1,0,1,0,0,1,1,0], a: [1,1,1,1,1,1,1,1,1,1,1,1,1] },
-            { sl: 2,  name: "ছালেহ আহম্মাদ",          m: [0,1,0,1,0,1,0,1,0,1,0,1,0], a: [1,1,1,1,1,1,1,1,1,1,1,1,1] },
-            { sl: 3,  name: "মোঃ ফজলুল হক",         m: [0,1,0,1,0,1,0,1,0,1,0,1,0], a: [1,1,1,1,1,1,1,1,1,1,1,1,1] },
-            { sl: 4,  name: "মাহফুজুর রহমান",         m: [0,1,0,1,0,1,0,1,0,1,0,1,0], a: [1,1,1,1,1,1,1,1,1,1,1,1,1] },
-            { sl: 5,  name: "মোঃ সাজ্জাদ হোসেন",       m: [0,1,0,1,0,1,0,1,0,1,0,1,0], a: [1,1,1,1,1,1,1,1,1,1,1,1,1] },
-            { sl: 6,  name: "মো: ইলিয়াছ মিয়া",         m: [0,1,0,1,0,1,0,1,0,1,0,1,1], a: [1,1,1,1,1,1,1,1,1,1,1,1,1] },
-            { sl: 7,  name: "মো: মাঈন উদ্দিন",         m: [0,1,0,1,0,1,0,1,0,1,0,1,1], a: [1,1,1,1,1,1,1,1,1,1,1,1,1] },
-            { sl: 8,  name: "মোঃ মহসিন-১",           m: [0,1,0,1,0,1,0,1,0,1,1,0,1], a: [1,1,1,1,1,1,1,1,1,1,1,1,1] },
-            { sl: 9,  name: "মোঃ মহি উদ্দিন",          m: [0,1,0,1,0,1,0,1,0,1,1,0,1], a: [1,1,1,1,1,1,1,1,1,1,1,1,1] },
-            { sl: 10, name: "জামাল উদ্দিন",           m: [0,1,0,1,0,1,0,1,1,0,1,0,1], a: [1,1,1,1,1,1,1,1,1,1,1,1,1] },
-            { sl: 11, name: "মোঃ আব্দুল হালিম",       m: [0,1,0,1,0,1,0,1,1,0,1,0,1], a: [1,1,1,1,1,1,1,1,1,1,1,1,1] },
-            { sl: 12, name: "মো: শহীদুল্লাহ",           m: [1,0,1,0,1,0,1,0,1,0,1,0,1], a: [1,1,1,1,1,1,1,1,1,1,1,1,1] },
-            { sl: 13, name: "মোজাম্মেল হক মুন্সী",      m: [1,0,1,0,1,0,1,0,1,0,1,0,1], a: [1,1,1,1,1,1,1,1,1,1,1,1,1] },
-            { sl: 14, name: "জাকির হোসেন",           m: [1,0,1,0,1,0,1,0,1,0,1,0,1], a: [1,1,1,1,1,1,1,1,1,1,1,1,1] },
-            { sl: 15, name: "শাহাদাত হোসেন",         m: [1,0,1,0,1,0,1,0,1,0,1,0,1], a: [1,1,1,1,1,1,1,1,1,1,1,1,1] },
-            { sl: 16, name: "মু. আব্দুল্লাহ আল নোমান",   m: [1,0,1,0,1,0,1,0,1,0,1,0,1], a: [1,1,1,1,1,1,1,1,1,1,1,1,1] },
-            { sl: 17, name: "এস. এম. মাসুম",          m: [1,0,1,0,1,0,1,0,1,0,1,0,1], a: [1,1,1,1,1,1,1,1,1,1,1,1,1] },
-            { sl: 18, name: "রাকিবুল হাসান",          m: [1,0,1,0,1,0,1,0,1,0,1,0,1], a: [1,1,1,1,1,1,1,1,1,1,1,1,1] },
-            { sl: 19, name: "আবু ইউসুফ",             m: [1,0,1,0,1,0,1,0,1,0,1,1,0], a: [1,1,1,1,1,1,1,1,1,1,1,1,1] },
-            { sl: 20, name: "নজরুল ইসলাম",          m: [1,0,1,0,1,0,1,0,1,0,1,1,0], a: [1,1,1,1,1,1,1,1,1,1,1,1,1] },
-            { sl: 21, name: "মোঃ বোরহান উদ্দিন",       m: [1,0,1,0,1,1,1,0,1,1,0,1,0], a: [1,1,1,1,1,1,1,1,1,0,1,1,1] },
-            { sl: 22, name: "সাফায়েত উল্লাহ্",         m: [1,0,1,1,0,1,1,0,1,1,0,1,0], a: [1,1,1,1,1,1,1,1,1,0,1,1,1] },
-            { sl: 23, name: "তুহিনুর রহমান",          m: [1,0,1,1,1,0,1,0,1,1,0,1,0], a: [1,1,1,1,1,1,1,1,1,0,1,1,1] },
-            { sl: 24, name: "মিজানুর রহমান",         m: [1,1,0,1,1,0,1,1,0,1,0,1,0], a: [1,1,1,1,1,1,1,1,1,0,1,1,1] },
-            { sl: 25, name: "শাকিল হোসেন",          m: [1,1,1,0,1,0,1,1,0,1,0,1,0], a: [1,1,1,1,1,1,1,1,1,0,1,1,1] },
-            { sl: 26, name: "আবু সহল মো: জাবালুন নূর", m: [1,1,1,0,1,1,0,1,0,1,0,0,1], a: [1,1,1,1,1,1,1,1,1,0,1,1,1] }
-        ];
+  // বর্তমানে নির্বাচিত শিফটের পিডিএফ প্রিভিউ (নতুন ট্যাবে)
+  function viewSelectedShiftPdf() {
+    const shift = document.getElementById('shiftSelect').value;
+    const key = SHIFT_PDF_KEYS[shift];
+    if (!key) return;
+    window.open("https://drive.google.com/file/d/" + key + "/view", "_blank");
+  }
 
-        // ৪টি শিফটের সমন্বিত ডাটা অবজেক্ট
-        const ALL_ROSTERS = {
-            joba: JOBA_ROSTER,
-            shapla: SHAPLA_ROSTER,
-            bokul: BOKUL_ROSTER,
-            beli: BELI_ROSTER
-        };
+  // পরীক্ষার ১৩টি তারিখ ও বার
+  const EXAM_DATES = [
+    { date: "১৭/১১/২৬", day: "মঙ্গল" },
+    { date: "১৮/১১/২৬", day: "বুধ" },
+    { date: "১৯/১১/২৬", day: "বৃহস্পতি" },
+    { date: "২২/১১/২৬", day: "রবি" },
+    { date: "২৩/১১/২৬", day: "সোম" },
+    { date: "২৪/১১/২৬", day: "মঙ্গল" },
+    { date: "২৫/১১/২৬", day: "বুধ" },
+    { date: "২৬/১১/২৬", day: "বৃহস্পতি" },
+    { date: "২৯/১১/২৬", day: "রবি" },
+    { date: "৩০/১১/২৬", day: "সোম" },
+    { date: "০১/১২/২৬", day: "মঙ্গল" },
+    { date: "০২/১২/২৬", day: "বুধ" },
+    { date: "০৩/১২/২৬", day: "বৃহস্পতি" }
+  ];
 
-        // শিফটের থিম ও গুগল ড্রাইভ পিডিএফ আইডি
-        const SHIFT_META = {
-            joba: {
-                title: "জবা শিফট",
-                totalShiftDuties: "৫১৯",
-                pdfName: "জবা শিফট ডিউটি রোস্টার",
-                id: "1hbJjccDFuMn52InMpXgztRtsXkoEmCcQ",
-                cardBorder: "border-rose-200/80 shadow-rose-900/5",
-                selectClass: "bg-rose-50/70 border-rose-200 focus:border-rose-600",
-                pillClass: "text-rose-700 bg-rose-50 border-rose-200",
-                iconGrad: "from-rose-500 to-pink-600",
-                badgeClass: "bg-rose-500/20 text-rose-300 border-rose-400/30"
-            },
-            shapla: {
-                title: "শাপলা শিফট",
-                totalShiftDuties: "৫১৪",
-                pdfName: "শাপলা শিফট ডিউটি রোস্টার",
-                id: "16q2R6n0Hbxrq__rt6BPx_KIONHLZDQb3",
-                cardBorder: "border-purple-200/80 shadow-purple-900/5",
-                selectClass: "bg-purple-50/70 border-purple-200 focus:border-purple-600",
-                pillClass: "text-purple-700 bg-purple-50 border-purple-200",
-                iconGrad: "from-purple-600 to-fuchsia-600",
-                badgeClass: "bg-purple-500/20 text-purple-300 border-purple-400/30"
-            },
-            bokul: {
-                title: "বকুল শিফট",
-                totalShiftDuties: "৫১৩",
-                pdfName: "বকুল শিফট ডিউটি রোস্টার",
-                id: "1q05_4D0z7ELIiUk4Se4MpdVyMO7pMO--",
-                cardBorder: "border-amber-200/80 shadow-amber-900/5",
-                selectClass: "bg-amber-50/70 border-amber-200 focus:border-amber-600",
-                pillClass: "text-amber-800 bg-amber-50 border-amber-200",
-                iconGrad: "from-amber-500 to-orange-600",
-                badgeClass: "bg-amber-500/20 text-amber-300 border-amber-400/30"
-            },
-            beli: {
-                title: "বেলি শিফট",
-                totalShiftDuties: "৫১৫",
-                pdfName: "বেলি শিফট ডিউটি রোস্টার",
-                id: "1y46KLpm2mwsr3Kxvf05mjU3xyHnjlEC1",
-                cardBorder: "border-emerald-200/80 shadow-emerald-900/5",
-                selectClass: "bg-emerald-50/70 border-emerald-200 focus:border-emerald-600",
-                pillClass: "text-emerald-800 bg-emerald-50 border-emerald-200",
-                iconGrad: "from-emerald-600 to-teal-600",
-                badgeClass: "bg-emerald-500/20 text-emerald-300 border-emerald-400/30"
-            }
-        };
+  // মূল রোস্টার শিট অনুযায়ী শতভাগ নির্ভুল নামের বানান ও ২৬ বেলার ডিউটি ডেটা
+  const DUTY_DATA = {
+    "জবা": [
+      { sl: 1, name: "জনাব এ.এম. আখতার হোসেন", d: [1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1] },
+      { sl: 2, name: "মো: সিরাজুল ইসলাম খান (C.T)", d: [1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1] },
+      { sl: 3, name: "মো: গোলাম আযম (C.T)", d: [1,1, 1,1, 1,1, 0,0, 1,0, 1,0, 1,1, 1,1, 0,0, 1,1, 1,0, 1,1, 1,1] },
+      { sl: 4, name: "কবির আহমেদ", d: [1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0] },
+      { sl: 5, name: "মু: নুর নবী (C.T)", d: [1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0] },
+      { sl: 6, name: "হেদায়েত উল্যাহ সবুজ (C.T)", d: [1,1, 1,1, 1,1, 0,0, 1,0, 1,0, 1,1, 1,1, 0,0, 1,1, 1,0, 1,1, 1,1] },
+      { sl: 7, name: "আবুল বাশার চৌধুরী (C.T)", d: [1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,1, 1,0, 1,1, 1,0, 1,1] },
+      { sl: 8, name: "আব্দুর রাজ্জাক", d: [1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,1, 1,0, 1,1, 1,0, 1,1] },
+      { sl: 9, name: "মাও. কামাল উদ্দিন (C.T)", d: [1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1] },
+      { sl: 10, name: "মোঃ শাহাদাত হোসাইন (C.T)", d: [1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1] },
+      { sl: 11, name: "আলমগীর হোসেন (C.T)", d: [1,1, 1,1, 1,1, 0,0, 1,0, 1,0, 1,1, 1,1, 0,0, 1,1, 1,0, 1,1, 1,1] },
+      { sl: 12, name: "মহসীন আল মামুন (C.T)", d: [1,0, 1,1, 1,0, 1,1, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1] },
+      { sl: 13, name: "মোঃ হোসাইন (C.T)", d: [1,0, 1,1, 1,0, 1,1, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1] },
+      { sl: 14, name: "মোঃ কাউছার হাবিব (C.T)", d: [1,0, 1,1, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1] },
+      { sl: 15, name: "তোফায়েল আহমদ খন্দ. (C.T)", d: [1,1, 1,0, 0,0, 1,1, 1,1, 1,0, 1,1, 1,1, 1,0, 1,1, 1,1, 1,0, 1,1] },
+      { sl: 16, name: "মোঃ শাহিন আলম (C.T)", d: [1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1] },
+      { sl: 17, name: "মমিনুর রহমান (C.T)", d: [1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,1, 1,0] },
+      { sl: 18, name: "জাকারিয়া হাবীব (C.T)", d: [1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,1, 1,0] },
+      { sl: 19, name: "সাইফুল ইসলাম (ইঞ্জিঃ)", d: [1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,1, 1,0, 1,1, 1,0] },
+      { sl: 20, name: "সাইফুল ইসলাম (C.T)", d: [1,1, 1,0, 1,1, 1,0, 1,1, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0] },
+      { sl: 21, name: "মোঃ ইকবাল তানিম", d: [1,1, 1,0, 1,1, 1,0, 1,1, 1,1, 1,1, 1,0, 1,1, 1,1, 1,0, 1,1, 1,0] },
+      { sl: 22, name: "মোস্তাফিজুর রহমান", d: [1,1, 1,0, 1,1, 1,1, 1,1, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0] },
+      { sl: 23, name: "নাছির উদ্দিন", d: [1,1, 1,0, 1,1, 1,1, 1,1, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0] },
+      { sl: 24, name: "মো: মাহমুদুল হাসান", d: [1,1, 1,0, 1,1, 1,1, 1,1, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0] },
+      { sl: 25, name: "মো: মনির হোসেন", d: [1,1, 1,0, 1,1, 1,1, 1,1, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0] },
+      { sl: 26, name: "ফয়সাল বিন সাঈদ", d: [1,1, 1,1, 1,1, 1,0, 1,1, 1,1, 1,0, 1,1, 1,0, 1,1, 1,1, 1,0, 1,0] }
+    ],
 
-        // শিফট সিলেক্ট করলে ঐ শিফটের শিক্ষকদের তালিকা লোড হবে
-        function populateTeachers() {
-            const shiftKey = document.getElementById('shiftSelect').value;
-            const teacherSelect = document.getElementById('teacherSelect');
-            const mainCard = document.getElementById('mainCard');
-            const headerIcon = document.getElementById('finderHeaderIcon');
-            const shiftPill = document.getElementById('finderShiftPill');
+    "বেলি": [
+      { sl: 1, name: "জনাব শেখ রেজাউল হোসেন", d: [0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 0,1, 1,1, 0,1, 1,1] },
+      { sl: 2, name: "ছালেহ আহমাদ", d: [0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1] },
+      { sl: 3, name: "মোঃ ফজলুল হক", d: [0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1] },
+      { sl: 4, name: "মাহফুজুর রহমান", d: [0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1] },
+      { sl: 5, name: "মোঃ সাজ্জাদ হোসেন", d: [0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1] },
+      { sl: 6, name: "মো: ইলিয়াছ মিয়া", d: [0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 1,1] },
+      { sl: 7, name: "মো: মাঈন উদ্দিন", d: [0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 1,1] },
+      { sl: 8, name: "মো: মহসিন-১", d: [0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 1,1, 0,1, 1,1] },
+      { sl: 9, name: "মো: মহি উদ্দিন", d: [0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 1,1, 0,1, 1,1] },
+      { sl: 10, name: "জামাল উদ্দিন", d: [0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 1,1, 0,1, 1,1, 0,1, 1,1] },
+      { sl: 11, name: "মোঃ আব্দুল হালিম", d: [0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 1,1, 0,1, 1,1, 0,1, 1,1] },
+      { sl: 12, name: "মো: শহীদুল্লাহ", d: [1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1] },
+      { sl: 13, name: "মোজাম্মেল হক মুন্সী", d: [1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1] },
+      { sl: 14, name: "জাকির হোসেন", d: [1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1] },
+      { sl: 15, name: "শাহাদাত হোসেন", d: [1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1] },
+      { sl: 16, name: "মু.আব্দুল্লাহ আল নোমান", d: [1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1] },
+      { sl: 17, name: "এস. এম. মাসুম", d: [1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1] },
+      { sl: 18, name: "রাকিবুল হাসান", d: [1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1] },
+      { sl: 19, name: "আবু ইউসুফ", d: [1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 1,1, 0,1] },
+      { sl: 20, name: "নজরুল ইসলাম", d: [1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 1,1, 0,1] },
+      { sl: 21, name: "মোঃ বোরহান উদ্দিন", d: [1,1, 0,1, 1,1, 0,1, 1,1, 1,1, 1,1, 0,1, 1,1, 1,0, 0,1, 1,1, 0,1] },
+      { sl: 22, name: "সাফায়েত উল্লাহ", d: [1,1, 0,1, 1,1, 1,1, 0,1, 1,1, 1,1, 0,1, 1,1, 1,0, 0,1, 1,1, 0,1] },
+      { sl: 23, name: "তুহিনুর রহমান", d: [1,1, 0,1, 1,1, 1,1, 1,1, 0,1, 1,1, 0,1, 1,1, 1,0, 0,1, 1,1, 0,1] },
+      { sl: 24, name: "মিজানুর রহমান", d: [1,1, 1,1, 0,1, 1,1, 1,1, 0,1, 1,1, 1,1, 0,1, 1,0, 0,1, 1,1, 0,1] },
+      { sl: 25, name: "শাকিল হোসেন", d: [1,1, 1,1, 1,1, 0,1, 1,1, 0,1, 1,1, 1,1, 0,1, 1,0, 0,1, 1,1, 0,1] },
+      { sl: 26, name: "আবু সহল মোঃ জাবালুন নূর", d: [1,1, 1,1, 1,1, 0,1, 1,1, 1,1, 0,1, 1,1, 0,1, 1,0, 0,1, 1,1, 0,1] }
+    ],
 
-            document.getElementById('dutyResultContainer').classList.add('hidden');
-            teacherSelect.innerHTML = '';
+    "বকুল": [
+      { sl: 1, name: "জনাব মো: মিজানুর রহমান-৩", d: [0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 0,1, 1,1, 1,1, 1,1] },
+      { sl: 2, name: "মো: মিজানুর রহমান-৪", d: [0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 1,1] },
+      { sl: 3, name: "মো: আবুল হোসেন ফারুক", d: [0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 1,1] },
+      { sl: 4, name: "মো: সাইফুল ইসলাম-১", d: [0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 1,1] },
+      { sl: 5, name: "মো: দুলাল হোসেন চৌধুরী", d: [0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 1,1] },
+      { sl: 6, name: "মো: নিজাম উদ্দীন মজুমদার", d: [0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 1,1, 0,1, 1,1] },
+      { sl: 7, name: "মোহাম্মদ আব্দুর রহমান", d: [0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 1,1, 0,1, 1,1] },
+      { sl: 8, name: "মোস্তফা কামাল", d: [0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 1,1, 0,1, 1,1] },
+      { sl: 9, name: "মো: জহিরুল ইসলাম", d: [0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 1,1, 0,1, 1,1] },
+      { sl: 10, name: "ফরহাদ আল ফয়সাল", d: [0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 1,1, 0,1, 1,1] },
+      { sl: 11, name: "সিরাজুস সালেহীন", d: [0,1, 1,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1] },
+      { sl: 12, name: "মোহাম্মদ মহসিন-২", d: [1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1] },
+      { sl: 13, name: "সাইফুল ইসলাম মিয়াজী", d: [1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 1,1, 1,1, 0,1, 1,1, 0,1, 1,1] },
+      { sl: 14, name: "মাও. মহিউদ্দিন", d: [1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 1,1, 1,1, 0,1, 1,1, 0,1, 1,1] },
+      { sl: 15, name: "মো: স্বপন মজুমদার", d: [1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 1,1, 1,1, 0,1, 1,1, 0,1, 1,1] },
+      { sl: 16, name: "মো: সিফাতুল মোস্তফা", d: [1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 1,1, 1,1, 0,1, 1,1, 1,1, 0,1] },
+      { sl: 17, name: "কাওছার আহমেদ", d: [1,1, 0,1, 1,1, 0,1, 1,1, 0,1, 1,1, 1,1, 1,1, 0,1, 1,1, 1,1, 0,1] },
+      { sl: 18, name: "মো: ইউছুফ আলী", d: [1,1, 0,1, 1,1, 0,1, 1,1, 1,1, 1,1, 0,1, 1,1, 0,1, 1,1, 1,1, 0,1] },
+      { sl: 19, name: "মোহাম্মদ হোসাইন", d: [1,1, 0,1, 1,1, 0,1, 1,1, 1,1, 1,1, 0,1, 1,1, 0,1, 1,1, 1,1, 0,1] },
+      { sl: 20, name: "বিল্লাল হোসেন", d: [1,1, 0,1, 1,1, 1,1, 1,1, 1,1, 1,1, 0,1, 1,1, 1,0, 0,1, 1,1, 0,1] },
+      { sl: 21, name: "এমরান হোসেন", d: [1,1, 0,1, 1,1, 1,1, 1,1, 1,1, 1,1, 0,1, 1,1, 1,0, 0,1, 1,1, 0,1] },
+      { sl: 22, name: "আবু মু. সজিব", d: [1,1, 1,1, 1,1, 0,1, 1,1, 1,1, 1,1, 0,1, 1,1, 1,0, 0,1, 1,1, 0,1] },
+      { sl: 23, name: "মাসুদ আলম", d: [1,1, 1,1, 1,1, 1,1, 1,1, 0,1, 1,1, 0,1, 1,1, 1,0, 0,1, 1,1, 0,1] },
+      { sl: 24, name: "বায়জিদুল ইসলাম মজুম.", d: [1,1, 1,1, 1,1, 1,1, 1,1, 0,1, 1,1, 0,1, 1,1, 1,0, 0,1, 1,1, 0,1] },
+      { sl: 25, name: "কাওছার হামিদ জীবন", d: [1,1, 1,1, 1,1, 1,1, 1,1, 0,1, 1,1, 0,1, 1,1, 1,0, 0,1, 1,1, 0,1] }
+    ],
 
-            if (!shiftKey || !ALL_ROSTERS[shiftKey]) {
-                teacherSelect.disabled = true;
-                teacherSelect.innerHTML = '<option value="">-- আগে শিফট নির্বাচন করুন --</option>';
-                teacherSelect.className = "w-full bg-slate-100 border-2 border-slate-200 rounded-2xl px-4 py-3.5 text-slate-900 font-bold text-base outline-none cursor-pointer disabled:opacity-60 transition-all";
-                mainCard.className = "bg-white border-2 border-sky-200/80 rounded-3xl p-6 sm:p-8 shadow-xl shadow-sky-900/5 mb-12 transition-all duration-300";
-                headerIcon.className = "w-12 h-12 rounded-2xl bg-gradient-to-br from-sky-500 to-indigo-600 text-white flex items-center justify-center text-xl shadow-md transition-all";
-                shiftPill.className = "text-xs font-bold uppercase text-sky-700 bg-sky-50 px-2.5 py-0.5 rounded-md border border-sky-200";
-                shiftPill.innerText = "স্মার্ট ডিউটি সার্চ • ৪টি শিফট";
-                return;
-            }
+    "শাপলা": [
+      { sl: 1, name: "জনাব মো: আবদুল কাদির", d: [1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,1] },
+      { sl: 2, name: "মোঃ শাহানুর রহমান", d: [1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,1] },
+      { sl: 3, name: "নূরে আলম সাথী", d: [1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,1] },
+      { sl: 4, name: "আনোয়ার হোসেন", d: [1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,1] },
+      { sl: 5, name: "মো: কামরুল ফারুক", d: [1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,1] },
+      { sl: 6, name: "বাহার উদ্দিন", d: [1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,1, 1,0, 1,1] },
+      { sl: 7, name: "গোলাম মহিউদ্দিন", d: [1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,1, 1,0, 1,1] },
+      { sl: 8, name: "রায়হান হোসেন", d: [1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,1, 1,0, 1,1] },
+      { sl: 9, name: "জিয়াউর রহমান", d: [1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,1, 1,0, 1,1] },
+      { sl: 10, name: "মাও. আল আমিন", d: [1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,1, 1,0, 1,1] },
+      { sl: 11, name: "ইসরাফিল ভূঁইয়া", d: [1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1] },
+      { sl: 12, name: "সাখাওয়াত হোসাইন", d: [1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,1, 1,1, 1,0, 1,1, 1,0, 1,1] },
+      { sl: 13, name: "একিউএম জাহিদুল বারী", d: [1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,1, 1,1, 1,0, 1,1, 1,0, 1,1] },
+      { sl: 14, name: "সাইফুদ্দিন মোঃ রাশেদ", d: [1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,1, 1,1, 1,0, 1,1, 1,0, 1,1] },
+      { sl: 15, name: "মোঃ মঈন উদ্দিন", d: [1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,1, 1,1, 1,0, 1,1, 1,0, 1,1] },
+      { sl: 16, name: "মো. জাকির হোসাইন", d: [1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,1, 1,1, 1,0, 1,1, 1,1, 1,0] },
+      { sl: 17, name: "জোবায়ের হোসেন", d: [1,1, 1,0, 1,1, 1,0, 1,1, 1,1, 1,1, 1,0, 1,1, 1,0, 1,1, 1,1, 1,0] },
+      { sl: 18, name: "গোলাম মোস্তফা", d: [1,1, 1,0, 1,1, 1,0, 1,1, 1,1, 1,1, 1,0, 1,1, 1,0, 1,1, 1,1, 1,0] },
+      { sl: 19, name: "ওমর ফারুক", d: [1,1, 1,0, 1,1, 1,0, 1,1, 1,1, 1,1, 1,0, 1,1, 1,0, 1,1, 1,1, 1,0] },
+      { sl: 20, name: "মানিক হোসেন", d: [1,1, 1,0, 1,1, 1,1, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,1, 1,0] },
+      { sl: 21, name: "আশিকুর রহমান সবুজ", d: [1,1, 1,0, 1,1, 1,1, 1,1, 1,0, 1,1, 1,0, 1,1, 1,1, 1,0, 1,1, 1,0] },
+      { sl: 22, name: "ফরিদ আহমেদ", d: [1,1, 1,0, 1,1, 1,1, 1,1, 1,0, 1,1, 1,0, 1,1, 1,1, 1,0, 1,1, 1,0] },
+      { sl: 23, name: "বোরহান উদ্দিন", d: [1,1, 1,1, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,1, 1,0, 1,1, 1,0] },
+      { sl: 24, name: "আরমান হোসেন", d: [1,1, 1,1, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,1, 1,0, 1,1, 1,0] },
+      { sl: 25, name: "রাশেদুল হাসান", d: [1,1, 1,1, 1,1, 1,0, 1,1, 1,0, 1,1, 1,0, 1,1, 1,1, 1,0, 1,1, 1,0] }
+    ]
+  };
 
-            const meta = SHIFT_META[shiftKey];
-            const roster = ALL_ROSTERS[shiftKey];
+  let isSummaryMode = false;
 
-            // নির্বাচিত শিফট অনুযায়ী কালার থিম আপডেট
-            mainCard.className = `bg-white border-2 ${meta.cardBorder} rounded-3xl p-6 sm:p-8 shadow-xl mb-12 transition-all duration-300`;
-            headerIcon.className = `w-12 h-12 rounded-2xl bg-gradient-to-br ${meta.iconGrad} text-white flex items-center justify-center text-xl shadow-md transition-all`;
-            shiftPill.className = `text-xs font-bold uppercase px-2.5 py-0.5 rounded-md border ${meta.pillClass}`;
-            shiftPill.innerText = `শিফট: ${meta.title.replace(' শিফট', '')} (সর্বমোট ডিউটি: ${meta.totalShiftDuties})`;
+  // ইংরেজি সংখ্যাকে বাংলায় রূপান্তর
+  function toBn(num) {
+    const bnDigits = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
+    return String(num).replace(/\d/g, d => bnDigits[d]);
+  }
 
-            teacherSelect.disabled = false;
-            teacherSelect.className = `w-full ${meta.selectClass} focus:bg-white border-2 rounded-2xl px-4 py-3.5 text-slate-900 font-bold text-base outline-none cursor-pointer transition-all`;
-            teacherSelect.innerHTML = '<option value="">-- তালিকা থেকে আপনার নাম বাছাই করুন --</option>';
+  // শিফট পরিবর্তন হলে শিক্ষকদের তালিকা আপডেট করা
+  function onShiftChange() {
+    const shift = document.getElementById('shiftSelect').value;
+    const teacherSelect = document.getElementById('teacherSelect');
+    const teachers = DUTY_DATA[shift] || [];
 
-            roster.forEach((teacher, idx) => {
-                const mSum = teacher.m.reduce((acc, v) => acc + v, 0);
-                const aSum = teacher.a.reduce((acc, v) => acc + v, 0);
-                const total = (mSum + aSum).toLocaleString('bn-BD');
-                const slBn = teacher.sl.toLocaleString('bn-BD');
-                teacherSelect.innerHTML += `<option value="${idx}">${slBn}. ${teacher.name} (মোট ডিউটি: ${total}টি)</option>`;
-            });
-        }
+    teacherSelect.innerHTML = '';
+    teachers.forEach((t, index) => {
+      const opt = document.createElement('option');
+      opt.value = index;
+      opt.textContent = `${toBn(t.sl)}. ${t.name}`;
+      teacherSelect.appendChild(opt);
+    });
 
-        // শিক্ষকের নাম সিলেক্ট করলে তাঁর ১৩ দিনের ডিউটি প্রদর্শন করবে
-        function displayTeacherDuty() {
-            const shiftKey = document.getElementById('shiftSelect').value;
-            const idxStr = document.getElementById('teacherSelect').value;
-            const container = document.getElementById('dutyResultContainer');
-            const grid = document.getElementById('dutyDatesGrid');
+    // জবা শিফটে ডিফল্টভাবে ১৯ নং (সাইফুল ইসলাম ইঞ্জিঃ) সিলেক্ট রাখা
+    if (shift === 'জবা' && teachers.length >= 19) {
+      teacherSelect.value = 18;
+    } else {
+      teacherSelect.value = 0;
+    }
 
-            if (!shiftKey || idxStr === '') {
-                container.classList.add('hidden');
-                return;
-            }
+    document.getElementById('selectedShiftDlBtn').innerHTML = `📥 ${shift} শিফট রোস্টার (PDF)`;
 
-            const meta = SHIFT_META[shiftKey];
-            const teacher = ALL_ROSTERS[shiftKey][parseInt(idxStr, 10)];
-            let mCount = 0;
-            let aCount = 0;
-            grid.innerHTML = '';
+    renderPersonalDuty();
+    if (isSummaryMode) {
+      renderShiftSummary();
+    }
+  }
 
-            EXAM_DATES.forEach((exam, d) => {
-                const hasM = teacher.m[d] === 1;
-                const hasA = teacher.a[d] === 1;
-                if (hasM) mCount++;
-                if (hasA) aCount++;
+  // ব্যক্তিগত ডিউটি রেন্ডার করা
+  function renderPersonalDuty() {
+    const shift = document.getElementById('shiftSelect').value;
+    const teacherIndex = parseInt(document.getElementById('teacherSelect').value, 10) || 0;
+    const onlyDuty = document.getElementById('onlyDutyDays').checked;
+    const teacher = DUTY_DATA[shift][teacherIndex];
 
-                let badgeHtml = '';
-                let cardStyle = '';
+    if (!teacher) return;
 
-                if (hasM && hasA) {
-                    badgeHtml = `
-                        <div class="flex flex-col items-end gap-1">
-                            <span class="text-xs font-bold px-2.5 py-1 rounded-lg bg-rose-600 text-white shadow-sm">১ম ও ২য় বেলা (উভয়)</span>
-                            <span class="text-[11px] font-semibold text-rose-700">সকাল + দুপুর</span>
-                        </div>`;
-                    cardStyle = 'bg-rose-50/70 border-rose-200 hover:border-rose-300';
-                } else if (hasM) {
-                    badgeHtml = `
-                        <div class="flex flex-col items-end gap-1">
-                            <span class="text-xs font-bold px-2.5 py-1 rounded-lg bg-sky-100 text-sky-800 border border-sky-200">শুধুমাত্র ১ম বেলা</span>
-                            <span class="text-[11px] font-semibold text-sky-600">সকাল ৭.৩০ - ১০.৩০</span>
-                        </div>`;
-                    cardStyle = 'bg-white border-slate-200 hover:border-sky-300';
-                } else if (hasA) {
-                    badgeHtml = `
-                        <div class="flex flex-col items-end gap-1">
-                            <span class="text-xs font-bold px-2.5 py-1 rounded-lg bg-amber-100 text-amber-900 border border-amber-200">শুধুমাত্র ২য় বেলা</span>
-                            <span class="text-[11px] font-semibold text-amber-700">দুপুর ১.৩০ - ৪.৩০</span>
-                        </div>`;
-                    cardStyle = 'bg-amber-50/50 border-amber-200 hover:border-amber-300';
-                } else {
-                    badgeHtml = `<span class="text-xs font-bold px-2.5 py-1 rounded-lg bg-slate-200 text-slate-600">ডিউটি নেই</span>`;
-                    cardStyle = 'bg-slate-50 border-slate-200 opacity-60';
-                }
+    document.getElementById('displayTeacherName').textContent = teacher.name;
+    document.getElementById('displaySerial').textContent = `ক্র.নং: ${toBn(teacher.sl)} | মোট পরীক্ষার দিন: ১৩ দিন`;
+    document.getElementById('displayShiftName').textContent = `শিফট: ${shift}`;
 
-                grid.innerHTML += `
-                    <div class="${cardStyle} border-2 rounded-2xl p-4 flex items-center justify-between gap-2 shadow-sm transition-all">
-                        <div class="flex items-center gap-3">
-                            <div class="w-9 h-9 rounded-xl bg-slate-800 text-white font-bold text-sm flex items-center justify-center shrink-0">
-                                ${(d + 1).toLocaleString('bn-BD')}
-                            </div>
-                            <div>
-                                <span class="font-bold text-slate-900 block text-base">${exam.date}</span>
-                                <span class="text-xs font-semibold text-slate-500">${exam.day}</span>
-                            </div>
-                        </div>
-                        ${badgeHtml}
-                    </div>
-                `;
-            });
+    let morningCount = 0;
+    let afternoonCount = 0;
+    let bothDaysCount = 0;
+    const tbody = document.getElementById('personalTableBody');
+    tbody.innerHTML = '';
 
-            const serialBadge = document.getElementById('resSerialBadge');
-            serialBadge.innerText = teacher.sl.toLocaleString('bn-BD');
-            serialBadge.className = `w-12 h-12 rounded-xl border flex items-center justify-center text-xl font-bold ${meta.badgeClass}`;
+    let rowSl = 1;
+    for (let i = 0; i < EXAM_DATES.length; i++) {
+      const m = teacher.d[i * 2];
+      const a = teacher.d[i * 2 + 1];
+      const dayTotal = m + a;
 
-            const shiftBadge = document.getElementById('resShiftBadge');
-            shiftBadge.innerText = `${meta.title} • ক্রমিক নং ${teacher.sl.toLocaleString('bn-BD')}`;
-            shiftBadge.className = `text-xs font-bold px-2.5 py-0.5 rounded-full ${meta.badgeClass}`;
+      morningCount += m;
+      afternoonCount += a;
+      if (m === 1 && a === 1) bothDaysCount++;
 
-            document.getElementById('resTeacherName').innerText = teacher.name;
-            document.getElementById('resMorningCount').innerText = `${mCount.toLocaleString('bn-BD')}টি`;
-            document.getElementById('resAfternoonCount').innerText = `${aCount.toLocaleString('bn-BD')}টি`;
-            document.getElementById('resTotalDuties').innerText = `${(mCount + aCount).toLocaleString('bn-BD')}টি`;
+      if (onlyDuty && dayTotal === 0) continue;
 
-            container.classList.remove('hidden');
-        }
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${toBn(rowSl++)}</td>
+        <td><strong>${EXAM_DATES[i].date}</strong></td>
+        <td>(${EXAM_DATES[i].day})</td>
+        <td>${m ? '<span class="badge-yes">আছে ✔</span>' : '<span class="badge-no">নেই</span>'}</td>
+        <td>${a ? '<span class="badge-yes">আছে ✔</span>' : '<span class="badge-no">নেই</span>'}</td>
+        <td class="day-count-badge">${toBn(dayTotal)} বেলা</td>
+      `;
+      tbody.appendChild(tr);
+    }
 
-        // লাইভ বাংলা তারিখ ও ঘড়ি
-        function updateDateTime() {
-            const now = new Date();
-            const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
-            document.getElementById('liveDate').innerText = now.toLocaleDateString('bn-BD', dateOptions);
-            document.getElementById('liveTime').innerText = now.toLocaleTimeString('bn-BD', timeOptions);
-        }
-        updateDateTime();
-        setInterval(updateDateTime, 1000);
+    const totalDuty = morningCount + afternoonCount;
+    document.getElementById('statTotal').textContent = `${toBn(totalDuty)} বেলা`;
+    document.getElementById('statMorning').textContent = `${toBn(morningCount)} বেলা`;
+    document.getElementById('statAfternoon').textContent = `${toBn(afternoonCount)} বেলা`;
+    document.getElementById('statBothDays').textContent = `${toBn(bothDaysCount)} দিন`;
+  }
 
-        // পিডিএফ সরাসরি ডাউনলোড
-        function startDirectDownload(shiftKey, btn) {
-            const fileInfo = SHIFT_META[shiftKey];
-            if (!fileInfo) return;
+  // পুরো শিফটের সকল শিক্ষকের সামারি রেন্ডার করা
+  function renderShiftSummary() {
+    const shift = document.getElementById('shiftSelect').value;
+    const teachers = DUTY_DATA[shift] || [];
+    const tbody = document.getElementById('summaryTableBody');
+    tbody.innerHTML = '';
 
-            const directDownloadUrl = `https://drive.google.com/uc?export=download&id=${fileInfo.id}`;
-            const originalContent = btn.innerHTML;
-            btn.disabled = true;
-            btn.innerHTML = `<i class="fa-solid fa-circle-notch fa-spin"></i> <span>ডাউনলোড হচ্ছে...</span>`;
+    let shiftGrandTotal = 0;
 
-            const container = document.getElementById('hiddenDownloadContainer');
-            const iframe = document.createElement('iframe');
-            iframe.style.display = 'none';
-            iframe.src = directDownloadUrl;
-            container.appendChild(iframe);
+    teachers.forEach((t, idx) => {
+      let mCount = 0, aCount = 0, bCount = 0;
+      for (let i = 0; i < 13; i++) {
+        const m = t.d[i * 2];
+        const a = t.d[i * 2 + 1];
+        mCount += m;
+        aCount += a;
+        if (m === 1 && a === 1) bCount++;
+      }
+      const tot = mCount + aCount;
+      shiftGrandTotal += tot;
 
-            showDownloadToast(`${fileInfo.pdfName} ডাউনলোড হচ্ছে`);
+      const tr = document.createElement('tr');
+      tr.className = 'clickable-row';
+      tr.title = 'বিস্তারিত দেখতে ক্লিক করুন';
+      tr.onclick = () => {
+        document.getElementById('teacherSelect').value = idx;
+        toggleSummaryView();
+        renderPersonalDuty();
+      };
 
-            setTimeout(() => {
-                btn.disabled = false;
-                btn.innerHTML = `<i class="fa-solid fa-circle-check"></i> <span>ডাউনলোড সম্পন্ন</span>`;
-                setTimeout(() => {
-                    btn.innerHTML = originalContent;
-                }, 2000);
-            }, 1400);
+      tr.innerHTML = `
+        <td>${toBn(t.sl)}.</td>
+        <td style="text-align: left; font-weight: 600; color: #0f5132;">${t.name}</td>
+        <td>${toBn(mCount)} বেলা</td>
+        <td>${toBn(aCount)} বেলা</td>
+        <td>${toBn(bCount)} দিন</td>
+        <td><span class="badge-yes">${toBn(tot)} বেলা</span></td>
+      `;
+      tbody.appendChild(tr);
+    });
 
-            setTimeout(() => {
-                if (container.contains(iframe)) {
-                    container.removeChild(iframe);
-                }
-            }, 30000);
-        }
+    document.getElementById('summaryHeaderTitle').textContent = `শিফট: ${shift} — সকল শিক্ষকের ডিউটি সামারি`;
+    document.getElementById('summaryTotalPill').textContent = `সর্বমোট ডিউটি: ${toBn(shiftGrandTotal)}`;
+  }
 
-        // পিডিএফ প্রিভিউ মডাল ওপেন
-        function openPreviewModal(shiftKey) {
-            const fileInfo = SHIFT_META[shiftKey];
-            if (!fileInfo) return;
+  // ব্যক্তিগত ভিউ এবং সামারি ভিউ টগল করা
+  function toggleSummaryView() {
+    isSummaryMode = !isSummaryMode;
+    const personalView = document.getElementById('personalView');
+    const summaryView = document.getElementById('shiftSummaryView');
+    const btn = document.getElementById('summaryToggleBtn');
 
-            const modal = document.getElementById('previewModal');
-            const frame = document.getElementById('previewFrame');
-            document.getElementById('modalTitle').innerText = fileInfo.pdfName;
-            frame.src = `https://drive.google.com/file/d/${fileInfo.id}/preview`;
+    if (isSummaryMode) {
+      personalView.style.display = 'none';
+      summaryView.style.display = 'block';
+      btn.textContent = '👤 ব্যক্তিগত রুটিনে ফিরে যান';
+      renderShiftSummary();
+    } else {
+      personalView.style.display = 'block';
+      summaryView.style.display = 'none';
+      btn.textContent = '📋 পুরো শিফটের সামারি';
+    }
+  }
 
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-        }
+  // পেজ লোড হলে ইনিশিয়ালাইজ করা
+  window.onload = onShiftChange;
+</script>
 
-        // পিডিএফ প্রিভিউ মডাল ক্লোজ
-        function closePreviewModal() {
-            const modal = document.getElementById('previewModal');
-            const frame = document.getElementById('previewFrame');
-            frame.src = '';
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        }
-
-        // টোস্ট মেসেজ
-        function showDownloadToast(titleText) {
-            const toast = document.getElementById('downloadToast');
-            document.getElementById('toastHeading').innerText = titleText;
-            toast.classList.remove('translate-y-24', 'opacity-0');
-            setTimeout(() => {
-                toast.classList.add('translate-y-24', 'opacity-0');
-            }, 4000);
-        }
-    </script>
 </body>
 </html>
