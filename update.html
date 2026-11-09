@@ -8,21 +8,18 @@
         :root { --thick-border: 2px solid #000; --thin-border: 1px solid #333; }
         * { box-sizing: border-box; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
         body { font-family: 'Noto Serif Bengali', serif; margin: 0; padding: 0; background: #e2e8f0; }
-
         .no-print-bar { background: #0f172a; color: white; padding: 10px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.15); position: sticky; top: 0; z-index: 1000; }
         .shift-selector, .action-buttons { display: flex; justify-content: center; align-items: center; gap: 8px; flex-wrap: wrap; }
         .shift-selector { margin-bottom: 8px; }
         .btn-shift { background: #334155; color: #e2e8f0; border: 2px solid #475569; padding: 5px 16px; font-size: 11pt; border-radius: 20px; cursor: pointer; font-weight: bold; font-family: inherit; transition: 0.2s; }
         .btn-shift:hover { background: #475569; }
         .btn-shift.active { background: #f59e0b; color: #000; border-color: #fbbf24; box-shadow: 0 0 10px rgba(245,158,11,0.5); }
-
         .btn-download, .btn-attendance, .btn-attendance-2, .btn-reset, .btn-clear { color: white; border: none; padding: 6px 13px; font-size: 10pt; border-radius: 6px; cursor: pointer; font-weight: bold; font-family: inherit; transition: 0.2s; }
         .btn-download { background: #10b981; } .btn-download:hover { background: #059669; }
         .btn-attendance { background: #2563eb; } .btn-attendance:hover { background: #1d4ed8; }
         .btn-attendance-2 { background: #7c3aed; } .btn-attendance-2:hover { background: #6d28d9; }
         .btn-reset { background: #f97316; } .btn-reset:hover { background: #ea580c; }
         .btn-clear { background: #ef4444; } .btn-clear:hover { background: #dc2626; }
-
         .page { width: 297mm; height: 209mm; margin: 8px auto; padding: 2mm 3.5mm; background: #fff; border: 1px solid #cbd5e1; box-shadow: 0 10px 15px rgba(0,0,0,0.1); display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; position: relative; }
         .header-container { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1px; flex-shrink: 0; }
         .left-header-group { display: flex; flex-direction: column; gap: 2px; width: 135px; }
@@ -30,30 +27,24 @@
         .box-left .box-title { background: #f1f5f9; padding: 1px; font-size: 7pt; font-weight: bold; border-bottom: var(--thick-border); }
         .box-left .box-value { font-size: 12pt; font-weight: bold; line-height: 1.1; color: #b91c1c; }
         .bidro-box { border: var(--thick-border); border-radius: 4px; background: #fef08a; text-align: center; padding: 2px 3px; font-size: 6.5pt; font-weight: bold; color: #854d0e; line-height: 1.05; }
-
         .header-center { text-align: center; flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; }
         .school-title-wrapper { display: flex; align-items: center; justify-content: center; gap: 8px; }
         .header-logo { width: 42px; height: 42px; object-fit: contain; }
         .school-name { font-size: 16pt; font-weight: bold; color: #0f172a; margin: 0; line-height: 1.0; }
         .exam-name { font-size: 9pt; font-weight: bold; margin: 1px 0 0 0; line-height: 1.0; }
         .roster-title { font-size: 8.5pt; font-weight: bold; display: inline-block; border-bottom: 2px solid #000; margin-top: 1px; line-height: 1.0; }
-
         .box-right-container { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
         .shift-badge { background: #dbeafe; border: 2px solid #2563eb; color: #1e3a8a; padding: 1px 10px; border-radius: 6px; font-weight: 900; font-size: 9pt; }
         .box-right { border: var(--thick-border); border-radius: 4px; padding: 2px 5px; font-size: 7.2pt; font-weight: bold; text-align: left; width: 160px; background: #f8fafc; line-height: 1.1; }
-
         table { width: 100%; border-collapse: collapse; font-size: 8.2pt; table-layout: fixed; border: var(--thick-border); flex-shrink: 0; margin-bottom: 0; }
         th, td { border: var(--thin-border); padding: 0; text-align: center; vertical-align: middle; overflow: hidden; white-space: nowrap; }
         th { background: #f8f9fa; font-weight: bold; }
-
         body.rows-25 .roster-table tbody td, body.rows-25 .total-row td { height: 19.2px !important; line-height: 19.2px !important; }
         body.rows-26 .roster-table tbody td, body.rows-26 .total-row td { height: 18.2px !important; line-height: 18.2px !important; }
         body.rows-27 .roster-table tbody td, body.rows-27 .total-row td { height: 17.5px !important; line-height: 17.5px !important; }
-
         body.rows-25 .attendance-table tbody td { height: 20.25px !important; line-height: 20.25px !important; }
         body.rows-26 .attendance-table tbody td { height: 19.25px !important; line-height: 19.25px !important; }
         body.rows-27 .attendance-table tbody td { height: 18.5px !important; line-height: 18.5px !important; }
-
         .roster-table thead tr:first-child th { height: 24px !important; background: #e2e8f0; color: #000; }
         .roster-table thead tr:last-child th { height: 28px !important; line-height: 13px !important; }
         .roster-table th:nth-child(1) { width: 2.8%; }
@@ -61,33 +52,27 @@
         .roster-table td:nth-child(2) { text-align: left; padding-left: 3px; font-size: 7.8pt; cursor: text; }
         .roster-table td:nth-child(2):hover { background: #fef08a; }
         [contenteditable]:focus { outline: 1px solid #2563eb; background: #fff; }
-
         .roster-table thead tr:first-child th:nth-child(2), .roster-table thead tr:first-child th:nth-child(n+3),
         .roster-table thead tr:last-child th:nth-child(even), .roster-table tbody td:nth-child(2),
         .roster-table tbody td:nth-child(even):not(:last-child), .roster-table tfoot td { border-right: var(--thick-border); }
         .roster-table tfoot td:first-child { border-right: none; }
         .roster-table tfoot td:nth-child(2) { border-right: var(--thick-border); }
-
         .slot-cell { cursor: pointer; font-size: 9pt; user-select: none; }
         .slot-cell:hover { background: #dbeafe; }
         .slot-cell.ticked { font-weight: 900; color: #000; }
         .row-total { font-weight: bold; font-size: 8.5pt; color: #1d4ed8; }
         .total-row td { border-top: var(--thick-border); border-bottom: var(--thick-border); font-weight: bold; font-size: 8.5pt; }
         .vertical-text { writing-mode: vertical-rl; transform: rotate(180deg); font-size: 6.5pt; display: inline-block; line-height: 1; }
-
         .date-header { font-size: 7.6pt !important; font-weight: 900 !important; line-height: 1.08 !important; color: #000 !important; padding: 1px 0 !important; }
         .day-label { font-size: 7.2pt; font-weight: 900; color: #0f172a; }
-
         .attendance-table thead tr:first-child th { height: 24px !important; line-height: 1.08 !important; font-size: 7.3pt !important; font-weight: 900 !important; color: #000 !important; background: #e2e8f0; }
         .attendance-table thead tr:last-child th { height: 18px !important; line-height: 18px !important; font-size: 6.5pt; }
         .attendance-table td:nth-child(2) { text-align: left; padding-left: 4px; font-size: 7.5pt; }
         .attendance-tick { font-size: 7.5pt; font-weight: 900; color: #000; }
         .thick-right { border-right: var(--thick-border) !important; }
         .sub-header-row th { border-bottom: var(--thick-border) !important; }
-
         .signature-section { display: flex; justify-content: space-between; align-items: flex-end; padding: 0 35px; font-weight: bold; font-size: 9pt; flex-shrink: 0; height: 32px; margin-top: 1px; }
         .signature-box { text-align: center; width: 140px; padding-top: 2px; border-top: 1.5px dashed #000; line-height: 1.1; }
-
         @media print {
             @page { size: A4 landscape; margin: 0mm; }
             html, body { width: 297mm; background: #fff; margin: 0 !important; padding: 0 !important; }
@@ -145,7 +130,6 @@
                 <div class="box-right">১ম বেলা : ৭.৩০ থেকে ১০.৩০টা<br>২য় বেলা : ১.৩০ থেকে ৪.৩০টা</div>
             </div>
         </div>
-
         <table class="roster-table">
             <thead>
                 <tr>
@@ -161,16 +145,12 @@
                             { d: "০১/১২/২৬", day: "(মঙ্গল)" }, { d: "০২/১২/২৬", day: "(বুধ)" },
                             { d: "০৩/১২/২৬", day: "(বৃহস্পতি)" }
                         ];
-                        examDates.forEach(item => {
-                            document.write(`<th colspan="2" class="date-header">${item.d}<br><span class="day-label">${item.day}</span></th>`);
-                        });
+                        examDates.forEach(item => document.write(`<th colspan="2" class="date-header">${item.d}<br><span class="day-label">${item.day}</span></th>`));
                     </script>
                     <th rowspan="2" style="width: 3.4%;">মোট</th>
                 </tr>
                 <tr>
-                    <script>
-                        for(let i=0; i<13; i++) document.write('<th><div class="vertical-text">১ম বেলা</div></th><th><div class="vertical-text">২য় বেলা</div></th>');
-                    </script>
+                    <script>for(let i=0; i<13; i++) document.write('<th><div class="vertical-text">১ম বেলা</div></th><th><div class="vertical-text">২য় বেলা</div></th>');</script>
                 </tr>
             </thead>
             <tbody id="rosterBody"></tbody>
@@ -182,7 +162,6 @@
                 </tr>
             </tfoot>
         </table>
-
         <div class="signature-section">
             <div class="signature-box">অধ্যক্ষ</div>
             <div class="signature-box">পরীক্ষা নিয়ন্ত্রক</div>
@@ -210,7 +189,6 @@
                 <div class="box-right">১ম বেলা : ৭.৩০ থেকে ১০.৩০টা<br>২য় বেলা : ১.৩০ থেকে ৪.৩০টা</div>
             </div>
         </div>
-
         <table class="attendance-table">
             <colgroup>
                 <col style="width: 2.8%;"><col style="width: 13.0%;">
@@ -228,7 +206,6 @@
             </thead>
             <tbody id="attendanceBody1"></tbody>
         </table>
-
         <div class="signature-section">
             <div class="signature-box">অধ্যক্ষ</div>
             <div class="signature-box">পরীক্ষা নিয়ন্ত্রক</div>
@@ -256,7 +233,6 @@
                 <div class="box-right">১ম বেলা : ৭.৩০ থেকে ১০.৩০টা<br>২য় বেলা : ১.৩০ থেকে ৪.৩০টা</div>
             </div>
         </div>
-
         <table class="attendance-table">
             <colgroup>
                 <col style="width: 2.8%;"><col style="width: 13.0%;">
@@ -274,7 +250,6 @@
             </thead>
             <tbody id="attendanceBody2"></tbody>
         </table>
-
         <div class="signature-section">
             <div class="signature-box">অধ্যক্ষ</div>
             <div class="signature-box">পরীক্ষা নিয়ন্ত্রক</div>
@@ -285,7 +260,7 @@
     <script>
         const SHIFTS_CONFIG = {
             joba: {
-                title: "শিফট: জবা", storageKey: "ibne_taimiya_roster_joba_v15", priorityShift: 1,
+                title: "শিফট: জবা", storageKey: "ibne_taimiya_roster_joba_v17", priorityShift: 1,
                 teachers: [
                     "জনাব এ.এম. আখতার হোসেন", '" মো: সিরাজুল ইসলাম খান (C.T)', '" মো: গোলাম আযম (C.T)',
                     '" কবির আহমেদ', '" মু: নুর নবী (C.T)', '" হেদায়েত উল্যাহ সবুজ (C.T)',
@@ -299,7 +274,7 @@
                 ]
             },
             shapla: {
-                title: "শিফট: শাপলা", storageKey: "ibne_taimiya_roster_shapla_v15", priorityShift: 1,
+                title: "শিফট: শাপলা", storageKey: "ibne_taimiya_roster_shapla_v17", priorityShift: 1,
                 teachers: [
                     "জনাব মো: আবদুল কাদির", '" মোঃ শাহানুর রহমান', '" নুরে আলম সাথী',
                     '" আনোয়ার হোসেন', '" মো: কামরুল ফারুক', '" বাহার উদ্দিন',
@@ -312,7 +287,7 @@
                 ]
             },
             beli: {
-                title: "শিফট: বেলি", storageKey: "ibne_taimiya_roster_beli_v15", priorityShift: 2,
+                title: "শিফট: বেলি", storageKey: "ibne_taimiya_roster_beli_v17", priorityShift: 2,
                 teachers: [
                     "জনাব শেখ রেজাউল হোসেন", '" ছালেহ আহমাদ', '" মোঃ ফজলুল হক',
                     '" মাহফুজুর রহমান', '" মোঃ সাজ্জাদ হোসেন', '" মো: ইলিয়াছ মিয়া',
@@ -326,7 +301,7 @@
                 ]
             },
             bokul: {
-                title: "শিফট: বকুল", storageKey: "ibne_taimiya_roster_bokul_v15", priorityShift: 2,
+                title: "শিফট: বকুল", storageKey: "ibne_taimiya_roster_bokul_v17", priorityShift: 2,
                 teachers: [
                     "জনাব মো: মিজানুর রহমান-৩", '" মো: মিজানুর রহমান-৪', '" মো: আবুল হোসেন ফারুক',
                     '" মো: সাইফুল ইসলাম-১', '" মো: দুলাল হোসেন চৌধুরী', '" মো: নিজাম উদ্দীন মজুমদার',
@@ -343,36 +318,38 @@
 
         let currentShiftKey = 'joba';
         const tbody = document.getElementById('rosterBody');
+        const toBengaliNum = num => num.toString().replace(/[0-9]/g, w => ['০','১','২','৩','৪','৫','৬','৭','৮','৯'][w]);
 
-        function toBengaliNum(num) {
-            const d = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
-            return num.toString().replace(/[0-9]/g, w => d[w]);
-        }
+        // বকুল ১৫ নং শিক্ষকের (index 14) ছুটির ৮টি তারিখ: ১৭/১১, ১৮/১১, ২২/১১, ২৪/১১, ২৫/১১, ২৯/১১, ০১/১২, ০২/১২
+        const BOKUL_15_OFF_DAYS = new Set([0, 1, 3, 5, 6, 8, 10, 11]);
 
-        function assignAlternatingHelpers(ticks, n, helperColOffset, dailyNeeded, helperTargets, forcedHelperDays) {
+        function assignAlternatingHelpers(ticks, n, helperColOffset, dailyNeeded, helperTargets, forcedHelperDays = {}, forbiddenHelperDays = {}) {
             let rem = [...helperTargets];
             for (let d = 0; d < 13; d++) {
-                let daysLeft = 13 - d;
-                let needed = dailyNeeded[d];
-                let chosen = new Set();
+                let needed = dailyNeeded[d], chosen = new Set();
 
                 for (let t = 0; t < n; t++) {
                     if (forcedHelperDays[t] && forcedHelperDays[t].has(d)) {
-                        chosen.add(t);
-                        rem[t]--;
+                        chosen.add(t); rem[t]--;
                     }
                 }
 
                 for (let t = 0; t < n; t++) {
-                    if (!chosen.has(t) && rem[t] === daysLeft && chosen.size < needed) {
-                        chosen.add(t);
-                        rem[t]--;
+                    if (chosen.has(t) || (forbiddenHelperDays[t] && forbiddenHelperDays[t].has(d))) continue;
+                    let availLeft = 0;
+                    for (let k = d; k < 13; k++) {
+                        if (!(forbiddenHelperDays[t] && forbiddenHelperDays[t].has(k))) availLeft++;
+                    }
+                    if (rem[t] >= availLeft && rem[t] > 0 && chosen.size < needed) {
+                        chosen.add(t); rem[t]--;
                     }
                 }
 
                 let candidates = [];
                 for (let t = 0; t < n; t++) {
-                    if (!chosen.has(t) && rem[t] > 0) candidates.push(t);
+                    if (!chosen.has(t) && rem[t] > 0 && !(forbiddenHelperDays[t] && forbiddenHelperDays[t].has(d))) {
+                        candidates.push(t);
+                    }
                 }
 
                 candidates.sort((a, b) => {
@@ -384,121 +361,60 @@
                 });
 
                 for (let idx = 0; idx < candidates.length && chosen.size < needed; idx++) {
-                    let t = candidates[idx];
-                    chosen.add(t);
-                    rem[t]--;
+                    chosen.add(candidates[idx]); rem[candidates[idx]]--;
                 }
 
-                chosen.forEach(t => {
-                    ticks[t][d * 2 + helperColOffset] = 1;
-                });
+                chosen.forEach(t => { ticks[t][d * 2 + helperColOffset] = 1; });
             }
         }
 
         function buildAutoSchedule(shiftKey) {
-            const cfg = SHIFTS_CONFIG[shiftKey];
-            const n = cfg.teachers.length;
+            const cfg = SHIFTS_CONFIG[shiftKey], n = cfg.teachers.length;
             const ticks = Array.from({ length: n }, () => new Array(26).fill(0));
 
             if (shiftKey === 'joba') {
-                const specialS1Days = new Set([0, 1, 2, 4, 5, 6, 7, 9, 10, 11, 12]);
-                const specialS2Days = new Set([0, 1, 2, 6, 7, 9, 11, 12]);
-                const t14S1Days = new Set([0, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
-                const t14S2Days = new Set([0, 3, 4, 6, 7, 9, 10, 12]);
-
-                for (let d = 0; d < 13; d++) {
-                    for (let t = 0; t < n; t++) {
-                        if ([2, 5, 10].includes(t)) {
-                            ticks[t][d * 2] = specialS1Days.has(d) ? 1 : 0;
-                            ticks[t][d * 2 + 1] = specialS2Days.has(d) ? 1 : 0;
-                        } else if (t === 14) {
-                            ticks[t][d * 2] = t14S1Days.has(d) ? 1 : 0;
-                            ticks[t][d * 2 + 1] = t14S2Days.has(d) ? 1 : 0;
-                        } else {
-                            ticks[t][d * 2] = 1;
-                        }
-                    }
-                }
-
-                let helperTargets = new Array(n).fill(0);
+                // ১ম বেলায় ২৬ জন (১০০%), ২য় বেলায় প্রতিদিন ৯ জন
+                for (let t = 0; t < n; t++) for (let d = 0; d < 13; d++) ticks[t][d * 2] = 1;
+                assignAlternatingHelpers(ticks, n, 1, new Array(13).fill(9), new Array(n).fill(0).map((_, t) => t < 13 ? 4 : 5));
+            } else if (shiftKey === 'shapla') {
+                // ২২ নং শিক্ষক (index 21)-এর ১৮/১১ (d=1) তারিখে কোনো ডিউটি নেই
                 for (let t = 0; t < n; t++) {
-                    if ([2, 5, 10, 14].includes(t)) continue;
-                    if (t < 6) helperTargets[t] = 6;
-                    else if (t < 20) helperTargets[t] = 7;
-                    else helperTargets[t] = 8;
-                }
-
-                let dailyNeeded = [];
-                for (let d = 0; d < 13; d++) {
-                    let totalS2ForJoba = (d < 6) ? 15 : 14;
-                    let s2Fixed = (specialS2Days.has(d) ? 3 : 0) + (t14S2Days.has(d) ? 1 : 0);
-                    dailyNeeded.push(totalS2ForJoba - s2Fixed);
-                }
-
-                assignAlternatingHelpers(ticks, n, 1, dailyNeeded, helperTargets, {});
-                return { names: [...cfg.teachers], ticks };
-            }
-
-            if (shiftKey === 'shapla') {
-                for (let t = 0; t < n; t++) {
-                    for (let d = 0; d < 13; d++) ticks[t][d * 2] = 1;
-                }
-                let helperTargets = new Array(n).fill(0).map((_, t) => (t < 11) ? 7 : 8);
-                let dailyNeeded = new Array(13).fill(0).map((_, d) => (d < 6) ? 14 : 15);
-                assignAlternatingHelpers(ticks, n, 1, dailyNeeded, helperTargets, {});
-
-                // ২২ নং শিক্ষক (" ফরিদ আহমেদ, index 21)-এর ১৮/১১ (d=1) তারিখে কোনো ডিউটি না রেখে ০৩/১২ (d=12) তারিখের ২য় বেলায় সংযোজন
-                ticks[21][1 * 2] = 0;
-                ticks[21][1 * 2 + 1] = 0;
-                ticks[21][12 * 2 + 1] = 1;
-
-                return { names: [...cfg.teachers], ticks };
-            }
-
-            if (shiftKey === 'beli') {
-                let forcedHelperDays = {};
-                for (let t = 0; t < n; t++) {
-                    forcedHelperDays[t] = new Set();
                     for (let d = 0; d < 13; d++) {
-                        if (d === 9 && t >= 20) {
-                            ticks[t][d * 2 + 1] = 0;
-                            forcedHelperDays[t].add(9);
-                        } else {
-                            ticks[t][d * 2 + 1] = 1;
-                        }
+                        ticks[t][d * 2] = (t === 21 && d === 1) ? 0 : 1;
                     }
                 }
-                let helperTargets = new Array(n).fill(0).map((_, t) => (t < 5) ? 6 : (t < 20 ? 7 : 8));
-                let dailyNeeded = new Array(13).fill(0).map((_, d) => (d === 0) ? 15 : 14);
-                assignAlternatingHelpers(ticks, n, 0, dailyNeeded, helperTargets, forcedHelperDays);
-                return { names: [...cfg.teachers], ticks };
-            }
-
-            if (shiftKey === 'bokul') {
-                let forcedHelperDays = {};
+                // বকুল ১৫ নং শিক্ষকের ছুটির ৮ দিনে শাপলা ২য় বেলায় ৯ জন দেয় (বাকি ৫ দিনে ৮ জন), মোট = ১১২টি
+                let dailyNeeded = new Array(13).fill(0).map((_, d) => BOKUL_15_OFF_DAYS.has(d) ? 9 : 8);
+                let helperTargets = new Array(n).fill(0).map((_, t) => t < 13 ? 4 : 5); // 13*4 + 12*5 = 112
+                assignAlternatingHelpers(ticks, n, 1, dailyNeeded, helperTargets, {}, { 21: new Set([1]) });
+            } else if (shiftKey === 'beli') {
+                // ২য় বেলায় ২৬ জন (১০০%), ১ম বেলায় প্রতিদিন ১১ জন
+                for (let t = 0; t < n; t++) for (let d = 0; d < 13; d++) ticks[t][d * 2 + 1] = 1;
+                assignAlternatingHelpers(ticks, n, 0, new Array(13).fill(11), new Array(n).fill(0).map((_, t) => t < 13 ? 5 : 6));
+            } else if (shiftKey === 'bokul') {
+                // ১৫ নং শিক্ষক (index 14)-এর নির্দিষ্ট ৮টি তারিখে কোনো ডিউটি নেই; বাকি ৫ দিনে উভয় বেলায় ডিউটি
                 for (let t = 0; t < n; t++) {
-                    forcedHelperDays[t] = new Set();
                     for (let d = 0; d < 13; d++) {
-                        if (d === 9 && t >= 19) {
-                            ticks[t][d * 2 + 1] = 0;
-                            forcedHelperDays[t].add(9);
-                        } else {
-                            ticks[t][d * 2 + 1] = 1;
-                        }
+                        ticks[t][d * 2 + 1] = (t === 14 && BOKUL_15_OFF_DAYS.has(d)) ? 0 : 1;
                     }
                 }
-                let helperTargets = new Array(n).fill(0).map((_, t) => (t < 12) ? 7 : (t < 19 ? 8 : 9));
-                let dailyNeeded = new Array(13).fill(0).map((_, d) => (d === 0) ? 14 : 15);
-                assignAlternatingHelpers(ticks, n, 0, dailyNeeded, helperTargets, forcedHelperDays);
-                return { names: [...cfg.teachers], ticks };
+                // ১৮/১১ (d=1) তারিখে শাপলার ২২ নং শিক্ষকের ১ম বেলার ঘাটতি পূরণে বকুল ১১ জন দেয়, বাকি ১২ দিনে ১০ জন (মোট ১৩১টি)
+                let dailyNeeded = new Array(13).fill(0).map((_, d) => d === 1 ? 11 : 10);
+                // ১৫ নং শিক্ষক উপস্থিত ৫ দিনে ১ম বেলায় ডিউটি করবেন (৫টি), বাকি ২৪ জনের ১৮ জন ৫টি ও ৬ জন ৬টি করে (90+36+5 = 131)
+                let helperTargets = new Array(n).fill(0).map((_, t) => {
+                    if (t === 14) return 5;
+                    return t < 19 ? 5 : 6;
+                });
+                let forced = { 14: new Set([2, 4, 7, 9, 12]) };
+                let forbidden = { 14: BOKUL_15_OFF_DAYS };
+                assignAlternatingHelpers(ticks, n, 0, dailyNeeded, helperTargets, forced, forbidden);
             }
+            return { names: [...cfg.teachers], ticks };
         }
 
         function saveToCache() {
-            const cfg = SHIFTS_CONFIG[currentShiftKey];
-            const rows = document.querySelectorAll('#rosterBody tr');
-            const state = { names: [], ticks: [] };
-            rows.forEach(row => {
+            const cfg = SHIFTS_CONFIG[currentShiftKey], state = { names: [], ticks: [] };
+            document.querySelectorAll('#rosterBody tr').forEach(row => {
                 state.names.push(row.querySelector('td:nth-child(2)').innerText);
                 const rowTicks = [];
                 row.querySelectorAll('.slot-cell').forEach(slot => rowTicks.push(slot.classList.contains('ticked') ? 1 : 0));
@@ -509,8 +425,7 @@
         }
 
         function loadFromCache() {
-            const cfg = SHIFTS_CONFIG[currentShiftKey];
-            const raw = localStorage.getItem(cfg.storageKey);
+            const cfg = SHIFTS_CONFIG[currentShiftKey], raw = localStorage.getItem(cfg.storageKey);
             if (!raw) {
                 const autoState = buildAutoSchedule(currentShiftKey);
                 localStorage.setItem(cfg.storageKey, JSON.stringify(autoState));
@@ -532,12 +447,10 @@
 
         function renderTable() {
             tbody.innerHTML = '';
-            const cfg = SHIFTS_CONFIG[currentShiftKey];
-            const savedState = loadFromCache();
-
+            const cfg = SHIFTS_CONFIG[currentShiftKey], savedState = loadFromCache();
             cfg.teachers.forEach((defaultName, index) => {
                 let tr = document.createElement('tr');
-                const currentName = (savedState && savedState.names && savedState.names[index] !== undefined) ? savedState.names[index] : defaultName;
+                const currentName = (savedState?.names?.[index] !== undefined) ? savedState.names[index] : defaultName;
 
                 let tdSl = document.createElement('td');
                 tdSl.innerText = toBengaliNum(index + 1) + ".";
@@ -554,15 +467,14 @@
                 for (let i = 0; i < 26; i++) {
                     let tdSlot = document.createElement('td');
                     tdSlot.className = 'slot-cell';
-                    if (savedState && savedState.ticks && savedState.ticks[index] && savedState.ticks[index][i] === 1) {
+                    if (savedState?.ticks?.[index]?.[i] === 1) {
                         tdSlot.classList.add('ticked');
                         tdSlot.innerText = '✔';
                     }
                     tdSlot.addEventListener('click', function() {
                         this.classList.toggle('ticked');
                         this.innerText = this.classList.contains('ticked') ? '✔' : '';
-                        calculateTotals();
-                        saveToCache();
+                        calculateTotals(); saveToCache();
                     });
                     tr.appendChild(tdSlot);
                 }
@@ -577,8 +489,7 @@
         }
 
         function calculateTotals() {
-            let grandTotal = 0;
-            let colTotals = new Array(26).fill(0);
+            let grandTotal = 0, colTotals = new Array(26).fill(0);
             document.querySelectorAll('#rosterBody tr').forEach(row => {
                 let rowTotal = 0;
                 row.querySelectorAll('.slot-cell').forEach((slot, idx) => {
@@ -587,11 +498,8 @@
                 row.querySelector('.row-total').innerText = rowTotal > 0 ? toBengaliNum(rowTotal) : '';
                 grandTotal += rowTotal;
             });
-
             const footerCells = document.querySelectorAll('.total-row td');
-            for (let i = 0; i < 26; i++) {
-                footerCells[i + 1].innerText = colTotals[i] > 0 ? toBengaliNum(colTotals[i]) : '';
-            }
+            for (let i = 0; i < 26; i++) footerCells[i + 1].innerText = colTotals[i] > 0 ? toBengaliNum(colTotals[i]) : '';
             const banglaGrand = toBengaliNum(grandTotal);
             document.getElementById('header-grand-total').innerText = banglaGrand;
             document.getElementById('footer-grand-total').innerText = banglaGrand;
@@ -600,10 +508,8 @@
         function renderShiftAttendance(tbodyId, totalElementId, shiftOffset) {
             const attBody = document.getElementById(tbodyId);
             attBody.innerHTML = '';
-            const cfg = SHIFTS_CONFIG[currentShiftKey];
-            const savedState = loadFromCache();
+            const cfg = SHIFTS_CONFIG[currentShiftKey], savedState = loadFromCache();
             let shiftTotal = 0;
-
             for (let i = 0; i < cfg.teachers.length; i++) {
                 let tr = document.createElement('tr');
                 let tdSl = document.createElement('td');
@@ -611,25 +517,20 @@
                 tdSl.style.fontWeight = "bold";
                 tr.appendChild(tdSl);
 
-                const currentName = (savedState && savedState.names && savedState.names[i] !== undefined) ? savedState.names[i] : cfg.teachers[i];
+                const currentName = (savedState?.names?.[i] !== undefined) ? savedState.names[i] : cfg.teachers[i];
                 let tdName = document.createElement('td');
                 tdName.className = 'thick-right';
                 tdName.innerText = currentName;
                 tr.appendChild(tdName);
 
                 for (let d = 0; d < 13; d++) {
-                    let slotIndex = (d * 2) + shiftOffset;
-                    const isTicked = savedState && savedState.ticks && savedState.ticks[i] && savedState.ticks[i][slotIndex] === 1 && currentName.trim() !== '';
+                    const isTicked = savedState?.ticks?.[i]?.[(d * 2) + shiftOffset] === 1 && currentName.trim() !== '';
                     if (isTicked) shiftTotal++;
-
                     let tdD = document.createElement('td');
                     tdD.className = 'attendance-tick';
                     tdD.innerText = isTicked ? '✔' : '';
                     tr.appendChild(tdD);
-
-                    let tdHall = document.createElement('td');
-                    tr.appendChild(tdHall);
-
+                    tr.appendChild(document.createElement('td'));
                     let tdSign = document.createElement('td');
                     tdSign.className = 'thick-right';
                     tr.appendChild(tdSign);
@@ -664,10 +565,9 @@
         function clearAllTicks() {
             const cfg = SHIFTS_CONFIG[currentShiftKey];
             if (confirm(cfg.title + "-এর সব টিক মার্ক মুছে খালি (Blank) করতে চান?")) {
-                const n = cfg.teachers.length;
                 localStorage.setItem(cfg.storageKey, JSON.stringify({
                     names: [...cfg.teachers],
-                    ticks: Array.from({ length: n }, () => new Array(26).fill(0))
+                    ticks: Array.from({ length: cfg.teachers.length }, () => new Array(26).fill(0))
                 }));
                 renderTable();
             }
@@ -677,3 +577,7 @@
     </script>
 </body>
 </html>
+
+১ম বেলা ৭৮ জন ২য় বেলা ৭২ জন ডিউটি করবে এভাবে সমন্বয় করে ডিউটি আবার গুছান।
+তবে বকুল শিফটের ১৫ নং শিক্ষকের ডিউটি যেভাবে আছে এভাবেই থাকবে।
+অন্য দিকে শাপলা শিফটের ২২নং শিক্ষকের ১৮ তারিখের ডিউটি ও থাকবেনা। এবার দেন কোড টা
