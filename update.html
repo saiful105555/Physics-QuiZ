@@ -2,311 +2,353 @@
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ইবনে তাইমিয়া স্কুল এন্ড কলেজ | ডিউটি রোস্টার পোর্টাল</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
+    <title>Master Exam Roster & Attendance - Ibne Taimiya School & College</title>
     <style>
-        * { font-family: 'Hind Siliguri', sans-serif; scroll-behavior: smooth; }
-        body {
-            background-color: #f8fafc;
-            background-image: 
-                radial-gradient(circle at 8% 12%, rgba(244, 63, 94, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 92% 12%, rgba(168, 85, 247, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 8% 88%, rgba(245, 158, 11, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 92% 88%, rgba(16, 185, 129, 0.08) 0%, transparent 40%);
-            color: #0f172a;
-        }
-        .bg-grid {
-            background-size: 40px 40px;
-            background-image: 
-                linear-gradient(to right, rgba(15, 23, 42, 0.03) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(15, 23, 42, 0.03) 1px, transparent 1px);
-        }
-        .logo-container {
-            position: relative; width: 140px; height: 140px; margin: 0 auto;
-            display: flex; align-items: center; justify-content: center;
-            animation: smoothFloat 5s ease-in-out infinite;
-        }
-        .logo-ring {
-            position: absolute; inset: -4px; border-radius: 50%;
-            background: conic-gradient(from 0deg, #0ea5e9, #a855f7, #f43f5e, #10b981, #0ea5e9);
-            animation: spinSlow 9s linear infinite; opacity: 0.8;
-        }
-        .logo-backlight {
-            position: absolute; inset: -10px; border-radius: 50%;
-            background: radial-gradient(circle, rgba(14, 165, 233, 0.25) 0%, rgba(168, 85, 247, 0.2) 60%, transparent 80%);
-            filter: blur(18px); z-index: 0;
-        }
-        .logo-circle-wrapper {
-            position: relative; z-index: 2; width: 132px; height: 132px;
-            border-radius: 50%; overflow: hidden; background: #fff;
-            box-shadow: 0 12px 28px rgba(15, 23, 42, 0.12); border: 4px solid #fff;
-        }
-        @keyframes spinSlow { to { transform: rotate(360deg); } }
-        @keyframes smoothFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;700&display=swap');
+        :root { --thick-border: 2px solid #000; --thin-border: 1px solid #333; }
+        * { box-sizing: border-box; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+        body { font-family: 'Noto Serif Bengali', serif; margin: 0; padding: 0; background: #e2e8f0; }
 
-        .roster-card {
-            position: relative; background: rgba(255, 255, 255, 0.94);
-            backdrop-filter: blur(14px); border: 1px solid #e2e8f0;
-            border-radius: 1.5rem; box-shadow: 0 10px 25px -10px rgba(15, 23, 42, 0.06);
-            transition: all 0.3s ease; overflow: hidden;
-        }
-        .roster-card::before {
-            content: ''; position: absolute; top: 0; left: 0; right: 0;
-            height: 5px; background: var(--accent);
-        }
-        .roster-card:hover {
-            transform: translateY(-5px); background: #fff;
-            box-shadow: 0 20px 38px -12px rgba(15, 23, 42, 0.12);
-        }
-        .card-watermark {
-            position: absolute; right: -10px; bottom: -15px;
-            font-size: 6.5rem; opacity: 0.04; transform: rotate(-15deg); pointer-events: none;
+        .no-print-bar { background: #0f172a; color: white; padding: 10px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.15); position: sticky; top: 0; z-index: 1000; }
+        .shift-selector, .action-buttons { display: flex; justify-content: center; align-items: center; gap: 8px; flex-wrap: wrap; }
+        .shift-selector { margin-bottom: 8px; }
+        .btn-shift { background: #334155; color: #e2e8f0; border: 2px solid #475569; padding: 5px 16px; font-size: 11pt; border-radius: 20px; cursor: pointer; font-weight: bold; font-family: inherit; transition: 0.2s; }
+        .btn-shift:hover { background: #475569; }
+        .btn-shift.active { background: #f59e0b; color: #000; border-color: #fbbf24; box-shadow: 0 0 10px rgba(245,158,11,0.5); }
+
+        .btn-download, .btn-attendance, .btn-attendance-2, .btn-reset, .btn-clear { color: white; border: none; padding: 6px 13px; font-size: 10pt; border-radius: 6px; cursor: pointer; font-weight: bold; font-family: inherit; transition: 0.2s; }
+        .btn-download { background: #10b981; } .btn-download:hover { background: #059669; }
+        .btn-attendance { background: #2563eb; } .btn-attendance:hover { background: #1d4ed8; }
+        .btn-attendance-2 { background: #7c3aed; } .btn-attendance-2:hover { background: #6d28d9; }
+        .btn-reset { background: #f97316; } .btn-reset:hover { background: #ea580c; }
+        .btn-clear { background: #ef4444; } .btn-clear:hover { background: #dc2626; }
+
+        .page { width: 297mm; height: 209mm; margin: 8px auto; padding: 2mm 3.5mm; background: #fff; border: 1px solid #cbd5e1; box-shadow: 0 10px 15px rgba(0,0,0,0.1); display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; position: relative; }
+        .header-container { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1px; flex-shrink: 0; }
+        .left-header-group { display: flex; flex-direction: column; gap: 2px; width: 135px; }
+        .box-left { border: var(--thick-border); border-radius: 4px; overflow: hidden; text-align: center; width: 100%; }
+        .box-left .box-title { background: #f1f5f9; padding: 1px; font-size: 7pt; font-weight: bold; border-bottom: var(--thick-border); }
+        .box-left .box-value { font-size: 12pt; font-weight: bold; line-height: 1.1; color: #b91c1c; }
+        .bidro-box { border: var(--thick-border); border-radius: 4px; background: #fef08a; text-align: center; padding: 2px 3px; font-size: 6.5pt; font-weight: bold; color: #854d0e; line-height: 1.05; }
+
+        .header-center { text-align: center; flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .school-title-wrapper { display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .header-logo { width: 42px; height: 42px; object-fit: contain; }
+        .school-name { font-size: 16pt; font-weight: bold; color: #0f172a; margin: 0; line-height: 1.0; }
+        .exam-name { font-size: 9pt; font-weight: bold; margin: 1px 0 0 0; line-height: 1.0; }
+        .roster-title { font-size: 8.5pt; font-weight: bold; display: inline-block; border-bottom: 2px solid #000; margin-top: 1px; line-height: 1.0; }
+
+        .box-right-container { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
+        .shift-badge { background: #dbeafe; border: 2px solid #2563eb; color: #1e3a8a; padding: 1px 10px; border-radius: 6px; font-weight: 900; font-size: 9pt; }
+        .box-right { border: var(--thick-border); border-radius: 4px; padding: 2px 5px; font-size: 7.2pt; font-weight: bold; text-align: left; width: 160px; background: #f8fafc; line-height: 1.1; }
+
+        table { width: 100%; border-collapse: collapse; font-size: 8.2pt; table-layout: fixed; border: var(--thick-border); flex-shrink: 0; margin-bottom: 0; }
+        th, td { border: var(--thin-border); padding: 0; text-align: center; vertical-align: middle; overflow: hidden; white-space: nowrap; }
+        th { background: #f8f9fa; font-weight: bold; }
+
+        body.rows-25 .roster-table tbody td, body.rows-25 .total-row td { height: 19.2px !important; line-height: 19.2px !important; }
+        body.rows-26 .roster-table tbody td, body.rows-26 .total-row td { height: 18.2px !important; line-height: 18.2px !important; }
+        body.rows-27 .roster-table tbody td, body.rows-27 .total-row td { height: 17.5px !important; line-height: 17.5px !important; }
+
+        body.rows-25 .attendance-table tbody td { height: 20.25px !important; line-height: 20.25px !important; }
+        body.rows-26 .attendance-table tbody td { height: 19.25px !important; line-height: 19.25px !important; }
+        body.rows-27 .attendance-table tbody td { height: 18.5px !important; line-height: 18.5px !important; }
+
+        .roster-table thead tr:first-child th { height: 24px !important; background: #e2e8f0; color: #000; }
+        .roster-table thead tr:last-child th { height: 28px !important; line-height: 13px !important; }
+        .roster-table th:nth-child(1) { width: 2.8%; }
+        .roster-table th:nth-child(2) { width: 13.5%; }
+        .roster-table td:nth-child(2) { text-align: left; padding-left: 3px; font-size: 7.8pt; cursor: text; }
+        .roster-table td:nth-child(2):hover { background: #fef08a; }
+        [contenteditable]:focus { outline: 1px solid #2563eb; background: #fff; }
+
+        .roster-table thead tr:first-child th:nth-child(2), .roster-table thead tr:first-child th:nth-child(n+3),
+        .roster-table thead tr:last-child th:nth-child(even), .roster-table tbody td:nth-child(2),
+        .roster-table tbody td:nth-child(even):not(:last-child), .roster-table tfoot td { border-right: var(--thick-border); }
+        .roster-table tfoot td:first-child { border-right: none; }
+        .roster-table tfoot td:nth-child(2) { border-right: var(--thick-border); }
+
+        .slot-cell { cursor: pointer; font-size: 9pt; user-select: none; }
+        .slot-cell:hover { background: #dbeafe; }
+        .slot-cell.ticked { font-weight: 900; color: #000; }
+        .row-total { font-weight: bold; font-size: 8.5pt; color: #1d4ed8; }
+        .total-row td { border-top: var(--thick-border); border-bottom: var(--thick-border); font-weight: bold; font-size: 8.5pt; }
+        .vertical-text { writing-mode: vertical-rl; transform: rotate(180deg); font-size: 6.5pt; display: inline-block; line-height: 1; }
+
+        .date-header { font-size: 7.6pt !important; font-weight: 900 !important; line-height: 1.08 !important; color: #000 !important; padding: 1px 0 !important; }
+        .day-label { font-size: 7.2pt; font-weight: 900; color: #0f172a; }
+
+        .attendance-table thead tr:first-child th { height: 24px !important; line-height: 1.08 !important; font-size: 7.3pt !important; font-weight: 900 !important; color: #000 !important; background: #e2e8f0; }
+        .attendance-table thead tr:last-child th { height: 18px !important; line-height: 18px !important; font-size: 6.5pt; }
+        .attendance-table td:nth-child(2) { text-align: left; padding-left: 4px; font-size: 7.5pt; }
+        .attendance-tick { font-size: 7.5pt; font-weight: 900; color: #000; }
+        .thick-right { border-right: var(--thick-border) !important; }
+        .sub-header-row th { border-bottom: var(--thick-border) !important; }
+
+        .signature-section { display: flex; justify-content: space-between; align-items: flex-end; padding: 0 35px; font-weight: bold; font-size: 9pt; flex-shrink: 0; height: 32px; margin-top: 1px; }
+        .signature-box { text-align: center; width: 140px; padding-top: 2px; border-top: 1.5px dashed #000; line-height: 1.1; }
+
+        @media print {
+            @page { size: A4 landscape; margin: 0mm; }
+            html, body { width: 297mm; background: #fff; margin: 0 !important; padding: 0 !important; }
+            .no-print-bar { display: none !important; }
+            .page { margin: 0 !important; border: none !important; box-shadow: none !important; width: 297mm !important; height: 209mm !important; padding: 2mm 3.5mm !important; page-break-inside: avoid !important; break-inside: avoid !important; }
+            body.print-roster-only #attendancePage1, body.print-roster-only #attendancePage2 { display: none !important; }
+            body.print-roster-only #rosterPage { page-break-after: avoid !important; }
+            body.print-att1-only #rosterPage, body.print-att1-only #attendancePage2 { display: none !important; }
+            body.print-att1-only #attendancePage1 { page-break-after: avoid !important; }
+            body.print-att2-only #rosterPage, body.print-att2-only #attendancePage1 { display: none !important; }
+            body.print-att2-only #attendancePage2 { page-break-after: avoid !important; }
+            body.print-all #rosterPage, body.print-all #attendancePage1 { page-break-after: always !important; }
+            body.print-all #attendancePage2 { page-break-after: avoid !important; }
+            td:nth-child(2):hover { background: transparent; }
         }
     </style>
 </head>
-<body class="bg-grid min-h-screen flex flex-col justify-between py-6 sm:py-10 px-4 sm:px-6">
+<body class="print-all rows-26">
 
-    <!-- TOP BAR -->
-    <div class="max-w-5xl w-full mx-auto mb-6">
-        <div class="flex flex-wrap items-center justify-between gap-3 px-5 py-3 rounded-2xl bg-white/90 border border-slate-200 text-xs sm:text-sm text-slate-600 shadow-sm">
-            <div class="flex items-center gap-2.5">
-                <span class="w-7 h-7 rounded-lg bg-sky-50 text-sky-600 border border-sky-200 flex items-center justify-center">
-                    <i class="fa-solid fa-building-columns text-xs"></i>
-                </span>
-                <span class="font-semibold text-slate-800">অফিসিয়াল ডিউটি রোস্টার পোর্টাল (১০২ জন শিক্ষক)</span>
-            </div>
-            <div class="flex items-center gap-4 font-medium">
-                <span><i class="fa-regular fa-calendar text-sky-600 mr-1.5"></i><span id="liveDate">...</span></span>
-                <span class="hidden sm:inline text-slate-300">|</span>
-                <span class="hidden sm:inline"><i class="fa-regular fa-clock text-emerald-600 mr-1.5"></i><span id="liveTime">--:--</span></span>
-            </div>
+    <div class="no-print-bar">
+        <div class="shift-selector">
+            <span style="font-weight:bold; font-size:11pt;">শিফট নির্বাচন করুন:</span>
+            <button class="btn-shift active" id="btn-joba" onclick="switchShift('joba')">🌺 জবা (২৬ জন)</button>
+            <button class="btn-shift" id="btn-shapla" onclick="switchShift('shapla')">🌸 শাপলা (২৫ জন)</button>
+            <button class="btn-shift" id="btn-beli" onclick="switchShift('beli')">🌼 বেলি (২৬ জন)</button>
+            <button class="btn-shift" id="btn-bokul" onclick="switchShift('bokul')">🏵️ বকুল (২৫ জন)</button>
+        </div>
+        <div class="action-buttons">
+            <button class="btn-download" onclick="printSection('roster')">🖨️ শুধু রোস্টার</button>
+            <button class="btn-attendance" onclick="printSection('att1')">🖨️ হাজিরা (১ম বেলা)</button>
+            <button class="btn-attendance-2" onclick="printSection('att2')">🖨️ হাজিরা (২য় বেলা)</button>
+            <button class="btn-download" style="background:#0d9488;" onclick="printSection('all')">🖨️ ৩টি পেইজ একসাথে প্রিন্ট/PDF</button>
+            <button class="btn-reset" onclick="resetToAutoSchedule()">🔄 ডিফল্ট অটো-রোটেশন রিসেট</button>
+            <button class="btn-clear" onclick="clearAllTicks()">🗑️ সব টিক মুছুন (Blank)</button>
         </div>
     </div>
 
-    <!-- MAIN CONTENT -->
-    <main class="max-w-5xl w-full mx-auto my-auto">
-        
-        <!-- HEADER -->
-        <header class="text-center mb-10">
-            <div class="logo-container mb-5">
-                <div class="logo-backlight"></div>
-                <div class="logo-ring"></div>
-                <div class="logo-circle-wrapper">
-                    <img src="https://drive.google.com/thumbnail?id=1ZmxR46CCr7Ge5UntTMM_TbTeMJfdiqTD&sz=w1000" 
-                         onerror="this.onerror=null; this.src='https://lh3.googleusercontent.com/d/1ZmxR46CCr7Ge5UntTMM_TbTeMJfdiqTD';"
-                         alt="লোগো" class="w-full h-full object-cover scale-105">
-                </div>
+    <!-- পেজ ১: মূল ডিউটি রোস্টার -->
+    <section class="page" id="rosterPage">
+        <div class="header-container">
+            <div class="left-header-group">
+                <div class="box-left"><div class="box-title">সর্বমোট ডিউটি</div><div class="box-value" id="header-grand-total">০</div></div>
+                <div class="bidro-box">বি:দ্র: পরীক্ষা শুরুর ২০ মিনিট পূর্বে কক্ষে অবস্থান করতে হবে।</div>
             </div>
-            <h1 class="text-3xl sm:text-5xl font-bold text-slate-900 mb-2">ইবনে তাইমিয়া স্কুল এন্ড কলেজ</h1>
-            <p class="text-slate-600 text-sm sm:text-base font-medium">বার্ষিক পরীক্ষা-২০২৬ • শিক্ষক ও কর্মকর্তাদের শিফট ভিত্তিক ডিউটি রোস্টার পোর্টাল</p>
-        </header>
-
-        <!-- SMART PERSONAL DUTY FINDER -->
-        <section class="mb-12">
-            <div class="bg-white border-2 border-sky-200/80 rounded-3xl p-6 sm:p-8 shadow-xl shadow-sky-900/5">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-5 border-b border-slate-200">
-                    <div class="flex items-center gap-3.5">
-                        <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-sky-500 to-indigo-600 text-white flex items-center justify-center text-xl shadow-md">
-                            <i class="fa-solid fa-magnifying-glass-chart"></i>
-                        </div>
-                        <div>
-                            <span class="text-xs font-bold uppercase text-sky-600 bg-sky-50 px-2.5 py-0.5 rounded-md border border-sky-200">স্মার্ট ডিউটি সার্চ • ১০২ জন শিক্ষক</span>
-                            <h2 class="text-xl sm:text-2xl font-bold text-slate-900 mt-0.5">আপনার ব্যক্তিগত ডিউটির তারিখ দেখুন</h2>
-                        </div>
-                    </div>
-                    <p class="text-xs sm:text-sm text-slate-500 font-medium">শিফট ও নাম সিলেক্ট করলেই রোস্টার অনুযায়ী ডিউটির তালিকা চলে আসবে</p>
+            <div class="header-center">
+                <div class="school-title-wrapper">
+                    <img src="https://lh3.googleusercontent.com/d/1ZmxR46CCr7Ge5UntTMM_TbTeMJfdiqTD" alt="Logo" class="header-logo">
+                    <div class="school-name">ইবনে তাইমিয়া স্কুল এন্ড কলেজ</div>
                 </div>
-
-                <!-- Dropdowns -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mt-6">
-                    <div>
-                        <label class="block text-sm font-bold text-slate-700 mb-2">১. আপনার শিফট নির্বাচন করুন:</label>
-                        <select id="shiftSelect" onchange="populateTeachers()" class="w-full bg-slate-50 border-2 border-slate-200 focus:border-sky-500 rounded-xl px-4 py-3.5 text-slate-800 font-semibold outline-none cursor-pointer">
-                            <option value="">-- প্রথমে শিফট বাছাই করুন --</option>
-                            <option value="joba">জবা শিফট (২৬ জন শিক্ষক)</option>
-                            <option value="shapla">শাপলা শিফট (২৫ জন শিক্ষক)</option>
-                            <option value="bokul">বকুল শিফট (২৫ জন শিক্ষক)</option>
-                            <option value="beli">বেলি শিফট (২৬ জন শিক্ষক)</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-bold text-slate-700 mb-2">২. আপনার নাম নির্বাচন করুন:</label>
-                        <select id="teacherSelect" onchange="displayTeacherDuty()" disabled class="w-full bg-slate-100 border-2 border-slate-200 focus:border-sky-500 rounded-xl px-4 py-3.5 text-slate-800 font-semibold outline-none cursor-pointer disabled:opacity-60">
-                            <option value="">-- আগে শিফট নির্বাচন করুন --</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- Duty Result Area -->
-                <div id="dutyResultContainer" class="hidden mt-7 pt-6 border-t border-slate-200">
-                    <div class="flex flex-wrap items-center justify-between gap-4 bg-slate-900 text-white p-5 rounded-2xl mb-5">
-                        <div class="flex items-center gap-3.5">
-                            <div class="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center text-sky-400 text-xl">
-                                <i class="fa-solid fa-chalkboard-user"></i>
-                            </div>
-                            <div>
-                                <span id="resShiftBadge" class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-sky-500/20 text-sky-300">শিফট</span>
-                                <h3 id="resTeacherName" class="text-xl sm:text-2xl font-bold mt-0.5">নাম</h3>
-                            </div>
-                        </div>
-                        <div class="flex flex-wrap items-center gap-2.5">
-                            <div class="bg-sky-500/20 border border-sky-400/30 px-3.5 py-1.5 rounded-xl text-center">
-                                <span class="text-[11px] text-sky-300 block">১ম বেলা</span>
-                                <span id="resMorningCount" class="text-base font-bold text-sky-300">০</span>
-                            </div>
-                            <div class="bg-amber-500/20 border border-amber-400/30 px-3.5 py-1.5 rounded-xl text-center">
-                                <span class="text-[11px] text-amber-300 block">২য় বেলা</span>
-                                <span id="resAfternoonCount" class="text-base font-bold text-amber-300">০</span>
-                            </div>
-                            <div class="bg-emerald-500/20 border border-emerald-400/30 px-4 py-1.5 rounded-xl text-center">
-                                <span class="text-[11px] text-emerald-300 block">মোট ডিউটি</span>
-                                <span id="resTotalDuties" class="text-base font-bold text-emerald-400">০</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <h4 class="text-sm font-bold text-slate-600 mb-3">
-                        <i class="fa-regular fa-calendar-check text-sky-600 mr-1.5"></i>বার্ষিক পরীক্ষার ১৩ দিনের তারিখভিত্তিক ডিউটি তালিকা:
-                    </h4>
-                    <div id="dutyDatesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5"></div>
-                </div>
+                <div class="exam-name">বার্ষিক পরীক্ষা-২০২৬ খ্রিস্টাব্দ</div>
+                <div class="roster-title">ডিউটি রোস্টার</div>
             </div>
-        </section>
-
-        <!-- SECTION TITLE -->
-        <div class="text-center mb-7">
-            <div class="inline-flex items-center gap-2.5 px-6 py-2 rounded-full bg-white border border-slate-200 shadow-sm">
-                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                <h2 class="text-sm sm:text-lg font-bold bg-gradient-to-r from-sky-600 via-indigo-600 to-rose-600 bg-clip-text text-transparent">
-                    সম্পূর্ণ শিফট রোস্টার পিডিএফ ডাউনলোড
-                </h2>
+            <div class="box-right-container">
+                <div class="shift-badge shift-name-display">শিফট: জবা</div>
+                <div class="box-right">১ম বেলা : ৭.৩০ থেকে ১০.৩০টা<br>২য় বেলা : ১.৩০ থেকে ৪.৩০টা</div>
             </div>
         </div>
 
-        <!-- 4 SHIFT ROSTER CARDS -->
-        <section id="shiftCardsContainer" class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-7"></section>
+        <table class="roster-table">
+            <thead>
+                <tr>
+                    <th rowspan="2">ক্র.নং</th>
+                    <th rowspan="2">পর্যবেক্ষকদের নাম</th>
+                    <script>
+                        const examDates = [
+                            { d: "১৭/১১/২৬", day: "(মঙ্গল)" }, { d: "১৮/১১/২৬", day: "(বুধ)" },
+                            { d: "১৯/১১/২৬", day: "(বৃহস্পতি)" }, { d: "২২/১১/২৬", day: "(রবি)" },
+                            { d: "২৩/১১/২৬", day: "(সোম)" }, { d: "২৪/১১/২৬", day: "(মঙ্গল)" },
+                            { d: "২৫/১১/২৬", day: "(বুধ)" }, { d: "২৬/১১/২৬", day: "(বৃহস্পতি)" },
+                            { d: "২৯/১১/২৬", day: "(রবি)" }, { d: "৩০/১১/২৬", day: "(সোম)" },
+                            { d: "০১/১২/২৬", day: "(মঙ্গল)" }, { d: "০২/১২/২৬", day: "(বুধ)" },
+                            { d: "০৩/১২/২৬", day: "(বৃহস্পতি)" }
+                        ];
+                        examDates.forEach(item => {
+                            document.write(`<th colspan="2" class="date-header">${item.d}<br><span class="day-label">${item.day}</span></th>`);
+                        });
+                    </script>
+                    <th rowspan="2" style="width: 3.4%;">মোট</th>
+                </tr>
+                <tr>
+                    <script>
+                        for(let i=0; i<13; i++) document.write('<th><div class="vertical-text">১ম বেলা</div></th><th><div class="vertical-text">২য় বেলা</div></th>');
+                    </script>
+                </tr>
+            </thead>
+            <tbody id="rosterBody"></tbody>
+            <tfoot>
+                <tr class="total-row">
+                    <td colspan="2" style="text-align: right; padding-right: 12px;">মোট =</td>
+                    <script>for(let i=0; i<26; i++) document.write('<td></td>');</script>
+                    <td id="footer-grand-total" style="color: #b91c1c;">০</td>
+                </tr>
+            </tfoot>
+        </table>
 
-    </main>
-
-    <!-- FOOTER -->
-    <footer class="max-w-5xl w-full mx-auto mt-16 pt-8 border-t border-slate-200 text-center">
-        <p class="text-slate-500 font-medium text-xs sm:text-sm mb-4">© ২০২৬ ইবনে তাইমিয়া স্কুল এন্ড কলেজ • সর্বস্বত্ব সংরক্ষিত</p>
-        <div class="inline-flex items-center gap-2.5 px-6 py-2.5 rounded-2xl bg-white border border-slate-200 shadow-md">
-            <span class="w-7 h-7 rounded-lg bg-sky-50 border border-sky-200 flex items-center justify-center text-sky-600 text-xs">
-                <i class="fa-solid fa-user-tie"></i>
-            </span>
-            <p class="text-sm sm:text-base font-bold bg-gradient-to-r from-slate-800 via-sky-700 to-emerald-700 bg-clip-text text-transparent">
-                সার্বিক তত্বাবধানে: ইঞ্জি: সাইফুল ইসলাম।
-            </p>
+        <div class="signature-section">
+            <div class="signature-box">অধ্যক্ষ</div>
+            <div class="signature-box">পরীক্ষা নিয়ন্ত্রক</div>
+            <div class="signature-box">প্রস্তুতকারী</div>
         </div>
-    </footer>
+    </section>
 
-    <!-- PDF PREVIEW MODAL -->
-    <div id="previewModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4">
-        <div class="bg-white border border-slate-200 rounded-2xl max-w-4xl w-full h-[85vh] flex flex-col overflow-hidden shadow-2xl">
-            <div class="flex items-center justify-between px-5 py-3.5 border-b border-slate-200 bg-slate-50">
-                <div class="flex items-center gap-2.5">
-                    <i class="fa-solid fa-file-pdf text-rose-600 text-lg"></i>
-                    <h3 id="modalTitle" class="font-bold text-slate-800 text-base sm:text-lg">রোস্টার প্রিভিউ</h3>
+    <!-- পেজ ২: শিক্ষক হাজিরা শিট (১ম বেলা) -->
+    <section class="page" id="attendancePage1">
+        <div class="header-container">
+            <div class="left-header-group">
+                <div class="box-left"><div class="box-title">সর্বমোট ডিউটি (১ম বেলা)</div><div class="box-value" id="attendance1-grand-total">০</div></div>
+                <div class="bidro-box">বি:দ্র: পরীক্ষা শুরুর ২০ মিনিট পূর্বে কক্ষে অবস্থান করতে হবে।</div>
+            </div>
+            <div class="header-center">
+                <div class="school-title-wrapper">
+                    <img src="https://lh3.googleusercontent.com/d/1ZmxR46CCr7Ge5UntTMM_TbTeMJfdiqTD" alt="Logo" class="header-logo">
+                    <div class="school-name">ইবনে তাইমিয়া স্কুল এন্ড কলেজ</div>
                 </div>
-                <button onclick="closePreviewModal()" class="w-8 h-8 rounded-lg bg-slate-200 hover:bg-rose-600 text-slate-700 hover:text-white transition flex items-center justify-center cursor-pointer">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
+                <div class="exam-name">বার্ষিক পরীক্ষা-২০২৬ খ্রিস্টাব্দ</div>
+                <div class="roster-title">শিক্ষক হাজিরা শিট (১ম বেলা)</div>
             </div>
-            <div class="flex-1 bg-slate-100">
-                <iframe id="previewFrame" class="w-full h-full border-0" src=""></iframe>
+            <div class="box-right-container">
+                <div class="shift-badge shift-name-display">শিফট: জবা</div>
+                <div class="box-right">১ম বেলা : ৭.৩০ থেকে ১০.৩০টা<br>২য় বেলা : ১.৩০ থেকে ৪.৩০টা</div>
             </div>
         </div>
-    </div>
 
-    <!-- TOAST -->
-    <div id="downloadToast" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none bg-white border border-emerald-200 text-slate-800 px-5 py-3.5 rounded-2xl shadow-xl flex items-center gap-3.5">
-        <div class="w-9 h-9 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-lg">
-            <i class="fa-solid fa-check"></i>
-        </div>
-        <div>
-            <h4 id="toastHeading" class="font-bold text-sm text-emerald-700">ডাউনলোড শুরু হয়েছে</h4>
-            <p class="text-xs text-slate-500">আপনার ডিভাইসে পিডিএফ ফাইলটি সরাসরি সেভ হচ্ছে...</p>
-        </div>
-    </div>
+        <table class="attendance-table">
+            <colgroup>
+                <col style="width: 2.8%;"><col style="width: 13.0%;">
+                <script>for(let i=0; i<13; i++) document.write('<col style="width: 0.75%;"><col style="width: 1.75%;"><col style="width: 4.15%;">');</script>
+            </colgroup>
+            <thead>
+                <tr>
+                    <th rowspan="2">ক্র.নং</th>
+                    <th rowspan="2" class="thick-right">পর্যবেক্ষকদের নাম</th>
+                    <script>examDates.forEach(item => document.write(`<th colspan="3" class="thick-right">${item.d}<br>${item.day}</th>`));</script>
+                </tr>
+                <tr class="sub-header-row">
+                    <script>for(let i=0; i<13; i++) document.write('<th>D</th><th>হল</th><th class="thick-right">স্বাক্ষর</th>');</script>
+                </tr>
+            </thead>
+            <tbody id="attendanceBody1"></tbody>
+        </table>
 
-    <div id="hiddenDownloadContainer" class="hidden"></div>
+        <div class="signature-section">
+            <div class="signature-box">অধ্যক্ষ</div>
+            <div class="signature-box">পরীক্ষা নিয়ন্ত্রক</div>
+            <div class="signature-box">প্রস্তুতকারী</div>
+        </div>
+    </section>
+
+    <!-- পেজ ৩: শিক্ষক হাজিরা শিট (২য় বেলা) -->
+    <section class="page" id="attendancePage2">
+        <div class="header-container">
+            <div class="left-header-group">
+                <div class="box-left"><div class="box-title">সর্বমোট ডিউটি (২য় বেলা)</div><div class="box-value" id="attendance2-grand-total">০</div></div>
+                <div class="bidro-box">বি:দ্র: পরীক্ষা শুরুর ২০ মিনিট পূর্বে কক্ষে অবস্থান করতে হবে।</div>
+            </div>
+            <div class="header-center">
+                <div class="school-title-wrapper">
+                    <img src="https://lh3.googleusercontent.com/d/1ZmxR46CCr7Ge5UntTMM_TbTeMJfdiqTD" alt="Logo" class="header-logo">
+                    <div class="school-name">ইবনে তাইমিয়া স্কুল এন্ড কলেজ</div>
+                </div>
+                <div class="exam-name">বার্ষিক পরীক্ষা-২০২৬ খ্রিস্টাব্দ</div>
+                <div class="roster-title">শিক্ষক হাজিরা শিট (২য় বেলা)</div>
+            </div>
+            <div class="box-right-container">
+                <div class="shift-badge shift-name-display">শিফট: জবা</div>
+                <div class="box-right">১ম বেলা : ৭.৩০ থেকে ১০.৩০টা<br>২য় বেলা : ১.৩০ থেকে ৪.৩০টা</div>
+            </div>
+        </div>
+
+        <table class="attendance-table">
+            <colgroup>
+                <col style="width: 2.8%;"><col style="width: 13.0%;">
+                <script>for(let i=0; i<13; i++) document.write('<col style="width: 0.75%;"><col style="width: 1.75%;"><col style="width: 4.15%;">');</script>
+            </colgroup>
+            <thead>
+                <tr>
+                    <th rowspan="2">ক্র.নং</th>
+                    <th rowspan="2" class="thick-right">পর্যবেক্ষকদের নাম</th>
+                    <script>examDates.forEach(item => document.write(`<th colspan="3" class="thick-right">${item.d}<br>${item.day}</th>`));</script>
+                </tr>
+                <tr class="sub-header-row">
+                    <script>for(let i=0; i<13; i++) document.write('<th>D</th><th>হল</th><th class="thick-right">স্বাক্ষর</th>');</script>
+                </tr>
+            </thead>
+            <tbody id="attendanceBody2"></tbody>
+        </table>
+
+        <div class="signature-section">
+            <div class="signature-box">অধ্যক্ষ</div>
+            <div class="signature-box">পরীক্ষা নিয়ন্ত্রক</div>
+            <div class="signature-box">প্রস্তুতকারী</div>
+        </div>
+    </section>
 
     <script>
-        // ১৩ দিনের পরীক্ষার তারিখসমূহ
-        const EXAM_DATES = [
-            { date: "১৭/১১/২০২৬", day: "মঙ্গলবার" },
-            { date: "১৮/১১/২০২৬", day: "বুধবার" },
-            { date: "১৯/১১/২০২৬", day: "বৃহস্পতিবার" },
-            { date: "২২/১১/২০২৬", day: "রবিবার" },
-            { date: "২৩/১১/২০২৬", day: "সোমবার" },
-            { date: "২৪/১১/২০২৬", day: "মঙ্গলবার" },
-            { date: "২৫/১১/২০২৬", day: "বুধবার" },
-            { date: "২৬/১১/২০২৬", day: "বৃহস্পতিবার" },
-            { date: "২৯/১১/২০২৬", day: "রবিবার" },
-            { date: "৩০/১১/২০২৬", day: "সোমবার" },
-            { date: "০১/১২/২০২৬", day: "মঙ্গলবার" },
-            { date: "০২/১২/২০২৬", day: "বুধবার" },
-            { date: "০৩/১২/২০২৬", day: "বৃহস্পতিবার" }
-        ];
-
-        // ৪টি শিফটের ১০২ জন শিক্ষকের তালিকা (পিডিএফ রোস্টার অনুযায়ী)
-        const TEACHERS_LIST = {
+        const SHIFTS_CONFIG = {
             joba: {
-                title: "জবা শিফট",
-                names: [
-                    "জনাব এ. এম. আখতার হোসেন", "মো: সিরাজুল ইসলাম খান", "মো: গোলাম আযম", "কবির আহমেদ",
-                    "মু: নুর নবী", "হেদায়েত উল্যাহ সবুজ", "আবুল বাশার চৌধুরী", "আব্দুর রাজ্জাক",
-                    "মাও. কামাল উদ্দিন", "মোঃ শাহাদাত হোসাইন", "আলমগীর হোসেন", "মহসীন আল মামুন",
-                    "মোঃ হোসাইন", "মোঃ কাউছার হাবিব", "তোফায়েল আহমদ খন্দ.", "মোঃ শাহিন আলম",
-                    "মমিনুর রহমান", "জাকারিয়া হাবীব", "সাইফুল ইসলাম(ইঞ্জিঃ)", "সাইফুল ইসলাম",
-                    "মোঃ ইকবাল তানিম", "মোস্তাফিজুর রহমান", "নাছির উদ্দিন", "মো: মাহমুদুল হাসান",
-                    "মো: মনির হোসেন", "ফয়সাল বিন সাঈদ"
+                title: "শিফট: জবা", storageKey: "ibne_taimiya_roster_joba_v15", priorityShift: 1,
+                teachers: [
+                    "জনাব এ.এম. আখতার হোসেন", '" মো: সিরাজুল ইসলাম খান (C.T)', '" মো: গোলাম আযম (C.T)',
+                    '" কবির আহমেদ', '" মু: নুর নবী (C.T)', '" হেদায়েত উল্যাহ সবুজ (C.T)',
+                    '" আবুল বাশার চৌধুরী (C.T)', "আব্দুর রাজ্জাক", '" মাও. কামাল উদ্দিন (C.T)',
+                    '" মোঃ শাহাদাত হোসাইন (C.T)', '" আলমগীর হোসেন (C.T)', '" মহসীন আল মামুন (C.T)',
+                    '" মোঃ হোসাইন (C.T)', '" মোঃ কাউছার হাবিব (C.T)', '" তোফায়েল আহমদ খন্দ. (C.T)',
+                    '" মোঃ শাহিন আলম (C.T)', '" মমিনুর রহমান (C.T)', '" জাকারিয়া হাবীব (C.T)',
+                    "সাইফুল ইসলাম (ইঞ্জিঃ)", '" সাইফুল ইসলাম (C.T)', '" মোঃ ইকবাল তানিম',
+                    '" মোস্তাফিজুর রহমান', '" নাছির উদ্দিন', '" মো: মাহমুদুল হাসান',
+                    '" মো: মনির হোসেন', '" ফয়সাল বিন সাঈদ'
                 ]
             },
             shapla: {
-                title: "শাপলা শিফট",
-                names: [
-                    "জনাব মো: আবদুল কাদির", "মোঃ শাহানুর রহমান", "নুরে আলম সাথী", "আনোয়ার হোসেন",
-                    "মো: কামরুল ফারুক", "বাহার উদ্দিন", "গোলাম মহিউদ্দিন", "রায়হান হোসেন",
-                    "জিয়াউর রহমান", "মাও. আল আমিন", "ইসরাফিল ভূঁইয়া", "সাখাওয়াত হোসাইন",
-                    "একিউএম জাহিদুল বারী", "সাইফুদ্দিন মোঃ রাশেদ", "মোঃ মঈন উদ্দিন", "মো. জাকির হোসাইন",
-                    "জোবায়ের হোসেন", "গোলাম মোস্তফা", "ওমর ফারুক", "মানিক হোসেন",
-                    "আশিকুর রহমান সবুজ", "ফরিদ আহমেদ", "বোরহান উদ্দিন", "আরমান হোসেন", "রাশেদুল হাসান"
-                ]
-            },
-            bokul: {
-                title: "বকুল শিফট",
-                names: [
-                    "জনাব মিজানুর রহমান-৩", "মিজানুর রহমান-৪", "আবুল হোসেন ফারুক", "সাইফুল ইসলাম-১",
-                    "দুলাল হোসেন চৌধুরী", "নিজাম উদ্দীন মজুমদার", "মোহাম্মদ আব্দুর রহমান", "মোস্তফা কামাল",
-                    "জহিরুল ইসলাম", "ফরহাদ আল ফয়সাল", "সিরাজুস সালেহীন", "মোহাম্মদ মহসিন-২",
-                    "সাইফুল ইসলাম মিয়াজী", "মাও. মহিউদ্দিন", "স্বপন মজুমদার", "সিফাতুল মোস্তফা",
-                    "কাউছার আহমেদ", "ইউছুফ আলী", "মোহাম্মদ হোসাইন", "বিল্লাল হোসেন",
-                    "এমরান হোসেন", "আবু মু. সজিব", "মাসুদ আলম", "বায়েজিদুল ইসলাম মজু.", "কাউছার হামিদ জীবন"
+                title: "শিফট: শাপলা", storageKey: "ibne_taimiya_roster_shapla_v15", priorityShift: 1,
+                teachers: [
+                    "জনাব মো: আবদুল কাদির", '" মোঃ শাহানুর রহমান', '" নুরে আলম সাথী',
+                    '" আনোয়ার হোসেন', '" মো: কামরুল ফারুক', '" বাহার উদ্দিন',
+                    '" গোলাম মহিউদ্দিন', '" রায়হান হোসেন', '" জিয়াউর রহমান',
+                    '" মাও. আল আমিন', '" ইসরাফিল ভূঁইয়া', '" সাখাওয়াত হোসাইন',
+                    '" একিউএম জাহিদুল বারী', '" সাইফুদ্দিন মোঃ রাশেদ', '" মোঃ মঈন উদ্দিন',
+                    '" মো. জাকির হোসাইন', '" জোবায়ের হোসেন', '" গোলাম মোস্তফা',
+                    '" ওমর ফারুক', '" মানিক হোসেন', '" আশিকুর রহমান সবুজ',
+                    '" ফরিদ আহমেদ', '" বোরহান উদ্দিন', '" আরমান হোসেন', '" রাশেদুল হাসান'
                 ]
             },
             beli: {
-                title: "বেলি শিফট",
-                names: [
-                    "জনাব শেখ রেজাউল হোসেন", "ছালেহ আহম্মাদ", "মোঃ ফজলুল হক", "মাহফুজুর রহমান",
-                    "মোঃ সাজ্জাদ হোসেন", "মো: ইলিয়াছ মিয়া", "মো: মাঈন উদ্দিন", "মোঃ মহসিন-১",
-                    "মোঃ মহি উদ্দিন", "জামাল উদ্দিন", "মোঃ আব্দুল হালিম", "মো: শহীদুল্লাহ",
-                    "মোজাম্মেল হক মুন্সী", "জাকির হোসেন", "শাহাদাত হোসেন", "মু. আব্দুল্লাহ আল নোমান",
-                    "এস. এম. মাসুম", "রাকিবুল হাসান", "আবু ইউসুফ", "নজরুল ইসলাম",
-                    "মোঃ বোরহান উদ্দিন", "সাফায়েত উল্লাহ্", "তুহিনুর রহমান", "মিজানুর রহমান",
-                    "শাকিল হোসেন", "আবু সহল মো: জাবালুন নূর"
+                title: "শিফট: বেলি", storageKey: "ibne_taimiya_roster_beli_v15", priorityShift: 2,
+                teachers: [
+                    "জনাব শেখ রেজাউল হোসেন", '" ছালেহ আহমাদ', '" মোঃ ফজলুল হক',
+                    '" মাহফুজুর রহমান', '" মোঃ সাজ্জাদ হোসেন', '" মো: ইলিয়াছ মিয়া',
+                    '" মো: মাঈন উদ্দিন', '" মো: মহসিন-১', '" মো: মহি উদ্দিন',
+                    '" জামাল উদ্দিন', '" মোঃ আব্দুল হালিম', '" মো: শহীদুল্লাহ',
+                    '" মোজাম্মেল হক মুন্সী', '" জাকির হোসেন', '" শাহাদাত হোসেন',
+                    '" মু.আব্দুল্লাহ আল নোমান', '" এস. এম. মাসুম', '" রাকিবুল হাসান',
+                    '" আবু ইউসুফ', '" নজরুল ইসলাম', '" মোঃ বোরহান উদ্দিন',
+                    '" সাফায়েত উল্লাহ্', '" তুহিনুর রহমান', '" মিজানুর রহমান',
+                    '" শাকিল হোসেন', '" আবু সহল মোঃ জাবালুন নূর'
+                ]
+            },
+            bokul: {
+                title: "শিফট: বকুল", storageKey: "ibne_taimiya_roster_bokul_v15", priorityShift: 2,
+                teachers: [
+                    "জনাব মো: মিজানুর রহমান-৩", '" মো: মিজানুর রহমান-৪', '" মো: আবুল হোসেন ফারুক',
+                    '" মো: সাইফুল ইসলাম-১', '" মো: দুলাল হোসেন চৌধুরী', '" মো: নিজাম উদ্দীন মজুমদার',
+                    '" মোহাম্মদ আব্দুর রহমান', '" মোস্তফা কামাল', '" মো: জহিরুল ইসলাম',
+                    '" ফরহাদ আল ফয়সাল', '" সিরাজুস সালেহীন', '" মোহাম্মদ মহসিন-২',
+                    '" সাইফুল ইসলাম মিয়াজী', '" মাও. মহিউদ্দিন', '" মো: স্বপন মজুমদার',
+                    '" মো: সিফাতুল মোস্তফা', '" কাওছার আহমেদ', '" মো: ইউছুফ আলী',
+                    '" মোহাম্মদ হোসাইন', '" বিল্লাল হোসেন', '" এমরান হোসেন',
+                    '" আবু মু. সজিব', '" মাসুদ আলম', '" বায়জিদুল ইসলাম মজু.',
+                    '" কাওছার হামিদ জীবন'
                 ]
             }
         };
 
-        // মূল পিডিএফ রোস্টারের হুবহু রোটেশন অ্যালগরিদম (assignAlternatingHelpers)
+        let currentShiftKey = 'joba';
+        const tbody = document.getElementById('rosterBody');
+
+        function toBengaliNum(num) {
+            const d = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
+            return num.toString().replace(/[0-9]/g, w => d[w]);
+        }
+
         function assignAlternatingHelpers(ticks, n, helperColOffset, dailyNeeded, helperTargets, forcedHelperDays) {
             let rem = [...helperTargets];
             for (let d = 0; d < 13; d++) {
@@ -320,6 +362,7 @@
                         rem[t]--;
                     }
                 }
+
                 for (let t = 0; t < n; t++) {
                     if (!chosen.has(t) && rem[t] === daysLeft && chosen.size < needed) {
                         chosen.add(t);
@@ -336,7 +379,8 @@
                     let prevA = (d > 0) ? ticks[a][(d - 1) * 2 + helperColOffset] : 0;
                     let prevB = (d > 0) ? ticks[b][(d - 1) * 2 + helperColOffset] : 0;
                     if (prevA !== prevB) return prevA - prevB;
-                    return rem[b] - rem[a];
+                    if (rem[b] !== rem[a]) return rem[b] - rem[a];
+                    return b - a;
                 });
 
                 for (let idx = 0; idx < candidates.length && chosen.size < needed; idx++) {
@@ -344,13 +388,16 @@
                     chosen.add(t);
                     rem[t]--;
                 }
-                chosen.forEach(t => { ticks[t][d * 2 + helperColOffset] = 1; });
+
+                chosen.forEach(t => {
+                    ticks[t][d * 2 + helperColOffset] = 1;
+                });
             }
         }
 
-        // মূল পিডিএফ রোস্টারের হুবহু শিডিউল বিল্ডার (buildAutoSchedule)
-        function buildShiftTicks(shiftKey) {
-            const n = TEACHERS_LIST[shiftKey].names.length;
+        function buildAutoSchedule(shiftKey) {
+            const cfg = SHIFTS_CONFIG[shiftKey];
+            const n = cfg.teachers.length;
             const ticks = Array.from({ length: n }, () => new Array(26).fill(0));
 
             if (shiftKey === 'joba') {
@@ -372,26 +419,43 @@
                         }
                     }
                 }
-                let helperTargets = new Array(n).fill(0).map((_, t) => (
-                    [2, 5, 10, 14].includes(t) ? 0 : (t < 6 ? 6 : (t < 20 ? 7 : 8))
-                ));
+
+                let helperTargets = new Array(n).fill(0);
+                for (let t = 0; t < n; t++) {
+                    if ([2, 5, 10, 14].includes(t)) continue;
+                    if (t < 6) helperTargets[t] = 6;
+                    else if (t < 20) helperTargets[t] = 7;
+                    else helperTargets[t] = 8;
+                }
+
                 let dailyNeeded = [];
                 for (let d = 0; d < 13; d++) {
                     let totalS2ForJoba = (d < 6) ? 15 : 14;
                     let s2Fixed = (specialS2Days.has(d) ? 3 : 0) + (t14S2Days.has(d) ? 1 : 0);
                     dailyNeeded.push(totalS2ForJoba - s2Fixed);
                 }
+
                 assignAlternatingHelpers(ticks, n, 1, dailyNeeded, helperTargets, {});
-            } 
-            else if (shiftKey === 'shapla') {
+                return { names: [...cfg.teachers], ticks };
+            }
+
+            if (shiftKey === 'shapla') {
                 for (let t = 0; t < n; t++) {
                     for (let d = 0; d < 13; d++) ticks[t][d * 2] = 1;
                 }
                 let helperTargets = new Array(n).fill(0).map((_, t) => (t < 11) ? 7 : 8);
                 let dailyNeeded = new Array(13).fill(0).map((_, d) => (d < 6) ? 14 : 15);
                 assignAlternatingHelpers(ticks, n, 1, dailyNeeded, helperTargets, {});
-            } 
-            else if (shiftKey === 'beli') {
+
+                // ২২ নং শিক্ষক (" ফরিদ আহমেদ, index 21)-এর ১৮/১১ (d=1) তারিখে কোনো ডিউটি না রেখে ০৩/১২ (d=12) তারিখের ২য় বেলায় সংযোজন
+                ticks[21][1 * 2] = 0;
+                ticks[21][1 * 2 + 1] = 0;
+                ticks[21][12 * 2 + 1] = 1;
+
+                return { names: [...cfg.teachers], ticks };
+            }
+
+            if (shiftKey === 'beli') {
                 let forcedHelperDays = {};
                 for (let t = 0; t < n; t++) {
                     forcedHelperDays[t] = new Set();
@@ -407,8 +471,10 @@
                 let helperTargets = new Array(n).fill(0).map((_, t) => (t < 5) ? 6 : (t < 20 ? 7 : 8));
                 let dailyNeeded = new Array(13).fill(0).map((_, d) => (d === 0) ? 15 : 14);
                 assignAlternatingHelpers(ticks, n, 0, dailyNeeded, helperTargets, forcedHelperDays);
-            } 
-            else if (shiftKey === 'bokul') {
+                return { names: [...cfg.teachers], ticks };
+            }
+
+            if (shiftKey === 'bokul') {
                 let forcedHelperDays = {};
                 for (let t = 0; t < n; t++) {
                     forcedHelperDays[t] = new Set();
@@ -424,225 +490,190 @@
                 let helperTargets = new Array(n).fill(0).map((_, t) => (t < 12) ? 7 : (t < 19 ? 8 : 9));
                 let dailyNeeded = new Array(13).fill(0).map((_, d) => (d === 0) ? 14 : 15);
                 assignAlternatingHelpers(ticks, n, 0, dailyNeeded, helperTargets, forcedHelperDays);
+                return { names: [...cfg.teachers], ticks };
             }
-
-            return ticks;
         }
 
-        // ৪টি শিফটের প্রি-কম্পিউটেড রোস্টার ম্যাট্রিক্স
-        const ALL_SHIFT_TICKS = {
-            joba: buildShiftTicks('joba'),
-            shapla: buildShiftTicks('shapla'),
-            bokul: buildShiftTicks('bokul'),
-            beli: buildShiftTicks('beli')
-        };
-
-        // ৪টি শিফটের কার্ড কনফিগারেশন
-        const SHIFTS_CONFIG = [
-            {
-                key: 'joba', badge: 'শিফট ০১ • ২৬ জন', name: 'জবা শিফট ডিউটি রোস্টার',
-                id: '1hbJjccDFuMn52InMpXgztRtsXkoEmCcQ', icon: 'fa-solid fa-spa',
-                accent: 'linear-gradient(90deg, #f43f5e, #fb7185)',
-                iconBg: 'bg-rose-50 border-rose-200 text-rose-600',
-                badgeBg: 'bg-rose-100 text-rose-700',
-                btnBg: 'from-rose-600 to-pink-600 hover:from-rose-500 hover:to-pink-500 shadow-rose-500/20',
-                textCol: 'text-rose-600'
-            },
-            {
-                key: 'shapla', badge: 'শিফট ০২ • ২৫ জন', name: 'শাপলা শিফট ডিউটি রোস্টার',
-                id: '16q2R6n0Hbxrq__rt6BPx_KIONHLZDQb3', icon: 'fa-brands fa-canadian-maple-leaf',
-                accent: 'linear-gradient(90deg, #9333ea, #db2777)',
-                iconBg: 'bg-purple-50 border-purple-200 text-purple-600',
-                badgeBg: 'bg-purple-100 text-purple-700',
-                btnBg: 'from-purple-600 to-fuchsia-600 hover:from-purple-500 hover:to-fuchsia-500 shadow-purple-500/20',
-                textCol: 'text-purple-600'
-            },
-            {
-                key: 'bokul', badge: 'শিফট ০৩ • ২৫ জন', name: 'বকুল শিফট ডিউটি রোস্টার',
-                id: '1q05_4D0z7ELIiUk4Se4MpdVyMO7pMO--', icon: 'fa-solid fa-sun',
-                accent: 'linear-gradient(90deg, #f59e0b, #ea580c)',
-                iconBg: 'bg-amber-50 border-amber-200 text-amber-600',
-                badgeBg: 'bg-amber-100 text-amber-800',
-                btnBg: 'from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 shadow-amber-500/20',
-                textCol: 'text-amber-600'
-            },
-            {
-                key: 'beli', badge: 'শিফট ০৪ • ২৬ জন', name: 'বেলি শিফট ডিউটি রোস্টার',
-                id: '1y46KLpm2mwsr3Kxvf05mjU3xyHnjlEC1', icon: 'fa-solid fa-seedling',
-                accent: 'linear-gradient(90deg, #10b981, #0d9488)',
-                iconBg: 'bg-emerald-50 border-emerald-200 text-emerald-600',
-                badgeBg: 'bg-emerald-100 text-emerald-800',
-                btnBg: 'from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 shadow-emerald-500/20',
-                textCol: 'text-emerald-600'
-            }
-        ];
-
-        // ৪টি শিফট কার্ড রেন্ডার
-        const cardsContainer = document.getElementById('shiftCardsContainer');
-        SHIFTS_CONFIG.forEach(s => {
-            cardsContainer.innerHTML += `
-                <div class="roster-card p-6 sm:p-7" style="--accent: ${s.accent};">
-                    <i class="${s.icon} card-watermark ${s.textCol}"></i>
-                    <div class="flex items-center gap-4 mb-6 relative z-10">
-                        <div class="w-14 h-14 rounded-2xl border flex items-center justify-center text-2xl shadow-sm ${s.iconBg}">
-                            <i class="${s.icon}"></i>
-                        </div>
-                        <div>
-                            <div class="flex items-center gap-2 mb-1">
-                                <span class="text-xs font-bold px-2.5 py-0.5 rounded-md ${s.badgeBg}">${s.badge}</span>
-                                <span class="text-xs font-semibold text-slate-500"><i class="fa-solid fa-file-pdf ${s.textCol} mr-1"></i>PDF</span>
-                            </div>
-                            <h3 class="text-xl sm:text-2xl font-bold text-slate-900">${s.name}</h3>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-3 relative z-10">
-                        <button onclick="startDirectDownload('${s.key}', this)" class="flex-1 py-3.5 px-5 rounded-xl bg-gradient-to-r ${s.btnBg} text-white font-semibold shadow-md flex items-center justify-center gap-2.5 active:scale-95 transition cursor-pointer">
-                            <i class="fa-solid fa-download"></i><span>ডাউনলোড করুন</span>
-                        </button>
-                        <button onclick="openPreviewModal('${s.key}')" class="py-3.5 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 font-semibold text-sm flex items-center gap-2 cursor-pointer">
-                            <i class="fa-regular fa-eye ${s.textCol}"></i><span class="hidden sm:inline">প্রিভিউ</span>
-                        </button>
-                    </div>
-                </div>
-            `;
-        });
-
-        // শিফট সিলেক্ট করলে শিক্ষকদের নাম ও তাঁদের মোট ডিউটি সংখ্যা ড্রপডাউনে দেখাবে
-        function populateTeachers() {
-            const shiftKey = document.getElementById('shiftSelect').value;
-            const teacherSelect = document.getElementById('teacherSelect');
-            document.getElementById('dutyResultContainer').classList.add('hidden');
-            teacherSelect.innerHTML = '';
-
-            if (!shiftKey || !TEACHERS_LIST[shiftKey]) {
-                teacherSelect.disabled = true;
-                teacherSelect.innerHTML = '<option value="">-- আগে শিফট নির্বাচন করুন --</option>';
-                return;
-            }
-
-            teacherSelect.disabled = false;
-            teacherSelect.innerHTML = '<option value="">-- আপনার নাম নির্বাচন করুন --</option>';
-            const ticksMatrix = ALL_SHIFT_TICKS[shiftKey];
-
-            TEACHERS_LIST[shiftKey].names.forEach((name, i) => {
-                const serialBn = (i + 1).toLocaleString('bn-BD');
-                const totalDuties = ticksMatrix[i].reduce((sum, val) => sum + val, 0).toLocaleString('bn-BD');
-                teacherSelect.innerHTML += `<option value="${i}">${serialBn}. ${name} (মোট ডিউটি: ${totalDuties}টি)</option>`;
+        function saveToCache() {
+            const cfg = SHIFTS_CONFIG[currentShiftKey];
+            const rows = document.querySelectorAll('#rosterBody tr');
+            const state = { names: [], ticks: [] };
+            rows.forEach(row => {
+                state.names.push(row.querySelector('td:nth-child(2)').innerText);
+                const rowTicks = [];
+                row.querySelectorAll('.slot-cell').forEach(slot => rowTicks.push(slot.classList.contains('ticked') ? 1 : 0));
+                state.ticks.push(rowTicks);
             });
+            localStorage.setItem(cfg.storageKey, JSON.stringify(state));
+            generateAttendance();
         }
 
-        // শিক্ষক সিলেক্ট করলে তাঁর ১৩ দিনের ডিউটির বিস্তারিত তালিকা দেখাবে
-        function displayTeacherDuty() {
-            const shiftKey = document.getElementById('shiftSelect').value;
-            const idxStr = document.getElementById('teacherSelect').value;
-            const container = document.getElementById('dutyResultContainer');
-            const grid = document.getElementById('dutyDatesGrid');
+        function loadFromCache() {
+            const cfg = SHIFTS_CONFIG[currentShiftKey];
+            const raw = localStorage.getItem(cfg.storageKey);
+            if (!raw) {
+                const autoState = buildAutoSchedule(currentShiftKey);
+                localStorage.setItem(cfg.storageKey, JSON.stringify(autoState));
+                return autoState;
+            }
+            try { return JSON.parse(raw); } catch (e) { return buildAutoSchedule(currentShiftKey); }
+        }
 
-            if (idxStr === '') { container.classList.add('hidden'); return; }
+        function switchShift(shiftKey) {
+            currentShiftKey = shiftKey;
+            const cfg = SHIFTS_CONFIG[shiftKey];
+            document.querySelectorAll('.btn-shift').forEach(btn => btn.classList.remove('active'));
+            document.getElementById('btn-' + shiftKey).classList.add('active');
+            document.querySelectorAll('.shift-name-display').forEach(el => el.innerText = cfg.title);
+            document.body.classList.remove('rows-25', 'rows-26', 'rows-27');
+            document.body.classList.add('rows-' + cfg.teachers.length);
+            renderTable();
+        }
 
-            const idx = parseInt(idxStr, 10);
-            const shift = TEACHERS_LIST[shiftKey];
-            const teacherName = shift.names[idx];
-            const rowTicks = ALL_SHIFT_TICKS[shiftKey][idx];
+        function renderTable() {
+            tbody.innerHTML = '';
+            const cfg = SHIFTS_CONFIG[currentShiftKey];
+            const savedState = loadFromCache();
 
-            let mCount = 0, aCount = 0;
-            grid.innerHTML = '';
+            cfg.teachers.forEach((defaultName, index) => {
+                let tr = document.createElement('tr');
+                const currentName = (savedState && savedState.names && savedState.names[index] !== undefined) ? savedState.names[index] : defaultName;
 
-            EXAM_DATES.forEach((exam, d) => {
-                const mDuty = rowTicks[d * 2] === 1;
-                const aDuty = rowTicks[d * 2 + 1] === 1;
-                if (mDuty) mCount++;
-                if (aDuty) aCount++;
+                let tdSl = document.createElement('td');
+                tdSl.innerText = toBengaliNum(index + 1) + ".";
+                tdSl.style.fontWeight = "bold";
+                tr.appendChild(tdSl);
 
-                let badgeHtml = '';
-                let cardStyle = 'bg-slate-50 border-slate-200';
+                let tdName = document.createElement('td');
+                tdName.innerText = currentName;
+                tdName.setAttribute('contenteditable', 'true');
+                tdName.spellcheck = false;
+                tdName.addEventListener('input', () => { calculateTotals(); saveToCache(); });
+                tr.appendChild(tdName);
 
-                if (mDuty && aDuty) {
-                    badgeHtml = `<span class="text-xs font-bold px-2.5 py-1 rounded-lg bg-rose-100 text-rose-700 border border-rose-200">১ম ও ২য় বেলা (উভয়)</span>`;
-                    cardStyle = 'bg-rose-50/40 border-rose-200';
-                } else if (mDuty) {
-                    badgeHtml = `<span class="text-xs font-bold px-2.5 py-1 rounded-lg bg-sky-100 text-sky-800 border border-sky-200">১ম বেলা (সকাল)</span>`;
-                } else if (aDuty) {
-                    badgeHtml = `<span class="text-xs font-bold px-2.5 py-1 rounded-lg bg-amber-100 text-amber-900 border border-amber-200">২য় বেলা (দুপুর)</span>`;
-                } else {
-                    badgeHtml = `<span class="text-xs font-bold px-2.5 py-1 rounded-lg bg-slate-200 text-slate-600">ডিউটি নেই</span>`;
-                    cardStyle = 'bg-slate-100/60 border-slate-200 opacity-65';
+                for (let i = 0; i < 26; i++) {
+                    let tdSlot = document.createElement('td');
+                    tdSlot.className = 'slot-cell';
+                    if (savedState && savedState.ticks && savedState.ticks[index] && savedState.ticks[index][i] === 1) {
+                        tdSlot.classList.add('ticked');
+                        tdSlot.innerText = '✔';
+                    }
+                    tdSlot.addEventListener('click', function() {
+                        this.classList.toggle('ticked');
+                        this.innerText = this.classList.contains('ticked') ? '✔' : '';
+                        calculateTotals();
+                        saveToCache();
+                    });
+                    tr.appendChild(tdSlot);
                 }
 
-                grid.innerHTML += `
-                    <div class="${cardStyle} border rounded-2xl p-4 flex items-center justify-between gap-3 shadow-sm">
-                        <div class="flex items-center gap-3">
-                            <div class="w-9 h-9 rounded-xl bg-slate-800 text-white font-bold text-sm flex items-center justify-center shrink-0">
-                                ${(d + 1).toLocaleString('bn-BD')}
-                            </div>
-                            <div>
-                                <span class="font-bold text-slate-900 block text-base">${exam.date}</span>
-                                <span class="text-xs font-semibold text-slate-500">${exam.day}</span>
-                            </div>
-                        </div>
-                        <div>${badgeHtml}</div>
-                    </div>
-                `;
+                let tdTotal = document.createElement('td');
+                tdTotal.className = 'row-total';
+                tr.appendChild(tdTotal);
+                tbody.appendChild(tr);
+            });
+            calculateTotals();
+            generateAttendance();
+        }
+
+        function calculateTotals() {
+            let grandTotal = 0;
+            let colTotals = new Array(26).fill(0);
+            document.querySelectorAll('#rosterBody tr').forEach(row => {
+                let rowTotal = 0;
+                row.querySelectorAll('.slot-cell').forEach((slot, idx) => {
+                    if (slot.classList.contains('ticked')) { rowTotal++; colTotals[idx]++; }
+                });
+                row.querySelector('.row-total').innerText = rowTotal > 0 ? toBengaliNum(rowTotal) : '';
+                grandTotal += rowTotal;
             });
 
-            document.getElementById('resShiftBadge').innerText = `${shift.title} • ক্রমিক ${(idx + 1).toLocaleString('bn-BD')}`;
-            document.getElementById('resTeacherName').innerText = teacherName;
-            document.getElementById('resMorningCount').innerText = `${mCount.toLocaleString('bn-BD')}টি`;
-            document.getElementById('resAfternoonCount').innerText = `${aCount.toLocaleString('bn-BD')}টি`;
-            document.getElementById('resTotalDuties').innerText = `${(mCount + aCount).toLocaleString('bn-BD')}টি`;
-
-            container.classList.remove('hidden');
+            const footerCells = document.querySelectorAll('.total-row td');
+            for (let i = 0; i < 26; i++) {
+                footerCells[i + 1].innerText = colTotals[i] > 0 ? toBengaliNum(colTotals[i]) : '';
+            }
+            const banglaGrand = toBengaliNum(grandTotal);
+            document.getElementById('header-grand-total').innerText = banglaGrand;
+            document.getElementById('footer-grand-total').innerText = banglaGrand;
         }
 
-        // পিডিএফ ডাউনলোড ও প্রিভিউ ফাংশন
-        function startDirectDownload(key, btn) {
-            const item = SHIFTS_CONFIG.find(s => s.key === key);
-            if (!item) return;
+        function renderShiftAttendance(tbodyId, totalElementId, shiftOffset) {
+            const attBody = document.getElementById(tbodyId);
+            attBody.innerHTML = '';
+            const cfg = SHIFTS_CONFIG[currentShiftKey];
+            const savedState = loadFromCache();
+            let shiftTotal = 0;
 
-            const oldHtml = btn.innerHTML;
-            btn.disabled = true;
-            btn.innerHTML = `<i class="fa-solid fa-circle-notch fa-spin"></i><span>ডাউনলোড হচ্ছে...</span>`;
+            for (let i = 0; i < cfg.teachers.length; i++) {
+                let tr = document.createElement('tr');
+                let tdSl = document.createElement('td');
+                tdSl.innerText = toBengaliNum(i + 1) + ".";
+                tdSl.style.fontWeight = "bold";
+                tr.appendChild(tdSl);
 
-            const iframe = document.createElement('iframe');
-            iframe.src = `https://drive.google.com/uc?export=download&id=${item.id}`;
-            document.getElementById('hiddenDownloadContainer').appendChild(iframe);
+                const currentName = (savedState && savedState.names && savedState.names[i] !== undefined) ? savedState.names[i] : cfg.teachers[i];
+                let tdName = document.createElement('td');
+                tdName.className = 'thick-right';
+                tdName.innerText = currentName;
+                tr.appendChild(tdName);
 
-            const toast = document.getElementById('downloadToast');
-            document.getElementById('toastHeading').innerText = `${item.name} ডাউনলোড হচ্ছে`;
-            toast.classList.remove('translate-y-24', 'opacity-0');
-            setTimeout(() => toast.classList.add('translate-y-24', 'opacity-0'), 4000);
+                for (let d = 0; d < 13; d++) {
+                    let slotIndex = (d * 2) + shiftOffset;
+                    const isTicked = savedState && savedState.ticks && savedState.ticks[i] && savedState.ticks[i][slotIndex] === 1 && currentName.trim() !== '';
+                    if (isTicked) shiftTotal++;
 
-            setTimeout(() => {
-                btn.disabled = false;
-                btn.innerHTML = `<i class="fa-solid fa-check"></i><span>ডাউনলোড সম্পন্ন</span>`;
-                setTimeout(() => btn.innerHTML = oldHtml, 2000);
-            }, 1400);
+                    let tdD = document.createElement('td');
+                    tdD.className = 'attendance-tick';
+                    tdD.innerText = isTicked ? '✔' : '';
+                    tr.appendChild(tdD);
+
+                    let tdHall = document.createElement('td');
+                    tr.appendChild(tdHall);
+
+                    let tdSign = document.createElement('td');
+                    tdSign.className = 'thick-right';
+                    tr.appendChild(tdSign);
+                }
+                attBody.appendChild(tr);
+            }
+            document.getElementById(totalElementId).innerText = toBengaliNum(shiftTotal);
         }
 
-        function openPreviewModal(key) {
-            const item = SHIFTS_CONFIG.find(s => s.key === key);
-            if (!item) return;
-            document.getElementById('modalTitle').innerText = item.name;
-            document.getElementById('previewFrame').src = `https://drive.google.com/file/d/${item.id}/preview`;
-            const modal = document.getElementById('previewModal');
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
+        function generateAttendance() {
+            renderShiftAttendance('attendanceBody1', 'attendance1-grand-total', 0);
+            renderShiftAttendance('attendanceBody2', 'attendance2-grand-total', 1);
         }
 
-        function closePreviewModal() {
-            const modal = document.getElementById('previewModal');
-            document.getElementById('previewFrame').src = '';
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
+        function printSection(mode) {
+            document.body.className = 'rows-' + SHIFTS_CONFIG[currentShiftKey].teachers.length;
+            if (mode === 'roster') document.body.classList.add('print-roster-only');
+            else if (mode === 'att1') document.body.classList.add('print-att1-only');
+            else if (mode === 'att2') document.body.classList.add('print-att2-only');
+            else document.body.classList.add('print-all');
+            window.print();
         }
 
-        function updateClock() {
-            const now = new Date();
-            document.getElementById('liveDate').innerText = now.toLocaleDateString('bn-BD', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-            document.getElementById('liveTime').innerText = now.toLocaleTimeString('bn-BD', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        function resetToAutoSchedule() {
+            const cfg = SHIFTS_CONFIG[currentShiftKey];
+            if (confirm(cfg.title + "-এর ডিউটি রোস্টারটি কি ডিফল্ট নিয়মে রিসেট করতে চান?")) {
+                localStorage.setItem(cfg.storageKey, JSON.stringify(buildAutoSchedule(currentShiftKey)));
+                renderTable();
+            }
         }
-        updateClock();
-        setInterval(updateClock, 1000);
+
+        function clearAllTicks() {
+            const cfg = SHIFTS_CONFIG[currentShiftKey];
+            if (confirm(cfg.title + "-এর সব টিক মার্ক মুছে খালি (Blank) করতে চান?")) {
+                const n = cfg.teachers.length;
+                localStorage.setItem(cfg.storageKey, JSON.stringify({
+                    names: [...cfg.teachers],
+                    ticks: Array.from({ length: n }, () => new Array(26).fill(0))
+                }));
+                renderTable();
+            }
+        }
+
+        switchShift('joba');
     </script>
 </body>
 </html>
