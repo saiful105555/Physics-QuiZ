@@ -2,24 +2,27 @@
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
-    <title>Master Exam Roster & Attendance - Ibne Taimiya School & College</title>
+    <title>Master Exam Roster & Attendance (78+78 Verified) - Ibne Taimiya School & College</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;700&display=swap');
         :root { --thick-border: 2px solid #000; --thin-border: 1px solid #333; }
         * { box-sizing: border-box; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
         body { font-family: 'Noto Serif Bengali', serif; margin: 0; padding: 0; background: #e2e8f0; }
+
         .no-print-bar { background: #0f172a; color: white; padding: 10px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.15); position: sticky; top: 0; z-index: 1000; }
         .shift-selector, .action-buttons { display: flex; justify-content: center; align-items: center; gap: 8px; flex-wrap: wrap; }
         .shift-selector { margin-bottom: 8px; }
         .btn-shift { background: #334155; color: #e2e8f0; border: 2px solid #475569; padding: 5px 16px; font-size: 11pt; border-radius: 20px; cursor: pointer; font-weight: bold; font-family: inherit; transition: 0.2s; }
         .btn-shift:hover { background: #475569; }
         .btn-shift.active { background: #f59e0b; color: #000; border-color: #fbbf24; box-shadow: 0 0 10px rgba(245,158,11,0.5); }
+
         .btn-download, .btn-attendance, .btn-attendance-2, .btn-reset, .btn-clear { color: white; border: none; padding: 6px 13px; font-size: 10pt; border-radius: 6px; cursor: pointer; font-weight: bold; font-family: inherit; transition: 0.2s; }
         .btn-download { background: #10b981; } .btn-download:hover { background: #059669; }
         .btn-attendance { background: #2563eb; } .btn-attendance:hover { background: #1d4ed8; }
         .btn-attendance-2 { background: #7c3aed; } .btn-attendance-2:hover { background: #6d28d9; }
         .btn-reset { background: #f97316; } .btn-reset:hover { background: #ea580c; }
         .btn-clear { background: #ef4444; } .btn-clear:hover { background: #dc2626; }
+
         .page { width: 297mm; height: 209mm; margin: 8px auto; padding: 2mm 3.5mm; background: #fff; border: 1px solid #cbd5e1; box-shadow: 0 10px 15px rgba(0,0,0,0.1); display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; position: relative; }
         .header-container { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1px; flex-shrink: 0; }
         .left-header-group { display: flex; flex-direction: column; gap: 2px; width: 135px; }
@@ -27,25 +30,30 @@
         .box-left .box-title { background: #f1f5f9; padding: 1px; font-size: 7pt; font-weight: bold; border-bottom: var(--thick-border); }
         .box-left .box-value { font-size: 12pt; font-weight: bold; line-height: 1.1; color: #b91c1c; }
         .bidro-box { border: var(--thick-border); border-radius: 4px; background: #fef08a; text-align: center; padding: 2px 3px; font-size: 6.5pt; font-weight: bold; color: #854d0e; line-height: 1.05; }
-        .header-center { text-align: center; flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0 6px; }
+
+        .header-center { text-align: center; flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; }
         .school-title-wrapper { display: flex; align-items: center; justify-content: center; gap: 8px; }
-        .header-logo { width: 38px; height: 38px; object-fit: contain; }
-        .school-name { font-size: 15.5pt; font-weight: bold; color: #0f172a; margin: 0; line-height: 1.0; }
-        .exam-name { font-size: 8.8pt; font-weight: bold; margin: 1px 0 0 0; line-height: 1.0; }
-        .roster-title { font-size: 8.2pt; font-weight: bold; display: inline-block; border-bottom: 1.5px solid #000; margin-top: 1px; line-height: 1.0; }
-        .special-instruction { margin-top: 2px; padding: 1.5px 10px; background: #fff1f2; border: 1.5px solid #be123c; border-radius: 4px; font-size: 7.4pt; font-weight: bold; color: #881337; line-height: 1.1; white-space: nowrap; }
+        .header-logo { width: 42px; height: 42px; object-fit: contain; }
+        .school-name { font-size: 16pt; font-weight: bold; color: #0f172a; margin: 0; line-height: 1.0; }
+        .exam-name { font-size: 9pt; font-weight: bold; margin: 1px 0 0 0; line-height: 1.0; }
+        .roster-title { font-size: 8.5pt; font-weight: bold; display: inline-block; border-bottom: 2px solid #000; margin-top: 1px; line-height: 1.0; }
+
         .box-right-container { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
         .shift-badge { background: #dbeafe; border: 2px solid #2563eb; color: #1e3a8a; padding: 1px 10px; border-radius: 6px; font-weight: 900; font-size: 9pt; }
         .box-right { border: var(--thick-border); border-radius: 4px; padding: 2px 5px; font-size: 7.2pt; font-weight: bold; text-align: left; width: 160px; background: #f8fafc; line-height: 1.1; }
+
         table { width: 100%; border-collapse: collapse; font-size: 8.2pt; table-layout: fixed; border: var(--thick-border); flex-shrink: 0; margin-bottom: 0; }
         th, td { border: var(--thin-border); padding: 0; text-align: center; vertical-align: middle; overflow: hidden; white-space: nowrap; }
         th { background: #f8f9fa; font-weight: bold; }
+
         body.rows-25 .roster-table tbody td, body.rows-25 .total-row td { height: 19.2px !important; line-height: 19.2px !important; }
         body.rows-26 .roster-table tbody td, body.rows-26 .total-row td { height: 18.2px !important; line-height: 18.2px !important; }
         body.rows-27 .roster-table tbody td, body.rows-27 .total-row td { height: 17.5px !important; line-height: 17.5px !important; }
+
         body.rows-25 .attendance-table tbody td { height: 20.25px !important; line-height: 20.25px !important; }
         body.rows-26 .attendance-table tbody td { height: 19.25px !important; line-height: 19.25px !important; }
         body.rows-27 .attendance-table tbody td { height: 18.5px !important; line-height: 18.5px !important; }
+
         .roster-table thead tr:first-child th { height: 24px !important; background: #e2e8f0; color: #000; }
         .roster-table thead tr:last-child th { height: 28px !important; line-height: 13px !important; }
         .roster-table th:nth-child(1) { width: 2.8%; }
@@ -53,27 +61,33 @@
         .roster-table td:nth-child(2) { text-align: left; padding-left: 3px; font-size: 7.8pt; cursor: text; }
         .roster-table td:nth-child(2):hover { background: #fef08a; }
         [contenteditable]:focus { outline: 1px solid #2563eb; background: #fff; }
+
         .roster-table thead tr:first-child th:nth-child(2), .roster-table thead tr:first-child th:nth-child(n+3),
         .roster-table thead tr:last-child th:nth-child(even), .roster-table tbody td:nth-child(2),
         .roster-table tbody td:nth-child(even):not(:last-child), .roster-table tfoot td { border-right: var(--thick-border); }
         .roster-table tfoot td:first-child { border-right: none; }
         .roster-table tfoot td:nth-child(2) { border-right: var(--thick-border); }
+
         .slot-cell { cursor: pointer; font-size: 9pt; user-select: none; }
         .slot-cell:hover { background: #dbeafe; }
         .slot-cell.ticked { font-weight: 900; color: #000; }
         .row-total { font-weight: bold; font-size: 8.5pt; color: #1d4ed8; }
         .total-row td { border-top: var(--thick-border); border-bottom: var(--thick-border); font-weight: bold; font-size: 8.5pt; }
         .vertical-text { writing-mode: vertical-rl; transform: rotate(180deg); font-size: 6.5pt; display: inline-block; line-height: 1; }
+
         .date-header { font-size: 7.6pt !important; font-weight: 900 !important; line-height: 1.08 !important; color: #000 !important; padding: 1px 0 !important; }
         .day-label { font-size: 7.2pt; font-weight: 900; color: #0f172a; }
+
         .attendance-table thead tr:first-child th { height: 24px !important; line-height: 1.08 !important; font-size: 7.3pt !important; font-weight: 900 !important; color: #000 !important; background: #e2e8f0; }
         .attendance-table thead tr:last-child th { height: 18px !important; line-height: 18px !important; font-size: 6.5pt; }
         .attendance-table td:nth-child(2) { text-align: left; padding-left: 4px; font-size: 7.5pt; }
         .attendance-tick { font-size: 7.5pt; font-weight: 900; color: #000; }
         .thick-right { border-right: var(--thick-border) !important; }
         .sub-header-row th { border-bottom: var(--thick-border) !important; }
+
         .signature-section { display: flex; justify-content: space-between; align-items: flex-end; padding: 0 35px; font-weight: bold; font-size: 9pt; flex-shrink: 0; height: 32px; margin-top: 1px; }
         .signature-box { text-align: center; width: 140px; padding-top: 2px; border-top: 1.5px dashed #000; line-height: 1.1; }
+
         @media print {
             @page { size: A4 landscape; margin: 0mm; }
             html, body { width: 297mm; background: #fff; margin: 0 !important; padding: 0 !important; }
@@ -95,7 +109,7 @@
 
     <div class="no-print-bar">
         <div class="shift-selector">
-            <span style="font-weight:bold; font-size:11pt;">শিফট নির্বাচন করুন:</span>
+            <span style="font-weight:bold; font-size:11pt;">শিফট নির্বাচন করুন (৭৮+৭৮ ভেরিফাইড):</span>
             <button class="btn-shift active" id="btn-joba" onclick="switchShift('joba')">🌺 জবা (২৬ জন)</button>
             <button class="btn-shift" id="btn-shapla" onclick="switchShift('shapla')">🌸 শাপলা (২৫ জন)</button>
             <button class="btn-shift" id="btn-beli" onclick="switchShift('beli')">🌼 বেলি (২৬ জন)</button>
@@ -104,7 +118,7 @@
         <div class="action-buttons">
             <button class="btn-download" onclick="printSection('roster')">🖨️ শুধু রোস্টার</button>
             <button class="btn-attendance" onclick="printSection('att1')">🖨️ হাজিরা (১ম বেলা)</button>
-            <button class="btn-attendance-2" onclick="printSection('att2')">🖨️ হাজিরা (২য় বেলা)</button>
+            <button class="btn-attendance-2" onclick="printSection('att2')">🖨️ হাজিরা (২য় বেলা)</button>
             <button class="btn-download" style="background:#0d9488;" onclick="printSection('all')">🖨️ ৩টি পেইজ একসাথে প্রিন্ট/PDF</button>
             <button class="btn-reset" onclick="resetToAutoSchedule()">🔄 ডিফল্ট অটো-রোটেশন রিসেট</button>
             <button class="btn-clear" onclick="clearAllTicks()">🗑️ সব টিক মুছুন (Blank)</button>
@@ -121,17 +135,17 @@
             <div class="header-center">
                 <div class="school-title-wrapper">
                     <img src="https://lh3.googleusercontent.com/d/1ZmxR46CCr7Ge5UntTMM_TbTeMJfdiqTD" alt="Logo" class="header-logo">
-                    <div class="school-name">ইবনে তাইমিয়া স্কুল এন্ড কলেজ</div>
+                    <div class="school-name">ইবনে তাইমিয়া স্কুল এন্ড কলেজ</div>
                 </div>
                 <div class="exam-name">বার্ষিক পরীক্ষা-২০২৬ খ্রিস্টাব্দ</div>
                 <div class="roster-title">ডিউটি রোস্টার</div>
-                <div class="special-instruction">বিশেষ নির্দেশনা: সকল শ্রেণিশিক্ষককে স্ব স্ব শ্রেণির আমল-আখলাক পরীক্ষার দিন অবশ্যই পর্যবেক্ষকের দায়িত্ব পালন করতে হবে।</div>
             </div>
             <div class="box-right-container">
                 <div class="shift-badge shift-name-display">শিফট: জবা</div>
-                <div class="box-right">১ম বেলা : ৭.৩০ থেকে ১০.৩০টা<br>২য় বেলা : ১.৩০ থেকে ৪.৩০টা</div>
+                <div class="box-right">১ম বেলা : ৭.৩০ থেকে ১০.৩০টা<br>২য় বেলা : ১.৩০ থেকে ৪.৩০টা</div>
             </div>
         </div>
+
         <table class="roster-table">
             <thead>
                 <tr>
@@ -147,12 +161,16 @@
                             { d: "০১/১২/২৬", day: "(মঙ্গল)" }, { d: "০২/১২/২৬", day: "(বুধ)" },
                             { d: "০৩/১২/২৬", day: "(বৃহস্পতি)" }
                         ];
-                        examDates.forEach(item => document.write(`<th colspan="2" class="date-header">${item.d}<br><span class="day-label">${item.day}</span></th>`));
+                        examDates.forEach(item => {
+                            document.write(`<th colspan="2" class="date-header">${item.d}<br><span class="day-label">${item.day}</span></th>`);
+                        });
                     </script>
                     <th rowspan="2" style="width: 3.4%;">মোট</th>
                 </tr>
                 <tr>
-                    <script>for(let i=0; i<13; i++) document.write('<th><div class="vertical-text">১ম বেলা</div></th><th><div class="vertical-text">২য় বেলা</div></th>');</script>
+                    <script>
+                        for(let i=0; i<13; i++) document.write('<th><div class="vertical-text">১ম বেলা</div></th><th><div class="vertical-text">২য় বেলা</div></th>');
+                    </script>
                 </tr>
             </thead>
             <tbody id="rosterBody"></tbody>
@@ -164,9 +182,10 @@
                 </tr>
             </tfoot>
         </table>
+
         <div class="signature-section">
             <div class="signature-box">অধ্যক্ষ</div>
-            <div class="signature-box">পরীক্ষা নিয়ন্ত্রক</div>
+            <div class="signature-box">পরীক্ষা নিয়ন্ত্রক</div>
             <div class="signature-box">প্রস্তুতকারী</div>
         </div>
     </section>
@@ -181,17 +200,17 @@
             <div class="header-center">
                 <div class="school-title-wrapper">
                     <img src="https://lh3.googleusercontent.com/d/1ZmxR46CCr7Ge5UntTMM_TbTeMJfdiqTD" alt="Logo" class="header-logo">
-                    <div class="school-name">ইবনে তাইমিয়া স্কুল এন্ড কলেজ</div>
+                    <div class="school-name">ইবনে তাইমিয়া স্কুল এন্ড কলেজ</div>
                 </div>
                 <div class="exam-name">বার্ষিক পরীক্ষা-২০২৬ খ্রিস্টাব্দ</div>
                 <div class="roster-title">শিক্ষক হাজিরা শিট (১ম বেলা)</div>
-                <div class="special-instruction">বিশেষ নির্দেশনা: সকল শ্রেণিশিক্ষককে স্ব স্ব শ্রেণির আমল-আখলাক পরীক্ষার দিন অবশ্যই পর্যবেক্ষকের দায়িত্ব পালন করতে হবে।</div>
             </div>
             <div class="box-right-container">
                 <div class="shift-badge shift-name-display">শিফট: জবা</div>
-                <div class="box-right">১ম বেলা : ৭.৩০ থেকে ১০.৩০টা<br>২য় বেলা : ১.৩০ থেকে ৪.৩০টা</div>
+                <div class="box-right">১ম বেলা : ৭.৩০ থেকে ১০.৩০টা<br>২য় বেলা : ১.৩০ থেকে ৪.৩০টা</div>
             </div>
         </div>
+
         <table class="attendance-table">
             <colgroup>
                 <col style="width: 2.8%;"><col style="width: 13.0%;">
@@ -209,34 +228,35 @@
             </thead>
             <tbody id="attendanceBody1"></tbody>
         </table>
+
         <div class="signature-section">
             <div class="signature-box">অধ্যক্ষ</div>
-            <div class="signature-box">পরীক্ষা নিয়ন্ত্রক</div>
+            <div class="signature-box">পরীক্ষা নিয়ন্ত্রক</div>
             <div class="signature-box">প্রস্তুতকারী</div>
         </div>
     </section>
 
-    <!-- পেজ ৩: শিক্ষক হাজিরা শিট (২য় বেলা) -->
+    <!-- পেজ ৩: শিক্ষক হাজিরা শিট (২য় বেলা) -->
     <section class="page" id="attendancePage2">
         <div class="header-container">
             <div class="left-header-group">
-                <div class="box-left"><div class="box-title">সর্বমোট ডিউটি (২য় বেলা)</div><div class="box-value" id="attendance2-grand-total">০</div></div>
+                <div class="box-left"><div class="box-title">সর্বমোট ডিউটি (২য় বেলা)</div><div class="box-value" id="attendance2-grand-total">০</div></div>
                 <div class="bidro-box">বি:দ্র: পরীক্ষা শুরুর ২০ মিনিট পূর্বে কক্ষে অবস্থান করতে হবে।</div>
             </div>
             <div class="header-center">
                 <div class="school-title-wrapper">
                     <img src="https://lh3.googleusercontent.com/d/1ZmxR46CCr7Ge5UntTMM_TbTeMJfdiqTD" alt="Logo" class="header-logo">
-                    <div class="school-name">ইবনে তাইমিয়া স্কুল এন্ড কলেজ</div>
+                    <div class="school-name">ইবনে তাইমিয়া স্কুল এন্ড কলেজ</div>
                 </div>
                 <div class="exam-name">বার্ষিক পরীক্ষা-২০২৬ খ্রিস্টাব্দ</div>
-                <div class="roster-title">শিক্ষক হাজিরা শিট (২য় বেলা)</div>
-                <div class="special-instruction">বিশেষ নির্দেশনা: সকল শ্রেণিশিক্ষককে স্ব স্ব শ্রেণির আমল-আখলাক পরীক্ষার দিন অবশ্যই পর্যবেক্ষকের দায়িত্ব পালন করতে হবে।</div>
+                <div class="roster-title">শিক্ষক হাজিরা শিট (২য় বেলা)</div>
             </div>
             <div class="box-right-container">
                 <div class="shift-badge shift-name-display">শিফট: জবা</div>
-                <div class="box-right">১ম বেলা : ৭.৩০ থেকে ১০.৩০টা<br>২য় বেলা : ১.৩০ থেকে ৪.৩০টা</div>
+                <div class="box-right">১ম বেলা : ৭.৩০ থেকে ১০.৩০টা<br>২য় বেলা : ১.৩০ থেকে ৪.৩০টা</div>
             </div>
         </div>
+
         <table class="attendance-table">
             <colgroup>
                 <col style="width: 2.8%;"><col style="width: 13.0%;">
@@ -254,9 +274,10 @@
             </thead>
             <tbody id="attendanceBody2"></tbody>
         </table>
+
         <div class="signature-section">
             <div class="signature-box">অধ্যক্ষ</div>
-            <div class="signature-box">পরীক্ষা নিয়ন্ত্রক</div>
+            <div class="signature-box">পরীক্ষা নিয়ন্ত্রক</div>
             <div class="signature-box">প্রস্তুতকারী</div>
         </div>
     </section>
@@ -264,21 +285,21 @@
     <script>
         const SHIFTS_CONFIG = {
             joba: {
-                title: "শিফট: জবা", storageKey: "ibne_taimiya_roster_joba_verified_final_v7", priorityShift: 1,
+                title: "শিফট: জবা", storageKey: "ibne_taimiya_roster_joba_v17", priorityShift: 1,
                 teachers: [
                     "জনাব এ.এম. আখতার হোসেন", '" মো: সিরাজুল ইসলাম খান (C.T)', '" মো: গোলাম আযম (C.T)',
-                    '" কবির আহমেদ', '" মু: নুর নবী (C.T)', '" হেদায়েত উল্যাহ সবুজ (C.T)',
+                    '" কবির আহমেদ', '" মু: নুর নবী (C.T)', '" হেদায়েত উল্যাহ সবুজ (C.T)',
                     '" আবুল বাশার চৌধুরী (C.T)', "আব্দুর রাজ্জাক", '" মাও. কামাল উদ্দিন (C.T)',
                     '" মোঃ শাহাদাত হোসাইন (C.T)', '" আলমগীর হোসেন (C.T)', '" মহসীন আল মামুন (C.T)',
-                    '" মোঃ হোসাইন (C.T)', '" মোঃ কাউছার হাবিব (C.T)', '" তোফায়েল আহমদ খন্দ. (C.T)',
-                    '" মোঃ শাহিন আলম (C.T)', '" মমিনুর রহমান (C.T)', '" জাকারিয়া হাবীব (C.T)',
+                    '" মোঃ হোসাইন (C.T)', '" মোঃ কাউছার হাবিব (C.T)', '" তোফায়েল আহমদ খন্দ. (C.T)',
+                    '" মোঃ শাহিন আলম (C.T)', '" মমিনুর রহমান (C.T)', '" জাকারিয়া হাবীব (C.T)',
                     "সাইফুল ইসলাম (ইঞ্জিঃ)", '" সাইফুল ইসলাম (C.T)', '" মোঃ ইকবাল তানিম',
                     '" মোস্তাফিজুর রহমান', '" নাছির উদ্দিন', '" মো: মাহমুদুল হাসান',
-                    '" মো: মনির হোসেন', '" ফয়সাল বিন সাঈদ'
+                    '" মো: মনির হোসেন', '" ফয়সাল বিন সাঈদ'
                 ]
             },
             shapla: {
-                title: "শিফট: শাপলা", storageKey: "ibne_taimiya_roster_shapla_verified_final_v2", priorityShift: 1,
+                title: "শিফট: শাপলা", storageKey: "ibne_taimiya_roster_shapla_v17", priorityShift: 1,
                 teachers: [
                     "জনাব মো: আবদুল কাদির", '" মোঃ শাহানুর রহমান', '" নুরে আলম সাথী',
                     '" আনোয়ার হোসেন', '" মো: কামরুল ফারুক', '" বাহার উদ্দিন',
@@ -291,7 +312,7 @@
                 ]
             },
             beli: {
-                title: "শিফট: বেলি", storageKey: "ibne_taimiya_roster_beli_verified_final_v2", priorityShift: 2,
+                title: "শিফট: বেলি", storageKey: "ibne_taimiya_roster_beli_v17", priorityShift: 2,
                 teachers: [
                     "জনাব শেখ রেজাউল হোসেন", '" ছালেহ আহমাদ', '" মোঃ ফজলুল হক',
                     '" মাহফুজুর রহমান', '" মোঃ সাজ্জাদ হোসেন', '" মো: ইলিয়াছ মিয়া',
@@ -305,16 +326,16 @@
                 ]
             },
             bokul: {
-                title: "শিফট: বকুল", storageKey: "ibne_taimiya_roster_bokul_verified_final_v3", priorityShift: 2,
+                title: "শিফট: বকুল", storageKey: "ibne_taimiya_roster_bokul_v17", priorityShift: 2,
                 teachers: [
                     "জনাব মো: মিজানুর রহমান-৩", '" মো: মিজানুর রহমান-৪', '" মো: আবুল হোসেন ফারুক',
                     '" মো: সাইফুল ইসলাম-১', '" মো: দুলাল হোসেন চৌধুরী', '" মো: নিজাম উদ্দীন মজুমদার',
                     '" মোহাম্মদ আব্দুর রহমান', '" মোস্তফা কামাল', '" মো: জহিরুল ইসলাম',
-                    '" ফরহাদ আল ফয়সাল', '" সিরাজুস সালেহীন', '" মোহাম্মদ মহসিন-২',
-                    '" সাইফুল ইসলাম মিয়াজী', '" মাও. মহিউদ্দিন', '" মো: স্বপন মজুমদার',
+                    '" ফরহাদ আল ফয়সাল', '" সিরাজুস সালেহীন', '" মোহাম্মদ মহসিন-২',
+                    '" সাইফুল ইসলাম মিয়াজী', '" মাও. মহিউদ্দিন', '" মো: স্বপন মজুমদার',
                     '" মো: সিফাতুল মোস্তফা', '" কাওছার আহমেদ', '" মো: ইউছুফ আলী',
                     '" মোহাম্মদ হোসাইন', '" বিল্লাল হোসেন', '" এমরান হোসেন',
-                    '" আবু মু. সজিব', '" মাসুদ আলম', '" বায়জিদুল ইসলাম মজু.',
+                    '" আবু মু. সজিব', '" মাসুদ আলম', '" বায়জিদুল ইসলাম মজু.',
                     '" কাওছার হামিদ জীবন'
                 ]
             }
@@ -322,206 +343,164 @@
 
         let currentShiftKey = 'joba';
         const tbody = document.getElementById('rosterBody');
-        const toBengaliNum = num => num.toString().replace(/[0-9]/g, w => ['০','১','২','৩','৪','৫','৬','৭','৮','৯'][w]);
 
-        // ১ নং শিক্ষক (index 0): বৃহস্পতিবারগুলোতে (১৯/১১, ২৬/১১, ০৩/১২) কোনো ডিউটি নেই (১০+৮ = ১৮টি)
-        const JOBA_T1_THURSDAYS_OFF = new Set([2, 7, 12]);
-        const JOBA_T1_AFTERNOON = new Set([0, 1, 3, 4, 6, 8, 9, 11]);
-        const JOBA_T1_AFTERNOON_OFF = new Set([2, 5, 7, 10, 12]);
+        function toBengaliNum(num) {
+            const d = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
+            return num.toString().replace(/[0-9]/g, w => d[w]);
+        }
 
-        // ৩ নং শিক্ষক (index 2): ২৬/১১ (7) তারিখের ডিউটি ২য় বেলা থেকে ১ম বেলায় স্থানান্তর (১১+৭ = ১৮টি)
-        const JOBA_T3_MORNING = new Set([0, 1, 2, 4, 5, 6, 7, 9, 10, 11, 12]);
-        const JOBA_T3_AFTERNOON = new Set([1, 4, 5, 6, 9, 11, 12]);
-        const JOBA_T3_AFTERNOON_OFF = new Set([0, 2, 3, 7, 8, 10]);
-
-        // ৬ নং শিক্ষক (index 5): ১ম বেলায় ১০টি + ২য় বেলায় ৮টি = ১৮টি
-        const JOBA_T6_MORNING = new Set([0, 1, 2, 4, 5, 6, 9, 10, 11, 12]);
-        const JOBA_T6_AFTERNOON = new Set([1, 4, 5, 6, 7, 9, 11, 12]);
-        const JOBA_T6_AFTERNOON_OFF = new Set([0, 2, 3, 8, 10]);
-
-        // ১১ নং শিক্ষক (index 10): দুই রবিবার (২২/১১ ও ২৯/১১) ১ম বেলায় ডিউটি যুক্ত এবং ২য় বেলায় ২টি ডাবল ডিউটি হ্রাস (১২+৬ = ১৮টি)
-        const JOBA_T11_MORNING = new Set([0, 1, 2, 3, 4, 5, 6, 8, 9, 10, 11, 12]);
-        const JOBA_T11_AFTERNOON = new Set([1, 6, 7, 9, 11, 12]);
-        const JOBA_T11_AFTERNOON_OFF = new Set([0, 2, 3, 4, 5, 8, 10]);
-
-        // ১৫ নং শিক্ষক (index 14): ১৯/১১(2) তারিখে কোনো ডিউটি নেই এবং ১৮/১১(1) বিকালে ডিউটি নেই (১২+৭ = ১৯টি)
-        const JOBA_T15_MORNING_OFF = new Set([2]);
-        const JOBA_T15_AFTERNOON_OFF = new Set([1, 2]);
-
-        function assignAlternatingHelpers(ticks, n, helperColOffset, dailyNeeded, helperTargets, forcedHelperDays = {}, forbiddenHelperDays = {}) {
+        function assignExactHelpers(ticks, n, helperColOffset, dailyNeeded, helperTargets, forbiddenDaysMap) {
             let rem = [...helperTargets];
             for (let d = 0; d < 13; d++) {
-                let needed = dailyNeeded[d], chosen = new Set();
-
-                for (let t = 0; t < n; t++) {
-                    if (forcedHelperDays[t] && forcedHelperDays[t].has(d)) {
-                        chosen.add(t); rem[t]--;
-                    }
-                }
-
-                for (let t = 0; t < n; t++) {
-                    if (chosen.has(t) || (forbiddenHelperDays[t] && forbiddenHelperDays[t].has(d))) continue;
-                    let availLeft = 0;
-                    for (let k = d; k < 13; k++) {
-                        if (!(forbiddenHelperDays[t] && forbiddenHelperDays[t].has(k))) availLeft++;
-                    }
-                    if (rem[t] >= availLeft && rem[t] > 0 && chosen.size < needed) {
-                        chosen.add(t); rem[t]--;
-                    }
-                }
+                let needed = dailyNeeded[d];
+                let chosen = new Set();
 
                 let candidates = [];
                 for (let t = 0; t < n; t++) {
-                    if (!chosen.has(t) && rem[t] > 0 && !(forbiddenHelperDays[t] && forbiddenHelperDays[t].has(d))) {
-                        candidates.push(t);
-                    }
+                    if (forbiddenDaysMap[t] && forbiddenDaysMap[t].has(d)) continue;
+                    if (rem[t] > 0) candidates.push(t);
                 }
 
                 candidates.sort((a, b) => {
+                    let availDaysA = 0, availDaysB = 0;
+                    for (let fd = d; fd < 13; fd++) {
+                        if (!(forbiddenDaysMap[a] && forbiddenDaysMap[a].has(fd))) availDaysA++;
+                        if (!(forbiddenDaysMap[b] && forbiddenDaysMap[b].has(fd))) availDaysB++;
+                    }
+                    let mustA = (rem[a] === availDaysA) ? 1 : 0;
+                    let mustB = (rem[b] === availDaysB) ? 1 : 0;
+                    if (mustB !== mustA) return mustB - mustA;
+
+                    if (rem[b] !== rem[a]) return rem[b] - rem[a];
+
                     let prevA = (d > 0) ? ticks[a][(d - 1) * 2 + helperColOffset] : 0;
                     let prevB = (d > 0) ? ticks[b][(d - 1) * 2 + helperColOffset] : 0;
                     if (prevA !== prevB) return prevA - prevB;
-                    if (rem[b] !== rem[a]) return rem[b] - rem[a];
+
                     return b - a;
                 });
 
                 for (let idx = 0; idx < candidates.length && chosen.size < needed; idx++) {
-                    chosen.add(candidates[idx]); rem[candidates[idx]]--;
+                    let t = candidates[idx];
+                    chosen.add(t);
+                    rem[t]--;
                 }
 
-                chosen.forEach(t => { ticks[t][d * 2 + helperColOffset] = 1; });
+                chosen.forEach(t => {
+                    ticks[t][d * 2 + helperColOffset] = 1;
+                });
             }
         }
 
         function buildAutoSchedule(shiftKey) {
-            const cfg = SHIFTS_CONFIG[shiftKey], n = cfg.teachers.length;
+            const cfg = SHIFTS_CONFIG[shiftKey];
+            const n = cfg.teachers.length;
             const ticks = Array.from({ length: n }, () => new Array(26).fill(0));
 
             if (shiftKey === 'joba') {
-                // ১ম বেলা:
-                for (let t = 0; t < n; t++) {
-                    for (let d = 0; d < 13; d++) {
+                // ১ নং শিক্ষক (index 0): বৃহস্পতিবার (d = 2, 7, 12) কোনো ডিউটি নেই, বাকি ১০ দিন ১ম বেলায় (১০টি) + ২য় বেলায় ৯টি = ১৯টি
+                const thursdays = new Set([2, 7, 12]);
+                // ৩, ৬ এবং ১১ নং শিক্ষকের নির্দিষ্ট তারিখ (১ম বেলা ১১টি + ২য় বেলা ৮টি = ১৯টি)
+                const specialS1Days = new Set([0, 1, 2, 4, 5, 6, 7, 9, 10, 11, 12]);
+                const specialS2Days = new Set([0, 1, 2, 6, 7, 9, 11, 12]);
+                // ১৫ নং শিক্ষকের শর্ত (১৮/১১ ২য় বেলা ও ১৯/১১ উভয় বেলা বন্ধ রেখে মোট ২০টি = ১২+৮)
+                const t14S1Days = new Set([0, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
+                const t14S2Days = new Set([0, 3, 4, 6, 7, 8, 10, 12]);
+
+                for (let d = 0; d < 13; d++) {
+                    for (let t = 0; t < n; t++) {
                         if (t === 0) {
-                            ticks[t][d * 2] = JOBA_T1_THURSDAYS_OFF.has(d) ? 0 : 1;
-                        } else if (t === 2) {
-                            ticks[t][d * 2] = JOBA_T3_MORNING.has(d) ? 1 : 0;
-                        } else if (t === 5) {
-                            ticks[t][d * 2] = JOBA_T6_MORNING.has(d) ? 1 : 0;
-                        } else if (t === 10) {
-                            ticks[t][d * 2] = JOBA_T11_MORNING.has(d) ? 1 : 0;
+                            ticks[t][d * 2] = thursdays.has(d) ? 0 : 1;
+                        } else if ([2, 5, 10].includes(t)) {
+                            ticks[t][d * 2] = specialS1Days.has(d) ? 1 : 0;
+                            ticks[t][d * 2 + 1] = specialS2Days.has(d) ? 1 : 0;
                         } else if (t === 14) {
-                            ticks[t][d * 2] = JOBA_T15_MORNING_OFF.has(d) ? 0 : 1;
+                            ticks[t][d * 2] = t14S1Days.has(d) ? 1 : 0;
+                            ticks[t][d * 2 + 1] = t14S2Days.has(d) ? 1 : 0;
                         } else {
                             ticks[t][d * 2] = 1;
                         }
                     }
                 }
 
-                // ২য় বেলা (সর্বমোট ১৬৫টি ডিউটি):
-                const joba2ndDaily = [13, 13, 12, 13, 13, 12, 13, 12, 13, 13, 12, 13, 13];
-                const joba2ndTargets = new Array(n).fill(0).map((_, t) => {
-                    if (t === 0) return 8;
-                    if (t === 2) return 7;
-                    if (t === 5) return 8;
-                    if (t === 10) return 6;
-                    if (t < 7) return 5;
-                    if (t === 14) return 7;
-                    if (t === 19) return 6;
-                    if (t === 25) return 8;
-                    if (t >= 20) return 7;
-                    return 6;
-                });
-                const forced2nd = {
-                    0: JOBA_T1_AFTERNOON,
-                    2: JOBA_T3_AFTERNOON,
-                    5: JOBA_T6_AFTERNOON,
-                    10: JOBA_T11_AFTERNOON
-                };
-                const forbidden2nd = {
-                    0: JOBA_T1_AFTERNOON_OFF,
-                    2: JOBA_T3_AFTERNOON_OFF,
-                    5: JOBA_T6_AFTERNOON_OFF,
-                    10: JOBA_T11_AFTERNOON_OFF,
-                    14: JOBA_T15_AFTERNOON_OFF
-                };
-                assignAlternatingHelpers(ticks, n, 1, joba2ndDaily, joba2ndTargets, forced2nd, forbidden2nd);
-
-                // ডাবল চেক গার্ড: ১, ৩, ৬, ১১ এবং ১৫ নং শিক্ষকের শর্তাবলী শতভাগ নিশ্চিতকরণ
-                for (let d = 0; d < 13; d++) {
-                    ticks[0][d * 2] = JOBA_T1_THURSDAYS_OFF.has(d) ? 0 : 1;
-                    ticks[0][d * 2 + 1] = JOBA_T1_AFTERNOON.has(d) ? 1 : 0;
-
-                    ticks[2][d * 2] = JOBA_T3_MORNING.has(d) ? 1 : 0;
-                    ticks[2][d * 2 + 1] = JOBA_T3_AFTERNOON.has(d) ? 1 : 0;
-
-                    ticks[5][d * 2] = JOBA_T6_MORNING.has(d) ? 1 : 0;
-                    ticks[5][d * 2 + 1] = JOBA_T6_AFTERNOON.has(d) ? 1 : 0;
-
-                    ticks[10][d * 2] = JOBA_T11_MORNING.has(d) ? 1 : 0;
-                    ticks[10][d * 2 + 1] = JOBA_T11_AFTERNOON.has(d) ? 1 : 0;
+                // জবা মোট = ৫০৮টি (১-১২ নং = ১৯টি করে, ১৩-২৬ নং = ২০টি করে)
+                let helperTargets = new Array(n).fill(0);
+                let forbiddenMap = { 0: thursdays };
+                for (let t = 0; t < n; t++) {
+                    if ([2, 5, 10, 14].includes(t)) {
+                        forbiddenMap[t] = new Set([0,1,2,3,4,5,6,7,8,9,10,11,12]);
+                        continue;
+                    }
+                    if (t === 0) helperTargets[t] = 9; // ১০ (১ম বেলা) + ৯ (২য় বেলা) = ১৯টি
+                    else helperTargets[t] = (t < 12) ? 6 : 7;
                 }
-                ticks[14][2 * 2] = 0;     // ১৫ নং শিক্ষকের ১৯/১১ ১ম বেলা বন্ধ
-                ticks[14][2 * 2 + 1] = 0; // ১৫ নং শিক্ষকের ১৯/১১ ২য় বেলা বন্ধ
-                ticks[14][1 * 2 + 1] = 0; // ১৫ নং শিক্ষকের ১৮/১১ ২য় বেলা বন্ধ
 
-            } else if (shiftKey === 'shapla') {
+                // ১১ দিন ১৪ জন এবং ২ দিন (d=3, 8) ১৩ জন (মোট ১৮০টি ২য় বেলায়)
+                const jobaS2Days13 = new Set([3, 8]);
+                let dailyNeeded = [];
+                for (let d = 0; d < 13; d++) {
+                    let targetCol = jobaS2Days13.has(d) ? 13 : 14;
+                    let fixedCount = (specialS2Days.has(d) ? 3 : 0) + (t14S2Days.has(d) ? 1 : 0);
+                    dailyNeeded.push(targetCol - fixedCount);
+                }
+
+                assignExactHelpers(ticks, n, 1, dailyNeeded, helperTargets, forbiddenMap);
+                return { names: [...cfg.teachers], ticks };
+            }
+
+            if (shiftKey === 'shapla') {
+                // শাপলা (২৫ জন): মোট = ৪৯৫টি (১-৫ নং = ১৯টি, ৬-২৫ নং = ২০টি)
+                // ২২ নং শিক্ষক (ফরিদ আহমেদ, index 21) ১৮/১১ (d=1) তারিখে উভয় বেলায় বন্ধ
                 for (let t = 0; t < n; t++) {
                     for (let d = 0; d < 13; d++) {
                         ticks[t][d * 2] = (t === 21 && d === 1) ? 0 : 1;
                     }
                 }
-                const shapla2ndDaily = [12, 12, 11, 12, 12, 12, 12, 11, 12, 12, 12, 12, 11];
-                const shapla2ndTargets = new Array(n).fill(0).map((_, t) => t < 22 ? 6 : 7);
-                assignAlternatingHelpers(ticks, n, 1, shapla2ndDaily, shapla2ndTargets, {}, { 21: new Set([1]) });
+                let helperTargets = new Array(n).fill(0).map((_, t) => (t < 5) ? 6 : (t === 21 ? 8 : 7));
+                let forbiddenMap = { 21: new Set([1]) };
 
-            } else if (shiftKey === 'beli') {
-                // বেলি ১ম বেলা: প্রতিদিন মোট ৭৮ জন মেলাতে ১৯/১১(2), ২২/১১(3), ২৬/১১(7), ২৯/১১(8) তারিখে ১৫ জন ও বাকি ৯ দিন ১৪ জন (মোট ১৮৬)
-                const beli1stDaily = [14, 14, 15, 15, 14, 14, 14, 15, 15, 14, 14, 14, 14];
-                const beli1stTargets = new Array(n).fill(0).map((_, t) => t < 22 ? 7 : 8);
-                assignAlternatingHelpers(ticks, n, 0, beli1stDaily, beli1stTargets);
+                // যে ১১ দিন জবায় ১৪ জন সেদিন শাপলায় ১৩ জন, আর বাকি ২ দিন (d=3, 8) শাপলায় ১৪ জন (জবা+শাপলা = প্রতিদিন ২৭ জন)
+                const jobaS2Days13 = new Set([3, 8]);
+                let dailyNeeded = new Array(13).fill(0).map((_, d) => jobaS2Days13.has(d) ? 14 : 13);
 
-                // বেলি ২য় বেলা: ১–১৮ নং শিক্ষকের ১৯টি (৭+১২) এবং ১৯–২৬ নং শিক্ষকের ২০টি (৭+১৩ বা ৮+১২) ডিউটি সমন্বয়
-                for (let t = 0; t < n; t++) for (let d = 0; d < 13; d++) ticks[t][d * 2 + 1] = 1;
-                let restPool = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 22, 23, 24, 25];
-                const beliDailyRests = [2, 2, 1, 2, 2, 2, 2, 1, 2, 2, 1, 2, 1];
-                for (let d = 0; d < 13; d++) {
-                    let restCount = beliDailyRests[d];
-                    restPool.sort((a, b) => ticks[b][d * 2] - ticks[a][d * 2]);
-                    for (let k = 0; k < restCount; k++) {
-                        let t = restPool.shift();
-                        ticks[t][d * 2 + 1] = 0;
-                    }
-                }
-
-            } else if (shiftKey === 'bokul') {
-                // বকুল ১ম বেলা: প্রতিদিন মোট ৭৮ জন মেলাতে ২৬/১১(7) তারিখে ১৫ জন, ৫ দিনে ১৪ জন ও ৭ দিনে ১৩ জন (মোট ১৭৬)
-                const bokul1stDaily = [13, 14, 14, 14, 13, 13, 13, 15, 14, 13, 13, 13, 14];
-                const bokul1stTargets = new Array(n).fill(0).map((_, t) => t < 24 ? 7 : 8);
-                assignAlternatingHelpers(ticks, n, 0, bokul1stDaily, bokul1stTargets);
-
-                // বকুল ২য় বেলা: ১৫ নং সহ সকলের ১৯/২০টি ডিউটি এবং প্রতিদিন ২য় বেলায় ৭২–৭৩ জন সমন্বয়
-                for (let t = 0; t < n; t++) {
-                    for (let d = 0; d < 13; d++) {
-                        ticks[t][d * 2 + 1] = 1;
-                    }
-                }
-                let restPool = [0, 1, 2, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24];
-                const bokulDailyRests = [2, 2, 1, 2, 1, 1, 1, 1, 2, 1, 2, 1, 1];
-                for (let d = 0; d < 13; d++) {
-                    let restCount = bokulDailyRests[d];
-                    restPool.sort((a, b) => ticks[b][d * 2] - ticks[a][d * 2]);
-                    for (let k = 0; k < restCount; k++) {
-                        let t = restPool.shift();
-                        ticks[t][d * 2 + 1] = 0;
-                    }
-                }
+                assignExactHelpers(ticks, n, 1, dailyNeeded, helperTargets, forbiddenMap);
+                return { names: [...cfg.teachers], ticks };
             }
-            return { names: [...cfg.teachers], ticks };
+
+            if (shiftKey === 'beli') {
+                // বেলি (২৬ জন): ২য় বেলায় প্রতিদিন সবাই (২৬ জন)। ১ম বেলায় মোট ১৭৮টি (জবার ১নং শিক্ষকের ৩টি বৃহস্পতিবারের শূন্যস্থান পূরণসহ)। সর্বমোট = ৫১৬টি (১-৪ নং = ১৯টি, ৫-২৬ নং = ২০টি)
+                for (let t = 0; t < n; t++) {
+                    for (let d = 0; d < 13; d++) ticks[t][d * 2 + 1] = 1;
+                }
+                let helperTargets = new Array(n).fill(0).map((_, t) => (t < 4) ? 6 : 7);
+                let dailyNeeded = new Array(13).fill(0).map((_, d) => {
+                    if (d === 2 || d === 3 || d === 8) return 15; // ১৯/১১ (বৃহঃ), ২২/১১ ও ২৯/১১
+                    if (d === 1 || d === 7 || d === 12) return 14; // ১৮/১১, ২৬/১১ (বৃহঃ) ও ০৩/১২ (বৃহঃ)
+                    return 13;                                     // বাকি ৭ দিন
+                });
+
+                assignExactHelpers(ticks, n, 0, dailyNeeded, helperTargets, {});
+                return { names: [...cfg.teachers], ticks };
+            }
+
+            if (shiftKey === 'bokul') {
+                // বকুল (২৫ জন): ২য় বেলায় প্রতিদিন সবাই (২৫ জন)। ১ম বেলায় মোট ১৮৪টি। সর্বমোট = ৫০৯টি (১-১৬ নং = ২০টি, ১৭-২৫ নং = ২১টি)
+                for (let t = 0; t < n; t++) {
+                    for (let d = 0; d < 13; d++) ticks[t][d * 2 + 1] = 1;
+                }
+                let helperTargets = new Array(n).fill(0).map((_, t) => (t < 16) ? 7 : 8);
+                let dailyNeeded = new Array(13).fill(0).map((_, d) => (d === 3 || d === 8) ? 15 : 14);
+
+                assignExactHelpers(ticks, n, 0, dailyNeeded, helperTargets, {});
+                return { names: [...cfg.teachers], ticks };
+            }
         }
 
         function saveToCache() {
-            const cfg = SHIFTS_CONFIG[currentShiftKey], state = { names: [], ticks: [] };
-            document.querySelectorAll('#rosterBody tr').forEach(row => {
+            const cfg = SHIFTS_CONFIG[currentShiftKey];
+            const rows = document.querySelectorAll('#rosterBody tr');
+            const state = { names: [], ticks: [] };
+            rows.forEach(row => {
                 state.names.push(row.querySelector('td:nth-child(2)').innerText);
                 const rowTicks = [];
                 row.querySelectorAll('.slot-cell').forEach(slot => rowTicks.push(slot.classList.contains('ticked') ? 1 : 0));
@@ -532,7 +511,8 @@
         }
 
         function loadFromCache() {
-            const cfg = SHIFTS_CONFIG[currentShiftKey], raw = localStorage.getItem(cfg.storageKey);
+            const cfg = SHIFTS_CONFIG[currentShiftKey];
+            const raw = localStorage.getItem(cfg.storageKey);
             if (!raw) {
                 const autoState = buildAutoSchedule(currentShiftKey);
                 localStorage.setItem(cfg.storageKey, JSON.stringify(autoState));
@@ -554,10 +534,12 @@
 
         function renderTable() {
             tbody.innerHTML = '';
-            const cfg = SHIFTS_CONFIG[currentShiftKey], savedState = loadFromCache();
+            const cfg = SHIFTS_CONFIG[currentShiftKey];
+            const savedState = loadFromCache();
+
             cfg.teachers.forEach((defaultName, index) => {
                 let tr = document.createElement('tr');
-                const currentName = (savedState?.names?.[index] !== undefined) ? savedState.names[index] : defaultName;
+                const currentName = (savedState && savedState.names && savedState.names[index] !== undefined) ? savedState.names[index] : defaultName;
 
                 let tdSl = document.createElement('td');
                 tdSl.innerText = toBengaliNum(index + 1) + ".";
@@ -574,14 +556,15 @@
                 for (let i = 0; i < 26; i++) {
                     let tdSlot = document.createElement('td');
                     tdSlot.className = 'slot-cell';
-                    if (savedState?.ticks?.[index]?.[i] === 1) {
+                    if (savedState && savedState.ticks && savedState.ticks[index] && savedState.ticks[index][i] === 1) {
                         tdSlot.classList.add('ticked');
                         tdSlot.innerText = '✔';
                     }
                     tdSlot.addEventListener('click', function() {
                         this.classList.toggle('ticked');
                         this.innerText = this.classList.contains('ticked') ? '✔' : '';
-                        calculateTotals(); saveToCache();
+                        calculateTotals();
+                        saveToCache();
                     });
                     tr.appendChild(tdSlot);
                 }
@@ -596,7 +579,8 @@
         }
 
         function calculateTotals() {
-            let grandTotal = 0, colTotals = new Array(26).fill(0);
+            let grandTotal = 0;
+            let colTotals = new Array(26).fill(0);
             document.querySelectorAll('#rosterBody tr').forEach(row => {
                 let rowTotal = 0;
                 row.querySelectorAll('.slot-cell').forEach((slot, idx) => {
@@ -605,8 +589,11 @@
                 row.querySelector('.row-total').innerText = rowTotal > 0 ? toBengaliNum(rowTotal) : '';
                 grandTotal += rowTotal;
             });
+
             const footerCells = document.querySelectorAll('.total-row td');
-            for (let i = 0; i < 26; i++) footerCells[i + 1].innerText = colTotals[i] > 0 ? toBengaliNum(colTotals[i]) : '';
+            for (let i = 0; i < 26; i++) {
+                footerCells[i + 1].innerText = colTotals[i] > 0 ? toBengaliNum(colTotals[i]) : '';
+            }
             const banglaGrand = toBengaliNum(grandTotal);
             document.getElementById('header-grand-total').innerText = banglaGrand;
             document.getElementById('footer-grand-total').innerText = banglaGrand;
@@ -615,8 +602,10 @@
         function renderShiftAttendance(tbodyId, totalElementId, shiftOffset) {
             const attBody = document.getElementById(tbodyId);
             attBody.innerHTML = '';
-            const cfg = SHIFTS_CONFIG[currentShiftKey], savedState = loadFromCache();
+            const cfg = SHIFTS_CONFIG[currentShiftKey];
+            const savedState = loadFromCache();
             let shiftTotal = 0;
+
             for (let i = 0; i < cfg.teachers.length; i++) {
                 let tr = document.createElement('tr');
                 let tdSl = document.createElement('td');
@@ -624,20 +613,25 @@
                 tdSl.style.fontWeight = "bold";
                 tr.appendChild(tdSl);
 
-                const currentName = (savedState?.names?.[i] !== undefined) ? savedState.names[i] : cfg.teachers[i];
+                const currentName = (savedState && savedState.names && savedState.names[i] !== undefined) ? savedState.names[i] : cfg.teachers[i];
                 let tdName = document.createElement('td');
                 tdName.className = 'thick-right';
                 tdName.innerText = currentName;
                 tr.appendChild(tdName);
 
                 for (let d = 0; d < 13; d++) {
-                    const isTicked = savedState?.ticks?.[i]?.[(d * 2) + shiftOffset] === 1 && currentName.trim() !== '';
+                    let slotIndex = (d * 2) + shiftOffset;
+                    const isTicked = savedState && savedState.ticks && savedState.ticks[i] && savedState.ticks[i][slotIndex] === 1 && currentName.trim() !== '';
                     if (isTicked) shiftTotal++;
+
                     let tdD = document.createElement('td');
                     tdD.className = 'attendance-tick';
                     tdD.innerText = isTicked ? '✔' : '';
                     tr.appendChild(tdD);
-                    tr.appendChild(document.createElement('td'));
+
+                    let tdHall = document.createElement('td');
+                    tr.appendChild(tdHall);
+
                     let tdSign = document.createElement('td');
                     tdSign.className = 'thick-right';
                     tr.appendChild(tdSign);
@@ -663,7 +657,7 @@
 
         function resetToAutoSchedule() {
             const cfg = SHIFTS_CONFIG[currentShiftKey];
-            if (confirm(cfg.title + "-এর ডিউটি রোস্টারটি কি ডিফল্ট নিয়মে রিসেট করতে চান?")) {
+            if (confirm(cfg.title + "-এর ডিউটি রোস্টারটি কি ডিফল্ট ৭৮+৭৮ নিয়মে রিসেট করতে চান?")) {
                 localStorage.setItem(cfg.storageKey, JSON.stringify(buildAutoSchedule(currentShiftKey)));
                 renderTable();
             }
@@ -672,9 +666,10 @@
         function clearAllTicks() {
             const cfg = SHIFTS_CONFIG[currentShiftKey];
             if (confirm(cfg.title + "-এর সব টিক মার্ক মুছে খালি (Blank) করতে চান?")) {
+                const n = cfg.teachers.length;
                 localStorage.setItem(cfg.storageKey, JSON.stringify({
                     names: [...cfg.teachers],
-                    ticks: Array.from({ length: cfg.teachers.length }, () => new Array(26).fill(0))
+                    ticks: Array.from({ length: n }, () => new Array(26).fill(0))
                 }));
                 renderTable();
             }
