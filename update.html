@@ -260,7 +260,7 @@
     <script>
         const SHIFTS_CONFIG = {
             joba: {
-                title: "শিফট: জবা", storageKey: "ibne_taimiya_roster_joba_verified_final_v4", priorityShift: 1,
+                title: "শিফট: জবা", storageKey: "ibne_taimiya_roster_joba_verified_final_v7", priorityShift: 1,
                 teachers: [
                     "জনাব এ.এম. আখতার হোসেন", '" মো: সিরাজুল ইসলাম খান (C.T)', '" মো: গোলাম আযম (C.T)',
                     '" কবির আহমেদ', '" মু: নুর নবী (C.T)', '" হেদায়েত উল্যাহ সবুজ (C.T)',
@@ -274,7 +274,7 @@
                 ]
             },
             shapla: {
-                title: "শিফট: শাপলা", storageKey: "ibne_taimiya_roster_shapla_verified_final_v1", priorityShift: 1,
+                title: "শিফট: শাপলা", storageKey: "ibne_taimiya_roster_shapla_verified_final_v2", priorityShift: 1,
                 teachers: [
                     "জনাব মো: আবদুল কাদির", '" মোঃ শাহানুর রহমান', '" নুরে আলম সাথী',
                     '" আনোয়ার হোসেন', '" মো: কামরুল ফারুক', '" বাহার উদ্দিন',
@@ -287,7 +287,7 @@
                 ]
             },
             beli: {
-                title: "শিফট: বেলি", storageKey: "ibne_taimiya_roster_beli_verified_final_v1", priorityShift: 2,
+                title: "শিফট: বেলি", storageKey: "ibne_taimiya_roster_beli_verified_final_v2", priorityShift: 2,
                 teachers: [
                     "জনাব শেখ রেজাউল হোসেন", '" ছালেহ আহমাদ', '" মোঃ ফজলুল হক',
                     '" মাহফুজুর রহমান', '" মোঃ সাজ্জাদ হোসেন', '" মো: ইলিয়াছ মিয়া',
@@ -301,7 +301,7 @@
                 ]
             },
             bokul: {
-                title: "শিফট: বকুল", storageKey: "ibne_taimiya_roster_bokul_verified_final_v1", priorityShift: 2,
+                title: "শিফট: বকুল", storageKey: "ibne_taimiya_roster_bokul_verified_final_v3", priorityShift: 2,
                 teachers: [
                     "জনাব মো: মিজানুর রহমান-৩", '" মো: মিজানুর রহমান-৪', '" মো: আবুল হোসেন ফারুক',
                     '" মো: সাইফুল ইসলাম-১', '" মো: দুলাল হোসেন চৌধুরী', '" মো: নিজাম উদ্দীন মজুমদার',
@@ -320,24 +320,29 @@
         const tbody = document.getElementById('rosterBody');
         const toBengaliNum = num => num.toString().replace(/[0-9]/g, w => ['০','১','২','৩','৪','৫','৬','৭','৮','৯'][w]);
 
-        // জবা শিফটের ১ নং শিক্ষকের (index 0) বৃহস্পতিবারগুলোর তালিকা: ১৯/১১(2), ২৬/১১(7), ০৩/১২(12)
+        // ১ নং শিক্ষক (index 0): বৃহস্পতিবারগুলোতে (১৯/১১, ২৬/১১, ০৩/১২) কোনো ডিউটি নেই (১০+৮ = ১৮টি)
         const JOBA_T1_THURSDAYS_OFF = new Set([2, 7, 12]);
-        // ১ নং শিক্ষকের ২য় বেলার ৮টি ডিউটি (১ম বেলায় ১০টি + ২য় বেলায় ৮টি = মোট ১৮টি)
         const JOBA_T1_AFTERNOON = new Set([0, 1, 3, 4, 6, 8, 9, 11]);
         const JOBA_T1_AFTERNOON_OFF = new Set([2, 5, 7, 10, 12]);
 
-        // জবা শিফটের ৩, ৬ ও ১১ নং শিক্ষক (0-based indices: 2, 5, 10)
-        const JOBA_SPECIAL_TEACHERS = new Set([2, 5, 10]);
-        // সকাল (১০ দিন): ১৭/১১(0), ১৮/১১(1), ১৯/১১(2), ২৩/১১(4), ২৪/১১(5), ২৫/১১(6), ৩০/১১(9), ০১/১২(10), ০২/১২(11), ০৩/১২(12)
-        // [২২/১১(3), ২৬/১১(7), ২৯/১১(8) তারিখে সকালে কোনো ডিউটি নেই]
-        const JOBA_SPECIAL_MORNING = new Set([0, 1, 2, 4, 5, 6, 9, 10, 11, 12]);
-        // বিকাল (৮ দিন): ১৮/১১(1), ২৩/১১(4), ২৪/১১(5), ২৫/১১(6), ২৬/১১(7), ৩০/১১(9), ০২/১২(11), ০৩/১২(12)
-        // [১৭/১১(0) ও ১৯/১১(2) শুধু ১ম বেলা; সকাল ১০টি + বিকাল ৮টি = মোট ১৮টি]
-        const JOBA_SPECIAL_AFTERNOON = new Set([1, 4, 5, 6, 7, 9, 11, 12]);
-        const JOBA_SPECIAL_AFTERNOON_OFF = new Set([0, 2, 3, 8, 10]);
+        // ৩ নং শিক্ষক (index 2): ২৬/১১ (7) তারিখের ডিউটি ২য় বেলা থেকে ১ম বেলায় স্থানান্তর (১১+৭ = ১৮টি)
+        const JOBA_T3_MORNING = new Set([0, 1, 2, 4, 5, 6, 7, 9, 10, 11, 12]);
+        const JOBA_T3_AFTERNOON = new Set([1, 4, 5, 6, 9, 11, 12]);
+        const JOBA_T3_AFTERNOON_OFF = new Set([0, 2, 3, 7, 8, 10]);
 
-        // বকুল ১৫ নং শিক্ষকের (index 14) ছুটির ৮টি তারিখ: ১৭/১১, ১৮/১১, ২২/১১, ২৪/১১, ২৫/১১, ২৯/১১, ০১/১২, ০২/১২
-        const BOKUL_15_OFF_DAYS = new Set([0, 1, 3, 5, 6, 8, 10, 11]);
+        // ৬ নং শিক্ষক (index 5): ১ম বেলায় ১০টি + ২য় বেলায় ৮টি = ১৮টি
+        const JOBA_T6_MORNING = new Set([0, 1, 2, 4, 5, 6, 9, 10, 11, 12]);
+        const JOBA_T6_AFTERNOON = new Set([1, 4, 5, 6, 7, 9, 11, 12]);
+        const JOBA_T6_AFTERNOON_OFF = new Set([0, 2, 3, 8, 10]);
+
+        // ১১ নং শিক্ষক (index 10): দুই রবিবার (২২/১১ ও ২৯/১১) ১ম বেলায় ডিউটি যুক্ত এবং ২য় বেলায় ২টি ডাবল ডিউটি হ্রাস (১২+৬ = ১৮টি)
+        const JOBA_T11_MORNING = new Set([0, 1, 2, 3, 4, 5, 6, 8, 9, 10, 11, 12]);
+        const JOBA_T11_AFTERNOON = new Set([1, 6, 7, 9, 11, 12]);
+        const JOBA_T11_AFTERNOON_OFF = new Set([0, 2, 3, 4, 5, 8, 10]);
+
+        // ১৫ নং শিক্ষক (index 14): ১৯/১১(2) তারিখে কোনো ডিউটি নেই এবং ১৮/১১(1) বিকালে ডিউটি নেই (১২+৭ = ১৯টি)
+        const JOBA_T15_MORNING_OFF = new Set([2]);
+        const JOBA_T15_AFTERNOON_OFF = new Set([1, 2]);
 
         function assignAlternatingHelpers(ticks, n, helperColOffset, dailyNeeded, helperTargets, forcedHelperDays = {}, forbiddenHelperDays = {}) {
             let rem = [...helperTargets];
@@ -389,55 +394,71 @@
             const ticks = Array.from({ length: n }, () => new Array(26).fill(0));
 
             if (shiftKey === 'joba') {
-                // ১ম বেলা: ১ নং শিক্ষকের বৃহস্পতিবার বাদে ১০ দিন, ৩/৬/১১ নং শিক্ষকের নির্দিষ্ট ১০ দিন এবং বাকি ২২ জনের ১৩ দিনই ডিউটি
+                // ১ম বেলা:
                 for (let t = 0; t < n; t++) {
                     for (let d = 0; d < 13; d++) {
                         if (t === 0) {
                             ticks[t][d * 2] = JOBA_T1_THURSDAYS_OFF.has(d) ? 0 : 1;
-                        } else if (JOBA_SPECIAL_TEACHERS.has(t)) {
-                            ticks[t][d * 2] = JOBA_SPECIAL_MORNING.has(d) ? 1 : 0;
+                        } else if (t === 2) {
+                            ticks[t][d * 2] = JOBA_T3_MORNING.has(d) ? 1 : 0;
+                        } else if (t === 5) {
+                            ticks[t][d * 2] = JOBA_T6_MORNING.has(d) ? 1 : 0;
+                        } else if (t === 10) {
+                            ticks[t][d * 2] = JOBA_T11_MORNING.has(d) ? 1 : 0;
+                        } else if (t === 14) {
+                            ticks[t][d * 2] = JOBA_T15_MORNING_OFF.has(d) ? 0 : 1;
                         } else {
                             ticks[t][d * 2] = 1;
                         }
                     }
                 }
-                // ২য় বেলা:
-                // - ১ নং এবং ৩, ৬, ১১ নং শিক্ষক: ৮টি করে (১০+৮ = ১৮টি)
-                // - ২, ৪, ৫, ৭ নং শিক্ষক (১ম ৭ জনের বাকি ৪ জন): ৫টি করে (১৩+৫ = ১৮টি)
-                // - ৮ থেকে ১৯ নং শিক্ষক (১১ নং বাদে): ৬টি করে (১৩+৬ = ১৯টি)
-                // - ২০ থেকে ২৬ নং শিক্ষক (নিচের ৭ জন): ৭টি করে (১৩+৭ = ২০টি)
-                const joba2ndDaily = [13, 13, 12, 13, 13, 13, 13, 13, 13, 13, 12, 13, 13];
+
+                // ২য় বেলা (সর্বমোট ১৬৫টি ডিউটি):
+                const joba2ndDaily = [13, 13, 12, 13, 13, 12, 13, 12, 13, 13, 12, 13, 13];
                 const joba2ndTargets = new Array(n).fill(0).map((_, t) => {
-                    if (t === 0 || JOBA_SPECIAL_TEACHERS.has(t)) return 8;
+                    if (t === 0) return 8;
+                    if (t === 2) return 7;
+                    if (t === 5) return 8;
+                    if (t === 10) return 6;
                     if (t < 7) return 5;
-                    if (t >= 19) return 7;
+                    if (t === 14) return 7;
+                    if (t === 19) return 6;
+                    if (t === 25) return 8;
+                    if (t >= 20) return 7;
                     return 6;
                 });
                 const forced2nd = {
                     0: JOBA_T1_AFTERNOON,
-                    2: JOBA_SPECIAL_AFTERNOON,
-                    5: JOBA_SPECIAL_AFTERNOON,
-                    10: JOBA_SPECIAL_AFTERNOON
+                    2: JOBA_T3_AFTERNOON,
+                    5: JOBA_T6_AFTERNOON,
+                    10: JOBA_T11_AFTERNOON
                 };
                 const forbidden2nd = {
                     0: JOBA_T1_AFTERNOON_OFF,
-                    2: JOBA_SPECIAL_AFTERNOON_OFF,
-                    5: JOBA_SPECIAL_AFTERNOON_OFF,
-                    10: JOBA_SPECIAL_AFTERNOON_OFF
+                    2: JOBA_T3_AFTERNOON_OFF,
+                    5: JOBA_T6_AFTERNOON_OFF,
+                    10: JOBA_T11_AFTERNOON_OFF,
+                    14: JOBA_T15_AFTERNOON_OFF
                 };
                 assignAlternatingHelpers(ticks, n, 1, joba2ndDaily, joba2ndTargets, forced2nd, forbidden2nd);
 
-                // ডাবল চেক গার্ড: ১ নং শিক্ষক এবং ৩, ৬, ১১ নং শিক্ষকের সকাল ও বিকালের টিক শতভাগ নিশ্চিতকরণ
+                // ডাবল চেক গার্ড: ১, ৩, ৬, ১১ এবং ১৫ নং শিক্ষকের শর্তাবলী শতভাগ নিশ্চিতকরণ
                 for (let d = 0; d < 13; d++) {
                     ticks[0][d * 2] = JOBA_T1_THURSDAYS_OFF.has(d) ? 0 : 1;
                     ticks[0][d * 2 + 1] = JOBA_T1_AFTERNOON.has(d) ? 1 : 0;
+
+                    ticks[2][d * 2] = JOBA_T3_MORNING.has(d) ? 1 : 0;
+                    ticks[2][d * 2 + 1] = JOBA_T3_AFTERNOON.has(d) ? 1 : 0;
+
+                    ticks[5][d * 2] = JOBA_T6_MORNING.has(d) ? 1 : 0;
+                    ticks[5][d * 2 + 1] = JOBA_T6_AFTERNOON.has(d) ? 1 : 0;
+
+                    ticks[10][d * 2] = JOBA_T11_MORNING.has(d) ? 1 : 0;
+                    ticks[10][d * 2 + 1] = JOBA_T11_AFTERNOON.has(d) ? 1 : 0;
                 }
-                JOBA_SPECIAL_TEACHERS.forEach(t => {
-                    for (let d = 0; d < 13; d++) {
-                        ticks[t][d * 2] = JOBA_SPECIAL_MORNING.has(d) ? 1 : 0;
-                        ticks[t][d * 2 + 1] = JOBA_SPECIAL_AFTERNOON.has(d) ? 1 : 0;
-                    }
-                });
+                ticks[14][2 * 2] = 0;     // ১৫ নং শিক্ষকের ১৯/১১ ১ম বেলা বন্ধ
+                ticks[14][2 * 2 + 1] = 0; // ১৫ নং শিক্ষকের ১৯/১১ ২য় বেলা বন্ধ
+                ticks[14][1 * 2 + 1] = 0; // ১৫ নং শিক্ষকের ১৮/১১ ২য় বেলা বন্ধ
 
             } else if (shiftKey === 'shapla') {
                 for (let t = 0; t < n; t++) {
@@ -450,13 +471,17 @@
                 assignAlternatingHelpers(ticks, n, 1, shapla2ndDaily, shapla2ndTargets, {}, { 21: new Set([1]) });
 
             } else if (shiftKey === 'beli') {
-                assignAlternatingHelpers(ticks, n, 0, new Array(13).fill(14), new Array(n).fill(7));
-                for (let t = 0; t < n; t++) for (let d = 0; d < 13; d++) ticks[t][d * 2 + 1] = 1;
+                // বেলি ১ম বেলা: প্রতিদিন মোট ৭৮ জন মেলাতে ১৯/১১(2), ২২/১১(3), ২৬/১১(7), ২৯/১১(8) তারিখে ১৫ জন ও বাকি ৯ দিন ১৪ জন (মোট ১৮৬)
+                const beli1stDaily = [14, 14, 15, 15, 14, 14, 14, 15, 15, 14, 14, 14, 14];
+                const beli1stTargets = new Array(n).fill(0).map((_, t) => t < 22 ? 7 : 8);
+                assignAlternatingHelpers(ticks, n, 0, beli1stDaily, beli1stTargets);
 
-                let restPool = Array.from({ length: 18 }, (_, i) => i);
-                const daysWith2Rests = new Set([0, 3, 6, 10, 11]);
+                // বেলি ২য় বেলা: ১–১৮ নং শিক্ষকের ১৯টি (৭+১২) এবং ১৯–২৬ নং শিক্ষকের ২০টি (৭+১৩ বা ৮+১২) ডিউটি সমন্বয়
+                for (let t = 0; t < n; t++) for (let d = 0; d < 13; d++) ticks[t][d * 2 + 1] = 1;
+                let restPool = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 22, 23, 24, 25];
+                const beliDailyRests = [2, 2, 1, 2, 2, 2, 2, 1, 2, 2, 1, 2, 1];
                 for (let d = 0; d < 13; d++) {
-                    let restCount = daysWith2Rests.has(d) ? 2 : 1;
+                    let restCount = beliDailyRests[d];
                     restPool.sort((a, b) => ticks[b][d * 2] - ticks[a][d * 2]);
                     for (let k = 0; k < restCount; k++) {
                         let t = restPool.shift();
@@ -465,23 +490,21 @@
                 }
 
             } else if (shiftKey === 'bokul') {
-                let dailyNeeded1st = new Array(13).fill(0).map((_, d) => d === 1 ? 14 : 13);
-                let helperTargets1st = new Array(n).fill(0).map((_, t) => {
-                    if (t === 14) return 5;
-                    return t < 3 ? 6 : 7;
-                });
-                let forced1st = { 14: new Set([2, 4, 7, 9, 12]) };
-                let forbidden1st = { 14: BOKUL_15_OFF_DAYS };
-                assignAlternatingHelpers(ticks, n, 0, dailyNeeded1st, helperTargets1st, forced1st, forbidden1st);
+                // বকুল ১ম বেলা: প্রতিদিন মোট ৭৮ জন মেলাতে ২৬/১১(7) তারিখে ১৫ জন, ৫ দিনে ১৪ জন ও ৭ দিনে ১৩ জন (মোট ১৭৬)
+                const bokul1stDaily = [13, 14, 14, 14, 13, 13, 13, 15, 14, 13, 13, 13, 14];
+                const bokul1stTargets = new Array(n).fill(0).map((_, t) => t < 24 ? 7 : 8);
+                assignAlternatingHelpers(ticks, n, 0, bokul1stDaily, bokul1stTargets);
 
+                // বকুল ২য় বেলা: ১৫ নং সহ সকলের ১৯/২০টি ডিউটি এবং প্রতিদিন ২য় বেলায় ৭২–৭৩ জন সমন্বয়
                 for (let t = 0; t < n; t++) {
                     for (let d = 0; d < 13; d++) {
-                        ticks[t][d * 2 + 1] = (t === 14 && BOKUL_15_OFF_DAYS.has(d)) ? 0 : 1;
+                        ticks[t][d * 2 + 1] = 1;
                     }
                 }
-                let restPool = [10, 11, 12, 13, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24];
+                let restPool = [0, 1, 2, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24];
+                const bokulDailyRests = [2, 2, 1, 2, 1, 1, 1, 1, 2, 1, 2, 1, 1];
                 for (let d = 0; d < 13; d++) {
-                    let restCount = (d === 11) ? 0 : ((d === 4 || d === 9) ? 2 : 1);
+                    let restCount = bokulDailyRests[d];
                     restPool.sort((a, b) => ticks[b][d * 2] - ticks[a][d * 2]);
                     for (let k = 0; k < restCount; k++) {
                         let t = restPool.shift();
