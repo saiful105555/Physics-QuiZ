@@ -1,0 +1,1702 @@
+<!DOCTYPE html>
+<html lang="bn" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>সাইফুল'স সাইন্স কেয়ার | ৭ম শ্রেণী (গণিত) বহুনির্বাচনি মডেল টেস্ট</title>
+  <!-- Google Fonts: Hind Siliguri & Noto Sans Bengali -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- SweetAlert2 & Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      --bg-gradient: linear-gradient(135deg, #f0f4ff 0%, #e5edff 50%, #f5f0ff 100%);
+      --card-bg: rgba(255, 255, 255, 0.88);
+      --card-border: rgba(99, 102, 241, 0.18);
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --primary: #4f46e5;
+      --primary-hover: #4338ca;
+      --primary-soft: rgba(79, 70, 229, 0.1);
+      --accent: #0ea5e9;
+      --success: #10b981;
+      --success-soft: rgba(16, 185, 129, 0.12);
+      --danger: #ef4444;
+      --danger-soft: rgba(239, 68, 68, 0.12);
+      --warning: #f59e0b;
+      --warning-soft: rgba(245, 158, 11, 0.14);
+      --shadow: 0 12px 32px -8px rgba(30, 41, 59, 0.12);
+      --option-bg: #f8fafc;
+      --option-border: #cbd5e1;
+    }
+
+    [data-theme="dark"] {
+      --bg-gradient: linear-gradient(135deg, #090d16 0%, #0f172a 50%, #1e1b4b 100%);
+      --card-bg: rgba(30, 41, 59, 0.86);
+      --card-border: rgba(148, 163, 184, 0.18);
+      --text-primary: #f8fafc;
+      --text-secondary: #cbd5e1;
+      --primary: #6366f1;
+      --primary-hover: #818cf8;
+      --primary-soft: rgba(99, 102, 241, 0.2);
+      --option-bg: rgba(15, 23, 42, 0.65);
+      --option-border: #334155;
+      --shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.5);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
+    }
+
+    body {
+      background: var(--bg-gradient);
+      color: var(--text-primary);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      transition: background 0.3s ease, color 0.3s ease;
+      overflow-x: hidden;
+    }
+
+    /* Top Header */
+    .top-navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      background: var(--card-bg);
+      border-bottom: 1px solid var(--card-border);
+      padding: 0.75rem 1.25rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+    }
+
+    .nav-container {
+      max-width: 1180px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .brand-box {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .brand-logo {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #4f46e5, #0ea5e9);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.35rem;
+      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.35);
+      flex-shrink: 0;
+    }
+
+    .brand-title h1 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1.2;
+    }
+
+    .brand-title p {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    .timer-badge {
+      display: none;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.4rem 0.85rem;
+      border-radius: 999px;
+      background: var(--primary-soft);
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 0.95rem;
+      border: 1px solid var(--card-border);
+    }
+
+    .timer-badge.warning {
+      background: var(--danger-soft);
+      color: var(--danger);
+      animation: pulse 1.2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.04); }
+    }
+
+    .theme-btn {
+      background: var(--option-bg);
+      border: 1px solid var(--option-border);
+      color: var(--text-primary);
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.15rem;
+      transition: all 0.2s ease;
+    }
+
+    .theme-btn:hover {
+      border-color: var(--primary);
+      transform: translateY(-1px);
+    }
+
+    /* Main Container */
+    .main-wrapper {
+      max-width: 1180px;
+      width: 100%;
+      margin: 1.5rem auto;
+      padding: 0 1rem;
+      flex: 1;
+    }
+
+    .glass-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      padding: 1.75rem;
+      transition: all 0.3s ease;
+    }
+
+    /* Welcome Screen */
+    .welcome-section {
+      max-width: 680px;
+      margin: 1.5rem auto;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .welcome-badge {
+      display: inline-block;
+      padding: 0.35rem 1rem;
+      border-radius: 99px;
+      background: var(--primary-soft);
+      color: var(--primary);
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .welcome-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.35rem;
+      color: var(--text-primary);
+    }
+
+    .welcome-subtitle {
+      font-size: 1.2rem;
+      color: var(--primary);
+      font-weight: 600;
+      margin-bottom: 1.25rem;
+    }
+
+    .exam-meta-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.85rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .meta-item {
+      background: var(--option-bg);
+      border: 1px solid var(--option-border);
+      padding: 0.85rem 0.5rem;
+      border-radius: 14px;
+    }
+
+    .meta-item h4 {
+      font-size: 1.25rem;
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .meta-item p {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+    }
+
+    .student-form {
+      text-align: left;
+      margin-top: 1rem;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      font-size: 0.95rem;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      border-radius: 12px;
+      border: 1.5px solid var(--option-border);
+      background: var(--option-bg);
+      color: var(--text-primary);
+      font-size: 1rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--primary-soft);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .start-btn {
+      width: 100%;
+      margin-top: 0.75rem;
+      padding: 1rem;
+      border: none;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #4f46e5 0%, #0ea5e9 100%);
+      color: #fff;
+      font-size: 1.15rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 10px 25px -5px rgba(79, 70, 229, 0.5);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+    }
+
+    .start-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 15px 30px -5px rgba(79, 70, 229, 0.65);
+    }
+
+    /* Exam Interface Layout */
+    #examSection {
+      display: none;
+    }
+
+    .exam-stats-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.85rem;
+      margin-bottom: 1.1rem;
+    }
+
+    .stat-pill {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 0.75rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: var(--shadow);
+    }
+
+    .stat-pill span {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    .stat-pill strong {
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+
+    .progress-wrapper {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 0.45rem;
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 10px;
+      background: var(--option-bg);
+      border-radius: 99px;
+      overflow: hidden;
+      border: 1px solid var(--option-border);
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #4f46e5, #0ea5e9, #10b981);
+      border-radius: 99px;
+      transition: width 0.35s ease;
+    }
+
+    .exam-grid {
+      display: grid;
+      grid-template-columns: 1fr 330px;
+      gap: 1.25rem;
+      align-items: start;
+    }
+
+    .question-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--card-border);
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .q-badge {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: #fff;
+      padding: 0.35rem 0.9rem;
+      border-radius: 99px;
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .q-topic-tag {
+      font-size: 0.82rem;
+      padding: 0.25rem 0.75rem;
+      border-radius: 8px;
+      background: var(--primary-soft);
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .stem-box {
+      background: var(--warning-soft);
+      border-left: 4px solid var(--warning);
+      padding: 0.85rem 1rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      font-size: 0.98rem;
+      font-weight: 500;
+    }
+
+    .question-text {
+      font-size: 1.22rem;
+      font-weight: 600;
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+      white-space: pre-line;
+    }
+
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .option-item {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      padding: 0.9rem 1.1rem;
+      border-radius: 14px;
+      background: var(--option-bg);
+      border: 2px solid var(--option-border);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      user-select: none;
+    }
+
+    .option-item:hover {
+      border-color: var(--primary);
+      transform: translateX(3px);
+    }
+
+    .option-item.selected {
+      background: var(--primary-soft);
+      border-color: var(--primary);
+      box-shadow: 0 4px 14px rgba(79, 70, 229, 0.16);
+    }
+
+    .option-radio {
+      appearance: none;
+      width: 22px;
+      height: 22px;
+      border: 2px solid var(--text-secondary);
+      border-radius: 50%;
+      display: grid;
+      place-content: center;
+      flex-shrink: 0;
+    }
+
+    .option-item.selected .option-radio {
+      border-color: var(--primary);
+    }
+
+    .option-radio::before {
+      content: "";
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      transform: scale(0);
+      transition: 0.15s transform ease-in-out;
+      background: var(--primary);
+    }
+
+    .option-item.selected .option-radio::before {
+      transform: scale(1);
+    }
+
+    .option-letter {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      background: var(--card-bg);
+      border: 1px solid var(--option-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.92rem;
+      flex-shrink: 0;
+    }
+
+    .option-item.selected .option-letter {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    .option-label-text {
+      font-size: 1.06rem;
+      font-weight: 500;
+      flex: 1;
+    }
+
+    .question-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--card-border);
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 0.7rem 1.25rem;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.96rem;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .btn-secondary {
+      background: var(--option-bg);
+      color: var(--text-primary);
+      border-color: var(--option-border);
+    }
+
+    .btn-secondary:hover:not(:disabled) {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      background: var(--primary-hover);
+    }
+
+    .btn-success {
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: #fff;
+      box-shadow: 0 6px 18px rgba(16, 185, 129, 0.35);
+    }
+
+    .btn-success:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    /* Navigator Card */
+    .navigator-card {
+      position: sticky;
+      top: 5.2rem;
+    }
+
+    .nav-grid-title {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-legend {
+      display: flex;
+      gap: 0.75rem;
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      margin-bottom: 0.85rem;
+      flex-wrap: wrap;
+    }
+
+    .legend-dot {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin-right: 4px;
+    }
+
+    .q-nav-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 0.45rem;
+      max-height: 340px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+
+    .q-nav-btn {
+      height: 38px;
+      border-radius: 9px;
+      border: 1px solid var(--option-border);
+      background: var(--option-bg);
+      color: var(--text-primary);
+      font-weight: 600;
+      font-size: 0.88rem;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .q-nav-btn.answered {
+      background: var(--success);
+      color: #fff;
+      border-color: var(--success);
+    }
+
+    .q-nav-btn.current {
+      outline: 2.5px solid var(--primary);
+      outline-offset: 1px;
+      font-weight: 700;
+    }
+
+    /* Result Section */
+    #resultSection {
+      display: none;
+    }
+
+    .result-hero {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .student-info-banner {
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      background: var(--option-bg);
+      border: 1px solid var(--option-border);
+      padding: 0.65rem 1.4rem;
+      border-radius: 99px;
+      margin-top: 0.75rem;
+      font-size: 0.95rem;
+    }
+
+    .result-dashboard-grid {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+      align-items: center;
+    }
+
+    .chart-box {
+      position: relative;
+      width: 240px;
+      height: 240px;
+      margin: 0 auto;
+    }
+
+    .chart-center-label {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+
+    .chart-center-label .big-score {
+      font-size: 2.1rem;
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1.1;
+    }
+
+    .chart-center-label .grade-pill {
+      margin-top: 0.25rem;
+      padding: 0.2rem 0.75rem;
+      border-radius: 99px;
+      background: var(--primary-soft);
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 0.88rem;
+    }
+
+    .score-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .score-stat-card {
+      background: var(--option-bg);
+      border: 1px solid var(--option-border);
+      border-radius: 16px;
+      padding: 1.1rem;
+      text-align: center;
+    }
+
+    .score-stat-card h3 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 0.2rem;
+    }
+
+    .score-stat-card p {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    .action-buttons-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+      justify-content: center;
+      margin: 1.5rem 0;
+    }
+
+    .btn-whatsapp {
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      color: #fff;
+      box-shadow: 0 8px 20px -4px rgba(37, 211, 102, 0.45);
+    }
+
+    /* Review Section */
+    .filter-tabs {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-tab {
+      padding: 0.45rem 1rem;
+      border-radius: 99px;
+      border: 1px solid var(--option-border);
+      background: var(--option-bg);
+      color: var(--text-primary);
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.88rem;
+    }
+
+    .filter-tab.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    .review-card {
+      margin-bottom: 1.25rem;
+      border-left: 5px solid var(--primary);
+    }
+
+    .review-card.correct-card { border-left-color: var(--success); }
+    .review-card.wrong-card { border-left-color: var(--danger); }
+    .review-card.skipped-card { border-left-color: var(--warning); }
+
+    .status-badge {
+      padding: 0.28rem 0.8rem;
+      border-radius: 99px;
+      font-size: 0.84rem;
+      font-weight: 700;
+    }
+
+    .status-correct { background: var(--success-soft); color: var(--success); }
+    .status-wrong { background: var(--danger-soft); color: var(--danger); }
+    .status-skipped { background: var(--warning-soft); color: var(--warning); }
+
+    .review-options-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.65rem;
+      margin: 1rem 0;
+    }
+
+    .review-opt {
+      padding: 0.65rem 0.9rem;
+      border-radius: 10px;
+      border: 1.5px solid var(--option-border);
+      background: var(--option-bg);
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .review-opt.is-correct {
+      border-color: var(--success);
+      background: var(--success-soft);
+      font-weight: 700;
+    }
+
+    .review-opt.is-user-wrong {
+      border-color: var(--danger);
+      background: var(--danger-soft);
+    }
+
+    .explanation-box {
+      background: var(--primary-soft);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 1.1rem;
+      margin-top: 0.85rem;
+    }
+
+    .explanation-box h4 {
+      color: var(--primary);
+      font-size: 1rem;
+      margin-bottom: 0.45rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .formula-tag {
+      display: inline-block;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      padding: 0.35rem 0.75rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.92rem;
+      margin-bottom: 0.5rem;
+      color: var(--primary);
+    }
+
+    .explanation-steps {
+      font-size: 0.96rem;
+      line-height: 1.65;
+      color: var(--text-primary);
+      white-space: pre-line;
+    }
+
+    /* Footer */
+    .site-footer {
+      text-align: center;
+      padding: 1.25rem;
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      border-top: 1px solid var(--card-border);
+      background: var(--card-bg);
+      margin-top: 2rem;
+    }
+
+    .site-footer strong {
+      color: var(--primary);
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 920px) {
+      .exam-grid {
+        grid-template-columns: 1fr;
+      }
+      .navigator-card {
+        position: static;
+      }
+      .result-dashboard-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .exam-stats-bar {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .score-cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .review-options-grid, .form-row {
+        grid-template-columns: 1fr;
+      }
+      .welcome-title {
+        font-size: 1.55rem;
+      }
+      .q-nav-grid {
+        grid-template-columns: repeat(7, 1fr);
+      }
+    }
+
+    /* Print Styles */
+    @media print {
+      .top-navbar, .action-buttons-row, .filter-tabs {
+        display: none !important;
+      }
+      body {
+        background: #fff !important;
+        color: #000 !important;
+      }
+      .glass-card {
+        box-shadow: none !important;
+        border: 1px solid #cbd5e1 !important;
+        break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <header class="top-navbar">
+    <div class="nav-container">
+      <div class="brand-box">
+        <div class="brand-logo">S</div>
+        <div class="brand-title">
+          <h1>সাইফুল'স সাইন্স কেয়ার</h1>
+          <p>৭ম শ্রেণী (গণিত) বহুনির্বাচনি মডেল টেস্ট</p>
+        </div>
+      </div>
+      <div class="nav-actions">
+        <div id="timerBadge" class="timer-badge">
+          <span>⏱️</span>
+          <span id="timerDisplay">৪৫:০০</span>
+        </div>
+        <button id="themeToggleBtn" class="theme-btn" title="ডার্ক/লাইট মোড পরিবর্তন করুন">🌙</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-wrapper">
+    <!-- 1. Welcome Page -->
+    <section id="welcomeSection" class="glass-card welcome-section">
+      <span class="welcome-badge">✨ প্রফেশনাল অনলাইন অ্যাসেসমেন্ট পোর্টাল</span>
+      <h2 class="welcome-title">সাইফুল'স সাইন্স কেয়ার</h2>
+      <p class="welcome-subtitle">৭ম শ্রেণী (গণিত) বহুনির্বাচনি মডেল টেস্ট</p>
+
+      <div class="exam-meta-grid">
+        <div class="meta-item">
+          <h4>৬৫ টি</h4>
+          <p>মোট বহুনির্বাচনি প্রশ্ন</p>
+        </div>
+        <div class="meta-item">
+          <h4>৬৫</h4>
+          <p>পূর্ণমান (১ নম্বর/প্রশ্ন)</p>
+        </div>
+        <div class="meta-item">
+          <h4>০.০০</h4>
+          <p>নেগেটিভ মার্কিং নেই</p>
+        </div>
+      </div>
+
+      <form id="startExamForm" class="student-form">
+        <div class="form-group">
+          <label for="studentName">শিক্ষার্থীর পূর্ণ নাম <span style="color:var(--danger)">*</span></label>
+          <input type="text" id="studentName" class="form-control" placeholder="তোমার নাম লেখো (যেমন: তানভীর আহমেদ)" required>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="studentRoll">রোল নম্বর <span style="color:var(--danger)">*</span></label>
+            <input type="text" id="studentRoll" class="form-control" placeholder="যেমন: ১০১" required>
+          </div>
+          <div class="form-group">
+            <label for="studentClass">শ্রেণি <span style="color:var(--danger)">*</span></label>
+            <input type="text" id="studentClass" class="form-control" value="৭ম শ্রেণী" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="timerMinutes">পরীক্ষার সময়সীমা (ঐচ্ছিক কাউন্টডাউন টাইমার)</label>
+          <select id="timerMinutes" class="form-control">
+            <option value="45" selected>৪৫ মিনিট (আদর্শ সময়)</option>
+            <option value="65">৬৫ মিনিট (প্রতি প্রশ্নে ১ মিনিট)</option>
+            <option value="30">৩০ মিনিট (দ্রুত অনুশীলন)</option>
+            <option value="0">টাইমার ছাড়া পরীক্ষা দিন</option>
+          </select>
+        </div>
+        <button type="submit" class="start-btn">
+          <span>🚀 পরীক্ষা শুরু করুন (Start Exam)</span>
+        </button>
+      </form>
+    </section>
+
+    <!-- 2. Main Examination Interface -->
+    <section id="examSection">
+      <div class="exam-stats-bar">
+        <div class="stat-pill">
+          <span>মোট প্রশ্ন</span>
+          <strong id="statTotal">৬৫</strong>
+        </div>
+        <div class="stat-pill">
+          <span>উত্তর দেওয়া হয়েছে</span>
+          <strong id="statAnswered" style="color:var(--success)">০</strong>
+        </div>
+        <div class="stat-pill">
+          <span>বাকি আছে</span>
+          <strong id="statRemaining" style="color:var(--warning)">৬৫</strong>
+        </div>
+        <div class="stat-pill">
+          <span>শিক্ষার্থী</span>
+          <strong id="statStudentName" style="font-size:0.95rem;color:var(--primary)">-</strong>
+        </div>
+      </div>
+
+      <div class="progress-wrapper">
+        <div class="progress-header">
+          <span>পরীক্ষার অগ্রগতি (Progress)</span>
+          <span id="progressPercentText">০% সম্পন্ন</span>
+        </div>
+        <div class="progress-track">
+          <div id="progressBarFill" class="progress-fill"></div>
+        </div>
+      </div>
+
+      <div class="exam-grid">
+        <!-- Active Question Card -->
+        <div class="glass-card">
+          <div class="question-header">
+            <span id="qNumberBadge" class="q-badge">প্রশ্ন ১ / ৬৫</span>
+            <span id="qTopicBadge" class="q-topic-tag">পাঠ ৩.১: দৈর্ঘ্য পরিমাপ</span>
+          </div>
+
+          <div id="qStemBox" class="stem-box" style="display:none;"></div>
+          <div id="qTextDisplay" class="question-text"></div>
+          <div id="optionsContainer" class="options-list"></div>
+
+          <div class="question-actions">
+            <button type="button" id="prevBtn" class="btn btn-secondary">⬅️ পূর্ববর্তী প্রশ্ন</button>
+            <button type="button" id="clearOptionBtn" class="btn btn-secondary">🔄 উত্তর মুছুন</button>
+            <button type="button" id="nextBtn" class="btn btn-primary">পরবর্তী প্রশ্ন ➡️</button>
+          </div>
+        </div>
+
+        <!-- Question Navigator Sidebar -->
+        <div class="glass-card navigator-card">
+          <div class="nav-grid-title">
+            <span>প্রশ্ন নেভিগেটর (১ - ৬৫)</span>
+          </div>
+          <div class="nav-legend">
+            <span><i class="legend-dot" style="background:var(--success)"></i>উত্তরকৃত</span>
+            <span><i class="legend-dot" style="background:var(--option-border)"></i>অনুত্তরিত</span>
+            <span><i class="legend-dot" style="background:var(--primary)"></i>বর্তমান প্রশ্ন</span>
+          </div>
+          <div id="questionNavGrid" class="q-nav-grid"></div>
+
+          <button type="button" id="submitExamBtn" class="btn btn-success" style="width:100%;justify-content:center;margin-top:1.25rem;padding:0.9rem;">
+            ✅ পরীক্ষা জমা দিন (Submit Exam)
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Result & Detailed Explanation Section -->
+    <section id="resultSection">
+      <div class="glass-card" id="printableResultCard">
+        <div class="result-hero">
+          <span class="welcome-badge">🏆 চূড়ান্ত ফলাফল ড্যাশবোর্ড</span>
+          <h2 class="welcome-title">সাইফুল'স সাইন্স কেয়ার</h2>
+          <p class="welcome-subtitle">৭ম শ্রেণী (গণিত) বহুনির্বাচনি মডেল টেস্ট</p>
+          <div class="student-info-banner">
+            <span>👤 <strong>নাম:</strong> <span id="resName"></span></span>
+            <span>🔢 <strong>রোল:</strong> <span id="resRoll"></span></span>
+            <span>🏫 <strong>শ্রেণি:</strong> <span id="resClass"></span></span>
+          </div>
+        </div>
+
+        <div class="result-dashboard-grid">
+          <div class="chart-box">
+            <canvas id="resultChart"></canvas>
+            <div class="chart-center-label">
+              <span id="resPercentBig" class="big-score">০%</span>
+              <span id="resGradeBadge" class="grade-pill">গ্রেড: -</span>
+            </div>
+          </div>
+
+          <div class="score-cards-grid">
+            <div class="score-stat-card">
+              <h3 id="resTotalQ" style="color:var(--primary)">৬৫</h3>
+              <p>মোট প্রশ্ন</p>
+            </div>
+            <div class="score-stat-card">
+              <h3 id="resCorrectQ" style="color:var(--success)">০</h3>
+              <p>সঠিক উত্তর</p>
+            </div>
+            <div class="score-stat-card">
+              <h3 id="resWrongQ" style="color:var(--danger)">০</h3>
+              <p>ভুল উত্তর</p>
+            </div>
+            <div class="score-stat-card">
+              <h3 id="resSkippedQ" style="color:var(--warning)">০</h3>
+              <p>উত্তর দেওয়া হয়নি</p>
+            </div>
+            <div class="score-stat-card">
+              <h3 id="resMarks" style="color:var(--primary)">০ / ৬৫</h3>
+              <p>প্রাপ্ত নম্বর</p>
+            </div>
+            <div class="score-stat-card">
+              <h3 id="resPerformanceText" style="color:var(--accent);font-size:1.3rem;">-</h3>
+              <p>মূল্যায়ন মন্তব্য</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="action-buttons-row">
+          <button type="button" id="whatsappShareBtn" class="btn btn-whatsapp">
+            📲 WhatsApp-এ ফলাফল পাঠান (01622186812)
+          </button>
+          <button type="button" id="printResultBtn" class="btn btn-primary">
+            🖨️ ফলাফল প্রিন্ট / Save as PDF
+          </button>
+          <button type="button" id="restartExamBtn" class="btn btn-secondary">
+            🔁 পুনরায় পরীক্ষা দিন (Restart Exam)
+          </button>
+        </div>
+      </div>
+
+      <!-- Detailed Question Review Header -->
+      <div class="glass-card" style="margin-top:1.5rem;margin-bottom:1.25rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;">
+        <div>
+          <h3 style="font-size:1.3rem;font-weight:700;">📚 প্রতিটি প্রশ্নের সঠিক উত্তর ও ধাপে ধাপে গাণিতিক ব্যাখ্যা</h3>
+          <p style="font-size:0.9rem;color:var(--text-secondary);">মূল বইয়ের সূত্র ও গাণিতিক যুক্তি অনুসারে প্রতিটি প্রশ্নের বিস্তারিত সমাধান নিচে দেওয়া হলো</p>
+        </div>
+        <div class="filter-tabs">
+          <button class="filter-tab active" data-filter="all">সব প্রশ্ন (৬৫)</button>
+          <button class="filter-tab" data-filter="correct">সঠিক</button>
+          <button class="filter-tab" data-filter="wrong">ভুল</button>
+          <button class="filter-tab" data-filter="skipped">অনুত্তরিত</button>
+        </div>
+      </div>
+
+      <div id="reviewListContainer"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© <strong>সাইফুল'স সাইন্স কেয়ার</strong> | ৭ম শ্রেণী (গণিত) বহুনির্বাচনি মডেল টেস্ট</p>
+    <p style="margin-top:0.25rem;">সার্বিক তত্ত্বাবধানে <strong>ইঞ্জি: সাইফুল ইসলাম</strong></p>
+  </footer>
+
+  <script>
+    // বাংলা সংখ্যা রূপান্তর ফাংশন
+    const toBn = (num) => String(num).replace(/\d/g, d => '০১২৩৪৫৬৭৮৯'[d]);
+    const optLetters = ['ক', 'খ', 'গ', 'ঘ'];
+
+    // সংযুক্ত ৩টি ছবির ৬৫টি নির্ভুল প্রশ্ন, অপশন, সঠিক উত্তর, সূত্র ও বিস্তারিত গাণিতিক সমাধান
+    const questions = [
+      { id: 1, origNo: "১", topic: "পাঠ ৩.১: দৈর্ঘ্য পরিমাপ", q: "কত সালে বাংলাদেশে তরল পদার্থের আয়তন পরিমাপের জন্য 'আন্তর্জাতিক আদর্শমান' গ্রহণ করা হয়েছে?", options: ["১৯৭২", "১৯৮২", "১৯৮৪", "১৯৯২"], ans: 1, formula: "বাংলাদেশে ১৯৮২ সাল থেকে পরিমাপের জন্য 'আন্তর্জাতিক আদর্শমান' (SI) গ্রহণ করা হয়েছে।", exp: "পাঠ্যবইয়ের তথ্য অনুযায়ী, বাংলাদেশে ১৯৮২ সাল থেকে দৈর্ঘ্য, ওজন ও তরল পদার্থের আয়তন পরিমাপের জন্য 'আন্তর্জাতিক আদর্শমান' বা International System of Units (SI) গ্রহণ করা হয়েছে। তাই সঠিক উত্তর খ (১৯৮২)।" },
+      { id: 2, origNo: "২", topic: "পাঠ ৩.১: দৈর্ঘ্য পরিমাপ", q: "দশমাংশকে ল্যাটিন ভাষায় কী বলা হয়?", options: ["মিলি", "ডেসি", "সেন্টি", "ডেকা"], ans: 1, formula: "ল্যাটিন ভাষায় ডেসি অর্থ দশমাংশ, সেন্টি অর্থ শতাংশ এবং মিলি অর্থ সহস্রাংশ।", exp: "ল্যাটিন ভাষায়:\n• ডেসি (Deci) অর্থ দশমাংশ (১/১০ বা ০.১)\n• সেন্টি (Centi) অর্থ শতাংশ (১/১০০ বা ০.০১)\n• মিলি (Milli) অর্থ সহস্রাংশ (১/১০০০ বা ০.০০১)\nসুতরাং দশমাংশকে ল্যাটিন ভাষায় 'ডেসি' বলা হয়।" },
+      { id: 3, origNo: "৩", topic: "পাঠ ৩.১: দৈর্ঘ্য পরিমাপ", q: "উত্তর মেরু থেকে বিষুবরেখা পর্যন্ত মোট দূরত্বের ১ কোটি ভাগের ১ ভাগকে কী বলে?", options: ["মিটার", "গজ", "কিলোমিটার", "হেক্টোমিটার"], ans: 0, formula: "১ মিটার = উত্তর মেরু থেকে ফ্রান্সের রাজধানী প্যারিসের দ্রাঘিমা বরাবর বিষুবরেখা পর্যন্ত মোট দূরত্বের ১ কোটি ভাগের ১ ভাগ।", exp: "মেট্রিক পদ্ধতিতে দৈর্ঘ্য পরিমাপের মূল একক হলো মিটার। উত্তর মেরু থেকে প্যারিসের দ্রাঘিমা রেখা বরাবর বিষুবরেখা পর্যন্ত মোট দূরত্বের ১ কোটি ভাগের ১ ভাগকে ১ মিটার হিসেবে নির্ধারণ করা হয়েছে।" },
+      { id: 4, origNo: "৪", topic: "পাঠ ৩.১: দৈর্ঘ্য পরিমাপ", q: "ল্যাটিন ভাষায় মিলি অর্থ কী?", options: ["একাংশ", "দশাংশ", "শতাংশ", "সহস্রাংশ"], ans: 3, formula: "ল্যাটিন ভাষায় মিলি (Milli) অর্থ সহস্রাংশ (১/১০০০)।", exp: "ল্যাটিন ভাষায় ডেসি অর্থ দশমাংশ, সেন্টি অর্থ শতাংশ এবং মিলি অর্থ সহস্রাংশ (১০০০ ভাগের ১ ভাগ)। তাই ১ মিলিমিটার = ১/১০০০ মিটার।" },
+      { id: 5, origNo: "৫", topic: "পাঠ ৩.১: দৈর্ঘ্য পরিমাপ", q: "১০ ইঞ্চি = কত সে.মি.?", options: ["২.৫৪", "২৫.৪", "৩৭.৩৯", "২৫৪"], ans: 1, formula: "১ ইঞ্চি = ২.৫৪ সে.মি. (প্রায়)", exp: "আমরা জানি,\n১ ইঞ্চি = ২.৫৪ সে.মি.\n∴ ১০ ইঞ্চি = (২.৫৪ × ১০) সে.মি. = ২৫.৪ সে.মি.।" },
+      { id: 6, origNo: "৬", topic: "পাঠ ৩.১: দৈর্ঘ্য পরিমাপ", q: "একটি সেতুর দৈর্ঘ্য ১০০ মিটার। ১৫০ মিটার লম্বা ট্রেনকে ঐ সেতু অতিক্রম করতে কত দূরত্ব অতিক্রম করতে হবে?", options: ["১০০ মিটার", "১৫০ মিটার", "২৫০ মিটার", "৫০০ মিটার"], ans: 2, formula: "ট্রেনের অতিক্রান্ত দূরত্ব = সেতুর দৈর্ঘ্য + ট্রেনের দৈর্ঘ্য", exp: "কোনো ট্রেনকে একটি সেতু সম্পূর্ণ অতিক্রম করতে হলে সেতুর দৈর্ঘ্য এবং নিজের দৈর্ঘ্যের সমষ্টি পরিমাণ দূরত্ব অতিক্রম করতে হয়।\n∴ মোট অতিক্রান্ত দূরত্ব = ১০০ মিটার + ১৫০ মিটার = ২৫০ মিটার।" },
+      { id: 7, origNo: "৭", topic: "পাঠ ৩.১: দৈর্ঘ্য পরিমাপ", q: "২ কি.মি. সমান কত মাইল?", options: ["০.৩১ মাইল", "০.৬২ মাইল", "১.২৪ মাইল", "১.৪২ মাইল"], ans: 2, formula: "১ কি.মি. = ০.৬২ মাইল (প্রায়)", exp: "আমরা জানি,\n১ কি.মি. = ০.৬২ মাইল (প্রায়)\n∴ ২ কি.মি. = (২ × ০.৬২) মাইল = ১.২৪ মাইল।" },
+      { id: 8, origNo: "৮", topic: "পাঠ ৩.১: দৈর্ঘ্য পরিমাপ", q: "৮৬.৩ ডেকামিটার = কত ডেসিমিটার?", options: ["৮.৬৩", "৪৩.১৫", "৮৬৩", "৮৬৩০"], ans: 3, formula: "১ ডেকামিটার = ১০ মিটার = ১০০ ডেসিমিটার", exp: "আমরা জানি,\n১ ডেকামিটার = ১০ মিটার এবং ১ মিটার = ১০ ডেসিমিটার।\nসুতরাং ১ ডেকামিটার = (১০ × ১০) = ১০০ ডেসিমিটার।\n∴ ৮৬.৩ ডেকামিটার = (৮৬.৩ × ১০০) ডেসিমিটার = ৮৬৩০ ডেসিমিটার।" },
+      { id: 9, origNo: "৯", topic: "পাঠ ৩.১: দৈর্ঘ্য পরিমাপ", q: "১০০ মিলিমিটার = কত ইঞ্চি?", options: ["১", "৩৮.৩৭", "৩.৯৩৭", "১০"], ans: 2, formula: "১ মিটার = ১০০০ মিলিমিটার = ৩৯.৩৭ ইঞ্চি (প্রায়)", exp: "আমরা জানি,\n১০০০ মিলিমিটার = ১ মিটার = ৩৯.৩৭ ইঞ্চি (প্রায়)\n∴ ১ মিলিমিটার = ৩৯.৩৭ ÷ ১০০০ ইঞ্চি\n∴ ১০০ মিলিমিটার = (৩৯.৩৭ × ১০০) ÷ ১০০০ = ৩.৯৩৭ ইঞ্চি।" },
+      { id: 10, origNo: "১০", topic: "পাঠ ৩.১: দৈর্ঘ্য পরিমাপ", q: "৮ কি.মি. ৯ সে.মি. = কত মিটার?", options: ["৮.৯", "৮০০.৯", "৮০০০.০০৯", "৮০০০.০৯"], ans: 3, formula: "১ কি.মি. = ১০০০ মিটার এবং ১ মিটার = ১০০ সে.মি.", exp: "প্রদত্ত রাশি = ৮ কি.মি. ৯ সে.মি.\n= (৮ × ১০০০) মিটার + (৯ ÷ ১০০) মিটার\n= ৮০০০ মিটার + ০.০৯ মিটার\n= ৮০০০.০৯ মিটার।" },
+      { id: 11, origNo: "১১", topic: "পাঠ ৩.১: দৈর্ঘ্য পরিমাপ", q: "১ গজে কত মিটার?", options: ["০.৯১৪৪", ".০৯৪১১", "১.৬১", "০.৮৪"], ans: 0, formula: "১ গজ = ৩ ফুট = ৩৬ ইঞ্চি এবং ১ ইঞ্চি = ২.৫৪ সে.মি.", exp: "আমরা জানি,\n১ গজ = ৩ ফুট = (৩ × ১২) ইঞ্চি = ৩৬ ইঞ্চি।\nআবার, ১ ইঞ্চি = ২.৫৪ সে.মি.\n∴ ৩৬ ইঞ্চি = (৩৬ × ২.৫৪) সে.মি. = ৯১.৪৪ সে.মি.\nযেহেতু ১০০ সে.মি. = ১ মিটার, তাই ১ গজ = ৯১.৪৪ ÷ ১০০ = ০.৯১৪৪ মিটার।" },
+      { id: 12, origNo: "১২", topic: "পাঠ ৩.১: দৈর্ঘ্য পরিমাপ", q: "৫ ফুট সমান কত ইঞ্চি?", options: ["১২ ইঞ্চি", "২৫.৪ ইঞ্চি", "৩৯.৩৭ ইঞ্চি", "৬০ ইঞ্চি"], ans: 3, formula: "১ ফুট = ১২ ইঞ্চি", exp: "আমরা জানি,\n১ ফুট = ১২ ইঞ্চি\n∴ ৫ ফুট = (৫ × ১২) ইঞ্চি = ৬০ ইঞ্চি।" },
+      { id: 13, origNo: "১৩", topic: "পাঠ ৩.১: দৈর্ঘ্য পরিমাপ", q: "১০ ফুট দৈর্ঘ্যের দড়িকে মিটারে পরিণত করলে নিচের কোনটি হবে?", options: ["১", "৩.৯৩৭", "৩.০৪৮", "৫"], ans: 2, formula: "১ ফুট = ১২ ইঞ্চি এবং ১ মিটার = ৩৯.৩৭ ইঞ্চি (প্রায়)", exp: "১০ ফুট = (১০ × ১২) ইঞ্চি = ১২০ ইঞ্চি।\nআমরা জানি, ৩৯.৩৭ ইঞ্চি = ১ মিটার\n∴ ১২০ ইঞ্চি = ১২০ ÷ ৩৯.৩৭ মিটার = ৩.০৪৮ মিটার।" },
+      { id: 14, origNo: "১৪", topic: "পাঠ ৩.১: দৈর্ঘ্য পরিমাপ", q: "৬ মাইল = কত কি. মি. (প্রায়)", options: ["৭.৫ কি. মি.", "৮.০৫ কি. মি.", "৯ কি. মি.", "৯.৬৬ কি.মি."], ans: 3, formula: "১ মাইল = ১.৬১ কি.মি. (প্রায়)", exp: "আমরা জানি,\n১ মাইল = ১.৬১ কি.মি. (প্রায়)\n∴ ৬ মাইল = (৬ × ১.৬১) কি.মি. = ৯.৬৬ কি.মি. (প্রায়)।" },
+      { id: 15, origNo: "১৫", topic: "পাঠ ৩.১: দৈর্ঘ্য পরিমাপ", q: "১ মিটারে কত ইঞ্চি?", options: ["৩৭.৩৯", "৩৯.৩৭", "৩৭.৩৮", "৩৯.৩৯"], ans: 1, formula: "১ মিটার = ৩৯.৩৭ ইঞ্চি (প্রায়)", exp: "মেট্রিক ও ব্রিটিশ পরিমাপের সম্পর্ক অনুযায়ী, ১ মিটার = ৩৯.৩৭ ইঞ্চি (প্রায়)।" },
+      { id: 16, origNo: "১৬", topic: "পাঠ ৩.১: দৈর্ঘ্য পরিমাপ", q: "i. ১ মাইল = ১.৬১ কি.মি.\nii. ১ মিটার = ৩৯.৩৭ ইঞ্চি\niii. দৈর্ঘ্য পরিমাপের একক মিটার\nনিচের কোনটি সঠিক?", options: ["i ও ii", "i ও iii", "ii ও iii", "i, ii ও iii"], ans: 3, formula: "১ মাইল = ১.৬১ কি.মি., ১ মিটার = ৩৯.৩৭ ইঞ্চি, দৈর্ঘ্যের একক মিটার", exp: "প্রদত্ত তিনটি তথ্যই সঠিক:\ni. ১ মাইল = ১.৬১ কি.মি. (প্রায়) — সঠিক।\nii. ১ মিটার = ৩৯.৩৭ ইঞ্চি (প্রায়) — সঠিক।\niii. দৈর্ঘ্য পরিমাপের মূল একক মিটার — সঠিক।\nসুতরাং i, ii ও iii তিনটিই সঠিক।" },
+      { id: 17, origNo: "১৭", topic: "পাঠ ৩.১: দৈর্ঘ্য পরিমাপ", q: "১ মাইল সমান—\ni. ১৭৬০ গজ\nii. ১৬১০ মিটার\niii. ০.৬২ কি.মি.\nনিচের কোনটি সঠিক?", options: ["i ও ii", "i ও iii", "ii ও iii", "i, ii ও iii"], ans: 0, formula: "১ মাইল = ১৭৬০ গজ = ১.৬১ কি.মি. = ১৬১০ মিটার", exp: "তথ্যগুলো যাচাই করি:\ni. ১ মাইল = ১৭৬০ গজ (সঠিক)\nii. ১ মাইল = ১.৬১ কি.মি. = (১.৬১ × ১০০০) মিটার = ১৬১০ মিটার (সঠিক)\niii. ১ কি.মি. = ০.৬২ মাইল, কিন্তু ১ মাইল = ১.৬১ কি.মি. (তাই iii ভুল)।\nসুতরাং সঠিক উত্তর ক (i ও ii)।" },
+      { id: 18, origNo: "১৮", topic: "পাঠ ৩.১: দৈর্ঘ্য পরিমাপ", q: "২৫৭১ মিটার সমান—\ni. ২ কিলোমিটার ৫০০ মিটার ৭১ সেন্টিমিটার\nii. ২৫৭১ × ১০০০ মিলিমিটার\niii. ২৫.৭১ হেক্টোমিটার\nনিচের কোনটি সঠিক?", options: ["i ও ii", "i ও iii", "ii ও iii", "i, ii ও iii"], ans: 2, formula: "১ মিটার = ১০০০ মিলিমিটার এবং ১০০ মিটার = ১ হেক্টোমিটার", exp: "তথ্যগুলো যাচাই করি:\ni. ২৫৭১ মিটার = ২ কিলোমিটার ৫৭১ মিটার (তাই i নং তথ্য ভুল)।\nii. ১ মিটার = ১০০০ মিলিমিটার হওয়ায় ২৫৭১ মিটার = ২৫৭১ × ১০০০ মিলিমিটার (সঠিক)।\niii. ১০০ মিটার = ১ হেক্টোমিটার হওয়ায় ২৫৭১ মিটার = ২৫৭১ ÷ ১০০ = ২৫.৭১ হেক্টোমিটার (সঠিক)।\nসুতরাং সঠিক উত্তর গ (ii ও iii)।" },
+      { id: 19, origNo: "১৯", topic: "পাঠ ৩.১: দৈর্ঘ্য পরিমাপ", q: "ব্রিটিশ পদ্ধতিতে দৈর্ঘ্য পরিমাপ—\ni. ১২ ইঞ্চি = ১ ফুট\nii. ৩ ফুট = ০.৫১৪৪ মিটার\niii. ১৭৬০ গজ = ১ মাইল\nনিচের কোনটি সঠিক?", options: ["i ও ii", "i ও iii", "ii ও iii", "i, ii ও iii"], ans: 1, formula: "১২ ইঞ্চি = ১ ফুট, ৩ ফুট = ১ গজ = ০.৯১৪৪ মিটার, ১৭৬০ গজ = ১ মাইল", exp: "তথ্যগুলো যাচাই করি:\ni. ১২ ইঞ্চি = ১ ফুট (সঠিক)।\nii. ৩ ফুট = ১ গজ = ০.৯১৪৪ মিটার, কিন্তু দেওয়া আছে ০.৫১৪৪ মিটার (ভুল)।\niii. ১৭৬০ গজ = ১ মাইল (সঠিক)।\nসুতরাং সঠিক উত্তর খ (i ও iii)।" },
+      { id: 20, origNo: "২০", topic: "পাঠ ৩.১: দৈর্ঘ্য পরিমাপ", q: "মেট্রিক ও ব্রিটিশ পরিমাপের সম্পর্ক অনুসারে—\ni. ১ ইঞ্চি = ২.৫৪ সে.মি. (প্রায়)\nii. ১ কি.মি. = ১.৬১ মাইল (প্রায়)\niii. ১ মিটার = ৩৯.৩৭ ইঞ্চি (প্রায়)\nনিচের কোনটি সঠিক?", options: ["i ও ii", "i ও iii", "ii ও iii", "i, ii ও iii"], ans: 1, formula: "১ ইঞ্চি = ২.৫৪ সে.মি., ১ মাইল = ১.৬১ কি.মি., ১ মিটার = ৩৯.৩৭ ইঞ্চি", exp: "তথ্যগুলো যাচাই করি:\ni. ১ ইঞ্চি = ২.৫৪ সে.মি. (প্রায়) — সঠিক।\nii. ১ মাইল = ১.৬১ কি.মি. এবং ১ কি.মি. = ০.৬২ মাইল (তাই ii নং তথ্য ভুল)।\niii. ১ মিটার = ৩৯.৩৭ ইঞ্চি (প্রায়) — সঠিক।\nসুতরাং সঠিক উত্তর খ (i ও iii)।" },
+      { id: 21, origNo: "২১", topic: "পাঠ ৩.১: দৈর্ঘ্য পরিমাপ", stem: "উদ্দীপক: একটি সেতুর দৈর্ঘ্য ৩.৮ মাইল (প্রায়)।", q: "সেতুটির দৈর্ঘ্য কি.মি. এককে কত?", options: ["৬.৬৮", "৬.১২", "২.৩৬", "৩.০৬"], ans: 1, formula: "১ মাইল = ১.৬১ কিলোমিটার (প্রায়)", exp: "দেওয়া আছে, সেতুটির দৈর্ঘ্য = ৩.৮ মাইল।\nআমরা জানি, ১ মাইল = ১.৬১ কি.মি. (প্রায়)\n∴ সেতুটির দৈর্ঘ্য = (৩.৮ × ১.৬১) কি.মি. = ৬.১১৮ কি.মি. ≈ ৬.১২ কি.মি.।" },
+      { id: 22, origNo: "২২", topic: "পাঠ ৩.১: দৈর্ঘ্য পরিমাপ", stem: "উদ্দীপক: একটি সেতুর দৈর্ঘ্য ৩.৮ মাইল (প্রায়)।", q: "গজ এককে সেতুটির দৈর্ঘ্য কত?", options: ["৬৬৮৮", "১৩৮৯", "২২২৯", "২০০৬৪"], ans: 0, formula: "১ মাইল = ১৭৬০ গজ", exp: "দেওয়া আছে, সেতুটির দৈর্ঘ্য = ৩.৮ মাইল।\nআমরা জানি, ১ মাইল = ১৭৬০ গজ\n∴ গজ এককে সেতুটির দৈর্ঘ্য = (৩.৮ × ১৭৬০) গজ = ৬৬৮৮ গজ।" },
+      { id: 23, origNo: "২৩", topic: "পাঠ ৩.২: ক্ষেত্রফল পরিমাপ", q: "১ বর্গফুট = কত বর্গ সে.মি.?", options: ["৭২৯ বর্গ সে.মি.", "৮২৯ বর্গ সে.মি.", "৯২৯ বর্গ সে.মি.", "৯৯২ বর্গ সে.মি."], ans: 2, formula: "১ বর্গফুট = ৯২৯ বর্গ সে.মি. (প্রায়)", exp: "১ ফুট = ১২ ইঞ্চি = (১২ × ২.৫৪) সে.মি. = ৩০.৪৮ সে.মি.\n∴ ১ বর্গফুট = (৩০.৪৮ × ৩০.৪৮) বর্গ সে.মি. = ৯২৯.০৩ বর্গ সে.মি. ≈ ৯২৯ বর্গ সে.মি. (প্রায়)।" },
+      { id: 24, origNo: "২৪", topic: "পাঠ ৩.২: ক্ষেত্রফল পরিমাপ", q: "একটি বর্গাকার পাতের দৈর্ঘ্য ১ ইঞ্চি। এর ক্ষেত্রফল কত?", options: ["১০.৭৬ বর্গ সে. মি. (প্রায়)", "৬.৪৫ বর্গ সে. মি. (প্রায়)", "২.৪৭ বর্গ সে. মি. (প্রায়)", "০.৮৪ বর্গ সে. মি. (প্রায়)"], ans: 1, formula: "১ বর্গইঞ্চি = ৬.৪৫ বর্গ সে.মি. (প্রায়)", exp: "বর্গাকার পাতের এক বাহুর দৈর্ঘ্য = ১ ইঞ্চি = ২.৫৪ সে.মি.\n∴ ক্ষেত্রফল = (১ ইঞ্চি)² = ১ বর্গইঞ্চি = (২.৫৪ × ২.৫৪) বর্গ সে.মি. = ৬.৪৫১৬ বর্গ সে.মি. ≈ ৬.৪৫ বর্গ সে.মি. (প্রায়)।" },
+      { id: 25, origNo: "২৫", topic: "পাঠ ৩.২: ক্ষেত্রফল পরিমাপ", q: "একটি জমির প্রস্থ, দৈর্ঘ্যের এক তৃতীয়াংশ। দৈর্ঘ্য ৬০ মিটার হলে ক্ষেত্রফল কত?", options: ["৬০ বর্গমিটার", "১৬০ বর্গমিটার", "১৮০ বর্গমিটার", "১২০০ বর্গমিটার"], ans: 3, formula: "আয়তাকার ক্ষেত্রের ক্ষেত্রফল = দৈর্ঘ্য × প্রস্থ", exp: "দেওয়া আছে, জমির দৈর্ঘ্য = ৬০ মিটার।\nপ্রশ্নমতে, জমির প্রস্থ = ৬০ × (১/৩) = ২০ মিটার।\n∴ জমির ক্ষেত্রফল = দৈর্ঘ্য × প্রস্থ = ৬০ × ২০ = ১২০০ বর্গমিটার।" },
+      { id: 26, origNo: "২৬", topic: "পাঠ ৩.২: ক্ষেত্রফল পরিমাপ", q: "একটি ঘরে তিনটি জানালা আছে। ১টি জানালার দৈর্ঘ্য ৩ মিটার, প্রস্থ ১.৫ মিটার হলে ৩টি জানালার ক্ষেত্রফল কত বর্গমিটার?", options: ["১৩", "১৩.৫", "১৪", "১৫.৫"], ans: 1, formula: "আয়তাকার ক্ষেত্রের ক্ষেত্রফল = দৈর্ঘ্য × প্রস্থ", exp: "১টি জানালার ক্ষেত্রফল = দৈর্ঘ্য × প্রস্থ = (৩ × ১.৫) বর্গমিটার = ৪.৫ বর্গমিটার।\n∴ ৩টি জানালার মোট ক্ষেত্রফল = (৪.৫ × ৩) বর্গমিটার = ১৩.৫ বর্গমিটার।" },
+      { id: 27, origNo: "২৭", topic: "পাঠ ৩.২: ক্ষেত্রফল পরিমাপ", q: "একটি ত্রিভুজের ভূমি ৪ সে.মি. এবং ক্ষেত্রফল ৫ বর্গ সে.মি. হলে ত্রিভুজটির উচ্চতা কত?", options: ["২ সে.মি.", "২.৫ সে.মি.", "১০ সে.মি.", "২০ সে.মি."], ans: 1, formula: "(১/২) × ভূমি × উচ্চতা = ত্রিভুজের ক্ষেত্রফল", exp: "আমরা জানি,\n(১/২) × ভূমি × উচ্চতা = ক্ষেত্রফল\nবা, উচ্চতা = (২ × ক্ষেত্রফল) ÷ ভূমি\n= (২ × ৫) ÷ ৪ = ১০ ÷ ৪ = ২.৫ সে.মি.।" },
+      { id: 28, origNo: "২৮", topic: "পাঠ ৩.২: ক্ষেত্রফল পরিমাপ", q: "একটি ত্রিভুজের ভূমি ৮ মি. এবং উচ্চতা ৩ মি. হলে এর ক্ষেত্রফল কত?", options: ["৮ বর্গ মি.", "১০ বর্গ মি.", "১২ বর্গ মি.", "২৪ বর্গ মি."], ans: 2, formula: "ত্রিভুজ ক্ষেত্রের ক্ষেত্রফল = (১/২) × ভূমি × উচ্চতা", exp: "দেওয়া আছে, ত্রিভুজের ভূমি = ৮ মি. এবং উচ্চতা = ৩ মি.\n∴ ত্রিভুজের ক্ষেত্রফল = (১/২) × ভূমি × উচ্চতা\n= (১/২) × ৮ × ৩ = ১২ বর্গ মি.।" },
+      { id: 29, origNo: "২৯", topic: "পাঠ ৩.২: ক্ষেত্রফল পরিমাপ", q: "নিচের কোনটি ক্ষেত্রফলের একক নয়?", options: ["হেক্টর", "বর্গগজ", "বর্গ ইঞ্চি", "হেক্টোমিটার"], ans: 3, formula: "ক্ষেত্রফলের এককসমূহ বর্গ একক বা হেক্টর/একর; হেক্টোমিটার দৈর্ঘ্যের একক।", exp: "হেক্টর, বর্গগজ এবং বর্গ ইঞ্চি হলো ক্ষেত্রফল পরিমাপের একক। কিন্তু 'হেক্টোমিটার' হলো দৈর্ঘ্য পরিমাপের একক (১ হেক্টোমিটার = ১০০ মিটার)।" },
+      { id: 30, origNo: "৩০", topic: "পাঠ ৩.২: ক্ষেত্রফল পরিমাপ", q: "১০০ বর্গ ডেসিমিটার = কত বর্গ মিটার?", options: ["০.১", "১", "১০", "১০০"], ans: 1, formula: "১ বর্গমিটার = ১০০ বর্গ ডেসিমিটার", exp: "আমরা জানি, ১ মিটার = ১০ ডেসিমিটার।\n∴ ১ বর্গমিটার = (১০ ডেসিমিটার × ১০ ডেসিমিটার) = ১০০ বর্গ ডেসিমিটার।\nঅতএব, ১০০ বর্গ ডেসিমিটার = ১ বর্গ মিটার।" },
+      { id: 31, origNo: "৩১", topic: "পাঠ ৩.২: ক্ষেত্রফল পরিমাপ", q: "১টি বর্গের এক বাহুর দৈর্ঘ্য ১৪ মিটার হলে এর এক চতুর্থাংশের ক্ষেত্রফল কত?", options: ["৩.৫ বর্গ ফুট", "১২.২৫ বর্গ সে.মি.", "১৯৬ বর্গমিটার", "৫৮.৩৩ বর্গগজ"], ans: 3, formula: "বর্গের ক্ষেত্রফল = (বাহু)² এবং ১ বর্গগজ = ০.৮৪ বর্গমিটার (প্রায়)", exp: "বর্গের এক বাহুর দৈর্ঘ্য = ১৪ মিটার।\n∴ বর্গের সম্পূর্ণ ক্ষেত্রফল = (১৪ × ১৪) = ১৯৬ বর্গমিটার।\nবর্গের এক চতুর্থাংশের ক্ষেত্রফল = ১৯৬ ÷ ৪ = ৪৯ বর্গমিটার।\nআমরা জানি, ০.৮৪ বর্গমিটার = ১ বর্গগজ (প্রায়)\n∴ ৪৯ বর্গমিটার = ৪৯ ÷ ০.৮৪ = ৫৮.৩৩ বর্গগজ (প্রায়)।" },
+      { id: 32, origNo: "৩৩", topic: "পাঠ ৩.২: ক্ষেত্রফল পরিমাপ", q: "১০ হেক্টর ক্ষেত্রফলের একটি জমি কত একর (প্রায়)?", options: ["২.৪৭", "৪.২৭", "২৪.৭", "১২.২৫"], ans: 2, formula: "১ হেক্টর = ২.৪৭ একর (প্রায়)", exp: "আমরা জানি,\n১ হেক্টর = ২.৪৭ একর (প্রায়)\n∴ ১০ হেক্টর = (১০ × ২.৪৭) একর = ২৪.৭ একর (প্রায়)।" },
+      { id: 33, origNo: "৩৪", topic: "পাঠ ৩.২: ক্ষেত্রফল পরিমাপ", q: "একটি কার্ডের ক্ষেত্রফল ২৪ বর্গ সেমি হলে ব্রিটিশ পদ্ধতিতে এর ক্ষেত্রফল কত বর্গ ইঞ্চি?", options: ["১.৭৮", "৩.৭২", "৭.৭৪", "২৯.৬৪"], ans: 1, formula: "১ বর্গ সেন্টিমিটার = ০.১৫৫ বর্গইঞ্চি (প্রায়)", exp: "আমরা জানি,\n১ বর্গ সেন্টিমিটার = ০.১৫৫ বর্গইঞ্চি (প্রায়)\n∴ ২৪ বর্গ সে.মি. = (২৪ × ০.১৫৫) বর্গ ইঞ্চি = ৩.৭২ বর্গ ইঞ্চি।" },
+      { id: 34, origNo: "৩৫", topic: "পাঠ ৩.২: ক্ষেত্রফল পরিমাপ", q: "একটি বর্গের বাহুর দৈর্ঘ্য ১৬ সে.মি. হলে এর ক্ষেত্রফল কত বর্গ সে.মি.?", options: ["১৪৪", "১২১", "১৬৯", "২৫৬"], ans: 3, formula: "বর্গের ক্ষেত্রফল = (বাহুর পরিমাপ)²", exp: "দেওয়া আছে, বর্গের বাহুর দৈর্ঘ্য = ১৬ সে.মি.\n∴ বর্গের ক্ষেত্রফল = (১৬)² বর্গ সে.মি. = (১৬ × ১৬) বর্গ সে.মি. = ২৫৬ বর্গ সে.মি.।" },
+      { id: 35, origNo: "৩৬", topic: "পাঠ ৩.২: ক্ষেত্রফল পরিমাপ", q: "একটি বর্গাকার ঘরের পরিসীমা ৮৮ মিটার হলে এর ক্ষেত্রফল কত বর্গমিটার?", options: ["৪৮৪", "১২১", "৩৫২", "১৬"], ans: 0, formula: "বর্গের এক বাহুর দৈর্ঘ্য = পরিসীমা ÷ ৪ এবং ক্ষেত্রফল = (বাহু)²", exp: "বর্গাকার ঘরের পরিসীমা = ৮৮ মিটার।\n∴ এক বাহুর দৈর্ঘ্য = ৮৮ ÷ ৪ = ২২ মিটার।\n∴ ক্ষেত্রফল = (২২)² বর্গমিটার = (২২ × ২২) বর্গমিটার = ৪৮৪ বর্গমিটার।" },
+      { id: 36, origNo: "৩৭", topic: "পাঠ ৩.২: ক্ষেত্রফল পরিমাপ", q: "একটি বর্গক্ষেত্রের ক্ষেত্রফল ১৬৯ বর্গমিটার হলে বাহুর দৈর্ঘ্য কত মিটার?", options: ["১৮", "১২", "১৪", "১৩"], ans: 3, formula: "বর্গক্ষেত্রের বাহুর দৈর্ঘ্য = √(ক্ষেত্রফল)", exp: "দেওয়া আছে, বর্গক্ষেত্রের ক্ষেত্রফল = ১৬৯ বর্গমিটার।\n∴ বাহুর দৈর্ঘ্য = √১৬৯ মিটার = ১৩ মিটার।" },
+      { id: 37, origNo: "৩৮", topic: "পাঠ ৩.২: ক্ষেত্রফল পরিমাপ", q: "সামান্তরিকের ক্ষেত্রফল নির্ণয়ের সূত্র নিচের কোনটি?", options: ["দৈর্ঘ্য × প্রস্থ", "ভূমি × উচ্চতা", "১/২ × ভূমি × উচ্চতা", "(বাহু)²"], ans: 1, formula: "সামান্তরিক ক্ষেত্রের ক্ষেত্রফল = ভূমি × উচ্চতা", exp: "• আয়তাকার ক্ষেত্রের ক্ষেত্রফল = দৈর্ঘ্য × প্রস্থ\n• সামান্তরিক ক্ষেত্রের ক্ষেত্রফল = ভূমি × উচ্চতা\n• ত্রিভুজ ক্ষেত্রের ক্ষেত্রফল = ১/২ × ভূমি × উচ্চতা\n• বর্গের ক্ষেত্রফল = (বাহু)²\nসুতরাং সঠিক উত্তর খ (ভূমি × উচ্চতা)।" },
+      { id: 38, origNo: "৩৯", topic: "পাঠ ৩.২: ক্ষেত্রফল পরিমাপ", q: "কোনো সামান্তরিকের ভূমি ৬০ সে.মি. ও উচ্চতা ৫০ সে.মি. হলে ক্ষেত্রফল কত বর্গ সে.মি. হবে ?", options: ["১২০০", "১৫০০", "২৭০০", "৩০০০"], ans: 3, formula: "সামান্তরিকের ক্ষেত্রফল = (ভূমি × উচ্চতা) বর্গএকক", exp: "দেওয়া আছে, সামান্তরিকের ভূমি = ৬০ সে.মি. এবং উচ্চতা = ৫০ সে.মি.\n∴ ক্ষেত্রফল = (ভূমি × উচ্চতা) বর্গএকক\n= (৬০ × ৫০) বর্গ সে.মি. = ৩০০০ বর্গ সে.মি.।" },
+      { id: 39, origNo: "৪০", topic: "পাঠ ৩.২: ক্ষেত্রফল পরিমাপ", q: "একটি ঘরের দৈর্ঘ্য ২ মিটার, প্রস্থ ১.৫ মিটার হলে এর মেঝের ক্ষেত্রফল কত বর্গফুট?", options: ["৩", "৩২.২৮", "৩৪.৪৮", "৩৬.৬৬"], ans: 1, formula: "১ বর্গমিটার = ১০.৭৬ বর্গফুট (প্রায়)", exp: "মেঝের ক্ষেত্রফল = (২ × ১.৫) বর্গ মিটার = ৩ বর্গ মিটার।\nআমরা জানি, ১ বর্গমিটার = ১০.৭৬ বর্গফুট (প্রায়)\n∴ মেঝের ক্ষেত্রফল = (৩ × ১০.৭৬) বর্গফুট = ৩২.২৮ বর্গফুট।" },
+      { id: 40, origNo: "৪১", topic: "পাঠ ৩.২: ক্ষেত্রফল পরিমাপ", q: "একটি পুকুরের দৈর্ঘ্য বিস্তারের ২ গুণ। দৈর্ঘ্য ২০ মিটার হলে পুকুরের ক্ষেত্রফল কত বর্গমিটার?", options: ["৪০", "১০০", "২০০", "৫০"], ans: 2, formula: "বিস্তার (প্রস্থ) = দৈর্ঘ্য ÷ ২ এবং ক্ষেত্রফল = দৈর্ঘ্য × বিস্তার", exp: "দেওয়া আছে, পুকুরের দৈর্ঘ্য = ২০ মিটার।\nযেহেতু দৈর্ঘ্য বিস্তারের ২ গুণ, তাই বিস্তার = ২০ ÷ ২ = ১০ মিটার।\n∴ পুকুরের ক্ষেত্রফল = (২০ × ১০) বর্গ মিটার = ২০০ বর্গ মিটার।" },
+      { id: 41, origNo: "৪২", topic: "পাঠ ৩.২: ক্ষেত্রফল পরিমাপ", q: "আয়তাকার ক্ষেত্রের ক্ষেত্রফল ৫৮০ বর্গমিটার এবং প্রস্থ ৭.২৫ মিটার হলে দৈর্ঘ্য কত মিটার?", options: ["৬০", "৭০", "৭৫", "৮০"], ans: 3, formula: "দৈর্ঘ্য = ক্ষেত্রফল ÷ প্রস্থ", exp: "দেওয়া আছে, আয়তাকার ক্ষেত্রের ক্ষেত্রফল = ৫৮০ বর্গমিটার এবং প্রস্থ = ৭.২৫ মিটার।\n∴ দৈর্ঘ্য = ক্ষেত্রফল ÷ প্রস্থ = ৫৮০ ÷ ৭.২৫ = ৮০ মিটার।" },
+      { id: 42, origNo: "৪৩", topic: "পাঠ ৩.২: ক্ষেত্রফল পরিমাপ", q: "ত্রিভুজাকার ক্ষেত্রের ক্ষেত্রফল ২৮০ বর্গমিটার এবং উচ্চতা ২৮ মিটার হলে, ভূমির পরিমাপ কত মিটার?", options: ["১১২০০", "২০", "১০", "৫"], ans: 1, formula: "ত্রিভুজের ক্ষেত্রফল = (১/২) × ভূমি × উচ্চতা", exp: "আমরা জানি,\nত্রিভুজের ক্ষেত্রফল = (১/২) × ভূমি × উচ্চতা\n∴ ২৮০ = (১/২) × ভূমি × ২৮\nবা, ভূমি = (২৮০ × ২) ÷ ২৮ = ২০ মিটার।" },
+      { id: 43, origNo: "৬৮", topic: "পাঠ ৩.৩-৩.৪: ওজন ও আয়তন পরিমাপ", q: "কত ডিগ্রি সেলসিয়াস তাপমাত্রায় ১ ঘন সেমি বিশুদ্ধ পানির ওজন ১ গ্রাম?", options: ["০°", "৪°", "৫°", "১০°"], ans: 1, formula: "৪° সেলসিয়াস তাপমাত্রায় ১ ঘন সে.মি. বিশুদ্ধ পানির ওজন ১ গ্রাম।", exp: "পানির ঘনত্ব ৪° সেলসিয়াস তাপমাত্রায় সর্বোচ্চ থাকে এবং ৪° সেলসিয়াস তাপমাত্রায় ১ ঘন সেন্টিমিটার (১ সি.সি.) বিশুদ্ধ পানির ওজন ঠিক ১ গ্রাম হয়।" },
+      { id: 44, origNo: "৬৯", topic: "পাঠ ৩.৩-৩.৪: ওজন ও আয়তন পরিমাপ", q: "১ ঘন ইঞ্চি সমান প্রায় কত মিলিলিটার?", options: ["৭.২৯", "১৭.৬", "১৬.৩৯", "১০"], ans: 2, formula: "১ ঘন ইঞ্চি = ১৬.৩৯ মিলিলিটার (প্রায়)", exp: "১ ইঞ্চি = ২.৫৪ সে.মি.।\n∴ ১ ঘন ইঞ্চি = (২.৫৪)³ ঘন সে.মি. = ১৬.৩৮৭ ঘন সে.মি. ≈ ১৬.৩৯ মিলিলিটার (যেহেতু ১ ঘন সে.মি. = ১ মিলিলিটার)।" },
+      { id: 45, origNo: "৭০", topic: "পাঠ ৩.৩-৩.৪: ওজন ও আয়তন পরিমাপ", q: "৪° সেলসিয়াস তাপমাত্রায় ৩ ঘন সে.মি বিশুদ্ধ পানির ওজন কত গ্রাম?", options: ["১", "২", "৩", "৪"], ans: 2, formula: "৪° সেলসিয়াস তাপমাত্রায় ১ ঘন সে.মি. বিশুদ্ধ পানির ওজন = ১ গ্রাম", exp: "৪° সেলসিয়াস তাপমাত্রায় ১ ঘন সে.মি. বিশুদ্ধ পানির ওজন ১ গ্রাম।\n∴ ৩ ঘন সে.মি. বিশুদ্ধ পানির ওজন = (৩ × ১) গ্রাম = ৩ গ্রাম।" },
+      { id: 46, origNo: "৭১", topic: "পাঠ ৩.৩-৩.৪: ওজন ও আয়তন পরিমাপ", q: "৭৮০ কেজিতে কত মেট্রিক টন?", options: ["৭৮০০০", "৭৮", "০.৭৮", "৭.৮"], ans: 2, formula: "১০০০ কেজি = ১ মেট্রিক টন", exp: "আমরা জানি,\n১০০০ কেজি = ১ মেট্রিক টন\n∴ ৭৮০ কেজি = (৭৮০ ÷ ১০০০) মেট্রিক টন = ০.৭৮ মেট্রিক টন।" },
+      { id: 47, origNo: "৭২", topic: "পাঠ ৩.৩-৩.৪: ওজন ও আয়তন পরিমাপ", q: "১৬ একর জমিতে ৪২০ মেট্রিক টন আলু হলে প্রতি হেক্টরে ফলন কত মেট্রিক টন?", options: ["৬৪.৮৪", "২৬.২৫", "১৬.৮", "৬.৪৭৭৭"], ans: 0, formula: "১ হেক্টর = ২.৪৭ একর (প্রায়)", exp: "১৬ একর জমিতে আলু উৎপন্ন হয় = ৪২০ মেট্রিক টন\n∴ ১ একর জমিতে আলু উৎপন্ন হয় = ৪২০ ÷ ১৬ = ২৬.২৫ মেট্রিক টন।\nযেহেতু ১ হেক্টর = ২.৪৭ একর (প্রায়),\n∴ প্রতি হেক্টরে (২.৪৭ একরে) ফলন = (২৬.২৫ × ২.৪৭) মেট্রিক টন = ৬৪.৮৩৭৫ ≈ ৬৪.৮৪ মেট্রিক টন।" },
+      { id: 48, origNo: "৭৩", topic: "পাঠ ৩.৩-৩.৪: ওজন ও আয়তন পরিমাপ", q: "১ লিটার = কত ঘন সেন্টিমিটার?", options: ["১", "১০", "১০০", "১০০০"], ans: 3, formula: "১ লিটার = ১ ঘন ডেসিমিটার = ১০০০ ঘন সেন্টিমিটার", exp: "তরল পদার্থের আয়তন পরিমাপের সূত্রানুসারে, ১০০০ ঘন সেন্টিমিটার (বা ১০০০ সি.সি.) = ১ ঘন ডেসিমিটার = ১ লিটার।" },
+      { id: 49, origNo: "৭৪", topic: "পাঠ ৩.৩-৩.৪: ওজন ও আয়তন পরিমাপ", q: "রাকিব ৫ লিটারের একটি মিনারেল ওয়াটার বোতল কিনল। বোতলটির আয়তন কত ঘন সে.মি.?", options: ["৫০০", "১০০০", "৫০০০", "১০০০০"], ans: 2, formula: "১ লিটার = ১০০০ ঘন সে.মি.", exp: "আমরা জানি,\n১ লিটার = ১০০০ ঘন সে.মি.\n∴ ৫ লিটার বোতলটির আয়তন = (৫ × ১০০০) ঘন সে.মি. = ৫০০০ ঘন সে.মি.।" },
+      { id: 50, origNo: "৭৫", topic: "পাঠ ৩.৩-৩.৪: ওজন ও আয়তন পরিমাপ", q: "একটি মগের ভিতরের আয়তন ২৫০০ ঘন সে.মি. হলে ১২৫ লিটারে কত মগ পানি ধরবে?", options: ["২৫", "৫০", "৭৫", "১০০"], ans: 1, formula: "১০০০ ঘন সে.মি. = ১ লিটার", exp: "মগের আয়তন = ২৫০০ ঘন সে.মি. = (২৫০০ ÷ ১০০০) লিটার = ২.৫ লিটার।\n∴ ১২৫ লিটারে পানি ধরবে = (১২৫ ÷ ২.৫) মগ = ৫০ মগ।" },
+      { id: 51, origNo: "৭৬", topic: "পাঠ ৩.৩-৩.৪: ওজন ও আয়তন পরিমাপ", q: "এক ব্যবসায়ী একদিনে ৬৪০০ গ্রাম ডাল বিক্রি করেন। এ হিসাবে ২০ দিনে তাঁর বিক্রিত ডালের পরিমাণ কত কেজি?", options: ["১২৮", "৬৪", "৫৮", "৩২"], ans: 0, formula: "১০০০ গ্রাম = ১ কিলোগ্রাম (কেজি)", exp: "ব্যবসায়ী একদিনে ডাল বিক্রি করেন = ৬৪০০ গ্রাম = (৬৪০০ ÷ ১০০০) কেজি = ৬.৪ কেজি।\n∴ ২০ দিনে বিক্রি করেন = (৬.৪ × ২০) কেজি = ১২৮ কেজি।" },
+      { id: 52, origNo: "৭৭", topic: "পাঠ ৩.৩-৩.৪: ওজন ও আয়তন পরিমাপ", q: "৫০ কিলোগ্রাম = কত কুইন্টাল?", options: ["০.৫", "৫", "৫০", "৬০"], ans: 0, formula: "১০০ কিলোগ্রাম = ১ কুইন্টাল", exp: "আমরা জানি,\n১০০ কিলোগ্রাম = ১ কুইন্টাল\n∴ ৫০ কিলোগ্রাম = (৫০ ÷ ১০০) কুইন্টাল = ০.৫ কুইন্টাল।" },
+      { id: 53, origNo: "৭৮", topic: "পাঠ ৩.৩-৩.৪: ওজন ও আয়তন পরিমাপ", q: "একটি ঘনকের এক ধারের দৈর্ঘ্য ২ মিটার। ঘনকটিতে কত কুইন্টাল পানি ধরবে?", options: ["৮০", "৮০০", "৮০০০", "১৬০০০"], ans: 0, formula: "ঘনকের আয়তন = (ধার)³, ১ ঘনমিটার = ১০০০ লিটার, ১০০ কেজি = ১ কুইন্টাল", exp: "ঘনকটির আয়তন = ২ × ২ × ২ = ৮ ঘনমিটার = (৮ × ১০০০) লিটার = ৮০০০ লিটার।\nআমরা জানি, ১ লিটার বিশুদ্ধ পানির ওজন = ১ কেজি।\n∴ ৮০০০ লিটার পানির ওজন = ৮০০০ কেজি = (৮০০০ ÷ ১০০) কুইন্টাল = ৮০ কুইন্টাল।" },
+      { id: 54, origNo: "৭৯", topic: "পাঠ ৩.৩-৩.৪: ওজন ও আয়তন পরিমাপ", q: "১০০ সি.সি. পানির ওজন কত কেজি?", options: ["১০", "১", "০.১", "০.০১"], ans: 2, formula: "১ সি.সি. পানির ওজন = ১ গ্রাম এবং ১০০০ গ্রাম = ১ কেজি", exp: "১ সি.সি. (ঘন সেন্টিমিটার) বিশুদ্ধ পানির ওজন = ১ গ্রাম।\n∴ ১০০ সি.সি. পানির ওজন = ১০০ গ্রাম = (১০০ ÷ ১০০০) কেজি = ০.১ কেজি।" },
+      { id: 55, origNo: "৮০", topic: "পাঠ ৩.৩-৩.৪: ওজন ও আয়তন পরিমাপ", q: "একটি আয়তাকার চৌবাচ্চায় ২৪০ লিটার পানি ধরে। একটি নল দিয়ে চৌবাচ্চায় এক তৃতীয়াংশ খালি হলে চৌবাচ্চায় কত লিটার পানি আছে?", options: ["৮০", "১২০", "১৬০", "২০০"], ans: 2, formula: "অবশিষ্ট পানি = মোট পানি - খালি হওয়া অংশ", exp: "চৌবাচ্চায় মোট পানি ধরে = ২৪০ লিটার।\nনল দিয়ে খালি হওয়া পানির পরিমাণ = ২৪০ এর ১/৩ অংশ = ৮০ লিটার।\n∴ চৌবাচ্চায় অবশিষ্ট পানি আছে = (২৪০ - ৮০) লিটার = ১৬০ লিটার।" },
+      { id: 56, origNo: "৮১", topic: "পাঠ ৩.৩-৩.৪: ওজন ও আয়তন পরিমাপ", q: "একটি গাড়ি ১০ লিটার ডিজেলে ৮০ কিলোমিটার যায়। ১ কিলোমিটার যেতে কত মিলিলিটার ডিজেল প্রয়োজন?", options: ["৮", "৮০", "১২৫", "১২৫০"], ans: 2, formula: "১ লিটার = ১০০০ মিলিলিটার", exp: "গাড়িটি ৮০ কিলোমিটার যায় = ১০ লিটার ডিজেলে\n∴ ১ কিলোমিটার যায় = (১০ ÷ ৮০) লিটারে = ০.১২৫ লিটারে\n= (০.১২৫ × ১০০০) মিলিলিটারে = ১২৫ মিলিলিটারে।" },
+      { id: 57, origNo: "৮২", topic: "পাঠ ৩.৩-৩.৪: ওজন ও আয়তন পরিমাপ", q: "০.৫ মেট্রিক টন = কত কেজি?", options: ["০.০০৫ কেজি", "০.০৫ কেজি", "৫০ কেজি", "৫০০ কেজি"], ans: 3, formula: "১ মেট্রিক টন = ১০০০ কেজি", exp: "আমরা জানি,\n১ মেট্রিক টন = ১০০০ কেজি\n∴ ০.৫ মেট্রিক টন = (০.৫ × ১০০০) কেজি = ৫০০ কেজি।" },
+      { id: 58, origNo: "৮৩", topic: "পাঠ ৩.৩-৩.৪: ওজন ও আয়তন পরিমাপ", q: "নিচের তথ্যগুলো লক্ষ কর:\ni. আয়তক্ষেত্রের ক্ষেত্রফল = দৈর্ঘ্য × প্রস্থ\nii. ১ কুইন্টাল = ১০০০ কিলোগ্রাম\niii. ৩.৫ মিটারকে ৩৫০ সে.মি. লেখা যায়\nনিচের কোনটি সঠিক?", options: ["i ও ii", "i ও iii", "ii ও iii", "i, ii ও iii"], ans: 1, formula: "১ কুইন্টাল = ১০০ কিলোগ্রাম এবং ১ মিটার = ১০০ সে.মি.", exp: "তথ্যগুলো যাচাই করি:\ni. আয়তক্ষেত্রের ক্ষেত্রফল = দৈর্ঘ্য × প্রস্থ (সঠিক)।\nii. ১ কুইন্টাল = ১০০ কিলোগ্রাম, ১০০০ কিলোগ্রাম নয় (তাই ii ভুল)।\niii. ৩.৫ মিটার = (৩.৫ × ১০০) সে.মি. = ৩৫০ সে.মি. (সঠিক)।\nসুতরাং সঠিক উত্তর খ (i ও iii)।" },
+      { id: 59, origNo: "৮৪", topic: "পাঠ ৩.৩-৩.৪: ওজন ও আয়তন পরিমাপ", q: "পরিমাপের ক্ষেত্রে—\ni. ১০ কুইন্টাল = ১ মেট্রিক টন\nii. ১ সি.সি. = ১ মিলিলিটার\niii. ১ মেট্রিক টন = ১০০০ কেজি\nনিচের কোনটি সঠিক?", options: ["i ও ii", "i ও iii", "ii ও iii", "i, ii ও iii"], ans: 3, formula: "১০ কুইন্টাল = ১০০০ কেজি = ১ মেট্রিক টন এবং ১ সি.সি. = ১ মিলিলিটার", exp: "তথ্যগুলো যাচাই করি:\ni. ১০ কুইন্টাল = ১ মেট্রিক টন (সঠিক)।\nii. ১ সি.সি. (ঘন সে.মি.) = ১ মিলিলিটার (সঠিক)।\niii. ১ মেট্রিক টন = ১০০০ কেজি (সঠিক)।\nসুতরাং সঠিক উত্তর ঘ (i, ii ও iii)।" },
+      { id: 60, origNo: "৮৫", topic: "পাঠ ৩.৩-৩.৪: ওজন ও আয়তন পরিমাপ", q: "৫ কেজি পানির আয়তন—\ni. ৫ ঘন ডেসি মিটার\nii. ৫০ লিটার\niii. ৩০৫.০৬৪ ঘন ইঞ্চি (প্রায়)\nনিচের কোনটি সঠিক?", options: ["i ও ii", "i ও iii", "ii ও iii", "i, ii ও iii"], ans: 1, formula: "১ কেজি পানির আয়তন = ১ লিটার = ১ ঘন ডেসিমিটার = ১০০০ মিলিলিটার", exp: "৫ কেজি বিশুদ্ধ পানির আয়তন = ৫ লিটার = ৫ ঘন ডেসিমিটার = ৫০০০ মিলিলিটার।\ni. ৫ ঘন ডেসি মিটার (সঠিক)।\nii. ৫০ লিটার দেওয়া আছে, কিন্তু হবে ৫ লিটার (তাই ii ভুল)।\niii. যেহেতু ১ ঘন ইঞ্চি = ১৬.৩৯ মিলিলিটার, তাই ৫০০০ মিলিলিটার = ৫০০০ ÷ ১৬.৩৯ = ৩০৫.০৬৪ ঘন ইঞ্চি (প্রায়) (সঠিক)।\nসুতরাং সঠিক উত্তর খ (i ও iii)।" },
+      { id: 61, origNo: "৮৬", topic: "পাঠ ৩.৩-৩.৪: ওজন ও আয়তন পরিমাপ", stem: "উদ্দীপক: একজন কৃষক ১.৫ হেক্টর জমিতে ৩৬ মেট্রিক টন পেঁয়াজ উৎপন্ন করেন।", q: "জমিটির ক্ষেত্রফল কত একর?", options: ["৩.৭০৫", "১.৬৫", "০.২৩৫", "১৬.১৪"], ans: 0, formula: "১ হেক্টর = ২.৪৭ একর (প্রায়)", exp: "দেওয়া আছে, জমির ক্ষেত্রফল = ১.৫ হেক্টর।\nআমরা জানি, ১ হেক্টর = ২.৪৭ একর (প্রায়)\n∴ জমিটির ক্ষেত্রফল = (১.৫ × ২.৪৭) একর = ৩.৭০৫ একর।" },
+      { id: 62, origNo: "৮৭", topic: "পাঠ ৩.৩-৩.৪: ওজন ও আয়তন পরিমাপ", stem: "উদ্দীপক: একজন কৃষক ১.৫ হেক্টর জমিতে ৩৬ মেট্রিক টন পেঁয়াজ উৎপন্ন করেন।", q: "উৎপন্ন পেঁয়াজের ওজন কত কিলোগ্রাম?", options: ["৩৬০", "৩৬০০", "৩৬০০০", "৩৬০০০০"], ans: 2, formula: "১ মেট্রিক টন = ১০০০ কিলোগ্রাম", exp: "দেওয়া আছে, উৎপন্ন পেঁয়াজের ওজন = ৩৬ মেট্রিক টন।\nআমরা জানি, ১ মেট্রিক টন = ১০০০ কিলোগ্রাম\n∴ উৎপন্ন পেঁয়াজের ওজন = (৩৬ × ১০০০) কিলোগ্রাম = ৩৬০০০ কিলোগ্রাম।" },
+      { id: 63, origNo: "৮৮", topic: "পাঠ ৩.৩-৩.৪: ওজন ও আয়তন পরিমাপ", stem: "উদ্দীপক: একজন কৃষক ১.৫ হেক্টর জমিতে ৩৬ মেট্রিক টন পেঁয়াজ উৎপন্ন করেন।", q: "প্রতি হেক্টর জমিতে কত কুইন্টাল পেঁয়াজ উৎপন্ন হয়?", options: ["১৮০", "২৪০", "২৮০", "৩৪০"], ans: 1, formula: "১ মেট্রিক টন = ১০ কুইন্টাল", exp: "১.৫ হেক্টর জমিতে পেঁয়াজ উৎপন্ন হয় = ৩৬ মেট্রিক টন = (৩৬ × ১০) কুইন্টাল = ৩৬০ কুইন্টাল।\n∴ প্রতি হেক্টর (১ হেক্টর) জমিতে পেঁয়াজ উৎপন্ন হয় = (৩৬০ ÷ ১.৫) কুইন্টাল = ২৪০ কুইন্টাল।" },
+      { id: 64, origNo: "৮৯", topic: "পাঠ ৩.৩-৩.৪: ওজন ও আয়তন পরিমাপ", stem: "উদ্দীপক: ১.২৫ লিটার পেপসি বোতলের দৈর্ঘ্য ৩০.২ সে.মি.", q: "বোতলটির দৈর্ঘ্য ইঞ্চিতে কত?", options: ["১১.৮৯", "১২.০৮", "১০.০৭", "৭৬.৭"], ans: 0, formula: "১ ইঞ্চি = ২.৫৪ সে.মি. (প্রায়)", exp: "দেওয়া আছে, বোতলটির দৈর্ঘ্য = ৩০.২ সে.মি.।\nআমরা জানি, ২.৫৪ সে.মি. = ১ ইঞ্চি\n∴ বোতলটির দৈর্ঘ্য = (৩০.২ ÷ ২.৫৪) ইঞ্চি = ১১.৮৮৯৭ ইঞ্চি ≈ ১১.৮৯ ইঞ্চি।" },
+      { id: 65, origNo: "৯০", topic: "পাঠ ৩.৩-৩.৪: ওজন ও আয়তন পরিমাপ", stem: "উদ্দীপক: ১.২৫ লিটার পেপসি বোতলের দৈর্ঘ্য ৩০.২ সে.মি.", q: "বোতলটির আয়তন সি.সি. এককে কত?", options: ["১১৫০", "১২৫০", "১২.৫", "১.২৫"], ans: 1, formula: "১ লিটার = ১০০০ সি.সি. (ঘন সেন্টিমিটার)", exp: "দেওয়া আছে, বোতলটির আয়তন = ১.২৫ লিটার।\nআমরা জানি, ১ লিটার = ১০০০ সি.সি.\n∴ বোতলটির আয়তন = (১.২৫ × ১০০০) সি.সি. = ১২৫০ সি.সি.।" }
+    ];
+
+    // অ্যাপ্লিকেশন স্টেট ও LocalStorage Key
+    const STORAGE_KEY = 'saiful_science_care_class7_math_exam_v1';
+    let state = {
+      started: false,
+      submitted: false,
+      studentName: '',
+      studentRoll: '',
+      studentClass: '৭ম শ্রেণী',
+      currentIdx: 0,
+      answers: {}, // { questionIndex: selectedOptionIndex }
+      remainingSeconds: 0,
+      timerEnabled: false
+    };
+    let timerInterval = null;
+    let chartInstance = null;
+
+    // DOM Elements
+    const welcomeSection = document.getElementById('welcomeSection');
+    const examSection = document.getElementById('examSection');
+    const resultSection = document.getElementById('resultSection');
+    const timerBadge = document.getElementById('timerBadge');
+    const timerDisplay = document.getElementById('timerDisplay');
+
+    // থিম টগল লজিক
+    const themeToggleBtn = document.getElementById('themeToggleBtn');
+    const savedTheme = localStorage.getItem('ssc_theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    themeToggleBtn.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+
+    themeToggleBtn.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('ssc_theme', next);
+      themeToggleBtn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+
+    // স্টেট সংরক্ষণ ও পুনরুদ্ধার
+    function saveState() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    }
+
+    function loadState() {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      try {
+        const parsed = JSON.parse(raw);
+        if (parsed && parsed.started) {
+          state = parsed;
+          if (state.submitted) {
+            showResultScreen();
+          } else {
+            resumeExamScreen();
+          }
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    // পরীক্ষা শুরু
+    document.getElementById('startExamForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('studentName').value.trim();
+      const roll = document.getElementById('studentRoll').value.trim();
+      const cls = document.getElementById('studentClass').value.trim();
+      const mins = parseInt(document.getElementById('timerMinutes').value, 10);
+
+      state = {
+        started: true,
+        submitted: false,
+        studentName: name,
+        studentRoll: roll,
+        studentClass: cls,
+        currentIdx: 0,
+        answers: {},
+        remainingSeconds: mins * 60,
+        timerEnabled: mins > 0
+      };
+      saveState();
+      resumeExamScreen();
+    });
+
+    function resumeExamScreen() {
+      welcomeSection.style.display = 'none';
+      resultSection.style.display = 'none';
+      examSection.style.display = 'block';
+      document.getElementById('statStudentName').textContent = `${state.studentName} (${state.studentRoll})`;
+
+      buildNavigator();
+      renderCurrentQuestion();
+      updateExamStats();
+
+      if (state.timerEnabled && state.remainingSeconds > 0) {
+        timerBadge.style.display = 'inline-flex';
+        startCountdown();
+      } else {
+        timerBadge.style.display = 'none';
+      }
+    }
+
+    function startCountdown() {
+      clearInterval(timerInterval);
+      updateTimerUI();
+      timerInterval = setInterval(() => {
+        if (state.submitted) {
+          clearInterval(timerInterval);
+          return;
+        }
+        state.remainingSeconds--;
+        saveState();
+        updateTimerUI();
+
+        if (state.remainingSeconds <= 0) {
+          clearInterval(timerInterval);
+          Swal.fire({
+            icon: 'info',
+            title: 'সময় শেষ!',
+            text: 'নির্ধারিত সময় শেষ হওয়ায় আপনার পরীক্ষা স্বয়ংক্রিয়ভাবে জমা দেওয়া হচ্ছে।',
+            confirmButtonText: 'ফলাফল দেখুন'
+          }).then(() => finalizeExam());
+        }
+      }, 1000);
+    }
+
+    function updateTimerUI() {
+      const m = Math.floor(state.remainingSeconds / 60);
+      const s = state.remainingSeconds % 60;
+      const formatted = `${toBn(String(m).padStart(2, '0'))}:${toBn(String(s).padStart(2, '0'))}`;
+      timerDisplay.textContent = formatted;
+      if (state.remainingSeconds <= 180) {
+        timerBadge.classList.add('warning');
+      } else {
+        timerBadge.classList.remove('warning');
+      }
+    }
+
+    // নেভিগেটর তৈরি
+    function buildNavigator() {
+      const navGrid = document.getElementById('questionNavGrid');
+      navGrid.innerHTML = '';
+      questions.forEach((q, idx) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'q-nav-btn';
+        btn.textContent = toBn(idx + 1);
+        btn.addEventListener('click', () => {
+          state.currentIdx = idx;
+          saveState();
+          renderCurrentQuestion();
+        });
+        navGrid.appendChild(btn);
+      });
+    }
+
+    // বর্তমান প্রশ্ন রেন্ডার করা
+    function renderCurrentQuestion() {
+      const idx = state.currentIdx;
+      const item = questions[idx];
+
+      document.getElementById('qNumberBadge').textContent = `প্রশ্ন ${toBn(idx + 1)} / ${toBn(questions.length)} (মূল প্রশ্ন নং: ${item.origNo})`;
+      document.getElementById('qTopicBadge').textContent = item.topic;
+
+      const stemBox = document.getElementById('qStemBox');
+      if (item.stem) {
+        stemBox.style.display = 'block';
+        stemBox.textContent = item.stem;
+      } else {
+        stemBox.style.display = 'none';
+      }
+
+      document.getElementById('qTextDisplay').textContent = `${toBn(idx + 1)}. ${item.q}`;
+
+      const optionsContainer = document.getElementById('optionsContainer');
+      optionsContainer.innerHTML = '';
+      const selectedOpt = state.answers[idx];
+
+      item.options.forEach((optText, oIdx) => {
+        const row = document.createElement('div');
+        row.className = `option-item ${selectedOpt === oIdx ? 'selected' : ''}`;
+        row.innerHTML = `
+          <input type="radio" class="option-radio" name="mcq_option" ${selectedOpt === oIdx ? 'checked' : ''} readonly>
+          <span class="option-letter">${optLetters[oIdx]}</span>
+          <span class="option-label-text">${optText}</span>
+        `;
+        row.addEventListener('click', () => {
+          if (state.submitted) return;
+          state.answers[idx] = oIdx;
+          saveState();
+          renderCurrentQuestion();
+          updateExamStats();
+        });
+        optionsContainer.appendChild(row);
+      });
+
+      document.getElementById('prevBtn').disabled = idx === 0;
+      document.getElementById('nextBtn').disabled = idx === questions.length - 1;
+
+      // নেভিগেটর বাটন হাইলাইট আপডেট
+      const navBtns = document.querySelectorAll('.q-nav-btn');
+      navBtns.forEach((b, bIdx) => {
+        b.classList.toggle('current', bIdx === idx);
+        b.classList.toggle('answered', state.answers[bIdx] !== undefined);
+      });
+    }
+
+    function updateExamStats() {
+      const total = questions.length;
+      const answered = Object.keys(state.answers).length;
+      const remaining = total - answered;
+      const pct = Math.round((answered / total) * 100);
+
+      document.getElementById('statTotal').textContent = toBn(total);
+      document.getElementById('statAnswered').textContent = toBn(answered);
+      document.getElementById('statRemaining').textContent = toBn(remaining);
+      document.getElementById('progressPercentText').textContent = `${toBn(pct)}% সম্পন্ন`;
+      document.getElementById('progressBarFill').style.width = `${pct}%`;
+    }
+
+    // নেভিগেশন বাটন ইভেন্ট
+    document.getElementById('prevBtn').addEventListener('click', () => {
+      if (state.currentIdx > 0) {
+        state.currentIdx--;
+        saveState();
+        renderCurrentQuestion();
+      }
+    });
+
+    document.getElementById('nextBtn').addEventListener('click', () => {
+      if (state.currentIdx < questions.length - 1) {
+        state.currentIdx++;
+        saveState();
+        renderCurrentQuestion();
+      }
+    });
+
+    document.getElementById('clearOptionBtn').addEventListener('click', () => {
+      if (state.submitted) return;
+      delete state.answers[state.currentIdx];
+      saveState();
+      renderCurrentQuestion();
+      updateExamStats();
+    });
+
+    // পরীক্ষা জমা দেওয়ার কনফার্মেশন মডাল
+    document.getElementById('submitExamBtn').addEventListener('click', () => {
+      const total = questions.length;
+      const answered = Object.keys(state.answers).length;
+      const unanswered = total - answered;
+
+      Swal.fire({
+        title: 'আপনি কি নিশ্চিত যে পরীক্ষা জমা দিতে চান?',
+        html: `
+          <div style="text-align:left;background:#f8fafc;color:#0f172a;padding:1rem;border-radius:12px;margin-top:0.5rem;font-size:1rem;line-height:1.8;border:1px solid #cbd5e1;">
+            <div>📌 <strong>মোট প্রশ্ন:</strong> ${toBn(total)} টি</div>
+            <div style="color:#10b981;">✅ <strong>উত্তর দেওয়া হয়েছে:</strong> ${toBn(answered)} টি</div>
+            <div style="color:#f59e0b;">⚠️ <strong>উত্তর দেওয়া হয়নি:</strong> ${toBn(unanswered)} টি</div>
+          </div>
+        `,
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#10b981',
+        cancelButtonColor: '#64748b',
+        confirmButtonText: 'হ্যাঁ, পরীক্ষা জমা দিন',
+        cancelButtonText: 'ফিরে যান'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          finalizeExam();
+        }
+      });
+    });
+
+    function finalizeExam() {
+      clearInterval(timerInterval);
+      state.submitted = true;
+      saveState();
+      showResultScreen();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function getGradeInfo(pct) {
+      if (pct >= 80) return { grade: 'A+', text: 'অসাধারণ সাফল্য! 🌟' };
+      if (pct >= 70) return { grade: 'A', text: 'অতি উত্তম ফলাফল! 👏' };
+      if (pct >= 60) return { grade: 'A-', text: 'উত্তম ফলাফল! 👍' };
+      if (pct >= 50) return { grade: 'B', text: 'সন্তোষজনক ফলাফল!' };
+      if (pct >= 40) return { grade: 'C', text: 'আরও অনুশীলন প্রয়োজন' };
+      if (pct >= 33) return { grade: 'D', text: 'কৃতকার্য (মনোযোগ বাড়াতে হবে)' };
+      return { grade: 'F', text: 'অকৃতকার্য (পুনরায় অনুশীলন করো)' };
+    }
+
+    // ফলাফল ড্যাশবোর্ড ও বিস্তারিত ব্যাখ্যা প্রদর্শন
+    function showResultScreen() {
+      welcomeSection.style.display = 'none';
+      examSection.style.display = 'none';
+      timerBadge.style.display = 'none';
+      resultSection.style.display = 'block';
+
+      let correct = 0, wrong = 0, skipped = 0;
+      questions.forEach((q, idx) => {
+        const uAns = state.answers[idx];
+        if (uAns === undefined) skipped++;
+        else if (uAns === q.ans) correct++;
+        else wrong++;
+      });
+
+      const total = questions.length;
+      const pct = Math.round((correct / total) * 100);
+      const gradeObj = getGradeInfo(pct);
+
+      document.getElementById('resName').textContent = state.studentName;
+      document.getElementById('resRoll').textContent = state.studentRoll;
+      document.getElementById('resClass').textContent = state.studentClass;
+
+      document.getElementById('resTotalQ').textContent = toBn(total);
+      document.getElementById('resCorrectQ').textContent = toBn(correct);
+      document.getElementById('resWrongQ').textContent = toBn(wrong);
+      document.getElementById('resSkippedQ').textContent = toBn(skipped);
+      document.getElementById('resMarks').textContent = `${toBn(correct)} / ${toBn(total)}`;
+      document.getElementById('resPercentBig').textContent = `${toBn(pct)}%`;
+      document.getElementById('resGradeBadge').textContent = `গ্রেড: ${gradeObj.grade}`;
+      document.getElementById('resPerformanceText').textContent = gradeObj.text;
+
+      renderResultChart(correct, wrong, skipped);
+      renderReviewCards('all');
+
+      // WhatsApp Share বাটন কনফিগারেশন
+      document.getElementById('whatsappShareBtn').onclick = () => {
+        const message =
+`📘 *সাইফুল'স সাইন্স কেয়ার*
+📝 *পরীক্ষার নাম:* ৭ম শ্রেণী (গণিত) বহুনির্বাচনি মডেল টেস্ট
+━━━━━━━━━━━━━━━━━━
+👤 *শিক্ষার্থীর নাম:* ${state.studentName}
+🔢 *রোল নম্বর:* ${state.studentRoll}
+🏫 *শ্রেণি:* ${state.studentClass}
+━━━━━━━━━━━━━━━━━━
+📊 *ফলাফল সারসংক্ষেপ:*
+✅ *প্রাপ্ত নম্বর:* ${toBn(correct)} / ${toBn(total)}
+📈 *শতকরা সাফল্য:* ${toBn(pct)}% (গ্রেড: ${gradeObj.grade})
+🟢 *সঠিক উত্তর:* ${toBn(correct)} টি
+🔴 *ভুল উত্তর:* ${toBn(wrong)} টি
+⚪ *উত্তর দেওয়া হয়নি:* ${toBn(skipped)} টি
+━━━━━━━━━━━━━━━━━━
+সার্বিক তত্ত্বাবধানে: ইঞ্জি: সাইফুল ইসলাম`;
+
+        const waUrl = `https://wa.me/8801622186812?text=${encodeURIComponent(message)}`;
+        window.open(waUrl, '_blank');
+      };
+    }
+
+    function renderResultChart(correct, wrong, skipped) {
+      const ctx = document.getElementById('resultChart').getContext('2d');
+      if (chartInstance) chartInstance.destroy();
+      chartInstance = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: ['সঠিক উত্তর', 'ভুল উত্তর', 'অনুত্তরিত'],
+          datasets: [{
+            data: [correct, wrong, skipped],
+            backgroundColor: ['#10b981', '#ef4444', '#f59e0b'],
+            borderWidth: 0,
+            hoverOffset: 6
+          }]
+        },
+        options: {
+          cutout: '74%',
+          plugins: {
+            legend: { display: false }
+          }
+        }
+      });
+    }
+
+    // প্রতিটি প্রশ্নের বিস্তারিত রিভিউ কার্ড তৈরি
+    function renderReviewCards(filterType) {
+      const container = document.getElementById('reviewListContainer');
+      container.innerHTML = '';
+
+      questions.forEach((q, idx) => {
+        const uAns = state.answers[idx];
+        const isSkipped = uAns === undefined;
+        const isCorrect = uAns === q.ans;
+        const statusKey = isSkipped ? 'skipped' : (isCorrect ? 'correct' : 'wrong');
+
+        if (filterType !== 'all' && filterType !== statusKey) return;
+
+        let cardClass = 'skipped-card', badgeClass = 'status-skipped', badgeText = '⚠️ উত্তর দেওয়া হয়নি';
+        if (isCorrect) {
+          cardClass = 'correct-card';
+          badgeClass = 'status-correct';
+          badgeText = '✅ সঠিক উত্তর';
+        } else if (!isSkipped) {
+          cardClass = 'wrong-card';
+          badgeClass = 'status-wrong';
+          badgeText = '❌ ভুল উত্তর';
+        }
+
+        const userChoiceText = isSkipped ? 'কোনো উত্তর নির্বাচন করা হয়নি' : `${optLetters[uAns]}) ${q.options[uAns]}`;
+        const correctChoiceText = `${optLetters[q.ans]}) ${q.options[q.ans]}`;
+
+        const optsHtml = q.options.map((opt, oIdx) => {
+          let cls = '';
+          let tag = '';
+          if (oIdx === q.ans) {
+            cls = 'is-correct';
+            tag = '<span>✔️ সঠিক উত্তর</span>';
+          } else if (oIdx === uAns && uAns !== q.ans) {
+            cls = 'is-user-wrong';
+            tag = '<span>✖️ তোমার উত্তর</span>';
+          }
+          return `<div class="review-opt ${cls}"><span><strong>${optLetters[oIdx]})</strong> ${opt}</span>${tag}</div>`;
+        }).join('');
+
+        const card = document.createElement('div');
+        card.className = `glass-card review-card ${cardClass}`;
+        card.innerHTML = `
+          <div class="question-header">
+            <span class="q-badge">প্রশ্ন ${toBn(idx + 1)} (মূল প্রশ্ন নং: ${q.origNo})</span>
+            <span class="status-badge ${badgeClass}">${badgeText}</span>
+          </div>
+          ${q.stem ? `<div class="stem-box">${q.stem}</div>` : ''}
+          <div class="question-text" style="font-size:1.12rem;margin-bottom:0.85rem;">${toBn(idx + 1)}. ${q.q}</div>
+          <div class="review-options-grid">${optsHtml}</div>
+          <div style="display:flex;gap:1.25rem;flex-wrap:wrap;font-size:0.95rem;margin-top:0.5rem;">
+            <div>🎯 <strong>তোমার নির্বাচিত উত্তর:</strong> <span style="color:${isCorrect ? 'var(--success)' : (isSkipped ? 'var(--warning)' : 'var(--danger)')};font-weight:700;">${userChoiceText}</span></div>
+            <div>🏆 <strong>সঠিক উত্তর:</strong> <span style="color:var(--success);font-weight:700;">${correctChoiceText}</span></div>
+          </div>
+          <div class="explanation-box">
+            <h4>💡 বিস্তারিত গাণিতিক সমাধান ও ব্যাখ্যা</h4>
+            <div class="formula-tag">📌 প্রয়োজনীয় সূত্র / তথ্য: ${q.formula}</div>
+            <div class="explanation-steps">${q.exp}</div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    // রিভিউ ফিল্টার বাটন ইভেন্ট
+    document.querySelectorAll('.filter-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        renderReviewCards(tab.getAttribute('data-filter'));
+      });
+    });
+
+    // প্রিন্ট ও পিডিএফ বাটন
+    document.getElementById('printResultBtn').addEventListener('click', () => {
+      window.print();
+    });
+
+    // পুনরায় পরীক্ষা দেওয়ার বাটন
+    document.getElementById('restartExamBtn').addEventListener('click', () => {
+      Swal.fire({
+        title: 'পুনরায় পরীক্ষা দিতে চান?',
+        text: 'পূর্বের নির্বাচিত সকল উত্তর মুছে নতুন করে পরীক্ষা শুরু হবে।',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#4f46e5',
+        cancelButtonColor: '#64748b',
+        confirmButtonText: 'হ্যাঁ, নতুন করে শুরু করুন',
+        cancelButtonText: 'না'
+      }).then((res) => {
+        if (res.isConfirmed) {
+          localStorage.removeItem(STORAGE_KEY);
+          location.reload();
+        }
+      });
+    });
+
+    // পেজ লোড হলে পূর্বের সংরক্ষিত পরীক্ষা থাকলে পুনরুদ্ধার করা
+    window.addEventListener('DOMContentLoaded', loadState);
+  </script>
+</body>
+</html>
